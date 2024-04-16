@@ -2,7 +2,7 @@
 const path = require('path')
 
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: true, // Development mode only – highlights potential problems.
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
