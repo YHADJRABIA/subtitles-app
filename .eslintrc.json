@@ -47,7 +47,7 @@
     "jsx-a11y/alt-text": "off",
     "react/jsx-fragments": "warn",
     "react/jsx-no-target-blank": "warn",
-    "no-unused-vars": "off",
+    "no-unused-vars": "warn",
     "unused-imports/no-unused-imports": "warn",
     "no-const-assign": "error",
     "no-compare-neg-zero": "error",
