@@ -1,5 +1,9 @@
-/** @type {import('next').NextConfig} */
+const createNextIntlPlugin = require('next-intl/plugin')
 const path = require('path')
+
+const withNextIntl = createNextIntlPlugin()
+
+/** @type {import('next').NextConfig} */
 
 const nextConfig = {
   reactStrictMode: true, // Development mode only – highlights potential problems.
@@ -8,4 +12,4 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+module.exports = withNextIntl(nextConfig)
