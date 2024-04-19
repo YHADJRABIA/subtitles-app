@@ -1,5 +1,8 @@
 {
   "Index": {
     "title": "Test"
+  },
+  "Navigation": {
+    "home": "Home"
   }
 }
