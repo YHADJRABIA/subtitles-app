@@ -1,0 +1,95 @@
+$breakpoints: (
+  'small': (
+    max-width: 768px,
+  ),
+  'medium': (
+    min-width: 768px,
+  ),
+  'large': (
+    min-width: 1024px,
+  ),
+  'huge': (
+    min-width: 1200px,
+  ),
+);
+
+@mixin multiLineEllipsisCommon($line-height, $lines-to-show) {
+  display: block; /* Fallback for non-webkit */
+  display: -webkit-box;
+  max-width: 100%;
+  overflow: hidden;
+
+  line-height: $line-height;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: $lines-to-show;
+  -webkit-box-orient: vertical;
+}
+
+@mixin multiLineEllipsis($line-height, $lines-to-show) {
+  @include multiLineEllipsisCommon($line-height, $lines-to-show);
+
+  max-height: calc(
+    1em * #{$line-height * $lines-to-show}
+  ); /* Fallback for non-webkit */
+}
+
+// To conceal overflowing elements and add "..." at the end
+@mixin truncated {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// For long words, making them complete on the next line
+@mixin ow {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+/*- Reset params -*/
+@mixin initialProperties {
+  position: initial;
+  height: initial;
+  width: initial;
+  transform: none;
+}
+
+// Prevents user from selecting or highlighting element
+@mixin preventUserSelect {
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+
+  /* The rule below is not implemented in browsers yet */
+  -o-user-select: none;
+
+  /* The rule below is implemented in most browsers by now */
+  user-select: none;
+}
+
+/* Responsive Breakpoints */
+
+/// Responsive breakpoint manager
+/// @access public
+/// @param {String} $breakpoint - Breakpoint
+/// @requires $breakpoints
+@mixin respond-to($breakpoint) {
+  $raw-query: map-get($breakpoints, $breakpoint);
+
+  @if $raw-query {
+    $query: if(
+      type-of($raw-query) == 'string',
+      unquote($raw-query),
+      inspect($raw-query)
+    );
+
+    @media #{$query} {
+      @content;
+    }
+  } @else {
+    @error 'No value found for `#{$breakpoint}`. '
+         + 'Please make sure it is defined in `$breakpoints` map.';
+  }
+}
