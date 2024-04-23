@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import '@/app/styles/globals.scss'
+import '@/styles/globals.scss'
 import { ReactNode } from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
