@@ -3,5 +3,9 @@ import { useTranslations } from 'next-intl'
 
 export default function Home() {
   const t = useTranslations('Index')
-  return <main className={styles.main}>{t('title')}</main>
+  return (
+    <main className={styles.main}>
+      <p>{t('title')}</p>
+    </main>
+  )
 }
