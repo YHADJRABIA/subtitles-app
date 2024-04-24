@@ -25,7 +25,7 @@ export default function LocaleLayout({
     <html lang={locale}>
       <body className={inter.className}>
         <Header />
-        {children}
+        <main>{children}</main>
         <Footer />
       </body>
     </html>
