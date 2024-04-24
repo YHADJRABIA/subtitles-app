@@ -1,0 +1,67 @@
+.btn {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  letter-spacing: 0.1rem;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+  color: var(--primary-white-color);
+  display: inline-block;
+  position: relative;
+
+  &:hover:enabled {
+    transform: translateY(-0.3rem);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.25);
+    &::after {
+      transform: scale(1.4, 1.6);
+      opacity: 0;
+    }
+  }
+
+  &:active:enabled {
+    transform: translateY(-0.1rem);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+  }
+
+  &:disabled,
+  &[disabled] {
+    cursor: not-allowed;
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+  }
+
+  i {
+    font-size: 1.75rem;
+    vertical-align: middle;
+  }
+}
+
+.primary {
+  padding: 1rem 2.5rem;
+  border-radius: 2rem;
+  background-color: var(--primary-blue-color);
+  &:hover:enabled {
+    background-color: var(--secondary-blue-color);
+  }
+}
+
+.secondary {
+  padding: 0.7rem 1.6rem;
+  border-radius: 0.5rem;
+  background-color: var(--primary-red-color);
+  &:hover:enabled {
+    background-color: var(--secondary-red-color);
+  }
+}
+
+.regular {
+  padding: 0.5rem 1.2rem;
+  border-radius: 0.5rem;
+  background-color: var(--primary-blue-color);
+  &:hover:enabled {
+    transform: none;
+    box-shadow: none;
+    background-color: var(--secondary-blue-color);
+  }
+}
