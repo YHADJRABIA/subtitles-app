@@ -4,5 +4,10 @@
   },
   "Navigation": {
     "home": "Page d'accueil"
+  },
+  "Footer": {
+    "first_name": "Yacine",
+    "last_name": "HADJ RABIA",
+    "development_year": "2024"
   }
 }

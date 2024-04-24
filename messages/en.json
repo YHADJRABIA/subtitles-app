@@ -4,5 +4,10 @@
   },
   "Navigation": {
     "home": "Home"
+  },
+  "Footer": {
+    "first_name": "Yacine",
+    "last_name": "Hadj Rabia",
+    "development_year": "2024"
   }
 }
