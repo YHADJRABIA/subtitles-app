@@ -1,8 +1,5 @@
 main {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @include flexCenter(column, space-around);
   padding: 6rem;
-  min-height: 90vh;
+  min-height: calc(95vh - $nav-height + $footer-height);
 }
