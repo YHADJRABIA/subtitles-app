@@ -1,5 +1,3 @@
 main {
   @include flexCenter(column, space-around);
-  padding: 6rem;
-  min-height: calc(95vh - $nav-height + $footer-height);
 }
