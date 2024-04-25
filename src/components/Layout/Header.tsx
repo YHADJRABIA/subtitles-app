@@ -5,10 +5,25 @@ import LanguageToggler from './LanguageToggler'
 
 const Header = () => {
   const t = useTranslations('Navigation')
+
+  const links = [
+    {
+      url: '/',
+      label: t('home'),
+    },
+    {
+      url: '/signup',
+      label: 'Sign up',
+    },
+  ]
   return (
     <header>
       <nav>
-        <Link href={'/'}>{t('home')}</Link>
+        {links.map((link, id) => (
+          <Link key={id} href={link.url}>
+            {link.label}
+          </Link>
+        ))}
         <LanguageToggler />
       </nav>
     </header>

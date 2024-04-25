@@ -18,7 +18,7 @@ const LanguageToggler = () => {
     })
   }
   return (
-    <label>
+    <>
       <p className={styles.srOnly}>Switch language</p>
       <select
         defaultValue={localActive}
@@ -28,7 +28,7 @@ const LanguageToggler = () => {
         <option value="en">En</option>
         <option value="fr">Fr</option>
       </select>
-    </label>
+    </>
   )
 }
 
