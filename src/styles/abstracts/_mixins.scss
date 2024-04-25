@@ -63,10 +63,7 @@ $breakpoints: (
 
 /*- Reset params -*/
 @mixin initialProperties {
-  position: initial;
-  height: initial;
-  width: initial;
-  transform: none;
+  all: unset;
 }
 
 // Prevents user from selecting or highlighting element
