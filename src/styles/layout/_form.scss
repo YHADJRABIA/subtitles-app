@@ -1,0 +1,40 @@
+form {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+}
+
+label {
+  font-size: 1.2rem;
+  pointer-events: none;
+  transition: color 0.3s ease;
+}
+
+textarea {
+  outline: none;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  width: 28rem;
+  min-width: 28rem;
+  max-width: 28rem;
+  height: 15rem;
+
+  &::-webkit-input-placeholder {
+    font-family: var(--secondary-font);
+  }
+
+  @include respond-to('medium') {
+    width: 40rem;
+    min-width: 40rem;
+    max-width: 40rem;
+    height: 15rem;
+    min-height: 5rem;
+    max-height: 30rem;
+  }
+}
+
+input::-webkit-input-placeholder {
+  opacity: 0;
+  transition: inherit;
+}
