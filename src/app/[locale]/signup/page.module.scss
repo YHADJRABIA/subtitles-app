@@ -1,3 +1,6 @@
+.wrapper {
+}
+
 .ctaIcon {
   position: absolute;
   top: 50%;
@@ -64,7 +67,7 @@
     outline: none;
     background-color: var(--primary-gray-color);
     border-radius: 0.8rem;
-    border: 1px solid var(--secondary-gray-color);
+    border: 1px solid var(--gray-border);
 
     @include respond-to('medium') {
       width: 32.5rem;
@@ -73,6 +76,10 @@
     &:focus {
       border-color: var(--primary-blue-color);
       color: var(--primary-blue-color);
+    }
+
+    &[type='password']::placeholder {
+      font-weight: bold;
     }
 
     &:placeholder-shown + label {
@@ -85,23 +92,30 @@
       transform: translate(2rem, 3rem) scale(1.2);
     }
 
-    &::-moz-placeholder {
+    &::-webkit-input-placeholder {
+      transition: inherit;
       opacity: 0;
+      font-weight: normal;
     }
 
-    &::-webkit-input-placeholder {
+    &:-ms-input-placeholder {
       opacity: 0;
-      transition: inherit;
+      font-weight: normal;
+    }
+
+    &::-moz-placeholder {
+      opacity: 0;
+      font-weight: normal;
     }
 
     &:focus::-moz-placeholder {
-      font-weight: initial;
+      color: var(--secondary-gray-color);
       opacity: 0.9;
     }
 
     // Placeholder's styles
     &:focus::-webkit-input-placeholder {
-      font-weight: initial;
+      color: var(--secondary-gray-color);
       opacity: 0.9;
     }
 
