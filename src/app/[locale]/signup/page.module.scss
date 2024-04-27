@@ -9,18 +9,15 @@
 .ctaIcon {
   position: absolute;
   top: 50%;
-  right: 7%;
-
-  @include respond-to('medium') {
-    right: 22%;
-  }
+  right: 1rem;
+  color: var(--secondary-gray-color);
 }
 
 .fieldIcon {
   transition: color 0.3s ease-in;
   position: absolute;
   top: 50%;
-  right: 5%;
+  left: 1rem;
   color: var(--secondary-gray-color);
 }
 
@@ -50,7 +47,7 @@
   margin-bottom: 1rem;
 
   &:last-of-type {
-    margin-bottom: 6rem;
+    margin-bottom: 4rem;
   }
 
   &:hover * {
@@ -62,8 +59,8 @@
     color: var(--primary-blue-color);
   }
 
-  & input {
-    padding: 1.3rem 2rem;
+  input {
+    padding: 1.3rem 3rem;
     width: 100%;
     transition: all 0.3s ease-in-out;
     transition-property: opacity, border-color, background-color, color;
@@ -90,7 +87,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       transform-origin: left bottom;
-      transform: translate(2rem, 3rem) scale(1.2);
+      transform: translate(3rem, 3rem) scale(1.2);
     }
 
     &::-webkit-input-placeholder {
@@ -125,7 +122,7 @@
     &:active + label {
       background-color: var(--primary-white-color);
       padding: 0 0.1rem;
-      transform: translate(2rem, 0.75rem) scale(1);
+      transform: translate(3rem, 0.75rem) scale(1);
       cursor: pointer;
     }
 
@@ -134,7 +131,7 @@
     }
   }
 
-  & label {
+  label {
     transition: all 0.3s ease-in-out;
     color: var(--secondary-gray-color);
   }
