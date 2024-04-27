@@ -1,0 +1,132 @@
+.ctaIcon {
+  position: absolute;
+  top: 50%;
+  right: 7%;
+
+  @include respond-to('medium') {
+    right: 22%;
+  }
+}
+
+.fieldIcon {
+  transition: color 0.3s ease-in;
+  position: absolute;
+  top: 50%;
+  right: 15%;
+  color: var(--secondary-gray-color);
+
+  @include respond-to('medium') {
+    right: 30%;
+  }
+}
+
+.formCard {
+  position: relative;
+  width: 100vw;
+  height: 80vh;
+  border-radius: 3rem;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+  @include flexCenter(column, space-evenly);
+
+  & > :last-child {
+    margin-top: 2rem;
+    @include respond-to('medium') {
+      margin-top: 4rem;
+    }
+  }
+
+  @include respond-to('medium') {
+    width: 70rem;
+  }
+}
+
+.formField {
+  position: relative;
+  @include flexCenter(column-reverse, space-between, flex-start);
+  width: inherit;
+
+  &:hover * {
+    color: var(--primary-blue-color);
+    border-color: var(--primary-blue-color);
+  }
+
+  &:focus-within .fieldIcon {
+    color: var(--primary-blue-color);
+  }
+
+  & input {
+    padding: 1.3rem 2rem;
+    width: 80%;
+    transition: all 0.3s ease-in-out;
+    transition-property: opacity, border-color, color;
+    font-weight: bold;
+    color: var(--secondary-black-color);
+    outline: none;
+    background-color: var(--primary-gray-color);
+    border-radius: 0.8rem;
+    border: 1px solid var(--secondary-gray-color);
+
+    @include respond-to('medium') {
+      width: 32.5rem;
+    }
+
+    &:focus {
+      border-color: var(--primary-blue-color);
+      color: var(--primary-blue-color);
+    }
+
+    &:placeholder-shown + label {
+      cursor: text;
+      max-width: 78.66%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transform-origin: left bottom;
+      transform: translate(2rem, 3rem) scale(1.2);
+    }
+
+    &::-moz-placeholder {
+      opacity: 0;
+    }
+
+    &::-webkit-input-placeholder {
+      opacity: 0;
+      transition: inherit;
+    }
+
+    &:focus::-moz-placeholder {
+      font-weight: initial;
+      opacity: 0.9;
+    }
+
+    // Placeholder's styles
+    &:focus::-webkit-input-placeholder {
+      font-weight: initial;
+      opacity: 0.9;
+    }
+
+    &:not(:placeholder-shown) + label,
+    &:focus + label,
+    &:active + label {
+      transform: translate(2rem, -0.2rem) scale(1);
+      cursor: pointer;
+    }
+
+    &:focus + label {
+      color: var(--primary-blue-color);
+    }
+  }
+
+  & label {
+    transition: all 0.3s ease-in-out;
+    color: var(--secondary-gray-color);
+  }
+}
+.recaptchaContainer {
+  height: 11rem;
+  margin-bottom: calc(1rem + 2vw);
+
+  @include respond-to('medium') {
+    height: 7.4rem;
+  }
+}
