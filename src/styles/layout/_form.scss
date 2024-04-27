@@ -11,6 +11,10 @@ label {
   transition: color 0.3s ease;
 }
 
+input {
+  cursor: pointer;
+}
+
 textarea {
   outline: none;
   margin-top: 0.5rem;
@@ -19,10 +23,6 @@ textarea {
   min-width: 28rem;
   max-width: 28rem;
   height: 15rem;
-
-  &::-webkit-input-placeholder {
-    font-family: var(--secondary-font);
-  }
 
   @include respond-to('medium') {
     width: 40rem;
@@ -37,4 +37,10 @@ textarea {
 input::-webkit-input-placeholder {
   opacity: 0;
   transition: inherit;
+}
+
+input[type='password'],
+input[type='password']::placeholder {
+  font-family: Verdana, sans-serif;
+  letter-spacing: 0.2rem;
 }
