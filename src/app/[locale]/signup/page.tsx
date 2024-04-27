@@ -54,69 +54,72 @@ const SignupPage = () => {
         className={styles.formCard}
       >
         <h1>Create account</h1>
-        <div className={styles.formField}>
-          <div className={styles.fieldIcon}>
-            <FontAwesomeIcon
-              icon={faAt}
-              style={{ fontSize: 14 }}
-              title="Email" // TODO: rework this
-            />
-          </div>
-          <input
-            placeholder="email@domain.com"
-            type="email"
-            name="email"
-            value={user.email}
-            onChange={e => setUser({ ...user, email: e.target.value })}
-            data-testid="login-email"
-          />
-          <label htmlFor="email">Email</label>
-        </div>
 
-        <div className={styles.formField}>
-          <div className={styles.fieldIcon}>
-            <FontAwesomeIcon
-              icon={faLock}
-              style={{ fontSize: 14 }}
-              title="Password" // TODO: rework this
+        <div className={styles.wrapper}>
+          <div className={styles.formField}>
+            <div className={styles.fieldIcon}>
+              <FontAwesomeIcon
+                icon={faAt}
+                style={{ fontSize: 14 }}
+                title="Email" // TODO: rework this
+              />
+            </div>
+            <input
+              placeholder="email@domain.com"
+              type="email"
+              name="email"
+              value={user.email}
+              onChange={e => setUser({ ...user, email: e.target.value })}
+              data-testid="login-email"
             />
+            <label htmlFor="email">Email</label>
           </div>
-          <input
-            placeholder={
-              passwordInputType === 'password' ? '••••' : 'MyPa$$word_'
-            }
-            type={passwordInputType}
-            name="password"
-            value={user.password}
-            onChange={e => setUser({ ...user, password: e.target.value })}
-            data-testid="login-password"
-          />
-          <label htmlFor="password">Password</label>
-          {/*          <div className={styles.ctaIcon}>
+
+          <div className={styles.formField}>
+            <div className={styles.fieldIcon}>
+              <FontAwesomeIcon
+                icon={faLock}
+                style={{ fontSize: 14 }}
+                title="Password" // TODO: rework this
+              />
+            </div>
+            <input
+              placeholder={
+                passwordInputType === 'password' ? '••••' : 'MyPa$$word_'
+              }
+              type={passwordInputType}
+              name="password"
+              value={user.password}
+              onChange={e => setUser({ ...user, password: e.target.value })}
+              data-testid="login-password"
+            />
+            <label htmlFor="password">Password</label>
+            {/*          <div className={styles.ctaIcon}>
             <ToggleIcon />
           </div> */}
+          </div>
+          {/* 
+          <div className={styles.recaptchaContainer}>
+            <ReCAPTCHA
+              size="normal"
+              sitekey={process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_CLIENT}
+              ref={reCaptchaRef}
+              data-testid="contact-recaptcha"
+              onChange={token => setToken(token)}
+              onExpired={() => setToken(null)}
+            />
+          </div> */}
+          <Button
+            variation="primary"
+            testId="submit-login-form"
+            /*           isDisabled={isDisabled} */
+            isLoading={isLoading}
+          >
+            Create account
+          </Button>
         </div>
-
-        <div className={styles.recaptchaContainer}>
-          <ReCAPTCHA
-            size="normal"
-            sitekey={process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_CLIENT}
-            ref={reCaptchaRef}
-            data-testid="contact-recaptcha"
-            onChange={token => setToken(token)}
-            onExpired={() => setToken(null)}
-          />
-        </div>
-        <Button
-          variation="primary"
-          testId="submit-login-form"
-          /*           isDisabled={isDisabled} */
-          isLoading={isLoading}
-        >
-          Create account
-        </Button>
         <p>
-          Already have an account?<Link href="/login"> Login here</Link>
+          Already have an account? <Link href="/login"> Login here</Link>
         </p>
       </form>
     </>

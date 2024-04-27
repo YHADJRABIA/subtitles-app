@@ -1,4 +1,9 @@
 .wrapper {
+  width: 90%;
+  @include flexCenter(column, space-evenly);
+  @include respond-to('medium') {
+    width: 32.5rem;
+  }
 }
 
 .ctaIcon {
@@ -15,21 +20,16 @@
   transition: color 0.3s ease-in;
   position: absolute;
   top: 50%;
-  right: 15%;
+  right: 5%;
   color: var(--secondary-gray-color);
-
-  @include respond-to('medium') {
-    right: 30%;
-  }
 }
 
 .formCard {
-  position: relative;
   width: 100vw;
   height: 80vh;
   border-radius: 3rem;
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
-  @include flexCenter(column, space-evenly);
+  @include flexCenter(column, space-around);
 
   & > :last-child {
     margin-top: 2rem;
@@ -47,6 +47,11 @@
   position: relative;
   @include flexCenter(column-reverse, space-between, flex-start);
   width: inherit;
+  margin-bottom: 1rem;
+
+  &:last-of-type {
+    margin-bottom: 6rem;
+  }
 
   &:hover * {
     color: var(--primary-blue-color);
@@ -59,19 +64,15 @@
 
   & input {
     padding: 1.3rem 2rem;
-    width: 80%;
+    width: 100%;
     transition: all 0.3s ease-in-out;
-    transition-property: opacity, border-color, color;
+    transition-property: opacity, border-color, background-color, color;
     font-weight: bold;
     color: var(--secondary-black-color);
     outline: none;
     background-color: var(--primary-gray-color);
     border-radius: 0.8rem;
     border: 1px solid var(--gray-border);
-
-    @include respond-to('medium') {
-      width: 32.5rem;
-    }
 
     &:focus {
       border-color: var(--primary-blue-color);
@@ -122,7 +123,9 @@
     &:not(:placeholder-shown) + label,
     &:focus + label,
     &:active + label {
-      transform: translate(2rem, -0.2rem) scale(1);
+      background-color: var(--primary-white-color);
+      padding: 0 0.1rem;
+      transform: translate(2rem, 0.75rem) scale(1);
       cursor: pointer;
     }
 
