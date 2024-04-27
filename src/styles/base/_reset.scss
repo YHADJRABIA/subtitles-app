@@ -39,6 +39,7 @@ a {
 a[href]:not([class]) {
   color: var(--secondary-blue-color);
   text-decoration: underline;
+  font-weight: 600;
 }
 
 img {
