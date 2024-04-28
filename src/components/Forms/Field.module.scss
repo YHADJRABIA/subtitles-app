@@ -1,8 +1,15 @@
+.wrapper {
+  width: inherit;
+  &:not(:first-child) {
+    padding-bottom: 2rem;
+  }
+}
+
 .ctaIcon,
 .fieldIcon {
   position: absolute;
   transition: color 0.3s ease-in;
-  top: 50%;
+  top: 3rem;
   color: var(--secondary-gray-color);
 }
 
@@ -10,18 +17,14 @@
   left: 1rem;
 }
 .ctaIcon {
-  right: 0.75rem;
+  right: 1rem;
 }
 
 .formField {
   position: relative;
   @include flexCenter(column-reverse, space-between, flex-start);
-  width: inherit;
-  margin-bottom: 1rem;
-
-  &:not(:first-child) {
-    margin-bottom: 4rem;
-  }
+  width: 100%;
+  padding-bottom: 0.5rem;
 
   &:hover * {
     color: var(--primary-blue-color);
