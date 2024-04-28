@@ -60,7 +60,7 @@
   }
 
   input {
-    padding: 1.3rem 3rem;
+    padding: 1.3rem 3.2rem;
     width: 100%;
     transition: all 0.3s ease-in-out;
     transition-property: opacity, border-color, background-color, color;
@@ -69,7 +69,7 @@
     outline: none;
     background-color: var(--primary-gray-color);
     border-radius: 0.8rem;
-    border: 1px solid var(--gray-border);
+    border: 1px solid var(--primary-gray-border);
 
     &:focus {
       border-color: var(--primary-blue-color);
@@ -87,7 +87,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       transform-origin: left bottom;
-      transform: translate(3rem, 3rem) scale(1.2);
+      transform: translate(3.2rem, 3rem) scale(1.2);
     }
 
     &::-webkit-input-placeholder {
