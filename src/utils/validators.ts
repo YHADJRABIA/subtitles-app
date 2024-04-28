@@ -12,9 +12,9 @@ export const isValidEmail = (email: string): boolean => {
 
 export const isPasswordLengthValid = (
   password: string,
-  minDigits: number
+  minLength: number
 ): boolean => {
-  const re = new RegExp(`^(?=.*[0-9].*)[a-zA-Z0-9]{${minDigits},}$`)
+  const re = new RegExp(`^(?=.*[a-zA-Z0-9])[a-zA-Z0-9]{${minLength},}$`)
   return re.test(password)
 }
 
