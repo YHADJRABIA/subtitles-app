@@ -1,13 +1,11 @@
 'use client'
-import { ReactNode } from 'react'
+import { ButtonHTMLAttributes, ReactNode } from 'react'
 import styles from './Button.module.scss'
 import cn from 'classnames'
 import Loader from './Loader'
 
-interface PropTypes {
-  children: ReactNode
+interface PropTypes extends ButtonHTMLAttributes<HTMLButtonElement> {
   testId?: string
-  isDisabled?: boolean
   isLoading?: boolean
   variation: 'primary' | 'secondary' | 'regular'
 }
@@ -15,7 +13,7 @@ interface PropTypes {
 const Button = ({
   variation,
   children,
-  isDisabled,
+  disabled,
   testId,
   isLoading,
 }: PropTypes) => {
@@ -32,7 +30,7 @@ const Button = ({
             : styles.regular
       )}
       data-testid={testId}
-      disabled={isDisabled}
+      disabled={disabled}
     >
       {isLoading ? <Loader /> : children}
     </button>
