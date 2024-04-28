@@ -65,7 +65,7 @@ const SignupPage = () => {
             name="email"
             label="Email"
             value={user.email}
-            data-testid="login-email"
+            dataTestId="login-email"
             onChange={e => setUser({ ...user, email: e.target.value })}
             leftIcon={
               <FontAwesomeIcon
@@ -84,7 +84,7 @@ const SignupPage = () => {
             name="password"
             value={user.password}
             onChange={e => setUser({ ...user, password: e.target.value })}
-            data-testid="login-password"
+            dataTestId="login-password"
             label="Password"
             leftIcon={
               <FontAwesomeIcon

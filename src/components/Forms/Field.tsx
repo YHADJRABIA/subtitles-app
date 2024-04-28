@@ -3,12 +3,14 @@ import styles from './Field.module.scss'
 
 interface PropTypes extends InputHTMLAttributes<HTMLInputElement> {
   label: string
+  dataTestId?: string
   leftIcon?: ReactNode
   rightIcon?: ReactNode
 }
 
 const Field = ({
   label,
+  dataTestId,
   type,
   placeholder,
   onChange,
@@ -26,6 +28,7 @@ const Field = ({
         name={name}
         value={value}
         onChange={onChange}
+        data-testid={dataTestId}
       />
       <label htmlFor={name}>{label}</label>
       {rightIcon && <div className={styles.ctaIcon}>{rightIcon}</div>}
