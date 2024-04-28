@@ -1,0 +1,28 @@
+.separator {
+  display: flex;
+  align-items: center;
+  width: 85%;
+  color: var(--primary-black-color);
+  opacity: 0.6;
+  margin: 1.5rem 0;
+
+  @include respond-to('medium') {
+    width: 100%;
+  }
+
+  &:before,
+  &:after {
+    content: '';
+    flex-grow: 1;
+    background: var(--primary-black-color);
+    opacity: 0.6;
+    height: 1px;
+    font-size: 0;
+    line-height: 0;
+    margin: 0 0.8rem;
+  }
+
+  span {
+    font-size: 14px;
+  }
+}
