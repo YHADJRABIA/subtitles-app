@@ -13,6 +13,7 @@ import Button from '@/components/UI/Button'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { useShowPassword } from '@/hooks/useShowPassword'
 import Separator from '@/components/UI/Separator'
+import Field from '@/components/Forms/Field'
 
 const SignupPage = () => {
   const router = useRouter()
@@ -22,7 +23,7 @@ const SignupPage = () => {
   })
   const [isDisabled, setIsDisabled] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const [passwordInputType, ToggleIcon] = useShowPassword()
+  const [passwordInputType, ToggleIcon] = useShowPassword({ size: 16 })
   const [token, setToken] = useState<string | null>(null) // reCAPTCHA's token (sent to backend to be validated by Google)
   const reCaptchaRef = useRef<ReCAPTCHA>(null)
 
@@ -58,50 +59,42 @@ const SignupPage = () => {
         <h1>Create account</h1>
 
         <div className={styles.wrapper}>
-          <div className={styles.formField}>
-            <input
-              placeholder="email@domain.com"
-              type="email"
-              name="email"
-              value={user.email}
-              onChange={e => setUser({ ...user, email: e.target.value })}
-              data-testid="login-email"
-            />
-            <label htmlFor="email">Email</label>
-            <div className={styles.fieldIcon}>
+          <Field
+            placeholder="email@domain.com"
+            type="email"
+            name="email"
+            label="Email"
+            value={user.email}
+            data-testid="login-email"
+            onChange={e => setUser({ ...user, email: e.target.value })}
+            leftIcon={
               <FontAwesomeIcon
                 icon={faAt}
                 style={{ fontSize: 14 }}
                 title="Email" // TODO: rework this
               />
-            </div>
-          </div>
+            }
+          />
 
-          <div className={styles.formField}>
-            <input
-              placeholder={
-                passwordInputType === 'password' ? '••••' : 'MyPa$$word_'
-              }
-              type={passwordInputType}
-              name="password"
-              value={user.password}
-              onChange={e => setUser({ ...user, password: e.target.value })}
-              data-testid="login-password"
-            />
-            <label htmlFor="password">Password</label>
-
-            <div className={styles.fieldIcon}>
+          <Field
+            placeholder={
+              passwordInputType === 'password' ? '••••' : 'MyPa$$word_'
+            }
+            type={passwordInputType}
+            name="password"
+            value={user.password}
+            onChange={e => setUser({ ...user, password: e.target.value })}
+            data-testid="login-password"
+            label="Password"
+            leftIcon={
               <FontAwesomeIcon
                 icon={faLock}
                 style={{ fontSize: 14 }}
                 title="Password" // TODO: rework this
               />
-            </div>
-
-            <div className={styles.ctaIcon}>
-              <ToggleIcon />
-            </div>
-          </div>
+            }
+            rightIcon={<ToggleIcon />}
+          />
 
           {/* 
           <div className={styles.recaptchaContainer}>
