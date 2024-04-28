@@ -6,19 +6,19 @@
   }
 }
 
-.ctaIcon {
+.ctaIcon,
+.fieldIcon {
   position: absolute;
-  top: 50%;
-  right: 1rem;
+  transition: color 0.3s ease-in;
+  top: 49%;
   color: var(--secondary-gray-color);
 }
 
 .fieldIcon {
-  transition: color 0.3s ease-in;
-  position: absolute;
-  top: 50%;
   left: 1rem;
-  color: var(--secondary-gray-color);
+}
+.ctaIcon {
+  right: 0.75rem;
 }
 
 .formCard {
@@ -46,7 +46,7 @@
   width: inherit;
   margin-bottom: 1rem;
 
-  &:last-of-type {
+  &:not(:first-child) {
     margin-bottom: 4rem;
   }
 
