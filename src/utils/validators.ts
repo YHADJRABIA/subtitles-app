@@ -10,6 +10,14 @@ export const isValidEmail = (email: string): boolean => {
   return re.test(email)
 }
 
+export const isPasswordLengthValid = (
+  password: string,
+  minDigits: number
+): boolean => {
+  const re = new RegExp(`^(?=.*[0-9].*)[a-zA-Z0-9]{${minDigits},}$`)
+  return re.test(password)
+}
+
 // Google reCAPTCHA validation (validating the frontend's generated token through Google's API)
 export const validateHuman = async (token: string): Promise<boolean> => {
   const res = await axios.post(
