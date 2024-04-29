@@ -43,8 +43,6 @@
   border-radius: 0.5rem;
   background-color: var(--primary-blue-color);
   &:hover:enabled {
-    transform: none;
-    box-shadow: none;
     background-color: var(--secondary-blue-color);
   }
 }
