@@ -1,12 +1,9 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import '@fortawesome/fontawesome-svg-core/styles.css'
-import { config } from '@fortawesome/fontawesome-svg-core'
 import '@/styles/globals.scss'
 import { ReactNode } from 'react'
 import Header from '@/components/Layout/Header'
 import Footer from '@/components/Layout/Footer'
-config.autoAddCss = false
 
 const inter = Inter({ subsets: ['latin'] })
 
