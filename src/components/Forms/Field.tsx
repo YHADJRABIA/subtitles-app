@@ -1,15 +1,17 @@
-import React, { InputHTMLAttributes, ReactNode, useRef, useState } from 'react'
+import React, { InputHTMLAttributes, ReactNode } from 'react'
 import { MdErrorOutline as ErrorIcon } from 'react-icons/md'
 import cn from 'classnames'
 import styles from './Field.module.scss'
 import { useDebounce } from '@/hooks/useDebounce'
+import { useFieldFocus } from '@/hooks/useFieldFocus'
 
 interface PropTypes extends InputHTMLAttributes<HTMLInputElement> {
   label: string
-  subLabel?: {
+  value: string
+  subLabel: {
     text: string
-    type?: 'info' | 'error'
-    onValidate?: (value: string) => boolean
+    isShownOnFocus?: boolean
+    onShow?: (value: string) => boolean
   }
   leftIcon?: ReactNode
   rightIcon?: ReactNode
@@ -28,32 +30,21 @@ const Field = ({
   rightIcon,
   value,
 }: PropTypes) => {
-  const transientValue = useRef('')
-  const [isFocused, setIsFocused] = useState(false)
-  const [isBlurred, setIsBlurred] = useState(false)
+  // TODO: Refactor this + useFieldFocus hook
+  const { text, isShownOnFocus = true, onShow } = subLabel
 
-  const [isInfo, isError] = [
-    subLabel?.type === 'info',
-    subLabel?.type === 'error',
-  ]
+  const debouncedValue = useDebounce(value)
 
-  const onFocus = () => {
-    setIsFocused(true)
-  }
+  const { isFocused, isBlurred, onFocus, onBlur } = useFieldFocus({
+    value: isShownOnFocus ? '' : debouncedValue,
+  })
 
-  const onBlur = () => {
-    if (isInfo) return setIsFocused(false)
-    // Only triggers if value changed after blur
-    if (transientValue.current !== value) setIsBlurred(true)
-  }
+  const shouldShowSubfield = onShow && onShow(debouncedValue)
 
-  const debouncedValue = useDebounce(value) as string
-
-  const isInvalid = subLabel?.onValidate && !subLabel.onValidate(debouncedValue)
-
-  const isShownSubfield = isInfo
-    ? isFocused && isInvalid
-    : isBlurred && isInvalid
+  // Info subfield shows on focus, error subfield shows on blur
+  const isShownSubfield = isShownOnFocus
+    ? isFocused && shouldShowSubfield
+    : isBlurred && shouldShowSubfield
 
   return (
     <div className={styles.wrapper}>
@@ -72,9 +63,10 @@ const Field = ({
         <label htmlFor={name}>{label}</label>
         {rightIcon && <div className={styles.ctaIcon}>{rightIcon}</div>}
       </div>
-      {subLabel?.text && (
-        <div className={styles.subField}>
-          {isError && (
+
+      {text && (
+        <div className={styles.subField} aria-hidden={!isShownSubfield}>
+          {!isShownOnFocus && (
             <ErrorIcon
               size={14}
               className={cn(styles.errorIcon, 'hidden', {
@@ -84,10 +76,11 @@ const Field = ({
           )}
           <small
             className={cn('hidden', { visible: isShownSubfield })}
-            style={{ color: isError ? 'var(--primary-red-color)' : undefined }}
-            aria-hidden={!isShownSubfield}
+            style={{
+              color: isShownOnFocus ? undefined : 'var(--primary-red-color)',
+            }}
           >
-            {subLabel.text}
+            {text}
           </small>
         </div>
       )}
