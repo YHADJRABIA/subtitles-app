@@ -2,20 +2,35 @@ import { connectDB } from '@/config/db'
 import { User } from '@/models/user.model'
 import { NextRequest, NextResponse } from 'next/server'
 import bcryptjs from 'bcryptjs'
+import { isEmpty, isValidPassword, isValidEmail } from '@/utils/validators'
+import { isDevelopment } from '@/utils/general'
 
 connectDB()
 
-export async function POST(request: NextRequest) {
+export async function POST(req: NextRequest) {
   try {
-    const reqBody = await request.json()
+    const reqBody = await req.json()
     const { email, password } = reqBody
 
     // Check if user already exists
-    const user = await User.findOne({ email })
+    const existingUser = await User.findOne({ email })
 
-    if (user)
+    // Empty fields
+    if (isEmpty(email) || isEmpty(password))
+      return NextResponse.json({ msg: 'Fill out all fields' }, { status: 400 })
+
+    // Invalid format
+    if (!isValidEmail(email))
+      return NextResponse.json({ msg: 'Invalid email' }, { status: 401 })
+
+    if (!isValidPassword(password))
+      return NextResponse.json({ msg: 'Invalid password' }, { status: 401 })
+
+    // Already existing user
+
+    if (existingUser)
       return NextResponse.json(
-        { error: 'User already exists' },
+        { msg: 'Account already exists under given email' },
         { status: 400 }
       )
 
@@ -28,19 +43,20 @@ export async function POST(request: NextRequest) {
       password: hashedPassword,
     })
 
-    const savedUser = await newUser.save()
-    console.log(savedUser)
+    const createdUser = await newUser.save()
+    isDevelopment && console.warn(createdUser)
 
     // send verification email
 
-    /*     await sendEmail({ email, emailType: 'VERIFY', userId: savedUser._id }) */
+    /*     await sendEmail({ email, emailType: 'VERIFY', userId: createdUser._id }) */
 
     return NextResponse.json({
       message: 'User created successfully',
       success: true,
-      savedUser,
+      savedUser: createdUser,
     })
   } catch (error: any) {
+    // TODO: type error properly
     return NextResponse.json({ error: error.message }, { status: 500 })
   }
 }
