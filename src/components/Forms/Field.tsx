@@ -8,10 +8,10 @@ import { useFieldFocus } from '@/hooks/useFieldFocus'
 interface PropTypes extends InputHTMLAttributes<HTMLInputElement> {
   label: string
   value: string
+  onValidate: (value: string) => boolean
   subLabel: {
     text: string
     isShownOnFocus?: boolean
-    onShow?: (value: string) => boolean
   }
   leftIcon?: ReactNode
   rightIcon?: ReactNode
@@ -20,6 +20,7 @@ interface PropTypes extends InputHTMLAttributes<HTMLInputElement> {
 
 const Field = ({
   label,
+  onValidate,
   subLabel,
   testId,
   type,
@@ -31,7 +32,7 @@ const Field = ({
   value,
 }: PropTypes) => {
   // TODO: Refactor this + useFieldFocus hook
-  const { text, isShownOnFocus = true, onShow } = subLabel
+  const { text, isShownOnFocus = true } = subLabel
 
   const debouncedValue = useDebounce(value)
 
@@ -39,12 +40,12 @@ const Field = ({
     value: isShownOnFocus ? '' : debouncedValue,
   })
 
-  const shouldShowSubfield = onShow && onShow(debouncedValue)
+  const isInvalid = !onValidate(debouncedValue)
 
   // Info subfield shows on focus, error subfield shows on blur
   const isShownSubfield = isShownOnFocus
-    ? isFocused && shouldShowSubfield
-    : isBlurred && shouldShowSubfield
+    ? isFocused && isInvalid
+    : isBlurred && isInvalid
 
   return (
     <div className={styles.wrapper}>
