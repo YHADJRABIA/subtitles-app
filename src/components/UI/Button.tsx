@@ -1,5 +1,4 @@
-'use client'
-import { ButtonHTMLAttributes, ReactNode } from 'react'
+import { ButtonHTMLAttributes } from 'react'
 import styles from './Button.module.scss'
 import cn from 'classnames'
 import Loader from './Loader'
@@ -32,7 +31,7 @@ const Button = ({
       data-testid={testId}
       disabled={disabled}
     >
-      {isLoading ? <Loader /> : children}
+      {isLoading ? <Loader size={18} /> : children}
     </button>
   )
 }
