@@ -1,17 +1,17 @@
 import mongoose from 'mongoose'
-const Schema = mongoose.Schema
+const { Schema } = mongoose
 
 const userSchema = new Schema(
   {
     email: {
       type: String,
-      required: [true, 'Please provide an e-mail.'],
+      required: [true, 'Please provide an email'],
       trim: true,
       unique: true,
     },
     password: {
       type: String,
-      required: [true, 'Please provide a password.'],
+      required: [true, 'Please provide a password'],
     },
     isVerified: {
       type: Boolean,
