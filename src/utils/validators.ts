@@ -10,11 +10,8 @@ export const isValidEmail = (email: string): boolean => {
   return re.test(email)
 }
 
-export const isPasswordLengthValid = (
-  password: string,
-  minLength: number
-): boolean => {
-  const re = new RegExp(`^(?=.*[a-zA-Z0-9])[a-zA-Z0-9]{${minLength},}$`)
+export const isValidPassword = (password: string): boolean => {
+  const re = new RegExp(`^(?=.*[a-zA-Z0-9])[a-zA-Z0-9]{6,}$`)
   return re.test(password)
 }
 
