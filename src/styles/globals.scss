@@ -1,5 +1,7 @@
 @import 'abstracts/variables';
 
+@import 'vendors/toastify';
+
 @import 'layout/header', 'layout/main', 'layout/footer', 'layout/form';
 
 @import 'base/reset', 'base/typography';
