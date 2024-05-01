@@ -12,9 +12,6 @@ export async function POST(req: NextRequest) {
     const reqBody = await req.json()
     const { email, password } = reqBody
 
-    // Check if user already exists
-    const existingUser = await User.findOne({ email })
-
     // Empty fields
     if (isEmpty(email) || isEmpty(password))
       return NextResponse.json({ msg: 'Fill out all fields' }, { status: 400 })
@@ -26,8 +23,10 @@ export async function POST(req: NextRequest) {
     if (!isValidPassword(password))
       return NextResponse.json({ msg: 'Invalid password' }, { status: 401 })
 
-    // Already existing user
+    // Check if user already exists
+    const existingUser = await User.findOne({ email })
 
+    // Already existing user
     if (existingUser)
       return NextResponse.json(
         { msg: 'Account already exists under given email' },
