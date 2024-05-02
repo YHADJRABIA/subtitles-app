@@ -18,6 +18,8 @@ const Button = ({
 }: PropTypes) => {
   const isPrimary = variation === 'primary'
   const isSecondary = variation === 'secondary'
+
+  const isClickeable = !(isLoading || disabled)
   return (
     <button
       className={cn(
@@ -26,10 +28,11 @@ const Button = ({
           ? styles.primary
           : isSecondary
             ? styles.secondary
-            : styles.regular
+            : styles.regular,
+        { disabled: !isClickeable }
       )}
       data-testid={testId}
-      disabled={disabled}
+      disabled={!isClickeable}
     >
       {isLoading ? <Loader size={18} /> : children}
     </button>
