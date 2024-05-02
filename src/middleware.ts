@@ -11,5 +11,5 @@ export default createMiddleware({
 
 export const config = {
   // Match only internationalized pathnames and redirects accordingly
-  matcher: ['/', '/signup', '/(en|fr)/:path*'],
+  matcher: ['/', '/signup', '/login', '/(en|fr)/:path*'],
 }
