@@ -1,10 +1,11 @@
 import type { Metadata } from 'next'
 import { Familjen_Grotesk, Inter } from 'next/font/google'
 import '@/styles/globals.scss'
-import 'react-toastify/dist/ReactToastify.css'
+import 'react-toastify/dist/ReactToastify.min.css'
 import { ReactNode } from 'react'
 import Header from '@/components/Layout/Header'
 import Footer from '@/components/Layout/Footer'
+import AppProvider from '@/context/AppProvider'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-body' })
 const familjenGrotesk = Familjen_Grotesk({
@@ -30,9 +31,11 @@ export default function LocaleLayout({
   return (
     <html lang={locale}>
       <body className={`${inter.variable} ${familjenGrotesk.variable}`}>
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <AppProvider>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </AppProvider>
       </body>
     </html>
   )
