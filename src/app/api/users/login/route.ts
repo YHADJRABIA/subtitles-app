@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
     if (!validPassword || !user) {
       return NextResponse.json(
         { error: 'Incorrect password or email', success: false },
-        { status: 400 }
+        { status: 401 }
       )
     }
 
