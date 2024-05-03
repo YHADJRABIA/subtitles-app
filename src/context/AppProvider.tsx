@@ -8,11 +8,13 @@ interface PropTypes {
 }
 
 const AppProvider = ({ children }: PropTypes) => {
+  /*     <Provider store={store}> 
+      </Provider>  */
   return (
-    <Provider store={store}>
+    <>
       <ToastContainer />
       {children}
-    </Provider>
+    </>
   )
 }
 
