@@ -1,4 +1,4 @@
-import { connectDB } from '@/config/db'
+import { connectDB } from '@/lib/mongodb'
 import { User } from '@/models/user.model'
 import { NextRequest, NextResponse } from 'next/server'
 import bcryptjs from 'bcryptjs'
@@ -14,14 +14,23 @@ export async function POST(req: NextRequest) {
 
     // Empty fields
     if (isEmpty(email) || isEmpty(password))
-      return NextResponse.json({ msg: 'Fill out all fields' }, { status: 400 })
+      return NextResponse.json(
+        { msg: 'Fill out all fields', success: false },
+        { status: 400 }
+      )
 
     // Invalid format
     if (!isValidEmail(email))
-      return NextResponse.json({ msg: 'Invalid email' }, { status: 401 })
+      return NextResponse.json(
+        { msg: 'Invalid email format', success: false },
+        { status: 401 }
+      )
 
     if (!isValidPassword(password))
-      return NextResponse.json({ msg: 'Invalid password' }, { status: 401 })
+      return NextResponse.json(
+        { msg: 'Invalid password format', success: false },
+        { status: 401 }
+      )
 
     // Check if user already exists
     const existingUser = await User.findOne({ email })
@@ -29,7 +38,7 @@ export async function POST(req: NextRequest) {
     // Already existing user
     if (existingUser)
       return NextResponse.json(
-        { msg: 'Account already exists under given email' },
+        { msg: 'Account already exists under given email', success: false },
         { status: 400 }
       )
 
@@ -50,7 +59,7 @@ export async function POST(req: NextRequest) {
     /*     await sendEmail({ email, emailType: 'VERIFY', userId: createdUser._id }) */
 
     return NextResponse.json({
-      message: 'User created successfully',
+      message: 'Account successfully created!',
       success: true,
       savedUser: createdUser,
     })
