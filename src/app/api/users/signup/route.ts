@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
     // Already existing user
     if (existingUser)
       return NextResponse.json(
-        { msg: 'Account already exists under given email', success: false },
+        { msg: 'Email already in use. Use another one', success: false },
         { status: 400 }
       )
 
