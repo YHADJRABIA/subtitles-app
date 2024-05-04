@@ -4,7 +4,7 @@ import {
 } from 'next-intl/navigation'
 
 export const locales = ['en', 'fr']
-export const localePrefix = 'always'
+export const localePrefix = 'as-needed' // No prefix for the default locale. /en -> /
 
 export const pathnames = {
   // If all locales use the same pathname, a
