@@ -65,7 +65,6 @@ export async function POST(req: NextRequest) {
       savedUser: createdUser,
     })
   } catch (error) {
-    // TODO: type error properly
     return NextResponse.json({ error: getErrorMessage(error) }, { status: 500 })
   }
 }
