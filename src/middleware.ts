@@ -1,12 +1,14 @@
 import createMiddleware from 'next-intl/middleware'
-import { locales } from './utils/locales'
 import withAuth, { NextRequestWithAuth } from 'next-auth/middleware'
 import { NextFetchEvent, NextRequest } from 'next/server'
 import { isPublicPath } from './utils/paths'
+import { localePrefix, locales, pathnames } from './lib/navigation'
 
 const intlMiddleware = createMiddleware({
-  locales: locales,
-  defaultLocale: locales[0],
+  defaultLocale: 'en',
+  localePrefix,
+  locales,
+  pathnames,
 })
 
 const authMiddleware = withAuth(
