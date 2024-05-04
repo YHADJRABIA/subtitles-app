@@ -13,10 +13,12 @@ const AppProvider = ({ children }: PropTypes) => {
   /*     <Provider store={store}> 
       </Provider>  */
   return (
-    <SessionProvider>
+    /*     <SessionProvider> */
+    <>
       <ToastContainer />
       {children}
-    </SessionProvider>
+    </>
+    /*   </SessionProvider> */
   )
 }
 
