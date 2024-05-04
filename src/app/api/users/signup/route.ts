@@ -16,20 +16,20 @@ export async function POST(req: NextRequest) {
     // Empty fields
     if (isEmpty(email) || isEmpty(password))
       return NextResponse.json(
-        { msg: 'Fill out all fields', success: false },
+        { message: 'Fill out all fields', success: false },
         { status: 400 }
       )
 
     // Invalid format
     if (!isValidEmail(email))
       return NextResponse.json(
-        { msg: 'Invalid email format', success: false },
+        { message: 'Invalid email format', success: false },
         { status: 401 }
       )
 
     if (!isValidPassword(password))
       return NextResponse.json(
-        { msg: 'Invalid password format', success: false },
+        { message: 'Invalid password format', success: false },
         { status: 401 }
       )
 
@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
     // Already existing user
     if (existingUser)
       return NextResponse.json(
-        { msg: 'Email already in use. Use another one', success: false },
+        { message: 'Email already in use. Use another one', success: false },
         { status: 400 }
       )
 
