@@ -1,5 +1,5 @@
+import { locales } from '@/lib/navigation'
 import { publicRoutes } from '@/routes/routes'
-import { locales } from './locales'
 
 export const isPublicPath = (pathname: string): boolean => {
   const publicPathnameRegex = RegExp(
