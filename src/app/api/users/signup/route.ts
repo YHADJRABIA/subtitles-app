@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import bcryptjs from 'bcryptjs'
 import { isEmpty, isValidPassword, isValidEmail } from '@/utils/validators'
 import { isDevelopment } from '@/utils/general'
+import { getErrorMessage } from '@/utils/errors'
 
 connectDB()
 
@@ -63,8 +64,8 @@ export async function POST(req: NextRequest) {
       success: true,
       savedUser: createdUser,
     })
-  } catch (error: any) {
+  } catch (error) {
     // TODO: type error properly
-    return NextResponse.json({ error: error.message }, { status: 500 })
+    return NextResponse.json({ error: getErrorMessage(error) }, { status: 500 })
   }
 }

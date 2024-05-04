@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken'
 
 import { isEmpty, isValidPassword, isValidEmail } from '@/utils/validators'
 import { isDevelopment } from '@/utils/general'
+import { getErrorMessage } from '@/utils/errors'
 
 connectDB()
 
@@ -64,8 +65,7 @@ export async function POST(request: NextRequest) {
       httpOnly: true,
     })
     return response
-  } catch (error: any) {
-    // TODO: fix any
-    return NextResponse.json({ error: error.message }, { status: 500 })
+  } catch (error) {
+    return NextResponse.json({ error: getErrorMessage(error) }, { status: 500 })
   }
 }
