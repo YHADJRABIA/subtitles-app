@@ -15,6 +15,7 @@ const Button = ({
   disabled,
   testId,
   isLoading,
+  ...rest
 }: PropTypes) => {
   const isPrimary = variation === 'primary'
   const isSecondary = variation === 'secondary'
@@ -22,6 +23,7 @@ const Button = ({
   const isClickeable = !(isLoading || disabled)
   return (
     <button
+      {...rest}
       className={cn(
         styles.btn,
         isPrimary
