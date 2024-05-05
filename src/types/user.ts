@@ -1,4 +1,6 @@
-export interface UserCredentials {
+export interface UserAPIType {
+  name: string
   email: string
-  password: string
+  password?: string
+  image: string
 }
