@@ -3,6 +3,10 @@ const { Schema } = mongoose
 
 const userSchema = new Schema(
   {
+    name: {
+      type: String,
+      default: '',
+    },
     email: {
       type: String,
       required: [true, 'Please provide an email'],
@@ -11,7 +15,6 @@ const userSchema = new Schema(
     },
     password: {
       type: String,
-      required: [true, 'Please provide a password'],
     },
     isVerified: {
       type: Boolean,
