@@ -6,11 +6,11 @@ import Loader from './Loader'
 interface PropTypes extends ButtonHTMLAttributes<HTMLButtonElement> {
   testId?: string
   isLoading?: boolean
-  variation: 'primary' | 'secondary' | 'regular'
+  variation?: 'primary' | 'secondary' | 'regular'
 }
 
 const Button = ({
-  variation,
+  variation = 'regular',
   children,
   disabled,
   testId,
