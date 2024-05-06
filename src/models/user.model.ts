@@ -5,7 +5,7 @@ const userSchema = new Schema(
   {
     name: {
       type: String,
-      default: '',
+      default: null,
     },
     email: {
       type: String,
@@ -24,9 +24,9 @@ const userSchema = new Schema(
       type: Number,
       default: 0, // 0 = user, 1 = admin
     },
-    avatar: {
+    image: {
       type: String,
-      default: '', // TODO: Add default image url
+      default: null,
     },
     forgotPasswordToken: String,
     forgotPasswordTokenExpiry: Date,
@@ -38,4 +38,5 @@ const userSchema = new Schema(
   }
 )
 
-export const User = mongoose.models.User || mongoose.model('User', userSchema)
+export const UserModel =
+  mongoose.models.User || mongoose.model('User', userSchema)
