@@ -1,10 +1,11 @@
 import { connectDB } from '@/lib/mongodb'
-import { User } from '@/models/user.model'
+import { UserModel } from '@/models/user.model'
 import { NextRequest, NextResponse } from 'next/server'
 import bcryptjs from 'bcryptjs'
 import { isEmpty, isValidPassword, isValidEmail } from '@/utils/validators'
 import { isDevelopment } from '@/utils/general'
 import { getErrorMessage } from '@/utils/errors'
+import { getUserByEmail } from '@/utils/mongoose'
 
 connectDB()
 
@@ -16,7 +17,7 @@ export async function POST(req: NextRequest) {
     // Empty fields
     if (isEmpty(email) || isEmpty(password))
       return NextResponse.json(
-        { message: 'Fill out all fields', success: false },
+        { message: 'Missing fields', success: false },
         { status: 400 }
       )
 
@@ -34,12 +35,12 @@ export async function POST(req: NextRequest) {
       )
 
     // Check if user already exists
-    const existingUser = await User.findOne({ email })
+    const existingUser = await getUserByEmail(email)
 
     // Already existing user
     if (existingUser)
       return NextResponse.json(
-        { message: 'Email already in use. Use another one', success: false },
+        { message: 'Email already exists', success: false },
         { status: 400 }
       )
 
@@ -47,7 +48,7 @@ export async function POST(req: NextRequest) {
     const salt = await bcryptjs.genSalt(10)
     const hashedPassword = await bcryptjs.hash(password, salt)
 
-    const newUser = new User({
+    const newUser = new UserModel({
       email,
       password: hashedPassword,
     })
