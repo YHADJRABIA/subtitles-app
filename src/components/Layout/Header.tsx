@@ -12,8 +12,8 @@ const Header = () => {
       label: t('home'),
     },
     {
-      url: '/signup',
-      label: 'Sign up',
+      url: '/register',
+      label: 'Register',
     },
   ]
   return (
