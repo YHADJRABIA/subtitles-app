@@ -13,8 +13,8 @@ export const pathnames = {
 
   // If locales use different paths, you can
   // specify each external path per locale.
-  '/signup': {
-    en: '/signup',
+  '/register': {
+    en: '/register',
     fr: '/inscription',
   },
 } satisfies Pathnames<typeof locales>
