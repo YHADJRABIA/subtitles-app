@@ -3,6 +3,7 @@ import withAuth, { NextRequestWithAuth } from 'next-auth/middleware'
 import { NextFetchEvent, NextRequest } from 'next/server'
 import { isPublicPath } from './utils/paths'
 import { localePrefix, locales, pathnames } from './lib/navigation'
+import { LOGIN_ROUTE } from './routes/routes'
 
 const intlMiddleware = createMiddleware({
   defaultLocale: 'en',
@@ -20,7 +21,7 @@ const authMiddleware = withAuth(
       authorized: ({ token }) => token !== null,
     },
     pages: {
-      signIn: '/login',
+      signIn: LOGIN_ROUTE,
     },
   }
 )
@@ -28,9 +29,9 @@ const authMiddleware = withAuth(
 // Run authMiddleware for protected routes else run intlMiddleware
 export default function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
-  const isPublicPage = isPublicPath(pathname)
+  const isPublicRoute = isPublicPath(pathname)
 
-  return isPublicPage
+  return isPublicRoute
     ? intlMiddleware(req)
     : authMiddleware(req as NextRequestWithAuth, {} as NextFetchEvent)
 }
