@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import { getRequestConfig } from 'next-intl/server'
-import { locales } from './lib/navigation'
+import { locales } from './lib/i18n/navigation'
 
 export default getRequestConfig(async ({ locale }) => {
   // Validate incoming `locale` param

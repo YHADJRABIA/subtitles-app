@@ -1,4 +1,4 @@
-import { locales } from '@/lib/navigation'
+import { locales } from '@/lib/i18n/navigation'
 import { publicRoutes } from '@/routes/routes'
 
 export const isPublicPath = (pathname: string): boolean => {
