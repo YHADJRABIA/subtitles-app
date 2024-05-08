@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import { accountSchema } from './account.model'
 const { Schema } = mongoose
 
 const userSchema = new Schema(
@@ -16,9 +17,9 @@ const userSchema = new Schema(
     password: {
       type: String,
     },
-    isVerifiedEmail: {
-      type: Boolean,
-      default: false,
+    emailVerified: {
+      type: Date,
+      default: null,
     },
     role: {
       type: Number,
@@ -28,6 +29,9 @@ const userSchema = new Schema(
       type: String,
       default: null,
     },
+
+    accounts: accountSchema,
+
     forgotPasswordToken: String,
     forgotPasswordTokenExpiry: Date,
     verifyToken: String,
