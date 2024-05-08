@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       )
 
-    // Hash password
+    // Hash password for safety
     const salt = await bcryptjs.genSalt(10)
     const hashedPassword = await bcryptjs.hash(password, salt)
 
