@@ -5,7 +5,8 @@ import bcryptjs from 'bcryptjs'
 import { isEmpty, isValidPassword, isValidEmail } from '@/utils/validators'
 import { isDevelopment } from '@/utils/general'
 import { getErrorMessage } from '@/utils/errors'
-import { getUserByEmail } from '@/utils/mongoose'
+import { getUserByEmail } from '@/utils/db/user'
+import { generateVerificationToken } from '@/lib/auth/token'
 
 connectDB()
 
@@ -56,9 +57,11 @@ export async function POST(req: NextRequest) {
     const createdUser = await newUser.save()
     isDevelopment && console.warn(createdUser)
 
-    // send verification email
+    // Generate verification token
+    const verificationToken = await generateVerificationToken(email)
 
-    /*     await sendEmail({ email, emailType: 'VERIFY', userId: createdUser._id }) */
+    // send verification email
+    /*  await sendVerificationEmail(email, verificationToken.token) */
 
     return NextResponse.json({
       message: 'Account successfully created!',
