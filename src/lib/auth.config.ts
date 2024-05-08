@@ -66,14 +66,14 @@ export const authOptions: NextAuthOptions = {
 
             // If no matching user or user registered via Google (no password)
             if (!existingUser || !existingUser?.password) {
-              throw new Error("User doesn't exist")
+              throw new Error('Incorrect user or password')
             }
 
             const passwordsMatch = await bycrptjs.compare(
               password,
               existingUser.password
             )
-            if (!passwordsMatch) throw new Error('Incorrect password')
+            if (!passwordsMatch) throw new Error('Incorrect user or password')
 
             // Passing down user to JWT
             return existingUser // TODO: Limit what's passed down
@@ -86,12 +86,20 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
 
+  events: {
+    linkAccount({ user }) {
+      console.log('Account linked to user', user) // TODO: Complete later with new account model
+    },
+  },
+
   callbacks: {
     // Called after authorize, user is only populated on login
     jwt({ token, user }) {
       if (!user) return token // Logged out
 
-      return { ...token, isVerifiedEmail: user.isVerifiedEmail } // Passing down token to session
+      const isVerifiedEmail = user.emailVerified !== null
+
+      return { ...token, isVerifiedEmail } // Passing down token to session
     },
 
     // Called after jwt
@@ -114,10 +122,12 @@ export const authOptions: NextAuthOptions = {
 
       if (!user) return null
 
+      const isVerifiedEmail = user.emailVerified !== null
+
       // Credentials login
       if (withCredentials) {
         // Deny access if unverified email
-        if (!user.isVerifiedEmail) return false
+        if (!isVerifiedEmail) throw new Error('Unverified email') // TODO: Make status 400
       }
 
       // Google login
@@ -133,7 +143,7 @@ export const authOptions: NextAuthOptions = {
             name,
             email,
             image,
-            isVerifiedEmail: true, // Verify email automatically
+            emailVerified: new Date(), // Verify email automatically
           })
           const res = await newUser.save()
           if (res.status === 200 || res.status === 201) {
