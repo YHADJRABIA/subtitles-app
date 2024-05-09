@@ -20,6 +20,6 @@ export const getVerificationTokenByToken = async (token: string) => {
   }
 }
 
-export const deleteVerificationTokenById = (id: string) => {
-  VerificationTokenModel.deleteOne({ id })
+export const deleteVerificationTokenById = async (id: string) => {
+  await VerificationTokenModel.deleteOne({ id })
 }
