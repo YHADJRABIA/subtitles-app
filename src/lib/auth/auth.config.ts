@@ -97,7 +97,7 @@ export const authOptions: NextAuthOptions = {
     jwt({ token, user }) {
       if (!user) return token // Logged out
 
-      const isVerifiedEmail = user.emailVerified !== null
+      const isVerifiedEmail = !!user.emailVerified
 
       return { ...token, isVerifiedEmail } // Passing down token to session
     },
@@ -122,7 +122,7 @@ export const authOptions: NextAuthOptions = {
 
       if (!user) return null
 
-      const isVerifiedEmail = user.emailVerified !== null
+      const isVerifiedEmail = !!user.emailVerified
 
       // Credentials login
       if (withCredentials) {
