@@ -4,31 +4,27 @@ const { Schema } = mongoose
 
 const userSchema = new Schema(
   {
-    name: {
-      type: String,
-      default: null,
-    },
+    name: String,
+
     email: {
       type: String,
       required: [true, 'Please provide an email'],
       trim: true,
       unique: true,
     },
+
     password: {
       type: String,
     },
-    emailVerified: {
-      type: Date,
-      default: null,
-    },
+
+    emailVerified: Date,
+
     role: {
       type: Number,
       default: 0, // 0 = user, 1 = admin
     },
-    image: {
-      type: String,
-      default: null,
-    },
+
+    image: String,
 
     accounts: accountSchema,
 
