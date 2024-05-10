@@ -13,7 +13,6 @@ export const getVerificationTokenByEmail = async (email: string) => {
 export const getVerificationTokenByToken = async (token: string) => {
   try {
     const verificationToken = await VerificationTokenModel.findOne({ token })
-
     return verificationToken
   } catch (err) {
     console.error('Get verification token by token:', getErrorMessage(err))
@@ -21,5 +20,9 @@ export const getVerificationTokenByToken = async (token: string) => {
 }
 
 export const deleteVerificationTokenById = async (id: string) => {
-  await VerificationTokenModel.deleteOne({ id })
+  try {
+    await VerificationTokenModel.deleteOne({ _id: id })
+  } catch (err) {
+    console.error('Delete verification token by id:', getErrorMessage(err))
+  }
 }
