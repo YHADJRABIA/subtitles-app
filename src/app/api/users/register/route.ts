@@ -68,7 +68,9 @@ export async function POST(req: NextRequest) {
     isDevelopment && console.warn(createdUser)
 
     // Generate verification token
-    const verificationToken = await generateVerificationToken(email)
+    const verificationToken = await generateVerificationToken(
+      email.toLowerCase()
+    )
 
     // Send verification email
     await sendVerificationEmail(
