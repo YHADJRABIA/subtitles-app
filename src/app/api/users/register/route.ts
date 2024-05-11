@@ -7,11 +7,21 @@ import { isDevelopment } from '@/utils/general'
 import { getErrorMessage } from '@/utils/errors'
 import { getUserByEmail } from '@/utils/db/user'
 import { generateVerificationToken } from '@/lib/auth/token'
+import { sendVerificationEmail } from '@/lib/mail'
 
 connectDB()
 
 export async function POST(req: NextRequest) {
   try {
+    const nextLocaleCookie = req.cookies.get('NEXT_LOCALE')
+    const locale = nextLocaleCookie ? nextLocaleCookie.value : 'en' // TODO: Set defaultLocale in variable
+
+    if (locale === undefined /* || !isLocale(locale) */) {
+      return NextResponse.json(
+        { message: 'Invalid locale', success: false },
+        { status: 400 }
+      )
+    }
     const reqBody = await req.json()
     const { email, password } = reqBody
 
@@ -50,7 +60,7 @@ export async function POST(req: NextRequest) {
     const hashedPassword = await bcryptjs.hash(password, salt)
 
     const newUser = new UserModel({
-      email,
+      email: email.toLowerCase(),
       password: hashedPassword,
     })
 
@@ -60,8 +70,12 @@ export async function POST(req: NextRequest) {
     // Generate verification token
     const verificationToken = await generateVerificationToken(email)
 
-    // send verification email
-    /*  await sendVerificationEmail(email, verificationToken.token) */
+    // Send verification email
+    await sendVerificationEmail(
+      locale,
+      email.toLowerCase(),
+      verificationToken.token
+    )
 
     return NextResponse.json({
       message: 'Account successfully created!',
