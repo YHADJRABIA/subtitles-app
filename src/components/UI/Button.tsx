@@ -15,6 +15,7 @@ const Button = ({
   disabled,
   testId,
   isLoading,
+  type = 'button',
   ...rest
 }: PropTypes) => {
   const isPrimary = variation === 'primary'
@@ -24,6 +25,7 @@ const Button = ({
   return (
     <button
       {...rest}
+      type={type}
       className={cn(
         styles.btn,
         isPrimary
