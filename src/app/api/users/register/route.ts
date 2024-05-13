@@ -8,6 +8,8 @@ import { getErrorMessage } from '@/utils/errors'
 import { getUserByEmail } from '@/utils/db/user'
 import { generateVerificationToken } from '@/lib/auth/token'
 import { sendVerificationEmail } from '@/lib/mail'
+import * as z from 'zod'
+import { loginSchema } from '@/types/schemas'
 
 connectDB()
 
@@ -23,7 +25,7 @@ export async function POST(req: NextRequest) {
       )
     }
     const reqBody = await req.json()
-    const { email, password } = reqBody
+    const { email, password }: z.infer<typeof loginSchema> = reqBody
 
     // Empty fields
     if (isEmpty(email) || isEmpty(password))
