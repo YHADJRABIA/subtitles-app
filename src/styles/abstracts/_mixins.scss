@@ -48,7 +48,7 @@ $breakpoints: (
 
 // To conceal overflowing elements and add "..." at the end
 @mixin truncated {
-  width: 100%;
+  width: fit-content;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
