@@ -57,3 +57,48 @@ export const sendVerificationEmail = async (
     html: outgoingEmail.content.replace(/\r\n/g, '<br>'),
   })
 }
+
+export const sendPasswordResetEmail = async (
+  lang: string,
+  email: string,
+  token: string
+) => {
+  const resetLink = `${websiteUrl}/reset-password?token=${token}`
+
+  const outgoingEmail = {
+    title: 'Reset your password',
+    content: `
+    Hello,\r\n
+    \r\n
+    A password reset has been requested for the account linked to this email.\r\n
+    Click <a href="${resetLink}">this link</a> to reset your password.\r\n
+    \r\n
+    This might not work with all browsers. If you experience an issue, please copy-paste ${resetLink} in your search bar.
+    `,
+  }
+
+  switch (lang) {
+    case 'fr':
+      outgoingEmail.title = 'Réinitialisation de mot de passe'
+      outgoingEmail.content = `
+      Bonjour,\r\n
+      \r\n
+      Une demande de réinitialisation de mot de passe a eu lieu pour le compte lié à ce courriel.\r\n
+      Afin de réinitialiser votre mot de passe, merci de cliquer sur <a href="${resetLink}">ce lien</a>.\r\n
+      \r\n
+      Des problèmes d'incompatibilité de certains navigateurs peuvent survenir ; si c'est le cas, merci de copier-coller ${resetLink} sur votre barre de recherche.
+      `
+      break
+
+    default: // English
+      break
+  }
+
+  await transporter.sendMail({
+    from: sender,
+    to: email,
+    subject: outgoingEmail.title,
+    text: outgoingEmail.content,
+    html: outgoingEmail.content.replace(/\r\n/g, '<br>'),
+  })
+}
