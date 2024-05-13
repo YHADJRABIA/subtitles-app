@@ -17,6 +17,13 @@ export async function POST(req: NextRequest) {
     const reqBody = await req.json()
     const { token } = reqBody
 
+    if (!token) {
+      return NextResponse.json(
+        { message: 'Missing token', success: false },
+        { status: 400 }
+      )
+    }
+
     // Look for existing token
     const existingToken = await getVerificationTokenByToken(token)
 
