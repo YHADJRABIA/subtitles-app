@@ -1,7 +1,6 @@
 import { connectDB } from '@/lib/mongodb'
 import { UserModel } from '@/models/user.model'
 import { NextRequest, NextResponse } from 'next/server'
-import bcryptjs from 'bcryptjs'
 import { isEmpty, isValidPassword, isValidEmail } from '@/utils/validators'
 import { isDevelopment } from '@/utils/general'
 import { getErrorMessage } from '@/utils/errors'
@@ -10,6 +9,7 @@ import { generateVerificationToken } from '@/lib/auth/token'
 import { sendVerificationEmail } from '@/lib/mail'
 import * as z from 'zod'
 import { loginSchema } from '@/types/schemas'
+import { hashPassword } from '@/utils/random'
 
 connectDB()
 
@@ -58,8 +58,7 @@ export async function POST(req: NextRequest) {
       )
 
     // Hash password for safety
-    const salt = await bcryptjs.genSalt(10)
-    const hashedPassword = await bcryptjs.hash(password, salt)
+    const hashedPassword = hashPassword(password)
 
     const newUser = new UserModel({
       email: email.toLowerCase(),
