@@ -1,9 +1,10 @@
 .root {
   @include flexCenter(row);
-  @include truncated;
+  flex-wrap: nowrap;
   border-radius: 0.5rem;
   padding: 1.5rem 0.5rem;
   width: inherit;
+  height: 6rem;
 }
 
 .icon {
@@ -15,6 +16,7 @@
   font-size: 1.4rem;
   font-weight: 500;
   color: var(--primary-white-color);
+  @include truncated;
 }
 
 .info {
