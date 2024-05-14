@@ -3,10 +3,6 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-
-  &:not(:first-child) {
-    padding-bottom: 2rem;
-  }
 }
 
 .subField {
@@ -72,10 +68,9 @@
 
     &:placeholder-shown + label {
       cursor: text;
-      max-width: 78.66%;
+      max-width: 70%;
       white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      @include truncated;
       transform-origin: left bottom;
       transform: translate(3.2rem, 3rem) scale(1.2);
     }
