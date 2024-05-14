@@ -1,6 +1,9 @@
 import { PasswordResetTokenModel } from '@/models/passwordResetToken.model'
 import { VerificationTokenModel } from '@/models/verificationToken.model'
-import { deletePasswordResetTokenById, getPasswordResetTokenByEmail } from '@/utils/db/password-reset-token'
+import {
+  deletePasswordResetTokenById,
+  getPasswordResetTokenByEmail,
+} from '@/utils/db/password-reset-token'
 import {
   deleteVerificationTokenById,
   getVerificationTokenByEmail,
@@ -39,13 +42,12 @@ export const generatePasswordResetToken = async (email: string) => {
     await deletePasswordResetTokenById(existingToken.id)
   }
 
-    // Create password reset token
-    const passwordResetToken = await PasswordResetTokenModel.create({
-      email,
-      token,
-      expires: new Date(expirationDate),
-    })
-  
-    return passwordResetToken
-  }
+  // Create password reset token
+  const passwordResetToken = await PasswordResetTokenModel.create({
+    email,
+    token,
+    expires: new Date(expirationDate),
+  })
+
+  return passwordResetToken
 }
