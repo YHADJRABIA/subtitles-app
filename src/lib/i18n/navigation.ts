@@ -3,6 +3,7 @@ import {
   Pathnames,
 } from 'next-intl/navigation'
 
+export const defaultLocale = 'en'
 export const locales = ['en', 'fr']
 export const localePrefix = 'as-needed' // No prefix for the default locale. /en -> /
 
