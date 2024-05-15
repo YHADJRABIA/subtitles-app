@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
       )
 
     // Hash password for safety
-    const hashedPassword = hashPassword(password)
+    const hashedPassword = await hashPassword(password)
 
     const newUser = new UserModel({
       email: email.toLowerCase(),

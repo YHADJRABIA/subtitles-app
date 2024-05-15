@@ -62,7 +62,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Hash password for safety
-    const hashedPassword = hashPassword(password)
+    const hashedPassword = await hashPassword(password)
 
     // Update associated user's password
     await UserModel.updateOne(
