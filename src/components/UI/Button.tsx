@@ -38,7 +38,7 @@ const Button = ({
       data-testid={testId}
       disabled={!isClickeable}
     >
-      {isLoading ? <Loader size={18} /> : children}
+      {isLoading ? <Loader size={17} /> : children}
     </button>
   )
 }
