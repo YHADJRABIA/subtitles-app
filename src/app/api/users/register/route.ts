@@ -10,20 +10,14 @@ import { sendVerificationEmail } from '@/lib/mail'
 import * as z from 'zod'
 import { loginSchema } from '@/types/schemas'
 import { hashPassword } from '@/utils/random'
+import { getLocaleFromRequestCookie } from '@/utils/cookies'
 
 connectDB()
 
 export async function POST(req: NextRequest) {
   try {
-    const nextLocaleCookie = req.cookies.get('NEXT_LOCALE')
-    const locale = nextLocaleCookie ? nextLocaleCookie.value : 'en' // TODO: Set defaultLocale in variable
+    const locale = getLocaleFromRequestCookie(req)
 
-    if (locale === undefined /* || !isLocale(locale) */) {
-      return NextResponse.json(
-        { message: 'Invalid locale', success: false },
-        { status: 400 }
-      )
-    }
     const reqBody = await req.json()
     const { email, password }: z.infer<typeof loginSchema> = reqBody
 
