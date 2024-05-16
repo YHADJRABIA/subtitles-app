@@ -8,7 +8,6 @@ import AppProvider from '@/context/AppProvider'
 const inter = Inter({ subsets: ['latin'], variable: '--font-body' })
 const familjenGrotesk = Familjen_Grotesk({
   subsets: ['latin'],
-  weight: ['400', '700'],
   variable: '--font-heading',
 })
 
