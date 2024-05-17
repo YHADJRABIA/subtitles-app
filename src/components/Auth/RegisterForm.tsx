@@ -95,6 +95,7 @@ const RegisterForm = () => {
         />
 
         <Field
+          autoFocus
           placeholder="email@domain.com"
           type="email"
           name="email"
@@ -127,7 +128,7 @@ const RegisterForm = () => {
           testId="login-password"
           label="Password"
           subLabel={{
-            text: 'Password must be at least 6 characters',
+            text: 'Password must contain at least 6 characters',
           }}
           leftIcon={
             <PasswordIcon
