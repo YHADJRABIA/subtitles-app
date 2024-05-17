@@ -24,6 +24,7 @@ import { getErrorMessage } from '@/utils/errors'
 import GoogleLogin from '@/components/Auth/GoogleLogin'
 import { handleGoogleLogin } from '@/lib/auth/actions'
 import InfoBox from '../UI/InfoBox'
+import Typography from '../UI/Typography'
 
 const RegisterForm = () => {
   const router = useRouter()
@@ -81,7 +82,9 @@ const RegisterForm = () => {
       noValidate
       className={styles.formCard}
     >
-      <h1 className={styles.title}>Create account</h1>
+      <Typography tag="h1" weight="semiBold">
+        Create account
+      </Typography>
 
       <div className={styles.wrapper}>
         <InfoBox
@@ -148,9 +151,9 @@ const RegisterForm = () => {
         <Separator label="Or" />
         <GoogleLogin disabled={isLoading} onClick={handleGoogleLogin} />
       </div>
-      <p>
+      <Typography>
         Already have an account? <Link href="/login"> Login here</Link>
-      </p>
+      </Typography>
     </form>
   )
 }
