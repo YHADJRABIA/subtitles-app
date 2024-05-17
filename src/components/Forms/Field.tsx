@@ -4,12 +4,13 @@ import cn from 'classnames'
 import styles from './Field.module.scss'
 import { useDebounce } from '@/hooks/useDebounce'
 import { useFieldFocus } from '@/hooks/useFieldFocus'
+import { isEmpty } from '@/utils/validators'
 
 interface PropTypes extends InputHTMLAttributes<HTMLInputElement> {
   label: string
   value: string
-  onValidate: (value: string) => boolean
-  subLabel: {
+  onValidate?: (value: string) => boolean
+  subLabel?: {
     text: string
     isShownOnFocus?: boolean
   }
@@ -30,9 +31,10 @@ const Field = ({
   leftIcon,
   rightIcon,
   value,
+  ...rest
 }: PropTypes) => {
   // TODO: Refactor this + useFieldFocus hook
-  const { text, isShownOnFocus = true } = subLabel
+  const { text, isShownOnFocus = true } = subLabel || {}
 
   const debouncedValue = useDebounce(value)
 
@@ -40,7 +42,9 @@ const Field = ({
     value: isShownOnFocus ? '' : debouncedValue,
   })
 
-  const isInvalid = !onValidate(debouncedValue)
+  const isInvalid = onValidate
+    ? !onValidate(debouncedValue)
+    : !isEmpty(debouncedValue)
 
   // Info subfield shows on focus, error subfield shows on blur
   const isShownSubfield = isShownOnFocus
@@ -52,6 +56,7 @@ const Field = ({
       <div className={styles.formField}>
         {leftIcon && <div className={styles.fieldIcon}>{leftIcon}</div>}
         <input
+          {...rest}
           placeholder={placeholder}
           type={type}
           name={name}
@@ -65,7 +70,7 @@ const Field = ({
         {rightIcon && <div className={styles.ctaIcon}>{rightIcon}</div>}
       </div>
 
-      {text && (
+      {subLabel && (
         <div className={styles.subField} aria-hidden={!isShownSubfield}>
           {!isShownOnFocus && (
             <ErrorIcon
