@@ -49,7 +49,7 @@
     width: 100%;
     transition: all 0.3s ease-in-out;
     transition-property: opacity, border-color, background-color, color;
-    font-weight: bold;
+    font-weight: 600;
     color: var(--secondary-black-color);
     outline: none;
     background-color: var(--primary-gray-color);
@@ -63,7 +63,7 @@
     }
 
     &[type='password']::placeholder {
-      font-weight: bold;
+      font-weight: 600;
     }
 
     &:placeholder-shown + label {
