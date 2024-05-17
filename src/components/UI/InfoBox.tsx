@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { CSSProperties, ReactNode } from 'react'
 
 import styles from './InfoBox.module.scss'
 
@@ -8,27 +8,31 @@ interface PropTypes {
   label: string
   icon: ReactNode
   type?: 'success' | 'info' | 'error'
-  style?: string
+  customStyle?: CSSProperties
+  isShown: boolean
 }
 
-const InfoBox = ({ label, icon, type = 'info', style }: PropTypes) => {
-  const isShown = label && icon
-
+const InfoBox = ({
+  label,
+  icon,
+  type = 'info',
+  customStyle: style,
+  isShown,
+}: PropTypes) => {
   return (
-    isShown && (
-      <div
-        className={cn(
-          styles[type],
-          'hidden',
-          styles.root,
-          { visible: isShown },
-          style
-        )}
-      >
-        <div className={styles.icon}>{icon}</div>
-        <p className={styles.label}>{label}</p>
-      </div>
-    )
+    <div
+      aria-hidden={!isShown}
+      className={cn(
+        styles[type],
+        'hidden',
+        styles.root,
+        { visible: isShown },
+        style
+      )}
+    >
+      <div className={styles.icon}>{icon}</div>
+      <p className={styles.label}>{label}</p>
+    </div>
   )
 }
 
