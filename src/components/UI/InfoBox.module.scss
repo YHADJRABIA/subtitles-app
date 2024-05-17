@@ -1,14 +1,14 @@
 .root {
-  @include flexCenter(row);
+  @include flexCenter(row, flex-start);
   flex-wrap: nowrap;
   border-radius: 0.5rem;
-  padding: 1.5rem 0.5rem;
+  padding: 0 1.5rem;
   width: inherit;
-  height: 6rem;
+  height: 5rem;
 }
 
 .icon {
-  margin-right: 1rem;
+  margin-right: 1.5rem;
   color: var(--primary-white-color);
 }
 
