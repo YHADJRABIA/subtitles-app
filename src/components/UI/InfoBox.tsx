@@ -16,7 +16,7 @@ const InfoBox = ({
   label,
   icon,
   type = 'info',
-  customStyle: style,
+  customStyle,
   isShown,
 }: PropTypes) => {
   return (
@@ -27,11 +27,15 @@ const InfoBox = ({
         'hidden',
         styles.root,
         { visible: isShown },
-        style
+        customStyle
       )}
     >
-      <div className={styles.icon}>{icon}</div>
-      <p className={styles.label}>{label}</p>
+      {isShown && (
+        <>
+          <div className={styles.icon}>{icon}</div>
+          <p className={styles.label}>{label}</p>
+        </>
+      )}
     </div>
   )
 }
