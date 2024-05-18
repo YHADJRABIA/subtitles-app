@@ -27,7 +27,7 @@ import InfoBox from '../UI/InfoBox'
 import Typography from '../UI/Typography'
 
 const RegisterForm = () => {
-  const router = useRouter()
+  const router = useRouter() // TODO: Redirect if logged in
 
   const [info, setInfo] = useState({
     label: '',
