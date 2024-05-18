@@ -1,10 +1,12 @@
 import React, { CSSProperties, ReactNode } from 'react'
+import styles from './Typography.module.scss'
 
 type TagType = keyof typeof tagMap
 
 interface PropTypes {
   tag?: TagType
   weight?: 'normal' | 'semiBold' | 'bold'
+  align?: 'left' | 'center' | 'right'
   color?: string
   uppercase?: boolean
   customStyle?: CSSProperties
@@ -19,6 +21,7 @@ const tagMap = {
   h5: 'h5',
   h6: 'h6',
   p: 'p',
+  small: 'small',
 } as const
 
 const Typography = ({
@@ -26,6 +29,7 @@ const Typography = ({
   weight = 'normal',
   color = 'inherit',
   uppercase = false,
+  align = 'center',
   customStyle,
   children,
 }: PropTypes) => {
@@ -33,14 +37,19 @@ const Typography = ({
 
   const isSemiBold = weight === 'semiBold'
 
-  const styles = {
+  const PropStyles = {
     fontWeight: isSemiBold ? 500 : weight,
-    color: color,
+    textAlign: align,
+    color,
     textTransform: uppercase ? 'uppercase' : undefined,
     ...customStyle,
   }
 
-  return <Tag style={styles as CSSProperties}>{children}</Tag>
+  return (
+    <Tag className={styles.root} style={PropStyles as CSSProperties}>
+      {children}
+    </Tag>
+  )
 }
 
 export default Typography
