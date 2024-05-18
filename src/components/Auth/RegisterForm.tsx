@@ -80,7 +80,7 @@ const RegisterForm = () => {
       method="POST"
       onSubmit={handleRegister}
       noValidate
-      className={styles.formCard}
+      className={styles.root}
     >
       <Typography tag="h1" weight="semiBold">
         Create account
