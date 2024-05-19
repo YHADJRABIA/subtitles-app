@@ -22,6 +22,10 @@
   }
 }
 
+.passwordField {
+  margin-bottom: 3rem;
+}
+
 .wrapper {
   width: 90%;
   @include flexCenter(column, space-evenly);
@@ -29,10 +33,6 @@
   @include respond-to('medium') {
     width: 36rem;
     margin-bottom: 4rem;
-  }
-
-  > div:has(+ button):not(:last-of-type) {
-    margin-bottom: 3rem; // Last field before button
   }
 
   & > :first-child {

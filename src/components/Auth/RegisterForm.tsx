@@ -117,6 +117,7 @@ const RegisterForm = () => {
         />
 
         <Field
+          className={styles.passwordField}
           placeholder={
             passwordInputType === 'password' ? '••••••' : 'MyPa$$word_'
           }
@@ -153,7 +154,7 @@ const RegisterForm = () => {
         <GoogleLogin disabled={isLoading} onClick={handleGoogleLogin} />
       </div>
       <Typography>
-        Already have an account? <Link href="/login"> Login here</Link>
+        Already have an account? <Link href="/login">Login here</Link>
       </Typography>
     </form>
   )
