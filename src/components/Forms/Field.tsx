@@ -31,6 +31,7 @@ const Field = ({
   leftIcon,
   rightIcon,
   value,
+  className,
   ...rest
 }: PropTypes) => {
   // TODO: Refactor this + useFieldFocus hook
@@ -52,7 +53,7 @@ const Field = ({
     : isBlurred && isInvalid
 
   return (
-    <div className={styles.wrapper}>
+    <div className={cn(styles.wrapper, className)}>
       <div className={styles.formField}>
         {leftIcon && <div className={styles.fieldIcon}>{leftIcon}</div>}
         <input
