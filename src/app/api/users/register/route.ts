@@ -74,11 +74,14 @@ export async function POST(req: NextRequest) {
       verificationToken.token
     )
 
-    return NextResponse.json({
-      message: 'Account successfully created!',
-      success: true,
-      savedUser: createdUser,
-    })
+    return NextResponse.json(
+      {
+        message: 'Account successfully created!',
+        success: true,
+        savedUser: createdUser,
+      },
+      { status: 201 }
+    )
   } catch (error) {
     return NextResponse.json({ error: getErrorMessage(error) }, { status: 500 })
   }
