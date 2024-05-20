@@ -32,13 +32,13 @@ export async function POST(req: NextRequest) {
     if (!isValidEmail(email))
       return NextResponse.json(
         { message: 'Invalid email format', success: false },
-        { status: 401 }
+        { status: 400 }
       )
 
     if (!isValidPassword(password))
       return NextResponse.json(
         { message: 'Invalid password format', success: false },
-        { status: 401 }
+        { status: 400 }
       )
 
     // Check if user already exists
