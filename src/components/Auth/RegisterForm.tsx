@@ -51,7 +51,7 @@ const RegisterForm = () => {
       setIsLoading(true)
       await axios.post('/api/users/register', user)
       setInfo({
-        label: 'Account created! Verification email sent.',
+        label: 'Account created! Verification email sent',
         type: 'success',
       })
       /*    router.push('/') */
