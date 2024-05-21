@@ -50,9 +50,9 @@ const ResetPasswordForm = () => {
         type: 'info',
       })
     } catch (err) {
-      console.log(err)
       setInfo({
-        label: getErrorMessage(err),
+        label:
+          getErrorMessage(err?.response.data.message) ?? getErrorMessage(err),
         type: 'error',
       })
     } finally {
