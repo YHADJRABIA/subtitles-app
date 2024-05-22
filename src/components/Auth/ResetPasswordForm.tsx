@@ -120,7 +120,7 @@ const ResetPasswordForm = () => {
         <Button
           className={styles.cta}
           variation="primary"
-          testId="submit-register-form"
+          testId="submit-reset-password-form"
           disabled={isDisabled}
           isLoading={isLoading}
           type="submit"
