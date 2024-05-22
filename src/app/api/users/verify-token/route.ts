@@ -63,7 +63,7 @@ export async function POST(req: NextRequest) {
     await deleteVerificationTokenById(existingToken.id)
 
     return NextResponse.json({
-      message: 'Email successfully Verified!',
+      message: 'Email successfully verified!',
       success: true,
     })
   } catch (error) {
