@@ -35,12 +35,18 @@ export async function POST(req: NextRequest) {
     // Check if user already exists
     const existingUser = await getUserByEmail(email)
 
-    // Email doesn't exist – be blurry with response message for security
+    // Should be blurry with response message for security reasons, to not expose database
+    // Email doesn't exist
     if (!existingUser)
-      return NextResponse.json({
-        message: 'Recovery Email sent, if user exists',
-        success: true,
-      })
+      return NextResponse.json(
+        {
+          message: 'User not found',
+          success: false,
+        },
+        {
+          status: 404,
+        }
+      )
 
     const passwordResetToken = await generatePasswordResetToken(email)
 
