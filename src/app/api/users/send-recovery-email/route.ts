@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
 
     const passwordResetToken = await generatePasswordResetToken(email)
 
-    // Send verification email
+    // Send password-reset email
     await sendPasswordResetEmail(
       locale,
       passwordResetToken.email,
