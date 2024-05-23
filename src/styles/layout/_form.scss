@@ -13,8 +13,11 @@ label {
 }
 
 input {
-  cursor: pointer;
   font-family: inherit;
+  cursor: pointer;
+  &:focus {
+    cursor: text;
+  }
 }
 
 textarea {
