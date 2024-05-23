@@ -47,7 +47,7 @@ const ResetPasswordForm = () => {
       const res = await axios.post('/api/users/send-recovery-email', user)
       setInfo({
         label: res.data.message,
-        type: 'info',
+        type: 'success',
       })
     } catch (err) {
       setInfo({
