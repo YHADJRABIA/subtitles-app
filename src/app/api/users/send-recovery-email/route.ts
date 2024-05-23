@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
     // Empty fields
     if (isEmpty(email))
       return NextResponse.json(
-        { message: 'Missing Email', success: false },
+        { message: 'Missing email', success: false },
         { status: 400 }
       )
 
@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
     )
 
     return NextResponse.json({
-      message: 'Recovery Email sent, if user exists',
+      message: 'Recovery email sent, if user exists',
       success: true,
     })
   } catch (error) {
