@@ -68,7 +68,7 @@ export async function POST(req: NextRequest) {
     )
 
     return NextResponse.json({
-      message: 'Verification Email sent',
+      message: 'Verification email sent',
       success: true,
     })
   } catch (error) {
