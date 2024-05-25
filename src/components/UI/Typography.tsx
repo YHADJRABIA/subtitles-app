@@ -1,5 +1,6 @@
 import React, { CSSProperties, ReactNode } from 'react'
 import styles from './Typography.module.scss'
+import cn from 'classnames'
 
 type TagType = keyof typeof tagMap
 
@@ -9,7 +10,7 @@ interface PropTypes {
   align?: 'left' | 'center' | 'right'
   color?: string
   uppercase?: boolean
-  customStyle?: CSSProperties
+  className?: string
   children: ReactNode
 }
 
@@ -30,7 +31,7 @@ const Typography = ({
   color = 'inherit',
   uppercase = false,
   align = 'center',
-  customStyle,
+  className,
   children,
 }: PropTypes) => {
   const Tag = tagMap[tag]
@@ -42,11 +43,13 @@ const Typography = ({
     textAlign: align,
     color,
     textTransform: uppercase ? 'uppercase' : undefined,
-    ...customStyle,
   }
 
   return (
-    <Tag className={styles.root} style={PropStyles as CSSProperties}>
+    <Tag
+      className={cn(styles.root, className)}
+      style={PropStyles as CSSProperties}
+    >
       {children}
     </Tag>
   )
