@@ -21,7 +21,6 @@ const InfoBox = ({
 }: PropTypes) => {
   return (
     <div
-      aria-hidden={!isShown}
       className={cn(
         styles[type],
         'hidden',

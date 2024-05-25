@@ -72,7 +72,7 @@ const Field = ({
       </div>
 
       {subLabel && (
-        <div className={styles.subField} aria-hidden={!isShownSubfield}>
+        <div className={styles.subField}>
           {!isShownOnFocus && (
             <ErrorIcon
               size={14}
