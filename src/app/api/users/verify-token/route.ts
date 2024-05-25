@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
     // Token doesn't match
     if (!existingToken) {
       return NextResponse.json(
-        { message: 'Invalid token. Reverify email', success: false },
+        { message: 'Invalid token. Reverify your email', success: false },
         { status: 400 }
       )
     }
