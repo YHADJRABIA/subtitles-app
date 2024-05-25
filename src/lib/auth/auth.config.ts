@@ -7,7 +7,7 @@ import { UserModel } from '@/models/user.model'
 import { UserAPIType } from '@/types/user'
 import { isDevelopment } from '@/utils/general'
 import { getUserByEmail } from '@/utils/db/user'
-import { isValidEmail, isValidPassword } from '@/utils/validators'
+import { isEmpty, isValidEmail } from '@/utils/validators'
 import { getErrorMessage } from '@/utils/errors'
 import { loginSchema } from '@/types/schemas'
 
@@ -58,7 +58,7 @@ export const authOptions: NextAuthOptions = {
           if (validatedFields.success) {
             const { email, password } = validatedFields.data
 
-            if (!isValidEmail(email) || !isValidPassword(password)) {
+            if (!isValidEmail(email) || isEmpty(password)) {
               throw new Error('Missing fields')
             }
             await connectDB()
@@ -66,14 +66,14 @@ export const authOptions: NextAuthOptions = {
 
             // If no matching user or user registered via Google (no password)
             if (!existingUser || !existingUser?.password) {
-              throw new Error('Incorrect user or password')
+              throw new Error('Incorrect email or password')
             }
 
             const passwordsMatch = await bycrptjs.compare(
               password,
               existingUser.password
             )
-            if (!passwordsMatch) throw new Error('Incorrect user or password')
+            if (!passwordsMatch) throw new Error('Incorrect email or password')
 
             // Passing down user to JWT
             return existingUser // TODO: Limit what's passed down
@@ -126,8 +126,13 @@ export const authOptions: NextAuthOptions = {
 
       // Credentials login
       if (withCredentials) {
-        // Deny access if unverified email
-        if (!isVerifiedEmail) throw new Error('Unverified email') // TODO: Make status 400
+        try {
+          // Deny access if unverified email
+          if (!isVerifiedEmail) throw new Error('Unverified email') // TODO: Make status 400
+        } catch (err) {
+          console.error('Credentials SignIn failed:', getErrorMessage(err))
+          throw err
+        }
       }
 
       // Google login
@@ -151,6 +156,7 @@ export const authOptions: NextAuthOptions = {
           }
         } catch (err) {
           console.error('Google SignIn failed:', getErrorMessage(err))
+          throw err
         }
       }
       return true
