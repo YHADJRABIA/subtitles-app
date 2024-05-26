@@ -19,6 +19,8 @@ const userSchema = new Schema(
 
     emailVerified: Date,
 
+    lastLogin: Date,
+
     role: {
       type: Number,
       default: 0, // 0 = user, 1 = admin
@@ -27,11 +29,6 @@ const userSchema = new Schema(
     image: String,
 
     accounts: accountSchema,
-
-    forgotPasswordToken: String,
-    forgotPasswordTokenExpiry: Date,
-    verifyToken: String,
-    verifyTokenExpiry: Date,
   },
   {
     timestamps: true,
