@@ -47,8 +47,8 @@ const LoginForm = () => {
 
   const handleLogin = async (e: any) => {
     e.preventDefault()
-    setIsLoading(true)
     try {
+      setIsLoading(true)
       const res = await signIn('credentials', {
         ...user,
         redirect: false,
@@ -58,7 +58,6 @@ const LoginForm = () => {
         type: 'error',
       })
     } catch (err) {
-      console.log(err)
       setInfo({
         label: getErrorMessage(err),
         type: 'error',
@@ -85,7 +84,7 @@ const LoginForm = () => {
       noValidate
       className={styles.root}
     >
-      <Typography tag="h1" weight="semiBold">
+      <Typography tag="h1" weight="semiBold" className={styles.title}>
         Login
       </Typography>
 
@@ -139,11 +138,11 @@ const LoginForm = () => {
           rightIcon={<ToggleIcon />}
         />
         <Link
-          className={styles.passwordReset}
+          className={styles.passwordRecovery}
           href={
             isValidEmail(user.email)
-              ? `/reset-password?email=${user.email}`
-              : '/reset-password'
+              ? `/password/recovery?email=${user.email}`
+              : '/password/recovery'
           }
         >
           Recover password
@@ -162,7 +161,7 @@ const LoginForm = () => {
         <Separator label="Or" />
         <GoogleLogin disabled={isLoading} onClick={handleGoogleLogin} />
       </div>
-      <Typography>
+      <Typography className={styles.link}>
         No account yet? <Link href="/register">Register here</Link>
       </Typography>
     </form>
