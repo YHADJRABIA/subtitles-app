@@ -63,7 +63,7 @@ export const sendPasswordResetEmail = async (
   email: string,
   token: string
 ) => {
-  const resetLink = `${websiteUrl}/reset-password?token=${token}`
+  const resetLink = `${websiteUrl}/password/reset?token=${token}`
 
   const outgoingEmail = {
     title: 'Reset your password',
