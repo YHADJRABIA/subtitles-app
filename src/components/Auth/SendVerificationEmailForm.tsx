@@ -39,8 +39,8 @@ const SendVerificationEmailForm = () => {
 
   const handleVerify = async (e: any) => {
     e.preventDefault()
-    setIsLoading(true)
     try {
+      setIsLoading(true)
       const res = await axios.post('/api/users/send-verification-email', user)
       setInfo({
         label: res.data.message,
