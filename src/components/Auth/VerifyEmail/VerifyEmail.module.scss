@@ -1,0 +1,26 @@
+.root {
+  @include flexCenter(column);
+  border-radius: 1rem;
+  padding: 0 1rem;
+  background-color: var(--primary-white-color);
+  width: 95%;
+  height: 20rem;
+
+  @include respond-to('medium') {
+    width: 40rem;
+  }
+}
+
+.loadingSection {
+  @include flexCenter(row);
+  position: relative;
+  & > :first-child {
+    margin-right: 1rem;
+  }
+}
+
+.cta {
+  position: absolute;
+  bottom: 40%;
+  padding: inherit;
+}
