@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
     )
 
     return NextResponse.json({
-      message: 'Recovery email sent, if user exists',
+      message: 'Recovery email sent',
       success: true,
     })
   } catch (error) {
