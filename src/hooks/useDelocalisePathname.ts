@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation'
  * @returns {string} Pathname without locale prefix.
  */
 
-export const useDelocalisePathname = () => {
+export const useDelocalisedPathname = () => {
   const pathname = usePathname()
 
   const localePattern = locales.join('|')
