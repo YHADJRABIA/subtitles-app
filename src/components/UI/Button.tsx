@@ -28,7 +28,7 @@ const Button = ({
       {...rest}
       type={type}
       className={cn(
-        styles.btn,
+        styles.root,
         isPrimary
           ? styles.primary
           : isSecondary
