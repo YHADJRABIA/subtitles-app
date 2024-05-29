@@ -23,7 +23,7 @@ const Button = ({
   const isSecondary = variation === 'secondary'
 
   const isClickeable = !(isLoading || disabled)
-  return (
+  return children ? (
     <button
       {...rest}
       type={type}
@@ -42,7 +42,7 @@ const Button = ({
     >
       {isLoading ? <Loader size={17} /> : children}
     </button>
-  )
+  ) : null
 }
 
 export default Button
