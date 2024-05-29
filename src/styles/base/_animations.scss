@@ -6,7 +6,11 @@
 
 .visible {
   visibility: visible;
-  opacity: 0.9;
+  opacity: 1;
+}
+
+.verticalFlip {
+  transform: rotate(180deg);
 }
 
 .disabled {
