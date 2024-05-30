@@ -6,8 +6,9 @@
   cursor: pointer;
   font-weight: 600;
   letter-spacing: 0.1rem;
-  transition-property: opacity border-color;
-  transition: 0.3s ease-in-out;
+  transition:
+    opacity 0.3s ease-in-out,
+    border-color 0.3s ease-in-out;
   padding: 2rem 1.5rem;
   border-radius: 0.8rem;
 
