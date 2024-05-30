@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import React from 'react'
-import LanguageToggler from './LanguageToggler'
+import LanguageMenu from './LanguageMenu'
 
 const Header = () => {
   const t = useTranslations('Navigation')
@@ -24,7 +24,7 @@ const Header = () => {
             {link.label}
           </Link>
         ))}
-        <LanguageToggler />
+        <LanguageMenu />
       </nav>
     </header>
   )
