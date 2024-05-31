@@ -1,32 +1,9 @@
-.wrapper {
+.root {
   width: inherit;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-}
-
-.subField {
-  @include flexCenter(row, space-between);
-}
-
-.errorIcon {
-  margin-right: 0.6rem;
-  color: var(--primary-red-color);
-}
-
-.ctaIcon,
-.fieldIcon {
-  position: absolute;
-  transition: color 0.3s ease-in;
-  top: 2.8rem;
-  color: var(--secondary-gray-color);
-}
-
-.fieldIcon {
-  left: 0.8rem;
-}
-.ctaIcon {
-  right: 1rem;
+  position: relative;
 }
 
 .formField {
@@ -118,4 +95,19 @@
     transition: all 0.3s ease-in-out;
     color: var(--secondary-gray-color);
   }
+}
+
+.ctaIcon,
+.fieldIcon {
+  position: absolute;
+  transition: color 0.3s ease-in;
+  top: 2.8rem;
+  color: var(--secondary-gray-color);
+}
+
+.fieldIcon {
+  left: 0.8rem;
+}
+.ctaIcon {
+  right: 1rem;
 }
