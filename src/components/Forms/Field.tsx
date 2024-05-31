@@ -1,95 +1,64 @@
 import React, { InputHTMLAttributes, ReactNode } from 'react'
-import { MdErrorOutline as ErrorIcon } from 'react-icons/md'
+
 import cn from 'classnames'
 import styles from './Field.module.scss'
-import { useDebounce } from '@/hooks/useDebounce'
-import { useFieldFocus } from '@/hooks/useFieldFocus'
-import { isEmpty } from '@/utils/validators'
+import { UseFormRegister } from 'react-hook-form'
+import Subfield from './Subfield'
+import { AuthFormData, ValidFieldNames } from '@/types/schemas/auth'
 
 interface PropTypes extends InputHTMLAttributes<HTMLInputElement> {
+  register: UseFormRegister<AuthFormData>
+  name: ValidFieldNames
   label: string
-  value: string
-  onValidate?: (value: string) => boolean
+  value?: string
+  isValid: boolean
   subLabel?: {
-    text: string
-    isShownOnFocus?: boolean
+    text?: string
+    isShown: boolean
+    isInfo?: boolean
   }
+  valueAsNumber?: boolean
   leftIcon?: ReactNode
   rightIcon?: ReactNode
   testId?: string
 }
 
 const Field = ({
+  register,
+  isValid,
+  valueAsNumber,
   label,
-  onValidate,
   subLabel,
   testId,
   type,
   placeholder,
-  onChange,
   name,
   leftIcon,
   rightIcon,
-  value,
   className,
   ...rest
 }: PropTypes) => {
-  // TODO: Refactor this + useFieldFocus hook
-  const { text, isShownOnFocus = true } = subLabel || {}
+  const { text, isShown = true, isInfo = false } = subLabel || {}
 
-  const debouncedValue = useDebounce(value)
-
-  const { isFocused, isBlurred, onFocus, onBlur } = useFieldFocus({
-    value: isShownOnFocus ? '' : debouncedValue,
-  })
-
-  const isInvalid = onValidate
-    ? !onValidate(debouncedValue)
-    : !isEmpty(debouncedValue)
-
-  // Info subfield shows on focus, error subfield shows on blur
-  const isShownSubfield = isShownOnFocus
-    ? isFocused && isInvalid
-    : isBlurred && isInvalid
+  const isShownSubfield = !isValid && isShown && !!text
 
   return (
-    <div className={cn(styles.wrapper, className)}>
+    <div className={cn(styles.root, className)}>
       <div className={styles.formField}>
         {leftIcon && <div className={styles.fieldIcon}>{leftIcon}</div>}
         <input
           {...rest}
           placeholder={placeholder}
           type={type}
-          name={name}
-          value={value}
-          onChange={onChange}
           data-testid={testId}
-          onFocus={onFocus}
-          onBlur={onBlur}
+          {...register(name, { valueAsNumber })} // TODO: Debounce value
         />
         <label htmlFor={name}>{label}</label>
         {rightIcon && <div className={styles.ctaIcon}>{rightIcon}</div>}
       </div>
 
       {subLabel && (
-        <div className={styles.subField}>
-          {!isShownOnFocus && (
-            <ErrorIcon
-              size={14}
-              className={cn(styles.errorIcon, 'hidden', {
-                visible: isShownSubfield,
-              })}
-            />
-          )}
-          <small
-            className={cn('hidden', { visible: isShownSubfield })}
-            style={{
-              color: isShownOnFocus ? undefined : 'var(--primary-red-color)',
-            }}
-          >
-            {text}
-          </small>
-        </div>
+        <Subfield label={text} isShown={isShownSubfield} hasIcon={!isInfo} />
       )}
     </div>
   )
