@@ -1,5 +1,11 @@
 import * as z from 'zod'
 
+export type ValidFieldNames = 'email' /*  | 'password' */
+
+export type AuthFormData = {
+  email: string
+}
+
 export const PasswordRecoveryValidator = z.object({
   email: z
     .string()
