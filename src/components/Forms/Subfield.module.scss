@@ -1,0 +1,10 @@
+.root {
+  @include flexCenter(row, space-between);
+  position: absolute;
+  bottom: -1.5rem;
+}
+
+.errorIcon {
+  margin-right: 0.6rem;
+  color: var(--primary-red-color);
+}
