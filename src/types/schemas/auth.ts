@@ -16,7 +16,7 @@ export const PasswordRecoveryValidator = z.object({
       message: 'Invalid email format',
     })
     .max(255, {
-      message: 'Email is too long',
+      message: 'Email is too long. Max 255 characters',
     })
     .trim()
     .toLowerCase(),
