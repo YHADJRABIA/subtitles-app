@@ -3,6 +3,7 @@ import React, { CSSProperties, ReactNode } from 'react'
 import styles from './InfoBox.module.scss'
 
 import cn from 'classnames'
+import Typography from './Typography'
 
 interface PropTypes {
   label: string
@@ -32,7 +33,9 @@ const InfoBox = ({
       {isShown && (
         <>
           <div className={styles.icon}>{icon}</div>
-          <p className={styles.label}>{label}</p>
+          <Typography className={styles.label} title={label}>
+            {label}
+          </Typography>
         </>
       )}
     </div>
