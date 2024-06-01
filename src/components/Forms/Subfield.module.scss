@@ -1,10 +1,17 @@
 .root {
-  @include flexCenter(row, space-between);
+  @include flexCenter(row, flex-start);
+  flex-wrap: nowrap;
   position: absolute;
   bottom: -1.5rem;
+  width: 100%;
 }
 
 .errorIcon {
   margin-right: 0.6rem;
   color: var(--primary-red-color);
+}
+
+.text {
+  @include truncated;
+  width: 100%;
 }
