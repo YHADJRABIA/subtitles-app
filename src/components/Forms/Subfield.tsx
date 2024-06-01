@@ -18,9 +18,11 @@ const Subfield = ({ label, hasIcon, isShown }: PropTypes) => {
     >
       {hasIcon && <ErrorIcon size={14} className={styles.errorIcon} />}
       <small
+        className={styles.text}
         style={{
           color: hasIcon ? 'var(--primary-red-color)' : undefined,
         }}
+        title={label}
       >
         {label}
       </small>
