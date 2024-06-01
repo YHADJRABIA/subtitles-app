@@ -1,10 +1,10 @@
-import React, { CSSProperties, ReactNode } from 'react'
+import React, { CSSProperties, HTMLAttributes, ReactNode } from 'react'
 import styles from './Typography.module.scss'
 import cn from 'classnames'
 
 type TagType = keyof typeof tagMap
 
-interface PropTypes {
+interface PropTypes extends HTMLAttributes<HTMLElement> {
   tag?: TagType
   weight?: 'normal' | 'semiBold' | 'bold'
   align?: 'left' | 'center' | 'right'
