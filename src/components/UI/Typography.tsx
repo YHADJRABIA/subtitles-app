@@ -28,7 +28,7 @@ const tagMap = {
 const Typography = ({
   tag = 'p',
   weight = 'normal',
-  color = 'inherit',
+  color,
   uppercase = false,
   align = 'center',
   className,
@@ -47,8 +47,8 @@ const Typography = ({
 
   return (
     <Tag
-      className={cn(styles.root, className)}
       style={PropStyles as CSSProperties}
+      className={cn(styles.root, className)}
     >
       {children}
     </Tag>
