@@ -2,13 +2,13 @@
   @include flexCenter(row, flex-start);
   flex-wrap: nowrap;
   border-radius: 0.5rem;
-  padding: 0 1.5rem;
+  padding: 0 1rem;
   width: inherit;
   height: 5rem;
 }
 
 .icon {
-  margin-right: 1.5rem;
+  margin-right: 1rem;
   color: var(--primary-white-color);
 }
 
