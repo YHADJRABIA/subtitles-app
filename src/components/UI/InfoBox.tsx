@@ -4,11 +4,12 @@ import styles from './InfoBox.module.scss'
 
 import cn from 'classnames'
 import Typography from './Typography'
+import { Info } from '@/types/info'
 
 interface PropTypes {
   label: string
   icon: ReactNode
-  type?: 'success' | 'info' | 'error'
+  type?: Info
   customStyle?: CSSProperties
   isShown: boolean
 }
