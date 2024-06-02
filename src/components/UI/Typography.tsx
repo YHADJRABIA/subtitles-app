@@ -33,6 +33,7 @@ const Typography = ({
   align = 'center',
   className,
   children,
+  ...rest
 }: PropTypes) => {
   const Tag = tagMap[tag]
 
@@ -47,6 +48,7 @@ const Typography = ({
 
   return (
     <Tag
+      {...rest}
       style={PropStyles as CSSProperties}
       className={cn(styles.root, className)}
     >
