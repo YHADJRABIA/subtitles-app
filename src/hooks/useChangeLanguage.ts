@@ -1,5 +1,5 @@
 import { useState, useTransition } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 import { useLocale } from 'next-intl'
 import { getLanguageByLocaleValue } from '@/utils/language'
@@ -14,6 +14,7 @@ import { Locale } from '@/types/locale'
 
 const useChangeLanguage = () => {
   const router = useRouter()
+  const searchParams = useSearchParams()
   const unlocalisedPathname = useDelocalisedPathname()
   const currentLocale = useLocale()
 
@@ -33,7 +34,9 @@ const useChangeLanguage = () => {
     if (selectedLanguage) {
       startTransition(() => {
         setCurrentLanguage(selectedLanguage)
-        router.replace(`/${locale}/${unlocalisedPathname}`)
+        const queryString = searchParams.toString()
+        const queryParams = queryString ? `?${queryString}` : ''
+        router.replace(`/${locale}/${unlocalisedPathname}${queryParams}`)
       })
     }
   }
