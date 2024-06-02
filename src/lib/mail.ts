@@ -29,7 +29,7 @@ export const sendVerificationEmail = async (
     Click <a href="${verificationLink}">this link</a> to verify your email.\r\n
     <b>This is link is only valid for 1 hour.</b>
     \r\n
-    This might not work with all browsers. If you experience an issue, please copy-paste ${verificationLink} in your search bar.
+    This might not work with all browsers. If you experience an issue, please copy-paste <b>${verificationLink}</b> in your search bar.
     `,
   }
 
@@ -43,7 +43,7 @@ export const sendVerificationEmail = async (
       Afin de finaliser la création de votre compte, merci de cliquer sur <a href="${verificationLink}">ce lien</a> pour vérifier votre courriel.\r\n
       <b>Ce lien n'est valable que pendant 1 heure.</b>
       \r\n
-      Des problèmes d'incompatibilité de certains navigateurs peuvent survenir ; si c'est le cas, merci de copier-coller ${verificationLink} sur votre barre de recherche.
+      Des problèmes d'incompatibilité de certains navigateurs peuvent survenir ; si c'est le cas, merci de copier-coller <b>${verificationLink}</b> sur votre barre de recherche.
       `
       break
 
@@ -76,7 +76,7 @@ export const sendPasswordResetEmail = async (
     Click <a href="${resetLink}">this link</a> to reset your password.\r\n
     <b>This is link is only valid for 1 hour.</b>
     \r\n
-    This might not work with all browsers. If you experience an issue, please copy-paste ${resetLink} in your search bar.
+    This might not work with all browsers. If you experience an issue, please copy-paste <b>${resetLink}</b> in your search bar.
     `,
   }
 
@@ -90,7 +90,7 @@ export const sendPasswordResetEmail = async (
       Afin de réinitialiser votre mot de passe, merci de cliquer sur <a href="${resetLink}">ce lien</a>.\r\n
       <b>Ce lien n'est valable que pendant 1 heure.</b>
       \r\n
-      Des problèmes d'incompatibilité de certains navigateurs peuvent survenir ; si c'est le cas, merci de copier-coller ${resetLink} sur votre barre de recherche.
+      Des problèmes d'incompatibilité de certains navigateurs peuvent survenir ; si c'est le cas, merci de copier-coller <b>${resetLink}</b> sur votre barre de recherche.
       `
       break
 
