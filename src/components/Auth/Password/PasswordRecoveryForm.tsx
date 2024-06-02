@@ -1,8 +1,8 @@
 'use client'
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
-import { isValidEmail } from '@/utils/validators'
+import React from 'react'
+import { useSearchParams } from 'next/navigation'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { MdAlternateEmail as EmailIcon } from 'react-icons/md'
 
 import {
@@ -20,69 +20,56 @@ import { getErrorMessage } from '@/utils/errors'
 import axios from 'axios'
 import InfoBox from '@/components/UI/InfoBox'
 import Typography from '@/components/UI/Typography'
+import {
+  PasswordRecoveryValidator,
+  PasswordRecoverySchema,
+} from '@/types/schemas/auth'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import useInfo from '@/hooks/useInfo'
+import LanguageMenu from '@/components/Layout/LanguageMenu'
 
 const PasswordRecoveryForm = () => {
-  const router = useRouter()
   const searchParams = useSearchParams()
+  const queryParamEmail = searchParams.get('email') ?? ''
 
-  const email = searchParams.get('email')
+  const { info, setInfoMessage } = useInfo()
 
-  const [info, setInfo] = useState({
-    label: '',
-    type: undefined,
+  const {
+    register,
+    getFieldState,
+    handleSubmit,
+    formState: { errors, isValid, isSubmitting },
+  } = useForm<PasswordRecoverySchema>({
+    resolver: zodResolver(PasswordRecoveryValidator),
+    defaultValues: { email: queryParamEmail },
+    delayError: 400,
+    mode: 'onChange',
   })
 
-  const [user, setUser] = useState({
-    email: '',
-  })
-
-  const [isDisabled, setIsDisabled] = useState(true)
-  const [isLoading, setIsLoading] = useState(false)
+  const fieldState = getFieldState('email')
 
   const InfoIcon = info.type === 'error' ? ErrorIcon : EmailSentIcon // TODO: update
 
-  const handleRecovery = async (e: any) => {
-    e.preventDefault()
+  const handleRecovery: SubmitHandler<PasswordRecoverySchema> = async user => {
     try {
-      setIsLoading(true)
       const res = await axios.post('/api/users/password/recover', user)
-      setInfo({
-        label: res.data.message,
-        type: 'success',
-      })
+      setInfoMessage(res.data.message, 'success')
     } catch (err) {
-      setInfo({
-        label:
-          getErrorMessage(err?.response.data.message) ?? getErrorMessage(err),
-        type: 'error',
-      })
-    } finally {
-      setIsLoading(false)
+      setInfoMessage(
+        getErrorMessage(err?.response.data.message) ?? getErrorMessage(err),
+        'error'
+      )
     }
   }
-
-  const handleInputChange = (e: any) => {
-    const { name, value } = e.target
-    return setUser(prev => ({ ...prev, [name]: value }))
-  }
-
-  const isValidUser = isValidEmail(user.email)
-
-  useEffect(() => {
-    if (email) setUser({ email })
-  }, [email])
-
-  useEffect(() => {
-    setIsDisabled(!isValidUser || isLoading)
-  }, [isLoading, isValidUser])
 
   return (
     <form
       method="POST"
-      onSubmit={handleRecovery}
+      onSubmit={handleSubmit(handleRecovery)}
       noValidate
       className={styles.root}
     >
+      <LanguageMenu />
       <Typography className={styles.title} tag="h1" weight="semiBold">
         Password recovery
       </Typography>
@@ -94,23 +81,20 @@ const PasswordRecoveryForm = () => {
           type={info.type}
           isShown={!!info.label}
         />
-
         <Field
           className={styles.field}
           autoFocus
+          register={register}
+          name="email"
           placeholder="email@domain.com"
           type="email"
-          name="email"
           label="Email"
+          isValid={isValid}
           subLabel={{
-            text: 'Invalid email format',
-            isShownOnFocus: false,
+            text: errors?.email?.message,
+            isShown: fieldState.isTouched,
           }}
-          onValidate={isValidEmail}
-          value={user.email}
           testId="send-reset-password-email"
-          onChange={handleInputChange}
-          /* autoFocus */
           leftIcon={
             <EmailIcon
               style={{ fontSize: 18 }}
@@ -123,8 +107,8 @@ const PasswordRecoveryForm = () => {
           className={styles.cta}
           variation="primary"
           testId="submit-send-reset-password-form"
-          disabled={isDisabled}
-          isLoading={isLoading}
+          disabled={!isValid}
+          isLoading={isSubmitting}
           type="submit"
         >
           Send recovery email
