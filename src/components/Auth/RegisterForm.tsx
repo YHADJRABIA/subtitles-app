@@ -1,9 +1,8 @@
 'use client'
 import Link from 'next/link'
-import React, { FormEvent, useEffect, useState } from 'react'
+import React from 'react'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
-import { isValidPassword, isValidEmail } from '@/utils/validators'
 import {
   MdLockOutline as PasswordIcon,
   MdAlternateEmail as EmailIcon,
@@ -25,64 +24,62 @@ import GoogleLogin from '@/components/Auth/GoogleLogin'
 import { handleGoogleLogin } from '@/lib/auth/actions'
 import InfoBox from '../UI/InfoBox'
 import Typography from '../UI/Typography'
+import LanguageMenu from '../Layout/LanguageMenu'
+import useInfo from '@/hooks/useInfo'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import {
+  AccountRegistrationSchema,
+  AccountRegistrationValidator,
+} from '@/types/schemas/auth'
 
 const RegisterForm = () => {
   const router = useRouter() // TODO: Redirect if logged in
 
-  const [info, setInfo] = useState({
-    label: '',
-    type: undefined,
-  })
-  const [user, setUser] = useState({
-    email: '',
-    password: '',
+  const { info, setInfoMessage } = useInfo()
+  const {
+    register,
+    getFieldState,
+    handleSubmit,
+    formState: { errors, isValid, isSubmitting },
+  } = useForm<AccountRegistrationSchema>({
+    resolver: zodResolver(AccountRegistrationValidator),
+    delayError: 400,
+    mode: 'onChange',
   })
 
-  const [isDisabled, setIsDisabled] = useState(true)
-  const [isLoading, setIsLoading] = useState(false)
+  const fieldState = {
+    email: getFieldState('email'),
+    password: getFieldState('password'),
+  }
 
   const InfoIcon = info.type === 'success' ? EmailSentIcon : ErrorIcon
 
   const [passwordInputType, ToggleIcon] = useShowPassword({ size: 20 })
 
-  const handleRegister = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const handleRegister: SubmitHandler<
+    AccountRegistrationSchema
+  > = async user => {
     try {
-      setIsLoading(true)
-      await axios.post('/api/users/register', user)
-      setInfo({
-        label: 'Account created! Verification email sent',
-        type: 'success',
-      })
-      /*    router.push('/') */
+      const res = await axios.post('/api/users/register', user)
+      setInfoMessage(res.data.message, 'success')
     } catch (err) {
-      setInfo({
-        label: err?.response.data.message ?? getErrorMessage(err),
-        type: 'error',
-      })
-    } finally {
-      setIsLoading(false)
+      setInfoMessage(
+        getErrorMessage(err?.response.data.message) ?? getErrorMessage(err),
+        'error'
+      )
     }
   }
 
-  const handleInputChange = (e: any) => {
-    const { name, value } = e.target
-    return setUser(prev => ({ ...prev, [name]: value }))
-  }
-
-  const isValidUser = isValidEmail(user.email) && isValidPassword(user.password)
-
-  useEffect(() => {
-    setIsDisabled(!isValidUser || isLoading)
-  }, [isLoading, isValidUser])
   return (
     <form
       method="POST"
-      onSubmit={handleRegister}
+      onSubmit={handleSubmit(handleRegister)}
       noValidate
       className={styles.root}
     >
-      <Typography tag="h1" weight="semiBold">
+      <LanguageMenu />
+      <Typography className={styles.title} tag="h1" weight="semiBold">
         Create account
       </Typography>
 
@@ -95,19 +92,19 @@ const RegisterForm = () => {
         />
 
         <Field
+          className={styles.emailField}
           autoFocus
+          register={register}
           placeholder="email@domain.com"
           type="email"
           name="email"
           label="Email"
+          isValid={isValid}
           subLabel={{
-            text: 'Invalid email format',
-            isShownOnFocus: false,
+            text: errors?.email?.message,
+            isShown: fieldState.email.isTouched,
           }}
-          onValidate={isValidEmail}
-          value={user.email}
           testId="login-email"
-          onChange={handleInputChange}
           leftIcon={
             <EmailIcon
               style={{ fontSize: 18 }}
@@ -122,14 +119,15 @@ const RegisterForm = () => {
             passwordInputType === 'password' ? '••••••' : 'MyPa$$word_'
           }
           type={passwordInputType}
+          register={register}
           name="password"
-          value={user.password}
-          onValidate={isValidPassword}
-          onChange={handleInputChange}
           testId="login-password"
           label="Password"
+          isValid={isValid}
           subLabel={{
-            text: 'Password must contain at least 6 characters',
+            text: errors?.password?.message,
+            isShown: fieldState.password.isTouched,
+            isInfo: true,
           }}
           leftIcon={
             <PasswordIcon
@@ -143,15 +141,15 @@ const RegisterForm = () => {
         <Button
           variation="primary"
           testId="submit-register-form"
-          disabled={isDisabled}
-          isLoading={isLoading}
+          disabled={!isValid}
+          isLoading={isSubmitting}
           type="submit"
         >
           Create account
         </Button>
 
         <Separator label="Or" />
-        <GoogleLogin disabled={isLoading} onClick={handleGoogleLogin} />
+        <GoogleLogin disabled={isSubmitting} onClick={handleGoogleLogin} />
       </div>
       <Typography>
         Already have an account? <Link href="/login">Login here</Link>
