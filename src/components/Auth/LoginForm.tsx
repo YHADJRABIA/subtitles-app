@@ -1,8 +1,7 @@
 'use client'
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useRouter } from 'next/navigation'
-import { isValidEmail, isEmpty } from '@/utils/validators'
 import {
   MdLockOutline as PasswordIcon,
   MdAlternateEmail as EmailIcon,
@@ -25,65 +24,61 @@ import { handleGoogleLogin } from '@/lib/auth/actions'
 import InfoBox from '../UI/InfoBox'
 import Typography from '../UI/Typography'
 import { signIn } from 'next-auth/react'
+import { AccountLoginSchema, AccountLoginValidator } from '@/types/schemas/auth'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import useInfo from '@/hooks/useInfo'
+import LanguageMenu from '../Layout/LanguageMenu'
 
 const LoginForm = () => {
   const router = useRouter() // TODO: Redirect if user is logged in
 
-  const [info, setInfo] = useState({
-    label: '',
-    type: undefined,
-  })
-  const [user, setUser] = useState({
-    email: '',
-    password: '',
+  const { info, setInfoMessage } = useInfo()
+  const {
+    register,
+    getFieldState,
+    getValues,
+    handleSubmit,
+    formState: { errors, isValid, isSubmitting },
+  } = useForm<AccountLoginSchema>({
+    resolver: zodResolver(AccountLoginValidator),
+    delayError: 400,
+    mode: 'onChange',
   })
 
-  const [isDisabled, setIsDisabled] = useState(true)
-  const [isLoading, setIsLoading] = useState(false)
+  const fieldState = {
+    email: getFieldState('email'),
+    password: getFieldState('password'),
+  }
+
+  const fieldValue = {
+    email: getValues('email'),
+  }
 
   const InfoIcon = info.type === 'success' ? EmailSentIcon : ErrorIcon // TODO: update
 
   const [passwordInputType, ToggleIcon] = useShowPassword({ size: 20 })
 
-  const handleLogin = async (e: any) => {
-    e.preventDefault()
+  const handleLogin: SubmitHandler<AccountLoginSchema> = async user => {
     try {
-      setIsLoading(true)
       const res = await signIn('credentials', {
         ...user,
         redirect: false,
       })
-      setInfo({
-        label: getErrorMessage(res?.error),
-        type: 'error',
-      })
+      setInfoMessage(getErrorMessage(res?.error), 'error')
     } catch (err) {
-      setInfo({
-        label: getErrorMessage(err),
-        type: 'error',
-      })
-    } finally {
-      setIsLoading(false)
+      setInfoMessage(getErrorMessage(err), 'error')
     }
   }
 
-  const handleInputChange = (e: any) => {
-    const { name, value } = e.target
-    return setUser(prev => ({ ...prev, [name]: value }))
-  }
-
-  const isValidUser = isValidEmail(user.email) && !isEmpty(user.password)
-
-  useEffect(() => {
-    setIsDisabled(!isValidUser || isLoading)
-  }, [isLoading, isValidUser])
   return (
     <form
       method="POST"
-      onSubmit={handleLogin}
+      onSubmit={handleSubmit(handleLogin)}
       noValidate
       className={styles.root}
     >
+      <LanguageMenu />
       <Typography tag="h1" weight="semiBold" className={styles.title}>
         Login
       </Typography>
@@ -97,20 +92,19 @@ const LoginForm = () => {
         />
 
         <Field
+          className={styles.emailField}
           autoFocus
+          register={register}
           placeholder="email@domain.com"
           type="email"
           name="email"
           label="Email"
+          isValid={isValid}
           subLabel={{
-            text: 'Invalid email format',
-            isShownOnFocus: false,
+            text: errors?.email?.message,
+            isShown: fieldState.email.isTouched,
           }}
-          onValidate={isValidEmail}
-          value={user.email}
           testId="login-email"
-          onChange={handleInputChange}
-          /* autoFocus */
           leftIcon={
             <EmailIcon
               style={{ fontSize: 18 }}
@@ -120,15 +114,19 @@ const LoginForm = () => {
         />
 
         <Field
+          register={register}
           placeholder={
             passwordInputType === 'password' ? '••••••' : 'MyPa$$word_'
           }
           type={passwordInputType}
           name="password"
-          value={user.password}
-          onChange={handleInputChange}
           testId="login-password"
           label="Password"
+          isValid={isValid}
+          subLabel={{
+            text: errors?.password?.message,
+            isShown: fieldState.password.isTouched,
+          }}
           leftIcon={
             <PasswordIcon
               size={18}
@@ -140,9 +138,9 @@ const LoginForm = () => {
         <Link
           className={styles.passwordRecovery}
           href={
-            isValidEmail(user.email)
-              ? `/password/recovery?email=${user.email}`
-              : '/password/recovery'
+            fieldState.email.invalid
+              ? '/password/recovery'
+              : `/password/recovery?email=${fieldValue.email}`
           }
         >
           Recover password
@@ -151,15 +149,15 @@ const LoginForm = () => {
         <Button
           variation="primary"
           testId="submit-register-form"
-          disabled={isDisabled}
-          isLoading={isLoading}
+          disabled={!isValid}
+          isLoading={isSubmitting}
           type="submit"
         >
           Login
         </Button>
 
         <Separator label="Or" />
-        <GoogleLogin disabled={isLoading} onClick={handleGoogleLogin} />
+        <GoogleLogin disabled={isSubmitting} onClick={handleGoogleLogin} />
       </div>
       <Typography className={styles.link}>
         No account yet? <Link href="/register">Register here</Link>
