@@ -1,16 +1,14 @@
 import { connectDB } from '@/lib/mongodb'
 import { UserModel } from '@/models/user.model'
 import { NextRequest, NextResponse } from 'next/server'
-import { isEmpty, isValidPassword, isValidEmail } from '@/utils/validators'
 import { isDevelopment } from '@/utils/general'
-import { getErrorMessage } from '@/utils/errors'
+import { getErrorMessage, getZodErrors } from '@/utils/errors'
 import { getUserByEmail } from '@/utils/db/user'
 import { generateVerificationToken } from '@/lib/auth/token'
 import { sendVerificationEmail } from '@/lib/mail'
-import * as z from 'zod'
-import { loginSchema } from '@/types/schemas'
 import { hashPassword } from '@/utils/random'
 import { getLocaleFromRequestCookie } from '@/utils/cookies'
+import { AccountRegistrationValidator } from '@/types/schemas/auth'
 
 connectDB()
 
@@ -18,28 +16,19 @@ export async function POST(req: NextRequest) {
   try {
     const locale = getLocaleFromRequestCookie(req)
 
-    const reqBody = await req.json()
-    const { email, password }: z.infer<typeof loginSchema> = reqBody
+    const rawBody = await req.json()
+    const body = AccountRegistrationValidator.safeParse(rawBody)
 
-    // Empty fields
-    if (isEmpty(email) || isEmpty(password))
+    // Form validation
+    if (!body.success) {
+      const zodErrors = getZodErrors(body.error)
       return NextResponse.json(
-        { message: 'Missing fields', success: false },
+        { message: zodErrors.message, success: false },
         { status: 400 }
       )
+    }
 
-    // Invalid format
-    if (!isValidEmail(email))
-      return NextResponse.json(
-        { message: 'Invalid email format', success: false },
-        { status: 400 }
-      )
-
-    if (!isValidPassword(password))
-      return NextResponse.json(
-        { message: 'Invalid password format', success: false },
-        { status: 400 }
-      )
+    const { email, password } = body.data
 
     // Check if user already exists
     const existingUser = await getUserByEmail(email)
@@ -55,7 +44,7 @@ export async function POST(req: NextRequest) {
     const hashedPassword = await hashPassword(password)
 
     const newUser = new UserModel({
-      email: email.toLowerCase(),
+      email,
       password: hashedPassword,
     })
 
@@ -63,20 +52,14 @@ export async function POST(req: NextRequest) {
     isDevelopment && console.warn(createdUser)
 
     // Generate verification token
-    const verificationToken = await generateVerificationToken(
-      email.toLowerCase()
-    )
+    const verificationToken = await generateVerificationToken(email)
 
     // Send verification email
-    await sendVerificationEmail(
-      locale,
-      email.toLowerCase(),
-      verificationToken.token
-    )
+    await sendVerificationEmail(locale, email, verificationToken.token)
 
     return NextResponse.json(
       {
-        message: 'Account successfully created!',
+        message: 'Account successfully created! Verification email sent',
         success: true,
         savedUser: createdUser,
       },
