@@ -8,10 +8,18 @@
 
   @include respond-to('medium') {
     justify-content: space-evenly;
+    align-content: stretch;
     width: 70rem;
     border-radius: 3rem;
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
   }
+  & > :first-child {
+    margin-top: 4rem;
+  }
+}
+
+.emailField {
+  margin-bottom: 1rem;
 }
 
 .title {
