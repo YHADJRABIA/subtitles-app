@@ -1,6 +1,26 @@
 {
+  "General": {
+    "or": "Or"
+  },
   "Index": {
     "title": "Test"
+  },
+  "Auth": {
+    "email": "Email",
+    "password": "Password",
+    "continue_with_google": "Continue with Google",
+    "Login": {
+      "title": "Login",
+      "cta": "Login",
+      "recover_password": "Recover password",
+      "no_account": "No account yet? Register here"
+    },
+    "Register": { "title": "Create account", "cta": "Create account" }
+  },
+  "LanguageMenu": {},
+  "UseShowPassword": {
+    "reveal_password": "Reveal password",
+    "conceal_password": "Conceal password"
   },
   "Navigation": {
     "home": "Home"
