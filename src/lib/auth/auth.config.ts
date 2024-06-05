@@ -7,9 +7,8 @@ import { UserModel } from '@/models/user.model'
 import { UserAPIType } from '@/types/user'
 import { isDevelopment } from '@/utils/general'
 import { getUserByEmail } from '@/utils/db/user'
-import { isEmpty, isValidEmail } from '@/utils/validators'
-import { getErrorMessage } from '@/utils/errors'
-import { loginSchema } from '@/types/schemas'
+import { getErrorMessage, getZodErrors } from '@/utils/errors'
+import { AccountLoginValidator } from '@/types/schemas/auth'
 
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, NEXTAUTH_SECRET } = process.env
 
@@ -40,7 +39,7 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: 'credentials',
       credentials: {
-        // For built-in form, useless here
+        // For built-in NextAuth form, useless here
         email: {
           label: 'Email',
           type: 'email',
@@ -54,13 +53,16 @@ export const authOptions: NextAuthOptions = {
       // Runs on credential login (with email & password)
       async authorize(credentials) {
         try {
-          const validatedFields = loginSchema.safeParse(credentials)
-          if (validatedFields.success) {
-            const { email, password } = validatedFields.data
+          const validatedFields = AccountLoginValidator.safeParse(credentials)
 
-            if (!isValidEmail(email) || isEmpty(password)) {
-              throw new Error('Missing fields')
-            }
+          // Form validation
+          if (!validatedFields.success) {
+            const zodErrors = getZodErrors(validatedFields.error)
+            throw new Error(zodErrors.message)
+          }
+          const { email, password } = validatedFields.data
+
+          if (validatedFields.success) {
             await connectDB()
             const existingUser = await getUserByEmail(email)
 
