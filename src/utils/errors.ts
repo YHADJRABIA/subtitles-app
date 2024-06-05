@@ -1,3 +1,5 @@
+import { ZodError } from 'zod'
+
 export const getErrorMessage = (error: unknown): string => {
   let message: string
 
@@ -11,4 +13,16 @@ export const getErrorMessage = (error: unknown): string => {
     message = 'Something went wrong'
   }
   return message
+}
+
+interface ZodErrors {
+  message: string
+}
+
+export const getZodErrors = (error: ZodError): ZodErrors => {
+  let zodErrors = { message: '' }
+  error.issues.forEach(issue => {
+    zodErrors = { ...zodErrors, message: issue.message }
+  })
+  return zodErrors
 }
