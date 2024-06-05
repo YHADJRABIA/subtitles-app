@@ -1,13 +1,13 @@
 import { connectDB } from '@/lib/mongodb'
 import { NextRequest, NextResponse } from 'next/server'
 
-import { getErrorMessage } from '@/utils/errors'
+import { getErrorMessage, getZodErrors } from '@/utils/errors'
 import { getUserByEmail } from '@/utils/db/user'
 
 import { getLocaleFromRequestCookie } from '@/utils/cookies'
-import { isEmpty, isValidEmail } from '@/utils/validators'
 import { sendVerificationEmail } from '@/lib/mail'
 import { generateVerificationToken } from '@/lib/auth/token'
+import { AccountEmailVerificationValidator } from '@/types/schemas/auth'
 
 connectDB()
 
@@ -15,22 +15,19 @@ export async function POST(req: NextRequest) {
   try {
     const locale = getLocaleFromRequestCookie(req)
 
-    const reqBody = await req.json()
-    const { email } = reqBody
+    const rawBody = await req.json()
+    const body = AccountEmailVerificationValidator.safeParse(rawBody)
 
-    // Empty fields
-    if (isEmpty(email))
+    // Form validation
+    if (!body.success) {
+      const zodErrors = getZodErrors(body.error)
       return NextResponse.json(
-        { message: 'Missing email', success: false },
+        { message: zodErrors.message, success: false },
         { status: 400 }
       )
+    }
 
-    // Invalid format
-    if (!isValidEmail(email))
-      return NextResponse.json(
-        { message: 'Invalid email format', success: false },
-        { status: 400 }
-      )
+    const { email } = body.data
 
     // Check if user already exists
     const existingUser = await getUserByEmail(email)
@@ -42,7 +39,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         {
           message: 'User not found',
-          success: true,
+          success: false,
         },
         { status: 404 }
       )
@@ -53,7 +50,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         {
           message: 'Email is already verified',
-          success: true,
+          success: false,
         },
         { status: 400 }
       )
