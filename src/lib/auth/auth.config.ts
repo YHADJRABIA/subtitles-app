@@ -60,26 +60,24 @@ export const authOptions: NextAuthOptions = {
             const zodErrors = getZodErrors(validatedFields.error)
             throw new Error(zodErrors.message)
           }
+
           const { email, password } = validatedFields.data
+          await connectDB()
+          const existingUser = await getUserByEmail(email)
 
-          if (validatedFields.success) {
-            await connectDB()
-            const existingUser = await getUserByEmail(email)
-
-            // If no matching user or user registered via Google (no password)
-            if (!existingUser || !existingUser?.password) {
-              throw new Error('Incorrect email or password')
-            }
-
-            const passwordsMatch = await bycrptjs.compare(
-              password,
-              existingUser.password
-            )
-            if (!passwordsMatch) throw new Error('Incorrect email or password')
-
-            // Passing down user to JWT
-            return existingUser // TODO: Limit what's passed down
+          // If no matching user or user registered via Google (no password)
+          if (!existingUser || !existingUser?.password) {
+            throw new Error('Incorrect email or password')
           }
+
+          const passwordsMatch = await bycrptjs.compare(
+            password,
+            existingUser.password
+          )
+          if (!passwordsMatch) throw new Error('Incorrect email or password')
+
+          // Passing down user to JWT
+          return existingUser // TODO: Limit what's passed down
         } catch (err) {
           console.error('Authorization failed:', getErrorMessage(err))
           throw err // Propagate error to frontend
