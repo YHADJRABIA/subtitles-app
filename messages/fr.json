@@ -1,6 +1,26 @@
 {
+  "General": {
+    "or": "Ou"
+  },
   "Index": {
     "title": "Essai"
+  },
+  "Auth": {
+    "email": "Email",
+    "password": "Mot de passe",
+    "continue_with_google": "Connexion avec Google",
+    "Login": {
+      "title": "Connexion",
+      "cta": "Se connecter",
+      "recover_password": "Mot de passe oublié ?",
+      "no_account": "Pas de compte ? S'inscrire"
+    },
+    "Register": { "title": "Création de compte", "cta": "S'inscrire" }
+  },
+  "LanguageMenu": {},
+  "UseShowPassword": {
+    "reveal_password": "Révéler mot de passe",
+    "conceal_password": "Masquer mot de passe"
   },
   "Navigation": {
     "home": "Page d'accueil"
