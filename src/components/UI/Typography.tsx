@@ -23,6 +23,7 @@ const tagMap = {
   h6: 'h6',
   p: 'p',
   small: 'small',
+  span: 'span',
 } as const
 
 const Typography = ({
@@ -40,7 +41,7 @@ const Typography = ({
   const isSemiBold = weight === 'semiBold'
 
   const PropStyles = {
-    fontWeight: isSemiBold ? 500 : weight,
+    fontWeight: isSemiBold ? 600 : weight,
     textAlign: align,
     color,
     textTransform: uppercase ? 'uppercase' : undefined,
