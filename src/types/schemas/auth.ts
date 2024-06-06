@@ -45,3 +45,11 @@ export const AccountLoginValidator = z.object({
 })
 
 export type AccountLoginSchema = z.infer<typeof AccountRegistrationValidator>
+
+export const AccountEmailVerificationValidator = z.object({
+  email: emailSchema,
+})
+
+export type AccountEmailVerificationSchema = z.infer<
+  typeof AccountEmailVerificationValidator
+>
