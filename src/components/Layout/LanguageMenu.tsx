@@ -10,6 +10,7 @@ import Button from '../UI/Button'
 import { useOnClickOutside } from '@/hooks/useOnClickOutside'
 import { languages } from '@/utils/language'
 import useChangeLanguage from '@/hooks/useChangeLanguage'
+import Typography from '../UI/Typography'
 
 interface PropTypes {
   className?: string
@@ -48,22 +49,32 @@ const LanguageMenu = ({ className }: PropTypes) => {
       </Button>
 
       <ul className={cn('hidden', { visible: isOpen })}>
-        {languages.map(el => (
-          <li
-            key={el.id}
-            lang={el.value}
-            onClick={() => onChangeLanguage(el.value)}
-          >
-            <Image
-              src={el.icon}
-              width={18}
-              height={18}
-              alt={el.label}
-              className={styles.flag}
-            />
-            <span className={styles.label}>{el.label}</span>
-          </li>
-        ))}
+        {languages.map(el => {
+          const isSelected = currentLanguage.value === el.value
+          return (
+            <li
+              key={el.id}
+              lang={el.value}
+              onClick={() => onChangeLanguage(el.value)}
+              title={el.label}
+            >
+              <Image
+                src={el.icon}
+                width={18}
+                height={18}
+                alt={el.label}
+                className={styles.flag}
+              />
+              <Typography
+                tag="span"
+                weight={isSelected ? 'semiBold' : undefined}
+                className={styles.label}
+              >
+                {el.label}
+              </Typography>
+            </li>
+          )
+        })}
       </ul>
     </div>
   )
