@@ -1,8 +1,7 @@
 'use client'
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useRouter } from 'next/navigation'
-import { isValidEmail } from '@/utils/validators'
 import { MdAlternateEmail as EmailIcon } from 'react-icons/md'
 
 import {
@@ -20,60 +19,55 @@ import { getErrorMessage } from '@/utils/errors'
 import InfoBox from '../UI/InfoBox'
 import Typography from '../UI/Typography'
 import axios from 'axios'
+import useInfo from '@/hooks/useInfo'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import {
+  AccountEmailVerificationSchema,
+  AccountEmailVerificationValidator,
+} from '@/types/schemas/auth'
+import { zodResolver } from '@hookform/resolvers/zod'
+import LanguageMenu from '../Layout/LanguageMenu'
 
 const SendVerificationEmailForm = () => {
   const router = useRouter()
-
-  const [info, setInfo] = useState({
-    label: '',
-    type: undefined,
+  const { info, setInfoMessage } = useInfo()
+  const {
+    register,
+    getFieldState,
+    handleSubmit,
+    formState: { errors, isValid, isSubmitting },
+  } = useForm<AccountEmailVerificationSchema>({
+    resolver: zodResolver(AccountEmailVerificationValidator),
+    delayError: 400,
+    mode: 'onChange',
   })
-  const [user, setUser] = useState({
-    email: '',
-  })
 
-  const [isDisabled, setIsDisabled] = useState(true)
-  const [isLoading, setIsLoading] = useState(false)
+  const fieldState = getFieldState('email')
 
   const InfoIcon = info.type === 'error' ? ErrorIcon : EmailSentIcon // TODO: update
 
-  const handleVerify = async (e: any) => {
-    e.preventDefault()
+  const handleVerify: SubmitHandler<
+    AccountEmailVerificationSchema
+  > = async user => {
     try {
-      setIsLoading(true)
       const res = await axios.post('/api/users/send-verification-email', user)
-      setInfo({
-        label: res.data.message,
-        type: 'info',
-      })
+      setInfoMessage(res.data.message, 'success')
     } catch (err) {
-      setInfo({
-        label:
-          getErrorMessage(err?.response.data.message) ?? getErrorMessage(err),
-        type: 'error',
-      })
-    } finally {
-      setIsLoading(false)
+      setInfoMessage(
+        getErrorMessage(err?.response.data.message) ?? getErrorMessage(err),
+        'error'
+      )
     }
   }
 
-  const handleInputChange = (e: any) => {
-    const { name, value } = e.target
-    return setUser(prev => ({ ...prev, [name]: value }))
-  }
-
-  const isValidUser = isValidEmail(user.email)
-
-  useEffect(() => {
-    setIsDisabled(!isValidUser || isLoading)
-  }, [isLoading, isValidUser])
   return (
     <form
       method="POST"
-      onSubmit={handleVerify}
+      onSubmit={handleSubmit(handleVerify)}
       noValidate
       className={styles.root}
     >
+      <LanguageMenu />
       <Typography tag="h1" weight="semiBold">
         Email verification
       </Typography>
@@ -89,19 +83,17 @@ const SendVerificationEmailForm = () => {
         <Field
           className={styles.field}
           autoFocus
+          register={register}
           placeholder="email@domain.com"
           type="email"
           name="email"
           label="Email"
+          isValid={isValid}
           subLabel={{
-            text: 'Invalid email format',
-            isShownOnFocus: false,
+            text: errors?.email?.message,
+            isShown: fieldState.isTouched,
           }}
-          onValidate={isValidEmail}
-          value={user.email}
           testId="verify-email"
-          onChange={handleInputChange}
-          /* autoFocus */
           leftIcon={
             <EmailIcon
               style={{ fontSize: 18 }}
@@ -114,8 +106,8 @@ const SendVerificationEmailForm = () => {
           className={styles.cta}
           variation="primary"
           testId="submit-email-verification-form"
-          disabled={isDisabled}
-          isLoading={isLoading}
+          disabled={!isValid}
+          isLoading={isSubmitting}
           type="submit"
         >
           Send verification email
