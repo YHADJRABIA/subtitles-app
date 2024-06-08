@@ -5,6 +5,7 @@
   "Index": {
     "title": "Essai"
   },
+  "NotFound": {},
   "Auth": {
     "email": "Email",
     "password": "Mot de passe",
@@ -13,7 +14,8 @@
       "title": "Connexion",
       "cta": "Se connecter",
       "recover_password": "Mot de passe oublié ?",
-      "no_account": "Pas de compte ? S'inscrire"
+      "no_account": "Pas de compte ?",
+      "register": "S'inscrire"
     },
     "Register": {
       "title": "Création de compte",
