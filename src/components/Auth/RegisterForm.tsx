@@ -32,9 +32,14 @@ import {
   AccountRegistrationSchema,
   AccountRegistrationValidator,
 } from '@/types/schemas/auth'
+import { useTranslations } from 'next-intl'
 
 const RegisterForm = () => {
   const router = useRouter() // TODO: Redirect if logged in
+  const t = {
+    general: useTranslations('General'),
+    register: useTranslations('Auth.Register'),
+  }
 
   const { info, setInfoMessage } = useInfo()
   const {
@@ -80,7 +85,7 @@ const RegisterForm = () => {
     >
       <LanguageMenu />
       <Typography className={styles.title} tag="h1" weight="semiBold">
-        Create account
+        {t.register('title')}
       </Typography>
 
       <div className={styles.wrapper}>
@@ -145,14 +150,15 @@ const RegisterForm = () => {
           isLoading={isSubmitting}
           type="submit"
         >
-          Create account
+          {t.register('cta')}
         </Button>
 
-        <Separator label="Or" />
+        <Separator label={t.general('or')} />
         <GoogleLogin disabled={isSubmitting} onClick={handleGoogleLogin} />
       </div>
       <Typography>
-        Already have an account? <Link href="/login">Login here</Link>
+        {t.register('existing_account')}{' '}
+        <Link href="/login">{t.register('login')}</Link>
       </Typography>
     </form>
   )
