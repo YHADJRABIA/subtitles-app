@@ -15,7 +15,12 @@
       "recover_password": "Recover password",
       "no_account": "No account yet? Register here"
     },
-    "Register": { "title": "Create account", "cta": "Create account" }
+    "Register": {
+      "title": "Create account",
+      "cta": "Create account",
+      "existing_account": "Already have an account?",
+      "login": "Login"
+    }
   },
   "LanguageMenu": {},
   "UseShowPassword": {
