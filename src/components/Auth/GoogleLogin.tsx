@@ -2,6 +2,7 @@ import React from 'react'
 import Button from '../UI/Button'
 import { FcGoogle } from 'react-icons/fc'
 import styles from './GoogleLogin.module.scss'
+import Typography from '../UI/Typography'
 
 interface PropTypes {
   disabled: boolean
@@ -20,7 +21,14 @@ const GoogleLogin = ({ label, disabled, onClick }: PropTypes) => {
       className={styles.root}
     >
       <FcGoogle title="Google" size={22} className={styles.icon} />
-      {label}
+      <Typography
+        tag="span"
+        weight="semiBold"
+        className={styles.label}
+        title={label}
+      >
+        {label}
+      </Typography>
     </Button>
   )
 }
