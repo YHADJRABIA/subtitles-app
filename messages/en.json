@@ -5,6 +5,7 @@
   "Index": {
     "title": "Test"
   },
+  "NotFound": {},
   "Auth": {
     "email": "Email",
     "password": "Password",
@@ -13,13 +14,14 @@
       "title": "Login",
       "cta": "Login",
       "recover_password": "Recover password",
-      "no_account": "No account yet? Register here"
+      "no_account": "No account yet?",
+      "register": "Register here"
     },
     "Register": {
       "title": "Create account",
       "cta": "Create account",
       "existing_account": "Already have an account?",
-      "login": "Login"
+      "login": "Login here"
     }
   },
   "LanguageMenu": {},
