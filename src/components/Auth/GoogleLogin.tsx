@@ -5,10 +5,11 @@ import styles from './GoogleLogin.module.scss'
 
 interface PropTypes {
   disabled: boolean
+  label: string
   onClick: () => void
 }
 
-const GoogleLogin = ({ disabled, onClick }: PropTypes) => {
+const GoogleLogin = ({ label, disabled, onClick }: PropTypes) => {
   return (
     <Button
       variation="secondary"
@@ -17,7 +18,7 @@ const GoogleLogin = ({ disabled, onClick }: PropTypes) => {
       disabled={disabled}
     >
       <FcGoogle title="Google" size={22} className={styles.googleIcon} />
-      Continue with Google
+      {label}
     </Button>
   )
 }
