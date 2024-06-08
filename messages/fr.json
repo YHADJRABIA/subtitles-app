@@ -15,7 +15,12 @@
       "recover_password": "Mot de passe oublié ?",
       "no_account": "Pas de compte ? S'inscrire"
     },
-    "Register": { "title": "Création de compte", "cta": "S'inscrire" }
+    "Register": {
+      "title": "Création de compte",
+      "cta": "S'inscrire",
+      "existing_account": "Déjà un compte ?",
+      "login": "Se connecter"
+    }
   },
   "LanguageMenu": {},
   "UseShowPassword": {
