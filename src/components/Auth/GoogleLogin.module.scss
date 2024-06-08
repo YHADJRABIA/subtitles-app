@@ -1,3 +1,11 @@
-.googleIcon {
+.root {
+  flex-wrap: nowrap;
+}
+
+.label {
+  @include truncated;
+}
+
+.icon {
   margin-right: 1.5rem;
 }
