@@ -8,7 +8,7 @@
   "Auth": {
     "email": "Email",
     "password": "Mot de passe",
-    "continue_with_google": "Connexion avec Google",
+    "continue_with_google": "Se connecter avec Google",
     "Login": {
       "title": "Connexion",
       "cta": "Se connecter",
