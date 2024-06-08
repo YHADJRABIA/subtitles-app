@@ -9,6 +9,7 @@ interface PropTypes {
   onClick: () => void
 }
 
+// TODO: Rename to ProviderLogin & add provider prop to scale code if more auth providers are used
 const GoogleLogin = ({ label, disabled, onClick }: PropTypes) => {
   return (
     <Button
@@ -16,8 +17,9 @@ const GoogleLogin = ({ label, disabled, onClick }: PropTypes) => {
       testId="login-with-google"
       onClick={onClick}
       disabled={disabled}
+      className={styles.root}
     >
-      <FcGoogle title="Google" size={22} className={styles.googleIcon} />
+      <FcGoogle title="Google" size={22} className={styles.icon} />
       {label}
     </Button>
   )
