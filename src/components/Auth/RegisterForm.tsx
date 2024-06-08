@@ -38,7 +38,7 @@ const RegisterForm = () => {
   const router = useRouter() // TODO: Redirect if logged in
   const t = {
     general: useTranslations('General'),
-    register: useTranslations('Auth.Register'),
+    auth: useTranslations('Auth'),
   }
 
   const { info, setInfoMessage } = useInfo()
@@ -85,7 +85,7 @@ const RegisterForm = () => {
     >
       <LanguageMenu />
       <Typography className={styles.title} tag="h1" weight="semiBold">
-        {t.register('title')}
+        {t.auth('Register.title')}
       </Typography>
 
       <div className={styles.wrapper}>
@@ -103,7 +103,7 @@ const RegisterForm = () => {
           placeholder="email@domain.com"
           type="email"
           name="email"
-          label="Email"
+          label={t.auth('email')}
           isValid={isValid}
           subLabel={{
             text: errors?.email?.message,
@@ -127,7 +127,7 @@ const RegisterForm = () => {
           register={register}
           name="password"
           testId="login-password"
-          label="Password"
+          label={t.auth('password')}
           isValid={isValid}
           subLabel={{
             text: errors?.password?.message,
@@ -150,15 +150,19 @@ const RegisterForm = () => {
           isLoading={isSubmitting}
           type="submit"
         >
-          {t.register('cta')}
+          {t.auth('Register.cta')}
         </Button>
 
         <Separator label={t.general('or')} />
-        <GoogleLogin disabled={isSubmitting} onClick={handleGoogleLogin} />
+        <GoogleLogin
+          disabled={isSubmitting}
+          onClick={handleGoogleLogin}
+          label={t.auth('continue_with_google')}
+        />
       </div>
       <Typography>
-        {t.register('existing_account')}{' '}
-        <Link href="/login">{t.register('login')}</Link>
+        {t.auth('Register.existing_account')}{' '}
+        <Link href="/login">{t.auth('Register.login')}</Link>
       </Typography>
     </form>
   )
