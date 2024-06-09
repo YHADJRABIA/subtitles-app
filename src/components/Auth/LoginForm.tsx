@@ -29,9 +29,14 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import useInfo from '@/hooks/useInfo'
 import LanguageMenu from '../Layout/LanguageMenu'
+import { useTranslations } from 'next-intl'
 
 const LoginForm = () => {
   const router = useRouter() // TODO: Redirect if user is logged in
+  const t = {
+    general: useTranslations('General'),
+    auth: useTranslations('Auth'),
+  }
 
   const { info, setInfoMessage } = useInfo()
   const {
@@ -80,7 +85,7 @@ const LoginForm = () => {
     >
       <LanguageMenu />
       <Typography tag="h1" weight="semiBold" className={styles.title}>
-        Login
+        {t.auth('Login.title')}
       </Typography>
 
       <div className={styles.wrapper}>
@@ -98,7 +103,7 @@ const LoginForm = () => {
           placeholder="email@domain.com"
           type="email"
           name="email"
-          label="Email"
+          label={t.auth('email')}
           isValid={isValid}
           subLabel={{
             text: errors?.email?.message,
@@ -121,7 +126,7 @@ const LoginForm = () => {
           type={passwordInputType}
           name="password"
           testId="login-password"
-          label="Password"
+          label={t.auth('password')}
           isValid={isValid}
           subLabel={{
             text: errors?.password?.message,
@@ -138,12 +143,12 @@ const LoginForm = () => {
         <Link
           className={styles.passwordRecovery}
           href={
-            fieldState.email.invalid
+            fieldState.email.error
               ? '/password/recovery'
               : `/password/recovery?email=${fieldValue.email}`
           }
         >
-          Recover password
+          {t.auth('Login.recover_password')}
         </Link>
 
         <Button
@@ -153,14 +158,19 @@ const LoginForm = () => {
           isLoading={isSubmitting}
           type="submit"
         >
-          Login
+          {t.auth('Login.cta')}
         </Button>
 
-        <Separator label="Or" />
-        <GoogleLogin disabled={isSubmitting} onClick={handleGoogleLogin} />
+        <Separator label={t.general('or')} />
+        <GoogleLogin
+          disabled={isSubmitting}
+          onClick={handleGoogleLogin}
+          label={t.auth('continue_with_google')}
+        />
       </div>
       <Typography className={styles.link}>
-        No account yet? <Link href="/register">Register here</Link>
+        {t.auth('Login.no_account')}{' '}
+        <Link href="/register">{t.auth('Login.register')} </Link>
       </Typography>
     </form>
   )
