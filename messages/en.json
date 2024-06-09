@@ -21,7 +21,31 @@
       "title": "Create account",
       "cta": "Create account",
       "existing_account": "Already have an account?",
-      "login": "Login here"
+      "login": "Login here",
+      "email_already_exists": "Email already exists",
+      "account_created": "Account successfully created! Verification email sent"
+    },
+    "VerifyEmail": {
+      "loading": "Verifying your email",
+      "issue": "Having an issue?",
+      "resend_email": "Resend verification email"
+    },
+    "SendVerificationEmail": {
+      "title": "Email verification",
+      "cta": "Send verification email",
+      "login": "Back to login"
+    }
+  },
+  "Zod": {
+    "email": {
+      "missing": "Missing email",
+      "invalid": "Invalid email",
+      "too_long": "Email is too long. Max 255 characters"
+    },
+    "password": {
+      "missing": "Missing password",
+      "too_short": "Password must contain at least 6 characters",
+      "too_long": "Password is too long. Max 255 characters"
     }
   },
   "LanguageMenu": {},
