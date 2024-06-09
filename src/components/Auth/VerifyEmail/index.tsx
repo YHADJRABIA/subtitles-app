@@ -12,8 +12,11 @@ import {
 } from 'react-icons/bs'
 import Link from 'next/link'
 import Loading from './loading'
+import { useTranslations } from 'next-intl'
 
 const VerifyEmail = () => {
+  const t = useTranslations('Auth.VerifyEmail')
+
   const [isLoading, setIsLoading] = useState(true)
   const searchParams = useSearchParams()
   const token = searchParams.get('token')
@@ -53,7 +56,7 @@ const VerifyEmail = () => {
     <div className={styles.root}>
       <div className={styles.loadingSection}>
         {isLoading ? (
-          <Loading />
+          <Loading label={t('loading')} />
         ) : (
           <>
             <Icon
@@ -70,8 +73,8 @@ const VerifyEmail = () => {
       </div>
       {isError && (
         <Typography className={styles.cta}>
-          Having an issue?{' '}
-          <Link href="/send-verification-email">Resend verification email</Link>{' '}
+          {t('issue')}{' '}
+          <Link href="/send-verification-email">{t('resend_email')}</Link>
           {/* TODO: Send automatically to associated user if expired token for UX */}
         </Typography>
       )}
