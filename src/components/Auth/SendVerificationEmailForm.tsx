@@ -27,8 +27,10 @@ import {
 } from '@/types/schemas/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 import LanguageMenu from '../Layout/LanguageMenu'
+import { useTranslations } from 'next-intl'
 
 const SendVerificationEmailForm = () => {
+  const t = useTranslations('Auth')
   const router = useRouter()
   const { info, setInfoMessage } = useInfo()
   const {
@@ -69,7 +71,7 @@ const SendVerificationEmailForm = () => {
     >
       <LanguageMenu />
       <Typography tag="h1" weight="semiBold">
-        Email verification
+        {t('SendVerificationEmail.title')}
       </Typography>
 
       <div className={styles.wrapper}>
@@ -87,7 +89,7 @@ const SendVerificationEmailForm = () => {
           placeholder="email@domain.com"
           type="email"
           name="email"
-          label="Email"
+          label={t('email')}
           isValid={isValid}
           subLabel={{
             text: errors?.email?.message,
@@ -110,11 +112,11 @@ const SendVerificationEmailForm = () => {
           isLoading={isSubmitting}
           type="submit"
         >
-          Send verification email
+          {t('SendVerificationEmail.cta')}
         </Button>
       </div>
 
-      <Link href="/login">Back to login</Link>
+      <Link href="/login">{t('SendVerificationEmail.login')}</Link>
     </form>
   )
 }
