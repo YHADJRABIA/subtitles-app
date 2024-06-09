@@ -21,7 +21,31 @@
       "title": "Création de compte",
       "cta": "S'inscrire",
       "existing_account": "Déjà un compte ?",
-      "login": "Se connecter"
+      "login": "Se connecter",
+      "email_already_exists": "Email déjà existant",
+      "account_created": "Compte créé avec succès ! Email de vérification envoyé"
+    },
+    "VerifyEmail": {
+      "loading": "Vérification d'email en cours",
+      "issue": "Un souci ?",
+      "resend_email": "Renvoyer email de vérification"
+    },
+    "SendVerificationEmail": {
+      "title": "Vérification d'email",
+      "cta": "Envoyer email de vérification",
+      "login": "Retour à la page de connexion"
+    }
+  },
+  "Zod": {
+    "email": {
+      "missing": "Email manquant",
+      "invalid": "Email invalide",
+      "too_long": "Email trop long. Ne pas dépasser 255 caractères"
+    },
+    "password": {
+      "missing": "Mot de passe manquant",
+      "too_short": "Le mot de passe doit contenir au moins 6 caractères",
+      "too_long": "Mot de passe trop long. Ne pas dépasser 255 caractères"
     }
   },
   "LanguageMenu": {},
