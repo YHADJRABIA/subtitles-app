@@ -2,11 +2,15 @@ import Loader from '@/components/UI/Loader'
 import Typography from '@/components/UI/Typography'
 import React from 'react'
 
-const Loading = () => {
+interface PropTypes {
+  label: string
+}
+
+const Loading = ({ label }: PropTypes) => {
   return (
     <>
       <Loader size={22} />
-      <Typography weight="semiBold">Verifying your email</Typography>
+      <Typography weight="semiBold">{label}</Typography>
     </>
   )
 }
