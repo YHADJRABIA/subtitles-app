@@ -7,16 +7,24 @@ import { getUserByEmail } from '@/utils/db/user'
 import { getLocaleFromRequestCookie } from '@/utils/cookies'
 import { sendVerificationEmail } from '@/lib/mail'
 import { generateVerificationToken } from '@/lib/auth/token'
-import { AccountEmailVerificationValidator } from '@/types/schemas/auth'
+import { SendEmailVerificationValidator } from '@/types/schemas/auth'
+import { getTranslations } from 'next-intl/server'
 
 connectDB()
 
 export async function POST(req: NextRequest) {
   try {
     const locale = getLocaleFromRequestCookie(req)
+    const t = {
+      zod: await getTranslations({ locale, namespace: 'Zod' }),
+      sendVerificationEmail: await getTranslations({
+        locale,
+        namespace: 'Auth.SendVerificationEmail',
+      }),
+    }
 
     const rawBody = await req.json()
-    const body = AccountEmailVerificationValidator.safeParse(rawBody)
+    const body = SendEmailVerificationValidator(t.zod).safeParse(rawBody)
 
     // Form validation
     if (!body.success) {
@@ -38,7 +46,7 @@ export async function POST(req: NextRequest) {
     if (!existingUser)
       return NextResponse.json(
         {
-          message: 'User not found',
+          message: t.sendVerificationEmail('user_not_found'),
           success: false,
         },
         { status: 404 }
@@ -49,7 +57,7 @@ export async function POST(req: NextRequest) {
     if (isAlreadyVerified)
       return NextResponse.json(
         {
-          message: 'Email is already verified',
+          message: t.sendVerificationEmail('email_already_verified'),
           success: false,
         },
         { status: 400 }
@@ -65,7 +73,7 @@ export async function POST(req: NextRequest) {
     )
 
     return NextResponse.json({
-      message: 'Verification email sent',
+      message: t.sendVerificationEmail('verification_email_sent'),
       success: true,
     })
   } catch (error) {
