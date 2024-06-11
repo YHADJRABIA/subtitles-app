@@ -100,6 +100,7 @@ const PasswordResetForm = () => {
           }
           type={passwordInputType}
           register={register}
+          isValid={isValid}
           name="password"
           subLabel={{
             text: errors?.password?.message,
