@@ -39,6 +39,7 @@ const RegisterForm = () => {
   const t = {
     general: useTranslations('General'),
     auth: useTranslations('Auth'),
+    zod: useTranslations('Zod'),
   }
 
   const { info, setInfoMessage } = useInfo()
@@ -48,7 +49,7 @@ const RegisterForm = () => {
     handleSubmit,
     formState: { errors, isValid, isSubmitting },
   } = useForm<AccountRegistrationSchema>({
-    resolver: zodResolver(AccountRegistrationValidator),
+    resolver: zodResolver(AccountRegistrationValidator(t.zod)),
     delayError: 400,
     mode: 'onChange',
   })
@@ -113,7 +114,7 @@ const RegisterForm = () => {
           leftIcon={
             <EmailIcon
               style={{ fontSize: 18 }}
-              title="Email" // TODO: rework this
+              title={t.auth('email')} // TODO: rework this
             />
           }
         />
@@ -137,7 +138,7 @@ const RegisterForm = () => {
           leftIcon={
             <PasswordIcon
               size={18}
-              title="Password" // TODO: rework this
+              title={t.auth('password')} // TODO: rework this
             />
           }
           rightIcon={<ToggleIcon />}
@@ -162,7 +163,7 @@ const RegisterForm = () => {
       </div>
       <Typography>
         {t.auth('Register.existing_account')}{' '}
-        <Link href="/login">{t.auth('Register.login')}</Link>
+        <Link href="/login">{t.auth('Register.fallback')}</Link>
       </Typography>
     </form>
   )
