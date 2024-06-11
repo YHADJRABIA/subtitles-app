@@ -2,7 +2,7 @@ import { connectDB } from '@/lib/mongodb'
 import { UserModel } from '@/models/user.model'
 import { NextRequest, NextResponse } from 'next/server'
 
-import { getErrorMessage } from '@/utils/errors'
+import { getErrorMessage, getZodErrors } from '@/utils/errors'
 import { getUserByEmail } from '@/utils/db/user'
 import { hasExpired } from '@/utils/time'
 import {
@@ -10,27 +10,36 @@ import {
   getPasswordResetTokenByToken,
 } from '@/utils/db/password-reset-token'
 import { hashPassword } from '@/utils/random'
+import { getLocaleFromRequestCookie } from '@/utils/cookies'
+import { getTranslations } from 'next-intl/server'
+import { PasswordResetValidator } from '@/types/schemas/auth'
 
 connectDB()
 
 export async function POST(req: NextRequest) {
   try {
-    const reqBody = await req.json()
-    const { token, password } = reqBody
+    const locale = getLocaleFromRequestCookie(req)
+    const t = {
+      zod: await getTranslations({ locale, namespace: 'Zod' }),
+      passwordReset: await getTranslations({
+        locale,
+        namespace: 'Auth.PasswordReset',
+      }),
+    }
 
-    if (!token) {
+    const rawBody = await req.json()
+    const body = PasswordResetValidator(t.zod).safeParse(rawBody)
+
+    // Form validation
+    if (!body.success) {
+      const zodErrors = getZodErrors(body.error)
       return NextResponse.json(
-        { message: 'Missing token', success: false },
+        { message: zodErrors.message, success: false },
         { status: 400 }
       )
     }
 
-    if (!password) {
-      return NextResponse.json(
-        { message: 'Missing password', success: false },
-        { status: 400 }
-      )
-    }
+    const { token, password } = body.data
 
     // Look for existing token
     const existingToken = await getPasswordResetTokenByToken(token)
@@ -38,7 +47,7 @@ export async function POST(req: NextRequest) {
     // Token doesn't match
     if (!existingToken) {
       return NextResponse.json(
-        { message: 'Invalid token. Recover password again', success: false },
+        { message: t.passwordReset('invalid_token'), success: false },
         { status: 400 }
       )
     }
@@ -48,7 +57,7 @@ export async function POST(req: NextRequest) {
     if (tokenHasExpired) {
       return NextResponse.json(
         {
-          message: 'Token has expired. Recover password again',
+          message: t.passwordReset('expired_token'),
           success: false,
         },
         { status: 400 }
@@ -59,7 +68,7 @@ export async function POST(req: NextRequest) {
     const associatedUser = await getUserByEmail(existingToken.email)
     if (!associatedUser) {
       return NextResponse.json(
-        { message: 'User not found', success: false },
+        { message: t.passwordReset('user_not_found'), success: false },
         { status: 404 }
       )
     }
@@ -77,7 +86,7 @@ export async function POST(req: NextRequest) {
     await deletePasswordResetTokenById(existingToken.id)
 
     return NextResponse.json({
-      message: 'Password successfully updated!',
+      message: t.passwordReset('password_updated'),
       success: true,
     })
   } catch (error) {
