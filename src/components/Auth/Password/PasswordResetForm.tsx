@@ -2,7 +2,7 @@
 import InfoBox from '@/components/UI/InfoBox'
 import Typography from '@/components/UI/Typography'
 import styles from './PasswordResetForm.module.scss'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Field from '@/components/Forms/Field'
 import Button from '@/components/UI/Button'
 import Link from 'next/link'
@@ -16,73 +16,73 @@ import { useShowPassword } from '@/hooks/useShowPassword'
 import { getErrorMessage } from '@/utils/errors'
 import axios from 'axios'
 import { useSearchParams } from 'next/navigation'
-import { isValidPassword } from '@/utils/validators'
+import { useTranslations } from 'next-intl'
+import useInfo from '@/hooks/useInfo'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import {
+  PasswordResetSchema,
+  PasswordResetValidator,
+} from '@/types/schemas/auth'
+import LanguageMenu from '@/components/Layout/LanguageMenu'
 
 const PasswordResetForm = () => {
   const searchParams = useSearchParams()
+  const t = {
+    auth: useTranslations('Auth'),
+    zod: useTranslations('Zod'),
+  }
 
-  const token = searchParams.get('token')
+  const token = searchParams.get('token') ?? ''
 
-  const [info, setInfo] = useState({
-    label: '',
-    type: undefined,
-  })
-  const [user, setUser] = useState({
-    password: '',
-    token,
-  })
+  const [passwordInputType, ToggleIcon] = useShowPassword({ size: 20 })
+  const { info, setInfoMessage } = useInfo()
 
   const InfoIcon = info.type === 'success' ? SuccessIcon : ErrorIcon // TODO: update
 
-  const [isDisabled, setIsDisabled] = useState(true)
-  const [isError, setIsError] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  const [passwordInputType, ToggleIcon] = useShowPassword({ size: 20 })
+  const {
+    register,
+    getFieldState,
+    handleSubmit,
+    setValue,
+    formState: { errors, isValid, isSubmitting },
+  } = useForm<PasswordResetSchema>({
+    resolver: zodResolver(PasswordResetValidator(t.zod)),
+    delayError: 400,
+    mode: 'onChange',
+  })
 
-  const handleReset = useCallback(
-    async (e: any) => {
-      e.preventDefault()
-      try {
-        setIsLoading(true)
-        const res = await axios.post('/api/users/password/reset', user)
-        setInfo({ label: res.data.message, type: 'success' })
-      } catch (err) {
-        setInfo({
-          label: getErrorMessage(err?.response.data.message),
-          type: 'error',
-        })
-        setIsError(true)
-      } finally {
-        setIsLoading(false)
-      }
-    },
-    [user]
-  )
+  const fieldState = getFieldState('password')
 
-  const handleInputChange = (e: any) => {
-    const { name, value } = e.target
-    return setUser(prev => ({ ...prev, [name]: value }))
+  const handleReset: SubmitHandler<PasswordResetSchema> = async user => {
+    try {
+      const res = await axios.post('/api/users/password/reset', user)
+      setInfoMessage(res.data.message, 'success')
+    } catch (err) {
+      setInfoMessage(
+        getErrorMessage(err?.response.data.message) ?? getErrorMessage(err),
+        'error'
+      )
+    }
   }
 
+  // Set token's value programmatically since no existing field
   useEffect(() => {
-    if (!token) {
-      setInfo({ label: 'No token provided', type: 'error' })
-    }
-  }, [token])
+    setValue('token', token)
+  }, [setValue, token])
 
-  useEffect(() => {
-    setIsDisabled(!isValidPassword(user.password) || isLoading)
-  }, [isLoading, user.password])
+  const isError = info.type === 'error'
 
   return (
     <form
       method="POST"
-      onSubmit={handleReset}
+      onSubmit={handleSubmit(handleReset)}
       noValidate
       className={styles.root}
     >
+      <LanguageMenu />
       <Typography tag="h1" weight="semiBold" className={styles.title}>
-        Password reset
+        {t.auth('PasswordReset.title')}
       </Typography>
 
       <div className={styles.wrapper}>
@@ -99,19 +99,19 @@ const PasswordResetForm = () => {
             passwordInputType === 'password' ? '••••••' : 'MyPa$$word_'
           }
           type={passwordInputType}
+          register={register}
           name="password"
-          value={user.password}
-          onChange={handleInputChange}
-          onValidate={isValidPassword}
           subLabel={{
-            text: 'Password must contain at least 6 characters',
+            text: errors?.password?.message,
+            isShown: fieldState.isTouched,
+            isInfo: true,
           }}
           testId="reset-password-field"
-          label="Password"
+          label={t.auth('password')}
           leftIcon={
             <PasswordIcon
               size={18}
-              title="Password" // TODO: rework this
+              title={t.auth('password')} // TODO: rework this
             />
           }
           rightIcon={<ToggleIcon />}
@@ -121,18 +121,20 @@ const PasswordResetForm = () => {
           className={styles.cta}
           variation="primary"
           testId="submit-reset-password-form"
-          disabled={isDisabled}
-          isLoading={isLoading}
+          disabled={!isValid}
+          isLoading={isSubmitting}
           type="submit"
         >
-          Confirm password
+          {t.auth('PasswordReset.cta')}
         </Button>
       </div>
 
       {isError ? (
-        <Link href="/password/recovery">Recover password again</Link>
+        <Link href="/password/recovery">
+          {t.auth('PasswordReset.cta_error')}
+        </Link>
       ) : (
-        <Link href="/login">Back to login</Link>
+        <Link href="/login"> {t.auth('PasswordReset.fallback')}</Link>
       )}
     </form>
   )
