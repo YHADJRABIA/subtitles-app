@@ -16,7 +16,9 @@
       "cta": "Login",
       "recover_password": "Recover password",
       "no_account": "No account yet?",
-      "fallback": "Register here"
+      "fallback": "Register here",
+      "incorrect_email_or_password": "Incorrect email and/or password",
+      "unverified_email": "Email verification required"
     },
     "Register": {
       "title": "Create account",
@@ -29,17 +31,27 @@
     "VerifyEmail": {
       "loading": "Verifying your email",
       "issue": "Having an issue?",
-      "resend_email": "Resend verification email"
+      "resend_email": "Resend verification email",
+      "invalid_token": "Invalid token. Reverify email",
+      "expired_token": "Token has expired. Reverify email",
+      "user_not_found": "User not found",
+      "email_verified": "Email successfully verified!",
+      "fallback": "Login"
     },
     "SendVerificationEmail": {
       "title": "Email verification",
       "cta": "Send verification email",
-      "fallback": "Back to login"
+      "fallback": "Back to login",
+      "user_not_found": "User not found",
+      "email_already_verified": "Email is already verified",
+      "verification_email_sent": "Verification email sent!"
     },
     "PasswordRecovery": {
       "title": "Password recovery",
       "cta": "Send recovery email",
-      "fallback": "Back to login"
+      "fallback": "Back to login",
+      "user_not_found": "User not found",
+      "recovery_email_sent": "Recovery email sent!"
     },
     "PasswordReset": {
       "title": "Password reset",
