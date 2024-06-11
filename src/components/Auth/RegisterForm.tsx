@@ -77,6 +77,8 @@ const RegisterForm = () => {
     }
   }
 
+  // TODO: Add Google Recaptcha to prevent abuse
+
   return (
     <form
       method="POST"
