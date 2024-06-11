@@ -36,6 +36,7 @@ const LoginForm = () => {
   const t = {
     general: useTranslations('General'),
     auth: useTranslations('Auth'),
+    zod: useTranslations('Zod'),
   }
 
   const { info, setInfoMessage } = useInfo()
@@ -46,7 +47,7 @@ const LoginForm = () => {
     handleSubmit,
     formState: { errors, isValid, isSubmitting },
   } = useForm<AccountLoginSchema>({
-    resolver: zodResolver(AccountLoginValidator),
+    resolver: zodResolver(AccountLoginValidator(t.zod)),
     delayError: 400,
     mode: 'onChange',
   })
@@ -113,7 +114,7 @@ const LoginForm = () => {
           leftIcon={
             <EmailIcon
               style={{ fontSize: 18 }}
-              title="Email" // TODO: rework this
+              title={t.auth('email')} // TODO: rework this
             />
           }
         />
@@ -135,7 +136,7 @@ const LoginForm = () => {
           leftIcon={
             <PasswordIcon
               size={18}
-              title="Password" // TODO: rework this
+              title={t.auth('password')} // TODO: rework this
             />
           }
           rightIcon={<ToggleIcon />}
@@ -170,7 +171,7 @@ const LoginForm = () => {
       </div>
       <Typography className={styles.link}>
         {t.auth('Login.no_account')}{' '}
-        <Link href="/register">{t.auth('Login.register')} </Link>
+        <Link href="/register">{t.auth('Login.fallback')} </Link>
       </Typography>
     </form>
   )
