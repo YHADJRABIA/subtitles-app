@@ -105,7 +105,6 @@ const LoginForm = () => {
           type="email"
           name="email"
           label={t.auth('email')}
-          isValid={isValid}
           subLabel={{
             text: errors?.email?.message,
             isShown: fieldState.email.isTouched,
@@ -128,7 +127,6 @@ const LoginForm = () => {
           name="password"
           testId="login-password"
           label={t.auth('password')}
-          isValid={isValid}
           subLabel={{
             text: errors?.password?.message,
             isShown: fieldState.password.isTouched,

@@ -94,7 +94,6 @@ const PasswordRecoveryForm = () => {
           placeholder="email@domain.com"
           type="email"
           label={t.auth('email')}
-          isValid={isValid}
           subLabel={{
             text: errors?.email?.message,
             isShown: fieldState.isTouched,
