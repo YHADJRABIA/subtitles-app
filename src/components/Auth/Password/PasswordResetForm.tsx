@@ -38,7 +38,9 @@ const PasswordResetForm = () => {
   const [passwordInputType, ToggleIcon] = useShowPassword({ size: 20 })
   const { info, setInfoMessage } = useInfo()
 
-  const InfoIcon = info.type === 'success' ? SuccessIcon : ErrorIcon // TODO: update
+  const isError = info.type === 'error'
+
+  const InfoIcon = isError ? ErrorIcon : SuccessIcon // TODO: update
 
   const {
     register,
@@ -70,8 +72,6 @@ const PasswordResetForm = () => {
   useEffect(() => {
     setValue('token', token)
   }, [setValue, token])
-
-  const isError = info.type === 'error'
 
   return (
     <form
