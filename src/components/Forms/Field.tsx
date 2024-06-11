@@ -11,7 +11,6 @@ interface PropTypes extends InputHTMLAttributes<HTMLInputElement> {
   name: ValidFieldNames
   label: string
   value?: string
-  isValid: boolean
   subLabel?: {
     text?: string
     isShown: boolean
@@ -25,7 +24,6 @@ interface PropTypes extends InputHTMLAttributes<HTMLInputElement> {
 
 const Field = ({
   register,
-  isValid,
   valueAsNumber,
   label,
   subLabel,
@@ -40,7 +38,7 @@ const Field = ({
 }: PropTypes) => {
   const { text, isShown = true, isInfo = false } = subLabel || {}
 
-  const isShownSubfield = !isValid && isShown && !!text
+  const isShownSubfield = isShown && !!text
 
   return (
     <div className={cn(styles.root, className)}>
