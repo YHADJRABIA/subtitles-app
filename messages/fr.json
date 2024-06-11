@@ -16,7 +16,9 @@
       "cta": "Se connecter",
       "recover_password": "Mot de passe oublié ?",
       "no_account": "Pas de compte ?",
-      "fallback": "S'inscrire"
+      "fallback": "S'inscrire",
+      "incorrect_email_or_password": "Email et/ou mot de passe erronés",
+      "unverified_email": "L'email doit être vérifié"
     },
     "Register": {
       "title": "Création de compte",
@@ -29,17 +31,27 @@
     "VerifyEmail": {
       "loading": "Vérification d'email en cours",
       "issue": "Un souci ?",
-      "resend_email": "Renvoyer email de vérification"
+      "resend_email": "Renvoyer email de vérification",
+      "invalid_token": "Jeton invalide. Revérifier l'email",
+      "expired_token": "Jeton expiré. Revérifier l'email",
+      "user_not_found": "Utilisateur inconnu",
+      "email_verified": "Email verifié avec succès !",
+      "fallback": "Se connecter"
     },
     "SendVerificationEmail": {
       "title": "Vérification d'email",
       "cta": "Envoyer email de vérification",
-      "fallback": "Retour à la page de connexion"
+      "fallback": "Retour à la page de connexion",
+      "user_not_found": "Utilisateur inconnu",
+      "email_already_verified": "Cet email est déjà verifié",
+      "verification_email_sent": "Email de vérification envoyé !"
     },
     "PasswordRecovery": {
       "title": "Récupération de mot de passe",
       "cta": "Envoyer email de récupération",
-      "fallback": "Retour à la page de connexion"
+      "fallback": "Retour à la page de connexion",
+      "user_not_found": "Utilisateur inconnu",
+      "recovery_email_sent": "Email de récupération envoyé !"
     },
     "PasswordReset": {
       "title": "Réinitialisation de mot de passe",
