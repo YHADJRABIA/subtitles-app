@@ -9,15 +9,20 @@ import { sendVerificationEmail } from '@/lib/mail'
 import { hashPassword } from '@/utils/random'
 import { getLocaleFromRequestCookie } from '@/utils/cookies'
 import { AccountRegistrationValidator } from '@/types/schemas/auth'
+import { getTranslations } from 'next-intl/server'
 
 connectDB()
 
 export async function POST(req: NextRequest) {
   try {
     const locale = getLocaleFromRequestCookie(req)
+    const t = {
+      zod: await getTranslations({ locale, namespace: 'Zod' }),
+      register: await getTranslations({ locale, namespace: 'Auth.Register' }),
+    }
 
     const rawBody = await req.json()
-    const body = AccountRegistrationValidator.safeParse(rawBody)
+    const body = AccountRegistrationValidator(t.zod).safeParse(rawBody)
 
     // Form validation
     if (!body.success) {
@@ -36,7 +41,7 @@ export async function POST(req: NextRequest) {
     // Already existing user
     if (existingUser)
       return NextResponse.json(
-        { message: 'Email already exists', success: false },
+        { message: t.register('email_already_exists'), success: false },
         { status: 400 }
       )
 
@@ -59,7 +64,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(
       {
-        message: 'Account successfully created! Verification email sent',
+        message: t.register('account_created'),
         success: true,
         savedUser: createdUser,
       },
