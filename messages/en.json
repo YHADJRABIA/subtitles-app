@@ -1,6 +1,7 @@
 {
   "General": {
-    "or": "Or"
+    "or": "Or",
+    "something_went_wrong": "Something went wrong"
   },
   "Index": {
     "title": "Test"
@@ -15,13 +16,13 @@
       "cta": "Login",
       "recover_password": "Recover password",
       "no_account": "No account yet?",
-      "register": "Register here"
+      "fallback": "Register here"
     },
     "Register": {
       "title": "Create account",
       "cta": "Create account",
       "existing_account": "Already have an account?",
-      "login": "Login here",
+      "fallback": "Login here",
       "email_already_exists": "Email already exists",
       "account_created": "Account successfully created! Verification email sent"
     },
@@ -33,7 +34,22 @@
     "SendVerificationEmail": {
       "title": "Email verification",
       "cta": "Send verification email",
-      "login": "Back to login"
+      "fallback": "Back to login"
+    },
+    "PasswordRecovery": {
+      "title": "Password recovery",
+      "cta": "Send recovery email",
+      "fallback": "Back to login"
+    },
+    "PasswordReset": {
+      "title": "Password reset",
+      "cta": "Confirm password",
+      "cta_error": "Recover password again",
+      "fallback": "Back to login",
+      "invalid_token": "Invalid token. Recover password again",
+      "expired_token": "Token has expired. Recover password again",
+      "user_not_found": "User not found",
+      "password_updated": "Password successfully updated!"
     }
   },
   "Zod": {
@@ -46,6 +62,9 @@
       "missing": "Missing password",
       "too_short": "Password must contain at least 6 characters",
       "too_long": "Password is too long. Max 255 characters"
+    },
+    "token": {
+      "missing": "Missing token"
     }
   },
   "LanguageMenu": {},
