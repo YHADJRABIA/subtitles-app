@@ -1,6 +1,7 @@
 {
   "General": {
-    "or": "Ou"
+    "or": "Ou",
+    "something_went_wrong": "Un erreur s'est produite"
   },
   "Index": {
     "title": "Essai"
@@ -15,13 +16,13 @@
       "cta": "Se connecter",
       "recover_password": "Mot de passe oublié ?",
       "no_account": "Pas de compte ?",
-      "register": "S'inscrire"
+      "fallback": "S'inscrire"
     },
     "Register": {
       "title": "Création de compte",
       "cta": "S'inscrire",
       "existing_account": "Déjà un compte ?",
-      "login": "Se connecter",
+      "fallback": "Se connecter",
       "email_already_exists": "Email déjà existant",
       "account_created": "Compte créé avec succès ! Email de vérification envoyé"
     },
@@ -33,7 +34,22 @@
     "SendVerificationEmail": {
       "title": "Vérification d'email",
       "cta": "Envoyer email de vérification",
-      "login": "Retour à la page de connexion"
+      "fallback": "Retour à la page de connexion"
+    },
+    "PasswordRecovery": {
+      "title": "Récupération de mot de passe",
+      "cta": "Envoyer email de récupération",
+      "fallback": "Retour à la page de connexion"
+    },
+    "PasswordReset": {
+      "title": "Réinitialisation de mot de passe",
+      "cta": "Confirmer mot de passe",
+      "cta_error": "Récupérer mot de passe de nouveau",
+      "fallback": "Retour à la page de connexion",
+      "invalid_token": "Jeton invalide. Renouveler récupération de mot de passe",
+      "expired_token": "Jeton expiré. Renouveler récupération de mot de passe",
+      "user_not_found": "Utilisateur inconnu",
+      "password_updated": "Mot de passe mis à jour !"
     }
   },
   "Zod": {
@@ -46,6 +62,9 @@
       "missing": "Mot de passe manquant",
       "too_short": "Le mot de passe doit contenir au moins 6 caractères",
       "too_long": "Mot de passe trop long. Ne pas dépasser 255 caractères"
+    },
+    "token": {
+      "missing": "Jeton requis"
     }
   },
   "LanguageMenu": {},
