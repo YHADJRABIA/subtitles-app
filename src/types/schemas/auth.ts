@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl'
 import * as z from 'zod'
 
 export type ValidFieldNames = 'email' | 'password'
@@ -7,49 +8,78 @@ export type AuthFormData = {
   password: string
 }
 
-const emailSchema = z
-  .string()
-  .min(1, {
-    message: 'Missing email',
-  })
-  .email({
-    message: 'Invalid email format',
-  })
-  .max(255, {
-    message: 'Email is too long. Max 255 characters',
-  })
-  .trim()
-  .toLowerCase()
-
-export const PasswordRecoveryValidator = z.object({ email: emailSchema })
-
-export type PasswordRecoverySchema = z.infer<typeof PasswordRecoveryValidator>
-
-export const AccountRegistrationValidator = z.object({
-  email: emailSchema,
-  password: z
+const emailSchema = (t: ReturnType<typeof useTranslations<'Zod'>>) =>
+  z
     .string()
-    .min(6, { message: 'Password must contain at least 6 characters' })
+    .min(1, {
+      message: t('email.missing'),
+    })
+    .email({
+      message: t('email.invalid'),
+    })
     .max(255, {
-      message: 'Password is too long. Max 255 characters',
-    }),
-})
+      message: t('email.too_long'),
+    })
+    .trim()
+    .toLowerCase()
+
+const passwordSchema = (t: ReturnType<typeof useTranslations<'Zod'>>) =>
+  z
+    .string()
+    .min(6, { message: t('password.too_short') })
+    .max(255, { message: t('password.too_long') })
+
+export const AccountRegistrationValidator = (
+  t: ReturnType<typeof useTranslations<'Zod'>>
+) =>
+  z.object({
+    email: emailSchema(t),
+    password: passwordSchema(t),
+  })
 
 export type AccountRegistrationSchema = z.infer<
-  typeof AccountRegistrationValidator
+  ReturnType<typeof AccountRegistrationValidator>
 >
 
-export const AccountLoginValidator = z.object({
-  email: emailSchema,
-  password: z.string().min(1, { message: 'Missing password' }),
-})
+export const AccountLoginValidator = (
+  t: ReturnType<typeof useTranslations<'Zod'>>
+) =>
+  z.object({
+    email: emailSchema(t),
+    password: z.string().min(1, { message: t('password.missing') }),
+  })
 
-export type AccountLoginSchema = z.infer<typeof AccountRegistrationValidator>
+export type AccountLoginSchema = z.infer<
+  ReturnType<typeof AccountLoginValidator>
+>
 
-export const AccountEmailVerificationValidator = z.object({
-  email: emailSchema,
-})
+export const AccountEmailVerificationValidator = (
+  t: ReturnType<typeof useTranslations<'Zod'>>
+) =>
+  z.object({
+    email: emailSchema(t),
+  })
 
 export type AccountEmailVerificationSchema = z.infer<
-  typeof AccountEmailVerificationValidator
+  ReturnType<typeof AccountEmailVerificationValidator>
+>
+
+export const PasswordRecoveryValidator = (
+  t: ReturnType<typeof useTranslations<'Zod'>>
+) => z.object({ email: emailSchema(t) })
+
+export type PasswordRecoverySchema = z.infer<
+  ReturnType<typeof PasswordRecoveryValidator>
+>
+
+export const PasswordResetValidator = (
+  t: ReturnType<typeof useTranslations<'Zod'>>
+) =>
+  z.object({
+    password: passwordSchema(t),
+    token: z.string().min(1, { message: t('token.missing') }),
+  })
+
+export type PasswordResetSchema = z.infer<
+  ReturnType<typeof PasswordResetValidator>
 >
