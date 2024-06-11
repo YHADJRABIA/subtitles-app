@@ -29,16 +29,18 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import useInfo from '@/hooks/useInfo'
 import LanguageMenu from '../Layout/LanguageMenu'
-import { useTranslations } from 'next-intl'
+import { useTranslations, useLocale } from 'next-intl'
 
 const LoginForm = () => {
   const router = useRouter() // TODO: Redirect if user is logged in
+  const locale = useLocale()
   const t = {
     general: useTranslations('General'),
     auth: useTranslations('Auth'),
     zod: useTranslations('Zod'),
   }
 
+  const [passwordInputType, ToggleIcon] = useShowPassword({ size: 20 })
   const { info, setInfoMessage } = useInfo()
   const {
     register,
@@ -57,25 +59,27 @@ const LoginForm = () => {
     password: getFieldState('password'),
   }
 
-  const fieldValue = {
-    email: getValues('email'),
-  }
+  const email = getValues('email')
 
   const InfoIcon = info.type === 'success' ? EmailSentIcon : ErrorIcon // TODO: update
 
-  const [passwordInputType, ToggleIcon] = useShowPassword({ size: 20 })
-
   const handleLogin: SubmitHandler<AccountLoginSchema> = async user => {
     try {
-      const res = await signIn('credentials', {
-        ...user,
-        redirect: false,
-      })
+      const res = await signIn(
+        'credentials',
+        {
+          ...user,
+          redirect: false,
+        },
+        { locale } // Passing locale to next-auth to avoid complexe extraction from headers
+      )
       setInfoMessage(getErrorMessage(res?.error), 'error')
     } catch (err) {
       setInfoMessage(getErrorMessage(err), 'error')
     }
   }
+
+  const isValidEmail = !!email?.length && !fieldState.email.error
 
   return (
     <form
@@ -142,9 +146,9 @@ const LoginForm = () => {
         <Link
           className={styles.passwordRecovery}
           href={
-            fieldState.email.error
-              ? '/password/recovery'
-              : `/password/recovery?email=${fieldValue.email}`
+            isValidEmail
+              ? `/password/recovery?email=${email}`
+              : '/password/recovery'
           }
         >
           {t.auth('Login.recover_password')}
