@@ -8,15 +8,23 @@ import { getLocaleFromRequestCookie } from '@/utils/cookies'
 import { sendPasswordResetEmail } from '@/lib/mail'
 import { generatePasswordResetToken } from '@/lib/auth/token'
 import { PasswordRecoveryValidator } from '@/types/schemas/auth'
+import { getTranslations } from 'next-intl/server'
 
 connectDB()
 
 export async function POST(req: NextRequest) {
   try {
     const locale = getLocaleFromRequestCookie(req)
+    const t = {
+      zod: await getTranslations({ locale, namespace: 'Zod' }),
+      passwordRecovery: await getTranslations({
+        locale,
+        namespace: 'Auth.PasswordRecovery',
+      }),
+    }
 
     const rawBody = await req.json()
-    const body = PasswordRecoveryValidator.safeParse(rawBody)
+    const body = PasswordRecoveryValidator(t.zod).safeParse(rawBody)
 
     // Form validation
     if (!body.success) {
@@ -37,7 +45,7 @@ export async function POST(req: NextRequest) {
     if (!existingUser)
       return NextResponse.json(
         {
-          message: 'User not found',
+          message: t.passwordRecovery('user_not_found'),
           success: false,
         },
         {
@@ -55,7 +63,7 @@ export async function POST(req: NextRequest) {
     )
 
     return NextResponse.json({
-      message: 'Recovery email sent',
+      message: t.passwordRecovery('recovery_email_sent'),
       success: true,
     })
   } catch (error) {
