@@ -34,6 +34,10 @@ export const pathnames = {
   },
   '/password/recovery': {
     en: '/password/recovery',
+    fr: '/mot-de-passe/recuperation',
+  },
+  '/password/reset': {
+    en: '/password/reset',
     fr: '/mot-de-passe/reinitialisation',
   },
 } satisfies Pathnames<typeof locales>
