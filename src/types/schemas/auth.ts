@@ -29,6 +29,9 @@ const passwordSchema = (t: ReturnType<typeof useTranslations<'Zod'>>) =>
     .min(6, { message: t('password.too_short') })
     .max(255, { message: t('password.too_long') })
 
+const tokenSchema = (t: ReturnType<typeof useTranslations<'Zod'>>) =>
+  z.string().min(1, { message: t('token.missing') })
+
 export const AccountRegistrationValidator = (
   t: ReturnType<typeof useTranslations<'Zod'>>
 ) =>
@@ -53,15 +56,26 @@ export type AccountLoginSchema = z.infer<
   ReturnType<typeof AccountLoginValidator>
 >
 
-export const AccountEmailVerificationValidator = (
+export const SendEmailVerificationValidator = (
   t: ReturnType<typeof useTranslations<'Zod'>>
 ) =>
   z.object({
     email: emailSchema(t),
   })
 
-export type AccountEmailVerificationSchema = z.infer<
-  ReturnType<typeof AccountEmailVerificationValidator>
+export type SendEmailVerificationSchema = z.infer<
+  ReturnType<typeof SendEmailVerificationValidator>
+>
+
+export const EmailVerificationValidator = (
+  t: ReturnType<typeof useTranslations<'Zod'>>
+) =>
+  z.object({
+    token: tokenSchema(t),
+  })
+
+export type EmailVerificationSchema = z.infer<
+  ReturnType<typeof EmailVerificationValidator>
 >
 
 export const PasswordRecoveryValidator = (
@@ -77,7 +91,7 @@ export const PasswordResetValidator = (
 ) =>
   z.object({
     password: passwordSchema(t),
-    token: z.string().min(1, { message: t('token.missing') }),
+    token: tokenSchema(t),
   })
 
 export type PasswordResetSchema = z.infer<
