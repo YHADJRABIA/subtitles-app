@@ -1,4 +1,10 @@
 {
+  "Metadata": {
+    "Auth": {
+      "title": "Authentication",
+      "description": "Authentication section"
+    }
+  },
   "General": {
     "or": "Or",
     "something_went_wrong": "Something went wrong"
