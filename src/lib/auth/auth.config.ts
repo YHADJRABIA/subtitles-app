@@ -9,6 +9,9 @@ import { isDevelopment } from '@/utils/general'
 import { getUserByEmail } from '@/utils/db/user'
 import { getErrorMessage, getZodErrors } from '@/utils/errors'
 import { AccountLoginValidator } from '@/types/schemas/auth'
+import { getTranslations } from 'next-intl/server'
+import { cookies } from 'next/headers'
+import { getLocaleFromNextCookies } from '@/utils/cookies'
 
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, NEXTAUTH_SECRET } = process.env
 
@@ -52,8 +55,21 @@ export const authOptions: NextAuthOptions = {
 
       // Runs on credential login (with email & password)
       async authorize(credentials) {
+        const nextCookies = cookies()
+        const locale = getLocaleFromNextCookies(nextCookies)
+
+        const t = {
+          zod: await getTranslations({ locale, namespace: 'Zod' }),
+          login: await getTranslations({
+            locale,
+            namespace: 'Auth.Login',
+          }),
+        }
+
         try {
-          const validatedFields = AccountLoginValidator.safeParse(credentials)
+          const validatedFields = AccountLoginValidator(t.zod).safeParse(
+            credentials
+          )
 
           // Form validation
           if (!validatedFields.success) {
@@ -67,14 +83,16 @@ export const authOptions: NextAuthOptions = {
 
           // If no matching user or user registered via Google (no password)
           if (!existingUser || !existingUser?.password) {
-            throw new Error('Incorrect email or password')
+            throw new Error(t.login('incorrect_email_or_password'))
           }
 
           const passwordsMatch = await bycrptjs.compare(
             password,
             existingUser.password
           )
-          if (!passwordsMatch) throw new Error('Incorrect email or password')
+          if (!passwordsMatch) {
+            throw new Error(t.login('incorrect_email_or_password'))
+          }
 
           // Passing down user to JWT
           return existingUser // TODO: Limit what's passed down
@@ -115,6 +133,14 @@ export const authOptions: NextAuthOptions = {
     },
 
     async signIn({ user, account }: PropTypes) {
+      const nextCookies = cookies()
+      const locale = getLocaleFromNextCookies(nextCookies)
+
+      const t = await getTranslations({
+        locale,
+        namespace: 'Auth.Login',
+      })
+
       const [withGoogle, withCredentials] = [
         account.provider === 'google',
         account.provider === 'credentials',
@@ -128,7 +154,7 @@ export const authOptions: NextAuthOptions = {
       if (withCredentials) {
         try {
           // Deny access if unverified email
-          if (!isVerifiedEmail) throw new Error('Unverified email') // TODO: Make status 400
+          if (!isVerifiedEmail) throw new Error(t('unverified_email')) // TODO: Make status 400
         } catch (err) {
           console.error('Credentials SignIn failed:', getErrorMessage(err))
           throw err
