@@ -1,4 +1,10 @@
 {
+  "Metadata": {
+    "Auth": {
+      "title": "Authentification",
+      "description": "Portail d'authentification"
+    }
+  },
   "General": {
     "or": "Ou",
     "something_went_wrong": "Un erreur s'est produite"
