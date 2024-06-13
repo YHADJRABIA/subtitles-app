@@ -10,7 +10,7 @@ import {
   getPasswordResetTokenByToken,
 } from '@/utils/db/password-reset-token'
 import { hashPassword } from '@/utils/random'
-import { getLocaleFromRequestCookie } from '@/utils/cookies'
+import { getLocaleFromNextRequest } from '@/utils/cookies'
 import { getTranslations } from 'next-intl/server'
 import { PasswordResetValidator } from '@/types/schemas/auth'
 
@@ -18,7 +18,7 @@ connectDB()
 
 export async function POST(req: NextRequest) {
   try {
-    const locale = getLocaleFromRequestCookie(req)
+    const locale = getLocaleFromNextRequest(req)
     const t = {
       zod: await getTranslations({ locale, namespace: 'Zod' }),
       passwordReset: await getTranslations({

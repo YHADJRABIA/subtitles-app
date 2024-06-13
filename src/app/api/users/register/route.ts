@@ -7,7 +7,7 @@ import { getUserByEmail } from '@/utils/db/user'
 import { generateVerificationToken } from '@/lib/auth/token'
 import { sendVerificationEmail } from '@/lib/mail'
 import { hashPassword } from '@/utils/random'
-import { getLocaleFromRequestCookie } from '@/utils/cookies'
+import { getLocaleFromNextRequest } from '@/utils/cookies'
 import { AccountRegistrationValidator } from '@/types/schemas/auth'
 import { getTranslations } from 'next-intl/server'
 
@@ -15,7 +15,7 @@ connectDB()
 
 export async function POST(req: NextRequest) {
   try {
-    const locale = getLocaleFromRequestCookie(req)
+    const locale = getLocaleFromNextRequest(req)
     const t = {
       zod: await getTranslations({ locale, namespace: 'Zod' }),
       register: await getTranslations({ locale, namespace: 'Auth.Register' }),

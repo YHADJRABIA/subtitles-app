@@ -10,14 +10,14 @@ import {
   getVerificationTokenByToken,
 } from '@/utils/db/verification-token'
 import { getTranslations } from 'next-intl/server'
-import { getLocaleFromRequestCookie } from '@/utils/cookies'
+import { getLocaleFromNextRequest } from '@/utils/cookies'
 import { EmailVerificationValidator } from '@/types/schemas/auth'
 
 connectDB()
 
 export async function POST(req: NextRequest) {
   try {
-    const locale = getLocaleFromRequestCookie(req)
+    const locale = getLocaleFromNextRequest(req)
     const t = {
       zod: await getTranslations({ locale, namespace: 'Zod' }),
       verifyEmail: await getTranslations({

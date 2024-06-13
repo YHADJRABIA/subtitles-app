@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getErrorMessage, getZodErrors } from '@/utils/errors'
 import { getUserByEmail } from '@/utils/db/user'
 
-import { getLocaleFromRequestCookie } from '@/utils/cookies'
+import { getLocaleFromNextRequest } from '@/utils/cookies'
 import { sendPasswordResetEmail } from '@/lib/mail'
 import { generatePasswordResetToken } from '@/lib/auth/token'
 import { PasswordRecoveryValidator } from '@/types/schemas/auth'
@@ -14,7 +14,7 @@ connectDB()
 
 export async function POST(req: NextRequest) {
   try {
-    const locale = getLocaleFromRequestCookie(req)
+    const locale = getLocaleFromNextRequest(req)
     const t = {
       zod: await getTranslations({ locale, namespace: 'Zod' }),
       passwordRecovery: await getTranslations({
