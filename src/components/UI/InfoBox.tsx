@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 
 import styles from './InfoBox.module.scss'
 
@@ -10,7 +10,7 @@ interface PropTypes {
   label: string
   icon: ReactNode
   type?: Info
-  customStyle?: CSSProperties
+  className?: string
   isShown: boolean
 }
 
@@ -18,7 +18,7 @@ const InfoBox = ({
   label,
   icon,
   type = 'info',
-  customStyle,
+  className,
   isShown,
 }: PropTypes) => {
   return (
@@ -28,7 +28,7 @@ const InfoBox = ({
         'hidden',
         styles.root,
         { visible: isShown },
-        customStyle
+        className
       )}
     >
       {isShown && (
