@@ -1,5 +1,15 @@
 import React, { ReactNode } from 'react'
 import styles from './layout.module.scss'
+import { getTranslations } from 'next-intl/server'
+
+export const generateMetadata = async () => {
+  const t = await getTranslations({ namespace: 'Metadata.Auth' })
+
+  return {
+    title: t('title'),
+    description: t('description'),
+  }
+}
 
 interface PropTypes {
   children: ReactNode
