@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
     // Already existing user
     if (existingUser)
       return NextResponse.json(
-        { message: t.register('email_already_exists'), success: false },
+        { message: t.register('email_already_taken'), success: false },
         { status: 400 }
       )
 
