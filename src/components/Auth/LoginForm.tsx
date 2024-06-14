@@ -29,11 +29,10 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import useInfo from '@/hooks/useInfo'
 import LanguageMenu from '../Layout/LanguageMenu'
-import { useTranslations, useLocale } from 'next-intl'
+import { useTranslations } from 'next-intl'
 
 const LoginForm = () => {
   const router = useRouter() // TODO: Redirect if user is logged in
-  const locale = useLocale()
   const t = {
     general: useTranslations('General'),
     auth: useTranslations('Auth'),
@@ -65,14 +64,10 @@ const LoginForm = () => {
 
   const handleLogin: SubmitHandler<AccountLoginSchema> = async user => {
     try {
-      const res = await signIn(
-        'credentials',
-        {
-          ...user,
-          redirect: false,
-        },
-        { locale } // Passing locale to next-auth to avoid complexe extraction from headers
-      )
+      const res = await signIn('credentials', {
+        ...user,
+        redirect: false,
+      })
       setInfoMessage(getErrorMessage(res?.error), 'error')
     } catch (err) {
       setInfoMessage(getErrorMessage(err), 'error')
@@ -95,6 +90,7 @@ const LoginForm = () => {
 
       <div className={styles.wrapper}>
         <InfoBox
+          className={styles.infoBox}
           icon={<InfoIcon style={{ fontSize: 18 }} />}
           label={info.label}
           type={info.type}
@@ -171,7 +167,7 @@ const LoginForm = () => {
           label={t.auth('continue_with_google')}
         />
       </div>
-      <Typography className={styles.link}>
+      <Typography>
         {t.auth('Login.no_account')}{' '}
         <Link href="/register">{t.auth('Login.fallback')} </Link>
       </Typography>
