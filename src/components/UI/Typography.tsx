@@ -1,15 +1,22 @@
 import React, { CSSProperties, HTMLAttributes, ReactNode } from 'react'
 import styles from './Typography.module.scss'
 import cn from 'classnames'
+import { Url } from 'next/dist/shared/lib/router/router'
+import Link from 'next/link'
 
 type TagType = keyof typeof tagMap
+
+type TextSize = 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl'
 
 interface PropTypes extends HTMLAttributes<HTMLElement> {
   tag?: TagType
   weight?: 'normal' | 'semiBold' | 'bold'
   align?: 'left' | 'center' | 'right'
+  size?: TextSize
   color?: string
   uppercase?: boolean
+  fullWidth?: boolean
+  href?: Url
   className?: string
   children: ReactNode
 }
@@ -32,9 +39,12 @@ const Typography = ({
   color,
   uppercase = false,
   align = 'center',
+  size,
+  href,
   className,
   children,
-  ...rest
+  fullWidth,
+  ...props
 }: PropTypes) => {
   const Tag = tagMap[tag]
 
@@ -44,14 +54,32 @@ const Typography = ({
     fontWeight: isSemiBold ? 600 : weight,
     textAlign: align,
     color,
-    textTransform: uppercase ? 'uppercase' : undefined,
   }
 
-  return (
-    <Tag
-      {...rest}
+  return href ? (
+    <Link
+      href={href}
+      {...props}
       style={PropStyles as CSSProperties}
-      className={cn(styles.root, className)}
+      className={cn(
+        styles.root,
+        { [styles.fullWidth]: fullWidth, uppercase },
+        size && styles[size],
+        className
+      )}
+    >
+      {children}
+    </Link>
+  ) : (
+    <Tag
+      {...props}
+      style={PropStyles as CSSProperties}
+      className={cn(
+        styles.root,
+        { fullWidth, uppercase },
+        size && styles[size],
+        className
+      )}
     >
       {children}
     </Tag>
