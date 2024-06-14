@@ -1,2 +1,18 @@
 // To be loaded by NextJS & included in every css file
 @import 'abstracts/mixins', 'base/animations';
+
+.fullWidth {
+  width: 100%;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.disabled {
+  opacity: 0.5;
+}
+
+.verticalFlip {
+  transform: rotate(180deg);
+}
