@@ -31,7 +31,7 @@
       "cta": "S'inscrire",
       "existing_account": "Déjà un compte ?",
       "fallback": "Se connecter",
-      "email_already_exists": "Email déjà existant",
+      "email_already_taken": "Email déjà utilisé",
       "account_created": "Compte créé avec succès ! Email de vérification envoyé"
     },
     "VerifyEmail": {

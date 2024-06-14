@@ -31,7 +31,7 @@
       "cta": "Create account",
       "existing_account": "Already have an account?",
       "fallback": "Login here",
-      "email_already_exists": "Email already exists",
+      "email_already_taken": "Email already taken",
       "account_created": "Account successfully created! Verification email sent"
     },
     "VerifyEmail": {
