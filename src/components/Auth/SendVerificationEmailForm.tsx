@@ -22,15 +22,16 @@ import axios from 'axios'
 import useInfo from '@/hooks/useInfo'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import {
-  AccountEmailVerificationSchema,
-  AccountEmailVerificationValidator,
+  SendEmailVerificationSchema,
+  SendEmailVerificationValidator,
 } from '@/types/schemas/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 import LanguageMenu from '../Layout/LanguageMenu'
 import { useTranslations } from 'next-intl'
 
 const SendVerificationEmailForm = () => {
-  const t = useTranslations('Auth')
+  const t = { auth: useTranslations('Auth'), zod: useTranslations('Zod') }
+
   const router = useRouter()
   const { info, setInfoMessage } = useInfo()
   const {
@@ -38,8 +39,8 @@ const SendVerificationEmailForm = () => {
     getFieldState,
     handleSubmit,
     formState: { errors, isValid, isSubmitting },
-  } = useForm<AccountEmailVerificationSchema>({
-    resolver: zodResolver(AccountEmailVerificationValidator),
+  } = useForm<SendEmailVerificationSchema>({
+    resolver: zodResolver(SendEmailVerificationValidator(t.zod)),
     delayError: 400,
     mode: 'onChange',
   })
@@ -49,7 +50,7 @@ const SendVerificationEmailForm = () => {
   const InfoIcon = info.type === 'error' ? ErrorIcon : EmailSentIcon // TODO: update
 
   const handleVerify: SubmitHandler<
-    AccountEmailVerificationSchema
+    SendEmailVerificationSchema
   > = async user => {
     try {
       const res = await axios.post('/api/users/send-verification-email', user)
@@ -70,8 +71,8 @@ const SendVerificationEmailForm = () => {
       className={styles.root}
     >
       <LanguageMenu />
-      <Typography tag="h1" weight="semiBold">
-        {t('SendVerificationEmail.title')}
+      <Typography tag="h1" weight="semiBold" className={styles.title}>
+        {t.auth('SendVerificationEmail.title')}
       </Typography>
 
       <div className={styles.wrapper}>
@@ -89,8 +90,7 @@ const SendVerificationEmailForm = () => {
           placeholder="email@domain.com"
           type="email"
           name="email"
-          label={t('email')}
-          isValid={isValid}
+          label={t.auth('email')}
           subLabel={{
             text: errors?.email?.message,
             isShown: fieldState.isTouched,
@@ -99,7 +99,7 @@ const SendVerificationEmailForm = () => {
           leftIcon={
             <EmailIcon
               style={{ fontSize: 18 }}
-              title="Email" // TODO: rework this
+              title={t.auth('email')} // TODO: rework this
             />
           }
         />
@@ -112,11 +112,11 @@ const SendVerificationEmailForm = () => {
           isLoading={isSubmitting}
           type="submit"
         >
-          {t('SendVerificationEmail.cta')}
+          {t.auth('SendVerificationEmail.cta')}
         </Button>
       </div>
 
-      <Link href="/login">{t('SendVerificationEmail.login')}</Link>
+      <Link href="/login">{t.auth('SendVerificationEmail.fallback')}</Link>
     </form>
   )
 }
