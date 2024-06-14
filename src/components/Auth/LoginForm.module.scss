@@ -16,17 +16,22 @@
   & > :first-child {
     margin-top: 4rem;
   }
-}
-
-.emailField {
-  margin-bottom: 1rem;
+  & > :last-child {
+    margin-bottom: 2rem;
+  }
 }
 
 .title {
-  margin: 5rem 0 4rem;
+  margin: 1rem 1.5rem 2rem;
 }
-.link {
-  margin-bottom: 2rem;
+
+.infoBox {
+  @include respond-to('small') {
+    margin-top: -5rem;
+  }
+}
+.emailField {
+  margin-bottom: 1rem;
 }
 
 .wrapper {
