@@ -81,6 +81,7 @@ const PasswordRecoveryForm = () => {
 
       <div className={styles.wrapper}>
         <InfoBox
+          className={styles.infoBox}
           icon={<InfoIcon style={{ fontSize: 18 }} />}
           label={info.label}
           type={info.type}
