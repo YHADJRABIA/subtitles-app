@@ -2,12 +2,12 @@ import React, { InputHTMLAttributes, ReactNode } from 'react'
 
 import cn from 'classnames'
 import styles from './Field.module.scss'
-import { UseFormRegister } from 'react-hook-form'
-import Subfield from './Subfield'
-import { AuthFormData, ValidFieldNames } from '@/types/schemas/auth'
 
-interface PropTypes extends InputHTMLAttributes<HTMLInputElement> {
-  register: UseFormRegister<AuthFormData>
+import Subfield from './Subfield'
+import { ValidFieldNames } from '@/types/schemas/auth'
+
+interface PropTypes<T> extends InputHTMLAttributes<HTMLInputElement> {
+  register: (name: ValidFieldNames, options: { valueAsNumber?: boolean }) => T
   name: ValidFieldNames
   label: string
   value?: string
@@ -22,7 +22,7 @@ interface PropTypes extends InputHTMLAttributes<HTMLInputElement> {
   testId?: string
 }
 
-const Field = ({
+function Field<T>({
   register,
   valueAsNumber,
   label,
@@ -35,7 +35,7 @@ const Field = ({
   rightIcon,
   className,
   ...rest
-}: PropTypes) => {
+}: PropTypes<T>) {
   const { text, isShown = true, isInfo = false } = subLabel || {}
 
   const isShownSubfield = isShown && !!text
