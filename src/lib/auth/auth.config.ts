@@ -58,18 +58,17 @@ export const authOptions: NextAuthOptions = {
         const nextCookies = cookies()
         const locale = getLocaleFromNextCookies(nextCookies)
 
-        const t = {
-          zod: await getTranslations({ locale, namespace: 'Zod' }),
-          login: await getTranslations({
+        const [t_zod, t] = [
+          await getTranslations({ locale, namespace: 'Zod' }),
+          await getTranslations({
             locale,
             namespace: 'Auth.Login',
           }),
-        }
+        ]
 
         try {
-          const validatedFields = AccountLoginValidator(t.zod).safeParse(
-            credentials
-          )
+          const validatedFields =
+            AccountLoginValidator(t_zod).safeParse(credentials)
 
           // Form validation
           if (!validatedFields.success) {
@@ -83,7 +82,7 @@ export const authOptions: NextAuthOptions = {
 
           // If no matching user or user registered via Google (no password)
           if (!existingUser || !existingUser?.password) {
-            throw new Error(t.login('incorrect_email_or_password'))
+            throw new Error(t('incorrect_email_or_password'))
           }
 
           const passwordsMatch = await bycrptjs.compare(
@@ -91,7 +90,7 @@ export const authOptions: NextAuthOptions = {
             existingUser.password
           )
           if (!passwordsMatch) {
-            throw new Error(t.login('incorrect_email_or_password'))
+            throw new Error(t('incorrect_email_or_password'))
           }
 
           // Passing down user to JWT
@@ -185,6 +184,9 @@ export const authOptions: NextAuthOptions = {
           throw err
         }
       }
+
+      // Todo: update lastLogin field on login
+
       return true
     },
   },
