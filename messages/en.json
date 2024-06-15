@@ -20,17 +20,15 @@
     "Login": {
       "title": "Login",
       "cta": "Login",
+      "fallback": "No account yet? <link>Register here</link>",
       "recover_password": "Recover password",
-      "no_account": "No account yet?",
-      "fallback": "Register here",
       "incorrect_email_or_password": "Incorrect email and/or password",
       "unverified_email": "Email verification required"
     },
     "Register": {
       "title": "Create account",
       "cta": "Create account",
-      "existing_account": "Already have an account?",
-      "fallback": "Login here",
+      "fallback": "Already have an account? <link>Login here</link>",
       "email_already_taken": "Email already taken",
       "account_created": "Account successfully created! Verification email sent"
     },
