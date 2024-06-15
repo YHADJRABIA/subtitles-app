@@ -31,10 +31,7 @@ import { useTranslations } from 'next-intl'
 
 const PasswordRecoveryForm = () => {
   const searchParams = useSearchParams()
-  const t = {
-    auth: useTranslations('Auth'),
-    zod: useTranslations('Zod'),
-  }
+  const [t, t_zod] = [useTranslations('Auth'), useTranslations('Zod')]
   const queryParamEmail = searchParams.get('email') ?? ''
 
   const { info, setInfoMessage } = useInfo()
@@ -45,7 +42,7 @@ const PasswordRecoveryForm = () => {
     handleSubmit,
     formState: { errors, isValid, isSubmitting },
   } = useForm<PasswordRecoverySchema>({
-    resolver: zodResolver(PasswordRecoveryValidator(t.zod)),
+    resolver: zodResolver(PasswordRecoveryValidator(t_zod)),
     defaultValues: { email: queryParamEmail },
     delayError: 400,
     mode: 'onChange',
@@ -76,7 +73,7 @@ const PasswordRecoveryForm = () => {
     >
       <LanguageMenu />
       <Typography className={styles.title} tag="h1" weight="semiBold">
-        {t.auth('PasswordRecovery.title')}
+        {t('PasswordRecovery.title')}
       </Typography>
 
       <div className={styles.wrapper}>
@@ -94,7 +91,7 @@ const PasswordRecoveryForm = () => {
           name="email"
           placeholder="email@domain.com"
           type="email"
-          label={t.auth('email')}
+          label={t('email')}
           subLabel={{
             text: errors?.email?.message,
             isShown: fieldState.isTouched,
@@ -103,7 +100,7 @@ const PasswordRecoveryForm = () => {
           leftIcon={
             <EmailIcon
               style={{ fontSize: 18 }}
-              title={t.auth('email')} // TODO: rework this
+              title={t('email')} // TODO: rework this
             />
           }
         />
@@ -116,11 +113,11 @@ const PasswordRecoveryForm = () => {
           isLoading={isSubmitting}
           type="submit"
         >
-          {t.auth('PasswordRecovery.cta')}
+          {t('PasswordRecovery.cta')}
         </Button>
       </div>
 
-      <Link href="/login">{t.auth('PasswordRecovery.fallback')}</Link>
+      <Link href="/login">{t('PasswordRecovery.fallback')}</Link>
     </form>
   )
 }

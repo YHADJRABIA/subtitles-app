@@ -28,10 +28,7 @@ import LanguageMenu from '@/components/Layout/LanguageMenu'
 
 const PasswordResetForm = () => {
   const searchParams = useSearchParams()
-  const t = {
-    auth: useTranslations('Auth'),
-    zod: useTranslations('Zod'),
-  }
+  const [t, t_zod] = [useTranslations('Auth'), useTranslations('Zod')]
 
   const token = searchParams.get('token') ?? ''
 
@@ -49,7 +46,7 @@ const PasswordResetForm = () => {
     setValue,
     formState: { errors, isValid, isSubmitting },
   } = useForm<PasswordResetSchema>({
-    resolver: zodResolver(PasswordResetValidator(t.zod)),
+    resolver: zodResolver(PasswordResetValidator(t_zod)),
     delayError: 400,
     mode: 'onChange',
   })
@@ -82,7 +79,7 @@ const PasswordResetForm = () => {
     >
       <LanguageMenu />
       <Typography tag="h1" weight="semiBold" className={styles.title}>
-        {t.auth('PasswordReset.title')}
+        {t('PasswordReset.title')}
       </Typography>
 
       <div className={styles.wrapper}>
@@ -107,11 +104,11 @@ const PasswordResetForm = () => {
             isInfo: true,
           }}
           testId="reset-password-field"
-          label={t.auth('password')}
+          label={t('password')}
           leftIcon={
             <PasswordIcon
               size={18}
-              title={t.auth('password')} // TODO: rework this
+              title={t('password')} // TODO: rework this
             />
           }
           rightIcon={<ToggleIcon />}
@@ -125,16 +122,14 @@ const PasswordResetForm = () => {
           isLoading={isSubmitting}
           type="submit"
         >
-          {t.auth('PasswordReset.cta')}
+          {t('PasswordReset.cta')}
         </Button>
       </div>
 
       {isError ? (
-        <Link href="/password/recovery">
-          {t.auth('PasswordReset.cta_error')}
-        </Link>
+        <Link href="/password/recovery">{t('PasswordReset.cta_error')}</Link>
       ) : (
-        <Link href="/login"> {t.auth('PasswordReset.fallback')}</Link>
+        <Link href="/login"> {t('PasswordReset.fallback')}</Link>
       )}
     </form>
   )

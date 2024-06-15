@@ -30,7 +30,7 @@ import LanguageMenu from '../Layout/LanguageMenu'
 import { useTranslations } from 'next-intl'
 
 const SendVerificationEmailForm = () => {
-  const t = { auth: useTranslations('Auth'), zod: useTranslations('Zod') }
+  const [t, t_zod] = [useTranslations('Auth'), useTranslations('Zod')]
 
   const router = useRouter()
   const { info, setInfoMessage } = useInfo()
@@ -40,7 +40,7 @@ const SendVerificationEmailForm = () => {
     handleSubmit,
     formState: { errors, isValid, isSubmitting },
   } = useForm<SendEmailVerificationSchema>({
-    resolver: zodResolver(SendEmailVerificationValidator(t.zod)),
+    resolver: zodResolver(SendEmailVerificationValidator(t_zod)),
     delayError: 400,
     mode: 'onChange',
   })
@@ -72,7 +72,7 @@ const SendVerificationEmailForm = () => {
     >
       <LanguageMenu />
       <Typography tag="h1" weight="semiBold" className={styles.title}>
-        {t.auth('SendVerificationEmail.title')}
+        {t('SendVerificationEmail.title')}
       </Typography>
 
       <div className={styles.wrapper}>
@@ -90,7 +90,7 @@ const SendVerificationEmailForm = () => {
           placeholder="email@domain.com"
           type="email"
           name="email"
-          label={t.auth('email')}
+          label={t('email')}
           subLabel={{
             text: errors?.email?.message,
             isShown: fieldState.isTouched,
@@ -99,7 +99,7 @@ const SendVerificationEmailForm = () => {
           leftIcon={
             <EmailIcon
               style={{ fontSize: 18 }}
-              title={t.auth('email')} // TODO: rework this
+              title={t('email')} // TODO: rework this
             />
           }
         />
@@ -112,11 +112,11 @@ const SendVerificationEmailForm = () => {
           isLoading={isSubmitting}
           type="submit"
         >
-          {t.auth('SendVerificationEmail.cta')}
+          {t('SendVerificationEmail.cta')}
         </Button>
       </div>
 
-      <Link href="/login">{t.auth('SendVerificationEmail.fallback')}</Link>
+      <Link href="/login">{t('SendVerificationEmail.fallback')}</Link>
     </form>
   )
 }

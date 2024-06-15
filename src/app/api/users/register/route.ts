@@ -16,13 +16,17 @@ connectDB()
 export async function POST(req: NextRequest) {
   try {
     const locale = getLocaleFromNextRequest(req)
-    const t = {
-      zod: await getTranslations({ locale, namespace: 'Zod' }),
-      register: await getTranslations({ locale, namespace: 'Auth.Register' }),
-    }
+
+    const [t_zod, t] = [
+      await getTranslations({ locale, namespace: 'Zod' }),
+      await getTranslations({
+        locale,
+        namespace: 'Auth.Register',
+      }),
+    ]
 
     const rawBody = await req.json()
-    const body = AccountRegistrationValidator(t.zod).safeParse(rawBody)
+    const body = AccountRegistrationValidator(t_zod).safeParse(rawBody)
 
     // Form validation
     if (!body.success) {
@@ -41,7 +45,7 @@ export async function POST(req: NextRequest) {
     // Already existing user
     if (existingUser)
       return NextResponse.json(
-        { message: t.register('email_already_taken'), success: false },
+        { message: t('email_already_taken'), success: false },
         { status: 400 }
       )
 
@@ -64,7 +68,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(
       {
-        message: t.register('account_created'),
+        message: t('account_created'),
         success: true,
         savedUser: createdUser,
       },
