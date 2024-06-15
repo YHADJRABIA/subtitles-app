@@ -7,12 +7,12 @@ export const handleGoogleLogin = async () => {
 }
 
 export const handleCredentialsLogin = async (user: AuthFormData) => {
-  await signIn('credentials', {
+  return await signIn('credentials', {
     ...user,
     redirect: false,
   })
 }
 
 export const handleRegister = async (user: AuthFormData) => {
-  await axios.post('/api/users/register', user)
+  return await axios.post('/api/users/register', user)
 }
