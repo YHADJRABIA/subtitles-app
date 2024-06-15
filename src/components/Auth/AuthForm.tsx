@@ -2,7 +2,6 @@
 import Link from 'next/link'
 import React from 'react'
 import { useRouter } from 'next/navigation'
-import axios from 'axios'
 import {
   MdLockOutline as PasswordIcon,
   MdAlternateEmail as EmailIcon,
@@ -29,33 +28,29 @@ import useInfo from '@/hooks/useInfo'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
-  AccountLoginSchema,
   AccountLoginValidator,
-  AccountRegistrationSchema,
   AccountRegistrationValidator,
   AuthFormData,
 } from '@/types/schemas/auth'
 import { useTranslations } from 'next-intl'
 
-type FormData = AccountRegistrationSchema | AccountLoginSchema
-
-interface PropTypes {
+interface PropTypes<T> {
   type: 'login' | 'register'
-  /*   onSubmit: SubmitHandler<FieldValues> */
-  onSubmit: (user: AuthFormData) => Promise<void>
+  onSubmit: (user: AuthFormData) => Promise<T>
 }
 
 // TODO: work in progress
 
-function AuthForm({ type, onSubmit }: PropTypes) {
+function AuthForm<T>({ type, onSubmit }: PropTypes<T>) {
   const isRegisterForm = type === 'register'
   const router = useRouter() // TODO: Redirect if logged in
   const [passwordInputType, ToggleIcon] = useShowPassword({ size: 20 })
-  const t = {
-    general: useTranslations('General'),
-    auth: useTranslations('Auth'),
-    zod: useTranslations('Zod'),
-  }
+
+  const [t, t_general, t_zod] = [
+    useTranslations('Auth'),
+    useTranslations('General'),
+    useTranslations('Zod'),
+  ]
 
   const { info, setInfoMessage } = useInfo()
   const isSuccessIcon = info.type === 'success'
@@ -70,8 +65,8 @@ function AuthForm({ type, onSubmit }: PropTypes) {
   } = useForm({
     resolver: zodResolver(
       isRegisterForm
-        ? AccountRegistrationValidator(t.zod)
-        : AccountLoginValidator(t.zod)
+        ? AccountRegistrationValidator(t_zod)
+        : AccountLoginValidator(t_zod)
     ),
     delayError: 400,
     mode: 'onChange',
@@ -112,7 +107,7 @@ function AuthForm({ type, onSubmit }: PropTypes) {
     >
       <LanguageMenu />
       <Typography className={styles.title} tag="h1" weight="semiBold">
-        {t.auth(isRegisterForm ? 'Register.title' : 'Login.title')}
+        {t(isRegisterForm ? 'Register.title' : 'Login.title')}
       </Typography>
 
       <div className={styles.wrapper}>
@@ -130,7 +125,7 @@ function AuthForm({ type, onSubmit }: PropTypes) {
           placeholder="email@domain.com"
           type="email"
           name="email"
-          label={t.auth('email')}
+          label={t('email')}
           subLabel={{
             text: errors?.email?.message,
             isShown: fieldState.email.isTouched,
@@ -139,7 +134,7 @@ function AuthForm({ type, onSubmit }: PropTypes) {
           leftIcon={
             <EmailIcon
               style={{ fontSize: 18 }}
-              title={t.auth('email')} // TODO: rework this
+              title={t('email')} // TODO: rework this
             />
           }
         />
@@ -152,7 +147,7 @@ function AuthForm({ type, onSubmit }: PropTypes) {
           register={register}
           name="password"
           testId={isRegisterForm ? 'register-password' : 'login-password'}
-          label={t.auth('password')}
+          label={t('password')}
           subLabel={{
             text: errors?.password?.message,
             isShown: fieldState.password.isTouched,
@@ -161,7 +156,7 @@ function AuthForm({ type, onSubmit }: PropTypes) {
           leftIcon={
             <PasswordIcon
               size={18}
-              title={t.auth('password')} // TODO: rework this
+              title={t('password')} // TODO: rework this
             />
           }
           rightIcon={<ToggleIcon />}
@@ -180,7 +175,7 @@ function AuthForm({ type, onSubmit }: PropTypes) {
                 : '/password/recovery'
             }
           >
-            {t.auth('Login.recover_password')}
+            {t('Login.recover_password')}
           </Typography>
         )}
 
@@ -192,23 +187,22 @@ function AuthForm({ type, onSubmit }: PropTypes) {
           isLoading={isSubmitting}
           type="submit"
         >
-          {t.auth(isRegisterForm ? 'Register.cta' : 'Login.cta')}
+          {t(isRegisterForm ? 'Register.cta' : 'Login.cta')}
         </Button>
 
-        <Separator label={t.general('or')} />
+        <Separator label={t_general('or')} />
         <GoogleLogin
           disabled={isSubmitting}
           onClick={handleGoogleLogin}
-          label={t.auth('continue_with_google')}
+          label={t('continue_with_google')}
         />
       </div>
       <Typography className={styles.link}>
-        {t.auth(
-          isRegisterForm ? 'Register.existing_account' : 'Login.no_account'
-        )}{' '}
-        <Link href={isRegisterForm ? '/login' : '/register'}>
-          {t.auth(isRegisterForm ? 'Register.fallback' : 'Login.fallback')}
-        </Link>
+        {t.rich(isRegisterForm ? 'Register.fallback' : 'Login.fallback', {
+          link: text => (
+            <Link href={isRegisterForm ? '/login' : '/register'}>{text}</Link>
+          ),
+        })}
       </Typography>
     </form>
   )
