@@ -15,16 +15,17 @@ connectDB()
 export async function POST(req: NextRequest) {
   try {
     const locale = getLocaleFromNextRequest(req)
-    const t = {
-      zod: await getTranslations({ locale, namespace: 'Zod' }),
-      sendVerificationEmail: await getTranslations({
+
+    const [t_zod, t] = [
+      await getTranslations({ locale, namespace: 'Zod' }),
+      await getTranslations({
         locale,
         namespace: 'Auth.SendVerificationEmail',
       }),
-    }
+    ]
 
     const rawBody = await req.json()
-    const body = SendEmailVerificationValidator(t.zod).safeParse(rawBody)
+    const body = SendEmailVerificationValidator(t_zod).safeParse(rawBody)
 
     // Form validation
     if (!body.success) {
@@ -46,7 +47,7 @@ export async function POST(req: NextRequest) {
     if (!existingUser)
       return NextResponse.json(
         {
-          message: t.sendVerificationEmail('user_not_found'),
+          message: t('user_not_found'),
           success: false,
         },
         { status: 404 }
@@ -57,7 +58,7 @@ export async function POST(req: NextRequest) {
     if (isAlreadyVerified)
       return NextResponse.json(
         {
-          message: t.sendVerificationEmail('email_already_verified'),
+          message: t('email_already_verified'),
           success: false,
         },
         { status: 400 }
@@ -73,7 +74,7 @@ export async function POST(req: NextRequest) {
     )
 
     return NextResponse.json({
-      message: t.sendVerificationEmail('verification_email_sent'),
+      message: t('verification_email_sent'),
       success: true,
     })
   } catch (error) {

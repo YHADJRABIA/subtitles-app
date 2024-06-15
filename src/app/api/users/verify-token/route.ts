@@ -18,16 +18,17 @@ connectDB()
 export async function POST(req: NextRequest) {
   try {
     const locale = getLocaleFromNextRequest(req)
-    const t = {
-      zod: await getTranslations({ locale, namespace: 'Zod' }),
-      verifyEmail: await getTranslations({
+
+    const [t_zod, t] = [
+      await getTranslations({ locale, namespace: 'Zod' }),
+      await getTranslations({
         locale,
         namespace: 'Auth.VerifyEmail',
       }),
-    }
+    ]
 
     const rawBody = await req.json()
-    const body = EmailVerificationValidator(t.zod).safeParse(rawBody)
+    const body = EmailVerificationValidator(t_zod).safeParse(rawBody)
 
     // Form validation
     if (!body.success) {
@@ -46,7 +47,7 @@ export async function POST(req: NextRequest) {
     // Token doesn't match
     if (!existingToken) {
       return NextResponse.json(
-        { message: t.verifyEmail('invalid_token'), success: false },
+        { message: t('invalid_token'), success: false },
         { status: 400 }
       )
     }
@@ -55,7 +56,7 @@ export async function POST(req: NextRequest) {
     const tokenHasExpired = hasExpired(existingToken.expires)
     if (tokenHasExpired) {
       return NextResponse.json(
-        { message: t.verifyEmail('expired_token'), success: false },
+        { message: t('expired_token'), success: false },
         { status: 400 }
       )
     }
@@ -64,7 +65,7 @@ export async function POST(req: NextRequest) {
     const associatedUser = await getUserByEmail(existingToken.email)
     if (!associatedUser) {
       return NextResponse.json(
-        { message: t.verifyEmail('user_not_found'), success: false },
+        { message: t('user_not_found'), success: false },
         { status: 404 }
       )
     }
@@ -79,7 +80,7 @@ export async function POST(req: NextRequest) {
     await deleteVerificationTokenById(existingToken.id)
 
     return NextResponse.json({
-      message: t.verifyEmail('email_verified'),
+      message: t('email_verified'),
       success: true,
     })
   } catch (error) {
