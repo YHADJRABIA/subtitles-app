@@ -15,16 +15,17 @@ connectDB()
 export async function POST(req: NextRequest) {
   try {
     const locale = getLocaleFromNextRequest(req)
-    const t = {
-      zod: await getTranslations({ locale, namespace: 'Zod' }),
-      passwordRecovery: await getTranslations({
+
+    const [t_zod, t] = [
+      await getTranslations({ locale, namespace: 'Zod' }),
+      await getTranslations({
         locale,
         namespace: 'Auth.PasswordRecovery',
       }),
-    }
+    ]
 
     const rawBody = await req.json()
-    const body = PasswordRecoveryValidator(t.zod).safeParse(rawBody)
+    const body = PasswordRecoveryValidator(t_zod).safeParse(rawBody)
 
     // Form validation
     if (!body.success) {
@@ -45,7 +46,7 @@ export async function POST(req: NextRequest) {
     if (!existingUser)
       return NextResponse.json(
         {
-          message: t.passwordRecovery('user_not_found'),
+          message: t('user_not_found'),
           success: false,
         },
         {
@@ -63,7 +64,7 @@ export async function POST(req: NextRequest) {
     )
 
     return NextResponse.json({
-      message: t.passwordRecovery('recovery_email_sent'),
+      message: t('recovery_email_sent'),
       success: true,
     })
   } catch (error) {
