@@ -20,17 +20,15 @@
     "Login": {
       "title": "Connexion",
       "cta": "Se connecter",
+      "fallback": "Pas de compte ? <link>S'inscrire</link>",
       "recover_password": "Mot de passe oublié ?",
-      "no_account": "Pas de compte ?",
-      "fallback": "S'inscrire",
       "incorrect_email_or_password": "Email et/ou mot de passe erronés",
       "unverified_email": "L'email doit être vérifié"
     },
     "Register": {
       "title": "Création de compte",
       "cta": "S'inscrire",
-      "existing_account": "Déjà un compte ?",
-      "fallback": "Se connecter",
+      "fallback": "Déjà un compte ? <link>Se connecter</link>",
       "email_already_taken": "Email déjà utilisé",
       "account_created": "Compte créé avec succès ! Email de vérification envoyé"
     },
