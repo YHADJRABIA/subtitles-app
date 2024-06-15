@@ -22,10 +22,10 @@ import {
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 
 const VerifyEmail = () => {
-  const t = {
-    verifyEmail: useTranslations('Auth.VerifyEmail'),
-    zod: useTranslations('Zod'),
-  }
+  const [t, t_zod] = [
+    useTranslations('Auth.VerifyEmail'),
+    useTranslations('Zod'),
+  ]
 
   const searchParams = useSearchParams()
   const token = searchParams.get('token') ?? ''
@@ -49,7 +49,7 @@ const VerifyEmail = () => {
     setValue,
     formState: { isSubmitted },
   } = useForm<EmailVerificationSchema>({
-    resolver: zodResolver(EmailVerificationValidator(t.zod)),
+    resolver: zodResolver(EmailVerificationValidator(t_zod)),
     delayError: 400,
     mode: 'onChange',
   })
@@ -60,7 +60,7 @@ const VerifyEmail = () => {
   }, [token])
 
   useIsomorphicLayoutEffect(() => {
-    if (!token) return setInfoMessage(t.zod('token.missing'), 'error')
+    if (!token) return setInfoMessage(t_zod('token.missing'), 'error')
     handleSubmit(handleValidate)()
   }, [])
 
@@ -73,7 +73,7 @@ const VerifyEmail = () => {
     <div className={styles.root}>
       <div className={styles.loadingSection}>
         {showLoader ? (
-          <Loading label={t.verifyEmail('loading')} />
+          <Loading label={t('loading')} />
         ) : (
           <>
             <Icon
@@ -92,13 +92,11 @@ const VerifyEmail = () => {
         <Typography className={styles.cta}>
           {isError ? (
             <>
-              {t.verifyEmail('issue')}{' '}
-              <Link href="/send-verification-email">
-                {t.verifyEmail('resend_email')}
-              </Link>
+              {t('issue')}{' '}
+              <Link href="/send-verification-email">{t('resend_email')}</Link>
             </>
           ) : (
-            <Link href="/login">{t.verifyEmail('fallback')}</Link>
+            <Link href="/login">{t('fallback')}</Link>
           )}
         </Typography>
       )}
