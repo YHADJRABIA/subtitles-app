@@ -91,10 +91,9 @@ const VerifyEmail = () => {
       {isSubmitted && (
         <Typography className={styles.cta}>
           {isError ? (
-            <>
-              {t('issue')}{' '}
-              <Link href="/send-verification-email">{t('resend_email')}</Link>
-            </>
+            t.rich('resend_email', {
+              link: text => <Link href="/send-verification-email">{text}</Link>,
+            })
           ) : (
             <Link href="/login">{t('fallback')}</Link>
           )}
