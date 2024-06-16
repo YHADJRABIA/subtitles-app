@@ -8,7 +8,7 @@ import cn from 'classnames'
 import Image from 'next/image'
 import Button from '../UI/Button'
 import { useOnClickOutside } from '@/hooks/useOnClickOutside'
-import { languages } from '@/utils/language'
+import { languages } from '@/utils/internationalization/language'
 import useChangeLanguage from '@/hooks/useChangeLanguage'
 import Typography from '../UI/Typography'
 
