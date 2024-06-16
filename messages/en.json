@@ -34,8 +34,7 @@
     },
     "VerifyEmail": {
       "loading": "Verifying your email",
-      "issue": "Having an issue?",
-      "resend_email": "Resend verification email",
+      "resend_email": "Having an issue? <link>Resend verification email</link>",
       "invalid_token": "Invalid token. Reverify email",
       "expired_token": "Token has expired. Reverify email",
       "user_not_found": "User not found",
