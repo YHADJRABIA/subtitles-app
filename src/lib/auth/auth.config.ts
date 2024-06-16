@@ -110,7 +110,16 @@ export const authOptions: NextAuthOptions = {
   },
 
   callbacks: {
-    // Called after authorize, user is only populated on login
+    // TODO: Update redirect callback
+    /*     async redirect({ url, baseUrl }) {
+      // Allows relative callback URLs
+      if (url.startsWith("/")) return `${baseUrl}${url}`
+      // Allows callback URLs on the same origin
+      else if (new URL(url).origin === baseUrl) return url
+      return baseUrl
+    } */
+
+    // Called after authorize (or after JWT is created or updated), user is only populated on login
     jwt({ token, user }) {
       if (!user) return token // Logged out
 
