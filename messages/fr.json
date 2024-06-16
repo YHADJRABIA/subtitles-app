@@ -34,8 +34,7 @@
     },
     "VerifyEmail": {
       "loading": "Vérification d'email en cours",
-      "issue": "Un souci ?",
-      "resend_email": "Renvoyer email de vérification",
+      "resend_email": "Un souci ? <link>Renvoyer email de vérification</link>",
       "invalid_token": "Jeton invalide. Revérifier l'email",
       "expired_token": "Jeton expiré. Revérifier l'email",
       "user_not_found": "Utilisateur inconnu",
