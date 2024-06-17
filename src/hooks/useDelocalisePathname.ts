@@ -1,29 +1,21 @@
-import { locales } from '@/lib/i18n/navigation'
-import { usePathname, useSearchParams } from 'next/navigation'
+import { usePathname } from 'next/navigation'
+import { useGetQueryParams } from './useGetQueryParams'
+import { removeLocalePrefixFromPathname } from '@/utils/internationalization/paths'
 
 /**
- * Custom hook to extract pathname without locale prefix with or without queryparams.
- * @param {boolean} hasQueryParams  Determines if search parameters should be included in the returned pathname.
- * @returns {string} Pathname without locale prefix.
+ * Extracts pathname from "/locale/pathname..." with or without queryparams.
+ * @param {boolean} hasSearchParams  Determines if search parameters should be included in the returned pathname.
+ * @returns Pathname without locale prefix.
  */
 
-export const useDelocalisedPathname = (
-  hasQueryParams: boolean = true
-): string => {
+export const useDelocalisedPathname = (hasSearchParams: boolean = true) => {
   const pathname = usePathname()
-  const searchParams = useSearchParams()
-  const queryString = searchParams.toString()
-  const queryParams = queryString ? `?${queryString}` : ''
+  const queryParams = useGetQueryParams()
+  const sanitisedPathname = removeLocalePrefixFromPathname(pathname)
 
-  const localePattern = locales.join('|')
-  const re = new RegExp(`^/(${localePattern})(?=/|$)`)
+  const searchParams = hasSearchParams ? queryParams : ''
 
-  // Remove the locale prefix
-  const sanitisedPathname = pathname.replace(re, '')
-
-  const delocalisedPathName = hasQueryParams
-    ? sanitisedPathname + queryParams
-    : sanitisedPathname
+  const delocalisedPathName = `${sanitisedPathname}${searchParams}`
 
   return delocalisedPathName
 }
