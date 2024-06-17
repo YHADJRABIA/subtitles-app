@@ -1,7 +1,5 @@
-import {
-  createLocalizedPathnamesNavigation,
-  Pathnames,
-} from 'next-intl/navigation'
+import { PathnamesType } from '@/types/pathnames'
+import { createLocalizedPathnamesNavigation } from 'next-intl/navigation'
 
 export const defaultLocale = 'en'
 export const locales = ['en', 'fr']
@@ -40,7 +38,7 @@ export const pathnames = {
     en: '/password/reset',
     fr: '/mot-de-passe/reinitialisation',
   },
-} satisfies Pathnames<typeof locales>
+} satisfies PathnamesType
 
 export const { Link, redirect, usePathname, useRouter, getPathname } =
   createLocalizedPathnamesNavigation({ locales, localePrefix, pathnames })
