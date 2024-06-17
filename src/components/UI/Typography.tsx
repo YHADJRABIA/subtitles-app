@@ -1,8 +1,8 @@
 import React, { CSSProperties, HTMLAttributes, ReactNode } from 'react'
 import styles from './Typography.module.scss'
 import cn from 'classnames'
-import { Url } from 'next/dist/shared/lib/router/router'
-import Link from 'next/link'
+import Link from '../Link'
+import { UrlObject } from 'url'
 
 type TagType = keyof typeof tagMap
 
@@ -16,7 +16,7 @@ interface PropTypes extends HTMLAttributes<HTMLElement> {
   color?: string
   uppercase?: boolean
   fullWidth?: boolean
-  href?: Url
+  href?: string | (UrlObject & string)
   className?: string
   children: ReactNode
 }
@@ -58,8 +58,8 @@ const Typography = ({
 
   return href ? (
     <Link
-      href={href}
       {...props}
+      href={href}
       style={PropStyles as CSSProperties}
       className={cn(
         styles.root,
