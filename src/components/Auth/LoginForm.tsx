@@ -33,11 +33,12 @@ import { useTranslations } from 'next-intl'
 
 const LoginForm = () => {
   const router = useRouter() // TODO: Redirect if user is logged in
-  const t = {
-    general: useTranslations('General'),
-    auth: useTranslations('Auth'),
-    zod: useTranslations('Zod'),
-  }
+
+  const [t, t_general, t_zod] = [
+    useTranslations('Auth'),
+    useTranslations('General'),
+    useTranslations('Zod'),
+  ]
 
   const [passwordInputType, ToggleIcon] = useShowPassword({ size: 20 })
   const { info, setInfoMessage } = useInfo()
@@ -48,7 +49,7 @@ const LoginForm = () => {
     handleSubmit,
     formState: { errors, isValid, isSubmitting },
   } = useForm<AccountLoginSchema>({
-    resolver: zodResolver(AccountLoginValidator(t.zod)),
+    resolver: zodResolver(AccountLoginValidator(t_zod)),
     delayError: 400,
     mode: 'onChange',
   })
@@ -85,7 +86,7 @@ const LoginForm = () => {
     >
       <LanguageMenu />
       <Typography tag="h1" weight="semiBold" className={styles.title}>
-        {t.auth('Login.title')}
+        {t('Login.title')}
       </Typography>
 
       <div className={styles.wrapper}>
@@ -104,7 +105,7 @@ const LoginForm = () => {
           placeholder="email@domain.com"
           type="email"
           name="email"
-          label={t.auth('email')}
+          label={t('email')}
           subLabel={{
             text: errors?.email?.message,
             isShown: fieldState.email.isTouched,
@@ -113,7 +114,7 @@ const LoginForm = () => {
           leftIcon={
             <EmailIcon
               style={{ fontSize: 18 }}
-              title={t.auth('email')} // TODO: rework this
+              title={t('email')} // TODO: rework this
             />
           }
         />
@@ -126,7 +127,7 @@ const LoginForm = () => {
           type={passwordInputType}
           name="password"
           testId="login-password"
-          label={t.auth('password')}
+          label={t('password')}
           subLabel={{
             text: errors?.password?.message,
             isShown: fieldState.password.isTouched,
@@ -134,7 +135,7 @@ const LoginForm = () => {
           leftIcon={
             <PasswordIcon
               size={18}
-              title={t.auth('password')} // TODO: rework this
+              title={t('password')} // TODO: rework this
             />
           }
           rightIcon={<ToggleIcon />}
@@ -147,7 +148,7 @@ const LoginForm = () => {
               : '/password/recovery'
           }
         >
-          {t.auth('Login.recover_password')}
+          {t('Login.recover_password')}
         </Link>
 
         <Button
@@ -157,19 +158,19 @@ const LoginForm = () => {
           isLoading={isSubmitting}
           type="submit"
         >
-          {t.auth('Login.cta')}
+          {t('Login.cta')}
         </Button>
 
-        <Separator label={t.general('or')} />
+        <Separator label={t_general('or')} />
         <GoogleLogin
           disabled={isSubmitting}
           onClick={handleGoogleLogin}
-          label={t.auth('continue_with_google')}
+          label={t('continue_with_google')}
         />
       </div>
       <Typography>
-        {t.auth('Login.no_account')}{' '}
-        <Link href="/register">{t.auth('Login.fallback')} </Link>
+        {t('Login.no_account')}{' '}
+        <Link href="/register">{t('Login.fallback')} </Link>
       </Typography>
     </form>
   )
