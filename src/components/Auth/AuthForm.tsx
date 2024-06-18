@@ -1,5 +1,5 @@
 'use client'
-import Link from 'next/link'
+import Link from '@/components/Link'
 import React from 'react'
 import { useRouter } from 'next/navigation'
 import {
@@ -127,7 +127,7 @@ function AuthForm<T>({ type, onSubmit }: PropTypes<T>) {
           name="email"
           label={t('email')}
           subLabel={{
-            text: errors?.email?.message,
+            text: errors?.email?.message as string,
             isShown: fieldState.email.isTouched,
           }}
           testId={isRegisterForm ? 'register-email' : 'login-email'}
@@ -149,7 +149,7 @@ function AuthForm<T>({ type, onSubmit }: PropTypes<T>) {
           testId={isRegisterForm ? 'register-password' : 'login-password'}
           label={t('password')}
           subLabel={{
-            text: errors?.password?.message,
+            text: errors?.password?.message as string,
             isShown: fieldState.password.isTouched,
             isInfo: isRegisterForm,
           }}
