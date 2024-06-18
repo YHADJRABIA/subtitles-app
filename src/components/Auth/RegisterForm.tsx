@@ -36,11 +36,11 @@ import { useTranslations } from 'next-intl'
 
 const RegisterForm = () => {
   const router = useRouter() // TODO: Redirect if logged in
-  const t = {
-    general: useTranslations('General'),
-    auth: useTranslations('Auth'),
-    zod: useTranslations('Zod'),
-  }
+  const [t, t_general, t_zod] = [
+    useTranslations('Auth'),
+    useTranslations('General'),
+    useTranslations('Zod'),
+  ]
 
   const { info, setInfoMessage } = useInfo()
   const {
@@ -49,7 +49,7 @@ const RegisterForm = () => {
     handleSubmit,
     formState: { errors, isValid, isSubmitting },
   } = useForm<AccountRegistrationSchema>({
-    resolver: zodResolver(AccountRegistrationValidator(t.zod)),
+    resolver: zodResolver(AccountRegistrationValidator(t_zod)),
     delayError: 400,
     mode: 'onChange',
   })
@@ -88,7 +88,7 @@ const RegisterForm = () => {
     >
       <LanguageMenu />
       <Typography className={styles.title} tag="h1" weight="semiBold">
-        {t.auth('Register.title')}
+        {t('Register.title')}
       </Typography>
 
       <div className={styles.wrapper}>
@@ -107,7 +107,7 @@ const RegisterForm = () => {
           placeholder="email@domain.com"
           type="email"
           name="email"
-          label={t.auth('email')}
+          label={t('email')}
           subLabel={{
             text: errors?.email?.message,
             isShown: fieldState.email.isTouched,
@@ -116,7 +116,7 @@ const RegisterForm = () => {
           leftIcon={
             <EmailIcon
               style={{ fontSize: 18 }}
-              title={t.auth('email')} // TODO: rework this
+              title={t('email')} // TODO: rework this
             />
           }
         />
@@ -130,7 +130,7 @@ const RegisterForm = () => {
           register={register}
           name="password"
           testId="login-password"
-          label={t.auth('password')}
+          label={t('password')}
           subLabel={{
             text: errors?.password?.message,
             isShown: fieldState.password.isTouched,
@@ -139,7 +139,7 @@ const RegisterForm = () => {
           leftIcon={
             <PasswordIcon
               size={18}
-              title={t.auth('password')} // TODO: rework this
+              title={t('password')} // TODO: rework this
             />
           }
           rightIcon={<ToggleIcon />}
@@ -152,19 +152,19 @@ const RegisterForm = () => {
           isLoading={isSubmitting}
           type="submit"
         >
-          {t.auth('Register.cta')}
+          {t('Register.cta')}
         </Button>
 
-        <Separator label={t.general('or')} />
+        <Separator label={t_general('or')} />
         <GoogleLogin
           disabled={isSubmitting}
           onClick={handleGoogleLogin}
-          label={t.auth('continue_with_google')}
+          label={t('continue_with_google')}
         />
       </div>
       <Typography>
-        {t.auth('Register.existing_account')}{' '}
-        <Link href="/login">{t.auth('Register.fallback')}</Link>
+        {t('Register.existing_account')}{' '}
+        <Link href="/login">{t('Register.fallback')}</Link>
       </Typography>
     </form>
   )
