@@ -24,5 +24,5 @@ export const handleRegister = async (user: AccountRegistrationSchema) => {
 export const handleSendVerificationEmail = async (
   user: SendEmailVerificationSchema
 ) => {
-  await axios.post('/api/users/send-verification-email', user)
+  return await axios.post('/api/users/send-verification-email', user)
 }
