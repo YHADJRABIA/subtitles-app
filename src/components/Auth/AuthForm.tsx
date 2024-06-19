@@ -93,7 +93,7 @@ function AuthForm<T>({ type, onSubmit }: PropTypes<T>) {
     }
   }
 
-  // TODO: Add Google Recaptcha to prevent abuse
+  // TODO: Add Google Recaptcha to prevent abuse + improve UX with resend validation email
   return (
     <form
       method="POST"
