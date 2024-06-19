@@ -1,14 +1,10 @@
-import RegisterForm from '@/components/Auth/RegisterForm'
+'use client'
+import AuthForm from '@/components/Auth/AuthForm'
+import { handleRegister } from '@/lib/auth/actions'
 import React from 'react'
 
-const RegisterPage = /* async */ () => {
-  /*   const session = await getServerSession() // TODO: PUT back after refactor to server component
-
-  if (session) {
-    redirect('/')
-  } */
-
-  return <RegisterForm />
+const RegisterPage = () => {
+  return <AuthForm type="register" onSubmit={handleRegister} />
 }
 
 export default RegisterPage
