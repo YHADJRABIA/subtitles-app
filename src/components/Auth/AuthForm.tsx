@@ -84,20 +84,17 @@ function AuthForm<T>({ type, onSubmit }: PropTypes<T>) {
     try {
       const res = await onSubmit(user)
 
+      // TODO: Find a better way to unify Next-auth's login response & register's
       setInfoMessage(
-        isRegisterForm ? res.data.message : getErrorMessage(res?.error), // TODO: Edit next-auth's response to match register's
+        isRegisterForm ? res.data.message : getErrorMessage(res?.error),
         isRegisterForm ? 'success' : 'error'
       )
     } catch (err) {
-      setInfoMessage(
-        getErrorMessage(isRegisterForm ? err?.response.data.message : err), // TODO: Edit next-auth's response to match register's
-        'error'
-      )
+      setInfoMessage(getErrorMessage(err?.response.data.message), 'error')
     }
   }
 
   // TODO: Add Google Recaptcha to prevent abuse
-
   return (
     <form
       method="POST"
