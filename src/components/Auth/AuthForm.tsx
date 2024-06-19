@@ -33,13 +33,12 @@ import {
   AuthFormData,
 } from '@/types/schemas/auth'
 import { useTranslations } from 'next-intl'
+import { AxiosResponse } from 'axios'
 
 interface PropTypes<T> {
   type: 'login' | 'register'
   onSubmit: (user: AuthFormData) => Promise<T>
 }
-
-// TODO: work in progress
 
 function AuthForm<T>({ type, onSubmit }: PropTypes<T>) {
   const isRegisterForm = type === 'register'
@@ -82,15 +81,17 @@ function AuthForm<T>({ type, onSubmit }: PropTypes<T>) {
 
   const handleAuth: SubmitHandler<AuthFormData> = async user => {
     try {
-      const res = await onSubmit(user)
+      const res = (await onSubmit(user)) as AxiosResponse
 
       // TODO: Find a better way to unify Next-auth's login response & register's
       setInfoMessage(
-        isRegisterForm ? res.data.message : getErrorMessage(res?.error),
+        isRegisterForm
+          ? res.data.message
+          : getErrorMessage((res as any)?.error),
         isRegisterForm ? 'success' : 'error'
       )
     } catch (err) {
-      setInfoMessage(getErrorMessage(err?.response.data.message), 'error')
+      setInfoMessage(getErrorMessage(err), 'error')
     }
   }
 
