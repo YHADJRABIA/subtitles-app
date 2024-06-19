@@ -1,15 +1,10 @@
+'use client'
 import React from 'react'
-
-import LoginForm from '@/components/Auth/LoginForm'
+import AuthForm from '@/components/Auth/AuthForm'
+import { handleCredentialsLogin } from '@/lib/auth/actions'
 
 const LoginPage = () => {
-  /*   const session = await getServerSession() // TODO: PUT back after refactor to server component
-
-  if (session) {
-    redirect('/dashboard')
-  } */
-
-  return <LoginForm />
+  return <AuthForm type="login" onSubmit={handleCredentialsLogin} />
 }
 
 export default LoginPage
