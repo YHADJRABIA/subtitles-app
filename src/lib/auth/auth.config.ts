@@ -42,7 +42,7 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: 'credentials',
       credentials: {
-        // For built-in NextAuth form, useless here
+        // For built-in NextAuth form. Useless here since own UI exists
         email: {
           label: 'Email',
           type: 'email',
