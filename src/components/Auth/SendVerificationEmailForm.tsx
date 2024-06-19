@@ -18,7 +18,6 @@ import { getErrorMessage } from '@/utils/errors'
 
 import InfoBox from '../UI/InfoBox'
 import Typography from '../UI/Typography'
-import axios from 'axios'
 import useInfo from '@/hooks/useInfo'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import {
@@ -28,6 +27,7 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 import LanguageMenu from '../Layout/LanguageMenu'
 import { useTranslations } from 'next-intl'
+import { handleSendVerificationEmail } from '@/lib/auth/actions'
 
 const SendVerificationEmailForm = () => {
   const [t, t_zod] = [useTranslations('Auth'), useTranslations('Zod')]
@@ -53,13 +53,10 @@ const SendVerificationEmailForm = () => {
     SendEmailVerificationSchema
   > = async user => {
     try {
-      const res = await axios.post('/api/users/send-verification-email', user)
+      const res = await handleSendVerificationEmail(user)
       setInfoMessage(res.data.message, 'success')
     } catch (err) {
-      setInfoMessage(
-        getErrorMessage(err?.response.data.message) ?? getErrorMessage(err),
-        'error'
-      )
+      setInfoMessage(getErrorMessage(err), 'error')
     }
   }
 
