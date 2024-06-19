@@ -85,9 +85,7 @@ function AuthForm<T>({ type, onSubmit }: PropTypes<T>) {
 
       // TODO: Find a better way to unify Next-auth's login response & register's
       setInfoMessage(
-        isRegisterForm
-          ? res.data.message
-          : getErrorMessage((res as any)?.error),
+        isRegisterForm ? res.data.message : getErrorMessage(res?.error),
         isRegisterForm ? 'success' : 'error'
       )
     } catch (err) {
