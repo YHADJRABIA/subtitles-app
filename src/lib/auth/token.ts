@@ -12,7 +12,7 @@ import { generateUUIDToken } from '@/utils/random'
 
 export const generateVerificationToken = async (email: string) => {
   // Generate random token
-  const { token, expirationDate } = generateUUIDToken() // Not using JWT because storing data in the token is irrelevant here. Token expires in 1 hour
+  const { token, expirationDate } = generateUUIDToken(24) // Not using JWT because storing data in the token is irrelevant here. Token expires in 24 hours
 
   // Check if existing token already sent for this email to delete it
   const existingToken = await getVerificationTokenByEmail(email)
@@ -32,8 +32,8 @@ export const generateVerificationToken = async (email: string) => {
 }
 
 export const generatePasswordResetToken = async (email: string) => {
-  // Generate random token
-  const { token, expirationDate } = generateUUIDToken()
+  // Generate random token, valid for 2 hours
+  const { token, expirationDate } = generateUUIDToken(2)
 
   // Check if existing token already sent for this email to delete it
   const existingToken = await getPasswordResetTokenByEmail(email)
