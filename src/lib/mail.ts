@@ -18,7 +18,7 @@ export const sendVerificationEmail = async (
   email: string,
   token: string
 ) => {
-  const verificationLink = `${websiteUrl}/verify-email?token=${token}`
+  const verificationLink = `${websiteUrl}/${lang}/verify-email?token=${token}`
 
   const outgoingEmail = {
     title: 'Verify your email',
@@ -65,7 +65,7 @@ export const sendPasswordResetEmail = async (
   email: string,
   token: string
 ) => {
-  const resetLink = `${websiteUrl}/password/reset?token=${token}`
+  const resetLink = `${websiteUrl}/${lang}/password/reset?token=${token}`
 
   const outgoingEmail = {
     title: 'Reset your password',
