@@ -10,6 +10,8 @@ import {
 } from '@/utils/db/verification-token'
 import { generateUUIDToken } from '@/utils/random'
 
+// TODO: Put expiration params in env variables and refactor in mail.ts also
+
 export const generateVerificationToken = async (email: string) => {
   // Generate random token
   const { token, expirationDate } = generateUUIDToken(24) // Not using JWT because storing data in the token is irrelevant here. Token expires in 24 hours
