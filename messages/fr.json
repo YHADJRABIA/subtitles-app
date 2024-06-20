@@ -44,7 +44,7 @@
     "SendVerificationEmail": {
       "title": "Vérification d'email",
       "cta": "Envoyer email de vérification",
-      "fallback": "Retour à la page de connexion",
+      "fallback": "Retour à la page de <login>connexion</login> ou d''<register>inscription</register>",
       "user_not_found": "Utilisateur inconnu",
       "email_already_verified": "Cet email est déjà verifié",
       "verification_email_sent": "Email de vérification envoyé !"
@@ -52,7 +52,7 @@
     "PasswordRecovery": {
       "title": "Récupération de mot de passe",
       "cta": "Envoyer email de récupération",
-      "fallback": "Retour à la page de connexion",
+      "fallback": "Retour à la page de <login>connexion</login> ou d''<register>inscription</register>",
       "user_not_found": "Utilisateur inconnu",
       "recovery_email_sent": "Email de récupération envoyé !"
     },
