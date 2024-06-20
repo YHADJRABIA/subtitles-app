@@ -4,7 +4,9 @@ import {
   SendEmailVerificationSchema,
 } from '@/types/schemas/auth'
 import axios from 'axios'
-import { signIn } from 'next-auth/react'
+import { signIn, signOut } from 'next-auth/react'
+
+export const handleLogout = async () => await signOut()
 
 export const handleGoogleLogin = async () => {
   await signIn('google', { callbackUrl: '/dashboard' })
