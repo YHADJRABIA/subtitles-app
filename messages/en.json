@@ -44,7 +44,7 @@
     "SendVerificationEmail": {
       "title": "Email verification",
       "cta": "Send verification email",
-      "fallback": "Back to login",
+      "fallback": "Back to <login>login</login> or <register>register</register>",
       "user_not_found": "User not found",
       "email_already_verified": "Email is already verified",
       "verification_email_sent": "Verification email sent!"
@@ -52,7 +52,7 @@
     "PasswordRecovery": {
       "title": "Password recovery",
       "cta": "Send recovery email",
-      "fallback": "Back to login",
+      "fallback": "Back to <login>login</login> or <register>register</register>",
       "user_not_found": "User not found",
       "recovery_email_sent": "Recovery email sent!"
     },
