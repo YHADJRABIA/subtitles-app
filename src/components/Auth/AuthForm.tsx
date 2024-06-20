@@ -82,7 +82,6 @@ function AuthForm<T>({ type, onSubmit }: PropTypes<T>) {
   const handleAuth: SubmitHandler<AuthFormData> = async user => {
     try {
       const res = (await onSubmit(user)) as AxiosResponse
-
       // TODO: Find a better way to unify Next-auth's login response & register's
       setInfoMessage(
         isRegisterForm ? res.data.message : getErrorMessage(res?.error),
