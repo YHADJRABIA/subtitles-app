@@ -1,7 +1,7 @@
-'use client'
+import Typography from '@/components/UI/Typography'
 
 const NotFoundPage = () => {
-  return <div>Not found</div>
+  return <Typography tag="h1">Page not found</Typography>
 }
 
 export default NotFoundPage
