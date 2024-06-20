@@ -34,7 +34,7 @@
   @include flexCenter(column, space-evenly);
 
   @include respond-to('medium') {
-    width: 40rem;
+    width: 42rem;
     margin-bottom: 4rem;
   }
 
