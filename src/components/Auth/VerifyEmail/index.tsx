@@ -1,6 +1,5 @@
 'use client'
 import { getErrorMessage } from '@/utils/errors'
-import axios from 'axios'
 import { useSearchParams } from 'next/navigation'
 import styles from './VerifyEmail.module.scss'
 import Typography from '../../UI/Typography'
@@ -20,6 +19,7 @@ import {
   EmailVerificationValidator,
 } from '@/types/schemas/auth'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
+import { handleVerifyEmailValidationToken } from '@/lib/auth/actions'
 
 const VerifyEmail = () => {
   const [t, t_zod] = [
@@ -34,13 +34,10 @@ const VerifyEmail = () => {
 
   const handleValidate: SubmitHandler<EmailVerificationSchema> = async user => {
     try {
-      const res = await axios.post('/api/users/verify-token', user)
+      const res = await handleVerifyEmailValidationToken(user)
       setInfoMessage(res.data.message, 'success')
     } catch (err) {
-      setInfoMessage(
-        getErrorMessage(err?.response.data.message) ?? getErrorMessage(err),
-        'error'
-      )
+      setInfoMessage(getErrorMessage(err), 'error')
     }
   }
 
