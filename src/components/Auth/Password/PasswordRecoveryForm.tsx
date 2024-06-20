@@ -17,7 +17,6 @@ import Field from '@/components/Forms/Field'
 
 import { getErrorMessage } from '@/utils/errors'
 
-import axios from 'axios'
 import InfoBox from '@/components/UI/InfoBox'
 import Typography from '@/components/UI/Typography'
 import {
@@ -28,6 +27,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import useInfo from '@/hooks/useInfo'
 import LanguageMenu from '@/components/Layout/LanguageMenu'
 import { useTranslations } from 'next-intl'
+import { handleSendPasswordRecoveryEmail } from '@/lib/auth/actions'
 
 const PasswordRecoveryForm = () => {
   const searchParams = useSearchParams()
@@ -54,13 +54,10 @@ const PasswordRecoveryForm = () => {
 
   const handleRecovery: SubmitHandler<PasswordRecoverySchema> = async user => {
     try {
-      const res = await axios.post('/api/users/password/recover', user)
+      const res = await handleSendPasswordRecoveryEmail(user)
       setInfoMessage(res.data.message, 'success')
     } catch (err) {
-      setInfoMessage(
-        getErrorMessage(err?.response.data.message) ?? getErrorMessage(err),
-        'error'
-      )
+      setInfoMessage(getErrorMessage(err), 'error')
     }
   }
 
@@ -117,7 +114,12 @@ const PasswordRecoveryForm = () => {
         </Button>
       </div>
 
-      <Link href="/login">{t('PasswordRecovery.fallback')}</Link>
+      <Typography>
+        {t.rich('PasswordRecovery.fallback', {
+          login: text => <Link href={'/login'}>{text}</Link>,
+          register: text => <Link href={'/register'}>{text}</Link>,
+        })}
+      </Typography>
     </form>
   )
 }
