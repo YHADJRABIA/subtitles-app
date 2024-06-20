@@ -1,6 +1,6 @@
 import createMiddleware from 'next-intl/middleware'
 import withAuth, { NextRequestWithAuth } from 'next-auth/middleware'
-import { NextFetchEvent, NextRequest } from 'next/server'
+import { NextFetchEvent } from 'next/server'
 import { isPublicPath } from './utils/paths'
 import {
   defaultLocale,
@@ -32,13 +32,14 @@ const authMiddleware = withAuth(
 )
 
 // Run authMiddleware for protected routes else run intlMiddleware
-export default function middleware(req: NextRequest) {
+export default function middleware(req: NextRequestWithAuth) {
   const { pathname } = req.nextUrl
+
   const isPublicRoute = isPublicPath(pathname)
 
   return isPublicRoute
     ? intlMiddleware(req)
-    : authMiddleware(req as NextRequestWithAuth, {} as NextFetchEvent)
+    : authMiddleware(req, {} as NextFetchEvent)
 }
 
 export const config = {
