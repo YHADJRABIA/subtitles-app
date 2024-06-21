@@ -23,10 +23,12 @@ const authMiddleware = withAuth(
   },
   {
     callbacks: {
-      authorized: ({ token }) => token !== null,
+      authorized: ({ token }) => token !== null, // If there's a token, user is authenticated
     },
     pages: {
+      // Replace Next-auth's built-in pages with ours
       signIn: LOGIN_ROUTE,
+      error: '/error',
     },
   }
 )
