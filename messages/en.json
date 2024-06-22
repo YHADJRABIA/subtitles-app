@@ -1,5 +1,9 @@
 {
   "Metadata": {
+    "Homepage": {
+      "title": "Homepage",
+      "description": "Landing page"
+    },
     "Auth": {
       "title": "Authentication",
       "description": "Authentication section"
