@@ -14,7 +14,13 @@
     "something_went_wrong": "Un erreur s'est produite"
   },
   "Index": {
-    "title": "Essai"
+    "HeroBanner": {
+      "heading": "Simulateur d'actions",
+      "desciption": "Simuler l'achat et vente d'actions boursières et estimer ses plus-values ou pertes financières en bourse."
+    },
+    "Body": {
+      "in_progress": "Application en cours de développement..."
+    }
   },
   "NotFound": {},
   "Auth": {
