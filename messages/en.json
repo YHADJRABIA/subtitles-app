@@ -14,7 +14,13 @@
     "something_went_wrong": "Something went wrong"
   },
   "Index": {
-    "title": "Test"
+    "HeroBanner": {
+      "heading": "Stocks simulator",
+      "desciption": "Simulate stocks trading and estimate your profits or losses."
+    },
+    "Body": {
+      "in_progress": "Application under construction..."
+    }
   },
   "NotFound": {},
   "Auth": {
