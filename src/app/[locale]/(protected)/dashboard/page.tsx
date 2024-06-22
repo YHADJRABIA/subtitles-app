@@ -1,16 +1,16 @@
 'use client'
-
 import Button from '@/components/UI/Button'
-import { signOut, useSession } from 'next-auth/react'
 import React from 'react'
+import { handleLogout } from '@/lib/auth/actions'
+import { useSession } from 'next-auth/react'
 
 const DashboardPage = () => {
-  const { data: session, status } = useSession()
+  const session = useSession()
 
   return (
     <div>
       <p>{JSON.stringify(session?.user)}</p>
-      <Button onClick={() => signOut()}>Sign out</Button>
+      <Button onClick={handleLogout}>Sign out</Button>
     </div>
   )
 }
