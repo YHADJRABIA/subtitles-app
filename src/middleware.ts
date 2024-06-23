@@ -43,10 +43,10 @@ export default async function middleware(req: NextRequestWithAuth) {
   const { pathname } = req.nextUrl
   const isPublicRoute = isPublicPath(pathname as Pathname)
 
-  const session = await getToken({
-    req,
-    secret: process.env.NEXTAUTH_SECRET, // Secret needed to access session outside of authMiddleware (has to be the same as in authOptions at /auth.config.ts)
-  })
+  // Secret needed to access session outside of authMiddleware (has to be the same as in authOptions at /auth.config.ts)
+  const secret = process.env.NEXTAUTH_SECRET
+
+  const session = await getToken({ req, secret })
 
   const isConnected = !!session
 
