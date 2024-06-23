@@ -1,8 +1,9 @@
+import { Locale, Locales } from '@/types/locale'
 import { PathnamesType } from '@/types/pathnames'
 import { createLocalizedPathnamesNavigation } from 'next-intl/navigation'
 
-export const defaultLocale = 'en'
-export const locales = ['en', 'fr']
+export const defaultLocale: Locale = 'en'
+export const locales = ['en', 'fr'] satisfies Locales
 export const localePrefix = 'as-needed' // No prefix for the default locale. /en -> /
 
 export const pathnames = {
