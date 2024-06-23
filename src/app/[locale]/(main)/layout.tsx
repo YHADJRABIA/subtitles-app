@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 import { getTranslations } from 'next-intl/server'
-import Header from '@/components/Layout/Header'
+import Header from '@/components/Layout/Header/index'
 import Footer from '@/components/Layout/Footer'
 
 export const generateMetadata = async () => {
