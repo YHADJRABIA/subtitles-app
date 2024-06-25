@@ -8,18 +8,16 @@ import {
 import axios from 'axios'
 import { signIn, signOut } from 'next-auth/react'
 
-export const handleLogout = async () => await signOut()
+export const handleLogout = async () => await signOut({ callbackUrl: '/' })
 
 export const handleGoogleLogin = async () => {
-  await signIn('google', { callbackUrl: '/dashboard' })
+  await signIn('google')
 }
 
 export const handleCredentialsLogin = async (user: AccountLoginSchema) => {
-  return await signIn('credentials', {
-    ...user,
-    redirect: true,
-    callbackUrl: '/dashboard',
-  })
+  // {redirect: false} to disable default redirection. Especially in case of invalid credentials, this might lead to Next-Auth's /api/auth/error page.
+  // Instead, we want to process signIn response on same page for UX.
+  return await signIn('credentials', { ...user, redirect: false })
 }
 
 export const handleRegister = async (user: AccountRegistrationSchema) => {
