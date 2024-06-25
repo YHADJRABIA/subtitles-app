@@ -27,14 +27,6 @@ export const pathnameMatchesLocalisedRoutes = (
   return publicPathnameRegex.test(pathname)
 }
 
-// Returns true if pathname or its localised version is included in publicRoutes
-export const isPublicPath = (pathname: Pathname): boolean => {
-  const localisedPublicRoutes = publicRoutes.flatMap(route =>
-    getLocalisedPathsForPathname(route)
-  )
-  return pathnameMatchesLocalisedRoutes(localisedPublicRoutes, pathname)
-}
-
 // Returns true if pathname or its localised version is included in ProtectedRoutes
 export const isProtectedPath = (pathname: Pathname): boolean => {
   const localisedProtectedRoutes = protectedRoutes.flatMap(route =>
