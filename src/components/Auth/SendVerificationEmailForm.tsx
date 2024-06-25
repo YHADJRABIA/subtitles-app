@@ -37,6 +37,7 @@ const SendVerificationEmailForm = () => {
   const {
     register,
     getFieldState,
+    getValues,
     handleSubmit,
     formState: { errors, isValid, isSubmitting },
   } = useForm<SendEmailVerificationSchema>({
@@ -46,6 +47,7 @@ const SendVerificationEmailForm = () => {
   })
 
   const fieldState = getFieldState('email')
+  const email = getValues('email')
 
   const InfoIcon = info.type === 'error' ? ErrorIcon : EmailSentIcon // TODO: update
 
@@ -112,8 +114,20 @@ const SendVerificationEmailForm = () => {
           {t('SendVerificationEmail.cta')}
         </Button>
       </div>
-
-      <Link href="/login">{t('SendVerificationEmail.fallback')}</Link>
+      <Typography>
+        {t.rich('SendVerificationEmail.fallback', {
+          login: text => (
+            <Link href={isValid ? `/login?email=${email}` : '/login'}>
+              {text}
+            </Link>
+          ),
+          register: text => (
+            <Link href={isValid ? `/register?email=${email}` : '/register'}>
+              {text}
+            </Link>
+          ),
+        })}
+      </Typography>
     </form>
   )
 }
