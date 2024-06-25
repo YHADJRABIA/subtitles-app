@@ -1,7 +1,6 @@
 'use client'
 import Link from '@/components/Link'
 import React from 'react'
-import { useRouter } from 'next/navigation'
 import {
   MdLockOutline as PasswordIcon,
   MdAlternateEmail as EmailIcon,
@@ -42,7 +41,6 @@ interface PropTypes<T> {
 
 function AuthForm<T>({ type, onSubmit }: PropTypes<T>) {
   const isRegisterForm = type === 'register'
-  const router = useRouter() // TODO: Redirect if logged in
   const [passwordInputType, ToggleIcon] = useShowPassword({ size: 20 })
 
   const [t, t_general, t_zod] = [
@@ -84,7 +82,7 @@ function AuthForm<T>({ type, onSubmit }: PropTypes<T>) {
       const res = (await onSubmit(user)) as AxiosResponse
       // TODO: Find a better way to unify Next-auth's login response & register's
       setInfoMessage(
-        isRegisterForm ? res.data.message : getErrorMessage(res?.error),
+        isRegisterForm ? res.data.message : getErrorMessage(res?.error ?? ''),
         isRegisterForm ? 'success' : 'error'
       )
     } catch (err) {
