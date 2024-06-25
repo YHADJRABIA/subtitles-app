@@ -45,9 +45,7 @@ export default async function middleware(req: NextRequestWithAuth) {
 
   // Needed outside of authMiddleware to access session (has to be the same as in authOptions at /auth.config.ts)
   const secret = process.env.NEXTAUTH_SECRET
-
   const session = await getToken({ req, secret })
-
   const isConnected = !!session
 
   // Prevent authenticated user from reaching login/register pages by redirecting to homepage
