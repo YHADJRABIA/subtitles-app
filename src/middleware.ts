@@ -8,7 +8,7 @@ import {
   locales,
   pathnames,
 } from './lib/i18n/navigation'
-import { LOGIN_ROUTE } from './routes/routes'
+import { DEFAULT_LOGIN_REDIRECT_ROUTE, LOGIN_ROUTE } from './routes/routes'
 import { getToken } from 'next-auth/jwt'
 import { Pathname } from './types/pathnames'
 
@@ -48,9 +48,9 @@ export default async function middleware(req: NextRequestWithAuth) {
   const session = await getToken({ req, secret })
   const isConnected = !!session
 
-  // Prevent authenticated user from reaching login/register pages by redirecting to homepage
+  // Prevent authenticated user from reaching login/register pages by redirecting away
   if (isConnected && isLoginOrRegisterPath(pathname as Pathname)) {
-    return NextResponse.redirect(new URL('/', req.url))
+    return NextResponse.redirect(new URL(DEFAULT_LOGIN_REDIRECT_ROUTE, req.url))
   }
 
   // Skip authMiddleware if route is public
