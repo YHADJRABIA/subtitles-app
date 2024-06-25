@@ -1,16 +1,11 @@
 import { locales, pathnames } from '@/lib/i18n/navigation'
-import {
-  REGISTER_ROUTE,
-  LOGIN_ROUTE,
-  publicRoutes,
-  protectedRoutes,
-} from '@/routes/routes'
+import { protectedRoutes, loginRegisterRoutes } from '@/routes/routes'
 import { Pathname } from '@/types/pathnames'
 
 /**
  * Checks if a pathname matches any of the localised routes.
  * @param {string[]} routes Array of routes to check.
- * @param {string} pathname Pathname to match.
+ * @param {Pathname} pathname Pathname to match.
  * @returns {boolean} True if the pathname matches any of the localised routes, false otherwise.
  */
 export const pathnameMatchesLocalisedRoutes = (
@@ -27,7 +22,11 @@ export const pathnameMatchesLocalisedRoutes = (
   return publicPathnameRegex.test(pathname)
 }
 
-// Returns true if pathname or its localised version is included in ProtectedRoutes
+/**
+ * Checks if pathname matches a protected route.
+ * @param {Pathname} pathname Pathname to check.
+ * @returns {boolean} True if the pathname matches any of the localised protected routes, false otherwise.
+ */
 export const isProtectedPath = (pathname: Pathname): boolean => {
   const localisedProtectedRoutes = protectedRoutes.flatMap(route =>
     getLocalisedPathsForPathname(route)
@@ -35,13 +34,13 @@ export const isProtectedPath = (pathname: Pathname): boolean => {
   return pathnameMatchesLocalisedRoutes(localisedProtectedRoutes, pathname)
 }
 
-// Returns true if pathname is /login or /register or a localised version of it
+// Returns true if pathname is any localised version of /login or /register
 export const isLoginOrRegisterPath = (pathname: Pathname): boolean => {
-  const loginRegisterRoutes = [
-    ...getLocalisedPathsForPathname(LOGIN_ROUTE),
-    ...getLocalisedPathsForPathname(REGISTER_ROUTE),
-  ]
-  return pathnameMatchesLocalisedRoutes(loginRegisterRoutes, pathname)
+  const localisedLoginRegisterRoutes = loginRegisterRoutes.flatMap(route =>
+    getLocalisedPathsForPathname(route)
+  )
+
+  return pathnameMatchesLocalisedRoutes(localisedLoginRegisterRoutes, pathname)
 }
 
 /**
