@@ -1,7 +1,7 @@
 import createMiddleware from 'next-intl/middleware'
 import withAuth, { NextRequestWithAuth } from 'next-auth/middleware'
 import { NextFetchEvent, NextResponse } from 'next/server'
-import { isLoginOrRegisterPath, isPublicPath } from './utils/paths'
+import { isLoginOrRegisterPath, isProtectedPath } from './utils/paths'
 import {
   defaultLocale,
   localePrefix,
@@ -41,7 +41,7 @@ const authMiddleware = withAuth(
 // Dispatches request to middlewares depending on conditions
 export default async function middleware(req: NextRequestWithAuth) {
   const { pathname } = req.nextUrl
-  const isPublicRoute = isPublicPath(pathname as Pathname)
+  const isProtectedRoute = isProtectedPath(pathname as Pathname)
 
   // Needed outside of authMiddleware to access session (has to be the same as in authOptions at /auth.config.ts)
   const secret = process.env.NEXTAUTH_SECRET
@@ -56,9 +56,9 @@ export default async function middleware(req: NextRequestWithAuth) {
   }
 
   // Skip authMiddleware if route is public
-  return isPublicRoute
-    ? intlMiddleware(req)
-    : authMiddleware(req, {} as NextFetchEvent)
+  return isProtectedRoute
+    ? authMiddleware(req, {} as NextFetchEvent)
+    : intlMiddleware(req)
 }
 
 export const config = {
