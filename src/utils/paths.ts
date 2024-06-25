@@ -1,5 +1,10 @@
 import { locales, pathnames } from '@/lib/i18n/navigation'
-import { REGISTER_ROUTE, LOGIN_ROUTE, publicRoutes } from '@/routes/routes'
+import {
+  REGISTER_ROUTE,
+  LOGIN_ROUTE,
+  publicRoutes,
+  protectedRoutes,
+} from '@/routes/routes'
 import { Pathname } from '@/types/pathnames'
 
 /**
@@ -28,6 +33,14 @@ export const isPublicPath = (pathname: Pathname): boolean => {
     getLocalisedPathsForPathname(route)
   )
   return pathnameMatchesLocalisedRoutes(localisedPublicRoutes, pathname)
+}
+
+// Returns true if pathname or its localised version is included in ProtectedRoutes
+export const isProtectedPath = (pathname: Pathname): boolean => {
+  const localisedProtectedRoutes = protectedRoutes.flatMap(route =>
+    getLocalisedPathsForPathname(route)
+  )
+  return pathnameMatchesLocalisedRoutes(localisedProtectedRoutes, pathname)
 }
 
 // Returns true if pathname is /login or /register or a localised version of it
