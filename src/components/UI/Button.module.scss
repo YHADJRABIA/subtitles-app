@@ -1,6 +1,5 @@
 .root {
   @include flexCenter(row, center);
-  width: inherit;
   border: none;
   outline: none;
   cursor: pointer;

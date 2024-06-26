@@ -6,6 +6,7 @@ import Loader from './Loader'
 interface PropTypes extends ButtonHTMLAttributes<HTMLButtonElement> {
   testId?: string
   isLoading?: boolean
+  isFullWidth?: boolean
   variation?: 'primary' | 'secondary' | 'regular'
 }
 
@@ -16,6 +17,7 @@ const Button = ({
   testId,
   isLoading,
   type = 'button',
+  isFullWidth = true,
   className,
   ...rest
 }: PropTypes) => {
@@ -34,7 +36,7 @@ const Button = ({
           : isSecondary
             ? styles.secondary
             : styles.regular,
-        { disabled: !isClickeable },
+        { disabled: !isClickeable, fullWidth: isFullWidth },
         className
       )}
       data-testid={testId}
