@@ -1,6 +1,6 @@
 import { usePathname } from 'next/navigation'
 import { useGetQueryParams } from './useGetQueryParams'
-import { removeLocalePrefixFromPathname } from '@/utils/internationalization/paths'
+import { removeLocalePrefixFromPathname } from '@/utils/internationalisation/paths'
 
 /**
  * Extracts pathname from "/locale/pathname..." with or without queryparams.

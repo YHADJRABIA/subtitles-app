@@ -2,7 +2,7 @@ import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 
 import { useLocale } from 'next-intl'
-import { getLanguageByLocaleValue } from '@/utils/internationalization/language'
+import { getLanguageByLocaleValue } from '@/utils/internationalisation/language'
 import { useDelocalisedPathname } from './useDelocalisePathname'
 import { Locale } from '@/types/locale'
 
