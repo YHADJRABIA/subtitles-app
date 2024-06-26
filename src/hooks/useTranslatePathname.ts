@@ -34,8 +34,8 @@ export const useTranslatePathname = ({
     ? extractHrefParams(href).searchParams
     : ''
 
-  // Get route's translation
-  const localisedPathname = (matchingPathname as PathnamesType)[locale]
+  const localisedPathname =
+    (matchingPathname as PathnamesType)[locale] ?? matchingPathname
 
   const translatedPathname = `/${locale}${localisedPathname}${searchParams}`
 
