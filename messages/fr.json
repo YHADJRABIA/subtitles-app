@@ -6,7 +6,35 @@
     },
     "Auth": {
       "title": "Authentification",
-      "description": "Portail d'authentification"
+      "description": "Portail d'authentification",
+      "Register": {
+        "title": "",
+        "description": ""
+      },
+      "Login": {
+        "title": "",
+        "description": ""
+      },
+      "SendVerificationEmail": {
+        "title": "",
+        "description": ""
+      },
+      "PasswordRecovery": {
+        "title": "",
+        "description": ""
+      },
+      "PasswordReset": {
+        "title": "",
+        "description": ""
+      },
+      "VerifyEmail": {
+        "title": "",
+        "description": ""
+      }
+    },
+    "Protected": {
+      "title": "Utilisateur",
+      "description": "Portail sécurisé"
     }
   },
   "General": {
@@ -27,6 +55,7 @@
     "email": "Email",
     "password": "Mot de passe",
     "continue_with_google": "Se connecter avec Google",
+    "log_out": "Se déconnecter",
     "Login": {
       "title": "Connexion",
       "cta": "Se connecter",
@@ -98,7 +127,10 @@
     "conceal_password": "Masquer mot de passe"
   },
   "Navigation": {
-    "home": "Page d'accueil"
+    "home": "Page d'accueil",
+    "login": "Connexion",
+    "register": "Inscription",
+    "dashboard": "Mon compte"
   },
   "Footer": {
     "first_name": "Yacine",
