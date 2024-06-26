@@ -110,14 +110,15 @@ export const authOptions: NextAuthOptions = {
   },
 
   callbacks: {
-    // TODO: Update redirect callback
-    /*     async redirect({ url, baseUrl }) {
-      // Allows relative callback URLs
-      if (url.startsWith("/")) return `${baseUrl}${url}`
-      // Allows callback URLs on the same origin
+    redirect({ url, baseUrl }) {
+      // Allows relative callback URLs (no need to add website prefix every time).
+      // Example: {callbackUrl: '/login'} ---> www.[baseUrl].com/login
+      if (url.startsWith('/')) return `${baseUrl}${url}`
+      // Allows callback URLs on the same origin, prevents redirections to external websites.
+      // Example: {callbackUrl: 'www.[baseUrl].com/login'} is the same as {callbackUrl: '/login'}
       else if (new URL(url).origin === baseUrl) return url
       return baseUrl
-    } */
+    },
 
     // Called after authorize (or after JWT is created or updated), user is only populated on login
     jwt({ token, user }) {
@@ -163,6 +164,9 @@ export const authOptions: NextAuthOptions = {
         try {
           // Deny access if unverified email
           if (!isVerifiedEmail) throw new Error(t('unverified_email')) // TODO: Make status 400
+          /*           return NextResponse.redirect(
+            new URL(DEFAULT_LOGIN_REDIRECT_ROUTE, 'localhost:3000/')
+          ) */
         } catch (err) {
           console.error('Credentials SignIn failed:', getErrorMessage(err))
           throw err
