@@ -1,16 +1,18 @@
-'use client'
-import Button from '@/components/UI/Button'
 import React from 'react'
-import { handleLogout } from '@/lib/auth/actions'
-import { useSession } from 'next-auth/react'
+import { getTranslations } from 'next-intl/server'
+import LogoutButton from '@/components/Auth/LogoutButton'
+import { authOptions } from '@/lib/auth/auth.config'
+import { getServerSession } from 'next-auth'
 
-const DashboardPage = () => {
-  const session = useSession()
+const DashboardPage = async () => {
+  const session = await getServerSession(authOptions)
+
+  const t = await getTranslations({ namespace: 'Auth' })
 
   return (
     <div>
       <p>{JSON.stringify(session?.user)}</p>
-      <Button onClick={handleLogout}>Sign out</Button>
+      <LogoutButton label={t('log_out')} />
     </div>
   )
 }
