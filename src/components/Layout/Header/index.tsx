@@ -6,8 +6,8 @@ import Nav from './Nav'
 const Header = () => {
   return (
     <header className={styles.root}>
-      <Nav />
-      <LanguageMenu />
+      <Nav className={styles.nav} />
+      <LanguageMenu className={styles.languageMenu} />
     </header>
   )
 }
