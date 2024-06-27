@@ -33,6 +33,8 @@ import {
 } from '@/types/schemas/auth'
 import { useTranslations } from 'next-intl'
 import { AxiosResponse } from 'axios'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { DEFAULT_LOGIN_REDIRECT_ROUTE } from '@/routes/routes'
 
 interface PropTypes<T> {
   type: 'login' | 'register'
@@ -40,7 +42,10 @@ interface PropTypes<T> {
 }
 
 function AuthForm<T>({ type, onSubmit }: PropTypes<T>) {
-  const isRegisterForm = type === 'register'
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const queryParamEmail = searchParams.get('email') ?? ''
+  const [isLoginForm, isRegisterForm] = [type === 'login', type === 'register']
   const [passwordInputType, ToggleIcon] = useShowPassword({ size: 20 })
 
   const [t, t_general, t_zod] = [
@@ -65,6 +70,7 @@ function AuthForm<T>({ type, onSubmit }: PropTypes<T>) {
         ? AccountRegistrationValidator(t_zod)
         : AccountLoginValidator(t_zod)
     ),
+    defaultValues: { email: queryParamEmail, password: '' },
     delayError: 400,
     mode: 'onChange',
   })
@@ -85,6 +91,8 @@ function AuthForm<T>({ type, onSubmit }: PropTypes<T>) {
         isRegisterForm ? res.data.message : getErrorMessage(res?.error ?? ''),
         isRegisterForm ? 'success' : 'error'
       )
+      // Redirect if successful login
+      if (isLoginForm && res?.ok) router.push(DEFAULT_LOGIN_REDIRECT_ROUTE)
     } catch (err) {
       setInfoMessage(getErrorMessage(err), 'error')
     }
@@ -155,7 +163,7 @@ function AuthForm<T>({ type, onSubmit }: PropTypes<T>) {
           rightIcon={<ToggleIcon />}
         />
 
-        {!isRegisterForm && (
+        {isLoginForm && (
           <Typography
             fullWidth
             className={styles.passwordRecovery}
