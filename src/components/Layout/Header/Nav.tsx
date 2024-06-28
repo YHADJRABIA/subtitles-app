@@ -2,8 +2,13 @@ import Link from '@/components/Link'
 import { useTranslations } from 'next-intl'
 import React from 'react'
 import styles from './Nav.module.scss'
+import cn from 'classnames'
 
-const Nav = () => {
+interface PropTypes {
+  className?: string
+}
+
+const Nav = ({ className }: PropTypes) => {
   const t = useTranslations('Navigation')
 
   const links = [
@@ -11,13 +16,9 @@ const Nav = () => {
       url: '/',
       label: t('home'),
     },
-    {
-      url: '/register',
-      label: 'Register',
-    },
   ]
   return (
-    <nav className={styles.root}>
+    <nav aria-label="Main menu" className={cn(styles.root, className)}>
       {links.map((link, id) => (
         <Link key={id} href={link.url}>
           {link.label}
