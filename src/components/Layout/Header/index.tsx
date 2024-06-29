@@ -14,7 +14,7 @@ const Header = ({ isConnected }: PropTypes) => {
     <header className={styles.root}>
       <Logo />
       <Nav className={styles.nav} />
-      <AuthSection showAccount={isConnected} />
+      <AuthSection showAccount={isConnected} className={styles.authSection} />
       <LanguageMenu className={styles.languageMenu} />
     </header>
   )
