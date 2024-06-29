@@ -42,4 +42,8 @@ export const pathnames = {
 } satisfies PathnamesType
 
 export const { Link, redirect, usePathname, useRouter, getPathname } =
-  createLocalizedPathnamesNavigation({ locales, localePrefix, pathnames })
+  createLocalizedPathnamesNavigation({
+    locales,
+    localePrefix,
+    pathnames: pathnames as typeof pathnames & Record<string & {}, string>, // For Link component, to allow hrefs that aren't part of pathnames
+  })
