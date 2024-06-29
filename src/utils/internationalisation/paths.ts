@@ -1,7 +1,7 @@
 import { locales } from '@/lib/i18n/navigation'
 
 /**
- * Strips locale prefix from a given localized pathname.
+ * Strips locale prefix from a given localised pathname.
  * Example: '/fr/test' becomes '/test'
  * @param {string} localisedPathname Pathname might include a locale prefix
  * @returns Pathname without locale prefix
