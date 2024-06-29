@@ -1,10 +1,10 @@
 import { useState, useTransition } from 'react'
-import { useRouter } from 'next/navigation'
-
+import { useParams } from 'next/navigation'
 import { useLocale } from 'next-intl'
 import { getLanguageByLocaleValue } from '@/utils/internationalisation/language'
-import { useDelocalisedPathname } from './useDelocalisePathname'
 import { Locale } from '@/types/locale'
+import { useRouter, usePathname } from '@/lib/i18n/navigation'
+import { useGetQueryParams } from './useGetQueryParams'
 
 /**
  * Provides current language with corresponding flag & label.
@@ -13,15 +13,16 @@ import { Locale } from '@/types/locale'
  */
 
 const useChangeLanguage = () => {
+  const currentLocale = useLocale() as Locale
+  const queryParams = useGetQueryParams()
+  const pathname = usePathname()
   const router = useRouter()
-
-  const unlocalisedPathname = useDelocalisedPathname()
-  const currentLocale = useLocale()
+  const params = useParams()
 
   const [isPending, startTransition] = useTransition()
   const [isOpen, setIsOpen] = useState(false)
   const [currentLanguage, setCurrentLanguage] = useState(
-    getLanguageByLocaleValue(currentLocale as Locale)
+    getLanguageByLocaleValue(currentLocale)
   )
 
   const handleClose = () => setIsOpen(false)
@@ -34,7 +35,13 @@ const useChangeLanguage = () => {
     if (selectedLanguage) {
       startTransition(() => {
         setCurrentLanguage(selectedLanguage)
-        router.replace(`/${locale}/${unlocalisedPathname}`)
+        router.replace(
+          // @ts-expect-error -- TypeScript will validate that only known `params`
+          // are used in combination with a given `pathname`. Since the two will
+          // always match for the current route, we can skip runtime checks.
+          { pathname: pathname + queryParams, params },
+          { locale }
+        )
       })
     }
   }
