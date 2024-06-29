@@ -1,3 +1,18 @@
 .root {
+  width: 100%;
   @include flexCenter(row);
+  background-color: var(--primary-gray-color);
+  height: 10rem;
+  padding: 0 2.5rem;
+}
+
+.authSection {
+  margin-left: calc(2rem + 2%);
+}
+
+.nav {
+  margin-left: auto;
+}
+.languageMenu {
+  margin-left: calc(0.5rem + 2.5%);
 }
