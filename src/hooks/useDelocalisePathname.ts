@@ -4,6 +4,7 @@ import { removeLocalePrefixFromPathname } from '@/utils/internationalisation/pat
 
 /**
  * Extracts pathname from "/locale/pathname..." with or without queryparams.
+ * Example: "/fr/inscription" -> "/inscription"
  * @param {boolean} hasSearchParams  Determines if search parameters should be included in the returned pathname.
  * @returns Pathname without locale prefix.
  */
