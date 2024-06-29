@@ -8,7 +8,6 @@ import {
   BsCheckCircleFill as SuccessIcon,
   BsXCircleFill as ErrorIcon,
 } from 'react-icons/bs'
-import Link from 'next/link'
 import Loading from './loading'
 import { useTranslations } from 'next-intl'
 import useInfo from '@/hooks/useInfo'
@@ -20,6 +19,7 @@ import {
 } from '@/types/schemas/auth'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 import { handleVerifyEmailValidationToken } from '@/lib/auth/actions'
+import { Link } from '@/lib/i18n/navigation'
 
 const VerifyEmail = () => {
   const [t, t_zod] = [

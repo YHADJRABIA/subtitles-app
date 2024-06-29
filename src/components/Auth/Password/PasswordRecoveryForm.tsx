@@ -1,5 +1,4 @@
 'use client'
-import Link from 'next/link'
 import React from 'react'
 import { useSearchParams } from 'next/navigation'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -28,6 +27,7 @@ import useInfo from '@/hooks/useInfo'
 import LanguageMenu from '@/components/Layout/LanguageMenu'
 import { useTranslations } from 'next-intl'
 import { handleSendPasswordRecoveryEmail } from '@/lib/auth/actions'
+import { Link } from '@/lib/i18n/navigation'
 
 const PasswordRecoveryForm = () => {
   const searchParams = useSearchParams()

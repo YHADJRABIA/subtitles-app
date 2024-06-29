@@ -1,7 +1,7 @@
 import React, { CSSProperties, HTMLAttributes, ReactNode } from 'react'
 import styles from './Typography.module.scss'
 import cn from 'classnames'
-import Link from '../Link'
+import { Link } from '@/lib/i18n/navigation'
 import { UrlObject } from 'url'
 
 type TagType = keyof typeof tagMap

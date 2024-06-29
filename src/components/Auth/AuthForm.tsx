@@ -1,5 +1,5 @@
 'use client'
-import Link from '@/components/Link'
+import { Link } from '@/lib/i18n/navigation'
 import React from 'react'
 import {
   MdLockOutline as PasswordIcon,
