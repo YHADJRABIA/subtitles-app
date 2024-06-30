@@ -1,16 +1,12 @@
-.root {
-  margin-left: auto;
-}
-
 .profileIcon {
 }
 
-.authCTA {
+.authCta {
   @include flexCenter(row);
   /*   min-width: 25rem; */
 }
 
-.mainCTA {
+.registerCta {
   margin-left: 2.5rem;
   letter-spacing: 0.1rem;
   transition:
@@ -29,7 +25,7 @@
   }
 }
 
-.secondaryCTA {
+.loginCta {
   letter-spacing: 0.1rem;
   transition:
     opacity 0.3s ease-in-out,
