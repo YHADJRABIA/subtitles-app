@@ -1,3 +1,24 @@
 .root {
-  width: 20rem;
+}
+
+.links {
+  @include flexCenter(row, space-around);
+
+  li {
+    &:not(:first-of-type) {
+      margin-left: 2rem;
+    }
+  }
+}
+
+.link {
+  transition: opacity 0.3s ease-in-out;
+  opacity: 0.6;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.isActive {
+  opacity: 1;
 }
