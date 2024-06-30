@@ -12,7 +12,6 @@ export const pathnameMatchesLocalisedRoutes = (
   routes: string[],
   pathname: Pathname
 ): boolean => {
-  // missing getLocalisedPathsForPathname
   const publicPathnameRegex = RegExp(
     `^(/(${locales.join('|')}))?(${routes
       .flatMap(p => (p === '/' ? ['', '/'] : p))
