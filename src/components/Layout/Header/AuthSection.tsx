@@ -1,31 +1,34 @@
 import React from 'react'
 import styles from './AuthSection.module.scss'
-import Link from '@/components/Link'
+import { Link } from '@/lib/i18n/navigation'
 import { useTranslations } from 'next-intl'
+import Typography from '@/components/UI/Typography'
+import cn from 'classnames'
 
 interface PropTypes {
   showAccount: boolean
+  className?: string
 }
 
-const AuthSection = ({ showAccount }: PropTypes) => {
+const AuthSection = ({ showAccount, className }: PropTypes) => {
   const t = useTranslations('Navigation')
   return (
-    <div className={styles.root}>
+    <>
       {showAccount ? (
-        <div className={styles.profileIcon}>
+        <div className={cn(styles.profileIcon, className)}>
           <Link href="/dashboard">{t('dashboard')}</Link>
         </div>
       ) : (
-        <div className={styles.authCTA}>
-          <Link href="/login" className={styles.secondaryCTA}>
+        <div className={cn(styles.authCta, className)}>
+          <Typography size="s" href="/login" className={styles.loginCta}>
             {t('login')}
-          </Link>
-          <Link href="/register" className={styles.mainCTA}>
+          </Typography>
+          <Typography size="s" href="/register" className={styles.registerCta}>
             {t('register')}
-          </Link>
+          </Typography>
         </div>
       )}
-    </div>
+    </>
   )
 }
 
