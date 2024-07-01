@@ -3,21 +3,25 @@ import styles from './AuthSection.module.scss'
 import { Link } from '@/lib/i18n/navigation'
 import { useTranslations } from 'next-intl'
 import Typography from '@/components/UI/Typography'
+import { RxAvatar } from 'react-icons/rx'
 import cn from 'classnames'
 
 interface PropTypes {
   showAccount: boolean
   className?: string
+  userAvatar?: string
 }
 
-const AuthSection = ({ showAccount, className }: PropTypes) => {
+const AuthSection = ({ showAccount, className, userAvatar }: PropTypes) => {
   const t = useTranslations('Navigation')
+  const hasAvatar = !!userAvatar // Not just avatar, but also name or "user"
   return (
     <>
       {showAccount ? (
-        <div className={cn(styles.profileIcon, className)}>
-          <Link href="/dashboard">{t('dashboard')}</Link>
-        </div>
+        <Link href="/dashboard" className={cn(styles.profileIcon, className)}>
+          {/* TODO: Update with user avatar + name */}
+          {hasAvatar ? <RxAvatar size={26} /> : <RxAvatar size={26} />}
+        </Link>
       ) : (
         <div className={cn(styles.authCta, className)}>
           <Typography size="s" href="/login" className={styles.loginCta}>
