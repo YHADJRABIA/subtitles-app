@@ -47,7 +47,8 @@
       "desciption": "Simuler l'achat et vente d'actions boursières et estimer ses plus-values ou pertes financières en bourse."
     },
     "Body": {
-      "in_progress": "Application en cours de développement..."
+      "in_progress": "Application en cours de développement...",
+      "authentication": "Un compte peut être créé en attendant."
     }
   },
   "NotFound": {},
