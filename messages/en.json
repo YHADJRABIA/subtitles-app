@@ -47,7 +47,8 @@
       "desciption": "Simulate stocks trading and estimate your profits or losses."
     },
     "Body": {
-      "in_progress": "Application under construction..."
+      "in_progress": "Application under construction...",
+      "authentication": "An account may be created in the meanwhile."
     }
   },
   "NotFound": {},
