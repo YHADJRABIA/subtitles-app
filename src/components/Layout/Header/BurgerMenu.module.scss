@@ -1,0 +1,33 @@
+.icon {
+  display: block;
+  cursor: pointer;
+  margin: 0 1rem;
+
+  & div {
+    width: 2.5rem;
+    height: 0.3rem;
+    margin: 0.5rem 0;
+    background-color: var(--primary-white-color);
+    transition: all 0.3s ease;
+
+    &.active {
+      background-color: var(--primary-white-color);
+    }
+  }
+
+  @include respond-to('medium') {
+    display: none;
+  }
+}
+
+.toggled {
+  & .line:first-child {
+    transform: rotate(-45deg) translate(-5px, 6px);
+  }
+  & .line:nth-child(2) {
+    opacity: 0;
+  }
+  & .line:last-child {
+    transform: rotate(45deg) translate(-5px, -6px);
+  }
+}
