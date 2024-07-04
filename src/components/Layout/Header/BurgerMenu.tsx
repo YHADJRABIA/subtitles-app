@@ -9,7 +9,6 @@ interface PropTypes {
   setToggled: Dispatch<SetStateAction<boolean>>
 }
 
-/* Props from Nav component */
 const BurgerMenu = ({ toggled, setToggled, navbar }: PropTypes) => {
   // On/Off menu button
   const toggleMenu = (): void => setToggled(!toggled)
