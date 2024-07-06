@@ -8,13 +8,17 @@
 
   ul {
     position: absolute;
-    margin-top: 0.6rem;
+    margin-top: 0.5rem;
     z-index: 1;
     background-color: var(--primary-white-color);
     @include flexCenter(column, center, flex-start);
     border: 1px solid var(--secondary-white-color);
     border-radius: 1rem;
     box-shadow: 0 0.2rem 0.3rem rgba(0, 0, 0, 0.2);
+
+    &.inverted {
+      margin-top: -12.5rem;
+    }
   }
 
   li {
@@ -41,7 +45,7 @@
 }
 .label {
   text-transform: uppercase;
-  font-size: 14px;
+  font-size: 1.4rem;
 }
 
 .toggler {
