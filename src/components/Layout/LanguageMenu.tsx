@@ -1,5 +1,4 @@
 'use client'
-
 import { useRef } from 'react'
 import styles from './LanguageMenu.module.scss'
 import { PiCaretDownBold as CaretIcon } from 'react-icons/pi'
@@ -14,9 +13,10 @@ import Typography from '../UI/Typography'
 
 interface PropTypes {
   className?: string
+  isInverted?: boolean
 }
 
-const LanguageMenu = ({ className }: PropTypes) => {
+const LanguageMenu = ({ className, isInverted = false }: PropTypes) => {
   const ref = useRef(null)
   const onToggle = () => setIsOpen(prev => !prev)
 
@@ -48,7 +48,12 @@ const LanguageMenu = ({ className }: PropTypes) => {
         />
       </Button>
 
-      <ul className={cn('hidden', { visible: isOpen })}>
+      <ul
+        className={cn('hidden', {
+          visible: isOpen,
+          [styles.inverted]: isInverted,
+        })}
+      >
         {languages.map(el => {
           const isSelected = currentLanguage.value === el.value
           return (
