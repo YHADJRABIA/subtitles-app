@@ -131,7 +131,8 @@
     "home": "Page d'accueil",
     "login": "Connexion",
     "register": "Inscription",
-    "dashboard": "Mon compte"
+    "dashboard": "Mon compte",
+    "about": "À propos"
   },
   "Footer": {
     "first_name": "Yacine",
