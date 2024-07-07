@@ -3,7 +3,7 @@ import styles from './Separator.module.scss'
 
 type PropTypes =
   | { label: string; color?: false }
-  | { color: string; label?: false }
+  | { color?: string; label?: false }
 
 /**
  * Horizontal line.
@@ -18,7 +18,7 @@ const Separator = ({ label, color }: PropTypes) => {
   ) : (
     <hr
       className={styles.separator}
-      style={color ? { borderColor: color } : undefined}
+      style={{ borderColor: color || 'var(--primary-black-color)' }}
     />
   )
 }
