@@ -1,22 +1,25 @@
 import React from 'react'
 import styles from './Separator.module.scss'
 
-interface PropTypes {
-  label?: string
-}
+type PropTypes =
+  | { label: string; color?: false }
+  | { color: string; label?: false }
 
 /**
  * Horizontal line.
  * Continuous if no label provided.
  * With gap in the middle if label provided.
  */
-const Separator = ({ label }: PropTypes) => {
+const Separator = ({ label, color }: PropTypes) => {
   return label ? (
-    <div className={styles.separator}>
+    <div className={styles.labelSeparator}>
       <span>{label}</span>
     </div>
   ) : (
-    <hr />
+    <hr
+      className={styles.separator}
+      style={color ? { borderColor: color } : undefined}
+    />
   )
 }
 
