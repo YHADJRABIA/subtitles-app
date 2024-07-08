@@ -129,10 +129,11 @@
   },
   "Navigation": {
     "home": "Page d'accueil",
+    "subtitles": "Sous-titres",
+    "about": "À propos",
+    "dashboard": "Mon compte",
     "login": "Connexion",
     "register": "Inscription",
-    "dashboard": "Mon compte",
-    "about": "À propos",
     "logout": "Déconnexion"
   },
   "Footer": {
