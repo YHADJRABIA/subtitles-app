@@ -129,10 +129,11 @@
   },
   "Navigation": {
     "home": "Home",
+    "subtitles": "Subtitles",
+    "about": "About",
+    "dashboard": "My account",
     "login": "Login",
     "register": "Register",
-    "dashboard": "My account",
-    "about": "About",
     "logout": "Log out"
   },
   "Footer": {
