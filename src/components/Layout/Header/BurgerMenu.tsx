@@ -1,4 +1,4 @@
-import { SetStateAction, FC, Dispatch } from 'react'
+import { SetStateAction, Dispatch } from 'react'
 import cn from 'classnames'
 import styles from './BurgerMenu.module.scss'
 import { useEventListener } from '@/hooks/useEventListener'
@@ -7,9 +7,10 @@ interface PropTypes {
   toggled: boolean
   navbar: boolean
   setToggled: Dispatch<SetStateAction<boolean>>
+  className?: string
 }
 
-const BurgerMenu = ({ toggled, setToggled, navbar }: PropTypes) => {
+const BurgerMenu = ({ toggled, setToggled, navbar, className }: PropTypes) => {
   // On/Off menu button
   const toggleMenu = (): void => setToggled(!toggled)
 
@@ -22,7 +23,7 @@ const BurgerMenu = ({ toggled, setToggled, navbar }: PropTypes) => {
 
   return (
     <div
-      className={cn(styles.icon, { [styles.toggled]: toggled })}
+      className={cn(styles.icon, { [styles.toggled]: toggled }, className)}
       onClick={toggleMenu}
       data-testid="burger-menu"
       aria-label="Menu"
