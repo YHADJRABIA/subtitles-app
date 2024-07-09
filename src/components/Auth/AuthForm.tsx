@@ -22,7 +22,6 @@ import GoogleLogin from '@/components/Auth/GoogleLogin'
 import { handleGoogleLogin } from '@/lib/auth/actions'
 import InfoBox from '../UI/InfoBox'
 import Typography from '../UI/Typography'
-import LanguageMenu from '../Layout/LanguageMenu'
 import useInfo from '@/hooks/useInfo'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -106,7 +105,6 @@ function AuthForm<T>({ type, onSubmit }: PropTypes<T>) {
       noValidate
       className={styles.root}
     >
-      <LanguageMenu />
       <Typography className={styles.title} tag="h1" weight="semiBold">
         {t(isRegisterForm ? 'Register.title' : 'Login.title')}
       </Typography>
