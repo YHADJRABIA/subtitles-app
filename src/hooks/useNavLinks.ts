@@ -1,3 +1,4 @@
+import { handleLogout } from '@/lib/auth/actions'
 import { useTranslations } from 'next-intl'
 
 import {
@@ -44,9 +45,9 @@ const useNavLinks = ({ isConnected }: PropTypes) => {
             icon: DashboardIcon,
           },
           {
-            url: '/logout',
             label: t('logout'),
             icon: LogoutIcon,
+            onClick: handleLogout,
           },
         ]
       : [
