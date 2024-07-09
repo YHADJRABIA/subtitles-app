@@ -1,0 +1,26 @@
+.root {
+  @include flexCenter(row);
+  @include respond-to('small') {
+    &:not(:last-of-type) {
+      margin-bottom: 2rem;
+    }
+  }
+
+  @include respond-to('medium') {
+    &:not(:first-of-type) {
+      margin-left: 2rem;
+    }
+  }
+}
+
+.label {
+  color: var(--primary-white-color);
+  transition: color 0.3s ease-in-out;
+  &:hover,
+  &.isActive {
+    color: var(--primary-yellow-color);
+  }
+}
+.icon {
+  margin-right: 1.5rem;
+}
