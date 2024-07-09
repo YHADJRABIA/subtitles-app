@@ -1,7 +1,7 @@
 import React from 'react'
 import LanguageMenu from '../LanguageMenu'
 import styles from './Header.module.scss'
-import Nav from './Nav'
+import Nav from './Nav/Nav'
 import AuthSection from './AuthSection'
 import Logo from './Logo'
 
@@ -14,7 +14,7 @@ const Header = ({ isConnected }: PropTypes) => {
     <header className={styles.root}>
       <Logo />
 
-      <Nav className={styles.nav} />
+      <Nav className={styles.nav} isConnected={isConnected} />
       {/*       <AuthSection showAccount={isConnected} className={styles.authSection} /> */}
       {/*  <LanguageMenu className={styles.languageMenu} /> */}
     </header>
