@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react'
 import styles from './layout.module.scss'
 import { getTranslations } from 'next-intl/server'
+import LanguageMenu from '@/components/Layout/LanguageMenu'
 
 export const generateMetadata = async () => {
   const t = await getTranslations({ namespace: 'Metadata.Auth' })
@@ -15,7 +16,14 @@ interface PropTypes {
   children: ReactNode
 }
 const layout = ({ children }: PropTypes) => {
-  return <main className={styles.root}>{children}</main>
+  return (
+    <div className={styles.root}>
+      <main className={styles.main}>
+        <LanguageMenu className={styles.languageMenu} />
+        {children}
+      </main>
+    </div>
+  )
 }
 
 export default layout
