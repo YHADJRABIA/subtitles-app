@@ -24,7 +24,6 @@ import {
   SendEmailVerificationValidator,
 } from '@/types/schemas/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
-import LanguageMenu from '../Layout/LanguageMenu'
 import { useTranslations } from 'next-intl'
 import { handleSendVerificationEmail } from '@/lib/auth/actions'
 import { Link } from '@/lib/i18n/navigation'
@@ -63,18 +62,12 @@ const SendVerificationEmailForm = () => {
   }
 
   return (
-    <form
-      method="POST"
-      onSubmit={handleSubmit(handleVerify)}
-      noValidate
-      className={styles.root}
-    >
-      <LanguageMenu />
-      <Typography tag="h1" weight="semiBold" className={styles.title}>
-        {t('SendVerificationEmail.title')}
-      </Typography>
-
+    <form method="POST" onSubmit={handleSubmit(handleVerify)} noValidate>
       <div className={styles.wrapper}>
+        <Typography tag="h1" weight="semiBold" className={styles.title}>
+          {t('SendVerificationEmail.title')}
+        </Typography>
+
         <InfoBox
           icon={<InfoIcon style={{ fontSize: 18 }} />}
           label={info.label}

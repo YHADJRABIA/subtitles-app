@@ -24,7 +24,6 @@ import {
   PasswordResetSchema,
   PasswordResetValidator,
 } from '@/types/schemas/auth'
-import LanguageMenu from '@/components/Layout/LanguageMenu'
 
 const PasswordResetForm = () => {
   const searchParams = useSearchParams()
@@ -77,12 +76,10 @@ const PasswordResetForm = () => {
       noValidate
       className={styles.root}
     >
-      <LanguageMenu />
-      <Typography tag="h1" weight="semiBold" className={styles.title}>
-        {t('PasswordReset.title')}
-      </Typography>
-
       <div className={styles.wrapper}>
+        <Typography tag="h1" weight="semiBold" className={styles.title}>
+          {t('PasswordReset.title')}
+        </Typography>
         <InfoBox
           icon={<InfoIcon style={{ fontSize: 18 }} />}
           label={info.label}
