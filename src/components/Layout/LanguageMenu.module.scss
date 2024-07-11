@@ -17,6 +17,7 @@
   li {
     cursor: pointer;
     @include flexCenter(row, flex-start);
+    flex-wrap: nowrap;
     transition: opacity 0.3s ease;
     padding: 1rem;
     width: 100%;
