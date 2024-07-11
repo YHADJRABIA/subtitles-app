@@ -103,13 +103,11 @@ function AuthForm<T>({ type, onSubmit }: PropTypes<T>) {
       method="POST"
       onSubmit={handleSubmit(handleAuth as SubmitHandler<FieldValues>)}
       noValidate
-      className={styles.root}
     >
-      <Typography className={styles.title} tag="h1" weight="semiBold">
-        {t(isRegisterForm ? 'Register.title' : 'Login.title')}
-      </Typography>
-
       <div className={styles.wrapper}>
+        <Typography className={styles.title} tag="h1" weight="semiBold">
+          {t(isRegisterForm ? 'Register.title' : 'Login.title')}
+        </Typography>
         <InfoBox
           icon={<InfoIcon style={{ fontSize: 18 }} />}
           label={info.label}
@@ -196,7 +194,7 @@ function AuthForm<T>({ type, onSubmit }: PropTypes<T>) {
           label={t('continue_with_google')}
         />
       </div>
-      <Typography className={styles.link}>
+      <Typography>
         {t.rich(isRegisterForm ? 'Register.fallback' : 'Login.fallback', {
           link: text => (
             <Link href={isRegisterForm ? '/login' : '/register'}>{text}</Link>

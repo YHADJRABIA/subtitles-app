@@ -24,7 +24,6 @@ import {
 } from '@/types/schemas/auth'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import useInfo from '@/hooks/useInfo'
-import LanguageMenu from '@/components/Layout/LanguageMenu'
 import { useTranslations } from 'next-intl'
 import { handleSendPasswordRecoveryEmail } from '@/lib/auth/actions'
 import { Link } from '@/lib/i18n/navigation'
@@ -68,12 +67,10 @@ const PasswordRecoveryForm = () => {
       noValidate
       className={styles.root}
     >
-      <LanguageMenu />
-      <Typography className={styles.title} tag="h1" weight="semiBold">
-        {t('PasswordRecovery.title')}
-      </Typography>
-
       <div className={styles.wrapper}>
+        <Typography className={styles.title} tag="h1" weight="semiBold">
+          {t('PasswordRecovery.title')}
+        </Typography>
         <InfoBox
           className={styles.infoBox}
           icon={<InfoIcon style={{ fontSize: 18 }} />}
