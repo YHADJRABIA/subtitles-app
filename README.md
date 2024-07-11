@@ -1,3 +1,6 @@
-# stocks-app
+# subtitles-app
 
-Fullstack financial Next.js app (React/Node.js) with authentication system coupled with MongoDB
+Internationalised fullstack Next.js application (React/Node.js) with MongoDB:
+- Authentication system using JWT (register, login, password recovery, email verification...etc);
+- authentication-protected dashboard section;
+- public section.
