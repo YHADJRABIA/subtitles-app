@@ -3,9 +3,13 @@ import styles from './Logo.module.scss'
 import React from 'react'
 import Image from 'next/image'
 
-const Logo = () => {
+interface PropsType {
+  className?: string
+}
+
+const Logo = ({ className }: PropsType) => {
   return (
-    <Link href="/">
+    <Link href="/" className={className}>
       <Image
         src="/logo.svg"
         width={75}
