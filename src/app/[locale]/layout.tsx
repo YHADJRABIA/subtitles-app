@@ -12,7 +12,7 @@ const familjenGrotesk = Familjen_Grotesk({
 })
 
 export const metadata: Metadata = {
-  title: 'Stocks app',
+  title: 'Subtitles app',
   description: 'Update description here',
 }
 
