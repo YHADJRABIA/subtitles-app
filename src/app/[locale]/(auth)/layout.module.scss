@@ -1,3 +1,46 @@
 .root {
   background-color: var(--primary-gray-color);
+  width: 100%;
+  height: 100%;
+  @include flexCenter(column, space-evenly);
+  flex-wrap: nowrap;
+}
+
+.main {
+  position: relative;
+  background-color: var(--primary-white-color);
+  @include flexCenter(column, space-evenly);
+  flex-wrap: nowrap;
+  width: inherit;
+
+  @include respond-to('medium') {
+    height: min-content;
+    width: 70rem;
+    border-radius: 3rem;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+  }
+
+  form {
+    & > :first-child {
+      margin-top: 4rem;
+    }
+    & > :last-child {
+      margin-bottom: 2rem;
+    }
+    @include flexCenter(column, space-evenly);
+
+    @include respond-to('small') {
+      width: inherit;
+      height: stretch;
+    }
+    @include respond-to('medium') {
+      padding-top: 4rem;
+    }
+  }
+}
+
+.top {
+  padding: 1rem 2rem;
+  width: 100%;
+  @include flexCenter(row, space-between);
 }
