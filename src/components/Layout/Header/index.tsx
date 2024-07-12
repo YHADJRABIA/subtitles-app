@@ -12,7 +12,7 @@ interface PropTypes {
 const Header = ({ isConnected }: PropTypes) => {
   return (
     <header className={styles.root}>
-      <Logo />
+      <Logo isInvertedColor size={50} />
 
       <Nav className={styles.nav} isConnected={isConnected} />
       {/*       <AuthSection showAccount={isConnected} className={styles.authSection} /> */}
