@@ -5,16 +5,19 @@ import Image from 'next/image'
 
 interface PropsType {
   className?: string
+  size?: number
+  isInvertedColor?: boolean // TODO: make colour dynamic
 }
 
-const Logo = ({ className }: PropsType) => {
+const Logo = ({ className, size, isInvertedColor }: PropsType) => {
   return (
     <Link href="/" className={className}>
       <Image
         src="/logo.svg"
-        width={75}
-        height={75}
+        width={size ?? 65}
+        height={size ?? 65}
         alt="Logo"
+        style={isInvertedColor ? { filter: 'invert(100%)' } : undefined}
         className={styles.root}
       />
     </Link>
