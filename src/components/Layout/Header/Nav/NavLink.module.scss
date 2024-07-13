@@ -10,6 +10,7 @@
     &:not(:first-of-type) {
       margin-left: 2rem;
     }
+    cursor: pointer;
   }
 }
 
@@ -23,4 +24,7 @@
 }
 .icon {
   margin-right: 1.5rem;
+  @include respond-to('medium') {
+    display: none;
+  }
 }
