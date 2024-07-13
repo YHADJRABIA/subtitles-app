@@ -29,7 +29,7 @@ const LanguageMenu = ({ className, isInverted = false }: PropTypes) => {
     isPending,
   } = useChangeLanguage()
 
-  useOnClickOutside(ref, handleClose) // Closes language menu if user clicks outside of it
+  useOnClickOutside(ref, handleClose) // Closes language menu if user clicks outside of ref
 
   return (
     <div ref={ref} className={cn(styles.root, className)}>
