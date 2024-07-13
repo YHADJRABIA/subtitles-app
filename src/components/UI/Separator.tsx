@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './Separator.module.scss'
+import cn from 'classnames'
 
 type PropTypes =
   | { label: string; color?: false }
@@ -10,14 +11,18 @@ type PropTypes =
  * Continuous if no label provided.
  * With gap in the middle if label provided.
  */
-const Separator = ({ label, color }: PropTypes) => {
+const Separator = ({
+  label,
+  color,
+  className,
+}: PropTypes & { className?: string }) => {
   return label ? (
-    <div className={styles.labelSeparator}>
+    <div className={cn(styles.labelSeparator, className)}>
       <span>{label}</span>
     </div>
   ) : (
     <hr
-      className={styles.separator}
+      className={cn(styles.separator, className)}
       style={{ borderColor: color || 'var(--primary-black-color)' }}
     />
   )
