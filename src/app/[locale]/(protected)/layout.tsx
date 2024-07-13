@@ -19,7 +19,7 @@ interface PropTypes {
 const ProtectedLayout = ({ children }: PropTypes) => {
   return (
     <>
-      <Header isConnected={true} />
+      <Header isConnected />
       <main className={styles.root}>{children}</main>
       <Footer />
     </>
