@@ -41,7 +41,9 @@ const LanguageMenu = ({ className, isInverted = false }: PropTypes) => {
           alt={currentLanguage.label}
           className={styles.flag}
         />
-        <span className={styles.label}>{currentLanguage.value}</span>
+        <Typography size="xs" tag="span" uppercase className={styles.label}>
+          {currentLanguage.value}
+        </Typography>
         <CaretIcon
           size={15}
           className={cn(styles.toggler, { verticalFlip: isOpen })}
@@ -72,6 +74,7 @@ const LanguageMenu = ({ className, isInverted = false }: PropTypes) => {
               />
               <Typography
                 tag="span"
+                size="xs"
                 weight={isSelected ? 'semiBold' : undefined}
                 className={styles.label}
               >
