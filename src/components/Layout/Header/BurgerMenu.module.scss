@@ -9,10 +9,6 @@
     margin: 0.5rem 0;
     background-color: var(--primary-white-color);
     transition: all 0.3s ease;
-
-    &.active {
-      background-color: var(--primary-white-color);
-    }
   }
 
   @include respond-to('medium') {

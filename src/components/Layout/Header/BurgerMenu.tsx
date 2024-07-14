@@ -5,12 +5,12 @@ import { useEventListener } from '@/hooks/useEventListener'
 
 interface PropTypes {
   toggled: boolean
-  navbar: boolean
+
   setToggled: Dispatch<SetStateAction<boolean>>
   className?: string
 }
 
-const BurgerMenu = ({ toggled, setToggled, navbar, className }: PropTypes) => {
+const BurgerMenu = ({ toggled, setToggled, className }: PropTypes) => {
   // On/Off menu button
   const toggleMenu = (): void => setToggled(!toggled)
 
@@ -31,7 +31,7 @@ const BurgerMenu = ({ toggled, setToggled, navbar, className }: PropTypes) => {
       aria-controls="navigation"
     >
       {[1, 2, 3].map(i => (
-        <div className={cn(styles.line, { active: navbar })} key={i}></div>
+        <div className={cn(styles.line)} key={i}></div>
       ))}
     </div>
   )
