@@ -1,8 +1,6 @@
 import React from 'react'
-import LanguageMenu from '../LanguageMenu'
 import styles from './Header.module.scss'
-import Nav from './Nav/Nav'
-import AuthSection from './AuthSection'
+import Nav from './Nav'
 import Logo from './Logo'
 
 interface PropTypes {
@@ -15,8 +13,6 @@ const Header = ({ isConnected }: PropTypes) => {
       <Logo isInvertedColor size={50} />
 
       <Nav className={styles.nav} isConnected={isConnected} />
-      {/*       <AuthSection showAccount={isConnected} className={styles.authSection} /> */}
-      {/*  <LanguageMenu className={styles.languageMenu} /> */}
     </header>
   )
 }
