@@ -1,0 +1,55 @@
+.menu {
+  @include flexCenter(column, flex-start);
+  padding: 3rem;
+  position: absolute;
+  overflow: hidden;
+  top: 8.2rem; // Height of nav
+  left: -120%;
+  opacity: 0;
+  transition: all 0.5s ease-out;
+  transition-property: left, opacity;
+  width: 100%;
+  height: 82%; // TODO: Account for footer's height
+  background-color: var(--primary-black-color);
+  box-shadow:
+    0 3px 5px 0px rgba(255, 255, 255, 0.2),
+    0 -3px 5px 0px rgba(255, 255, 255, 0.2);
+  & > * {
+    width: inherit;
+  }
+
+  @include respond-to('medium') {
+    all: unset;
+    box-sizing: border-box;
+    @include flexCenter(row, flex-start);
+  }
+
+  &.toggled {
+    background-color: var(--primary-black-color);
+    opacity: 1;
+    left: 0;
+    z-index: 999;
+  }
+}
+
+.burgerMenu,
+.separator {
+  @include respond-to('medium') {
+    display: none;
+  }
+}
+
+.links {
+  @include flexCenter(column, space-around, flex-start);
+  align-content: flex-start;
+  @include respond-to('medium') {
+    flex-direction: row;
+  }
+}
+
+.languageMenu {
+  margin-top: auto;
+  @include respond-to('medium') {
+    margin-left: 2rem;
+  }
+}
