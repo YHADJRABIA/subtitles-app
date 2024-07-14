@@ -3,9 +3,16 @@ import React, { ElementType } from 'react'
 import cn from 'classnames'
 import styles from './NavLink.module.scss'
 
+export type NavLinkType = {
+  icon: ElementType
+  label: string
+  url?: string
+  onClick?: () => void
+}
+
 interface PropTypes {
   isActive: boolean
-  link: { icon: ElementType; label: string; url?: string; onClick?: () => void }
+  link: NavLinkType
 }
 
 const NavLink = ({ isActive, link }: PropTypes) => {
@@ -23,6 +30,7 @@ const NavLink = ({ isActive, link }: PropTypes) => {
       />
 
       <Typography
+        size="s"
         weight={isActive ? 'semiBold' : undefined}
         className={cn(styles.label, { [styles.isActive]: isActive })}
         href={link?.url}
