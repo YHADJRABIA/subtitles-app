@@ -107,6 +107,12 @@
       "password_updated": "Password successfully updated!"
     }
   },
+  "Dashboard": {
+    "overview": "Overview",
+    "settings": "Settings",
+    "edit_email": "Edit email",
+    "delete_account": "Delete account"
+  },
   "Zod": {
     "email": {
       "missing": "Missing email",

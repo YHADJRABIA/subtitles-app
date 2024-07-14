@@ -107,6 +107,12 @@
       "password_updated": "Mot de passe mis à jour !"
     }
   },
+  "Dashboard": {
+    "overview": "Aperçu",
+    "settings": "Paramètres",
+    "edit_email": "Modifier email",
+    "delete_account": "Supprimer compte"
+  },
   "Zod": {
     "email": {
       "missing": "Email manquant",
