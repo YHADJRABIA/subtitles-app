@@ -41,7 +41,7 @@ const LanguageMenu = ({ className, isInverted = false }: PropTypes) => {
           alt={currentLanguage.label}
           className={styles.flag}
         />
-        <Typography size="xs" tag="span" uppercase className={styles.label}>
+        <Typography size="xs" tag="span" uppercase>
           {currentLanguage.value}
         </Typography>
         <CaretIcon
