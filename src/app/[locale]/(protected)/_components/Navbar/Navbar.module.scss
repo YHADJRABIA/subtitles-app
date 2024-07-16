@@ -1,0 +1,19 @@
+.root {
+  width: 100%;
+  background-color: var(--primary-gray-color);
+
+  ul {
+    margin-left: 2.5rem;
+    @include flexCenter(row, flex-start, center);
+    height: inherit;
+
+    @include respond-to('medium') {
+      justify-content: center;
+    }
+    li {
+      &:not(:last-of-type) {
+        margin-right: 1.5rem;
+      }
+    }
+  }
+}
