@@ -2,8 +2,7 @@
   width: 100%;
   @include flexCenter(row);
   background-color: var(--primary-black-color);
-  height: 10rem;
-  padding: 0 2.5rem;
+  padding: 0.5rem 2.5rem;
 }
 
 .authSection {
