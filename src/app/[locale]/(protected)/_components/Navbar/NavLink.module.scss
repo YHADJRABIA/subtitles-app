@@ -1,0 +1,14 @@
+.root {
+  @include flexCenter(row);
+  padding: 1rem 0;
+  border-bottom: 2px transparent solid;
+  transition: border-color 0.3s ease;
+}
+.active,
+.root:hover {
+  border-color: var(--primary-black-color);
+}
+
+.icon {
+  margin-right: 0.5rem;
+}
