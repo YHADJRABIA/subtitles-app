@@ -1,9 +1,10 @@
 .root {
   width: 100%;
+  height: 3.8rem;
   background-color: var(--primary-gray-color);
 
   ul {
-    margin-left: 2.5rem;
+    margin-left: 2rem;
     @include flexCenter(row, flex-start, center);
     height: inherit;
 
