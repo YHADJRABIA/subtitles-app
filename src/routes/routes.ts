@@ -20,6 +20,9 @@ export const loginRegisterRoutes = [
 ] satisfies Pathname[]
 
 /** Routes redirecting to '/login' if accessed as unauthenticated user. */
-export const protectedRoutes = ['/dashboard'] satisfies Pathname[]
+export const protectedRoutes = [
+  '/dashboard',
+  '/dashboard/settings',
+] satisfies Pathname[]
 
 export const apiAuthPrefix = '/api/auth' // Routes handled by Next-Auth
