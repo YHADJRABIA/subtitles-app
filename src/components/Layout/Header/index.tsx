@@ -11,7 +11,6 @@ const Header = ({ isConnected }: PropTypes) => {
   return (
     <header className={styles.root}>
       <Logo isInvertedColor size={50} />
-
       <Nav className={styles.nav} isConnected={isConnected} />
     </header>
   )
