@@ -15,10 +15,6 @@ export const pathnames = {
     en: '/dashboard',
     fr: '/tableau-de-bord',
   },
-  '/dashboard/overview': {
-    en: '/dashboard/overview',
-    fr: '/tableau-de-bord/apercu',
-  },
   '/dashboard/settings': {
     en: '/dashboard/settings',
     fr: '/tableau-de-bord/parametres',
