@@ -111,7 +111,8 @@
     "overview": "Overview",
     "settings": "Settings",
     "edit_email": "Edit email",
-    "delete_account": "Delete account"
+    "delete_account": "Delete account",
+    "preferred_language": "Preferred language"
   },
   "Zod": {
     "email": {
