@@ -19,6 +19,7 @@ const Logo = ({ className, size, isInvertedColor }: PropsType) => {
         alt="Logo"
         style={isInvertedColor ? { filter: 'invert(100%)' } : undefined}
         className={styles.root}
+        priority
       />
     </Link>
   )
