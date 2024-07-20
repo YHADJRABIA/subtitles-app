@@ -4,7 +4,7 @@ import GoogleProvider from 'next-auth/providers/google'
 import bycrptjs from 'bcryptjs'
 import { connectDB } from '@/lib/mongodb'
 import { UserModel } from '@/models/user.model'
-import { UserAPIType } from '@/types/user'
+import { ExtendedUser } from '@/types/user'
 import { isDevelopment } from '@/utils/general'
 import { getUserByEmail } from '@/utils/db/user'
 import { getErrorMessage, getZodErrors } from '@/utils/errors'
@@ -16,7 +16,7 @@ import { getLocaleFromNextCookies } from '@/utils/cookies'
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, NEXTAUTH_SECRET } = process.env
 
 interface PropTypes {
-  user: UserAPIType
+  user: ExtendedUser
   account: { provider: string }
 }
 
