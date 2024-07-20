@@ -110,9 +110,12 @@
   "Dashboard": {
     "overview": "Aperçu",
     "settings": "Paramètres",
+    "profile": "Profile",
     "edit_email": "Modifier email",
     "delete_account": "Supprimer compte",
-    "preferred_language": "Langue préférée"
+    "preferred_language": "Langue préférée",
+    "avatar": "Photo de profil",
+    "log_out": "Se déconnecter"
   },
   "Zod": {
     "email": {
