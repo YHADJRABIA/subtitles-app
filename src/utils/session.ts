@@ -1,19 +1,9 @@
-import { User, getServerSession } from 'next-auth'
-
-// TODO: type any
-export const session = async ({ session, token }: any) => {
-  session.user.id = token.id
-  session.user.tenant = token.tenant
-  return session
-}
+import { authOptions } from '@/lib/auth/auth.config'
+import { getServerSession } from 'next-auth'
 
 // Returns current user if authenticated
-export const getUserSession = async (): Promise<User> => {
-  const authUserSession = await getServerSession({
-    callbacks: {
-      session,
-    },
-  })
+export const getUserSession = async () => {
+  const authUserSession = await getServerSession(authOptions)
 
   return authUserSession?.user
 }
