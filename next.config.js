@@ -11,6 +11,17 @@ const nextConfig = {
     includePaths: [path.join(__dirname, 'src/styles')],
     prependData: `@import "utilities.scss";`, // Scss code that'd be prepended to every single scss file.
   },
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '*.googleusercontent.com',
+        port: '',
+        pathname: '**',
+      },
+    ],
+  },
   webpack(config) {
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find(rule =>
