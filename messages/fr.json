@@ -111,10 +111,15 @@
     "overview": "Aperçu",
     "settings": "Paramètres",
     "profile": "Profil",
+    "name": "Nom",
+    "email": "Email",
+    "last_login": "Dernière connexion : ",
+    "registered_since": "Compte créé le : ",
+    "avatar": "Photo de profil",
     "edit_email": "Modifier email",
     "delete_account": "Supprimer compte",
     "preferred_language": "Langue préférée",
-    "avatar": "Photo de profil",
+    "edit": "Modifier",
     "log_out": "Se déconnecter"
   },
   "Zod": {
@@ -133,6 +138,15 @@
     }
   },
   "LanguageMenu": {},
+  "EditableField": {
+    "edit": "Edit",
+    "add": "Ajouter",
+    "cancel": "Annuler"
+  },
+  "Avatar": {
+    "avatar": "Avatar",
+    "default_avatar": "Avatar par défaut"
+  },
   "UseShowPassword": {
     "reveal_password": "Révéler mot de passe",
     "conceal_password": "Masquer mot de passe"
