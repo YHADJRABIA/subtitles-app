@@ -5,24 +5,25 @@ import cn from 'classnames'
 import Image from 'next/image'
 
 interface PropTypes {
-  image?: string | null
+  src?: string | null
   size?: number
   className?: string
 }
 
 const DEFAULT_SIZE = 75
 
-const Avatar = ({ image, size, className }: PropTypes) => {
+const Avatar = ({ src, size, className }: PropTypes) => {
   return (
     <>
-      {image ? (
+      {src ? (
         <Image
-          src={image}
+          src={src}
           alt="Avatar"
           width={size ?? DEFAULT_SIZE}
           height={size ?? DEFAULT_SIZE}
           style={{ objectFit: 'cover' }}
           className={cn(styles.root, className)}
+          priority
         />
       ) : (
         <UserIcon
