@@ -1,10 +1,10 @@
-import { NextAuthOptions } from 'next-auth'
+import { NextAuthOptions, Session } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GoogleProvider from 'next-auth/providers/google'
 import bycrptjs from 'bcryptjs'
 import { connectDB } from '@/lib/mongodb'
 import { UserModel } from '@/models/user.model'
-import { ExtendedUser } from '@/types/user'
+import { UserAPIType } from '@/types/user'
 import { isDevelopment } from '@/utils/general'
 import { getUserByEmail } from '@/utils/db/user'
 import { getErrorMessage, getZodErrors } from '@/utils/errors'
@@ -16,7 +16,8 @@ import { getLocaleFromNextCookies } from '@/utils/cookies'
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, NEXTAUTH_SECRET } = process.env
 
 interface PropTypes {
-  user: ExtendedUser
+  user: UserAPIType
+  session: Session
   account: { provider: string }
 }
 
@@ -125,8 +126,9 @@ export const authOptions: NextAuthOptions = {
       if (!user) return token // Logged out
 
       const isVerifiedEmail = !!user.emailVerified
+      const { createdAt, lastLogin } = user
 
-      return { ...token, isVerifiedEmail } // Passing down token to session
+      return { ...token, isVerifiedEmail, createdAt, lastLogin } // Passing down token to session
     },
 
     // Called after jwt
@@ -137,6 +139,8 @@ export const authOptions: NextAuthOptions = {
           ...session.user,
           id: token.sub,
           isVerifiedEmail: token.isVerifiedEmail,
+          creationDate: token.createdAt,
+          lastLoginDate: token.lastLogin,
         },
       }
     },
