@@ -1,8 +1,17 @@
 import { DefaultSession } from 'next-auth'
 
-export type UserAPIType = {
+export type UserType = {
   email: string
-  emailVerified?: Date
+  isVerifiedEmail: boolean
+  creationDate: Date
+  lastLoginDate?: Date
 }
 
-export type ExtendedUser = DefaultSession['user'] & UserAPIType
+export type UserAPIType = DefaultSession['user'] & {
+  email: string
+  emailVerified?: Date
+  createdAt: Date
+  lastLogin?: Date
+}
+
+export type ExtendedUser = DefaultSession['user'] & UserType
