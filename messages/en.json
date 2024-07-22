@@ -110,12 +110,12 @@
   "Dashboard": {
     "overview": "Overview",
     "settings": "Settings",
+    "account": "Account",
     "profile": "Profile",
     "name": "Name",
     "email": "Email",
-    "last_login": "Last login:",
-    "registered_since": "Registered since:",
-    "avatar": "Profile image",
+    "last_login": "Last login: {date}",
+    "registered_since": "Registred since: {date}",
     "edit_email": "Edit email",
     "delete_account": "Delete account",
     "preferred_language": "Preferred language",
@@ -144,8 +144,10 @@
     "cancel": "Cancel"
   },
   "Avatar": {
-    "avatar": "Avatar",
-    "default_avatar": "Default avatar"
+    "avatar": "Profile image"
+  },
+  "EditableAvatar": {
+    "edit": "Edit image"
   },
   "UseShowPassword": {
     "reveal_password": "Reveal password",

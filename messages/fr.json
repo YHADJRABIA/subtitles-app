@@ -110,12 +110,12 @@
   "Dashboard": {
     "overview": "Aperçu",
     "settings": "Paramètres",
+    "account": "Compte",
     "profile": "Profil",
     "name": "Nom",
     "email": "Email",
-    "last_login": "Dernière connexion : ",
-    "registered_since": "Compte créé le : ",
-    "avatar": "Photo de profil",
+    "last_login": "Dernière connexion : {date}",
+    "registered_since": "Compte créé le : {date}",
     "edit_email": "Modifier email",
     "delete_account": "Supprimer compte",
     "preferred_language": "Langue préférée",
@@ -144,8 +144,10 @@
     "cancel": "Annuler"
   },
   "Avatar": {
-    "avatar": "Avatar",
-    "default_avatar": "Avatar par défaut"
+    "avatar": "Photo de profil"
+  },
+  "EditableAvatar": {
+    "edit": "Modifier photo"
   },
   "UseShowPassword": {
     "reveal_password": "Révéler mot de passe",
