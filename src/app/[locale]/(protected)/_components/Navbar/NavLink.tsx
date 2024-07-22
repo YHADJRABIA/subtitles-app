@@ -11,6 +11,8 @@ interface PropTypes {
   className?: string
 }
 
+// TODO: add type and unify with homepage's navlink
+
 const NavLink = ({ link, isActive, className }: PropTypes) => {
   const Icon = link.icon
   return (
