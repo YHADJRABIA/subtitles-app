@@ -1,5 +1,5 @@
 import { PORTFOLIO_LINK } from '@/utils/general'
-import { getCurrentYear } from '@/utils/time'
+import { getCurrentYear } from '@/utils/date'
 import { useTranslations } from 'next-intl'
 import styles from './Footer.module.scss'
 import Link from 'next/link'

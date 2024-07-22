@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import { getErrorMessage, getZodErrors } from '@/utils/errors'
 import { getUserByEmail } from '@/utils/db/user'
-import { hasExpired } from '@/utils/time'
+import { hasExpired } from '@/utils/date'
 import {
   deletePasswordResetTokenById,
   getPasswordResetTokenByToken,
