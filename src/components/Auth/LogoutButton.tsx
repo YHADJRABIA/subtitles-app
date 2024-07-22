@@ -2,6 +2,9 @@
 import React from 'react'
 import Button from '../UI/Button'
 import { handleLogout } from '@/lib/auth/actions'
+import cn from 'classnames'
+import styles from './LogoutButton.module.scss'
+import Typography from '../UI/Typography'
 
 interface PropTypes {
   className?: string
@@ -10,8 +13,14 @@ interface PropTypes {
 
 const LogoutButton = ({ className, label }: PropTypes) => {
   return (
-    <Button className={className} onClick={handleLogout}>
-      {label}
+    <Button
+      className={cn(styles.root, className)}
+      variation="secondary"
+      onClick={handleLogout}
+    >
+      <Typography size="xs" weight="semiBold">
+        {label}
+      </Typography>
     </Button>
   )
 }
