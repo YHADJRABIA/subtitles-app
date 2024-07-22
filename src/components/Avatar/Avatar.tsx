@@ -1,8 +1,8 @@
 import React from 'react'
 import styles from './Avatar.module.scss'
-import { PiUserThin as UserIcon } from 'react-icons/pi'
 import cn from 'classnames'
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 
 interface PropTypes {
   src?: string | null
@@ -10,29 +10,23 @@ interface PropTypes {
   className?: string
 }
 
-const DEFAULT_SIZE = 75
+const PLACEHOLDER = '/avatar/default-avatar.svg'
 
 const Avatar = ({ src, size, className }: PropTypes) => {
+  const t = useTranslations('Avatar')
+  const hasAvatar = !!src
+  const defaultSize = hasAvatar ? 75 : 65
   return (
-    <>
-      {src ? (
-        <Image
-          src={src}
-          alt="Avatar"
-          width={size ?? DEFAULT_SIZE}
-          height={size ?? DEFAULT_SIZE}
-          style={{ objectFit: 'cover' }}
-          className={cn(styles.root, className)}
-          priority
-        />
-      ) : (
-        <UserIcon
-          size={26}
-          color="var(--primary-black-color)"
-          className={cn(styles.root, className)}
-        />
-      )}
-    </>
+    <Image
+      src={hasAvatar ? src : PLACEHOLDER}
+      alt={t('avatar')}
+      title={t('avatar')}
+      width={size ?? defaultSize}
+      height={size ?? defaultSize}
+      style={{ objectFit: 'cover' }}
+      className={cn(styles.root, className)}
+      priority
+    />
   )
 }
 
