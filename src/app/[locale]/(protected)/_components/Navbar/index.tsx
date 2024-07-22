@@ -4,6 +4,7 @@ import styles from './Navbar.module.scss'
 import {
   LuUserSquare2 as OverviewIcon,
   LuSettings as SettingsIcon,
+  LuInfo as InfoIcon,
 } from 'react-icons/lu'
 import { useTranslations } from 'next-intl'
 import NavLink from './NavLink'
@@ -22,6 +23,11 @@ const Navbar = () => {
       url: '/dashboard/settings',
       label: t('settings'),
       icon: SettingsIcon,
+    },
+    {
+      url: '/dashboard/account',
+      label: t('account'),
+      icon: InfoIcon,
     },
   ]
   return (
