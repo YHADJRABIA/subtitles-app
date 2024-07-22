@@ -1,5 +1,7 @@
 .root {
+  @include flexCenter(column, flex-start);
   align-content: stretch;
+  padding: 2rem;
 }
 
 .sidebar {
