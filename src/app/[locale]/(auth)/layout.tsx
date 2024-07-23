@@ -3,9 +3,12 @@ import styles from './layout.module.scss'
 import { getTranslations } from 'next-intl/server'
 import LanguageMenu from '@/components/Layout/LanguageMenu'
 import Logo from '@/components/Layout/Header/Logo'
+import { getNextLocale } from '@/utils/cookies'
 
 export const generateMetadata = async () => {
-  const t = await getTranslations({ namespace: 'Metadata.Auth' })
+  const locale = getNextLocale()
+
+  const t = await getTranslations({ locale, namespace: 'Metadata.Auth' })
 
   return {
     title: t('title'),

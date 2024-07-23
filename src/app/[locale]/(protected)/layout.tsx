@@ -3,9 +3,12 @@ import styles from './layout.module.scss'
 import { getTranslations } from 'next-intl/server'
 import Header from '@/components/Layout/Header'
 import Footer from '@/components/Layout/Footer'
+import Navbar from './_components/Navbar'
+import { getNextLocale } from '@/utils/cookies'
 
 export const generateMetadata = async () => {
-  const t = await getTranslations({ namespace: 'Metadata.Protected' })
+  const locale = getNextLocale()
+  const t = await getTranslations({ locale, namespace: 'Metadata.Protected' })
 
   return {
     title: t('title'),
@@ -20,7 +23,12 @@ const ProtectedLayout = ({ children }: PropTypes) => {
   return (
     <>
       <Header isConnected />
-      <main className={styles.root}>{children}</main>
+      <Navbar />
+
+      <main className={styles.root}>
+        {/*         <Sidebar className={styles.sidebar} /> */}
+        {children}
+      </main>
       <Footer />
     </>
   )

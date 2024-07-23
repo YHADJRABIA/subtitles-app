@@ -3,9 +3,11 @@ import { getTranslations } from 'next-intl/server'
 import Header from '@/components/Layout/Header/index'
 import Footer from '@/components/Layout/Footer'
 import { getUserSession } from '@/utils/session'
+import { getNextLocale } from '@/utils/cookies'
 
 export const generateMetadata = async () => {
-  const t = await getTranslations({ namespace: 'Metadata.Homepage' })
+  const locale = getNextLocale()
+  const t = await getTranslations({ locale, namespace: 'Metadata.Homepage' })
 
   return {
     title: t('title'),
