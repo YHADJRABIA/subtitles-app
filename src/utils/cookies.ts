@@ -1,6 +1,7 @@
 import { defaultLocale } from '@/lib/i18n/navigation'
 import { RequestCookies } from 'next/dist/compiled/@edge-runtime/cookies'
 import { ReadonlyRequestCookies } from 'next/dist/server/web/spec-extension/adapters/request-cookies'
+import { cookies } from 'next/headers'
 import { NextRequest } from 'next/server'
 
 /**
@@ -23,4 +24,9 @@ export const getLocaleFromNextRequest = (req: NextRequest) => {
 
 export const getLocaleFromNextCookies = (cookies: ReadonlyRequestCookies) => {
   return getLocaleFromNextCookie(cookies)
+}
+
+export const getNextLocale = () => {
+  const nextCookies = cookies()
+  return getLocaleFromNextCookies(nextCookies)
 }

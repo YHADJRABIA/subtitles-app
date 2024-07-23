@@ -10,8 +10,7 @@ import { getUserByEmail } from '@/utils/db/user'
 import { getErrorMessage, getZodErrors } from '@/utils/errors'
 import { AccountLoginValidator } from '@/types/schemas/auth'
 import { getTranslations } from 'next-intl/server'
-import { cookies } from 'next/headers'
-import { getLocaleFromNextCookies } from '@/utils/cookies'
+import { getNextLocale } from '@/utils/cookies'
 
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, NEXTAUTH_SECRET } = process.env
 
@@ -56,8 +55,7 @@ export const authOptions: NextAuthOptions = {
 
       // Runs on credential login (with email & password)
       async authorize(credentials) {
-        const nextCookies = cookies()
-        const locale = getLocaleFromNextCookies(nextCookies)
+        const locale = getNextLocale()
 
         const [t_zod, t] = [
           await getTranslations({ locale, namespace: 'Zod' }),
@@ -126,9 +124,9 @@ export const authOptions: NextAuthOptions = {
       if (!user) return token // Logged out
 
       const isVerifiedEmail = !!user.emailVerified
-      const { createdAt, lastLogin } = user
+      const { createdAt, lastLogin, updatedAt } = user
 
-      return { ...token, isVerifiedEmail, createdAt, lastLogin } // Passing down token to session
+      return { ...token, isVerifiedEmail, createdAt, lastLogin, updatedAt } // Passing down token to session
     },
 
     // Called after jwt
@@ -140,14 +138,14 @@ export const authOptions: NextAuthOptions = {
           id: token.sub,
           isVerifiedEmail: token.isVerifiedEmail,
           creationDate: token.createdAt,
+          lastUpdateDate: token.updatedAt,
           lastLoginDate: token.lastLogin,
         },
       }
     },
 
     async signIn({ user, account }: PropTypes) {
-      const nextCookies = cookies()
-      const locale = getLocaleFromNextCookies(nextCookies)
+      const locale = getNextLocale()
 
       const t = await getTranslations({
         locale,
