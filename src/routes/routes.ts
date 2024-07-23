@@ -23,6 +23,7 @@ export const loginRegisterRoutes = [
 export const protectedRoutes = [
   '/dashboard',
   '/dashboard/settings',
+  '/dashboard/account',
 ] satisfies Pathname[]
 
 export const apiAuthPrefix = '/api/auth' // Routes handled by Next-Auth
