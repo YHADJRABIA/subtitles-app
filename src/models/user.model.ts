@@ -21,6 +21,12 @@ const userSchema = new Schema(
 
     lastLogin: Date,
 
+    favoriteLocale: {
+      type: String,
+      enum: ['en', 'fr'],
+      default: 'en',
+    },
+
     role: {
       type: Number,
       default: 0, // 0 = user, 1 = admin
