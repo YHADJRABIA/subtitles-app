@@ -17,7 +17,11 @@ export const pathnames = {
   },
   '/dashboard/settings': {
     en: '/dashboard/settings',
-    fr: '/tableau-de-bord/parametres',
+    fr: '/tableau-de-bord/reglages',
+  },
+  '/dashboard/account': {
+    en: '/dashboard/account',
+    fr: '/tableau-de-bord/compte',
   },
   '/register': {
     en: '/register',
