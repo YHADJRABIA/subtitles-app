@@ -109,18 +109,26 @@
   },
   "Dashboard": {
     "overview": "Aperçu",
-    "settings": "Paramètres",
+    "settings": "Réglages",
     "account": "Compte",
-    "profile": "Profil",
+    "title": "Profil",
     "name": "Nom",
     "email": "Email",
-    "last_login": "Dernière connexion : {date}",
-    "registered_since": "Compte créé le : {date}",
     "edit_email": "Modifier email",
-    "delete_account": "Supprimer compte",
-    "preferred_language": "Langue préférée",
     "edit": "Modifier",
-    "log_out": "Se déconnecter"
+    "log_out": "Se déconnecter",
+    "Settings": {
+      "title": "Réglages",
+      "edit_password": "Modifier mot de passe",
+      "preferred_language": "Langue préférée : "
+    },
+    "Account": {
+      "title": "Compte",
+      "last_login": "Dernière connexion : ",
+      "registered_since": "Date de création : ",
+      "last_update": "Dernière modification : ",
+      "delete_account": "Supprimer compte"
+    }
   },
   "Zod": {
     "email": {

@@ -111,16 +111,24 @@
     "overview": "Overview",
     "settings": "Settings",
     "account": "Account",
-    "profile": "Profile",
+    "title": "Profile",
     "name": "Name",
     "email": "Email",
-    "last_login": "Last login: {date}",
-    "registered_since": "Registred since: {date}",
     "edit_email": "Edit email",
-    "delete_account": "Delete account",
-    "preferred_language": "Preferred language",
     "edit": "Edit",
-    "log_out": "Log out"
+    "log_out": "Log out",
+    "Settings": {
+      "title": "Settings",
+      "edit_password": "Edit password",
+      "preferred_language": "Preferred language:"
+    },
+    "Account": {
+      "title": "Account",
+      "last_login": "Last login:",
+      "registered_since": "Registred since:",
+      "last_update": "Last update:",
+      "delete_account": "Delete account"
+    }
   },
   "Zod": {
     "email": {
