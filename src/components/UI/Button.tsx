@@ -8,6 +8,7 @@ interface PropTypes extends ButtonHTMLAttributes<HTMLButtonElement> {
   isLoading?: boolean
   isFullWidth?: boolean
   variation?: 'primary' | 'secondary' | 'regular'
+  backgroundColor?: string
 }
 
 const Button = ({
@@ -19,6 +20,7 @@ const Button = ({
   type = 'button',
   isFullWidth = true,
   className,
+  backgroundColor,
   ...rest
 }: PropTypes) => {
   const isPrimary = variation === 'primary'
@@ -41,6 +43,7 @@ const Button = ({
       )}
       data-testid={testId}
       disabled={!isClickeable}
+      style={{ backgroundColor: backgroundColor ?? undefined }}
     >
       {isLoading ? <Loader size={17} /> : children}
     </button>
