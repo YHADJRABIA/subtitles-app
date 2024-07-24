@@ -27,6 +27,11 @@ const userSchema = new Schema(
       default: 'en',
     },
 
+    isTwoFactorEnabled: {
+      type: Boolean,
+      default: false,
+    },
+
     role: {
       type: Number,
       default: 0, // 0 = user, 1 = admin
