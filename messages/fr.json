@@ -107,6 +107,9 @@
       "password_updated": "Mot de passe mis à jour !"
     }
   },
+  "User": {
+    "user_deleted": "Utilisateur supprimé !"
+  },
   "Dashboard": {
     "overview": "Aperçu",
     "settings": "Réglages",
@@ -114,13 +117,14 @@
     "title": "Profil",
     "name": "Nom",
     "email": "Email",
-    "edit_email": "Modifier email",
     "edit": "Modifier",
     "log_out": "Se déconnecter",
     "Settings": {
       "title": "Réglages",
+      "edit_email": "Modifier email",
       "edit_password": "Modifier mot de passe",
-      "preferred_language": "Langue préférée : "
+      "preferred_language": "Langue préférée : ",
+      "two_factor_auth": "Double authentification :"
     },
     "Account": {
       "title": "Compte",

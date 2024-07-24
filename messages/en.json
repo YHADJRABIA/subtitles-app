@@ -107,6 +107,9 @@
       "password_updated": "Password successfully updated!"
     }
   },
+  "User": {
+    "user_deleted": "User successfully deleted!"
+  },
   "Dashboard": {
     "overview": "Overview",
     "settings": "Settings",
@@ -114,13 +117,14 @@
     "title": "Profile",
     "name": "Name",
     "email": "Email",
-    "edit_email": "Edit email",
     "edit": "Edit",
     "log_out": "Log out",
     "Settings": {
       "title": "Settings",
+      "edit_email": "Edit email",
       "edit_password": "Edit password",
-      "preferred_language": "Preferred language:"
+      "preferred_language": "Preferred language:",
+      "two_factor_auth": "Two-factor authentication:"
     },
     "Account": {
       "title": "Account",
