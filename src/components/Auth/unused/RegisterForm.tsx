@@ -21,7 +21,7 @@ import Field from '@/components/Forms/Field'
 
 import { getErrorMessage } from '@/utils/errors'
 import GoogleLogin from '@/components/Auth/GoogleLogin'
-import { handleGoogleLogin } from '@/lib/auth/actions'
+import { handleGoogleLogin } from '@/actions/auth'
 import InfoBox from '../../UI/InfoBox'
 import Typography from '../../UI/Typography'
 import LanguageMenu from '../../Layout/LanguageMenu'

@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import Button from '../UI/Button'
-import { handleLogout } from '@/lib/auth/actions'
+import { handleLogout } from '@/actions/auth'
 import cn from 'classnames'
 import styles from './LogoutButton.module.scss'
 import Typography from '../UI/Typography'

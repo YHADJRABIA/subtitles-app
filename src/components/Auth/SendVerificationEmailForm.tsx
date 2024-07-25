@@ -1,6 +1,5 @@
 'use client'
 import React from 'react'
-import { useRouter } from 'next/navigation'
 import { MdAlternateEmail as EmailIcon } from 'react-icons/md'
 
 import {
@@ -25,13 +24,12 @@ import {
 } from '@/types/schemas/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
-import { handleSendVerificationEmail } from '@/lib/auth/actions'
+import { handleSendVerificationEmail } from '@/actions/auth'
 import { Link } from '@/lib/i18n/navigation'
 
 const SendVerificationEmailForm = () => {
   const [t, t_zod] = [useTranslations('Auth'), useTranslations('Zod')]
 
-  const router = useRouter()
   const { info, setInfoMessage } = useInfo()
   const {
     register,

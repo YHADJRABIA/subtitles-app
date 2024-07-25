@@ -1,5 +1,5 @@
 'use client'
-import { Link } from '@/lib/i18n/navigation'
+import { Link, useRouter } from '@/lib/i18n/navigation'
 import React from 'react'
 import {
   MdLockOutline as PasswordIcon,
@@ -19,7 +19,7 @@ import Field from '@/components/Forms/Field'
 
 import { getErrorMessage } from '@/utils/errors'
 import GoogleLogin from '@/components/Auth/GoogleLogin'
-import { handleGoogleLogin } from '@/lib/auth/actions'
+import { handleGoogleLogin } from '@/actions/auth'
 import InfoBox from '../UI/InfoBox'
 import Typography from '../UI/Typography'
 import useInfo from '@/hooks/useInfo'
@@ -32,7 +32,7 @@ import {
 } from '@/types/schemas/auth'
 import { useTranslations } from 'next-intl'
 import { AxiosResponse } from 'axios'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import { DEFAULT_LOGIN_REDIRECT_ROUTE } from '@/routes/routes'
 
 interface PropTypes<T> {

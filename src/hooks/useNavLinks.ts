@@ -1,4 +1,4 @@
-import { handleLogout } from '@/lib/auth/actions'
+import { handleLogout } from '@/actions/auth'
 import { useTranslations } from 'next-intl'
 
 import {

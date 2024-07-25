@@ -18,7 +18,7 @@ import {
   EmailVerificationValidator,
 } from '@/types/schemas/auth'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
-import { handleVerifyEmailValidationToken } from '@/lib/auth/actions'
+import { handleVerifyEmailValidationToken } from '@/actions/auth'
 import { Link } from '@/lib/i18n/navigation'
 
 const VerifyEmail = () => {

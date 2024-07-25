@@ -25,7 +25,7 @@ import {
 import { SubmitHandler, useForm } from 'react-hook-form'
 import useInfo from '@/hooks/useInfo'
 import { useTranslations } from 'next-intl'
-import { handleSendPasswordRecoveryEmail } from '@/lib/auth/actions'
+import { handleSendPasswordRecoveryEmail } from '@/actions/auth'
 import { Link } from '@/lib/i18n/navigation'
 
 const PasswordRecoveryForm = () => {
