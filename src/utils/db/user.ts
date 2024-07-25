@@ -1,4 +1,10 @@
 import { UserModel } from '@/models/user.model'
 
-export const getUserByEmail = (email: string) => UserModel.findOne({ email })
-export const getUserById = (id: string) => UserModel.findById(id)
+export const getUserByEmail = async (email: string) =>
+  await UserModel.findOne({ email })
+
+export const getUserById = async (id: string) => await UserModel.findById(id)
+
+export const updateNameById = async (id: string, name: string) => {
+  await UserModel.updateOne({ _id: id }, { name })
+}
