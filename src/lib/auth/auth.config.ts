@@ -125,16 +125,18 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user, session, trigger }) {
       // TODO: Check if access token is expired and prompt login if so
 
+      if (!token.sub) return token // Logged out
+
       // Update token according to client session's data
       if (trigger === 'update') {
         // Update name in database
-        if (token.sub && token.name !== session?.name) {
+        if (token.name !== session?.name) {
           await updateNameById(token.sub, session.name)
         }
         return { ...token, ...session }
       }
 
-      // User only defined after authorize
+      // User only defined after authorize (login)
       if (!user) return token // Logged out
       const isVerifiedEmail = !!user.emailVerified
       const { createdAt, lastLogin, updatedAt } = user
