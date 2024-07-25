@@ -6,17 +6,19 @@ import { connectDB } from '@/lib/mongodb'
 import { UserModel } from '@/models/user.model'
 import { UserAPIType } from '@/types/user'
 import { isDevelopment } from '@/utils/general'
-import { getUserByEmail } from '@/utils/db/user'
+import { getUserByEmail, updateNameById } from '@/utils/db/user'
 import { getErrorMessage, getZodErrors } from '@/utils/errors'
 import { AccountLoginValidator } from '@/types/schemas/auth'
 import { getTranslations } from 'next-intl/server'
 import { getNextLocale } from '@/utils/cookies'
+import { JWT } from 'next-auth/jwt'
 
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, NEXTAUTH_SECRET } = process.env
 
 interface PropTypes {
   user: UserAPIType
   session: Session
+  token: JWT
   account: { provider: string }
 }
 
@@ -119,10 +121,19 @@ export const authOptions: NextAuthOptions = {
       return baseUrl
     },
 
-    // Called after authorize (or after JWT is created or updated), user is only populated on login
-    jwt({ token, user }) {
-      if (!user) return token // Logged out
+    // Called after JWT is created (on login) or updated (client session is accessed)
+    async jwt({ token, user, session, trigger }) {
+      // Update token according to client session's data
+      if (trigger === 'update') {
+        // Update name in database
+        if (token.sub && token.name !== session?.name) {
+          await updateNameById(token.sub, session.name)
+        }
+        return { ...token, ...session }
+      }
 
+      // User only defined after authorize
+      if (!user) return token // Logged out
       const isVerifiedEmail = !!user.emailVerified
       const { createdAt, lastLogin, updatedAt } = user
 
@@ -136,6 +147,7 @@ export const authOptions: NextAuthOptions = {
         user: {
           ...session.user,
           id: token.sub,
+          name: token.name, // Updated name passed down from jwt after update-trigger
           isVerifiedEmail: token.isVerifiedEmail,
           creationDate: token.createdAt,
           lastUpdateDate: token.updatedAt,
