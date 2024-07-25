@@ -123,6 +123,8 @@ export const authOptions: NextAuthOptions = {
 
     // Called after JWT is created (on login) or updated (client session is accessed)
     async jwt({ token, user, session, trigger }) {
+      // TODO: Check if access token is expired and prompt login if so
+
       // Update token according to client session's data
       if (trigger === 'update') {
         // Update name in database
