@@ -108,6 +108,7 @@
     }
   },
   "User": {
+    "user_not_found": "Utilisateur inconnu",
     "user_deleted": "Utilisateur supprimé !"
   },
   "Dashboard": {

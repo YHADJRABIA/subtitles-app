@@ -108,6 +108,7 @@
     }
   },
   "User": {
+    "user_not_found": "User not found",
     "user_deleted": "User successfully deleted!"
   },
   "Dashboard": {
