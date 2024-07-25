@@ -7,3 +7,7 @@ declare module 'next-auth' {
 
   interface User extends UserAPIType {}
 }
+
+declare module 'next-auth/jwt' {
+  interface JWT extends UserAPIType {}
+}
