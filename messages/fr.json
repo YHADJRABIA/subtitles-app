@@ -136,6 +136,10 @@
     }
   },
   "Zod": {
+    "id": {
+      "missing": "Id manquant",
+      "invalid": "Id invalide"
+    },
     "email": {
       "missing": "Email manquant",
       "invalid": "Email invalide",
