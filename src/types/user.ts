@@ -3,6 +3,7 @@ import { Locale } from './locale'
 
 export type UserType = {
   email: string
+  id: string
   isVerifiedEmail: boolean
   lastUpdateDate: Date
   creationDate: Date
