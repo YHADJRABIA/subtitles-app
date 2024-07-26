@@ -54,6 +54,7 @@ export async function POST(req: NextRequest) {
 
     const newUser = new UserModel({
       email,
+      favoriteLocale: locale,
       password: hashedPassword,
     })
 

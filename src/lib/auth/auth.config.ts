@@ -201,6 +201,7 @@ export const authOptions: NextAuthOptions = {
           if (existingUser) return user
 
           const newUser = new UserModel({
+            favoriteLocale: locale,
             name,
             email,
             image,
