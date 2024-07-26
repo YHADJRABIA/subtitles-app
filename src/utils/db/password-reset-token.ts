@@ -6,7 +6,7 @@ export const getPasswordResetTokenByToken = async (token: string) => {
     const existingToken = await PasswordResetTokenModel.findOne({ token })
     return existingToken
   } catch (err) {
-    console.error('Get password reset token by token', getErrorMessage(err))
+    console.error('Get password reset token by token:', getErrorMessage(err))
   }
 }
 
@@ -15,7 +15,7 @@ export const getPasswordResetTokenByEmail = async (email: string) => {
     const existingToken = await PasswordResetTokenModel.findOne({ email })
     return existingToken
   } catch (err) {
-    console.error('Get password reset token by email', getErrorMessage(err))
+    console.error('Get password reset token by email:', getErrorMessage(err))
   }
 }
 

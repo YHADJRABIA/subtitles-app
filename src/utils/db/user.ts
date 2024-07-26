@@ -1,14 +1,34 @@
 import { UserModel } from '@/models/user.model'
+import { getErrorMessage } from '../errors'
 
-export const getUserByEmail = async (email: string) =>
-  await UserModel.findOne({ email })
+export const getUserByEmail = async (email: string) => {
+  try {
+    await UserModel.findOne({ email })
+  } catch (err) {
+    console.error('Error getting user by email:', getErrorMessage(err))
+  }
+}
 
-export const getUserById = async (id: string) => await UserModel.findById(id)
+export const getUserById = async (id: string) => {
+  try {
+    await UserModel.findById(id)
+  } catch (err) {
+    console.error('Error finding user by id:', getErrorMessage(err))
+  }
+}
 
 export const deleteUserById = async (id: string) => {
-  await UserModel.findByIdAndDelete(id)
+  try {
+    await UserModel.findByIdAndDelete(id)
+  } catch (err) {
+    console.error('Error deleting user by id:', getErrorMessage(err))
+  }
 }
 
 export const updateNameById = async (id: string, name: string) => {
-  await UserModel.updateOne({ _id: id }, { name })
+  try {
+    await UserModel.updateOne({ _id: id }, { name })
+  } catch (err) {
+    console.error("Error updating user's name by id:", getErrorMessage(err))
+  }
 }

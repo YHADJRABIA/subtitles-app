@@ -6,7 +6,10 @@ export const getVerificationTokenByEmail = async (email: string) => {
     const verificationToken = await VerificationTokenModel.findOne({ email })
     return verificationToken
   } catch (err) {
-    console.error('Get verification token by email:', getErrorMessage(err))
+    console.error(
+      'Error getting verification token by email:',
+      getErrorMessage(err)
+    )
   }
 }
 
@@ -15,7 +18,10 @@ export const getVerificationTokenByToken = async (token: string) => {
     const verificationToken = await VerificationTokenModel.findOne({ token })
     return verificationToken
   } catch (err) {
-    console.error('Get verification token by token:', getErrorMessage(err))
+    console.error(
+      'Error getting verification token by token:',
+      getErrorMessage(err)
+    )
   }
 }
 
@@ -23,6 +29,9 @@ export const deleteVerificationTokenById = async (id: string) => {
   try {
     await VerificationTokenModel.deleteOne({ _id: id })
   } catch (err) {
-    console.error('Delete verification token by id:', getErrorMessage(err))
+    console.error(
+      'Error deleting verification token by id:',
+      getErrorMessage(err)
+    )
   }
 }
