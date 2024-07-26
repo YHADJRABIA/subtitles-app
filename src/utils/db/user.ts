@@ -3,7 +3,7 @@ import { getErrorMessage } from '../errors'
 
 export const getUserByEmail = async (email: string) => {
   try {
-    await UserModel.findOne({ email })
+    return await UserModel.findOne({ email })
   } catch (err) {
     console.error('Error getting user by email:', getErrorMessage(err))
   }
@@ -11,7 +11,7 @@ export const getUserByEmail = async (email: string) => {
 
 export const getUserById = async (id: string) => {
   try {
-    await UserModel.findById(id)
+    return await UserModel.findById(id)
   } catch (err) {
     console.error('Error finding user by id:', getErrorMessage(err))
   }
@@ -19,7 +19,7 @@ export const getUserById = async (id: string) => {
 
 export const deleteUserById = async (id: string) => {
   try {
-    await UserModel.findByIdAndDelete(id)
+    return await UserModel.findByIdAndDelete(id)
   } catch (err) {
     console.error('Error deleting user by id:', getErrorMessage(err))
   }
@@ -27,7 +27,7 @@ export const deleteUserById = async (id: string) => {
 
 export const updateNameById = async (id: string, name: string) => {
   try {
-    await UserModel.updateOne({ _id: id }, { name })
+    return await UserModel.updateOne({ _id: id }, { name })
   } catch (err) {
     console.error("Error updating user's name by id:", getErrorMessage(err))
   }

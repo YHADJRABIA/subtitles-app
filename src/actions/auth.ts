@@ -5,6 +5,7 @@ import {
   PasswordRecoverySchema,
   SendEmailVerificationSchema,
 } from '@/types/schemas/auth'
+import { getErrorMessage } from '@/utils/errors'
 import axios from 'axios'
 import { signIn, signOut } from 'next-auth/react'
 
@@ -24,7 +25,7 @@ export const handleRegister = async (user: AccountRegistrationSchema) => {
   try {
     return await axios.post('/api/users/register', user)
   } catch (err) {
-    console.error('Error creating user:', err)
+    console.error('Error creating user:', getErrorMessage(err))
   }
 }
 
@@ -34,7 +35,7 @@ export const handleSendVerificationEmail = async (
   try {
     return await axios.post('/api/users/send-verification-email', user)
   } catch (err) {
-    console.error('Error sending verificaiton email:', err)
+    console.error('Error sending verificaiton email:', getErrorMessage(err))
   }
 }
 
@@ -44,7 +45,7 @@ export const handleVerifyEmailValidationToken = async (
   try {
     return await axios.post('/api/users/verify-token', user)
   } catch (err) {
-    console.error('Error verifying validaiton token:', err)
+    console.error('Error verifying validaiton token:', getErrorMessage(err))
   }
 }
 
@@ -54,6 +55,9 @@ export const handleSendPasswordRecoveryEmail = async (
   try {
     return await axios.post('/api/users/password/recover', user)
   } catch (err) {
-    console.error('Error sending password recovery email:', err)
+    console.error(
+      'Error sending password recovery email:',
+      getErrorMessage(err)
+    )
   }
 }
