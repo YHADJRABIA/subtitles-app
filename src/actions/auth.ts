@@ -21,23 +21,39 @@ export const handleCredentialsLogin = async (user: AccountLoginSchema) => {
 }
 
 export const handleRegister = async (user: AccountRegistrationSchema) => {
-  return await axios.post('/api/users/register', user)
+  try {
+    return await axios.post('/api/users/register', user)
+  } catch (err) {
+    console.error('Error creating user:', err)
+  }
 }
 
 export const handleSendVerificationEmail = async (
   user: SendEmailVerificationSchema
 ) => {
-  return await axios.post('/api/users/send-verification-email', user)
+  try {
+    return await axios.post('/api/users/send-verification-email', user)
+  } catch (err) {
+    console.error('Error sending verificaiton email:', err)
+  }
 }
 
 export const handleVerifyEmailValidationToken = async (
   user: EmailVerificationSchema
 ) => {
-  return await axios.post('/api/users/verify-token', user)
+  try {
+    return await axios.post('/api/users/verify-token', user)
+  } catch (err) {
+    console.error('Error verifying validaiton token:', err)
+  }
 }
 
 export const handleSendPasswordRecoveryEmail = async (
   user: PasswordRecoverySchema
 ) => {
-  return await axios.post('/api/users/password/recover', user)
+  try {
+    return await axios.post('/api/users/password/recover', user)
+  } catch (err) {
+    console.error('Error sending password recovery email:', err)
+  }
 }
