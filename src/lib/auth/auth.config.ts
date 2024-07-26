@@ -131,7 +131,7 @@ export const authOptions: NextAuthOptions = {
       if (trigger === 'update') {
         // Update name in database
         if (token.name !== session?.name) {
-          await updateNameById(token.sub, session.name)
+          await updateNameById(token.sub, session.name) // TODO: don't update db here
         }
         return { ...token, ...session }
       }
