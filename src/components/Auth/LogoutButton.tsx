@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import Button from '../UI/Button'
+import { Button } from '../UI/Button'
 import { handleLogout } from '@/actions/auth'
 import cn from 'classnames'
 import styles from './LogoutButton.module.scss'
@@ -18,7 +18,7 @@ const LogoutButton = ({ className, label }: PropTypes) => {
       variation="secondary"
       onClick={handleLogout}
     >
-      <Typography size="xs" weight="semiBold">
+      <Typography tag="span" size="xs" weight="semiBold">
         {label}
       </Typography>
     </Button>

@@ -8,14 +8,14 @@ type TagType = keyof typeof tagMap
 
 type TextSize = 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl'
 
-interface PropTypes extends HTMLAttributes<HTMLElement> {
+export interface TypographyPropTypes extends HTMLAttributes<HTMLElement> {
   tag?: TagType
   weight?: 'normal' | 'semiBold' | 'bold'
   align?: 'left' | 'center' | 'right'
   size?: TextSize
   color?: string
   uppercase?: boolean
-  fullWidth?: boolean
+  isFullWidth?: boolean
   href?: string | (UrlObject & string)
   className?: string
   children: ReactNode
@@ -43,9 +43,9 @@ const Typography = ({
   href,
   className,
   children,
-  fullWidth,
+  isFullWidth,
   ...props
-}: PropTypes) => {
+}: TypographyPropTypes) => {
   const Tag = tagMap[tag]
 
   const isSemiBold = weight === 'semiBold'
@@ -63,7 +63,7 @@ const Typography = ({
       style={PropStyles as CSSProperties}
       className={cn(
         styles.root,
-        { [styles.fullWidth]: fullWidth, uppercase },
+        { [styles.fullWidth]: isFullWidth, uppercase },
         size && styles[size],
         className
       )}
@@ -76,7 +76,7 @@ const Typography = ({
       style={PropStyles as CSSProperties}
       className={cn(
         styles.root,
-        { fullWidth, uppercase },
+        { fullWidth: isFullWidth, uppercase },
         size && styles[size],
         className
       )}
