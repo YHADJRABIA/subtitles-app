@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from '../UI/Button'
+import { Button } from '../UI/Button'
 import { FcGoogle } from 'react-icons/fc'
 import styles from './GoogleLogin.module.scss'
 import Typography from '../UI/Typography'

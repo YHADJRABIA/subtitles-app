@@ -12,7 +12,7 @@ import {
 } from 'react-icons/bs'
 
 import styles from './AuthForm.module.scss'
-import Button from '@/components/UI/Button'
+import { Button } from '@/components/UI/Button'
 import { useShowPassword } from '@/hooks/useShowPassword'
 import Separator from '@/components/UI/Separator'
 import Field from '@/components/Forms/Field'
@@ -161,7 +161,7 @@ function AuthForm<T>({ type, onSubmit }: PropTypes<T>) {
 
         {isLoginForm && (
           <Typography
-            fullWidth
+            isFullWidth
             className={styles.passwordRecovery}
             align="right"
             weight="semiBold"

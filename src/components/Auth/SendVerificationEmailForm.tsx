@@ -8,7 +8,7 @@ import {
 } from 'react-icons/bs'
 
 import styles from './SendVerificationEmailForm.module.scss'
-import Button from '@/components/UI/Button'
+import { Button } from '@/components/UI/Button'
 
 import Field from '@/components/Forms/Field'
 
@@ -53,7 +53,7 @@ const SendVerificationEmailForm = () => {
   > = async user => {
     try {
       const res = await handleSendVerificationEmail(user)
-      setInfoMessage(res.data.message, 'success')
+      setInfoMessage(res?.data.message, 'success')
     } catch (err) {
       setInfoMessage(getErrorMessage(err), 'error')
     }

@@ -10,7 +10,7 @@ import {
 } from 'react-icons/bs'
 
 import styles from './PasswordRecoveryForm.module.scss'
-import Button from '@/components/UI/Button'
+import { Button } from '@/components/UI/Button'
 
 import Field from '@/components/Forms/Field'
 
