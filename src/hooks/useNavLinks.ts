@@ -5,7 +5,7 @@ import {
   GrHomeRounded as HomeIcon,
   GrCircleQuestion as AboutIcon,
   GrUserSettings as DashboardIcon,
-  GrLogout as LogoutIcon,
+  GrPowerShutdown as LogoutIcon,
   GrKey as LoginIcon,
   GrUserExpert as RegisterIcon,
 } from 'react-icons/gr'
