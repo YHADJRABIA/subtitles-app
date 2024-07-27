@@ -2,8 +2,10 @@ import { ButtonHTMLAttributes } from 'react'
 import styles from './Button.module.scss'
 import cn from 'classnames'
 import Loader from './Loader'
+import Typography, { TypographyPropTypes } from './Typography'
+import { UrlObject } from 'url'
 
-interface PropTypes extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonPropTypes extends ButtonHTMLAttributes<HTMLButtonElement> {
   testId?: string
   isLoading?: boolean
   isFullWidth?: boolean
@@ -11,7 +13,7 @@ interface PropTypes extends ButtonHTMLAttributes<HTMLButtonElement> {
   backgroundColor?: string
 }
 
-const Button = ({
+export const Button = ({
   variation = 'regular',
   children,
   disabled,
@@ -22,11 +24,11 @@ const Button = ({
   className,
   backgroundColor,
   ...rest
-}: PropTypes) => {
+}: ButtonPropTypes) => {
   const isPrimary = variation === 'primary'
   const isSecondary = variation === 'secondary'
 
-  const isClickeable = !(isLoading || disabled)
+  const isClickable = !(isLoading || disabled)
   return children ? (
     <button
       {...rest}
@@ -38,11 +40,11 @@ const Button = ({
           : isSecondary
             ? styles.secondary
             : styles.regular,
-        { disabled: !isClickeable, fullWidth: isFullWidth },
+        { disabled: !isClickable, fullWidth: isFullWidth },
         className
       )}
       data-testid={testId}
-      disabled={!isClickeable}
+      disabled={!isClickable}
       style={{ backgroundColor: backgroundColor ?? undefined }}
     >
       {isLoading ? <Loader size={17} /> : children}
@@ -50,4 +52,43 @@ const Button = ({
   ) : null
 }
 
-export default Button
+interface LinkButtonPropTypes extends TypographyPropTypes {
+  testId?: string
+  href: string | (UrlObject & string)
+  variation?: 'primary' | 'secondary' | 'regular'
+  backgroundColor?: string
+}
+
+export const LinkButton = ({
+  variation = 'regular',
+  testId,
+  isFullWidth = true,
+  className,
+  href,
+  backgroundColor,
+  children,
+  ...rest
+}: LinkButtonPropTypes) => {
+  const isPrimary = variation === 'primary'
+  const isSecondary = variation === 'secondary'
+  return (
+    <Typography
+      {...rest}
+      href={href}
+      className={cn(
+        styles.root,
+        isPrimary
+          ? styles.primary
+          : isSecondary
+            ? styles.secondary
+            : styles.regular,
+        { fullWidth: isFullWidth },
+        className
+      )}
+      data-testid={testId}
+      style={{ backgroundColor: backgroundColor ?? undefined }}
+    >
+      {children}
+    </Typography>
+  )
+}
