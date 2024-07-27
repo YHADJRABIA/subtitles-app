@@ -44,12 +44,8 @@
   },
   "Index": {
     "HeroBanner": {
-      "heading": "Stocks simulator",
-      "desciption": "Simulate stocks trading and estimate your profits or losses."
-    },
-    "Body": {
-      "in_progress": "Application under construction...",
-      "authentication": "An account may be created in the meanwhile."
+      "heading": "Subtitles for Russian-speaking shows",
+      "desciption": "Access free and exclusive subtitles of series & movies unavailable on mainstream media"
     }
   },
   "NotFound": {},
@@ -167,6 +163,9 @@
   },
   "EditableAvatar": {
     "edit": "Edit image"
+  },
+  "SwitchButton": {
+    "toggle": "Toggle"
   },
   "UseShowPassword": {
     "reveal_password": "Reveal password",

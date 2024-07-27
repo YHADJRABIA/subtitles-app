@@ -44,12 +44,8 @@
   },
   "Index": {
     "HeroBanner": {
-      "heading": "Simulateur d'actions",
-      "desciption": "Simuler l'achat et vente d'actions boursières et estimer ses plus-values ou pertes financières en bourse."
-    },
-    "Body": {
-      "in_progress": "Application en cours de développement...",
-      "authentication": "Un compte peut être créé en attendant."
+      "heading": "Sous-titres de series russophones",
+      "desciption": "Accès à des sous-titres gratuits et exclusifs de series russophones inconnues du grand public"
     }
   },
   "NotFound": {},
@@ -167,6 +163,9 @@
   },
   "EditableAvatar": {
     "edit": "Modifier photo"
+  },
+  "SwitchButton": {
+    "toggle": "Basculer"
   },
   "UseShowPassword": {
     "reveal_password": "Révéler mot de passe",
