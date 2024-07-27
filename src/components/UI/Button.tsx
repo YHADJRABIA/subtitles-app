@@ -77,6 +77,7 @@ export const LinkButton = ({
       href={href}
       className={cn(
         styles.root,
+        styles.shadowHover,
         isPrimary
           ? styles.primary
           : isSecondary
