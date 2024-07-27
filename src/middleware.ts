@@ -43,6 +43,8 @@ export default async function middleware(req: NextRequestWithAuth) {
   const { pathname } = req.nextUrl
   const isProtectedRoute = isProtectedPath(pathname as Pathname)
 
+  // TODO: limit /api calls from same ip to prevent potential abuse
+
   // Needed outside of authMiddleware to access session (has to be the same as in authOptions at /auth.config.ts)
   const secret = process.env.NEXTAUTH_SECRET
   const session = await getToken({ req, secret })
