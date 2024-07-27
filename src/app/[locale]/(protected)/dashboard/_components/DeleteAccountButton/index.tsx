@@ -30,6 +30,7 @@ const DeleteAccountButton = ({ className, label }: PropTypes) => {
       isLoading={status === 'loading'}
       onClick={handleDelete}
     >
+      {/*  TODO: Create CTA button without breaking HTML5 tag nesting guidelines */}
       <Typography size="xs" weight="semiBold">
         {label}
       </Typography>
