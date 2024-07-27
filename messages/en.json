@@ -39,7 +39,8 @@
   },
   "General": {
     "or": "Or",
-    "something_went_wrong": "Something went wrong"
+    "something_went_wrong": "Something went wrong",
+    "too_many_requests": "Too many requests"
   },
   "Index": {
     "HeroBanner": {
@@ -109,7 +110,8 @@
   },
   "User": {
     "user_not_found": "User not found",
-    "user_deleted": "User successfully deleted!"
+    "user_deleted": "User successfully deleted!",
+    "unauthorised": "Unauthorised"
   },
   "Dashboard": {
     "overview": "Overview",

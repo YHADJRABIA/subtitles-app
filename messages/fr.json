@@ -39,7 +39,8 @@
   },
   "General": {
     "or": "Ou",
-    "something_went_wrong": "Un erreur s'est produite"
+    "something_went_wrong": "Un erreur s'est produite",
+    "too_many_requests": "Trop de requêtes"
   },
   "Index": {
     "HeroBanner": {
@@ -109,7 +110,8 @@
   },
   "User": {
     "user_not_found": "Utilisateur inconnu",
-    "user_deleted": "Utilisateur supprimé !"
+    "user_deleted": "Utilisateur supprimé !",
+    "unauthorised": "Non authorisé"
   },
   "Dashboard": {
     "overview": "Aperçu",
