@@ -45,7 +45,11 @@
   "Index": {
     "HeroBanner": {
       "heading": "Subtitles for Russian-speaking shows",
-      "desciption": "Access free and exclusive subtitles of series & movies unavailable on mainstream media"
+      "description": "Access free and exclusive subtitles of series & movies unavailable on mainstream media"
+    },
+    "Cta": {
+      "support_me": "Support me",
+      "browse_shows": "Browse shows"
     }
   },
   "NotFound": {},

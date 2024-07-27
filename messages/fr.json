@@ -45,7 +45,11 @@
   "Index": {
     "HeroBanner": {
       "heading": "Sous-titres de series russophones",
-      "desciption": "Accès à des sous-titres gratuits et exclusifs de series russophones inconnues du grand public"
+      "description": "Accès à des sous-titres gratuits et exclusifs de series russophones inconnues du grand public"
+    },
+    "Cta": {
+      "support_me": "Me soutenir",
+      "browse_shows": "Découvrir les séries"
     }
   },
   "NotFound": {},
