@@ -18,7 +18,7 @@ interface PropTypes {
 
 const Nav = ({ className, isConnected }: PropTypes) => {
   const currentPath = usePathname()
-  const isOnMobile = useIsOnTablet()
+  const isOnTablet = useIsOnTablet()
   const [toggled, setToggled] = useState(false)
   const navLinks = useNavLinks({ isConnected })
 
@@ -42,7 +42,7 @@ const Nav = ({ className, isConnected }: PropTypes) => {
           className={styles.separator}
         />
         {/* TODO: Reuse later  <AuthSection showAccount={isConnected} className={styles.authSection} /> */}
-        <LanguageMenu isInverted={isOnMobile} className={styles.languageMenu} />
+        <LanguageMenu isInverted={isOnTablet} className={styles.languageMenu} />
         {/* Add donation button */}
       </div>
     </nav>
