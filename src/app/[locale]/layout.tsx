@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.min.css'
 import { ReactNode } from 'react'
 import AppProvider from '@/context/AppProvider'
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-body' })
+const inter = Inter({ subsets: ['latin', 'cyrillic'], variable: '--font-body' })
 const familjenGrotesk = Familjen_Grotesk({
   subsets: ['latin'],
   variable: '--font-heading',
