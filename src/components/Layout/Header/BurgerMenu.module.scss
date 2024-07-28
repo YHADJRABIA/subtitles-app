@@ -11,7 +11,7 @@
     transition: all 0.3s ease;
   }
 
-  @include respond-to('medium') {
+  @include respond-to('large') {
     display: none;
   }
 }

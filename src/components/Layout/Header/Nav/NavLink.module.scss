@@ -1,14 +1,17 @@
 .root {
   @include flexCenter(row);
-  @include respond-to('small') {
-    &:not(:last-of-type) {
-      margin-bottom: 2rem;
-    }
+
+  &:not(:last-of-type) {
+    margin-bottom: 2rem;
   }
 
-  @include respond-to('medium') {
+  @include respond-to('large') {
     &:not(:first-of-type) {
       margin-left: 2rem;
+    }
+
+    &:not(:last-of-type) {
+      margin-bottom: unset;
     }
     cursor: pointer;
   }
@@ -24,7 +27,7 @@
 }
 .icon {
   margin-right: 1.5rem;
-  @include respond-to('medium') {
+  @include respond-to('large') {
     display: none;
   }
 }

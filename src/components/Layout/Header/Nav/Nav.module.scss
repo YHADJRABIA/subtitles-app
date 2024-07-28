@@ -18,7 +18,7 @@
     width: inherit;
   }
 
-  @include respond-to('medium') {
+  @include respond-to('large') {
     all: unset;
     box-sizing: border-box;
     @include flexCenter(row, flex-start);
@@ -34,7 +34,7 @@
 
 .burgerMenu,
 .separator {
-  @include respond-to('medium') {
+  @include respond-to('large') {
     display: none;
   }
 }
@@ -42,14 +42,14 @@
 .links {
   @include flexCenter(column, space-around, flex-start);
   align-content: flex-start;
-  @include respond-to('medium') {
+  @include respond-to('large') {
     flex-direction: row;
   }
 }
 
 .languageMenu {
   margin-top: auto;
-  @include respond-to('medium') {
+  @include respond-to('large') {
     margin-left: 2rem;
   }
 }

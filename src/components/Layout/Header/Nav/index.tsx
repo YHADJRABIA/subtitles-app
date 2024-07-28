@@ -9,7 +9,7 @@ import LanguageMenu from '../../LanguageMenu'
 import Separator from '@/components/UI/Separator'
 import NavLink from './NavLink'
 import useNavLinks from '@/hooks/useNavLinks'
-import useIsOnTablet from '@/hooks/useIsOnTablet'
+import useIsOnDesktop from '@/hooks/useIsOnDesktop'
 
 interface PropTypes {
   isConnected: boolean
@@ -18,7 +18,7 @@ interface PropTypes {
 
 const Nav = ({ className, isConnected }: PropTypes) => {
   const currentPath = usePathname()
-  const isOnTablet = useIsOnTablet()
+  const isOnDesktop = useIsOnDesktop()
   const [toggled, setToggled] = useState(false)
   const navLinks = useNavLinks({ isConnected })
 
@@ -42,7 +42,10 @@ const Nav = ({ className, isConnected }: PropTypes) => {
           className={styles.separator}
         />
         {/* TODO: Reuse later  <AuthSection showAccount={isConnected} className={styles.authSection} /> */}
-        <LanguageMenu isInverted={isOnTablet} className={styles.languageMenu} />
+        <LanguageMenu
+          isInverted={!isOnDesktop}
+          className={styles.languageMenu}
+        />
         {/* Add donation button */}
       </div>
     </nav>

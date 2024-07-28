@@ -13,7 +13,7 @@
   flex-wrap: nowrap;
   width: inherit;
 
-  @include respond-to('medium') {
+  @include respond-to('large') {
     height: min-content;
     width: 70rem;
     border-radius: 3rem;
@@ -21,6 +21,7 @@
   }
 
   form {
+    height: stretch;
     & > :first-child {
       margin-top: 4rem;
     }
@@ -31,11 +32,11 @@
 
     @include respond-to('small') {
       width: inherit;
-      height: stretch;
     }
-    @include respond-to('medium') {
+
+    /*     @include respond-to('medium') {
       padding-top: 4rem;
-    }
+    } */
   }
 }
 

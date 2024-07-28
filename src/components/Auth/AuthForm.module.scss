@@ -12,7 +12,7 @@
   @include flexCenter(column, space-evenly);
 
   @include respond-to('medium') {
-    width: 42rem;
+    width: 40rem;
   }
 
   // Targets last element before submit button
