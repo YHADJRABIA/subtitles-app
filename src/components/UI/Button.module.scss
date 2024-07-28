@@ -46,3 +46,11 @@
     border-color: var(--primary-blue-color);
   }
 }
+
+.shadowHover {
+  transition: box-shadow 0.3s ease-in-out;
+  box-shadow: 0 0.1rem 0.1rem rgba(0, 0, 0, 0.1);
+  &:hover {
+    box-shadow: 0.2rem 0.4rem 0.6rem rgba(0, 0, 0, 0.2);
+  }
+}
