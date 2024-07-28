@@ -6,7 +6,9 @@ const useIsOnTablet = (): boolean => {
   const [isOnTablet, setIsOnTablet] = useState(true)
 
   const updateMatchQuery = () =>
-    setIsOnTablet(matchMedia('(max-width: 1023px)').matches)
+    setIsOnTablet(
+      matchMedia('(min-width: 426px) and (max-width: 1024px)').matches
+    )
 
   useEffect(() => updateMatchQuery(), [])
   useEventListener('resize', updateMatchQuery)
