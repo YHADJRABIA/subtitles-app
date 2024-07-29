@@ -4,6 +4,10 @@
       "title": "Page d'accueil",
       "description": "Page principale"
     },
+    "NotFound": {
+      "title": "404",
+      "description": "Page non trouvée"
+    },
     "Auth": {
       "title": "Authentification",
       "description": "Portail d'authentification",
@@ -52,7 +56,13 @@
       "browse_shows": "Explorer les séries"
     }
   },
-  "NotFound": {},
+
+  "NotFound": {
+    "page_not_found": "Page non trouvée",
+    "verify_route": "Vérifier l'exactitude du lien introduit, ou réessayer plus tard",
+    "back_to_homepage": "Vers page d'accueil",
+    "storyset_credit": "Illustré par Storyset"
+  },
   "Auth": {
     "email": "Email",
     "password": "Mot de passe",

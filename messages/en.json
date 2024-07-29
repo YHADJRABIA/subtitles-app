@@ -4,6 +4,10 @@
       "title": "Homepage",
       "description": "Landing page"
     },
+    "NotFound": {
+      "title": "404",
+      "description": "Page not found"
+    },
     "Auth": {
       "title": "Authentication",
       "description": "Authentication section",
@@ -52,7 +56,12 @@
       "browse_shows": "Browse shows"
     }
   },
-  "NotFound": {},
+  "NotFound": {
+    "page_not_found": "Page not found",
+    "verify_route": "Verify the correctness of the link you are trying to access or retry later",
+    "back_to_homepage": "To homepage",
+    "storyset_credit": "Illustration by Storyset"
+  },
   "Auth": {
     "email": "Email",
     "password": "Password",
