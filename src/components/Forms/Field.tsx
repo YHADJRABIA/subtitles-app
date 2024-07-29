@@ -43,7 +43,7 @@ function Field<T>({
   return (
     <div className={cn(styles.root, className)}>
       <div className={styles.formField}>
-        {leftIcon && <div className={styles.fieldIcon}>{leftIcon}</div>}
+        {leftIcon && <span className={styles.fieldIcon}>{leftIcon}</span>}
         <input
           {...rest}
           placeholder={placeholder}
@@ -52,7 +52,7 @@ function Field<T>({
           {...register(name, { valueAsNumber })} // TODO: Debounce value
         />
         <label htmlFor={name}>{label}</label>
-        {rightIcon && <div className={styles.ctaIcon}>{rightIcon}</div>}
+        {rightIcon && <span className={styles.ctaIcon}>{rightIcon}</span>}
       </div>
 
       {subLabel && (
