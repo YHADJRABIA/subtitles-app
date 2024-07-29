@@ -32,7 +32,7 @@ const NotFoundPage = async () => {
       <Header isConnected={!!user} />
       <main className={styles.root}>
         <div className={styles.image}>
-          <Image src="/404.gif" alt="404" fill />
+          <Image src="/assets/404.gif" alt="404" fill />
         </div>
         <div className={styles.content}>
           <HeroBanner
