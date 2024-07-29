@@ -11,6 +11,7 @@
   background-color: var(--primary-white-color);
   @include flexCenter(column, space-evenly);
   flex-wrap: nowrap;
+  height: 100%;
   width: inherit;
 
   @include respond-to('large') {
