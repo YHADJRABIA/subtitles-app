@@ -1,5 +1,8 @@
 .root {
   width: 100%;
+  position: sticky;
+  top: 0;
+  height: var(--header-height);
   @include flexCenter(row);
   background-color: var(--primary-black-color);
   padding: 0.5rem 2.5rem;
