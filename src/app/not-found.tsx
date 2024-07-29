@@ -1,7 +1,14 @@
-import Typography from '@/components/UI/Typography'
+'use client'
+import { defaultLocale } from '@/lib/i18n/navigation'
+import Error from 'next/error'
 
-const NotFoundPage = () => {
-  return <Typography tag="h1">Page not found</Typography>
+// This page is hit when request is made to route not handled by next-intl's middleware (i.e. not triggering middleware's matcher config)
+export default function NotFoundPage() {
+  return (
+    <html lang={defaultLocale}>
+      <body>
+        <Error statusCode={404} />
+      </body>
+    </html>
+  )
 }
-
-export default NotFoundPage
