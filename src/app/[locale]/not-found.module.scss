@@ -1,6 +1,7 @@
 .root {
   @include flexCenter(row);
   padding: 2rem;
+  height: unset;
 }
 
 .image {
