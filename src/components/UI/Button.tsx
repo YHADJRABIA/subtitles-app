@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes } from 'react'
+import { ButtonHTMLAttributes, ReactNode } from 'react'
 import styles from './Button.module.scss'
 import cn from 'classnames'
 import Loader from './Loader'
@@ -57,6 +57,7 @@ interface LinkButtonPropTypes extends TypographyPropTypes {
   href: string | (UrlObject & string)
   variation?: 'primary' | 'secondary' | 'regular'
   backgroundColor?: string
+  icon?: ReactNode
 }
 
 export const LinkButton = ({
@@ -67,6 +68,7 @@ export const LinkButton = ({
   href,
   backgroundColor,
   children,
+  icon,
   ...rest
 }: LinkButtonPropTypes) => {
   const isPrimary = variation === 'primary'
@@ -89,6 +91,7 @@ export const LinkButton = ({
       data-testid={testId}
       style={{ backgroundColor: backgroundColor ?? undefined }}
     >
+      {icon && <span className={styles.icon}>{icon}</span>}
       {children}
     </Typography>
   )
