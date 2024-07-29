@@ -86,6 +86,19 @@
     "no-unneeded-ternary": "error",
     "no-var": "error",
     "require-await": "error",
+    /*  "react/jsx-sort-props": [ // TODO: Configure properly
+      true,
+      {
+        "callbacksLast": true,
+        "shorthandFirst": true,
+        "shorthandLast": false,
+        "multiline": "last",
+        "ignoreCase": true,
+        "noSortAlphabetically": true,
+        "reservedFirst": ["key"],
+        "locale": "auto"
+      }
+    ], */
     // Consistently import navigation APIs from `@/navigation` instead of next/link or next/navigation.
     "no-restricted-imports": [
       "error",
