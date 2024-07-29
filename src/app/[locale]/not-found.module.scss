@@ -1,0 +1,44 @@
+.root {
+  @include flexCenter(row);
+  padding: 2rem;
+}
+
+.image {
+  position: relative;
+  margin-bottom: 4rem;
+  width: 90vw;
+  height: 90vw;
+  @include respond-to('medium') {
+    width: min(calc(20rem + 35vw), 50rem);
+    height: min(calc(20rem + 35vw), 50rem);
+  }
+}
+
+.content {
+  @include flexCenter(column);
+  @include respond-to('medium') {
+    width: 80%;
+  }
+  @include respond-to('large') {
+    width: 40%;
+  }
+}
+
+.text {
+  margin-bottom: 5rem;
+}
+.cta {
+  margin-bottom: 4rem;
+  @include respond-to('medium') {
+    width: max-content;
+  }
+
+  @include respond-to('large') {
+    margin-bottom: unset;
+  }
+}
+
+.credits {
+  opacity: 0.8;
+  margin-bottom: 2rem;
+}
