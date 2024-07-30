@@ -12,7 +12,6 @@
   @include flexCenter(column, space-evenly);
   flex-wrap: nowrap;
   height: 100%;
-  width: inherit;
 
   @include respond-to('large') {
     height: min-content;
@@ -34,14 +33,10 @@
     @include respond-to('small') {
       width: inherit;
     }
-
-    /*     @include respond-to('medium') {
-      padding-top: 4rem;
-    } */
   }
 }
 
-.top {
+.topElements {
   padding: 1rem 2rem;
   width: 100%;
   @include flexCenter(row, space-between);

@@ -23,7 +23,7 @@ const layout = ({ children }: PropTypes) => {
   return (
     <div className={styles.root}>
       <main className={styles.main}>
-        <div className={styles.top}>
+        <div className={styles.topElements}>
           <Logo size={50} />
           <LanguageMenu />
         </div>
