@@ -1,6 +1,34 @@
 .root {
   width: 100%;
   @include flexCenter(column);
+
+  @include respond-to('medium') {
+    flex-direction: row;
+  }
+
+  @include respond-to('large') {
+    max-width: 150rem;
+  }
+}
+
+.image {
+  position: relative;
+  margin-bottom: 4rem;
+  width: 85%;
+  height: 25rem;
+  @include respond-to('medium') {
+    width: min(calc(20rem + 30vw), 40rem);
+    height: min(calc(20rem + 20vw), 40rem);
+  }
+}
+
+.textContainer {
+  width: 100%;
+  @include flexCenter(column);
+  align-items: center;
+  @include respond-to('medium') {
+    width: min(85%, 65rem);
+  }
 }
 
 .title {
@@ -14,4 +42,9 @@
 
 .description {
   opacity: 0.75;
+}
+
+.ctaContainer {
+  width: 100%;
+  margin-top: 5rem;
 }
