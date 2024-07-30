@@ -23,6 +23,8 @@ import { LinkButton } from '@/components/UI/Button'
   }
 } */
 
+const SVG_PATH = '/assets/ice-fishing.svg'
+
 const NotFoundPage = async () => {
   const locale = getNextLocale()
   const t = await getTranslations({ locale, namespace: 'NotFound' })
@@ -32,7 +34,7 @@ const NotFoundPage = async () => {
       <Header isConnected={!!user} />
       <main className={styles.root}>
         <div className={styles.image}>
-          <Image src="/assets/404.gif" alt="404" fill />
+          <Image src={SVG_PATH} alt="404" fill />
         </div>
         <div className={styles.content}>
           <HeroBanner
