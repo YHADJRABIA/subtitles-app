@@ -1,13 +1,17 @@
 .root {
   @include flexCenter(row);
   padding: 2rem;
+  margin: 0 auto;
+  @include respond-to('large') {
+    justify-content: space-between;
+  }
 }
 
 .image {
   position: relative;
   margin-bottom: 4rem;
   width: 90vw;
-  height: 90vw;
+  height: 35rem;
   @include respond-to('medium') {
     width: min(calc(20rem + 35vw), 50rem);
     height: min(calc(20rem + 35vw), 50rem);
@@ -16,11 +20,8 @@
 
 .content {
   @include flexCenter(column);
-  @include respond-to('medium') {
-    width: 80%;
-  }
   @include respond-to('large') {
-    width: 40%;
+    width: 45%;
   }
 }
 
