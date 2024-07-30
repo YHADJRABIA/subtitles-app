@@ -13,8 +13,8 @@
   width: 90vw;
   height: 35rem;
   @include respond-to('medium') {
-    width: min(calc(20rem + 35vw), 50rem);
-    height: min(calc(20rem + 35vw), 50rem);
+    width: min(calc(25rem + 35vw), 50rem);
+    height: min(calc(25rem + 35vw), 50rem);
   }
 }
 
