@@ -6,7 +6,6 @@ import { getUserSession } from '@/utils/session'
 import { getNextLocale } from '@/utils/cookies'
 import HeroBanner from '@/components/UI/HeroBanner'
 import styles from './not-found.module.scss'
-import Image from 'next/image'
 import Typography from '@/components/UI/Typography'
 import { LinkButton } from '@/components/UI/Button'
 
@@ -33,25 +32,23 @@ const NotFoundPage = async () => {
     <>
       <Header isConnected={!!user} />
       <main className={styles.root}>
-        <div className={styles.image}>
-          <Image src={SVG_PATH} alt="404" fill />
-        </div>
-        <div className={styles.content}>
-          <HeroBanner
-            title={t('page_not_found')}
-            description={t('verify_route')}
-            className={styles.text}
-          />
-
-          <LinkButton
-            href="/"
-            variation="primary"
-            weight="semiBold"
-            className={styles.cta}
-          >
-            {t('back_to_homepage')}
-          </LinkButton>
-        </div>
+        <HeroBanner
+          image={SVG_PATH}
+          imageAlt="404"
+          title={t('page_not_found')}
+          description={t('verify_route')}
+          className={styles.text}
+          ctaElements={
+            <LinkButton
+              href="/"
+              variation="primary"
+              weight="semiBold"
+              className={styles.cta}
+            >
+              {t('back_to_homepage')}
+            </LinkButton>
+          }
+        />
       </main>
       <Typography
         size="s"
