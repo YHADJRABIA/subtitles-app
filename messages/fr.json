@@ -49,11 +49,17 @@
   "Index": {
     "HeroBanner": {
       "heading": "Sous-titres de series russophones",
-      "description": "Accès à des sous-titres gratuits et exclusifs de series russophones inconnues du grand public"
+      "description": "Profitez de sous-titres gratuits et exclusifs de séries russophones méconnues.",
+      "image_alt": "Photo de pellicules de film"
     },
     "Cta": {
-      "support_me": "Me soutenir",
-      "browse_shows": "Explorer les séries"
+      "browse_series": "Explorer les séries",
+      "support_me": "Me soutenir"
+    },
+    "Highlights": {
+      "discover_new_shows": "Séries inhabituelles et peu connues",
+      "entirely_free": "Entièrement gratuit",
+      "learn_about_cultures": "Découverte de cultures slaves orientales, d'Asie centrale et autres pays d'ex-URSS"
     }
   },
 
@@ -195,8 +201,7 @@
     "logout": "Déconnexion"
   },
   "Footer": {
-    "first_name": "Yacine",
-    "last_name": "HADJ RABIA",
+    "name": "Yacine HADJ RABIA",
     "development_year": "2024"
   }
 }

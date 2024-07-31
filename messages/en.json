@@ -48,12 +48,18 @@
   },
   "Index": {
     "HeroBanner": {
-      "heading": "Subtitles for Russian-speaking shows",
-      "description": "Access free and exclusive subtitles of series and movies unavailable on mainstream media"
+      "heading": "Subtitles for Russian-speaking series",
+      "description": "Discover exclusive subtitles for series not featured on mainstream platforms, for free.",
+      "image_alt": "Camera stock photo"
     },
     "Cta": {
-      "support_me": "Support me",
-      "browse_shows": "Browse shows"
+      "browse_series": "Browse series",
+      "support_me": "Support me"
+    },
+    "Highlights": {
+      "discover_new_shows": "Unusual and lesser-known series",
+      "entirely_free": "Entirely free",
+      "learn_about_cultures": "Learn about Eastern Slavic, Central Asian, and other ex-USSR cultures"
     }
   },
   "NotFound": {
@@ -194,8 +200,7 @@
     "logout": "Log out"
   },
   "Footer": {
-    "first_name": "Yacine",
-    "last_name": "Hadj Rabia",
+    "name": "Yacine Hadj Rabia",
     "development_year": "2024"
   }
 }

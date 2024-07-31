@@ -1,0 +1,18 @@
+.root {
+  @include flexCenter(column, center);
+  width: 100%;
+  & > :first-of-type {
+    margin-bottom: 2rem;
+  }
+
+  @include respond-to('medium') {
+    @include flexCenter(row, space-between);
+    width: 35rem;
+    & > :first-of-type {
+      margin-bottom: unset;
+    }
+    a {
+      width: fit-content;
+    }
+  }
+}
