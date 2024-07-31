@@ -1,10 +1,11 @@
 import Typography from '@/components/UI/Typography'
-import React, { ElementType } from 'react'
+import React from 'react'
 import cn from 'classnames'
 import styles from './NavLink.module.scss'
+import { IconType } from 'react-icons/lib'
 
 export type NavLinkType = {
-  icon: ElementType
+  icon: IconType
   label: string
   url?: string
   onClick?: () => void
