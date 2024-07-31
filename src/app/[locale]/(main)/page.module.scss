@@ -3,7 +3,7 @@
   height: 100%;
   padding: 2rem;
   padding-bottom: 4rem;
-  @include flexCenter(column, flex-end);
+  @include flexCenter(column, center);
 
   @include respond-to('medium') {
     flex-direction: row;
