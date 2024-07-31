@@ -16,7 +16,6 @@ export default function HomePage() {
         title={t('HeroBanner.heading')}
         description={t('HeroBanner.description')}
         ctaElements={<CtaSection />}
-        className={styles.heroBanner}
       />
     </div>
   )
