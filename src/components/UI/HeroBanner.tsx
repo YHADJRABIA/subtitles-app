@@ -42,7 +42,7 @@ const HeroBanner = ({
         >
           {title}
         </Typography>
-        <Typography size="l" align={align} className={styles.description}>
+        <Typography align={align} className={styles.description}>
           {description}
         </Typography>
 
