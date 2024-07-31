@@ -1,5 +1,6 @@
 {
   "Metadata": {
+    "prefix": "РуSubs",
     "Homepage": {
       "title": "Homepage",
       "description": "Landing page"
@@ -50,7 +51,7 @@
     "HeroBanner": {
       "heading": "Subtitles for Russian-speaking series",
       "description": "Discover exclusive subtitles for series not featured on mainstream platforms, for free.",
-      "image_alt": "Camera stock photo"
+      "image_alt": "Film rolls photo"
     },
     "Cta": {
       "browse_series": "Browse series",
