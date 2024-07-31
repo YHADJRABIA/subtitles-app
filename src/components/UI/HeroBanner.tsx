@@ -31,6 +31,8 @@ const HeroBanner = ({
           <Image src={image} fill alt={imageAlt ?? ''} />
         </div>
       )}
+
+      {/* TODO: Limit text length */}
       <div className={styles.textContainer}>
         <Typography
           tag="h1"
