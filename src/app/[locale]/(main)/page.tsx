@@ -3,7 +3,7 @@ import styles from './page.module.scss'
 import { useTranslations } from 'next-intl'
 import CtaSection from './_components/CtaSection'
 
-const MAIN_ASSET_PATH = '/assets/pellicules.svg'
+const MAIN_ASSET_PATH = '/assets/film-rolls.svg'
 
 export default function HomePage() {
   const t = useTranslations('Index')
