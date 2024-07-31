@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes, ReactNode } from 'react'
 import styles from './Button.module.scss'
 import cn from 'classnames'
 import Loader from './Loader'
-import Typography, { TypographyPropTypes } from './Typography'
+import Typography, { LinkType, TypographyPropTypes } from './Typography'
 
 interface ButtonPropTypes extends ButtonHTMLAttributes<HTMLButtonElement> {
   testId?: string
@@ -56,6 +56,7 @@ interface LinkButtonPropTypes extends TypographyPropTypes {
   variation?: 'primary' | 'secondary' | 'regular'
   backgroundColor?: string
   icon?: ReactNode
+  link: LinkType
 }
 
 export const LinkButton = ({

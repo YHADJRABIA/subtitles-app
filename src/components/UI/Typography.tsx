@@ -6,6 +6,11 @@ import { UrlObject } from 'url'
 
 type TagType = keyof typeof tagMap
 
+export type LinkType = {
+  href: string | null | (UrlObject & string)
+  openInNewTab?: boolean
+}
+
 type TextSize = 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl'
 
 export interface TypographyPropTypes extends HTMLAttributes<HTMLElement> {
@@ -16,7 +21,7 @@ export interface TypographyPropTypes extends HTMLAttributes<HTMLElement> {
   color?: string
   uppercase?: boolean
   isFullWidth?: boolean
-  link?: { href: string | null | (UrlObject & string); openInNewTab?: boolean }
+  link?: LinkType
   className?: string
   children: ReactNode
 }
