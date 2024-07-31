@@ -33,7 +33,7 @@ const NavLink = ({ isActive, link }: PropTypes) => {
         size="s"
         weight={isActive ? 'semiBold' : undefined}
         className={cn(styles.label, { [styles.isActive]: isActive })}
-        href={link?.url}
+        link={{ href: link?.url ?? null }}
         onClick={link.onClick}
       >
         {link.label}

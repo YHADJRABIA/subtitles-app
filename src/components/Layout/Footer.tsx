@@ -11,7 +11,7 @@ const Footer = () => {
     <footer>
       <small>
         &copy;{getCurrentYear()} –{' '}
-        <Link href={PORTFOLIO_LINK} className={styles.link}>
+        <Link href={PORTFOLIO_LINK} target="_blank" className={styles.link}>
           {`${t('first_name')} ${t('last_name')}`}
         </Link>
       </small>

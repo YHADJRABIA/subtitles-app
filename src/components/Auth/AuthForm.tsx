@@ -166,11 +166,11 @@ function AuthForm<T>({ type, onSubmit }: PropTypes<T>) {
             align="right"
             weight="semiBold"
             size="xs"
-            href={
-              isValidEmail
+            link={{
+              href: isValidEmail
                 ? `/password/recovery?email=${email}`
-                : '/password/recovery'
-            }
+                : '/password/recovery',
+            }}
           >
             {t('Login.recover_password')}
           </Typography>

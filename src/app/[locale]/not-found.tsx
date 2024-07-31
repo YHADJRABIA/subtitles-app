@@ -40,7 +40,8 @@ const NotFoundPage = async () => {
           className={styles.text}
           ctaElements={
             <LinkButton
-              href="/"
+              link={{ href: '/' }}
+              size="s"
               variation="primary"
               weight="semiBold"
               className={styles.cta}
@@ -54,7 +55,7 @@ const NotFoundPage = async () => {
         size="s"
         className={styles.credits}
         color="var(--primary-blue-color)"
-        href="https://storyset.com/"
+        link={{ href: 'https://storyset.com/', openInNewTab: true }}
       >
         {t('storyset_credit')}
       </Typography>
