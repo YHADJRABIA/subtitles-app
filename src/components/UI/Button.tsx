@@ -3,7 +3,6 @@ import styles from './Button.module.scss'
 import cn from 'classnames'
 import Loader from './Loader'
 import Typography, { TypographyPropTypes } from './Typography'
-import { UrlObject } from 'url'
 
 interface ButtonPropTypes extends ButtonHTMLAttributes<HTMLButtonElement> {
   testId?: string
@@ -54,7 +53,6 @@ export const Button = ({
 
 interface LinkButtonPropTypes extends TypographyPropTypes {
   testId?: string
-  href: string | (UrlObject & string)
   variation?: 'primary' | 'secondary' | 'regular'
   backgroundColor?: string
   icon?: ReactNode
@@ -65,7 +63,7 @@ export const LinkButton = ({
   testId,
   isFullWidth = true,
   className,
-  href,
+  link = { href: '/', openInNewTab: false },
   backgroundColor,
   children,
   icon,
@@ -76,10 +74,10 @@ export const LinkButton = ({
   return (
     <Typography
       {...rest}
-      href={href}
+      link={{ ...link }}
       className={cn(
         styles.root,
-        styles.shadowHover,
+        styles.shadowEffect,
         isPrimary
           ? styles.primary
           : isSecondary

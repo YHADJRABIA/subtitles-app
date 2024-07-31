@@ -16,7 +16,7 @@ export interface TypographyPropTypes extends HTMLAttributes<HTMLElement> {
   color?: string
   uppercase?: boolean
   isFullWidth?: boolean
-  href?: string | (UrlObject & string)
+  link?: { href: string | null | (UrlObject & string); openInNewTab?: boolean }
   className?: string
   children: ReactNode
 }
@@ -40,7 +40,7 @@ const Typography = ({
   uppercase = false,
   align = 'center',
   size,
-  href,
+  link = { href: null, openInNewTab: false },
   className,
   children,
   isFullWidth,
@@ -56,10 +56,10 @@ const Typography = ({
     color,
   }
 
-  return href ? (
+  return link?.href ? (
     <Link
       {...props}
-      href={href}
+      href={link.href}
       style={PropStyles as CSSProperties}
       className={cn(
         styles.root,
@@ -67,6 +67,8 @@ const Typography = ({
         size && styles[size],
         className
       )}
+      // TODO: complete SEO props relative to referrer and follow
+      target={link.openInNewTab ? '_blank' : undefined}
     >
       {children}
     </Link>
