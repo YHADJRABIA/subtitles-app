@@ -4,6 +4,7 @@ import Header from '@/components/Layout/Header/index'
 import Footer from '@/components/Layout/Footer'
 import { getUserSession } from '@/utils/session'
 import { getNextLocale } from '@/utils/cookies'
+import styles from './layout.module.scss'
 
 export const generateMetadata = async () => {
   const locale = getNextLocale()
@@ -23,7 +24,7 @@ const layout = async ({ children }: PropTypes) => {
   return (
     <>
       <Header isConnected={!!user} />
-      <main>{children}</main>
+      <main className={styles.main}>{children}</main>
       <Footer />
     </>
   )
