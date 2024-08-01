@@ -9,7 +9,6 @@ declare global {
       NEXTAUTH_SECRET: string
       NODEMAILER_SERVICE: string
       NODEMAILER_SENDER_EMAIL: string
-      SUPPORT_LINK: string
       NODE_ENV: 'development' | 'production'
     }
   }
