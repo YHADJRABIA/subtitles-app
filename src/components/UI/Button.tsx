@@ -56,7 +56,7 @@ interface LinkButtonPropTypes extends TypographyPropTypes {
   testId?: string
   variation?: 'primary' | 'secondary' | 'regular'
   backgroundColor?: string
-  icon?: IconType
+  icon?: { src: IconType; size?: number; color?: string }
   link: LinkType
 }
 
@@ -68,11 +68,12 @@ export const LinkButton = ({
   link = { href: '/', openInNewTab: false },
   backgroundColor,
   children,
-  icon: Icon,
+  icon,
   ...rest
 }: LinkButtonPropTypes) => {
   const isPrimary = variation === 'primary'
   const isSecondary = variation === 'secondary'
+  const Icon = icon?.src
   return (
     <Typography
       {...rest}
@@ -93,7 +94,7 @@ export const LinkButton = ({
     >
       {Icon && (
         <span className={styles.icon}>
-          <Icon size={18} />
+          <Icon size={icon.size ?? 18} color={icon.color} />
         </span>
       )}
       {children}
