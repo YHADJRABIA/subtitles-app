@@ -7,11 +7,11 @@ import { getNextLocale } from '@/utils/cookies'
 
 export const generateMetadata = async () => {
   const locale = getNextLocale()
-  const t = await getTranslations({ locale, namespace: 'Metadata.Homepage' })
+  const t = await getTranslations({ locale, namespace: 'Metadata' })
 
   return {
-    title: t('title'),
-    description: t('description'),
+    title: `${t('prefix')} ${t('Homepage.title')}`,
+    description: t('Homepage.description'),
   }
 }
 
