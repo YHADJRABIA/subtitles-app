@@ -1,8 +1,9 @@
-import { ButtonHTMLAttributes, ReactNode } from 'react'
+import { ButtonHTMLAttributes } from 'react'
 import styles from './Button.module.scss'
 import cn from 'classnames'
 import Loader from './Loader'
 import Typography, { LinkType, TypographyPropTypes } from './Typography'
+import { IconType } from 'react-icons/lib'
 
 interface ButtonPropTypes extends ButtonHTMLAttributes<HTMLButtonElement> {
   testId?: string
@@ -55,7 +56,7 @@ interface LinkButtonPropTypes extends TypographyPropTypes {
   testId?: string
   variation?: 'primary' | 'secondary' | 'regular'
   backgroundColor?: string
-  icon?: ReactNode
+  icon?: IconType
   link: LinkType
 }
 
@@ -67,7 +68,7 @@ export const LinkButton = ({
   link = { href: '/', openInNewTab: false },
   backgroundColor,
   children,
-  icon,
+  icon: Icon,
   ...rest
 }: LinkButtonPropTypes) => {
   const isPrimary = variation === 'primary'
@@ -90,7 +91,11 @@ export const LinkButton = ({
       data-testid={testId}
       style={{ backgroundColor: backgroundColor ?? undefined }}
     >
-      {icon && <span className={styles.icon}>{icon}</span>}
+      {Icon && (
+        <span className={styles.icon}>
+          <Icon size={19} />
+        </span>
+      )}
       {children}
     </Typography>
   )
