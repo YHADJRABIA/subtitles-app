@@ -48,4 +48,7 @@
 .button {
   position: relative;
   box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
+  &:hover {
+    border-color: var(--secondary-blue-color);
+  }
 }
