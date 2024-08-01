@@ -71,8 +71,8 @@ const Typography = ({
         size && styles[size],
         className
       )}
-      // TODO: complete SEO props relative to referrer and follow
       target={link.openInNewTab ? '_blank' : undefined}
+      rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
     >
       {children}
     </Link>
