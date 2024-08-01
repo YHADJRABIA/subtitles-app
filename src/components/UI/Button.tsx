@@ -93,7 +93,7 @@ export const LinkButton = ({
     >
       {Icon && (
         <span className={styles.icon}>
-          <Icon size={19} />
+          <Icon size={18} />
         </span>
       )}
       {children}

@@ -48,9 +48,13 @@
   }
 }
 
-.languageMenu {
+.bottomSection {
   margin-top: auto;
+  @include flexCenter(row, space-between);
+}
+
+.languageMenu {
   @include respond-to('large') {
-    margin-left: 2rem;
+    margin: 0 2rem;
   }
 }
