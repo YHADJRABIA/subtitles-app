@@ -10,6 +10,10 @@ import Separator from '@/components/UI/Separator'
 import NavLink from './NavLink'
 import useNavLinks from '@/hooks/useNavLinks'
 import useIsOnDesktop from '@/hooks/useIsOnDesktop'
+import { LinkButton } from '@/components/UI/Button'
+import { supportLink } from '@/utils/support'
+import { useTranslations } from 'next-intl'
+import { SiBuymeacoffee as SupportIcon } from 'react-icons/si'
 
 interface PropTypes {
   isConnected: boolean
@@ -17,6 +21,7 @@ interface PropTypes {
 }
 
 const Nav = ({ className, isConnected }: PropTypes) => {
+  const t = useTranslations('Navigation')
   const currentPath = usePathname()
   const isOnDesktop = useIsOnDesktop()
   const [toggled, setToggled] = useState(false)
@@ -42,11 +47,25 @@ const Nav = ({ className, isConnected }: PropTypes) => {
           className={styles.separator}
         />
         {/* TODO: Reuse later  <AuthSection showAccount={isConnected} className={styles.authSection} /> */}
-        <LanguageMenu
-          isInverted={!isOnDesktop}
-          className={styles.languageMenu}
-        />
-        {/* Add donation button */}
+        <div className={styles.bottomSection}>
+          <LanguageMenu
+            isInverted={!isOnDesktop}
+            className={styles.languageMenu}
+          />
+
+          <LinkButton
+            size="xs"
+            weight="semiBold"
+            isFullWidth={false}
+            icon={{ src: SupportIcon }}
+            link={{
+              href: supportLink,
+              openInNewTab: true,
+            }}
+          >
+            {t('donate')}
+          </LinkButton>
+        </div>
       </div>
     </nav>
   )
