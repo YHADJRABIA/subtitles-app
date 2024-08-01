@@ -14,7 +14,6 @@ export type LinkType = {
 type TextSize = 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl'
 
 export interface TypographyPropTypes extends HTMLAttributes<HTMLElement> {
-  tag?: TagType
   weight?: 'normal' | 'semiBold' | 'bold'
   align?: 'left' | 'center' | 'right'
   size?: TextSize
@@ -50,7 +49,7 @@ const Typography = ({
   children,
   isFullWidth,
   ...props
-}: TypographyPropTypes) => {
+}: TypographyPropTypes & { tag?: TagType }) => {
   const Tag = tagMap[tag]
 
   const isSemiBold = weight === 'semiBold'
