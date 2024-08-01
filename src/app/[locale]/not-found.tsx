@@ -8,6 +8,7 @@ import HeroBanner from '@/components/UI/HeroBanner'
 import styles from './not-found.module.scss'
 import Typography from '@/components/UI/Typography'
 import { LinkButton } from '@/components/UI/Button'
+import { MdOutlineKeyboardBackspace as BackIcon } from 'react-icons/md'
 
 // TODO: find a way to account for metadata
 // TODO: fix "Unable to find `next-intl` locale because the middleware didn't run on this request. See https://next-intl-docs.vercel.app/docs/routing/middleware#unable-to-find-locale. The `notFound()` function will be called as a result."
@@ -37,7 +38,7 @@ const NotFoundPage = async () => {
           imageAlt="404"
           title={t('page_not_found')}
           description={t('verify_route')}
-          className={styles.text}
+          className={styles.heroBanner}
           ctaElements={
             <LinkButton
               link={{ href: '/' }}
@@ -45,6 +46,7 @@ const NotFoundPage = async () => {
               variation="primary"
               weight="semiBold"
               className={styles.cta}
+              icon={{ src: BackIcon, size: 22 }}
             >
               {t('back_to_homepage')}
             </LinkButton>
