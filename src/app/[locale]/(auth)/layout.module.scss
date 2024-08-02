@@ -4,6 +4,9 @@
   height: 100%;
   @include flexCenter(column, space-evenly);
   flex-wrap: nowrap;
+  @include respond-to('large') {
+    padding: 4rem;
+  }
 }
 
 .main {
