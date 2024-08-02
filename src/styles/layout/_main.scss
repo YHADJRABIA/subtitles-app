@@ -1,4 +1,4 @@
 main {
-  @include flexCenter(column, space-around);
+  @include flexCenter(column, flex-start);
   width: 100%;
 }
