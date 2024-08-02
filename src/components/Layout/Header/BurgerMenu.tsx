@@ -12,7 +12,7 @@ interface PropTypes {
 
 const BurgerMenu = ({ toggled, setToggled, className }: PropTypes) => {
   // On/Off menu button
-  const toggleMenu = (): void => setToggled(!toggled)
+  const toggleMenu = (): void => setToggled(prev => !prev)
 
   // Closes menu if escape key pressed
   const keyboardHandler = (e: KeyboardEvent): void => {
