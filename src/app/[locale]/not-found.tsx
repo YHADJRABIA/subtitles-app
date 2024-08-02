@@ -10,18 +10,7 @@ import Typography from '@/components/UI/Typography'
 import { LinkButton } from '@/components/UI/Button'
 import { MdOutlineKeyboardBackspace as BackIcon } from 'react-icons/md'
 
-// TODO: find a way to account for metadata
 // TODO: fix "Unable to find `next-intl` locale because the middleware didn't run on this request. See https://next-intl-docs.vercel.app/docs/routing/middleware#unable-to-find-locale. The `notFound()` function will be called as a result."
-
-/* export const generateMetadata = async () => {
-  const locale = getNextLocale()
-  const t = await getTranslations({ locale, namespace: 'Metadata.NotFound' })
-
-  return {
-    title: t('title'),
-    description: t('description'),
-  }
-} */
 
 const SVG_PATH = '/assets/ice-fishing.svg'
 
