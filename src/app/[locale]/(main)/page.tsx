@@ -4,10 +4,11 @@ import { useTranslations } from 'next-intl'
 import CtaSection from './_components/CtaSection'
 import { getNextLocale } from '@/utils/cookies'
 import { getTranslations } from 'next-intl/server'
+import { Metadata } from 'next'
 
 const MAIN_ASSET_PATH = '/assets/film-rolls.svg'
 
-export const generateMetadata = async () => {
+export const generateMetadata = async (): Promise<Metadata> => {
   const locale = getNextLocale()
   const t = await getTranslations({ locale, namespace: 'Metadata' })
 

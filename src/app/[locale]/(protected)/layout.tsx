@@ -5,8 +5,9 @@ import Header from '@/components/Layout/Header'
 import Footer from '@/components/Layout/Footer'
 import Navbar from './_components/Navbar'
 import { getNextLocale } from '@/utils/cookies'
+import { Metadata } from 'next'
 
-export const generateMetadata = async () => {
+export const generateMetadata = async (): Promise<Metadata> => {
   const locale = getNextLocale()
   const t = await getTranslations({ locale, namespace: 'Metadata.Protected' })
 
