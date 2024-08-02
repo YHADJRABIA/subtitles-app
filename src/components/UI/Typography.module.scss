@@ -1,6 +1,6 @@
-/*  .root {
-    width: inherit; 
-} */
+.root {
+  @include ow;
+}
 
 .fullWidth {
   width: inherit; // Todo: Find more appropriate name
