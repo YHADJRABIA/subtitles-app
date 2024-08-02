@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './Nav.module.scss'
 import cn from 'classnames'
 import { usePathname } from '@/lib/i18n/navigation'
@@ -32,6 +32,11 @@ const Nav = ({ className, isConnected }: PropTypes) => {
     setToggled(false)
   }
 
+  // Close nav menu when path has changed
+  useEffect(() => {
+    handleCloseNav()
+  }, [currentPath]) // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
     <nav aria-label="Main menu" className={cn(styles.root, className)}>
       <BurgerMenu
@@ -49,7 +54,7 @@ const Nav = ({ className, isConnected }: PropTypes) => {
                 key={id}
                 link={link}
                 isActive={isActive}
-                onClick={handleCloseNav}
+                onClick={isActive ? handleCloseNav : undefined} // Close nav menu if already on target route
               />
             )
           })}

@@ -9,9 +9,7 @@
   transition: all 0.5s ease-out;
   transition-property: left, opacity;
   width: 100%;
-  height: calc(
-    100vh - var(--header-height) + 1rem
-  ); // TODO: Account for footer's height
+  height: calc(100vh - var(--header-height) + 1rem);
   background-color: var(--primary-black-color);
   box-shadow:
     0 3px 5px 0px rgba(255, 255, 255, 0.2),
