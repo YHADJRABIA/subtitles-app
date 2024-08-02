@@ -2,10 +2,10 @@ import { SetStateAction, Dispatch } from 'react'
 import cn from 'classnames'
 import styles from './BurgerMenu.module.scss'
 import { useEventListener } from '@/hooks/useEventListener'
+import useLockBodyScroll from '@/hooks/useLockBodyScroll'
 
 interface PropTypes {
   toggled: boolean
-
   setToggled: Dispatch<SetStateAction<boolean>>
   className?: string
 }
@@ -13,6 +13,9 @@ interface PropTypes {
 const BurgerMenu = ({ toggled, setToggled, className }: PropTypes) => {
   // On/Off menu button
   const toggleMenu = (): void => setToggled(prev => !prev)
+
+  // Prevent scroll when menu is opened
+  useLockBodyScroll(toggled)
 
   // Closes menu if escape key pressed
   const keyboardHandler = (e: KeyboardEvent): void => {
