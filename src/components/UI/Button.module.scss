@@ -58,6 +58,12 @@
   }
 }
 
+.hoverEffect {
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
 .icon {
   margin-right: 1rem;
 }

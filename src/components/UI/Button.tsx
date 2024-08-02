@@ -80,13 +80,15 @@ export const LinkButton = ({
       link={{ ...link }}
       className={cn(
         styles.root,
-        styles.shadowEffect,
         isPrimary
           ? styles.primary
           : isSecondary
             ? styles.secondary
             : styles.regular,
-        { fullWidth: isFullWidth },
+        {
+          fullWidth: isFullWidth,
+        },
+        isPrimary ? styles.hoverEffect : styles.shadowEffect,
         className
       )}
       data-testid={testId}
