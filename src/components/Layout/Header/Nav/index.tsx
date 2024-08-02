@@ -27,6 +27,11 @@ const Nav = ({ className, isConnected }: PropTypes) => {
   const [toggled, setToggled] = useState(false)
   const navLinks = useNavLinks({ isConnected })
 
+  const handleCloseNav = () => {
+    if (toggled === false) return
+    setToggled(false)
+  }
+
   return (
     <nav aria-label="Main menu" className={cn(styles.root, className)}>
       <BurgerMenu
@@ -39,7 +44,14 @@ const Nav = ({ className, isConnected }: PropTypes) => {
         <ul className={styles.links}>
           {navLinks.map((link, id) => {
             const isActive = link?.url === currentPath
-            return <NavLink key={id} link={link} isActive={isActive} />
+            return (
+              <NavLink
+                key={id}
+                link={link}
+                isActive={isActive}
+                onClick={handleCloseNav}
+              />
+            )
           })}
         </ul>
         <Separator
