@@ -88,6 +88,7 @@ const AccordionItem = ({
           tag="h3"
           size="s"
           align="left"
+          weight="semiLight"
           className={styles.description}
         >
           {body}
