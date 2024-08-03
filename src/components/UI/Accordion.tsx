@@ -66,7 +66,7 @@ const AccordionItem = ({
         <Typography
           tag="h2"
           size="m"
-          weight="bold"
+          weight="semiBold"
           className={styles.title}
           align="left"
         >
@@ -84,7 +84,12 @@ const AccordionItem = ({
           maxHeight: isOpen ? `${contentHeight.current?.scrollHeight}px` : '0',
         }}
       >
-        <Typography tag="h3" align="left" className={styles.description}>
+        <Typography
+          tag="h3"
+          size="s"
+          align="left"
+          className={styles.description}
+        >
           {body}
         </Typography>
       </div>
