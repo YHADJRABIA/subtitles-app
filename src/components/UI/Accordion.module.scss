@@ -1,0 +1,46 @@
+.root {
+  width: 100%;
+
+  @include respond-to('large') {
+    width: 80rem;
+  }
+}
+
+.item {
+  border-radius: 1rem;
+  background-color: var(--primary-gray-color);
+
+  &:not(:last-of-type) {
+    margin-bottom: 1.5rem;
+  }
+}
+
+.titleContainer {
+  padding: 2rem;
+  cursor: pointer;
+  @include flexCenter(row, space-between);
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    opacity: 0.75;
+  }
+}
+
+.toggler {
+  transition: transform 0.3s ease;
+}
+
+.title {
+  flex: 1;
+  padding-right: 2rem;
+}
+
+.collapseable {
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.description {
+  padding: 0.5rem 2rem 2rem;
+  opacity: 0.75;
+}
