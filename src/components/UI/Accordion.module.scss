@@ -1,9 +1,6 @@
 .root {
   width: 100%;
-
-  @include respond-to('large') {
-    width: 80rem;
-  }
+  max-width: 80rem;
 }
 
 .item {
