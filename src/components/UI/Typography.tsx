@@ -3,6 +3,7 @@ import styles from './Typography.module.scss'
 import cn from 'classnames'
 import { Link } from '@/lib/i18n/navigation'
 import { UrlObject } from 'url'
+import { fontWeights } from '@/utils/font'
 
 type TagType = keyof typeof tagMap
 
@@ -12,9 +13,10 @@ export type LinkType = {
 }
 
 type TextSize = 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl'
+type TextWeight = 'light' | 'semiLight' | 'normal' | 'semiBold' | 'bold'
 
 export interface TypographyPropTypes extends HTMLAttributes<HTMLElement> {
-  weight?: 'normal' | 'semiBold' | 'bold'
+  weight?: TextWeight
   align?: 'left' | 'center' | 'right'
   size?: TextSize
   color?: string
@@ -52,10 +54,8 @@ const Typography = ({
 }: TypographyPropTypes & { tag?: TagType }) => {
   const Tag = tagMap[tag]
 
-  const isSemiBold = weight === 'semiBold'
-
   const PropStyles = {
-    fontWeight: isSemiBold ? 600 : weight,
+    fontWeight: fontWeights[weight] || weight,
     textAlign: align,
     color,
   }
