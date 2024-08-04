@@ -14,7 +14,7 @@ import {
 import styles from './AuthForm.module.scss'
 import { Button } from '@/components/UI/Button'
 import { useShowPassword } from '@/hooks/useShowPassword'
-import Separator from '@/components/UI/Separator'
+import Separator from '@/components/Separator'
 import Field from '@/components/Forms/Field'
 
 import { getErrorMessage } from '@/utils/errors'
