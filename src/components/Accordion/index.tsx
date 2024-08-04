@@ -2,9 +2,8 @@
 import React, { useRef, useState } from 'react'
 import styles from './Accordion.module.scss'
 import { PiCaretDownBold as CaretIcon } from 'react-icons/pi'
-
 import cn from 'classnames'
-import Typography from './Typography'
+import Typography from '../UI/Typography'
 
 type ItemType = { title: string; body: string }
 
