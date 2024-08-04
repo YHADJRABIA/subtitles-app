@@ -33,9 +33,7 @@
 
 .burgerMenu,
 .separator {
-  @include respond-to('large') {
-    display: none;
-  }
+  @include hideOnLarge;
 }
 
 .links {

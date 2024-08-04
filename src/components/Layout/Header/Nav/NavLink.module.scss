@@ -27,7 +27,5 @@
 }
 .icon {
   margin-right: 1.5rem;
-  @include respond-to('large') {
-    display: none;
-  }
+  @include hideOnLarge;
 }

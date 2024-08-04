@@ -103,3 +103,24 @@ $breakpoints: (
          + 'Please make sure it is defined in `$breakpoints` map.';
   }
 }
+
+@mixin hideOnSmall {
+  @include respond-to('small') {
+    display: none;
+  }
+}
+
+@mixin hideOnMedium {
+  @include respond-to('medium') {
+    display: none;
+  }
+}
+@mixin hideOnLarge {
+  @include respond-to('large') {
+    display: none;
+  }
+}
+
+@mixin removeTapHighlight {
+  -webkit-tap-highlight-color: transparent;
+}
