@@ -32,4 +32,16 @@ $footer-height: 6rem;
 
   // Dimensions
   --header-height: 6.3rem;
+
+  // Layout
+  @include respond-to('small') {
+    --gutter-width: 1.6rem;
+  }
+
+  @include respond-to('medium') {
+    --gutter-width: 2.4rem;
+  }
+
+  --half-gutter-width: calc(var(--gutter-width) * 0.5);
+  --gutter-compensation: calc(var(--half-gutter-width) * -1);
 }
