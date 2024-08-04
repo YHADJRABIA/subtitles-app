@@ -64,7 +64,7 @@ const AccordionItem = ({
         onClick={onToggle}
       >
         <Typography
-          tag="h2"
+          tag="h3"
           size="m"
           weight="semiBold"
           className={styles.title}
@@ -85,7 +85,7 @@ const AccordionItem = ({
         }}
       >
         <Typography
-          tag="h3"
+          tag="h4"
           size="s"
           align="left"
           weight="semiLight"
