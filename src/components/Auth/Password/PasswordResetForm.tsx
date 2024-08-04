@@ -1,5 +1,5 @@
 'use client'
-import InfoBox from '@/components/UI/InfoBox'
+import TextInBox from '@/components/TextInBox'
 import Typography from '@/components/UI/Typography'
 import styles from './PasswordResetForm.module.scss'
 import React, { useEffect } from 'react'
@@ -80,7 +80,7 @@ const PasswordResetForm = () => {
         <Typography tag="h1" weight="semiBold" className={styles.title}>
           {t('PasswordReset.title')}
         </Typography>
-        <InfoBox
+        <TextInBox
           icon={<InfoIcon style={{ fontSize: 18 }} />}
           label={info.label}
           type={info.type}

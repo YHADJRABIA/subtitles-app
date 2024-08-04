@@ -20,7 +20,7 @@ import Field from '@/components/Forms/Field'
 import { getErrorMessage } from '@/utils/errors'
 import GoogleLogin from '@/components/Auth/GoogleLogin'
 import { handleGoogleLogin } from '@/actions/auth'
-import InfoBox from '../UI/InfoBox'
+import TextInBox from '../TextInBox'
 import Typography from '../UI/Typography'
 import useInfo from '@/hooks/useInfo'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
@@ -108,7 +108,7 @@ function AuthForm<T>({ type, onSubmit }: PropTypes<T>) {
         <Typography className={styles.title} tag="h1" weight="semiBold">
           {t(isRegisterForm ? 'Register.title' : 'Login.title')}
         </Typography>
-        <InfoBox
+        <TextInBox
           icon={<InfoIcon style={{ fontSize: 18 }} />}
           label={info.label}
           type={info.type}

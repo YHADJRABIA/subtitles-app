@@ -14,7 +14,7 @@ import Field from '@/components/Forms/Field'
 
 import { getErrorMessage } from '@/utils/errors'
 
-import InfoBox from '../UI/InfoBox'
+import TextInBox from '../TextInBox'
 import Typography from '../UI/Typography'
 import useInfo from '@/hooks/useInfo'
 import { SubmitHandler, useForm } from 'react-hook-form'
@@ -66,7 +66,7 @@ const SendVerificationEmailForm = () => {
           {t('SendVerificationEmail.title')}
         </Typography>
 
-        <InfoBox
+        <TextInBox
           icon={<InfoIcon style={{ fontSize: 18 }} />}
           label={info.label}
           type={info.type}

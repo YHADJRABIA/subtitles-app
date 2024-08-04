@@ -1,9 +1,7 @@
 import React, { ReactNode } from 'react'
-
-import styles from './InfoBox.module.scss'
-
+import styles from './TextInBox.module.scss'
 import cn from 'classnames'
-import Typography from './Typography'
+import Typography from '../UI/Typography'
 import { Info } from '@/types/info'
 
 interface PropTypes {
@@ -14,7 +12,7 @@ interface PropTypes {
   isShown: boolean
 }
 
-const InfoBox = ({
+const TextInBox = ({
   label,
   icon,
   type = 'info',
@@ -43,4 +41,4 @@ const InfoBox = ({
   )
 }
 
-export default InfoBox
+export default TextInBox

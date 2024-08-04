@@ -16,7 +16,7 @@ import Field from '@/components/Forms/Field'
 
 import { getErrorMessage } from '@/utils/errors'
 
-import InfoBox from '@/components/UI/InfoBox'
+import TextInBox from '@/components/TextInBox'
 import Typography from '@/components/UI/Typography'
 import {
   PasswordRecoveryValidator,
@@ -71,7 +71,7 @@ const PasswordRecoveryForm = () => {
         <Typography className={styles.title} tag="h1" weight="semiBold">
           {t('PasswordRecovery.title')}
         </Typography>
-        <InfoBox
+        <TextInBox
           className={styles.infoBox}
           icon={<InfoIcon style={{ fontSize: 18 }} />}
           label={info.label}
