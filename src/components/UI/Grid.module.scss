@@ -1,0 +1,140 @@
+$column-count: 12;
+
+.row {
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  margin-right: var(--gutter-compensation);
+  margin-left: var(--gutter-compensation);
+}
+
+@mixin makeColReady() {
+  position: relative;
+
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  padding-right: var(--half-gutter-width);
+  padding-left: var(--half-gutter-width);
+}
+
+@mixin makeCol($size) {
+  @if ($size != 0) {
+    display: unset;
+
+    flex-basis: percentage(calc($size / $column-count));
+    // Add a `max-width` to ensure content within each column does not blow out
+    // the width of the column. Applies to IE10+ and Firefox.
+    max-width: percentage(calc($size / $column-count));
+  } @else {
+    display: none;
+  }
+}
+
+@mixin makeColOffset($size) {
+  margin-left: percentage(calc($size / $column-count));
+}
+
+@mixin makeRowUtilities($name: '') {
+  .reverse#{$name} {
+    flex-direction: row-reverse;
+  }
+
+  .justifyInitial#{$name} {
+    justify-content: initial;
+  }
+
+  .justifyStart#{$name} {
+    justify-content: flex-start;
+  }
+
+  .justifyCenter#{$name} {
+    justify-content: center;
+  }
+
+  .justifyEnd#{$name} {
+    justify-content: flex-end;
+  }
+
+  .justifyAround#{$name} {
+    justify-content: space-around;
+  }
+
+  .justifyBetween#{$name} {
+    justify-content: space-between;
+  }
+
+  .alignInitial#{$name} {
+    align-items: initial;
+  }
+
+  .alignTop#{$name} {
+    align-items: flex-start;
+  }
+
+  .alignMiddle#{$name} {
+    align-items: center;
+  }
+
+  .alignBottom#{$name} {
+    align-items: flex-end;
+  }
+}
+
+@mixin makeColUtilities($name: '') {
+  .first#{$name} {
+    order: -1;
+  }
+
+  .last#{$name} {
+    order: 1;
+  }
+}
+
+@mixin makeUtilities($name: '') {
+  @include makeRowUtilities($name);
+  @include makeColUtilities($name);
+}
+
+/* Global: col */
+@mixin makeCols($name: '') {
+  /* First: Commons rules */
+  @for $i from 0 through $column-count {
+    .col#{$i}#{$name},
+    .offset#{$i}#{$name} {
+      @include makeColReady();
+    }
+  }
+
+  /* Next: the specific rules that will override the general rules */
+  @for $i from 0 through $column-count {
+    .col#{$i}#{$name} {
+      @include makeCol($i);
+    }
+
+    @if ($i < $column-count) {
+      .offset#{$i}#{$name} {
+        @include makeColOffset($i);
+      }
+    }
+  }
+}
+
+@include makeCols();
+@include makeUtilities();
+
+@include respond-to('small') {
+  @include makeCols('Small');
+  @include makeUtilities('Small');
+}
+
+@include respond-to('medium') {
+  @include makeCols('Medium');
+  @include makeUtilities('Medium');
+}
+
+@include respond-to('large') {
+  @include makeCols('Large');
+  @include makeUtilities('Large');
+}
