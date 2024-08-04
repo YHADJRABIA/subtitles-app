@@ -1,8 +1,7 @@
 import React, { ReactNode } from 'react'
 import styles from './HeroBanner.module.scss'
-
+import Typography from '../UI/Typography'
 import cn from 'classnames'
-import Typography from './Typography'
 import Image from 'next/image'
 
 interface PropTypes {

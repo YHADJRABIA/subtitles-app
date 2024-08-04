@@ -1,4 +1,4 @@
-import HeroBanner from '@/components/UI/HeroBanner'
+import HeroBanner from '@/components/HeroBanner'
 import styles from './page.module.scss'
 import { useTranslations } from 'next-intl'
 import CtaSection from './_components/CtaSection'
