@@ -47,9 +47,15 @@
 .bottomSection {
   margin-top: auto;
   @include flexCenter(row, space-between);
+  @include respond-to('medium') {
+    justify-content: flex-start;
+  }
 }
 
 .languageMenu {
+  @include respond-to('medium') {
+    margin-right: 4rem;
+  }
   @include respond-to('large') {
     margin: 0 2rem;
   }
