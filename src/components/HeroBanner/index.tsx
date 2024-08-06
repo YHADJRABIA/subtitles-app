@@ -35,6 +35,7 @@ const HeroBanner = ({
       <div className={styles.textContainer}>
         <Typography
           tag="h1"
+          lineHeight="narrow"
           weight="bold"
           align={align}
           className={styles.title}
