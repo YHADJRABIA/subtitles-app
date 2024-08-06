@@ -3,7 +3,7 @@ import styles from './Typography.module.scss'
 import cn from 'classnames'
 import { Link } from '@/lib/i18n/navigation'
 import { UrlObject } from 'url'
-import { fontWeights } from '@/utils/font'
+import { fontWeights, lineHeights } from '@/utils/font'
 
 type TagType = keyof typeof tagMap
 
@@ -12,12 +12,14 @@ export type LinkType = {
   openInNewTab?: boolean
 }
 
+type TextWeight = keyof typeof fontWeights
+type LineHeight = keyof typeof lineHeights
 type TextSize = 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl'
-type TextWeight = 'light' | 'semiLight' | 'normal' | 'semiBold' | 'bold'
 
 export interface TypographyPropTypes extends HTMLAttributes<HTMLElement> {
   weight?: TextWeight
   align?: 'left' | 'center' | 'right'
+  lineHeight?: LineHeight
   size?: TextSize
   color?: string
   uppercase?: boolean
@@ -50,12 +52,14 @@ const Typography = ({
   className,
   children,
   isFullWidth,
+  lineHeight = 'regular',
   ...props
 }: TypographyPropTypes & { tag?: TagType }) => {
   const Tag = tagMap[tag]
 
   const PropStyles = {
     fontWeight: fontWeights[weight] || weight,
+    lineHeight: lineHeights[lineHeight] || lineHeight,
     textAlign: align,
     color,
   }
