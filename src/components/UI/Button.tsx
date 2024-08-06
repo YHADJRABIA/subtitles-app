@@ -80,6 +80,7 @@ export const LinkButton = ({
       link={{ ...link }}
       className={cn(
         styles.root,
+        styles.linkButton,
         isPrimary
           ? styles.primary
           : isSecondary
