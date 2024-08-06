@@ -43,10 +43,9 @@
 }
 
 .ctaContainer {
-  width: 100%;
-  margin-top: 5rem;
-
-  @include respond-to('medium') {
-    @include flexCenter(row);
+  @include respond-to('small') {
+    width: 100%;
   }
+
+  margin-top: 5rem;
 }

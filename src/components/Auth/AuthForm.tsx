@@ -103,6 +103,7 @@ function AuthForm<T>({ type, onSubmit }: PropTypes<T>) {
       method="POST"
       onSubmit={handleSubmit(handleAuth as SubmitHandler<FieldValues>)}
       noValidate
+      className={styles.root}
     >
       <div className={styles.wrapper}>
         <Typography className={styles.title} tag="h1" weight="semiBold">

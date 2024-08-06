@@ -6,7 +6,7 @@ const useIsOnMobile = (): boolean => {
   const [isCompact, setIsCompact] = useState(true)
 
   const updateMatchQuery = () =>
-    setIsCompact(matchMedia('(max-width: 425px)').matches)
+    setIsCompact(matchMedia('(max-width:768px)').matches)
 
   useEffect(() => updateMatchQuery(), [])
   useEventListener('resize', updateMatchQuery)

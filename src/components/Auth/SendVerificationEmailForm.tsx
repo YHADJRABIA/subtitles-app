@@ -60,7 +60,12 @@ const SendVerificationEmailForm = () => {
   }
 
   return (
-    <form method="POST" onSubmit={handleSubmit(handleVerify)} noValidate>
+    <form
+      method="POST"
+      onSubmit={handleSubmit(handleVerify)}
+      noValidate
+      className={styles.root}
+    >
       <div className={styles.wrapper}>
         <Typography tag="h1" weight="semiBold" className={styles.title}>
           {t('SendVerificationEmail.title')}

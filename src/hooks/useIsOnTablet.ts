@@ -7,7 +7,7 @@ const useIsOnTablet = (): boolean => {
 
   const updateMatchQuery = () =>
     setIsOnTablet(
-      matchMedia('(min-width: 426px) and (max-width: 1024px)').matches
+      matchMedia('(min-width: 768px) and (max-width: 1024px)').matches
     )
 
   useEffect(() => updateMatchQuery(), [])
