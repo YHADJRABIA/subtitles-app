@@ -15,6 +15,7 @@
   flex-wrap: nowrap;
 
   @include respond-to('large') {
+    flex: unset;
     height: min-content;
     width: 70rem;
     border-radius: 3rem;
