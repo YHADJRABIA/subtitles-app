@@ -6,9 +6,9 @@
   }
 
   @include respond-to('medium') {
-    @include flexCenter(row, space-between);
-    width: 35rem;
+    @include flexCenter(row, center);
     & > :first-of-type {
+      margin-right: 2.5rem;
       margin-bottom: unset;
     }
     a {

@@ -16,7 +16,7 @@ const CtaSection = ({ className }: PropTypes) => {
   return (
     <section className={cn(styles.root, className)}>
       <LinkButton
-        size="s"
+        size="xs"
         variation="primary"
         weight="semiBold"
         link={{ href: '/' }}
@@ -24,7 +24,7 @@ const CtaSection = ({ className }: PropTypes) => {
         {t('browse_series')}
       </LinkButton>
       <LinkButton
-        size="s"
+        size="xs"
         variation="secondary"
         link={{ href: supportLink, openInNewTab: true }}
       >
