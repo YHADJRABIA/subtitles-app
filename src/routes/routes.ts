@@ -7,6 +7,8 @@ export const DEFAULT_LOGIN_REDIRECT_ROUTE: Pathname = '/dashboard'
 /** Routes accessible without requiring authentication. */
 export const publicRoutes = [
   '/',
+  '/about',
+  '/subtitles',
   '/verify-email',
   '/send-verification-email',
   '/password/recovery',
