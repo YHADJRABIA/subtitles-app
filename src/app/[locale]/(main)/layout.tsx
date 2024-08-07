@@ -9,6 +9,8 @@ interface PropTypes {
 }
 const layout = async ({ children }: PropTypes) => {
   const user = await getUserSession()
+
+  /* TODO: Hide Header when user scrolls up and hide it when user scrolls down */
   return (
     <>
       <Header isConnected={!!user} />
