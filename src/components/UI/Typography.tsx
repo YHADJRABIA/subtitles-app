@@ -14,7 +14,7 @@ export type LinkType = {
 
 type TextWeight = keyof typeof fontWeights
 type LineHeight = keyof typeof lineHeights
-type TextSize = 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl'
+type TextSize = 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | 'xxxl'
 
 export interface TypographyPropTypes extends HTMLAttributes<HTMLElement> {
   weight?: TextWeight
