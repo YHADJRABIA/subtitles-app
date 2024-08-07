@@ -115,7 +115,7 @@ export default function AboutPage() {
       <section className={styles.faq}>
         <Typography
           tag="h2"
-          weight="semiBold"
+          weight="bold"
           isFullWidth
           align="left"
           className={styles.title}
