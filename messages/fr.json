@@ -116,7 +116,7 @@
 
   "NotFound": {
     "page_not_found": "Page non trouvée",
-    "verify_route": "Vérifier l'exactitude du lien introduit, ou réessayer plus tard",
+    "verify_route": "Vérifier l'exactitude du lien introduit, ou réessayer plus tard.",
     "back_to_homepage": "Vers page d'accueil",
     "storyset_credit": "Illustré par Storyset"
   },

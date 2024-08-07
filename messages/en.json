@@ -114,7 +114,7 @@
   },
   "NotFound": {
     "page_not_found": "Page not found",
-    "verify_route": "Verify the correctness of the link you are trying to access or retry later",
+    "verify_route": "Verify the correctness of the link you are trying to access or retry later.",
     "back_to_homepage": "To homepage",
     "storyset_credit": "Illustration by Storyset"
   },
