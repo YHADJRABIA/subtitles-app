@@ -11,11 +11,12 @@
 .image {
   position: relative;
   margin-bottom: 4rem;
-  width: 85%;
-  height: 25rem;
+  width: min(15rem + 45vw, 40rem);
+  height: min(15rem + 45vw, 40rem);
+
   @include respond-to('medium') {
-    width: min(calc(20rem + 30vw), 40rem);
-    height: min(calc(20rem + 20vw), 40rem);
+    width: min(calc(20rem + 30vw), 50rem);
+    height: min(calc(20rem + 20vw), 50rem);
   }
 }
 
