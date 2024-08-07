@@ -1,6 +1,5 @@
 .root {
   width: 100%;
-  max-width: 80rem;
 }
 
 .item {
@@ -39,5 +38,5 @@
 
 .description {
   padding: 0.5rem 2rem 1.2rem;
-  opacity: 0.85;
+  color: var(--tertiary-black-color);
 }
