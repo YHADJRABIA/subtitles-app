@@ -1,7 +1,32 @@
 .root {
   @include flexCenter(column);
+  @include respond-to('large') {
+    max-width: 100rem;
+  }
+
+  @include respond-to('huge') {
+    min-width: 110rem;
+  }
 }
 
 .title {
   margin-bottom: 4rem;
+}
+
+.highlights {
+  margin-bottom: 2rem;
+}
+
+.textWithIcon {
+  margin-bottom: 4rem;
+
+  @include respond-to('medium') {
+    min-height: 14rem;
+  }
+  @include respond-to('large') {
+    min-height: 15rem;
+  }
+}
+
+.faq {
 }
