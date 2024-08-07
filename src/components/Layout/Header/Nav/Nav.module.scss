@@ -41,6 +41,7 @@
   align-content: flex-start;
   @include respond-to('large') {
     flex-direction: row;
+    margin-right: 2rem;
   }
 }
 
