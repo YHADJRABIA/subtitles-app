@@ -11,6 +11,16 @@ export const pathnames = {
   '/': '/',
 
   // If locales use different paths, you can specify each external path per locale
+  '/about': {
+    en: '/about',
+    fr: '/a-propos',
+  },
+  '/subtitles': {
+    en: '/subtitles',
+    fr: '/sous-titres',
+  },
+
+  /* Protected */
   '/dashboard': {
     en: '/dashboard',
     fr: '/tableau-de-bord',
@@ -23,6 +33,8 @@ export const pathnames = {
     en: '/dashboard/account',
     fr: '/tableau-de-bord/compte',
   },
+
+  /* Auth */
   '/register': {
     en: '/register',
     fr: '/inscription',
