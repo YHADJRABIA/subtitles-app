@@ -1,4 +1,4 @@
-import { Inter, Nunito } from 'next/font/google'
+import { Inter, Literata } from 'next/font/google'
 import '@/styles/globals.scss'
 import 'react-toastify/dist/ReactToastify.min.css'
 import { ReactNode } from 'react'
@@ -7,7 +7,7 @@ import { getNextLocale } from '@/utils/cookies'
 import { getTranslations } from 'next-intl/server'
 
 const inter = Inter({ subsets: ['latin', 'cyrillic'], variable: '--font-body' })
-const nunito = Nunito({
+const literate = Literata({
   subsets: ['latin', 'cyrillic'],
   variable: '--font-heading',
 })
@@ -35,7 +35,7 @@ export default function LocaleLayout({
 }: PropTypes) {
   return (
     <html lang={locale}>
-      <body className={`${inter.variable} ${nunito.variable}`}>
+      <body className={`${inter.variable} ${literate.variable}`}>
         <AppProvider>{children}</AppProvider>
       </body>
     </html>
