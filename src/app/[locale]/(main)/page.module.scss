@@ -1,6 +1,6 @@
 .root {
   height: 100%;
-  @include flexCenter(column, center);
+  @include flexCenter(column, center, stretch);
 
   @include respond-to('medium') {
     flex-direction: row;

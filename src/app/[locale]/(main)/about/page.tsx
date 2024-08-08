@@ -116,7 +116,6 @@ export default function AboutPage() {
         <Typography
           tag="h2"
           weight="bold"
-          isFullWidth
           align="left"
           className={styles.title}
         >

@@ -1,5 +1,6 @@
 .root {
   @include flexCenter(column);
+  align-content: stretch;
   @include respond-to('large') {
     max-width: 100rem;
   }

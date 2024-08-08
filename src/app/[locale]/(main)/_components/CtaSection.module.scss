@@ -1,6 +1,5 @@
 .root {
   @include flexCenter(column, center);
-  width: 100%;
   & > :first-of-type {
     margin-bottom: 2rem;
   }
