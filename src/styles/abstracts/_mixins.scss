@@ -23,7 +23,7 @@ $breakpoints: (
   justify-content: $justify-content;
   align-items: $align-items;
   flex-flow: $wrap $direction;
-  align-content: center;
+  align-content: stretch;
 }
 
 @mixin hideScrollbars() {
