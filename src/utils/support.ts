@@ -1,1 +1,1 @@
-export const supportLink = 'https://buymeacoffee.com/y.h.r'
+export const SUPPORT_LINK = 'https://buymeacoffee.com/y.h.r'
