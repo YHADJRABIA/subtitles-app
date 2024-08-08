@@ -3,7 +3,7 @@ import React from 'react'
 import cn from 'classnames'
 import styles from './CtaSection.module.scss'
 import { useTranslations } from 'next-intl'
-import { supportLink } from '@/utils/support'
+import { SUPPORT_LINK } from '@/utils/hardCode'
 
 interface PropTypes {
   className?: string
@@ -26,7 +26,7 @@ const CtaSection = ({ className }: PropTypes) => {
       <LinkButton
         size="xs"
         variation="secondary"
-        link={{ href: supportLink, openInNewTab: true }}
+        link={{ href: SUPPORT_LINK, openInNewTab: true }}
       >
         {t('support_me')}
       </LinkButton>
