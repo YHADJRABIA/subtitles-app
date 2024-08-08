@@ -112,7 +112,7 @@ export default function AboutPage() {
         </Row>
       </section>
 
-      <section className={styles.faq}>
+      <section>
         <Typography
           tag="h2"
           weight="bold"
