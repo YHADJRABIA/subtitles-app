@@ -6,7 +6,7 @@ import { RefObject, useEffect, useRef } from 'react'
 export const useEventListener = <T extends Event>(
   eventName: string,
   handler: (event: T) => void,
-  element?: RefObject<HTMLElement> | Window | Document
+  element?: RefObject<HTMLElement> | Window | Document | HTMLElement
 ) => {
   // Create a ref that stores the handler
   const savedHandler = useRef<(event: T) => void>()
