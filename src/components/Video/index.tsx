@@ -2,6 +2,7 @@ import React from 'react'
 import cn from 'classnames'
 import styles from './Video.module.scss'
 import { Locale } from '@/types/locale'
+import { getYouTubeEmbedUrl, isYouTubeUrl } from '@/utils/video'
 
 interface PropTypes {
   className?: string
@@ -32,7 +33,21 @@ const Video = ({
   captionsLabel,
   srcLang = 'en',
 }: PropTypes) => {
-  return (
+  const isYouTubeVideo = isYouTubeUrl(videoSrc)
+
+  const youtubeUrl = getYouTubeEmbedUrl(videoSrc)
+
+  return isYouTubeVideo ? (
+    <iframe
+      width={width}
+      height={height}
+      src={youtubeUrl}
+      className={cn(styles.root, className)}
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+      aria-label="YouTube video" // Todo: make dynamic
+    />
+  ) : (
     <video
       width={width}
       height={height}
