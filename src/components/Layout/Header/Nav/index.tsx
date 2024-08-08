@@ -11,7 +11,7 @@ import NavLink from './NavLink'
 import useNavLinks from '@/hooks/useNavLinks'
 import useIsOnDesktop from '@/hooks/useIsOnDesktop'
 import { LinkButton } from '@/components/UI/Button'
-import { supportLink } from '@/utils/support'
+import { SUPPORT_LINK } from '@/utils/hardCode'
 import { useTranslations } from 'next-intl'
 import { SiBuymeacoffee as SupportIcon } from 'react-icons/si'
 
@@ -76,7 +76,7 @@ const Nav = ({ className, isConnected }: PropTypes) => {
             isFullWidth={false}
             icon={{ src: SupportIcon }}
             link={{
-              href: supportLink,
+              href: SUPPORT_LINK,
               openInNewTab: true,
             }}
           >
