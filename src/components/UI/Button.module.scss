@@ -69,5 +69,7 @@
 }
 
 .linkButton {
-  align-items: normal;
+  @include respond-to('medium') {
+    align-items: normal;
+  }
 }
