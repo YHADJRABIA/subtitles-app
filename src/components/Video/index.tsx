@@ -58,6 +58,7 @@ const Video = ({
       preload={preload}
       className={cn(styles.root, className)}
       aria-label="Video" // Todo: make dynamic
+      playsInline // For iOS browsers compatibility
     >
       <source src={videoSrc} type="video/mp4" />
       {captionsSrc && (
