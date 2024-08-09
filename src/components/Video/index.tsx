@@ -66,6 +66,7 @@ const Video = ({
           kind="subtitles" // Todo: make dynamic?
           srcLang={srcLang}
           label={captionsLabel}
+          default
         />
       )}
       Video tag not supported by your browser. {/*  // Todo: make dynamic */}
