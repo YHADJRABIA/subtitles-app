@@ -21,9 +21,9 @@ interface PropTypes {
 
 const Video = ({
   className,
-  showControls = false,
-  isMuted = true,
-  isAutoPlay = true,
+  showControls = true,
+  isMuted = false,
+  isAutoPlay = false,
   isLooping = false,
   preload = 'auto',
   videoSrc,
