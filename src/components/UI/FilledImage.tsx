@@ -3,10 +3,12 @@ import Image, { ImageProps } from 'next/image'
 import React from 'react'
 import styles from './FilledImage.module.scss'
 
+export type AspectRatio = '16/9' | '16/10' | '4/3' | '1/1'
+
 interface PropTypes extends Omit<ImageProps, 'width' | 'height'> {
   className?: string
   hasRoundedBorder?: boolean
-  aspectRatio?: '16/9' | '16/10' | '4/3'
+  aspectRatio?: AspectRatio
 }
 
 const FilledImage = ({
