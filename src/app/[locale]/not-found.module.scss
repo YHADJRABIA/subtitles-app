@@ -1,5 +1,6 @@
 .root {
   padding: 2rem;
+  @include flexCenter(column, center);
 }
 
 .cta {

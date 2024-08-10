@@ -1,19 +1,21 @@
 .root {
   width: 100%;
-  max-width: 150rem;
   @include flexCenter(column);
 
+  @include respond-to('small') {
+    max-width: 50rem;
+  }
+
   @include respond-to('medium') {
+    max-width: 150rem;
     flex-direction: row;
   }
 }
 
 .image {
   margin-bottom: 4rem;
-  width: min(100%, 40rem) !important;
-
   @include respond-to('medium') {
-    width: min(calc(20rem + 30vw), 55rem) !important;
+    max-width: 45rem;
   }
 }
 
