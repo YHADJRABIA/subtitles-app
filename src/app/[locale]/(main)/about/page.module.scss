@@ -20,11 +20,4 @@
 
 .textWithIcon {
   margin-bottom: 4rem;
-
-  @include respond-to('medium') {
-    min-height: 14rem;
-  }
-  @include respond-to('large') {
-    min-height: 15rem;
-  }
 }
