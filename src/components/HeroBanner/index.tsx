@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react'
 import styles from './HeroBanner.module.scss'
 import Typography from '../UI/Typography'
 import cn from 'classnames'
-import Image from 'next/image'
+import FilledImage, { AspectRatio } from '../UI/FilledImage'
 
 interface PropTypes {
   title: string
@@ -12,6 +12,7 @@ interface PropTypes {
   imageAlt?: string
   className?: string
   ctaElements?: ReactNode
+  imageAspectRatio?: AspectRatio
 }
 
 const HeroBanner = ({
@@ -20,15 +21,19 @@ const HeroBanner = ({
   align = 'center',
   image,
   imageAlt,
+  imageAspectRatio,
   ctaElements,
   description,
 }: PropTypes) => {
   return (
     <section className={cn(styles.root, className)}>
       {image && (
-        <div className={styles.image}>
-          <Image src={image} fill alt={imageAlt ?? ''} />
-        </div>
+        <FilledImage
+          src={image}
+          alt={imageAlt ?? ''}
+          className={styles.image}
+          aspectRatio={imageAspectRatio}
+        />
       )}
 
       {/* TODO: Limit text length */}
