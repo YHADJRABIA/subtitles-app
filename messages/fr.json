@@ -111,7 +111,20 @@
     }
   },
   "Subtitles": {
-    "title": "Sous-titres"
+    "title": "Sous-titres",
+    "featured": "À la une :",
+    "watch_trailer": "Regarder bande annonce",
+    "series": "Séries :"
+  },
+  "Series": {
+    "country": "Pays :",
+    "release_year": "Année de parution :",
+    "genre": "Genre :",
+    "number_of_seasons": "Nombre de saisons :",
+    "language": "Langues :",
+    "director": "Réalisateurs :",
+    "actors": "Acteurs :",
+    "description": "Description :"
   },
 
   "NotFound": {

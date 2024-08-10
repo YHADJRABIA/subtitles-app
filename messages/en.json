@@ -110,7 +110,20 @@
     }
   },
   "Subtitles": {
-    "title": "Subtitles"
+    "title": "Subtitles",
+    "featured": "Featured:",
+    "watch_trailer": "Watch trailer",
+    "series": "Series:"
+  },
+  "Series": {
+    "country": "Country:",
+    "release_year": "Release year:",
+    "genre": "Genre:",
+    "number_of_seasons": "Number of seasons:",
+    "language": "Languages:",
+    "director": "Directors:",
+    "actors": "Actors:",
+    "description": "Description:"
   },
   "NotFound": {
     "page_not_found": "Page not found",
