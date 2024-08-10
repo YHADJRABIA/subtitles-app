@@ -10,6 +10,7 @@
 
 .image {
   margin-bottom: 4rem;
+  width: min(100%, 40rem) !important;
 
   @include respond-to('medium') {
     width: min(calc(20rem + 30vw), 55rem) !important;

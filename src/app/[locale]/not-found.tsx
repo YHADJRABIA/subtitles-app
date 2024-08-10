@@ -27,7 +27,7 @@ const NotFoundPage = async () => {
           imageAlt="404"
           title={t('page_not_found')}
           description={t('verify_route')}
-          className={styles.heroBanner}
+          imageAspectRatio="1/1"
           ctaElements={
             <LinkButton
               link={{ href: '/' }}

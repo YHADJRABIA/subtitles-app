@@ -25,6 +25,7 @@ export default function HomePage() {
   return (
     <div className={styles.root}>
       <HeroBanner
+        imageAspectRatio="1/1"
         image={MAIN_ASSET_PATH}
         imageAlt={t('HeroBanner.image_alt')}
         title={t('HeroBanner.heading')}
