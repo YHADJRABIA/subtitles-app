@@ -1,0 +1,11 @@
+.root {
+  @include flexCenter(column, flex-start, stretch);
+  box-shadow: 0 0.15rem 0.2rem rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--primary-gray-border);
+  padding: 1rem;
+  border-radius: 1rem;
+
+  & > :not(:last-of-type) {
+    margin-bottom: 1rem;
+  }
+}
