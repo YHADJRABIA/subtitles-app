@@ -15,9 +15,14 @@ export const pathnames = {
     en: '/about',
     fr: '/a-propos',
   },
+
   '/subtitles': {
     en: '/subtitles',
     fr: '/sous-titres',
+  },
+  '/subtitles/[...slug]': {
+    en: '/subtitles/[...slug]',
+    fr: '/sous-titres/[...slug]',
   },
 
   /* Protected */
