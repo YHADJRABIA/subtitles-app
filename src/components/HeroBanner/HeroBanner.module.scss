@@ -9,7 +9,7 @@
 .image {
   margin-bottom: 4rem;
   @include respond-to('medium') {
-    max-width: 45rem;
+    max-width: 40rem;
   }
 }
 
