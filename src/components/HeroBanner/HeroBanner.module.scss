@@ -1,13 +1,7 @@
 .root {
   width: 100%;
   @include flexCenter(column);
-
-  @include respond-to('small') {
-    max-width: 50rem;
-  }
-
   @include respond-to('medium') {
-    max-width: 150rem;
     flex-direction: row;
   }
 }

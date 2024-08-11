@@ -27,6 +27,7 @@ export default function HomePage() {
       <HeroBanner
         imageAspectRatio="1/1"
         image={MAIN_ASSET_PATH}
+        className={styles.heroBanner}
         imageAlt={t('HeroBanner.image_alt')}
         title={t('HeroBanner.heading')}
         description={t('HeroBanner.description')}

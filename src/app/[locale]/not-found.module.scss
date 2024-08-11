@@ -1,10 +1,18 @@
 .root {
   padding: 2rem;
   @include flexCenter(column, center);
+  margin: 0 auto;
+
+  @include respond-to('small') {
+    max-width: 50rem;
+  }
+
+  @include respond-to('medium') {
+    max-width: 150rem;
+  }
 }
 
 .cta {
-  margin: 0 auto;
   @include respond-to('medium') {
     width: max-content;
   }
