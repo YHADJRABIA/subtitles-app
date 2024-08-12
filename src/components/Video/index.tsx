@@ -4,6 +4,7 @@ import styles from './Video.module.scss'
 import { Locale } from '@/types/locale'
 import { useTranslations } from 'next-intl'
 import { getYouTubeEmbedUrl, isYouTubeUrl } from '@/utils/video'
+import { capitaliseFirstLetter } from '@/utils/string'
 
 interface PropTypes {
   className?: string
@@ -73,7 +74,7 @@ const Video = ({
         <track
           src={captionsSrc}
           kind="subtitles"
-          srcLang={srcLang}
+          srcLang={capitaliseFirstLetter(srcLang)}
           label={captionsLabel}
           default
         />
