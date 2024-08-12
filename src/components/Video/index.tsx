@@ -33,6 +33,8 @@ const Video = ({
   captionsLabel,
   srcLang = 'en',
 }: PropTypes) => {
+  if (!videoSrc.length) return
+
   const isYouTubeVideo = isYouTubeUrl(videoSrc)
 
   const youtubeUrl = getYouTubeEmbedUrl(videoSrc)
