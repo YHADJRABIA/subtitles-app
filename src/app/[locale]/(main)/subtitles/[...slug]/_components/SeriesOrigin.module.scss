@@ -1,0 +1,20 @@
+.root {
+  width: 100%;
+  @include flexCenter(column, flex-start, stretch);
+}
+
+.top {
+  @include flexCenter(row, space-between);
+}
+
+.field {
+  @include flexCenter(row, flex-start);
+  margin-right: 1rem;
+  &:not(:last-of-type) {
+    margin-bottom: 1rem;
+  }
+}
+
+.icon {
+  margin-right: 1rem;
+}
