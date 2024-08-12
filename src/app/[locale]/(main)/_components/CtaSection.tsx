@@ -19,7 +19,7 @@ const CtaSection = ({ className }: PropTypes) => {
         size="xs"
         variation="primary"
         weight="semiBold"
-        link={{ href: '/subtitles' }}
+        link={{ href: '/series' }}
       >
         {t('browse_series')}
       </LinkButton>
