@@ -63,7 +63,7 @@ const Video = ({
       playsInline // For iOS browsers compatibility
     >
       <source src={videoSrc} type="video/mp4" />
-      {captionsSrc && (
+      {captionsSrc?.length && (
         <track
           src={captionsSrc}
           kind="subtitles" // Todo: make dynamic?
