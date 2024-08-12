@@ -16,13 +16,13 @@ export const pathnames = {
     fr: '/a-propos',
   },
 
-  '/subtitles': {
-    en: '/subtitles',
-    fr: '/sous-titres',
+  '/series': {
+    en: '/series',
+    fr: '/series',
   },
-  '/subtitles/[...slug]': {
-    en: '/subtitles/[...slug]',
-    fr: '/sous-titres/[...slug]',
+  '/series/[...slug]': {
+    en: '/series/[...slug]',
+    fr: '/series/[...slug]',
   },
 
   /* Protected */

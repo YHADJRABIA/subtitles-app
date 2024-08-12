@@ -33,8 +33,8 @@ const useNavLinks = ({ isConnected }: PropTypes) => {
       icon: AboutIcon,
     },
     {
-      url: '/subtitles',
-      label: t('subtitles'),
+      url: '/series',
+      label: t('series'),
       icon: SubtitlesIcon,
     },
     ...(isConnected

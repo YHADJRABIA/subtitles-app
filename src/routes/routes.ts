@@ -8,7 +8,7 @@ export const DEFAULT_LOGIN_REDIRECT_ROUTE: Pathname = '/dashboard'
 export const publicRoutes = [
   '/',
   '/about',
-  '/subtitles',
+  '/series',
   '/verify-email',
   '/send-verification-email',
   '/password/recovery',
