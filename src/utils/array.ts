@@ -4,6 +4,6 @@
  * @param {string[]} arr Array of strings to be joined.
  * @returns {string} String with each array element separated by ", ".
  */
-export const joinWithComma = (arr: string[]): string => {
+export const ArrayToString = (arr: string[]): string => {
   return arr.join(', ')
 }
