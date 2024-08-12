@@ -1,0 +1,50 @@
+.root {
+  width: 100%;
+  @include respond-to('medium') {
+    @include flexCenter(column, flex-start, center);
+  }
+}
+
+.title {
+  margin-bottom: 2rem;
+}
+
+.wrapper {
+  max-width: 150rem;
+}
+
+.container {
+  @include respond-to('medium') {
+    @include flexCenter(row, center, flex-start);
+  }
+}
+
+.leftContainer {
+  @include flexCenter(column, space-between, flex-start);
+  @include respond-to('medium') {
+    flex: 1;
+    margin-right: 3rem;
+  }
+}
+
+.rightContainer {
+  @include flexCenter(column, space-between, flex-start);
+  @include respond-to('medium') {
+    max-width: min(45%, 70rem);
+  }
+}
+
+.image {
+  margin-bottom: 3rem;
+}
+.origin {
+  margin-bottom: 2rem;
+}
+
+.info {
+  margin-bottom: 2rem;
+}
+
+.description {
+  margin-bottom: 2rem;
+}
