@@ -116,14 +116,38 @@
     "series": "Series:"
   },
   "Series": {
-    "country": "Country:",
-    "release_year": "Release year:",
-    "genre": "Genre:",
-    "number_of_seasons": "Number of seasons:",
-    "language": "Languages:",
-    "director": "Directors:",
-    "actors": "Actors:",
-    "description": "Description:"
+    "Country": {
+      "title": "Country",
+      "ru": "Russian",
+      "kz": "Kazakhstan"
+    },
+
+    "Language": {
+      "title": "Languages",
+      "ru": "Russian",
+      "kz": "Kazakh"
+    },
+
+    "release_year": "Release year",
+
+    "Genre": {
+      "title": "Genre",
+      "comedy": "Comedy"
+    },
+
+    "Seasons": {
+      "title": "Number of seasons:",
+      "number_of_seasons": "{count, plural, one {# season} other {# seasons}}"
+    },
+
+    "director": "Director{count, plural, one {} other {s}}:",
+    "actors": "Actor{count, plural, one {} other {s}}:",
+
+    "description": "Description",
+
+    "subtitles": "Subtitles",
+    "trailer": "Watch trailer",
+    "where_to_watch": "Where to watch"
   },
   "NotFound": {
     "page_not_found": "Page not found",
