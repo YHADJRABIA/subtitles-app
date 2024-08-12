@@ -36,6 +36,8 @@ $footer-height: 6rem;
   --header-height: 6.3rem;
 
   // Layout
+  --page-padding: 2rem;
+
   @include respond-to('small') {
     --gutter-width: 1.6rem;
   }

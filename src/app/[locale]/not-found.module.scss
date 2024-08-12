@@ -1,5 +1,5 @@
 .root {
-  padding: 2rem;
+  padding: var(--page-padding);
   @include flexCenter(column, center);
   margin: 0 auto;
 
