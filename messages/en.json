@@ -9,17 +9,17 @@
       "title": "About",
       "description": "Learn more about РуSubs, and find answers to what you might be wondering about."
     },
-    "Subtitles": {
-      "title": "Subtitles",
-      "description": "Subtitles of all available series."
+    "Series": {
+      "title": "Series",
+      "description": "All available series."
     },
     "NotFound": {
       "title": "404",
-      "description": "Page not found"
+      "description": "Page not found."
     },
     "Auth": {
       "title": "Authentication",
-      "description": "Authentication section",
+      "description": "Authentication section.",
       "Register": {
         "title": "",
         "description": ""
@@ -109,13 +109,10 @@
       "from_free_websites": "Some are freely available on YouTube, others on their official publisher's website (such as CTC.ru or NTK.kz). If you still can't find them, feel free to message me and I will help you out."
     }
   },
-  "Subtitles": {
-    "title": "Subtitles",
-    "featured": "Featured:",
-    "watch_trailer": "Watch trailer",
-    "series": "Series:"
-  },
   "Series": {
+    "title": "Series",
+    "featured": "Featured:",
+    "all_series": "Series:",
     "Country": {
       "title": "Country",
       "ru": "Russian",
@@ -136,7 +133,7 @@
     },
 
     "Seasons": {
-      "title": "Number of seasons:",
+      "title": "Number of seasons",
       "number_of_seasons": "{count, plural, one {# season} other {# seasons}}"
     },
 
@@ -282,7 +279,7 @@
   },
   "Navigation": {
     "home": "Home",
-    "subtitles": "Subtitles",
+    "series": "Series",
     "about": "About",
     "dashboard": "My account",
     "login": "Login",

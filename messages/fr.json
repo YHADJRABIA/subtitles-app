@@ -9,17 +9,17 @@
       "title": "À propos",
       "description": "En savoir plus sur РуSubs et trouver des réponses à d'éventuelles questions."
     },
-    "Subtitles": {
-      "title": "Sous-titres",
-      "description": "Sous-titres des différentes séries disponibles."
+    "Series": {
+      "title": "Séries",
+      "description": "Toutes les séries disponibles."
     },
     "NotFound": {
       "title": "404",
-      "description": "Page non trouvée"
+      "description": "Page non trouvée."
     },
     "Auth": {
       "title": "Authentification",
-      "description": "Portail d'authentification",
+      "description": "Portail d'authentification.",
       "Register": {
         "title": "",
         "description": ""
@@ -110,13 +110,11 @@
       "from_free_websites": "Certaines sont disponibles gratuitement sur YouTube, d'autres sur le site officiel de diffusion (comme CTC.ru ou NTK.kz). S'il est impossible de les trouver, il est possible de me contacter pour de l'aide."
     }
   },
-  "Subtitles": {
-    "title": "Sous-titres",
-    "featured": "À la une :",
-    "watch_trailer": "Regarder bande annonce",
-    "series": "Séries :"
-  },
+
   "Series": {
+    "title": "Séries",
+    "featured": "À la une :",
+    "all_series": "Séries :",
     "Country": {
       "title": "Pays",
       "ru": "Russie",
@@ -136,7 +134,7 @@
       "comedy": "Comédie"
     },
     "Seasons": {
-      "title": "Nombre de saisons :",
+      "title": "Nombre de saisons",
       "number_of_seasons": "{count, plural, one {# saison} other {# saisons}}"
     },
 
@@ -283,7 +281,7 @@
   },
   "Navigation": {
     "home": "Page d'accueil",
-    "subtitles": "Sous-titres",
+    "series": "Séries",
     "about": "À propos",
     "dashboard": "Mon compte",
     "login": "Connexion",
