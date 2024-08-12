@@ -4,7 +4,7 @@
 }
 
 .row {
-  @include flexCenter(row, space-between);
+  @include flexCenter(row, space-between, flex-start);
 }
 
 .field {
@@ -15,5 +15,5 @@
 }
 
 .icon {
-  margin-right: 1rem;
+  margin-right: 0.8rem;
 }
