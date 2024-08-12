@@ -5,8 +5,8 @@
   }
 }
 
-.title {
-  margin-bottom: 2rem;
+.withPadding {
+  padding: 0 var(--page-padding);
 }
 
 .wrapper {
@@ -23,28 +23,23 @@
   @include flexCenter(column, space-between, flex-start);
   @include respond-to('medium') {
     flex: 1;
-    margin-right: 3rem;
   }
 }
 
 .rightContainer {
   @include flexCenter(column, space-between, flex-start);
   @include respond-to('medium') {
-    max-width: min(45%, 70rem);
+    max-width: min(50%, 70rem);
   }
 }
 
-.image {
+.image,
+.description {
   margin-bottom: 3rem;
 }
-.origin {
-  margin-bottom: 2rem;
-}
 
+.title,
+.trailer,
 .info {
-  margin-bottom: 2rem;
-}
-
-.description {
   margin-bottom: 2rem;
 }

@@ -54,14 +54,14 @@ const SeriesOrigin = ({
 
       <div className={styles.row}>
         <Field
-          icon={YearIcon}
-          value={String(releaseYear)}
-          title={t('release_year')}
-        />
-        <Field
           icon={GenreIcon}
           value={t(`Genre.${genre}`)}
           title={t('Genre.title')}
+        />
+        <Field
+          icon={YearIcon}
+          value={String(releaseYear)}
+          title={t('release_year')}
         />
       </div>
 
