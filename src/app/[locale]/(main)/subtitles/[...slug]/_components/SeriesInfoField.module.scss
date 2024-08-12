@@ -1,5 +1,5 @@
 .root {
-  @include flexCenter(row, space-between);
+  @include flexCenter(column, flex-start, flex-start);
 
   &:not(:last-of-type) {
     padding-bottom: 1rem;
@@ -8,10 +8,6 @@
     @include respond-to('medium') {
       border-bottom: unset;
     }
-  }
-
-  @include respond-to('medium') {
-    @include flexCenter(column, flex-start, flex-start);
   }
 }
 
