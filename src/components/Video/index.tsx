@@ -12,6 +12,7 @@ interface PropTypes {
   isLooping?: boolean
   preload?: 'none' | 'metadata' | 'auto'
   videoSrc: string
+  thumbnailSrc?: string
   captionsSrc?: string
   captionsLabel?: string
   srcLang?: Locale
@@ -28,6 +29,7 @@ const Video = ({
   preload = 'auto',
   videoSrc,
   captionsSrc,
+  thumbnailSrc,
   width = 320,
   height = 240,
   captionsLabel,
@@ -60,6 +62,7 @@ const Video = ({
       preload={preload}
       className={cn(styles.root, className)}
       aria-label="Video" // Todo: make dynamic
+      poster={thumbnailSrc}
       playsInline // For iOS browsers compatibility
     >
       <source src={videoSrc} type="video/mp4" />
