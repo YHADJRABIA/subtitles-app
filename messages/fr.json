@@ -146,7 +146,7 @@
     "description": "Description",
 
     "subtitles": "Sous-titres",
-    "trailer": "Regarder bande annonce",
+    "trailer": "Bande annonce",
     "where_to_watch": "Où regarder"
   },
 
@@ -273,6 +273,9 @@
   },
   "SwitchButton": {
     "toggle": "Basculer"
+  },
+  "Video": {
+    "not_supported": "La balise vidéo n'est pas compatible avec ce navigateur."
   },
   "UseShowPassword": {
     "reveal_password": "Révéler mot de passe",

@@ -2,6 +2,7 @@ import React from 'react'
 import cn from 'classnames'
 import styles from './Video.module.scss'
 import { Locale } from '@/types/locale'
+import { useTranslations } from 'next-intl'
 import { getYouTubeEmbedUrl, isYouTubeUrl } from '@/utils/video'
 
 interface PropTypes {
@@ -35,6 +36,8 @@ const Video = ({
   captionsLabel,
   srcLang = 'en',
 }: PropTypes) => {
+  const t = useTranslations('Video')
+
   if (!videoSrc.length) return
 
   const isYouTubeVideo = isYouTubeUrl(videoSrc)
@@ -69,13 +72,13 @@ const Video = ({
       {captionsSrc?.length && (
         <track
           src={captionsSrc}
-          kind="subtitles" // Todo: make dynamic?
+          kind="subtitles"
           srcLang={srcLang}
           label={captionsLabel}
           default
         />
       )}
-      Video tag not supported by your browser. {/*  // Todo: make dynamic */}
+      {t('not_supported')}
     </video>
   )
 }
