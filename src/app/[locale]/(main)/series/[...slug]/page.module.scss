@@ -6,7 +6,7 @@
 }
 
 .wrapper {
-  max-width: 150rem;
+  max-width: var(--page-max-width);
 }
 
 .container {
@@ -33,10 +33,11 @@
 }
 .rightSubContainer {
   width: 100%;
+  @include flexCenter(row, space-between, flex-start);
+
   @include respond-to('small') {
     margin: 0 var(--page-padding);
   }
-  @include flexCenter(row, space-between, flex-start);
 
   & > :not(:last-of-type) {
     margin-bottom: 2rem;

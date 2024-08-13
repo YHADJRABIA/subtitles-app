@@ -1,14 +1,7 @@
 .root {
-  @include flexCenter(column);
+  @include flexCenter(column, flex-start, flex-start);
   padding: var(--page-padding);
-
-  @include respond-to('large') {
-    max-width: 100rem;
-  }
-
-  @include respond-to('huge') {
-    min-width: 110rem;
-  }
+  max-width: var(--page-max-width);
 }
 
 .title {

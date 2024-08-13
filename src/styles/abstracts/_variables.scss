@@ -37,6 +37,7 @@ $footer-height: 6rem;
 
   // Layout
   --page-padding: 2rem;
+  --page-max-width: 120rem;
 
   @include respond-to('small') {
     --gutter-width: 1.6rem;
