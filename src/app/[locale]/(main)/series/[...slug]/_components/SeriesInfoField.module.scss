@@ -1,14 +1,5 @@
 .root {
   @include flexCenter(column, flex-start, flex-start);
-
-  &:not(:last-of-type) {
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--primary-gray-border);
-
-    @include respond-to('medium') {
-      border-bottom: unset;
-    }
-  }
 }
 
 .label {
