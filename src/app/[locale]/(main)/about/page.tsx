@@ -121,7 +121,12 @@ export default function AboutPage() {
         >
           {t('FAQ.title')}
         </Typography>
-        <Accordion items={faq} expandMultiple />
+        <Accordion
+          items={faq}
+          backgroundColor="var(--primary-gray-color)"
+          expandMultiple
+          hasBackgroundEffect
+        />
       </section>
     </div>
   )

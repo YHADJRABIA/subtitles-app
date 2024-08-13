@@ -4,14 +4,8 @@
 
 .item {
   border-radius: 1rem;
-  transition: background-color 0.3s ease;
-
   &:not(:last-of-type) {
     margin-bottom: 1.5rem;
-  }
-
-  &:hover {
-    background-color: var(--tertiary-blue-color) !important;
   }
 }
 
@@ -41,6 +35,12 @@
   color: var(--tertiary-black-color);
 }
 
-.isExpanded {
+.coloredBackground {
   background-color: var(--tertiary-blue-color) !important;
+}
+.hoverEffect {
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: var(--tertiary-blue-color) !important;
+  }
 }

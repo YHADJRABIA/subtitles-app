@@ -11,29 +11,52 @@ type ItemType = {
   backgroundColor?: string
   titleTag?: TagType
   bodyTag?: TagType
+  hasBackgroundEffect?: boolean
 }
 
-interface PropTypes {
-  items: ItemType[]
+interface BaseProps {
   className?: string
   expandMultiple?: boolean
   backgroundColor?: string
   titleTag?: TagType
   bodyTag?: TagType
+  hasBackgroundEffect?: boolean
 }
+
+interface ItemsProps extends BaseProps {
+  items: ItemType[]
+  title?: never
+  body?: never
+}
+
+interface BodyProps extends BaseProps {
+  title: string
+  body: ReactNode
+  items?: never
+}
+
+type PropTypes = ItemsProps | BodyProps
 
 const Accordion = ({
   className,
   items,
+  body,
+  title,
   expandMultiple = false,
   backgroundColor,
+  hasBackgroundEffect = false,
   titleTag,
   bodyTag,
 }: PropTypes) => {
-  // Index of opened item(s)
   const [openStates, setOpenStates] = useState<boolean[]>(
-    items.map(() => false)
+    items ? items.map(() => false) : [false]
   )
+
+  if (items && body) {
+    throw new Error(
+      "Accordion cannot have both 'items' and 'body' at the same time."
+    )
+  }
 
   const handleToggle = (index: number) => {
     setOpenStates(prevStates =>
@@ -51,17 +74,32 @@ const Accordion = ({
 
   return (
     <ul className={cn(styles.root, className)}>
-      {items.map((item, idx) => (
+      {items ? (
+        items.map((item, idx) => (
+          <AccordionItem
+            key={idx}
+            {...item}
+            isOpen={openStates[idx]}
+            titleTag={titleTag}
+            bodyTag={bodyTag}
+            backgroundColor={backgroundColor}
+            onToggle={() => handleToggle(idx)}
+            hasBackgroundEffect={hasBackgroundEffect}
+          />
+        ))
+      ) : (
         <AccordionItem
-          key={idx}
-          {...item}
-          isOpen={openStates[idx]}
+          title={title}
+          body={body}
+          isOpen={openStates[0]}
           titleTag={titleTag}
           bodyTag={bodyTag}
           backgroundColor={backgroundColor}
-          onToggle={() => handleToggle(idx)}
+          onToggle={() => handleToggle(0)}
+          hasBackgroundEffect={hasBackgroundEffect}
+          isSingleItem
         />
-      ))}
+      )}
     </ul>
   )
 }
@@ -71,23 +109,29 @@ export default Accordion
 interface AccordionItemTypes extends ItemType {
   isOpen: boolean
   onToggle: () => void
+  isSingleItem?: boolean
 }
 
 const AccordionItem = ({
   title,
   body,
-  backgroundColor = 'var(--primary-gray-color)',
+  backgroundColor,
   titleTag = 'h3',
   bodyTag = 'h4',
   isOpen,
   onToggle,
+  isSingleItem = false,
+  hasBackgroundEffect,
 }: AccordionItemTypes) => {
   const contentHeight = useRef<HTMLDivElement | null>(null)
 
   return (
     <li
       style={{ backgroundColor }}
-      className={cn(styles.item, { [styles.isExpanded]: isOpen })}
+      className={cn(styles.item, {
+        [styles.coloredBackground]: hasBackgroundEffect && isOpen,
+        [styles.hoverEffect]: hasBackgroundEffect,
+      })}
     >
       <span className={styles.titleContainer} onClick={onToggle}>
         <Typography
@@ -111,15 +155,19 @@ const AccordionItem = ({
           maxHeight: isOpen ? `${contentHeight.current?.scrollHeight}px` : '0',
         }}
       >
-        <Typography
-          tag={bodyTag}
-          size="s"
-          align="left"
-          weight="semiLight"
-          className={styles.description}
-        >
-          {body}
-        </Typography>
+        {isSingleItem ? (
+          body // Render body as-is for single title-body pair
+        ) : (
+          <Typography
+            tag={bodyTag}
+            size="s"
+            align="left"
+            weight="semiLight"
+            className={styles.description}
+          >
+            {body}
+          </Typography>
+        )}
       </div>
     </li>
   )
