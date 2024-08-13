@@ -2,8 +2,8 @@ import React from 'react'
 import cn from 'classnames'
 import styles from './SeriesInfo.module.scss'
 import { useTranslations } from 'next-intl'
-import SeriesInfoField from './SeriesInfoField'
 import { ArrayToString } from '@/utils/array'
+import Typography from '@/components/UI/Typography'
 
 interface PropTypes {
   directors: string[]
@@ -15,11 +15,11 @@ const SeriesInfo = ({ className, directors, actors }: PropTypes) => {
   const t = useTranslations('Series')
   return (
     <section className={cn(styles.root, className)}>
-      <SeriesInfoField
+      <Field
         label={t('director', { count: directors.length })}
         value={ArrayToString(directors)}
       />
-      <SeriesInfoField
+      <Field
         label={t('actors', { count: actors.length })}
         value={ArrayToString(actors)}
       />
@@ -28,3 +28,21 @@ const SeriesInfo = ({ className, directors, actors }: PropTypes) => {
 }
 
 export default SeriesInfo
+
+const Field = ({ label, value }: { label: string; value: string }) => {
+  return (
+    <span className={styles.field}>
+      <Typography
+        weight="semiBold"
+        size="xs"
+        align="left"
+        className={styles.label}
+      >
+        {label}
+      </Typography>
+      <Typography size="xs" align="left" color="var(--tertiary-black-color)">
+        {value}
+      </Typography>
+    </span>
+  )
+}
