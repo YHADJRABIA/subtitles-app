@@ -144,7 +144,8 @@
 
     "subtitles": "Subtitles",
     "trailer": "Trailer",
-    "where_to_watch": "Where to watch"
+    "where_to_watch": "Where to watch",
+    "where_to_download": "Where to download"
   },
   "NotFound": {
     "page_not_found": "Page not found",
