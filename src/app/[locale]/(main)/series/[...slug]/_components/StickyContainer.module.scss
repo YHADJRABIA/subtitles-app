@@ -1,0 +1,6 @@
+.root {
+  @include respond-to('medium') {
+    position: sticky;
+    transition: top 0.5s ease-in-out;
+  }
+}
