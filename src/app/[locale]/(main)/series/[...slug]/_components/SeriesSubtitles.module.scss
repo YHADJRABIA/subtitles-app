@@ -1,0 +1,49 @@
+.root {
+  width: 100%;
+  @include flexCenter(column, space-between, center);
+  border: 1px solid var(--primary-gray-border);
+  border-radius: 1rem;
+  box-shadow: 0 0.1rem 0.1rem rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0.05rem 0.2rem 0.15rem rgba(0, 0, 0, 0.2);
+  }
+  @include preventUserSelect;
+}
+
+.titleContainer {
+  padding: 2rem;
+  width: 100%;
+  cursor: pointer;
+  @include flexCenter(row, space-between);
+}
+
+.toggler {
+  transition: transform 0.3s ease;
+}
+
+.collapseable {
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.accordionBody {
+  @include flexCenter(row, flex-start, flex-start);
+  margin: 0 1.5rem 2rem;
+  gap: 1rem;
+
+  .isDisabled {
+    cursor: not-allowed;
+    opacity: 0.2;
+  }
+}
+
+.seasonItem {
+  cursor: pointer;
+  width: max-content;
+  padding: 1rem 1.4rem;
+  background-color: var(--primary-black-color);
+  border: 1px solid var(--primary-gray-border);
+  border-radius: 10rem;
+}
