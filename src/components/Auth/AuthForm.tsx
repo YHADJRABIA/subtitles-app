@@ -91,7 +91,8 @@ function AuthForm<T>({ type, onSubmit }: PropTypes<T>) {
         isRegisterForm ? 'success' : 'error'
       )
       // Redirect if successful login
-      if (isLoginForm && res?.ok) router.push(DEFAULT_LOGIN_REDIRECT_ROUTE)
+      if (isLoginForm && res?.ok)
+        router.push(DEFAULT_LOGIN_REDIRECT_ROUTE as string)
     } catch (err) {
       setInfoMessage(getErrorMessage(err), 'error')
     }

@@ -1,5 +1,9 @@
 .root {
   justify-content: space-between;
+
+  .separator {
+    margin: 2rem 0;
+  }
 }
 
 .emailField {
