@@ -3,7 +3,7 @@ import styles from './page.module.scss'
 import { useTranslations } from 'next-intl'
 import { getNextLocale } from '@/utils/cookies'
 import { getTranslations } from 'next-intl/server'
-import { Metadata } from 'next'
+import { Metadata } from 'next/types'
 import SeriesInfo from './_components/SeriesInfo'
 import FilledImage from '@/components/UI/FilledImage'
 import SeriesDescription from './_components/SeriesDescription'
@@ -17,6 +17,8 @@ import Separator from '@/components/Separator'
 import SeriesTrailer from './_components/SeriesTrailer'
 import SeriesWhereTo from './_components/SeriesWhereTo'
 import { Col, Row } from '@/components/UI/Grid'
+import SeriesSubtitles from './_components/SeriesSubtitles'
+import StickyContainer from '@/components/StickyContainer'
 
 // TODO: fetch from CMS
 const DATA = {
@@ -50,6 +52,43 @@ const DATA = {
     {
       label: 'Google',
       href: 'https://www.google.com/search?q=patrul+kz',
+    },
+  ],
+
+  subtitles: [
+    {
+      season: 1,
+      episodes: [
+        {
+          episode: 1,
+          subtitleUrl: '/assets/subtitles/Patrul_s01_ep01.srt',
+        },
+        {
+          episode: 2,
+          subtitleUrl: '/assets/subtitles/Patrul_s01_ep02.srt',
+        },
+        // Add more episodes here...
+      ],
+    },
+    {
+      season: 2,
+      episodes: [],
+    },
+    {
+      season: 3,
+      episodes: [],
+    },
+    {
+      season: 4,
+      episodes: [],
+    },
+    {
+      season: 5,
+      episodes: [],
+    },
+    {
+      season: 6,
+      episodes: [],
     },
   ],
 }
@@ -111,7 +150,7 @@ export default function SeriesPage({}) {
             />
           </div>
 
-          <div className={styles.rightContainer}>
+          <StickyContainer className={styles.rightContainer}>
             <Row>
               <Col width={12}>
                 <SeriesInfo
@@ -120,24 +159,17 @@ export default function SeriesPage({}) {
                   className={styles.info}
                 />
               </Col>
+
               <div className={styles.rightSubContainer}>
-                <Col width={[12, 12, 6]}>
-                  <SeriesWhereTo type="watch" list={DATA.whereToWatch} />
+                <Col width={12}>
+                  <SeriesSubtitles subtitles={DATA.subtitles} />
                 </Col>
-                <Col width={[12, 12, 6]}>
-                  <SeriesWhereTo
-                    type="download"
-                    list={[
-                      {
-                        label: 'Google',
-                        href: 'https://www.google.com/search?q=patrul+kz',
-                      },
-                    ]}
-                  />
+                <Col width={[12, 6]}>
+                  <SeriesWhereTo type="watch" list={DATA.whereToWatch} />
                 </Col>
               </div>
             </Row>
-          </div>
+          </StickyContainer>
         </div>
       </div>
     </div>
