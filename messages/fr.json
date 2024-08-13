@@ -138,6 +138,11 @@
       "number_of_seasons": "{count, plural, one {# saison} other {# saisons}}"
     },
 
+    "Subtitles": {
+      "season": "Saison {count}",
+      "episode": "Episode {count}"
+    },
+
     "director": "Réalisateur{count, plural, one {} other {s}} :",
     "actors": "Acteur{count, plural, one {} other {s}} :",
 
