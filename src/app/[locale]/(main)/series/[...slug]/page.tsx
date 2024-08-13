@@ -13,12 +13,10 @@ import SeriesOrigin, {
   SeriesLanguage,
   SeriesNumberOfSeasons,
 } from './_components/SeriesOrigin'
-import cn from 'classnames'
-import Accordion from '@/components/Accordion'
-import { LinkButton } from '@/components/UI/Button'
 import Separator from '@/components/Separator'
-import Video from '@/components/Video'
 import SeriesTrailer from './_components/SeriesTrailer'
+import SeriesWhereTo from './_components/SeriesWhereTo'
+import { Col, Row } from '@/components/UI/Grid'
 
 // TODO: fetch from CMS
 const DATA = {
@@ -44,6 +42,16 @@ const DATA = {
   trailer: '/assets/patrul-trailer.mp4',
   trailerThumbnail: '/assets/patrul-thumbnail.jpg',
   captions: '/assets/patrul-trailer.vtt',
+  whereToWatch: [
+    {
+      label: 'NTK.kz',
+      href: 'https://www.ntk.kz/ru/programs-and-serials/serials/Patrul/',
+    },
+    {
+      label: 'Google',
+      href: 'https://www.google.com/search?q=patrul+kz',
+    },
+  ],
 }
 
 export const generateMetadata = async (): Promise<Metadata> => {
@@ -71,12 +79,12 @@ export default function SeriesPage({}) {
           weight="bold"
           align="left"
           size="xxxl"
-          className={cn(styles.title, styles.withPadding)}
+          className={styles.title}
         >
           {DATA.name}
         </Typography>
         <div className={styles.container}>
-          <div className={cn(styles.leftContainer, styles.withPadding)}>
+          <div className={styles.leftContainer}>
             <FilledImage
               src={DATA.image}
               alt={DATA.imageAlt}
@@ -104,21 +112,31 @@ export default function SeriesPage({}) {
           </div>
 
           <div className={styles.rightContainer}>
-            <SeriesInfo
-              actors={DATA.actors}
-              directors={DATA.directors}
-              className={styles.info}
-            />
-
-            <Typography
-              tag="h3"
-              weight="semiBold"
-              align="left"
-              size="s"
-              className={styles.title}
-            >
-              {t('where_to_watch')}
-            </Typography>
+            <Row>
+              <Col width={12}>
+                <SeriesInfo
+                  actors={DATA.actors}
+                  directors={DATA.directors}
+                  className={styles.info}
+                />
+              </Col>
+              <div className={styles.rightSubContainer}>
+                <Col width={[12, 12, 6]}>
+                  <SeriesWhereTo type="watch" list={DATA.whereToWatch} />
+                </Col>
+                <Col width={[12, 12, 6]}>
+                  <SeriesWhereTo
+                    type="download"
+                    list={[
+                      {
+                        label: 'Google',
+                        href: 'https://www.google.com/search?q=patrul+kz',
+                      },
+                    ]}
+                  />
+                </Col>
+              </div>
+            </Row>
           </div>
         </div>
       </div>

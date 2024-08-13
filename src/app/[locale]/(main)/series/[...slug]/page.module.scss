@@ -1,12 +1,8 @@
 .root {
-  width: 100%;
+  margin: var(--page-padding) var(--page-padding) 0;
   @include respond-to('medium') {
     @include flexCenter(column, flex-start, center);
   }
-}
-
-.withPadding {
-  padding: 0 var(--page-padding);
 }
 
 .wrapper {
@@ -22,14 +18,31 @@
 .leftContainer {
   @include flexCenter(column, space-between, flex-start);
   @include respond-to('medium') {
-    flex: 1;
+    margin-right: var(--page-padding);
+    max-width: min(50%, 70rem);
   }
 }
 
 .rightContainer {
-  @include flexCenter(column, space-between, flex-start);
+  margin: 0 -2rem;
+  @include flexCenter(column, space-between);
   @include respond-to('medium') {
-    max-width: min(50%, 70rem);
+    margin: unset;
+    flex: 1;
+  }
+}
+.rightSubContainer {
+  width: 100%;
+  @include respond-to('small') {
+    margin: 0 var(--page-padding);
+  }
+  @include flexCenter(row, space-between, flex-start);
+
+  & > :not(:last-of-type) {
+    margin-bottom: 2rem;
+    @include respond-to('large') {
+      margin-bottom: 0;
+    }
   }
 }
 
