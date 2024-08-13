@@ -1,5 +1,5 @@
 'use client'
-import React, { useRef, useState } from 'react'
+import React, { ReactNode, useRef, useState } from 'react'
 import styles from './Accordion.module.scss'
 import { PiCaretDownBold as CaretIcon } from 'react-icons/pi'
 import cn from 'classnames'
@@ -7,7 +7,7 @@ import Typography, { TagType } from '../UI/Typography'
 
 type ItemType = {
   title: string
-  body: string
+  body?: string | ReactNode
   backgroundColor?: string
   titleTag?: TagType
   bodyTag?: TagType
@@ -79,11 +79,11 @@ const AccordionItem = ({
   const contentHeight = useRef<HTMLDivElement | null>(null)
 
   return (
-    <li className={styles.item} style={{ backgroundColor }}>
-      <span
-        className={cn(styles.titleContainer, { [styles.isExpanded]: isOpen })}
-        onClick={onToggle}
-      >
+    <li
+      style={{ backgroundColor }}
+      className={cn(styles.item, { [styles.isExpanded]: isOpen })}
+    >
+      <span className={styles.titleContainer} onClick={onToggle}>
         <Typography
           tag={titleTag}
           size="m"
@@ -100,7 +100,7 @@ const AccordionItem = ({
       </span>
       <div
         ref={contentHeight}
-        className={cn(styles.collapseable, { [styles.open]: isOpen })}
+        className={styles.collapseable}
         style={{
           maxHeight: isOpen ? `${contentHeight.current?.scrollHeight}px` : '0',
         }}
