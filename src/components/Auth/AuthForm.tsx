@@ -19,7 +19,11 @@ import Field from '@/components/Forms/Field'
 
 import { getErrorMessage } from '@/utils/errors'
 import GoogleLogin from '@/components/Auth/GoogleLogin'
-import { handleGoogleLogin } from '@/actions/auth'
+import {
+  handleRegister,
+  handleCredentialsLogin,
+  handleGoogleLogin,
+} from '@/actions/auth'
 import TextInBox from '../TextInBox'
 import Typography from '../UI/Typography'
 import useInfo from '@/hooks/useInfo'
@@ -37,10 +41,9 @@ import { DEFAULT_LOGIN_REDIRECT_ROUTE } from '@/routes/routes'
 
 interface PropTypes<T> {
   type: 'login' | 'register'
-  onSubmit: (user: AuthFormData) => Promise<T>
 }
 
-function AuthForm<T>({ type, onSubmit }: PropTypes<T>) {
+function AuthForm<T>({ type }: PropTypes<T>) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const queryParamEmail = searchParams.get('email') ?? ''
@@ -84,7 +87,12 @@ function AuthForm<T>({ type, onSubmit }: PropTypes<T>) {
 
   const handleAuth: SubmitHandler<AuthFormData> = async user => {
     try {
-      const res = (await onSubmit(user)) as AxiosResponse
+      const res = (
+        isRegisterForm
+          ? await handleRegister(user)
+          : await handleCredentialsLogin(user)
+      ) as AxiosResponse
+
       // TODO: Find a better way to unify Next-auth's login response & register's
       setInfoMessage(
         isRegisterForm ? res.data.message : getErrorMessage(res?.error ?? ''),

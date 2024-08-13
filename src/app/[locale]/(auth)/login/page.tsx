@@ -1,7 +1,5 @@
-'use client'
 import React from 'react'
 import AuthForm from '@/components/Auth/AuthForm'
-import { handleCredentialsLogin } from '@/actions/auth'
 import { getNextLocale } from '@/utils/cookies'
 import { Metadata } from 'next/types'
 import { getTranslations } from 'next-intl/server'
@@ -17,7 +15,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
 }
 
 const LoginPage = () => {
-  return <AuthForm type="login" onSubmit={handleCredentialsLogin} />
+  return <AuthForm type="login" />
 }
 
 export default LoginPage

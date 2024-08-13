@@ -1,6 +1,5 @@
-'use client'
 import AuthForm from '@/components/Auth/AuthForm'
-import { handleRegister } from '@/actions/auth'
+
 import React from 'react'
 import { getNextLocale } from '@/utils/cookies'
 import { Metadata } from 'next/types'
@@ -17,7 +16,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
 }
 
 const RegisterPage = () => {
-  return <AuthForm type="register" onSubmit={handleRegister} />
+  return <AuthForm type="register" />
 }
 
 export default RegisterPage
