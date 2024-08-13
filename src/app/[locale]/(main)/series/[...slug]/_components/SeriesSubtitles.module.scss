@@ -47,3 +47,22 @@
   border: 1px solid var(--primary-gray-border);
   border-radius: 10rem;
 }
+
+.episodeItem {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  background-color: var(--primary-dark-color);
+  border: 1px solid var(--primary-gray-border);
+  border-radius: 5rem;
+  margin-bottom: 0.5rem;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: var(--primary-light-color);
+  }
+
+  .isDisabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}

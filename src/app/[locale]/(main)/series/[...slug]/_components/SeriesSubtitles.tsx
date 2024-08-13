@@ -1,11 +1,12 @@
 'use client'
-import React from 'react'
+import React, { memo } from 'react'
 import cn from 'classnames'
 import styles from './SeriesSubtitles.module.scss'
 import { useTranslations } from 'next-intl'
 import Typography from '@/components/UI/Typography'
 import Accordion from '@/components/Accordion'
 import { downloadFile } from '@/utils/download'
+import { formatNumber } from '@/utils/string'
 
 export type SeriesEpisode = { episode: number; subtitleUrl: string }
 
@@ -21,9 +22,7 @@ interface PropTypes {
 const SeriesSubtitles = ({ className, subtitles }: PropTypes) => {
   const t = useTranslations('Series')
 
-  if (!subtitles.length) return
-
-  const numberOfAvailableSeasons = subtitles.length
+  if (!subtitles.length) return null
 
   return (
     <section className={cn(styles.root, className)}>
@@ -31,12 +30,13 @@ const SeriesSubtitles = ({ className, subtitles }: PropTypes) => {
         title={t('subtitles')}
         body={
           <div className={styles.accordionBody}>
-            {Array.from({ length: numberOfAvailableSeasons }, (_, idx) => {
-              const hasEpisodes = !!subtitles[idx].episodes.length
+            {subtitles.map(({ season, episodes }) => {
+              const hasEpisodes = episodes.length > 0
               return (
                 <SeasonItem
-                  key={idx}
-                  label={t('Subtitles.season', { count: idx + 1 })}
+                  key={season}
+                  seasonNumber={season}
+                  episodes={episodes}
                   isActive={hasEpisodes}
                 />
               )
@@ -50,32 +50,78 @@ const SeriesSubtitles = ({ className, subtitles }: PropTypes) => {
 
 export default SeriesSubtitles
 
-const SeasonItem = ({
-  label,
-  isActive,
-}: {
-  label: string
+interface SeasonItemProps {
+  seasonNumber: number
+  episodes: SeriesEpisode[]
   isActive: boolean
-}) => {
+}
+
+const SeasonItem = memo(
+  ({ seasonNumber, episodes, isActive }: SeasonItemProps) => {
+    const t = useTranslations('Series.Subtitles')
+    const isUnavailable = !isActive
+    return (
+      <div
+        className={cn(styles.seasonItem, {
+          [styles.isDisabled]: isUnavailable,
+        })}
+      >
+        <Typography
+          align="left"
+          tag="h4"
+          weight="semiBold"
+          size="xs"
+          color="var(--primary-white-color)"
+          title={isUnavailable ? t('not_available_yet') : undefined}
+        >
+          {t('season', { count: seasonNumber })}
+        </Typography>
+        {isActive && (
+          <div className={styles.episodeList}>
+            {episodes.map(({ episode, subtitleUrl }) => (
+              <EpisodeItem
+                key={episode}
+                episodeNumber={episode}
+                seasonNumber={seasonNumber}
+                subtitleUrl={subtitleUrl}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    )
+  }
+)
+SeasonItem.displayName = 'SeasonItem'
+
+interface EpisodeItemProps {
+  episodeNumber: number
+  seasonNumber: number
+  subtitleUrl: string
+}
+
+const EpisodeItem = ({
+  episodeNumber,
+  subtitleUrl,
+  seasonNumber,
+}: EpisodeItemProps) => {
   const t = useTranslations('Series.Subtitles')
-  const isUnavailable = !isActive
-  /*   const downloadEpisode = (link, filename) =>
-    downloadFile('/assets/subs/Patrul-s01-ep01.srt', 'Patrul-s01-ep01.srt') */
+
+  const filename = `s${formatNumber(seasonNumber)}-ep${formatNumber(episodeNumber)}.srt`
+
+  const handleDownload = () => {
+    downloadFile(subtitleUrl, filename)
+  }
 
   return (
-    <div
-      className={cn(styles.seasonItem, { [styles.isDisabled]: isUnavailable })}
-    >
+    <div className={styles.episodeItem} onClick={handleDownload}>
       <Typography
         align="left"
-        tag="h4"
-        weight="semiBold"
+        weight="normal"
         size="xs"
         color="var(--primary-white-color)"
-        title={isUnavailable ? t('not_available_yet') : undefined}
-        /*         onClick={() => downloadEpisode('link', 'filename')} */
       >
-        {label}
+        {t('episode', { count: episodeNumber })}
       </Typography>
     </div>
   )
