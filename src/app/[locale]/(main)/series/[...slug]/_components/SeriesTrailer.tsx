@@ -21,7 +21,7 @@ const SeriesTrailer = ({
   const t = useTranslations('Series')
   if (!src.length || !captionsSrc.length) return
   return (
-    <div className={cn(styles.root, className)}>
+    <section className={cn(styles.root, className)}>
       <Typography
         tag="h3"
         weight="semiBold"
@@ -36,7 +36,7 @@ const SeriesTrailer = ({
         captionsSrc={captionsSrc}
         thumbnailSrc={thumbnail}
       />
-    </div>
+    </section>
   )
 }
 

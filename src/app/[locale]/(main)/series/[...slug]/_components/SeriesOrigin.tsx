@@ -38,7 +38,7 @@ const SeriesOrigin = ({
 }: PropTypes) => {
   const t = useTranslations('Series')
   return (
-    <div className={cn(styles.root, className)}>
+    <section className={cn(styles.root, className)}>
       <div className={styles.row}>
         <Field
           icon={CountryIcon}
@@ -70,7 +70,7 @@ const SeriesOrigin = ({
         value={t('Seasons.number_of_seasons', { count: numberOfSeasons })}
         title={t('Seasons.title')}
       />
-    </div>
+    </section>
   )
 }
 
