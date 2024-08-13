@@ -21,28 +21,28 @@
       "title": "Authentification",
       "description": "Portail d'authentification.",
       "Register": {
-        "title": "",
-        "description": ""
+        "title": "Créer un compte",
+        "description": "Créer un compte pour accéder au tableau de bord utilisateur."
       },
       "Login": {
-        "title": "",
-        "description": ""
+        "title": "S'authentifier",
+        "description": "Accéder au tableau de bord utilisateur."
       },
       "SendVerificationEmail": {
-        "title": "",
-        "description": ""
+        "title": "Envoyer email de vérification",
+        "description": "Envoi d'email en vérifier l'appartenance."
       },
       "PasswordRecovery": {
-        "title": "",
-        "description": ""
+        "title": "Récupération de mot de passe",
+        "description": "Récupérer mot de passe oublié."
       },
       "PasswordReset": {
-        "title": "",
-        "description": ""
+        "title": "Réinitialisation de mot de passe",
+        "description": "Mise à jour du mot de passe oublié."
       },
       "VerifyEmail": {
-        "title": "",
-        "description": ""
+        "title": "Valider email",
+        "description": "Activer un compte en attente de validation."
       }
     },
     "Protected": {

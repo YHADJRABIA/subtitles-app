@@ -21,28 +21,28 @@
       "title": "Authentication",
       "description": "Authentication section.",
       "Register": {
-        "title": "",
-        "description": ""
+        "title": "Create an account",
+        "description": "Create an account to access user's dashboard."
       },
       "Login": {
-        "title": "",
-        "description": ""
+        "title": "Log in",
+        "description": "Authenticate yourself."
       },
       "SendVerificationEmail": {
-        "title": "",
-        "description": ""
+        "title": "Send verification email",
+        "description": "Send an email to verify your account."
       },
       "PasswordRecovery": {
-        "title": "",
-        "description": ""
+        "title": "Recover your password",
+        "description": "Recover your forgotten password"
       },
       "PasswordReset": {
-        "title": "",
-        "description": ""
+        "title": "Reset your password",
+        "description": "Update your forgotten password"
       },
       "VerifyEmail": {
-        "title": "",
-        "description": ""
+        "title": "Verify your email",
+        "description": "Activate your account."
       }
     },
     "Protected": {
