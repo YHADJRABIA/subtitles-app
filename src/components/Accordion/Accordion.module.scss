@@ -4,7 +4,6 @@
 
 .item {
   border-radius: 1rem;
-  background-color: var(--primary-gray-color);
   transition: background-color 0.3s ease;
 
   &:not(:last-of-type) {

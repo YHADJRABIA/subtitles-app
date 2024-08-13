@@ -3,17 +3,33 @@ import React, { useRef, useState } from 'react'
 import styles from './Accordion.module.scss'
 import { PiCaretDownBold as CaretIcon } from 'react-icons/pi'
 import cn from 'classnames'
-import Typography from '../UI/Typography'
+import Typography, { TagType } from '../UI/Typography'
 
-type ItemType = { title: string; body: string }
+type ItemType = {
+  title: string
+  body: string
+  backgroundColor?: string
+  titleTag?: TagType
+  bodyTag?: TagType
+}
 
 interface PropTypes {
   items: ItemType[]
   className?: string
   expandMultiple?: boolean
+  backgroundColor?: string
+  titleTag?: TagType
+  bodyTag?: TagType
 }
 
-const Accordion = ({ className, items, expandMultiple = true }: PropTypes) => {
+const Accordion = ({
+  className,
+  items,
+  expandMultiple = true,
+  backgroundColor,
+  titleTag,
+  bodyTag,
+}: PropTypes) => {
   // Index of opened item(s)
   const [openStates, setOpenStates] = useState<boolean[]>(
     items.map(() => false)
@@ -34,6 +50,9 @@ const Accordion = ({ className, items, expandMultiple = true }: PropTypes) => {
           key={idx}
           {...item}
           isOpen={openStates[idx]}
+          titleTag={titleTag}
+          bodyTag={bodyTag}
+          backgroundColor={backgroundColor}
           onToggle={() => handleToggle(idx)}
         />
       ))}
@@ -51,19 +70,22 @@ interface AccordionItemTypes extends ItemType {
 const AccordionItem = ({
   title,
   body,
+  backgroundColor = 'var(--primary-gray-color)',
+  titleTag = 'h3',
+  bodyTag = 'h4',
   isOpen,
   onToggle,
 }: AccordionItemTypes) => {
   const contentHeight = useRef<HTMLDivElement | null>(null)
 
   return (
-    <li className={styles.item}>
+    <li className={styles.item} style={{ backgroundColor }}>
       <span
         className={cn(styles.titleContainer, { [styles.isExpanded]: isOpen })}
         onClick={onToggle}
       >
         <Typography
-          tag="h3"
+          tag={titleTag}
           size="m"
           weight="semiBold"
           className={styles.title}
@@ -84,7 +106,7 @@ const AccordionItem = ({
         }}
       >
         <Typography
-          tag="h4"
+          tag={bodyTag}
           size="s"
           align="left"
           weight="semiLight"

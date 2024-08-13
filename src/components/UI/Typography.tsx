@@ -5,7 +5,7 @@ import { Link } from '@/lib/i18n/navigation'
 import { UrlObject } from 'url'
 import { fontWeights, lineHeights } from '@/utils/font'
 
-type TagType = keyof typeof tagMap
+export type TagType = keyof typeof tagMap
 
 export type LinkType = {
   href: string | null | (UrlObject & string)
