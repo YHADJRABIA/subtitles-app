@@ -188,7 +188,7 @@ function AuthForm<T>({ type, onSubmit }: PropTypes<T>) {
           {t(isRegisterForm ? 'Register.cta' : 'Login.cta')}
         </Button>
 
-        <Separator label={t_general('or')} />
+        <Separator label={t_general('or')} className={styles.separator} />
         <GoogleLogin
           disabled={isSubmitting}
           onClick={handleGoogleLogin}

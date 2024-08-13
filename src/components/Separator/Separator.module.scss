@@ -1,14 +1,10 @@
 .labelSeparator {
   display: flex;
   align-items: center;
-  width: 85%;
+  width: 100%;
   color: var(--primary-black-color);
   opacity: 0.6;
   margin: 1.5rem 0;
-
-  @include respond-to('medium') {
-    width: 100%;
-  }
 
   &:before,
   &:after {
