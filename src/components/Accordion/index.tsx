@@ -93,7 +93,6 @@ const Accordion = ({
           body={body}
           isOpen={openStates[0]}
           titleTag={titleTag}
-          bodyTag={bodyTag}
           backgroundColor={backgroundColor}
           onToggle={() => handleToggle(0)}
           hasBackgroundEffect={hasBackgroundEffect}
