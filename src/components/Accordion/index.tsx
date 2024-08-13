@@ -37,9 +37,15 @@ const Accordion = ({
 
   const handleToggle = (index: number) => {
     setOpenStates(prevStates =>
-      expandMultiple
-        ? prevStates.map((isOpen, idx) => (idx === index ? !isOpen : isOpen))
-        : prevStates.map((_, idx) => idx === index)
+      prevStates.map((isOpen, idx) =>
+        expandMultiple
+          ? idx === index
+            ? !isOpen
+            : isOpen
+          : idx === index
+            ? !isOpen
+            : false
+      )
     )
   }
 
