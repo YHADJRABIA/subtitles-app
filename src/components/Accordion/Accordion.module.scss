@@ -19,6 +19,7 @@
   padding: 2rem 2rem 1.5rem;
   cursor: pointer;
   @include flexCenter(row, space-between);
+  @include preventUserSelect;
 }
 
 .toggler {
