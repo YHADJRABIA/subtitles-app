@@ -25,7 +25,7 @@ interface PropTypes {
 const Accordion = ({
   className,
   items,
-  expandMultiple = true,
+  expandMultiple = false,
   backgroundColor,
   titleTag,
   bodyTag,

@@ -121,7 +121,7 @@ export default function AboutPage() {
         >
           {t('FAQ.title')}
         </Typography>
-        <Accordion items={faq} />
+        <Accordion items={faq} expandMultiple />
       </section>
     </div>
   )
