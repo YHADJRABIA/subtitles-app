@@ -17,8 +17,8 @@ import Separator from '@/components/Separator'
 import SeriesTrailer from './_components/SeriesTrailer'
 import SeriesWhereTo from './_components/SeriesWhereTo'
 import { Col, Row } from '@/components/UI/Grid'
-import SeriesSubtitles from './_components/SeriesSubtitles'
 import StickyContainer from '@/components/StickyContainer'
+import SeriesSubtitles from './_components/SeriesSubtitles'
 
 // TODO: fetch from CMS
 const DATA = {
@@ -162,7 +162,10 @@ export default function SeriesPage({}) {
 
               <div className={styles.rightSubContainer}>
                 <Col width={12}>
-                  <SeriesSubtitles subtitles={DATA.subtitles} />
+                  <SeriesSubtitles
+                    seriesName={DATA.name}
+                    subtitles={DATA.subtitles}
+                  />
                 </Col>
                 <Col width={[12, 6]}>
                   <SeriesWhereTo type="watch" list={DATA.whereToWatch} />

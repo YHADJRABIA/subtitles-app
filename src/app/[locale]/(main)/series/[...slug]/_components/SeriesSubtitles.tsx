@@ -5,8 +5,8 @@ import styles from './SeriesSubtitles.module.scss'
 import { useTranslations } from 'next-intl'
 import Typography from '@/components/UI/Typography'
 import Accordion from '@/components/Accordion'
-import { downloadFile } from '@/utils/download'
-import { formatNumber } from '@/utils/string'
+import { useModal } from '@/hooks/useModal'
+import EpisodesModal from '@/components/Modals/EpisodesModal'
 
 export type SeriesEpisode = { episode: number; subtitleUrl: string }
 
@@ -16,11 +16,27 @@ export type SeriesSubtitles = SeriesSeason[]
 
 interface PropTypes {
   className?: string
+  seriesName: string
   subtitles: SeriesSubtitles
 }
 
-const SeriesSubtitles = ({ className, subtitles }: PropTypes) => {
+const SeriesSubtitles = ({ className, subtitles, seriesName }: PropTypes) => {
   const t = useTranslations('Series')
+  const { openModal, closeModal } = useModal()
+
+  const handleOpenModal = (seasonNumber: number, episodes: SeriesEpisode[]) => {
+    openModal({
+      title: `${t('Subtitles.season', { count: seasonNumber })} — ${seriesName}`,
+      content: (
+        <EpisodesModal
+          isOpen={true}
+          onClose={closeModal}
+          seasonNumber={seasonNumber}
+          episodes={episodes}
+        />
+      ),
+    })
+  }
 
   if (!subtitles.length) return null
 
@@ -38,6 +54,7 @@ const SeriesSubtitles = ({ className, subtitles }: PropTypes) => {
                   seasonNumber={season}
                   episodes={episodes}
                   isActive={hasEpisodes}
+                  onOpen={handleOpenModal}
                 />
               )
             })}
@@ -54,17 +71,25 @@ interface SeasonItemProps {
   seasonNumber: number
   episodes: SeriesEpisode[]
   isActive: boolean
+  onOpen: (seasonNumber: number, episodes: SeriesEpisode[]) => void
 }
 
 const SeasonItem = memo(
-  ({ seasonNumber, episodes, isActive }: SeasonItemProps) => {
+  ({ seasonNumber, episodes, isActive, onOpen }: SeasonItemProps) => {
     const t = useTranslations('Series.Subtitles')
     const isUnavailable = !isActive
+
+    const handleClick = () => {
+      if (!isActive) return
+      onOpen(seasonNumber, episodes)
+    }
+
     return (
       <div
         className={cn(styles.seasonItem, {
           [styles.isDisabled]: isUnavailable,
         })}
+        onClick={handleClick}
       >
         <Typography
           align="left"
@@ -76,53 +101,8 @@ const SeasonItem = memo(
         >
           {t('season', { count: seasonNumber })}
         </Typography>
-        {isActive && (
-          <div className={styles.episodeList}>
-            {episodes.map(({ episode, subtitleUrl }) => (
-              <EpisodeItem
-                key={episode}
-                episodeNumber={episode}
-                seasonNumber={seasonNumber}
-                subtitleUrl={subtitleUrl}
-              />
-            ))}
-          </div>
-        )}
       </div>
     )
   }
 )
 SeasonItem.displayName = 'SeasonItem'
-
-interface EpisodeItemProps {
-  episodeNumber: number
-  seasonNumber: number
-  subtitleUrl: string
-}
-
-const EpisodeItem = ({
-  episodeNumber,
-  subtitleUrl,
-  seasonNumber,
-}: EpisodeItemProps) => {
-  const t = useTranslations('Series.Subtitles')
-
-  const filename = `s${formatNumber(seasonNumber)}-ep${formatNumber(episodeNumber)}.srt`
-
-  const handleDownload = () => {
-    downloadFile(subtitleUrl, filename)
-  }
-
-  return (
-    <div className={styles.episodeItem} onClick={handleDownload}>
-      <Typography
-        align="left"
-        weight="normal"
-        size="xs"
-        color="var(--primary-white-color)"
-      >
-        {t('episode', { count: episodeNumber })}
-      </Typography>
-    </div>
-  )
-}
