@@ -47,7 +47,19 @@
     },
     "Protected": {
       "title": "Utilisateur",
-      "description": "Portail sécurisé"
+      "description": "Portail protégé.",
+      "Dashboard": {
+        "title": "Tableau de bord",
+        "description": "Vue d'ensemble du compte."
+      },
+      "Settings": {
+        "title": "Paramètres",
+        "description": "Paramètres de l'utilisateur."
+      },
+      "Account": {
+        "title": "Compte",
+        "description": "Informations relatives au compte."
+      }
     }
   },
   "General": {
@@ -269,7 +281,8 @@
   "EditableField": {
     "edit": "Edit",
     "add": "Ajouter",
-    "cancel": "Annuler"
+    "cancel": "Annuler",
+    "save": "Enregistrer"
   },
   "Avatar": {
     "avatar": "Photo de profil"

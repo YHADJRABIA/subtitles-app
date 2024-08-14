@@ -34,11 +34,11 @@
       },
       "PasswordRecovery": {
         "title": "Recover your password",
-        "description": "Recover your forgotten password"
+        "description": "Recover your forgotten password."
       },
       "PasswordReset": {
         "title": "Reset your password",
-        "description": "Update your forgotten password"
+        "description": "Update your forgotten password."
       },
       "VerifyEmail": {
         "title": "Verify your email",
@@ -47,7 +47,19 @@
     },
     "Protected": {
       "title": "User",
-      "description": "Secured section"
+      "description": "Protected section.",
+      "Dashboard": {
+        "title": "Dashboard",
+        "description": "Account's overview."
+      },
+      "Settings": {
+        "title": "Settings",
+        "description": "Edit account's settings."
+      },
+      "Account": {
+        "title": "Account",
+        "description": "Account's information."
+      }
     }
   },
   "General": {
@@ -266,7 +278,8 @@
   "EditableField": {
     "edit": "Edit",
     "add": "Add",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "save": "Save"
   },
   "Avatar": {
     "avatar": "Profile image"
