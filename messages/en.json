@@ -139,7 +139,8 @@
     "Subtitles": {
       "season": "Season {count}",
       "episode": "Episode {count}",
-      "not_available_yet": "Not available yet"
+      "not_available_yet": "Not available yet",
+      "download": "Download"
     },
 
     "director": "Director{count, plural, one {} other {s}}:",
