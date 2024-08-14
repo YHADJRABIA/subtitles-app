@@ -19,7 +19,7 @@ const CtaSection = ({ className }: PropTypes) => {
         size="xs"
         variation="primary"
         weight="semiBold"
-        link={{ href: '/series' }}
+        link={{ href: '/series/patrul' }} // Todo: change to /series when page is finished
       >
         {t('browse_series')}
       </LinkButton>
