@@ -7,7 +7,7 @@ import { Metadata } from 'next'
 import { Col, Row } from '@/components/UI/Grid'
 import InfoImage from '@/components/InfoImage'
 import Separator from '@/components/Separator'
-import { redirect } from 'next/navigation'
+import { redirect } from '@/lib/i18n/navigation'
 
 export const generateMetadata = async (): Promise<Metadata> => {
   const locale = getNextLocale()
