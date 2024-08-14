@@ -1,0 +1,40 @@
+.root {
+  padding: 2rem 0;
+  @include flexCenter(column, flex-start, stretch);
+  gap: 1rem;
+}
+
+.item {
+  width: 100%;
+
+  border: 1px solid var(--primary-gray-border);
+  padding: 1.5rem;
+  border-radius: 1rem;
+
+  @include flexCenter(row, space-between);
+
+  @include respond-to('medium') {
+  }
+}
+
+.label {
+  color: var(--primary-black-color);
+  margin-right: 2rem;
+}
+
+.cta {
+  cursor: pointer;
+
+  opacity: 1;
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  color: var(--primary-white-color);
+  background-color: var(--primary-black-color);
+  border: 1px solid var(--primary-gray-border);
+  border-radius: 10rem;
+  padding: 1rem 1.5rem;
+}
