@@ -45,7 +45,7 @@ const SeriesSubtitles = ({ className, subtitles, seriesName }: PropTypes) => {
       <Accordion
         title={t('subtitles')}
         body={
-          <div className={styles.accordionBody}>
+          <ul className={styles.accordionBody}>
             {subtitles.map(({ season, episodes }) => {
               const hasEpisodes = episodes.length > 0
               return (
@@ -58,7 +58,7 @@ const SeriesSubtitles = ({ className, subtitles, seriesName }: PropTypes) => {
                 />
               )
             })}
-          </div>
+          </ul>
         }
       />
     </section>
@@ -85,7 +85,7 @@ const SeasonItem = memo(
     }
 
     return (
-      <div
+      <li
         className={cn(styles.seasonItem, {
           [styles.isDisabled]: isUnavailable,
         })}
@@ -101,7 +101,7 @@ const SeasonItem = memo(
         >
           {t('season', { count: seasonNumber })}
         </Typography>
-      </div>
+      </li>
     )
   }
 )
