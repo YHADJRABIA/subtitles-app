@@ -97,6 +97,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
   const locale = getNextLocale()
   const t = await getTranslations({ locale, namespace: 'Metadata' })
 
+  // TODO: complete meta
   return {
     title: `${t('prefix')} ${DATA.name}`,
     description: DATA.description,
