@@ -34,7 +34,7 @@ const Modal = ({ isOpen, onClose, title, className, children }: PropTypes) => {
             {title}
           </Typography>
         )}
-        <div className={styles.body}>{children}</div>
+        {children}
       </div>
     </div>
   )
