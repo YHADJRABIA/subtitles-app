@@ -13,10 +13,6 @@
   border-radius: 1rem;
 
   @include flexCenter(row, space-between);
-
-  @include respond-to('medium') {
-    flex: 1;
-  }
 }
 
 .label {
