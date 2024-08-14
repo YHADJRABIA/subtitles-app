@@ -2,8 +2,13 @@
 import Modal from '@/components/Modals/Modal'
 import React, { createContext, useState, ReactNode } from 'react'
 
+interface PropTypes {
+  title?: string
+  content: ReactNode
+}
+
 interface ModalContextType {
-  openModal: (content: ReactNode, title?: string) => void
+  openModal: (props: PropTypes) => void
   closeModal: () => void
 }
 
@@ -16,7 +21,7 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
   const [modalContent, setModalContent] = useState<ReactNode>(null)
   const [modalTitle, setModalTitle] = useState<string | undefined>(undefined)
 
-  const openModal = (content: ReactNode, title?: string) => {
+  const openModal = ({ content, title }: PropTypes) => {
     setModalContent(content)
     setModalTitle(title)
     setIsOpen(true)
