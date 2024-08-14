@@ -11,6 +11,7 @@
 }
 
 .container {
+  overflow-y: scroll;
   animation: slideIn 0.3s ease-out;
   @include respond-to('small') {
     margin-top: auto;

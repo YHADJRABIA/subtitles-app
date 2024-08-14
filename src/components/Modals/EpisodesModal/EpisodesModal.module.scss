@@ -2,11 +2,12 @@
   padding: 2rem 0;
   @include flexCenter(column, flex-start, stretch);
   gap: 1rem;
+  @include respond-to('medium') {
+    flex-direction: row;
+  }
 }
 
 .item {
-  width: 100%;
-
   border: 1px solid var(--primary-gray-border);
   padding: 1.5rem;
   border-radius: 1rem;
@@ -14,6 +15,7 @@
   @include flexCenter(row, space-between);
 
   @include respond-to('medium') {
+    flex: 1;
   }
 }
 
