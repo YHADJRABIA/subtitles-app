@@ -1,0 +1,32 @@
+.root {
+  padding: var(--page-padding);
+  width: 100%;
+  @include flexCenter(column, flex-start, flex-start);
+}
+
+.wrapper {
+  /*   max-width: var(--page-max-width); */
+  width: 100%;
+}
+
+.container {
+  @include respond-to('medium') {
+    @include flexCenter(row, center, flex-start);
+  }
+}
+
+.title {
+  margin-bottom: 4rem;
+}
+
+.featured,
+.series {
+  @include respond-to('small') {
+    width: 100%;
+  }
+  margin-bottom: 1rem;
+}
+
+.featuredTitle {
+  margin-bottom: 1.5rem;
+}
