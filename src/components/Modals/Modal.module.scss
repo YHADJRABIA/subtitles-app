@@ -1,0 +1,48 @@
+.root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.65);
+  @include flexCenter(column);
+  z-index: 999;
+  animation: fadeIn 0.3s ease-in;
+}
+
+.container {
+  animation: slideIn 0.3s ease-out;
+  @include respond-to('small') {
+    margin-top: auto;
+    -moz-border-radius: 0; // Apply border radius to top part only
+    -webkit-border-radius: 1rem 1rem 0 0;
+    border-radius: 1rem 1rem 0 0;
+  }
+
+  background-color: var(--primary-gray-color);
+  border-radius: 1rem;
+  padding: 1rem 2rem 2rem;
+  width: 100vw;
+  height: 75%;
+  position: relative;
+  @include respond-to('medium') {
+    min-width: 50rem;
+    width: min(60%, var(--page-max-width) / 1.5);
+  }
+}
+
+.closeIcon {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--primary-black-color);
+  cursor: pointer;
+  transition: color 0.3s;
+
+  &:hover {
+    color: var(--primary-blue-color);
+  }
+}
