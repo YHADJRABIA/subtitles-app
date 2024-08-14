@@ -22,7 +22,7 @@ const NavLink = ({ link, isActive, className }: PropTypes) => {
         className={cn(styles.root, className, { [styles.active]: isActive })}
       >
         <Icon size={16} className={styles.icon} />
-        <Typography size="xs" weight={isActive ? 'semiBold' : undefined}>
+        <Typography size="xxs" weight={isActive ? 'semiBold' : undefined}>
           {link.label}
         </Typography>
       </Link>
