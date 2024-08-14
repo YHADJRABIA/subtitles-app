@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import styles from './FoldableHeader.module.scss'
+import styles from './ConcealableHeader.module.scss'
 import Header from '..'
 import cn from 'classnames'
 import { useScrollDirection } from '@/hooks/useScrollDirection'
@@ -11,7 +11,7 @@ interface PropTypes {
 }
 
 /* Conceals itself on down-scroll and reappears on up-scroll */
-const FoldableHeader = ({ isConnected, className }: PropTypes) => {
+const ConcealableHeader = ({ isConnected, className }: PropTypes) => {
   const scrollDirection = useScrollDirection()
   const isDownScroll = scrollDirection === 'down'
 
@@ -23,4 +23,4 @@ const FoldableHeader = ({ isConnected, className }: PropTypes) => {
   )
 }
 
-export default FoldableHeader
+export default ConcealableHeader
