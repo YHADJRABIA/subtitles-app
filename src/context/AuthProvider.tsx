@@ -5,10 +5,10 @@ import React, { ReactNode } from 'react'
 
 interface PropTypes {
   children: ReactNode
-  session: Session
+  session?: Session | null
 }
 
-const AuthProvider = ({ children, session }: PropTypes) => {
+const AuthProvider = ({ children, session = null }: PropTypes) => {
   return <SessionProvider session={session}>{children}</SessionProvider>
 }
 

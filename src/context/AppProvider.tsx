@@ -4,7 +4,6 @@ import { getMessages } from 'next-intl/server'
 import { ToastContainer } from 'react-toastify'
 import AuthProvider from './AuthProvider'
 import { ModalProvider } from './ModalProvider'
-import { getSession } from 'next-auth/react' // Import getSession to fetch the session
 
 interface PropTypes {
   children: ReactNode
@@ -12,11 +11,10 @@ interface PropTypes {
 
 const AppProvider = async ({ children }: PropTypes) => {
   const messages = await getMessages()
-  const session = await getSession()
 
   return (
     <NextIntlClientProvider messages={messages}>
-      <AuthProvider session={session!}>
+      <AuthProvider>
         <ModalProvider>
           <ToastContainer />
           {children}
