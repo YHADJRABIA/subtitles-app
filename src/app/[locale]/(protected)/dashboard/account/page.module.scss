@@ -1,0 +1,57 @@
+.root {
+  @include flexCenter(column, flex-start);
+  width: 100%;
+  height: 100%;
+
+  & > * {
+    width: 100%;
+  }
+
+  @include respond-to('medium') {
+    max-width: var(--container-max-width);
+  }
+}
+
+.title {
+  margin-bottom: 4rem;
+  @include respond-to('medium') {
+    margin-bottom: 2rem;
+  }
+}
+
+.container {
+  @include flexCenter(column, flex-start, flex-start);
+  flex: 1;
+
+  @include respond-to('medium') {
+    flex: unset;
+    border-radius: 2rem;
+    border: 1px solid var(--primary-gray-border);
+    padding: 2rem;
+  }
+}
+
+.fieldsContainer {
+  width: 100%;
+  @include flexCenter(column, space-between);
+  & > *:not(:last-of-type) {
+    margin-bottom: 2rem;
+  }
+  margin-bottom: 8rem;
+}
+
+.field {
+  @include flexCenter(row, space-between);
+  width: 100%;
+}
+
+.separator {
+  opacity: 0.1;
+}
+
+.cta {
+  margin-top: auto;
+  @include respond-to('medium') {
+    margin-top: unset;
+  }
+}
