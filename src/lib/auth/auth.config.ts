@@ -160,6 +160,9 @@ export const authOptions: NextAuthOptions = {
       }
     },
 
+    // TODO: remove lint ignore once next-auth fixes bug
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     async signIn({ user, account }: PropTypes) {
       const locale = getNextLocale()
 
