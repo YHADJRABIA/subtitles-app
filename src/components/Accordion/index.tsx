@@ -138,7 +138,6 @@ const AccordionItem = ({
           size="m"
           weight="semiBold"
           className={styles.title}
-          align="left"
         >
           {title}
         </Typography>
@@ -160,7 +159,6 @@ const AccordionItem = ({
           <Typography
             tag={bodyTag}
             size="s"
-            align="left"
             weight="semiLight"
             className={styles.description}
           >

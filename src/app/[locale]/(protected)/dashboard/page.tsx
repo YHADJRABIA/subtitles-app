@@ -35,7 +35,6 @@ const DashboardPage = async () => {
       <Typography
         isFullWidth
         tag="h1"
-        align="left"
         size="xxl"
         weight="semiBold"
         className={styles.title}

@@ -107,20 +107,14 @@ export const generateMetadata = async (): Promise<Metadata> => {
   }
 }
 
-export default function SeriesPage({}) {
+export default function SeriesPage() {
   const t = useTranslations('Series')
   /* TODO: Add breadcrumbs */
 
   return (
     <div className={styles.root}>
       <div className={styles.wrapper}>
-        <Typography
-          tag="h1"
-          weight="bold"
-          align="left"
-          size="xxxl"
-          className={styles.title}
-        >
+        <Typography tag="h1" weight="bold" size="xxxl" className={styles.title}>
           {DATA.name}
         </Typography>
         <div className={styles.container}>

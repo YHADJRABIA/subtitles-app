@@ -22,13 +22,7 @@ const SeriesTrailer = ({
   if (!src.length || !captionsSrc.length) return
   return (
     <section className={cn(styles.root, className)}>
-      <Typography
-        tag="h3"
-        weight="semiBold"
-        align="left"
-        size="s"
-        className={styles.title}
-      >
+      <Typography tag="h3" weight="semiBold" size="s" className={styles.title}>
         {t('trailer')}
       </Typography>
       <Video

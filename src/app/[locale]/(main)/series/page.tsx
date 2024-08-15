@@ -4,9 +4,7 @@ import { useTranslations } from 'next-intl'
 import { getNextLocale } from '@/utils/cookies'
 import { getTranslations } from 'next-intl/server'
 import { Metadata } from 'next'
-import { Col, Row } from '@/components/UI/Grid'
 import InfoImage from '@/components/InfoImage'
-import Separator from '@/components/Separator'
 import { redirect } from '@/lib/i18n/navigation'
 
 export const generateMetadata = async (): Promise<Metadata> => {
@@ -27,12 +25,7 @@ export default function SeriesPage() {
   return (
     <div className={styles.root}>
       <div className={styles.wrapper}>
-        <Typography
-          tag="h1"
-          weight="bold"
-          align="left"
-          className={styles.title}
-        >
+        <Typography tag="h1" weight="bold" className={styles.title}>
           {t('title')}
         </Typography>
         <div className={styles.container}>
@@ -40,7 +33,6 @@ export default function SeriesPage() {
             <Typography
               tag="h2"
               weight="semiBold"
-              align="left"
               size="xl"
               className={styles.featuredTitle}
             >
@@ -58,7 +50,6 @@ export default function SeriesPage() {
           <Typography
             tag="h2"
             weight="semiBold"
-            align="left"
             size="xl"
             className={styles.seriesTitle}
           >
@@ -68,7 +59,6 @@ export default function SeriesPage() {
           <div className={styles.serie}>
             <Typography
               tag="h3"
-              align="left"
               size="m"
               link={{ href: '/series/patrul' }}
             >

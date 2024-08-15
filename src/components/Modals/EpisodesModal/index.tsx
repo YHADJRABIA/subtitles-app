@@ -26,12 +26,7 @@ const EpisodesModal = ({ seasonNumber, episodes }: EpisodesModalProps) => {
     <ul className={styles.root}>
       {episodes.map(({ episode, subtitleUrl }) => (
         <li key={episode} className={styles.item}>
-          <Typography
-            align="left"
-            size="xs"
-            weight="semiBold"
-            className={styles.label}
-          >
+          <Typography size="xs" weight="semiBold" className={styles.label}>
             {t('Subtitles.episode', { count: episode })}
           </Typography>
 

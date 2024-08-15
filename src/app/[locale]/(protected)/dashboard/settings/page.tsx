@@ -2,9 +2,9 @@ import React from 'react'
 import { getTranslations } from 'next-intl/server'
 import styles from './page.module.scss'
 import { getNextLocale } from '@/utils/cookies'
-import { getUserSession } from '@/utils/session'
+/* import { getUserSession } from '@/utils/session' */
 import Typography from '@/components/UI/Typography'
-import SwitchButton from '@/components/SwitchButton'
+/* import SwitchButton from '@/components/SwitchButton' */
 
 import { Metadata } from 'next/types'
 import UnderDevelopment from '@/components/UnderDevelopment'
@@ -23,7 +23,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
 }
 
 const DashboardSettingsPage = async () => {
-  const { favoriteLocale, isTwoFactorEnabled } = await getUserSession()
+  /*   const { favoriteLocale, isTwoFactorEnabled } = await getUserSession() */
   const locale = getNextLocale()
 
   const t = await getTranslations({ locale, namespace: 'Dashboard.Settings' })
@@ -33,7 +33,6 @@ const DashboardSettingsPage = async () => {
       <Typography
         isFullWidth
         tag="h1"
-        align="left"
         size="xxl"
         weight="semiBold"
         className={styles.title}

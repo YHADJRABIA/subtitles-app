@@ -11,16 +11,10 @@ interface PropTypes {
 const SeriesDescription = ({ className, title, body }: PropTypes) => {
   return (
     <span className={className}>
-      <Typography
-        align="left"
-        tag="h3"
-        weight="semiBold"
-        size="s"
-        className={styles.title}
-      >
+      <Typography tag="h3" weight="semiBold" size="s" className={styles.title}>
         {title}
       </Typography>
-      <Typography align="left" tag="h4" size="xs">
+      <Typography tag="h4" size="xs">
         {body}
       </Typography>
     </span>

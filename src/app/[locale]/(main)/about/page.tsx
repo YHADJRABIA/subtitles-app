@@ -113,12 +113,7 @@ export default function AboutPage() {
       </section>
 
       <section>
-        <Typography
-          tag="h2"
-          weight="bold"
-          align="left"
-          className={styles.title}
-        >
+        <Typography tag="h2" weight="bold" className={styles.title}>
           {t('FAQ.title')}
         </Typography>
         <Accordion

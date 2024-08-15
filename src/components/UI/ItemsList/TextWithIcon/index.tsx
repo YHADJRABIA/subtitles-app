@@ -24,22 +24,11 @@ const TextWithIcon = ({
       </span>
 
       <div className={styles.textContainer}>
-        <Typography
-          tag="h3"
-          size="m"
-          weight="bold"
-          align="left"
-          className={styles.title}
-        >
+        <Typography tag="h3" size="m" weight="bold" className={styles.title}>
           {title}
         </Typography>
 
-        <Typography
-          size="s"
-          weight="semiLight"
-          align="left"
-          className={styles.description}
-        >
+        <Typography size="s" weight="semiLight" className={styles.description}>
           {description}
         </Typography>
       </div>

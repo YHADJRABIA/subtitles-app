@@ -47,7 +47,7 @@ const Typography = ({
   weight = 'normal',
   color,
   uppercase = false,
-  align = 'center',
+  align = 'left',
   size,
   link = { href: null, openInNewTab: false },
   className,

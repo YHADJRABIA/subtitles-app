@@ -92,7 +92,6 @@ const SeasonItem = memo(
         onClick={handleClick}
       >
         <Typography
-          align="left"
           tag="h4"
           weight="semiBold"
           size="xs"

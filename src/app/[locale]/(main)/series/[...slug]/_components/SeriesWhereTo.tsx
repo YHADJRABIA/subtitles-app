@@ -31,7 +31,6 @@ const SeriesWhereTo = ({ type, list, className }: PropTypes) => {
         <Typography
           tag="h3"
           weight="semiBold"
-          align="left"
           size="xs"
           className={styles.title}
         >
@@ -53,7 +52,6 @@ const Item = ({ label, href }: { label: string; href: string }) => {
     <span className={styles.item}>
       <Typography
         link={{ href: href, openInNewTab: true }}
-        align="left"
         size="xs"
         color="var(--secondary-blue-color)"
         className={styles.link}
