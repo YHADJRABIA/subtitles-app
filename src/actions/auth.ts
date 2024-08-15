@@ -26,6 +26,7 @@ export const handleRegister = async (user: AccountRegistrationSchema) => {
     return await axios.post('/api/users/register', user)
   } catch (err) {
     console.error('Error creating user:', getErrorMessage(err))
+    throw err
   }
 }
 
@@ -36,6 +37,7 @@ export const handleSendVerificationEmail = async (
     return await axios.post('/api/users/send-verification-email', user)
   } catch (err) {
     console.error('Error sending verificaiton email:', getErrorMessage(err))
+    throw err
   }
 }
 
@@ -46,6 +48,7 @@ export const handleVerifyEmailValidationToken = async (
     return await axios.post('/api/users/verify-token', user)
   } catch (err) {
     console.error('Error verifying validaiton token:', getErrorMessage(err))
+    throw err
   }
 }
 
@@ -59,5 +62,6 @@ export const handleSendPasswordRecoveryEmail = async (
       'Error sending password recovery email:',
       getErrorMessage(err)
     )
+    throw err
   }
 }
