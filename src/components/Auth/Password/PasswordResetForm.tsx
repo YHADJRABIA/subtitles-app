@@ -57,10 +57,7 @@ const PasswordResetForm = () => {
       const res = await axios.post('/api/users/password/reset', user)
       setInfoMessage(res.data.message, 'success')
     } catch (err) {
-      setInfoMessage(
-        getErrorMessage(err?.response.data.message) ?? getErrorMessage(err),
-        'error'
-      )
+      setInfoMessage(getErrorMessage(err), 'error')
     }
   }
 
@@ -93,7 +90,7 @@ const PasswordResetForm = () => {
             passwordInputType === 'password' ? '••••••' : 'MyPa$$word_'
           }
           type={passwordInputType}
-          register={register}
+          register={register as any}
           name="password"
           subLabel={{
             text: errors?.password?.message,

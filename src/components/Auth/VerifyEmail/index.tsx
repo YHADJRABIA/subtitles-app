@@ -35,7 +35,7 @@ const VerifyEmail = () => {
   const handleValidate: SubmitHandler<EmailVerificationSchema> = async user => {
     try {
       const res = await handleVerifyEmailValidationToken(user)
-      setInfoMessage(res.data.message, 'success')
+      setInfoMessage(res?.data.message, 'success')
     } catch (err) {
       setInfoMessage(getErrorMessage(err), 'error')
     }
