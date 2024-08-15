@@ -1,5 +1,9 @@
 .root {
   padding: var(--page-padding);
+  margin: 0 auto;
+  @include respond-to('medium') {
+    max-width: var(--container-max-width);
+  }
 }
 
 .sidebar {

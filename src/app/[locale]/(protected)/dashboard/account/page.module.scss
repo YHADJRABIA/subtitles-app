@@ -6,13 +6,10 @@
   & > * {
     width: 100%;
   }
-
-  @include respond-to('medium') {
-    max-width: var(--container-max-width);
-  }
 }
 
 .title {
+  // TODO: refactor to all layout elements
   margin-bottom: 4rem;
   @include respond-to('medium') {
     margin-bottom: 2rem;
