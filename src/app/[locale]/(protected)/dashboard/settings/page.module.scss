@@ -1,0 +1,30 @@
+.root {
+  @include flexCenter(
+    column,
+    flex-start
+  ); // TODO: Apply to all main tags instead?
+  width: 100%;
+  height: 100%;
+
+  & > * {
+    width: 100%;
+  }
+}
+
+.title {
+  margin-bottom: 6rem;
+}
+
+.section {
+  @include flexCenter(column, flex-start, flex-start);
+  align-content: flex-start;
+
+  & > *:not(:last-of-type) {
+    margin-bottom: 2rem;
+  }
+}
+.element {
+  @include flexCenter(row, space-between);
+  width: 100%;
+  margin-bottom: 2rem;
+}

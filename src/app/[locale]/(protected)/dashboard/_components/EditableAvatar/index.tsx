@@ -17,12 +17,12 @@ const EditableAvatar = ({ className, src, onEditAvatar }: PropTypes) => {
   return (
     <div className={cn(styles.root, className)}>
       <Avatar src={src} className={styles.avatar} />
-      <CameraIcon
+      {/*       <CameraIcon
         size={20}
         className={styles.ctaIcon}
         onClick={onEditAvatar}
         title={t('edit')}
-      />
+      /> */}
     </div>
   )
 }
