@@ -1,4 +1,3 @@
-import store from '@/lib/redux/store'
 import { ReactNode } from 'react'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
