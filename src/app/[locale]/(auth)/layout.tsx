@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, Suspense } from 'react'
 import styles from './layout.module.scss'
 import { getTranslations } from 'next-intl/server'
 import LanguageMenu from '@/components/Layout/LanguageMenu'
@@ -28,8 +28,7 @@ const layout = ({ children }: PropTypes) => {
           <Logo size={50} />
           <LanguageMenu />
         </div>
-
-        {children}
+        <Suspense>{children}</Suspense>
       </main>
     </div>
   )
