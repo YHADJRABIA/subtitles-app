@@ -39,11 +39,11 @@ import { AxiosResponse } from 'axios'
 import { useSearchParams } from 'next/navigation'
 import { DEFAULT_LOGIN_REDIRECT_ROUTE } from '@/routes/routes'
 
-interface PropTypes<T> {
+interface PropTypes {
   type: 'login' | 'register'
 }
 
-function AuthForm<T>({ type }: PropTypes<T>) {
+function AuthForm({ type }: PropTypes) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const queryParamEmail = searchParams.get('email') ?? ''
@@ -94,11 +94,16 @@ function AuthForm<T>({ type }: PropTypes<T>) {
       ) as AxiosResponse
 
       // TODO: Find a better way to unify Next-auth's login response & register's
+
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       setInfoMessage(
-        isRegisterForm ? res.data.message : getErrorMessage(res?.error ?? ''),
+        isRegisterForm ? res.data.message : getErrorMessage(res?.data),
         isRegisterForm ? 'success' : 'error'
       )
       // Redirect if successful login
+
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       if (isLoginForm && res?.ok)
         router.push(DEFAULT_LOGIN_REDIRECT_ROUTE as string)
     } catch (err) {

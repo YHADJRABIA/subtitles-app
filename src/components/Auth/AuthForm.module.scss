@@ -12,6 +12,9 @@
 
 .title {
   margin: 5rem 0 4rem;
+  @include respond-to('small') {
+    width: 100%;
+  }
 }
 
 .wrapper {
