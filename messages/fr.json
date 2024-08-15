@@ -313,5 +313,7 @@
   "Footer": {
     "name": "Yacine HADJ RABIA",
     "development_year": "2024"
-  }
+  },
+
+  "UnderDevelopement": { "title": "En cours de développement" }
 }

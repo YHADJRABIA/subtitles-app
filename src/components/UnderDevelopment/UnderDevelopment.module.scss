@@ -1,0 +1,7 @@
+.root {
+  @include flexCenter(row, flex-start);
+}
+
+.icon {
+  margin-right: 1.5rem;
+}
