@@ -31,9 +31,7 @@ textarea {
   height: 15rem;
 
   @include respond-to('medium') {
-    width: 40rem;
-    min-width: 40rem;
-    max-width: 40rem;
+    width: var(--container-max-width);
     height: 15rem;
     min-height: 5rem;
     max-height: 30rem;

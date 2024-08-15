@@ -4,7 +4,7 @@
   min-height: 20rem;
   margin-bottom: auto;
   @include respond-to('medium') {
-    width: 40rem;
+    width: var(--container-max-width);
   }
 }
 
