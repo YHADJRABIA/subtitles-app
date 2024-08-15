@@ -24,10 +24,18 @@ const AuthSection = ({ showAccount, className, userAvatar }: PropTypes) => {
         </Link>
       ) : (
         <div className={cn(styles.authCta, className)}>
-          <Typography size="s" href="/login" className={styles.loginCta}>
+          <Typography
+            size="s"
+            link={{ href: '/login' }}
+            className={styles.loginCta}
+          >
             {t('login')}
           </Typography>
-          <Typography size="s" href="/register" className={styles.registerCta}>
+          <Typography
+            size="s"
+            link={{ href: '/register' }}
+            className={styles.registerCta}
+          >
             {t('register')}
           </Typography>
         </div>
