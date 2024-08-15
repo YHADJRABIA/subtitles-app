@@ -1,0 +1,35 @@
+.root {
+  @include flexCenter(column, space-around, flex-start);
+  align-content: flex-start;
+  position: relative;
+  width: 100%;
+}
+
+.editingContainer {
+  width: 100%;
+  @include flexCenter(row, space-between);
+}
+
+.ctaSection {
+  gap: 1.5rem;
+  @include flexCenter(row, flex-start);
+}
+
+.separator {
+  opacity: 0.1;
+}
+
+.label {
+  margin-bottom: 0.8rem;
+}
+
+.value {
+  @include truncated;
+}
+
+.ctaIcon {
+  position: absolute;
+  right: 0;
+  bottom: 3rem;
+  cursor: pointer;
+}
