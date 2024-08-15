@@ -4,8 +4,12 @@ import { ZodError } from 'zod'
 export const getErrorMessage = (error: unknown): string => {
   let message: string
 
-  if (axios.isAxiosError(error) && error.response) {
-    message = error.response.data?.message || 'Something went wrong' // Default message if specific one is not found
+  if (axios.isAxiosError(error)) {
+    if (error.response) {
+      message = error.response.data?.message || 'Something went wrong'
+    } else {
+      message = error.message || 'Something went wrong'
+    }
   } else if (error instanceof Error) {
     message = error.message
   } else if (typeof error === 'string') {
@@ -13,6 +17,7 @@ export const getErrorMessage = (error: unknown): string => {
   } else {
     message = 'Something went wrong' // TODO: internationalise
   }
+
   return message
 }
 
