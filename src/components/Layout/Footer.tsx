@@ -1,8 +1,8 @@
-import { PORTFOLIO_LINK } from '@/utils/general'
 import { getCurrentYear } from '@/utils/date'
 import { useTranslations } from 'next-intl'
 import React from 'react'
 import Typography from '../UI/Typography'
+import { PORTFOLIO_LINK } from '@/utils/hardCode'
 
 const Footer = () => {
   const t = useTranslations('Footer')

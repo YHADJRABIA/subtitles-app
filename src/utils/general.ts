@@ -1,4 +1,3 @@
-export const PORTFOLIO_LINK = 'https://yhr.vercel.app'
 export const PRODUCTION_URL = '' // TODO: complete before hosting
 
 const DEVELOPMENT_URL = 'http://localhost:3000'
