@@ -35,9 +35,9 @@ import {
   AuthFormData,
 } from '@/types/schemas/auth'
 import { useTranslations } from 'next-intl'
-import { AxiosResponse } from 'axios'
 import { useSearchParams } from 'next/navigation'
 import { DEFAULT_LOGIN_REDIRECT_ROUTE } from '@/routes/routes'
+import { SignInResponse } from 'next-auth/react'
 
 interface PropTypes {
   type: 'login' | 'register'
@@ -87,24 +87,13 @@ function AuthForm({ type }: PropTypes) {
 
   const handleAuth: SubmitHandler<AuthFormData> = async user => {
     try {
-      const res = (
-        isRegisterForm
-          ? await handleRegister(user)
-          : await handleCredentialsLogin(user)
-      ) as AxiosResponse
+      const res = isRegisterForm
+        ? await handleRegister(user)
+        : await handleCredentialsLogin(user)
 
-      // TODO: Find a better way to unify Next-auth's login response & register's
-
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      setInfoMessage(
-        isRegisterForm ? res.data.message : getErrorMessage(res?.data),
-        isRegisterForm ? 'success' : 'error'
-      )
+      setInfoMessage(getErrorMessage(res), isRegisterForm ? 'success' : 'error')
       // Redirect if successful login
-
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
-      if (isLoginForm && res?.ok)
+      if (isLoginForm && (res as SignInResponse)?.ok)
         router.push(DEFAULT_LOGIN_REDIRECT_ROUTE as string)
     } catch (err) {
       setInfoMessage(getErrorMessage(err), 'error')

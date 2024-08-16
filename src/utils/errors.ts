@@ -14,6 +14,13 @@ export const getErrorMessage = (error: unknown): string => {
     message = error.message
   } else if (typeof error === 'string') {
     message = error
+  } else if (
+    typeof error === 'object' &&
+    error !== null &&
+    'error' in error &&
+    'status' in error
+  ) {
+    message = (error.error as string) || 'Something went wrong'
   } else {
     message = 'Something went wrong' // TODO: internationalise
   }
