@@ -18,7 +18,7 @@ import SeriesWhereTo from './_components/SeriesWhereTo'
 import { Col, Row } from '@/components/UI/Grid'
 import StickyContainer from '@/components/StickyContainer'
 import SeriesSubtitles from './_components/SeriesSubtitles'
-import { Locale } from '@/types/locale'
+import { MetaDataProps } from '@/app/[locale]/layout'
 
 // TODO: fetch from CMS
 const DATA = {
@@ -95,9 +95,7 @@ const DATA = {
 
 export const generateMetadata = async ({
   params: { locale },
-}: {
-  params: { locale: Locale }
-}): Promise<Metadata> => {
+}: MetaDataProps): Promise<Metadata> => {
   const t = await getTranslations({ locale, namespace: 'Metadata' })
 
   // TODO: complete meta

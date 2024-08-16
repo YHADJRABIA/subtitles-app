@@ -13,13 +13,15 @@ const literate = Literata({
   variable: '--font-heading',
 })
 
+export interface MetaDataProps {
+  params: { locale: Locale }
+}
+
 // Hacky way to account for 404's metadata
 // TODO: find a batter way to apply page's metadata, this should only conain the whole app's meta
 export const generateMetadata = async ({
   params: { locale },
-}: {
-  params: { locale: Locale }
-}): Promise<Metadata> => {
+}: MetaDataProps): Promise<Metadata> => {
   const t = await getTranslations({ locale, namespace: 'Metadata' })
 
   return {
@@ -28,7 +30,7 @@ export const generateMetadata = async ({
   }
 }
 
-interface PropTypes {
+export interface LayoutProps {
   children: ReactNode
   params: { locale: string }
 }
@@ -36,7 +38,7 @@ interface PropTypes {
 export default function LocaleLayout({
   children,
   params: { locale },
-}: PropTypes) {
+}: LayoutProps) {
   return (
     <html lang={locale}>
       <body className={`${inter.variable} ${literate.variable}`}>

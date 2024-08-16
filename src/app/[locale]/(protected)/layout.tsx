@@ -6,8 +6,8 @@ import Footer from '@/components/Layout/Footer'
 import Navbar from './_components/Navbar'
 import { Metadata } from 'next'
 import { locales } from '@/lib/i18n/navigation'
-import { Locale } from '@/types/locale'
 import Loader from '@/components/UI/Loader'
+import { MetaDataProps } from '../layout'
 
 export function generateStaticParams() {
   return locales.map(locale => ({ locale }))
@@ -15,9 +15,7 @@ export function generateStaticParams() {
 
 export const generateMetadata = async ({
   params: { locale },
-}: {
-  params: { locale: Locale }
-}): Promise<Metadata> => {
+}: MetaDataProps): Promise<Metadata> => {
   const t = await getTranslations({ locale, namespace: 'Metadata.Protected' })
 
   return {

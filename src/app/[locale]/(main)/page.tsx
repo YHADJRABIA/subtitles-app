@@ -4,16 +4,14 @@ import { useTranslations } from 'next-intl'
 import CtaSection from './_components/CtaSection'
 import { getTranslations } from 'next-intl/server'
 import { Metadata } from 'next'
-import { Locale } from '@/types/locale'
+import { MetaDataProps } from '../layout'
 
 const MAIN_ASSET_PATH = '/assets/film-rolls.svg'
 
 // TODO: Complete SEO fields
 export const generateMetadata = async ({
   params: { locale },
-}: {
-  params: { locale: Locale }
-}): Promise<Metadata> => {
+}: MetaDataProps): Promise<Metadata> => {
   const t = await getTranslations({ locale, namespace: 'Metadata' })
 
   return {

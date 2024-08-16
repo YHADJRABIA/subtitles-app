@@ -5,13 +5,11 @@ import { getTranslations } from 'next-intl/server'
 import { Metadata } from 'next'
 import InfoImage from '@/components/InfoImage'
 import { redirect } from '@/lib/i18n/navigation'
-import { Locale } from '@/types/locale'
+import { MetaDataProps } from '../../layout'
 
 export const generateMetadata = async ({
   params: { locale },
-}: {
-  params: { locale: Locale }
-}): Promise<Metadata> => {
+}: MetaDataProps): Promise<Metadata> => {
   const t = await getTranslations({ locale, namespace: 'Metadata' })
 
   return {
