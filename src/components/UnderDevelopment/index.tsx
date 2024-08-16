@@ -10,7 +10,7 @@ const UnderDevelopment = () => {
   return (
     <div className={styles.root}>
       <InDevelopmentIcon size={22} className={styles.icon} />
-      <Typography align="left" size="m" weight="semiBold">
+      <Typography size="m" weight="semiBold">
         {t('title')}
       </Typography>
     </div>
