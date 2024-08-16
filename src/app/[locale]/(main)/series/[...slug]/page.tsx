@@ -1,7 +1,6 @@
 import Typography from '@/components/UI/Typography'
 import styles from './page.module.scss'
 import { useTranslations } from 'next-intl'
-import { getNextLocale } from '@/utils/cookies'
 import { getTranslations } from 'next-intl/server'
 import { Metadata } from 'next/types'
 import SeriesInfo from './_components/SeriesInfo'
@@ -19,6 +18,7 @@ import SeriesWhereTo from './_components/SeriesWhereTo'
 import { Col, Row } from '@/components/UI/Grid'
 import StickyContainer from '@/components/StickyContainer'
 import SeriesSubtitles from './_components/SeriesSubtitles'
+import { Locale } from '@/types/locale'
 
 // TODO: fetch from CMS
 const DATA = {
@@ -93,8 +93,11 @@ const DATA = {
   ],
 }
 
-export const generateMetadata = async (): Promise<Metadata> => {
-  const locale = getNextLocale()
+export const generateMetadata = async ({
+  params: { locale },
+}: {
+  params: { locale: Locale }
+}): Promise<Metadata> => {
   const t = await getTranslations({ locale, namespace: 'Metadata' })
 
   // TODO: complete meta

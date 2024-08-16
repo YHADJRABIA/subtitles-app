@@ -1,14 +1,16 @@
-import React, { ReactNode, Suspense } from 'react'
+import React, { ReactNode } from 'react'
 import styles from './layout.module.scss'
 import { getTranslations } from 'next-intl/server'
 import LanguageMenu from '@/components/Layout/LanguageMenu'
 import Logo from '@/components/Layout/Header/Logo'
-import { getNextLocale } from '@/utils/cookies'
 import { Metadata } from 'next'
+import { Locale } from '@/types/locale'
 
-export const generateMetadata = async (): Promise<Metadata> => {
-  const locale = getNextLocale()
-
+export const generateMetadata = async ({
+  params: { locale },
+}: {
+  params: { locale: Locale }
+}): Promise<Metadata> => {
   const t = await getTranslations({ locale, namespace: 'Metadata.Auth' })
 
   return {
@@ -28,7 +30,7 @@ const layout = ({ children }: PropTypes) => {
           <Logo size={50} />
           <LanguageMenu />
         </div>
-        <Suspense>{children}</Suspense>
+        {children}
       </main>
     </div>
   )

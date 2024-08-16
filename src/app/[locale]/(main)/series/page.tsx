@@ -1,14 +1,17 @@
 import Typography from '@/components/UI/Typography'
 import styles from './page.module.scss'
 import { useTranslations } from 'next-intl'
-import { getNextLocale } from '@/utils/cookies'
 import { getTranslations } from 'next-intl/server'
 import { Metadata } from 'next'
 import InfoImage from '@/components/InfoImage'
 import { redirect } from '@/lib/i18n/navigation'
+import { Locale } from '@/types/locale'
 
-export const generateMetadata = async (): Promise<Metadata> => {
-  const locale = getNextLocale()
+export const generateMetadata = async ({
+  params: { locale },
+}: {
+  params: { locale: Locale }
+}): Promise<Metadata> => {
   const t = await getTranslations({ locale, namespace: 'Metadata' })
 
   return {
@@ -19,6 +22,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
 
 export default function SeriesPage() {
   redirect('/series/patrul') // TODO: Remove when this page is finished
+
   const t = useTranslations('Series')
   /* TODO: Add breadcrumbs */
 

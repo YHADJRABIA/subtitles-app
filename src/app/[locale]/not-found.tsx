@@ -1,23 +1,22 @@
 import React from 'react'
-import { getTranslations } from 'next-intl/server'
 import Header from '@/components/Layout/Header/index'
 import Footer from '@/components/Layout/Footer'
 import { getUserSession } from '@/utils/session'
-import { getNextLocale } from '@/utils/cookies'
 import HeroBanner from '@/components/HeroBanner'
 import styles from './not-found.module.scss'
 import Typography from '@/components/UI/Typography'
 import { LinkButton } from '@/components/UI/Button'
 import { MdOutlineKeyboardBackspace as BackIcon } from 'react-icons/md'
+import { useTranslations } from 'next-intl'
 
 // TODO: fix "Unable to find `next-intl` locale because the middleware didn't run on this request. See https://next-intl-docs.vercel.app/docs/routing/middleware#unable-to-find-locale. The `notFound()` function will be called as a result."
 
 const SVG_PATH = '/assets/ice-fishing.svg'
 
-const NotFoundPage = async () => {
-  const locale = getNextLocale()
-  const t = await getTranslations({ locale, namespace: 'NotFound' })
-  const user = await getUserSession()
+const NotFoundPage = () => {
+  const t = useTranslations('NotFound')
+  const user = getUserSession()
+
   return (
     <>
       <Header isConnected={!!user} />

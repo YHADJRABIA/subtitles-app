@@ -2,7 +2,6 @@ import Typography from '@/components/UI/Typography'
 import styles from './page.module.scss'
 import { useTranslations } from 'next-intl'
 import Accordion from '@/components/Accordion'
-import { getNextLocale } from '@/utils/cookies'
 import { getTranslations } from 'next-intl/server'
 import { Metadata } from 'next'
 import TextWithIcon from '@/components/UI/ItemsList/TextWithIcon'
@@ -13,8 +12,11 @@ import {
 } from 'react-icons/pi'
 import { Col, Row } from '@/components/UI/Grid'
 
-export const generateMetadata = async (): Promise<Metadata> => {
-  const locale = getNextLocale()
+export const generateMetadata = async ({
+  params: { locale },
+}: {
+  params: { locale: string }
+}): Promise<Metadata> => {
   const t = await getTranslations({ locale, namespace: 'Metadata' })
 
   return {
