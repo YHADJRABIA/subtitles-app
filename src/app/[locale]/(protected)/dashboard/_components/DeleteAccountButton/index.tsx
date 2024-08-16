@@ -14,10 +14,10 @@ interface PropTypes {
 }
 
 const DeleteAccountButton = ({ className, label }: PropTypes) => {
-  const { data: session, status, update } = useSession()
+  const { data: session, status /* update */ } = useSession()
 
   const handleDelete = async () => {
-    console.log(session?.user.id)
+    /*     console.log(session?.user.id) */
     await handleDeleteUserById('123')
     // Toast + logout + redirect
   }

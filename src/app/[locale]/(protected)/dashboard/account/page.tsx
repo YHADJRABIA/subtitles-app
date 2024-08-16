@@ -1,15 +1,17 @@
 import React from 'react'
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
 import styles from './page.module.scss'
-import { getNextLocale } from '@/utils/cookies'
 import Typography from '@/components/UI/Typography'
 import { getUserSession } from '@/utils/session'
 import { formatDate } from '@/utils/date'
 import DeleteAccountButton from '../_components/DeleteAccountButton'
 import { Metadata } from 'next/types'
 
-export const generateMetadata = async (): Promise<Metadata> => {
-  const locale = getNextLocale()
+export const generateMetadata = async ({
+  params: { locale },
+}: {
+  params: { locale: string }
+}): Promise<Metadata> => {
   const t = await getTranslations({
     locale,
     namespace: 'Metadata.Protected.Account',
@@ -21,9 +23,13 @@ export const generateMetadata = async (): Promise<Metadata> => {
   }
 }
 
-const DashboardAccountPage = async () => {
+const DashboardAccountPage = async ({
+  params: { locale },
+}: {
+  params: { locale: string }
+}) => {
+  unstable_setRequestLocale(locale)
   const { creationDate, lastUpdateDate } = await getUserSession()
-  const locale = getNextLocale()
 
   const t = await getTranslations({ locale, namespace: 'Dashboard.Account' })
 

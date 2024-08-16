@@ -8,11 +8,11 @@ import { useTranslations } from 'next-intl'
 interface PropTypes {
   src?: string | null
   className?: string
-  onEditAvatar: () => void
+  /*  onEditAvatar: () => void */
 }
 
 // TODO: finish up
-const EditableAvatar = ({ className, src, onEditAvatar }: PropTypes) => {
+const EditableAvatar = ({ className, src /* onEditAvatar */ }: PropTypes) => {
   const t = useTranslations('EditableAvatar')
   return (
     <div className={cn(styles.root, className)}>
