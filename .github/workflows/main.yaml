@@ -20,7 +20,7 @@ jobs:
   # This workflow contains 3 jobs called "run-linters", "Typecheck" & "build"
   run-linters:
     name: Run linters
-    timeout-minutes: 5
+    timeout-minutes: 2
     runs-on: ubuntu-latest
 
     steps:
