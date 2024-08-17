@@ -6,6 +6,7 @@ import AppProvider from '@/context/AppProvider'
 import { getTranslations } from 'next-intl/server'
 import { Metadata } from 'next/types'
 import { Locale } from '@/types/locale'
+import { Analytics } from '@vercel/analytics/react'
 
 const inter = Inter({ subsets: ['latin', 'cyrillic'], variable: '--font-body' })
 const literate = Literata({
@@ -43,6 +44,7 @@ export default function LocaleLayout({
     <html lang={locale}>
       <body className={`${inter.variable} ${literate.variable}`}>
         <AppProvider>{children}</AppProvider>
+        <Analytics />
       </body>
     </html>
   )
