@@ -13,7 +13,7 @@
     "check-lint": "eslint . --ext ts --ext tsx --ext js",
     "format": "prettier --write .",
     "test-all": "npm run check-format && npm run check-lint && npm run check-types && npm run build",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.4.2",
