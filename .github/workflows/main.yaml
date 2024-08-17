@@ -16,7 +16,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   checks: write
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
