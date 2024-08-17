@@ -1,6 +1,3 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
 echo '🏗️👷 Styling, testing & building the project before pushing.'
 
 # Ensure npm run dev is not running
