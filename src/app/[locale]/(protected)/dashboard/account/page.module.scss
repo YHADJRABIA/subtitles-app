@@ -1,13 +1,3 @@
-.root {
-  @include flexCenter(column, flex-start);
-  width: 100%;
-  height: 100%;
-
-  & > * {
-    width: 100%;
-  }
-}
-
 .title {
   // TODO: refactor to all layout elements
   margin-bottom: 4rem;

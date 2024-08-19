@@ -34,7 +34,7 @@ const DashboardAccountPage = async ({
   const t = await getTranslations({ locale, namespace: 'Dashboard.Account' })
 
   return (
-    <div className={styles.root}>
+    <>
       <Typography
         isFullWidth
         tag="h1"
@@ -69,7 +69,7 @@ const DashboardAccountPage = async ({
           label={t('delete_account')}
         />
       </div>
-    </div>
+    </>
   )
 }
 

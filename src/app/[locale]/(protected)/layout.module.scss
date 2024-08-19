@@ -4,6 +4,14 @@
   @include respond-to('medium') {
     max-width: var(--container-max-width);
   }
+
+  @include flexCenter(column, flex-start);
+  width: 100%;
+  height: 100%;
+
+  & > * {
+    width: 100%;
+  }
 }
 
 .sidebar {

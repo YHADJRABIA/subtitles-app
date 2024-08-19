@@ -31,7 +31,7 @@ const DashboardPage = async ({ params: { locale } }: MetaDataProps) => {
   const t = await getTranslations({ locale, namespace: 'Dashboard' })
 
   return (
-    <div className={styles.root}>
+    <>
       <Typography
         isFullWidth
         tag="h1"
@@ -63,7 +63,7 @@ const DashboardPage = async ({ params: { locale } }: MetaDataProps) => {
       </div>
 
       <LogoutButton label={t('log_out')} className={styles.logoutCta} />
-    </div>
+    </>
   )
 }
 

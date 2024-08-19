@@ -1,13 +1,3 @@
-.root {
-  @include flexCenter(column, flex-start);
-  width: 100%;
-  height: 100%;
-
-  & > * {
-    width: 100%;
-  }
-}
-
 .avatar {
   @include flexCenter(column, center);
   margin-bottom: 5rem;
