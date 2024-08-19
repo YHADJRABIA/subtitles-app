@@ -1,8 +1,7 @@
 .root {
-  /*   transition: transform 0.3s ease; 
-  TODO: update effect */
+  transition: transform 0.3s ease;
 
   &:hover {
-    /*     transform: translateY(-0.2rem); */
+    transform: scale(1.05);
   }
 }
