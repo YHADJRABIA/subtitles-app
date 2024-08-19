@@ -3,8 +3,8 @@ import Typography from '@/components/UI/Typography'
 
 import styles from './EpisodesModal.module.scss'
 import { downloadFile } from '@/utils/download'
-import { SeriesEpisode } from '@/app/[locale]/(main)/series/[...slug]/_components/SeriesSubtitles' // TODO: relocate to types folder
 import { useTranslations } from 'next-intl'
+import { SeriesEpisode } from '@/types/series'
 
 interface EpisodesModalProps {
   isOpen: boolean

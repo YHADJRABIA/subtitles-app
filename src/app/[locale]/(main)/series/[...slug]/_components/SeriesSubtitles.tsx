@@ -7,17 +7,15 @@ import Typography from '@/components/UI/Typography'
 import Accordion from '@/components/Accordion'
 import { useModal } from '@/hooks/useModal'
 import EpisodesModal from '@/components/Modals/EpisodesModal'
-
-export type SeriesEpisode = { episode: number; subtitleUrl: string }
-
-export type SeriesSeason = { season: number; episodes: SeriesEpisode[] }
-
-export type SeriesSubtitles = SeriesSeason[]
+import {
+  SeriesEpisode,
+  SeriesSubtitles as SeriesSubtitlesType,
+} from '@/types/series'
 
 interface PropTypes {
   className?: string
   seriesName: string
-  subtitles: SeriesSubtitles
+  subtitles: SeriesSubtitlesType
 }
 
 const SeriesSubtitles = ({ className, subtitles, seriesName }: PropTypes) => {
