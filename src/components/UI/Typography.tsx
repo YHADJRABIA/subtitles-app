@@ -72,7 +72,7 @@ const Typography = ({
       style={PropStyles as CSSProperties}
       className={cn(
         styles.root,
-        { [styles.fullWidth]: isFullWidth, uppercase },
+        { isFullWidth, uppercase },
         size && styles[size],
         className
       )}
@@ -87,7 +87,7 @@ const Typography = ({
       style={PropStyles as CSSProperties}
       className={cn(
         styles.root,
-        { fullWidth: isFullWidth, uppercase },
+        { isFullWidth, uppercase },
         size && styles[size],
         className
       )}
