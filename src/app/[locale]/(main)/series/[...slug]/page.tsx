@@ -6,12 +6,7 @@ import { Metadata } from 'next/types'
 import SeriesInfo from './_components/SeriesInfo'
 import FilledImage from '@/components/UI/FilledImage'
 import SeriesDescription from './_components/SeriesDescription'
-import SeriesOrigin, {
-  SeriesCountry,
-  SeriesGenre,
-  SeriesLanguage,
-  SeriesNumberOfSeasons,
-} from './_components/SeriesOrigin'
+import SeriesOrigin from './_components/SeriesOrigin'
 import Separator from '@/components/Separator'
 import SeriesTrailer from './_components/SeriesTrailer'
 import SeriesWhereTo from './_components/SeriesWhereTo'
@@ -19,6 +14,12 @@ import { Col, Row } from '@/components/UI/Grid'
 import StickyContainer from '@/components/StickyContainer'
 import SeriesSubtitles from './_components/SeriesSubtitles'
 import { MetaDataProps } from '@/app/[locale]/layout'
+import {
+  SeriesCountry,
+  SeriesGenre,
+  SeriesLanguage,
+  SeriesNumberOfSeasons,
+} from '@/types/series'
 
 // TODO: fetch from CMS
 const DATA = {
