@@ -12,6 +12,14 @@
   & > * {
     width: 100%;
   }
+
+  & > :first-child {
+    // Page's title
+    margin-bottom: 4rem;
+    @include respond-to('medium') {
+      margin-bottom: 2rem;
+    }
+  }
 }
 
 .sidebar {

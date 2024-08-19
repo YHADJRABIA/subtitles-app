@@ -32,13 +32,7 @@ const DashboardPage = async ({ params: { locale } }: MetaDataProps) => {
 
   return (
     <>
-      <Typography
-        isFullWidth
-        tag="h1"
-        size="xxl"
-        weight="semiBold"
-        className={styles.title}
-      >
+      <Typography isFullWidth tag="h1" size="xxl" weight="semiBold">
         {t('title')}
       </Typography>
 

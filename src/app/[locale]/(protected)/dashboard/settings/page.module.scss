@@ -1,7 +1,3 @@
-.title {
-  margin-bottom: 6rem;
-}
-
 .section {
   @include flexCenter(column, flex-start, flex-start);
   align-content: flex-start;
