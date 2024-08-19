@@ -109,7 +109,12 @@ function AuthForm({ type }: PropTypes) {
       className={styles.root}
     >
       <div className={styles.wrapper}>
-        <Typography className={styles.title} tag="h1" weight="semiBold">
+        <Typography
+          className={styles.title}
+          align="center"
+          tag="h1"
+          weight="semiBold"
+        >
           {t(isRegisterForm ? 'Register.title' : 'Login.title')}
         </Typography>
         <TextInBox
@@ -165,7 +170,6 @@ function AuthForm({ type }: PropTypes) {
 
         {isLoginForm && (
           <Typography
-            isFullWidth
             className={styles.passwordRecovery}
             align="right"
             weight="semiBold"
