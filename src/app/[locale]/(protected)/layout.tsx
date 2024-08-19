@@ -30,12 +30,13 @@ interface PropTypes {
 const ProtectedLayout = ({ children }: PropTypes) => {
   return (
     <>
-      <Header isConnected />
+      <Suspense fallback={<Loader size={20} />}>
+        <Header isConnected />
+      </Suspense>
       <Navbar />
-
       <main className={styles.root}>
         {/*         <Sidebar className={styles.sidebar} /> */}
-        <Suspense fallback={<Loader size={34} />}>{children}</Suspense>
+        {children}
       </main>
 
       <Footer />
