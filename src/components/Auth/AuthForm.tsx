@@ -91,10 +91,18 @@ function AuthForm({ type }: PropTypes) {
         ? await handleRegister(user)
         : await handleCredentialsLogin(user)
 
-      setInfoMessage(getErrorMessage(res), isRegisterForm ? 'success' : 'error')
-      // Redirect if successful login
-      if (isLoginForm && (res as SignInResponse)?.ok)
-        router.push(DEFAULT_LOGIN_REDIRECT_ROUTE as string)
+      if (isLoginForm) {
+        if ((res as SignInResponse)?.ok) {
+          // Redirect if successful login
+          router.push(DEFAULT_LOGIN_REDIRECT_ROUTE as string)
+        } else {
+          setInfoMessage(getErrorMessage(res), 'error')
+        }
+      }
+
+      if (isRegisterForm) {
+        setInfoMessage(getErrorMessage(res), 'success')
+      }
     } catch (err) {
       setInfoMessage(getErrorMessage(err), 'error')
     }
