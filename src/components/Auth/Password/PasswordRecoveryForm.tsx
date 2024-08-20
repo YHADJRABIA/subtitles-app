@@ -81,7 +81,7 @@ const PasswordRecoveryForm = () => {
         <Field
           className={styles.field}
           autoFocus
-          register={register as any}
+          register={register}
           name="email"
           placeholder="email@domain.com"
           type="email"

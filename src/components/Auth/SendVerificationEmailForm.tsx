@@ -81,7 +81,7 @@ const SendVerificationEmailForm = () => {
         <Field
           className={styles.field}
           autoFocus
-          register={register as any}
+          register={register}
           placeholder="email@domain.com"
           type="email"
           name="email"

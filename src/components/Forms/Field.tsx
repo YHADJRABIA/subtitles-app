@@ -6,9 +6,10 @@ import styles from './Field.module.scss'
 import Subfield from './Subfield'
 import { ValidFieldNames } from '@/types/schemas/auth'
 
-interface PropTypes<T> extends InputHTMLAttributes<HTMLInputElement> {
-  register: (name: ValidFieldNames, options: { valueAsNumber?: boolean }) => T
-  name: ValidFieldNames
+interface PropTypes<T, K extends ValidFieldNames>
+  extends InputHTMLAttributes<HTMLInputElement> {
+  register: (name: K, options: { valueAsNumber?: boolean }) => T
+  name: K
   label: string
   value?: string
   subLabel?: {
@@ -22,7 +23,7 @@ interface PropTypes<T> extends InputHTMLAttributes<HTMLInputElement> {
   testId?: string
 }
 
-function Field<T>({
+function Field<T, K extends ValidFieldNames & string>({
   register,
   valueAsNumber,
   label,
@@ -35,7 +36,7 @@ function Field<T>({
   rightIcon,
   className,
   ...rest
-}: PropTypes<T>) {
+}: PropTypes<T, K>) {
   const { text, isShown = true, isInfo = false } = subLabel || {}
 
   const isShownSubfield = isShown && !!text
@@ -49,7 +50,7 @@ function Field<T>({
           placeholder={placeholder}
           type={type}
           data-testid={testId}
-          {...register(name, { valueAsNumber })} // TODO: Debounce value
+          {...register(name, { valueAsNumber })} // Use register with the name prop
         />
         <label htmlFor={name}>{label}</label>
         {rightIcon && <span className={styles.ctaIcon}>{rightIcon}</span>}
