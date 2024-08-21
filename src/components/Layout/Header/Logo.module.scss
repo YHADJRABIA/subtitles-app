@@ -4,4 +4,8 @@
   &:hover {
     transform: scale(1.05);
   }
+
+  @include respond-to('small') {
+    padding: 0.25rem;
+  }
 }
