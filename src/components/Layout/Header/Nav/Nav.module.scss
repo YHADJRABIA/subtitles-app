@@ -4,7 +4,7 @@
   position: absolute;
   overflow: hidden;
   top: var(--header-height);
-  height: calc(100vh - var(--header-height));
+  height: calc(100dvh - var(--header-height));
   left: -120%;
   opacity: 0;
   transition: all 0.5s ease-out;
