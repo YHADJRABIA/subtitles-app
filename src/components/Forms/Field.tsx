@@ -50,7 +50,7 @@ function Field<T, K extends ValidFieldNames & string>({
           placeholder={placeholder}
           type={type}
           data-testid={testId}
-          {...register(name, { valueAsNumber })} // Use register with the name prop
+          {...register(name, { valueAsNumber })} // TODO Debounce value
         />
         <label htmlFor={name}>{label}</label>
         {rightIcon && <span className={styles.ctaIcon}>{rightIcon}</span>}
