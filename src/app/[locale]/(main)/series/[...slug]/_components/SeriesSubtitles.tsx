@@ -20,18 +20,13 @@ interface PropTypes {
 
 const SeriesSubtitles = ({ className, subtitles, seriesName }: PropTypes) => {
   const t = useTranslations('Series')
-  const { openModal, closeModal } = useModal()
+  const { openModal } = useModal()
 
   const handleOpenModal = (seasonNumber: number, episodes: SeriesEpisode[]) => {
     openModal({
       title: `${t('Subtitles.season', { count: seasonNumber })} — ${seriesName}`,
       content: (
-        <EpisodesModal
-          isOpen={true}
-          onClose={closeModal}
-          seasonNumber={seasonNumber}
-          episodes={episodes}
-        />
+        <EpisodesModal seasonNumber={seasonNumber} episodes={episodes} />
       ),
     })
   }
