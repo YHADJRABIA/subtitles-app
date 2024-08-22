@@ -6,12 +6,11 @@ import { getUserSession } from '@/utils/session'
 import { formatDate } from '@/utils/date'
 import DeleteAccountButton from '../_components/DeleteAccountButton'
 import { Metadata } from 'next/types'
+import { LayoutProps, MetaDataProps } from '@/app/[locale]/layout'
 
 export const generateMetadata = async ({
   params: { locale },
-}: {
-  params: { locale: string }
-}): Promise<Metadata> => {
+}: MetaDataProps): Promise<Metadata> => {
   const t = await getTranslations({
     locale,
     namespace: 'Metadata.Protected.Account',
@@ -23,11 +22,7 @@ export const generateMetadata = async ({
   }
 }
 
-const DashboardAccountPage = async ({
-  params: { locale },
-}: {
-  params: { locale: string }
-}) => {
+const DashboardAccountPage = async ({ params: { locale } }: LayoutProps) => {
   unstable_setRequestLocale(locale)
   const { creationDate, lastUpdateDate } = await getUserSession()
 
