@@ -7,9 +7,6 @@ import { useTranslations } from 'next-intl'
 import { SeriesEpisode } from '@/types/series'
 
 interface PropTypes {
-  isOpen: boolean
-  onClose: () => void
-  title?: string
   seasonNumber: number
   episodes: SeriesEpisode[]
 }
