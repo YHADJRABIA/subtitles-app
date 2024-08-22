@@ -20,21 +20,15 @@ interface PropTypes {
 const NavLink = ({ isActive, link, onClick }: PropTypes) => {
   const Icon = link.icon
   return (
-    <li className={styles.root} onClick={onClick}>
-      <Icon
-        size={16}
-        color={
-          isActive
-            ? 'var(--primary-yellow-color)'
-            : 'var(--primary-white-color)'
-        }
-        className={styles.icon}
-      />
+    <li
+      className={cn(styles.root, { [styles.isActive]: isActive })}
+      onClick={onClick}
+    >
+      <Icon size={16} className={styles.icon} />
 
       <Typography
         size="s"
         weight={isActive ? 'semiBold' : undefined}
-        className={cn(styles.label, { [styles.isActive]: isActive })}
         link={{ href: link?.url ?? null }}
         onClick={link.onClick}
       >
