@@ -6,7 +6,7 @@ import { connectDB } from '@/lib/mongodb'
 import { UserModel } from '@/models/user.model'
 import { UserAPIType } from '@/types/user'
 import { isDevelopment } from '@/utils/general'
-import { getUserByEmail, updateNameById } from '@/utils/db/user'
+import { getUserByEmail, updateNameById, updateUserById } from '@/utils/db/user'
 import { getErrorMessage, getZodErrors } from '@/utils/errors'
 import { AccountLoginValidator } from '@/types/schemas/auth'
 import { getTranslations } from 'next-intl/server'
@@ -201,7 +201,29 @@ export const authOptions: NextAuthOptions = {
           await connectDB()
 
           const existingUser = await getUserByEmail(email)
-          if (existingUser) return user
+
+          if (existingUser) {
+            // Update only empty fields and lastLogin
+            const updatedFields: Partial<UserAPIType> = {
+              lastLogin: new Date(),
+              ...(existingUser.name.length ? {} : { name }),
+              ...(existingUser.image.length ? {} : { image }),
+            }
+
+            const updatedUser = await updateUserById(
+              existingUser._id,
+              updatedFields
+            )
+
+            // Access following fields from session
+            Object.assign(user, {
+              lastLogin: existingUser.lastLogin, // Previous login
+              createdAt: updatedUser.createdAt,
+              updatedAt: updatedUser.updatedAt,
+            })
+
+            return updatedUser
+          }
 
           const newUser = new UserModel({
             favoriteLocale: locale,
@@ -209,18 +231,25 @@ export const authOptions: NextAuthOptions = {
             email,
             image,
             emailVerified: new Date(), // Verify email automatically
+            createdAt: new Date(),
+            lastLogin: new Date(),
           })
           const res = await newUser.save()
+
+          Object.assign(user, {
+            lastLogin: newUser.lastLogin,
+            createdAt: newUser.createdAt,
+            updatedAt: newUser.updatedAt,
+          })
+
           if (res.status === 200 || res.status === 201) {
-            return user
+            return newUser
           }
         } catch (err) {
           console.error('Google SignIn failed:', getErrorMessage(err))
           throw err
         }
       }
-
-      // Todo: update lastLogin field on login
 
       return true
     },
