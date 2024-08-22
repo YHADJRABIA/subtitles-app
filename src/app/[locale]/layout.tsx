@@ -33,7 +33,7 @@ export const generateMetadata = async ({
 
 export interface LayoutProps {
   children: ReactNode
-  params: { locale: string }
+  params: { locale: Locale }
 }
 
 export default function LocaleLayout({
