@@ -3,10 +3,10 @@ import styles from './page.module.scss'
 import { useTranslations } from 'next-intl'
 import { getTranslations } from 'next-intl/server'
 import { Metadata } from 'next/types'
-import SeriesInfo from './_components/SeriesInfo'
+import SeriesCast from './_components/SeriesCast'
 import FilledImage from '@/components/UI/FilledImage'
 import SeriesDescription from './_components/SeriesDescription'
-import SeriesOrigin from './_components/SeriesOrigin'
+import SeriesHighlights from './_components/SeriesHighlights'
 import Separator from '@/components/Separator'
 import SeriesTrailer from './_components/SeriesTrailer'
 import SeriesWhereTo from './_components/SeriesWhereTo'
@@ -126,7 +126,7 @@ export default function SeriesPage() {
               alt={DATA.imageAlt}
               className={styles.image}
             />
-            <SeriesOrigin
+            <SeriesHighlights
               country={DATA.country as SeriesCountry}
               language={DATA.language as SeriesLanguage}
               genre={DATA.genre as SeriesGenre}
@@ -149,7 +149,7 @@ export default function SeriesPage() {
           <StickyContainer className={styles.rightContainer}>
             <Row dir="col">
               <Col Tag="section" width={12}>
-                <SeriesInfo actors={DATA.actors} directors={DATA.directors} />
+                <SeriesCast actors={DATA.actors} directors={DATA.directors} />
               </Col>
 
               <section className={styles.rightSubContainer}>

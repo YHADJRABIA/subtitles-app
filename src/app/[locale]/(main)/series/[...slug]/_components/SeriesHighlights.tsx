@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './SeriesOrigin.module.scss'
+import styles from './SeriesHighlights.module.scss'
 import cn from 'classnames'
 import {
   PiChatCircleDotsThin as LanguageIcon,
@@ -28,7 +28,7 @@ interface PropTypes {
   className?: string
 }
 
-const SeriesOrigin = ({
+const SeriesHighlights = ({
   country,
   language,
   releaseYear,
@@ -74,7 +74,7 @@ const SeriesOrigin = ({
   )
 }
 
-export default SeriesOrigin
+export default SeriesHighlights
 
 const Field = ({
   icon: Icon,
