@@ -5,8 +5,8 @@ const {
   NODEMAILER_SENDER_EMAIL: sender,
   NODEMAILER_SENDER_EMAIL_PASSWORD: pass,
   NODEMAILER_SERVICE: service,
-  EMAIL_VERIFICATION_TOKEN_LIFETIME_HOURS: verificationTokenLifetime,
-  PASSWORD_RESET_TOKEN_LIFETIME_HOURS: passwordResetTokenLifetime,
+  EMAIL_VERIFICATION_TOKEN_LIFETIME_HOURS,
+  PASSWORD_RESET_TOKEN_LIFETIME_HOURS,
 } = process.env
 
 const transporter = nodemailer.createTransport({
@@ -31,7 +31,7 @@ export const sendVerificationEmail = async (
     \r\n
     An account has been created using this email.\r\n
     Click <a href="${verificationLink}">this link</a> to verify your email.\r\n
-    <b>This is link is only valid for ${verificationTokenLifetime} hours.</b>
+    <b>This is link is only valid for ${EMAIL_VERIFICATION_TOKEN_LIFETIME_HOURS} hours.</b>
     \r\n
     This might not work with all browsers. If you experience an issue, please copy-paste <b>${verificationLink}</b> in your search bar.
     `,
@@ -45,7 +45,7 @@ export const sendVerificationEmail = async (
       \r\n
       Un compte a été créé avec ce courriel.\r\n
       Afin de finaliser la création de votre compte, merci de cliquer sur <a href="${verificationLink}">ce lien</a> pour vérifier votre courriel.\r\n
-      <b>Ce lien n'est valable que pendant ${verificationTokenLifetime} heures.</b>
+      <b>Ce lien n'est valable que pendant ${EMAIL_VERIFICATION_TOKEN_LIFETIME_HOURS} heures.</b>
       \r\n
       Des problèmes d'incompatibilité de certains navigateurs peuvent survenir ; si c'est le cas, merci de copier-coller <b>${verificationLink}</b> sur votre barre de recherche.
       `
@@ -78,7 +78,7 @@ export const sendPasswordResetEmail = async (
     \r\n
     A password reset has been requested for the account linked to this email.\r\n
     Click <a href="${resetLink}">this link</a> to reset your password.\r\n
-    <b>This is link is only valid for ${passwordResetTokenLifetime} hours.</b>
+    <b>This is link is only valid for ${PASSWORD_RESET_TOKEN_LIFETIME_HOURS} hours.</b>
     \r\n
     This might not work with all browsers. If you experience an issue, please copy-paste <b>${resetLink}</b> in your search bar.
     `,
@@ -92,7 +92,7 @@ export const sendPasswordResetEmail = async (
       \r\n
       Une demande de réinitialisation de mot de passe a eu lieu pour le compte lié à ce courriel.\r\n
       Afin de réinitialiser votre mot de passe, merci de cliquer sur <a href="${resetLink}">ce lien</a>.\r\n
-      <b>Ce lien n'est valable que pendant ${passwordResetTokenLifetime} heures.</b>
+      <b>Ce lien n'est valable que pendant ${PASSWORD_RESET_TOKEN_LIFETIME_HOURS} heures.</b>
       \r\n
       Des problèmes d'incompatibilité de certains navigateurs peuvent survenir ; si c'est le cas, merci de copier-coller <b>${resetLink}</b> sur votre barre de recherche.
       `

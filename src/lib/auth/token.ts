@@ -11,14 +11,14 @@ import {
 import { generateUUIDToken } from '@/utils/random'
 
 const {
-  EMAIL_VERIFICATION_TOKEN_LIFETIME_HOURS: verificationTokenLifetime,
-  PASSWORD_RESET_TOKEN_LIFETIME_HOURS: passwordResetTokenLifetime,
+  EMAIL_VERIFICATION_TOKEN_LIFETIME_HOURS,
+  PASSWORD_RESET_TOKEN_LIFETIME_HOURS,
 } = process.env
 
 export const generateVerificationToken = async (email: string) => {
   // Generate random token
   const { token, expirationDate } = generateUUIDToken(
-    Number(verificationTokenLifetime)
+    Number(EMAIL_VERIFICATION_TOKEN_LIFETIME_HOURS)
   ) // Not using JWT because storing data in the token is irrelevant here. Token expires in 24 hours
 
   // Check if existing token already sent for this email to delete it
@@ -41,7 +41,7 @@ export const generateVerificationToken = async (email: string) => {
 export const generatePasswordResetToken = async (email: string) => {
   // Generate random token, valid for 2 hours
   const { token, expirationDate } = generateUUIDToken(
-    Number(passwordResetTokenLifetime)
+    Number(PASSWORD_RESET_TOKEN_LIFETIME_HOURS)
   )
 
   // Check if existing token already sent for this email to delete it
