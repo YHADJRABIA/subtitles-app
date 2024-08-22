@@ -6,7 +6,7 @@ import { downloadFile } from '@/utils/download'
 import { useTranslations } from 'next-intl'
 import { SeriesEpisode } from '@/types/series'
 
-interface EpisodesModalProps {
+interface PropTypes {
   isOpen: boolean
   onClose: () => void
   title?: string
@@ -14,7 +14,7 @@ interface EpisodesModalProps {
   episodes: SeriesEpisode[]
 }
 
-const EpisodesModal = ({ seasonNumber, episodes }: EpisodesModalProps) => {
+const EpisodesModal = ({ seasonNumber, episodes }: PropTypes) => {
   const t = useTranslations('Series')
 
   const handleDownload = (subtitleUrl: string, episodeNumber: number) => {
