@@ -32,10 +32,10 @@ export default SeriesInfo
 const Field = ({ label, value }: { label: string; value: string }) => {
   return (
     <span className={styles.field}>
-      <Typography weight="semiBold" size="xs" className={styles.label}>
+      <Typography weight="semiBold" size="xs">
         {label}
       </Typography>
-      <Typography size="xs" color="var(--tertiary-black-color)">
+      <Typography size="xs" className={styles.label}>
         {value}
       </Typography>
     </span>

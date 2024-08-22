@@ -12,10 +12,8 @@
 
 .fieldsContainer {
   width: 100%;
-  @include flexCenter(column, space-between);
-  & > *:not(:last-of-type) {
-    margin-bottom: 2rem;
-  }
+  @include flexCenter(column);
+  gap: 2rem;
   margin-bottom: 8rem;
 }
 

@@ -1,12 +1,11 @@
 .root {
   width: 100%;
+  @include flexCenter(column, space-between, stretch);
+  gap: 1.5rem;
 }
 
 .item {
   border-radius: 1rem;
-  &:not(:last-of-type) {
-    margin-bottom: 1.5rem;
-  }
 }
 
 .titleContainer {
@@ -14,6 +13,7 @@
   cursor: pointer;
   @include flexCenter(row, space-between);
   @include preventUserSelect;
+  gap: 2rem;
 }
 
 .toggler {
@@ -22,7 +22,6 @@
 
 .title {
   flex: 1;
-  padding-right: 2rem;
 }
 
 .collapseable {

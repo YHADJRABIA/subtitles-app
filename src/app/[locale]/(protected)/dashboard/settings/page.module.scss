@@ -1,10 +1,7 @@
 .section {
   @include flexCenter(column, flex-start, flex-start);
   align-content: flex-start;
-
-  & > *:not(:last-of-type) {
-    margin-bottom: 2rem;
-  }
+  gap: 2rem;
 }
 .element {
   @include flexCenter(row, space-between);

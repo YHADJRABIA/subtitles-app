@@ -4,19 +4,16 @@
 }
 
 .userInfo {
-  & > * {
-    margin-bottom: 6rem;
-    &:not(:last-of-type) {
-      margin-bottom: 1rem;
-    }
-  }
+  @include flexCenter(column);
+  gap: 1rem;
+  margin-bottom: 6rem;
 }
 
 .logoutCta {
   margin-top: auto;
   @include respond-to('medium') {
     margin-top: unset;
-    width: max-content;
+    /*  width: max-content; */
     margin-bottom: 10rem;
   }
 }

@@ -1,5 +1,6 @@
 .root {
-  margin: var(--page-padding) var(--page-padding) 0;
+  margin: var(--page-padding) var(--page-padding) 2rem;
+
   @include respond-to('medium') {
     @include flexCenter(column, flex-start, center);
   }
@@ -7,9 +8,14 @@
 
 .wrapper {
   max-width: var(--page-max-width);
+  @include flexCenter(column, flex-start, flex-start);
+  gap: 2rem;
 }
 
 .container {
+  @include flexCenter(column);
+  gap: var(--page-padding);
+
   @include respond-to('medium') {
     @include flexCenter(row, center, flex-start);
   }
@@ -18,14 +24,15 @@
 .leftContainer {
   @include flexCenter(column, space-between, flex-start);
   @include respond-to('medium') {
-    margin-right: var(--page-padding);
     max-width: min(50%, 70rem);
   }
 }
 
 .rightContainer {
   margin: 0 -2rem;
-  @include flexCenter(column, space-between);
+  & > div {
+    gap: 2rem;
+  }
   @include respond-to('medium') {
     margin: unset;
     flex: 1;
@@ -34,23 +41,14 @@
 .rightSubContainer {
   width: 100%;
   @include flexCenter(row, space-between, flex-start);
+  gap: 2rem;
 
   @include respond-to('small') {
     margin: 0 var(--page-padding);
-  }
-
-  & > :not(:last-of-type) {
-    margin-bottom: 2rem;
   }
 }
 
 .image,
 .description {
   margin-bottom: 3rem;
-}
-
-.title,
-.trailer,
-.info {
-  margin-bottom: 2rem;
 }

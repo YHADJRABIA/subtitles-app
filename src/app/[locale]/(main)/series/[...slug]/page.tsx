@@ -116,7 +116,7 @@ export default function SeriesPage() {
   return (
     <div className={styles.root}>
       <div className={styles.wrapper}>
-        <Typography tag="h1" weight="bold" size="xxxl" className={styles.title}>
+        <Typography tag="h1" weight="bold" size="xxxl">
           {DATA.name}
         </Typography>
         <div className={styles.container}>
@@ -143,21 +143,16 @@ export default function SeriesPage() {
               src={DATA.trailer}
               captionsSrc={DATA.captions}
               thumbnail={DATA.trailerThumbnail}
-              className={styles.trailer}
             />
           </div>
 
           <StickyContainer className={styles.rightContainer}>
-            <Row>
-              <Col width={12}>
-                <SeriesInfo
-                  actors={DATA.actors}
-                  directors={DATA.directors}
-                  className={styles.info}
-                />
+            <Row dir="col">
+              <Col Tag="section" width={12}>
+                <SeriesInfo actors={DATA.actors} directors={DATA.directors} />
               </Col>
 
-              <div className={styles.rightSubContainer}>
+              <section className={styles.rightSubContainer}>
                 <Col width={12}>
                   <SeriesSubtitles
                     seriesName={DATA.name}
@@ -167,7 +162,7 @@ export default function SeriesPage() {
                 <Col width={[12, 6]}>
                   <SeriesWhereTo type="watch" list={DATA.whereToWatch} />
                 </Col>
-              </div>
+              </section>
             </Row>
           </StickyContainer>
         </div>

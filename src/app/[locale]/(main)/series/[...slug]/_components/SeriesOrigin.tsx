@@ -86,7 +86,7 @@ const Field = ({
   title: string
 }) => (
   <span className={styles.field}>
-    <Icon className={styles.icon} size={20} title={title} />
+    <Icon size={20} title={title} />
     <Typography size="xs" weight="semiBold">
       {value}
     </Typography>
