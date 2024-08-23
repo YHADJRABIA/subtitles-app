@@ -231,7 +231,7 @@
   },
   "User": {
     "user_not_found": "Utilisateur inconnu",
-    "user_deleted": "Utilisateur supprimé !",
+    "user_deleted": "Compte supprimé avec succès !",
     "unauthorised": "Non authorisé"
   },
   "Dashboard": {
@@ -256,8 +256,7 @@
       "registered_since": "Date de création : ",
       "last_update": "Dernière modification : ",
       "delete_account": "Supprimer compte",
-      "warning_deletion": "Ce compte sera définitivement supprimé, cette action ne pourra pas être défaite",
-      "confirm_deletion": "Voulez-vous procéder ?"
+      "warning_deletion": "Ce compte sera définitivement supprimé, cette action ne pourra pas être défaite"
     }
   },
   "Zod": {
@@ -299,6 +298,7 @@
     "not_supported": "La balise vidéo n'est pas compatible avec ce navigateur."
   },
   "ConfirmationModal": {
+    "are_you_sure": "Voulez-vous procéder ?",
     "yes": "Oui",
     "no": "Annuler"
   },

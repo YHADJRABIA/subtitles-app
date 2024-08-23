@@ -228,7 +228,7 @@
   },
   "User": {
     "user_not_found": "User not found",
-    "user_deleted": "User successfully deleted!",
+    "user_deleted": "Account successfully deleted!",
     "unauthorised": "Unauthorised"
   },
   "Dashboard": {
@@ -253,8 +253,7 @@
       "registered_since": "Registred since:",
       "last_update": "Last update:",
       "delete_account": "Delete account",
-      "warning_deletion": "This account will be permanently deleted, this action cannot be undone",
-      "confirm_deletion": "Do you still want to proceed?"
+      "warning_deletion": "This account will be permanently deleted, this action cannot be undone"
     }
   },
   "Zod": {
@@ -296,6 +295,7 @@
     "not_supported": "Video tag not supported by your browser."
   },
   "ConfirmationModal": {
+    "are_you_sure": "Do you want to proceed?",
     "yes": "Yes",
     "no": "Cancel"
   },
