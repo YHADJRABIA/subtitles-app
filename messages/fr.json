@@ -255,7 +255,9 @@
       "last_login": "Dernière connexion : ",
       "registered_since": "Date de création : ",
       "last_update": "Dernière modification : ",
-      "delete_account": "Supprimer compte"
+      "delete_account": "Supprimer compte",
+      "warning_deletion": "Ce compte sera définitivement supprimé, cette action ne pourra pas être défaite",
+      "confirm_deletion": "Voulez-vous procéder ?"
     }
   },
   "Zod": {
@@ -295,6 +297,10 @@
   },
   "Video": {
     "not_supported": "La balise vidéo n'est pas compatible avec ce navigateur."
+  },
+  "ConfirmationModal": {
+    "yes": "Oui",
+    "no": "Annuler"
   },
   "UseShowPassword": {
     "reveal_password": "Révéler mot de passe",
