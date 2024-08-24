@@ -110,6 +110,8 @@ const PasswordResetForm = () => {
           disabled={!isValid}
           isLoading={isSubmitting}
           type="submit"
+          weight="semiBold"
+          size="xs"
         >
           {t('PasswordReset.cta')}
         </Button>

@@ -101,6 +101,8 @@ const SendVerificationEmailForm = () => {
           disabled={!isValid}
           isLoading={isSubmitting}
           type="submit"
+          weight="semiBold"
+          size="xs"
         >
           {t('SendVerificationEmail.cta')}
         </Button>

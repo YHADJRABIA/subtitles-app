@@ -101,6 +101,8 @@ const PasswordRecoveryForm = () => {
           disabled={!isValid}
           isLoading={isSubmitting}
           type="submit"
+          weight="semiBold"
+          size="xs"
         >
           {t('PasswordRecovery.cta')}
         </Button>
