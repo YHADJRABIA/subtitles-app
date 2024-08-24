@@ -24,7 +24,7 @@
   border-radius: 1rem;
   padding: 1rem 2rem 2rem;
   width: 100vw;
-  height: 75dvh;
+  height: auto;
   position: relative;
   @include respond-to('medium') {
     min-width: 50rem;
