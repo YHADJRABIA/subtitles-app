@@ -7,6 +7,7 @@ interface LinkButtonPropTypes extends TypographyPropTypes {
   testId?: string
   variation?: 'primary' | 'secondary' | 'regular'
   backgroundColor?: string
+  isRounded?: boolean
   icon?: { src: IconType; size?: number; color?: string }
   link: LinkType
 }
@@ -15,6 +16,7 @@ export const LinkButton = ({
   variation = 'regular',
   testId,
   isFullWidth = true,
+  isRounded = false,
   className,
   link = { href: '/', openInNewTab: false },
   backgroundColor,
@@ -34,6 +36,7 @@ export const LinkButton = ({
         styles[variation],
         styles.clickable,
         {
+          [styles.rounded]: isRounded,
           fullWidth: isFullWidth,
         },
         className

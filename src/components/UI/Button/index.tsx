@@ -9,6 +9,7 @@ interface ButtonPropTypes extends ButtonHTMLAttributes<HTMLButtonElement> {
   testId?: string
   isLoading?: boolean
   isFullWidth?: boolean
+  isRounded?: boolean
   variation?: 'primary' | 'secondary' | 'regular'
   backgroundColor?: string
   disabled?: boolean
@@ -24,6 +25,7 @@ export const Button = ({
   isLoading,
   type = 'button',
   isFullWidth = true,
+  isRounded = false,
   className,
   backgroundColor,
   onClick,
@@ -55,6 +57,7 @@ export const Button = ({
         isClickable ? styles.clickable : styles.disabled,
         styles[variation],
         {
+          [styles.rounded]: isRounded,
           fullWidth: isFullWidth,
         },
         className

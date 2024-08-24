@@ -5,6 +5,7 @@ import styles from './EpisodesModal.module.scss'
 import { downloadFile } from '@/utils/download'
 import { useTranslations } from 'next-intl'
 import { SeriesEpisode } from '@/types/series'
+import { Button } from '@/components/UI/Button'
 
 interface PropTypes {
   seasonNumber: number
@@ -27,13 +28,15 @@ const EpisodesModal = ({ seasonNumber, episodes }: PropTypes) => {
             {t('Subtitles.episode', { count: episode })}
           </Typography>
 
-          <Typography
+          <Button
             onClick={() => handleDownload(subtitleUrl, episode)}
+            variation="primary"
             size="xs"
-            className={styles.cta}
+            isFullWidth={false}
+            isRounded
           >
             {t('Subtitles.download')}
-          </Typography>
+          </Button>
         </li>
       ))}
     </ul>
