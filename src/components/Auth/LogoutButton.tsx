@@ -4,7 +4,6 @@ import { Button } from '../UI/Button'
 import { handleLogout } from '@/actions/auth'
 import cn from 'classnames'
 import styles from './LogoutButton.module.scss'
-import Typography from '../UI/Typography'
 import { getErrorMessage } from '@/utils/errors'
 
 interface PropTypes {
@@ -28,13 +27,15 @@ const LogoutButton = ({ className, label }: PropTypes) => {
   return (
     <Button
       className={cn(styles.root, className)}
-      variation="secondary"
+      disabled={isLoading}
       isLoading={isLoading}
+      variation="secondary"
       onClick={onLogoutClick}
+      tag="span"
+      size="xs"
+      weight="semiBold"
     >
-      <Typography tag="span" size="xs" weight="semiBold">
-        {label}
-      </Typography>
+      {label}
     </Button>
   )
 }
