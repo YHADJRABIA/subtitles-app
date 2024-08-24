@@ -54,10 +54,7 @@ const DashboardAccountPage = async ({ params: { locale } }: MetaDataProps) => {
             </div>
           )}
         </div>
-        <DeleteAccountButton
-          className={styles.cta}
-          label={t('delete_account')}
-        />
+        <DeleteAccountButton className={styles.cta} />
       </div>
     </>
   )
