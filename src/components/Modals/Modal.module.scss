@@ -25,6 +25,7 @@
   padding: 1rem 2rem 2rem;
   width: 100vw;
   height: auto;
+  max-height: 75dvh;
   position: relative;
   @include respond-to('medium') {
     min-width: 50rem;
