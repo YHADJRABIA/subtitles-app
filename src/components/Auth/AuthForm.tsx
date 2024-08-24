@@ -147,7 +147,6 @@ function AuthForm({ type }: PropTypes) {
           testId={isRegisterForm ? 'register-email' : 'login-email'}
           leftIcon={
             <EmailIcon
-              style={{ fontSize: 18 }}
               title={t('email')} // TODO: rework this
             />
           }
@@ -169,7 +168,6 @@ function AuthForm({ type }: PropTypes) {
           }}
           leftIcon={
             <PasswordIcon
-              size={18}
               title={t('password')} // TODO: rework this
             />
           }
@@ -181,7 +179,7 @@ function AuthForm({ type }: PropTypes) {
             className={styles.passwordRecovery}
             align="right"
             weight="semiBold"
-            size="xs"
+            size="xxs"
             link={{
               href: isValidEmail
                 ? `/password/recovery?email=${email}`
@@ -199,6 +197,8 @@ function AuthForm({ type }: PropTypes) {
           disabled={!isValid}
           isLoading={isSubmitting}
           type="submit"
+          weight="semiBold"
+          size="xs"
         >
           {t(isRegisterForm ? 'Register.cta' : 'Login.cta')}
         </Button>

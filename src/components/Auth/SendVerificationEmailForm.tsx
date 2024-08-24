@@ -93,7 +93,6 @@ const SendVerificationEmailForm = () => {
           testId="verify-email"
           leftIcon={
             <EmailIcon
-              style={{ fontSize: 18 }}
               title={t('email')} // TODO: rework this
             />
           }

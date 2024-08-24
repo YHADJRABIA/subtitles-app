@@ -101,7 +101,6 @@ const PasswordResetForm = () => {
           label={t('password')}
           leftIcon={
             <PasswordIcon
-              size={18}
               title={t('password')} // TODO: rework this
             />
           }
