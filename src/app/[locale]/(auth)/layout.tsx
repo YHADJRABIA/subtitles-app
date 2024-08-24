@@ -26,7 +26,7 @@ const layout = ({ children }: PropTypes) => {
       <main className={styles.main}>
         <div className={styles.topElements}>
           <Logo size={50} />
-          <LanguageMenu />
+          <LanguageMenu className={styles.languageMenu} />
         </div>
         {children}
       </main>
