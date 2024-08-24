@@ -253,7 +253,7 @@
       "registered_since": "Registred since:",
       "last_update": "Last update:",
       "delete_account": "Delete account",
-      "warning_deletion": "This account will be permanently deleted, this action cannot be undone"
+      "warning_deletion": "This account will be permanently deleted, this action cannot be undone."
     }
   },
   "Zod": {
