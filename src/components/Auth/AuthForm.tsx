@@ -145,11 +145,7 @@ function AuthForm({ type }: PropTypes) {
             isShown: fieldState.email.isTouched,
           }}
           testId={isRegisterForm ? 'register-email' : 'login-email'}
-          leftIcon={
-            <EmailIcon
-              title={t('email')} // TODO: rework this
-            />
-          }
+          leftIcon={{ src: EmailIcon, title: t('email') }}
         />
 
         <Field
@@ -166,12 +162,8 @@ function AuthForm({ type }: PropTypes) {
             isShown: fieldState.password.isTouched,
             isInfo: isRegisterForm,
           }}
-          leftIcon={
-            <PasswordIcon
-              title={t('password')} // TODO: rework this
-            />
-          }
-          rightIcon={<ToggleIcon />}
+          leftIcon={{ src: PasswordIcon, title: t('password') }}
+          rightIcon={{ src: ToggleIcon }}
         />
 
         {isLoginForm && (

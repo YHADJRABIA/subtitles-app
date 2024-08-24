@@ -91,11 +91,7 @@ const SendVerificationEmailForm = () => {
             isShown: fieldState.isTouched,
           }}
           testId="verify-email"
-          leftIcon={
-            <EmailIcon
-              title={t('email')} // TODO: rework this
-            />
-          }
+          leftIcon={{ src: EmailIcon, title: t('email') }}
         />
 
         <Button

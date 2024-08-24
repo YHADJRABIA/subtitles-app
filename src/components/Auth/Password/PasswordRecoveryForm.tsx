@@ -91,11 +91,7 @@ const PasswordRecoveryForm = () => {
             isShown: fieldState.isTouched,
           }}
           testId="send-reset-password-email"
-          leftIcon={
-            <EmailIcon
-              title={t('email')} // TODO: rework this
-            />
-          }
+          leftIcon={{ src: EmailIcon, title: t('email') }}
         />
 
         <Button

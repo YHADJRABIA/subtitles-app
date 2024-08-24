@@ -1,11 +1,16 @@
-import React, { InputHTMLAttributes, ReactNode } from 'react'
+import React, { InputHTMLAttributes } from 'react'
 
 import cn from 'classnames'
 import styles from './Field.module.scss'
 
 import Subfield from './Subfield'
 import { ValidFieldNames } from '@/types/schemas/auth'
+import { IconType } from 'react-icons/lib'
 
+interface IconProps {
+  src: IconType
+  title?: string
+}
 interface PropTypes<T, K extends ValidFieldNames>
   extends InputHTMLAttributes<HTMLInputElement> {
   register: (name: K, options: { valueAsNumber?: boolean }) => T
@@ -18,8 +23,8 @@ interface PropTypes<T, K extends ValidFieldNames>
     isInfo?: boolean
   }
   valueAsNumber?: boolean
-  leftIcon?: ReactNode
-  rightIcon?: ReactNode
+  leftIcon?: IconProps
+  rightIcon?: IconProps
   testId?: string
 }
 
@@ -41,10 +46,17 @@ function Field<T, K extends ValidFieldNames & string>({
 
   const isShownSubfield = isShown && !!text
 
+  const LeftIcon = leftIcon?.src
+  const RightIcon = rightIcon?.src
+
   return (
     <div className={cn(styles.root, className)}>
       <div className={styles.formField}>
-        {leftIcon && <span className={styles.fieldIcon}>{leftIcon}</span>}
+        {LeftIcon && (
+          <span className={styles.fieldIcon} title={leftIcon.title}>
+            <LeftIcon />
+          </span>
+        )}
         <input
           {...rest}
           placeholder={placeholder}
@@ -53,7 +65,11 @@ function Field<T, K extends ValidFieldNames & string>({
           {...register(name, { valueAsNumber })} // TODO Debounce value
         />
         <label htmlFor={name}>{label}</label>
-        {rightIcon && <span className={styles.ctaIcon}>{rightIcon}</span>}
+        {RightIcon && (
+          <span className={styles.ctaIcon} title={rightIcon.title}>
+            <RightIcon />
+          </span>
+        )}
       </div>
 
       {subLabel && (

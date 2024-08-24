@@ -99,12 +99,8 @@ const PasswordResetForm = () => {
           }}
           testId="reset-password-field"
           label={t('password')}
-          leftIcon={
-            <PasswordIcon
-              title={t('password')} // TODO: rework this
-            />
-          }
-          rightIcon={<ToggleIcon />}
+          leftIcon={{ src: PasswordIcon, title: t('password') }}
+          rightIcon={{ src: ToggleIcon }}
         />
 
         <Button
