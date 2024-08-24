@@ -1,34 +1,44 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button } from '../UI/Button'
 import { FcGoogle } from 'react-icons/fc'
 import styles from './GoogleLogin.module.scss'
-import Typography from '../UI/Typography'
+import { getErrorMessage } from '@/utils/errors'
+import { SignInResponse } from 'next-auth/react'
 
 interface PropTypes {
   disabled: boolean
   label: string
-  onClick: () => void
+  onClick: () => Promise<SignInResponse | undefined>
 }
 
 // TODO: Rename to ProviderLogin & add provider prop to scale code if more auth providers are used
 const GoogleLogin = ({ label, disabled, onClick }: PropTypes) => {
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleClick = async () => {
+    setIsLoading(true)
+    try {
+      await onClick()
+    } catch (err) {
+      console.error(getErrorMessage(err))
+    } finally {
+      setIsLoading(false)
+    }
+  }
   return (
     <Button
-      variation="secondary"
-      testId="login-with-google"
-      onClick={onClick}
-      disabled={disabled}
       className={styles.root}
+      variation="secondary"
+      weight="semiBold"
+      size="xs"
+      testId="login-with-google"
+      onClick={handleClick}
+      disabled={disabled || isLoading}
+      isLoading={isLoading}
+      title={label}
     >
-      <FcGoogle title="Google" size={22} className={styles.icon} />
-      <Typography
-        tag="span"
-        weight="semiBold"
-        className={styles.label}
-        title={label}
-      >
-        {label}
-      </Typography>
+      <FcGoogle title="Google" size={22} />
+      {label}
     </Button>
   )
 }
