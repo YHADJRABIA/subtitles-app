@@ -1,0 +1,38 @@
+.root {
+  @include flexCenter(column, flex-start, flex-start);
+  height: auto;
+  padding-top: 2rem;
+  gap: 4rem;
+  @include respond-to('medium') {
+    gap: 3rem;
+  }
+}
+.textContainer {
+  @include flexCenter(row, flex-start, center);
+  gap: 1rem;
+}
+.confirmation {
+  flex: 1;
+}
+
+.icon {
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+}
+
+.ctaSection {
+  @include flexCenter(column, flex-start, flex-start);
+  width: 100%;
+  gap: 2rem;
+}
+
+.cta {
+  @include flexCenter(row, space-between, stretch);
+  gap: 2rem;
+  width: 100%;
+  & > * {
+    flex: 1;
+  }
+  @include respond-to('medium') {
+    gap: 4rem;
+  }
+}
