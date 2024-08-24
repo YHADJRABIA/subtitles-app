@@ -31,7 +31,6 @@ export const Button = ({
 }: ButtonPropTypes & TypographyPropTypes) => {
   const isClickable = !(isLoading || disabled)
 
-  // Handle click event and pass it to `Typography`
   const handleClick = (event: MouseEvent<HTMLElement>) => {
     if (onClick && isClickable) {
       onClick(event)
@@ -62,7 +61,7 @@ export const Button = ({
       )}
       data-testid={testId}
       tabIndex={isClickable ? 0 : -1} // Prevents focus if disabled
-      style={{ backgroundColor }}
+      backgroundColor={backgroundColor}
       role="button"
       aria-disabled={!isClickable}
       onClick={handleClick}

@@ -35,6 +35,7 @@ export interface TypographyPropTypes extends HTMLAttributes<HTMLElement> {
   children: ReactNode
   onClick?: MouseEventHandler<HTMLElement>
   tag?: TagType
+  backgroundColor?: string
 }
 
 const tagMap = {
@@ -62,6 +63,7 @@ const Typography = ({
   isFullWidth,
   lineHeight = 'regular',
   onClick,
+  backgroundColor,
   ...props
 }: TypographyPropTypes) => {
   const Tag = tagMap[tag]
@@ -71,6 +73,7 @@ const Typography = ({
     lineHeight: lineHeights[lineHeight] || lineHeight,
     textAlign: align,
     color,
+    backgroundColor,
   }
 
   const handleClick: MouseEventHandler<HTMLElement> = event => {
