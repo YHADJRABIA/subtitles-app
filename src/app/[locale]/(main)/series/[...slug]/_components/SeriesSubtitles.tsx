@@ -78,7 +78,7 @@ const SeasonItem = memo(
     }
 
     return (
-      <li
+      <li // TODO: refactor with Button and add rounded prop?
         className={cn(styles.seasonItem, {
           [styles.isDisabled]: isUnavailable,
         })}
