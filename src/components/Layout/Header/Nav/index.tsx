@@ -64,10 +64,7 @@ const Nav = ({ className, isConnected }: PropTypes) => {
         />
         {/* TODO: Reuse later  <AuthSection showAccount={isConnected} className={styles.authSection} /> */}
         <div className={styles.bottomSection}>
-          <LanguageMenu
-            isInverted={!isOnDesktop}
-            className={styles.languageMenu}
-          />
+          <LanguageMenu isInverted={!isOnDesktop} />
 
           <LinkButton
             size="xs"
