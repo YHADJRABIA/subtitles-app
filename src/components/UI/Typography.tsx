@@ -103,7 +103,7 @@ const Typography = ({
         size && styles[size],
         className
       )}
-      onClick={handleClick}
+      onClick={onClick ? handleClick : undefined} // Allows component to remain server component if no onClick is passed
     >
       {children}
     </Tag>
