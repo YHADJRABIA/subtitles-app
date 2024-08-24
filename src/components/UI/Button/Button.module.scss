@@ -3,7 +3,6 @@
   border: none;
   outline: none;
   cursor: pointer;
-  font-weight: 600;
   letter-spacing: 0.1rem;
   transition:
     opacity 0.3s ease-in-out,
@@ -16,14 +15,26 @@
     padding: 2rem;
   }
 
-  &:hover:enabled,
-  &:active:enabled {
-    opacity: 0.85;
+  &.disabled {
+    @include preventUserSelect;
+    cursor: not-allowed;
+  }
+}
+
+.clickable {
+  &.primary {
+    &:hover,
+    &:active {
+      opacity: 0.8;
+    }
   }
 
-  &:disabled,
-  &[disabled] {
-    cursor: not-allowed;
+  &:not(.primary) {
+    box-shadow: 0 0.1rem 0.1rem rgba(0, 0, 0, 0.1);
+    &:hover,
+    &:active {
+      box-shadow: 0.2rem 0.4rem 0.6rem rgba(0, 0, 0, 0.2);
+    }
   }
 }
 
@@ -48,19 +59,6 @@
 
   &:hover {
     opacity: 0.7;
-  }
-}
-
-.shadowEffect {
-  box-shadow: 0 0.1rem 0.1rem rgba(0, 0, 0, 0.1);
-  &:hover {
-    box-shadow: 0.2rem 0.4rem 0.6rem rgba(0, 0, 0, 0.2);
-  }
-}
-
-.hoverEffect {
-  &:hover {
-    opacity: 0.8;
   }
 }
 
