@@ -256,6 +256,7 @@
       "registered_since": "Date de création : ",
       "last_update": "Dernière modification : ",
       "delete_account": "Supprimer compte",
+      "account_deletion": "Suppression de compte",
       "warning_deletion": "Ce compte sera définitivement supprimé, cette action ne pourra pas être défaite."
     }
   },

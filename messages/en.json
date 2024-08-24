@@ -253,6 +253,7 @@
       "registered_since": "Registred since:",
       "last_update": "Last update:",
       "delete_account": "Delete account",
+      "account_deletion": "Account deletion",
       "warning_deletion": "This account will be permanently deleted, this action cannot be undone."
     }
   },
