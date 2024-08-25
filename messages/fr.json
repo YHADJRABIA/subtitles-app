@@ -257,7 +257,8 @@
       "last_update": "Dernière modification : ",
       "delete_account": "Supprimer compte",
       "account_deletion": "Suppression du compte",
-      "warning_deletion": "Ce compte sera définitivement supprimé, cette action est irréversible."
+      "warning_deletion": "Ce compte sera définitivement supprimé, cette action est irréversible.",
+      "deletion_failed": "Échec de suppression du compte."
     }
   },
   "Zod": {
