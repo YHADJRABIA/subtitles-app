@@ -7,7 +7,6 @@ export const handleDeleteUserById = async (id: string) => {
       params: {
         id,
       },
-      headers: { Authorization: '' },
     })
   } catch (err) {
     console.error('Error deleting user:', getErrorMessage(err))
@@ -20,7 +19,6 @@ export const handleUpdateUserById = async (id: string) => {
       params: {
         id,
       },
-      headers: { Authorization: '' },
     })
   } catch (err) {
     console.error('Error patching user:', getErrorMessage(err))
