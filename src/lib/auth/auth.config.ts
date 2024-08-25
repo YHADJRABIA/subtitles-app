@@ -128,6 +128,7 @@ export const authOptions: NextAuthOptions = {
       if (!token.sub) return token // Logged out
 
       // Update token according to client session's data
+      // Triggered if update of useSession is called
       if (trigger === 'update') {
         // Update name in database
         if (token.name !== session?.name) {
@@ -205,7 +206,7 @@ export const authOptions: NextAuthOptions = {
           if (existingUser) {
             // Update only empty fields and lastLogin
             const updatedFields: Partial<UserAPIType> = {
-              lastLogin: new Date(),
+              lastLogin: String(new Date()),
               ...(existingUser.name.length ? {} : { name }),
               ...(existingUser.image.length ? {} : { image }),
             }
@@ -217,9 +218,11 @@ export const authOptions: NextAuthOptions = {
 
             // Access following fields from session
             Object.assign(user, {
+              id: existingUser._id,
               lastLogin: existingUser.lastLogin, // Previous login
               createdAt: updatedUser.createdAt,
-              updatedAt: updatedUser.updatedAt,
+              updatedAt: updatedUser.updatedAt, // TODO: update accordingly
+              isVerifiedEmail: true,
             })
 
             return updatedUser
@@ -237,9 +240,11 @@ export const authOptions: NextAuthOptions = {
           const res = await newUser.save()
 
           Object.assign(user, {
+            id: newUser._id,
             lastLogin: newUser.lastLogin,
             createdAt: newUser.createdAt,
             updatedAt: newUser.updatedAt,
+            isVerifiedEmail: true,
           })
 
           if (res.status === 200 || res.status === 201) {
