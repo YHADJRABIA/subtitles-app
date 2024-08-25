@@ -35,7 +35,7 @@ export async function apiRateLimitMiddleware(req: NextRequestWithAuth) {
   if (remaining === 0) {
     return new Response(
       JSON.stringify({
-        error: 'Too many API calls',
+        error: 'Too many API calls', // TODO: internationalise
       }),
       {
         status: 429,

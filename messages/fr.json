@@ -65,7 +65,7 @@
   "General": {
     "or": "Ou",
     "something_went_wrong": "Un erreur s'est produite",
-    "too_many_requests": "Trop de requêtes"
+    "too_many_requests": "Trop de requêtes. Veuillez patienter avant de réessayer."
   },
   "Index": {
     "HeroBanner": {
