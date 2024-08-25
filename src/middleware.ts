@@ -33,10 +33,8 @@ export async function apiRateLimitMiddleware(req: NextRequestWithAuth) {
   const { limit, reset, remaining } = await ratelimit.limit(ip)
 
   if (remaining === 0) {
-    return new Response(
-      JSON.stringify({
-        error: 'Too many API calls', // TODO: internationalise
-      }),
+    return NextResponse.json(
+      { message: 'Too many API calls', success: false },
       {
         status: 429,
         headers: {
