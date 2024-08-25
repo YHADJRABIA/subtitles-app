@@ -53,7 +53,7 @@ const SendVerificationEmailForm = () => {
   > = async user => {
     try {
       const res = await handleSendVerificationEmail(user)
-      setInfoMessage(res?.data.message, 'success')
+      setInfoMessage(res.data.message, 'success')
     } catch (err) {
       setInfoMessage(getErrorMessage(err), 'error')
     }

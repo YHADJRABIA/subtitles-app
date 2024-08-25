@@ -54,7 +54,7 @@ const PasswordRecoveryForm = () => {
   const handleRecovery: SubmitHandler<PasswordRecoverySchema> = async user => {
     try {
       const res = await handleSendPasswordRecoveryEmail(user)
-      setInfoMessage(res?.data.message, 'success')
+      setInfoMessage(res.data.message, 'success')
     } catch (err) {
       setInfoMessage(getErrorMessage(err), 'error')
     }
