@@ -3,10 +3,10 @@ import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
 import styles from './page.module.scss'
 import Typography from '@/components/UI/Typography'
 import { getUserSession } from '@/utils/session'
-import { formatDate } from '@/utils/date'
 import DeleteAccountButton from '../_components/DeleteAccountButton'
 import { Metadata } from 'next/types'
 import { MetaDataProps } from '@/app/[locale]/layout'
+import DateDisplay from '@/components/DateDisplay'
 
 export const generateMetadata = async ({
   params: { locale },
@@ -24,8 +24,7 @@ export const generateMetadata = async ({
 
 const DashboardAccountPage = async ({ params: { locale } }: MetaDataProps) => {
   unstable_setRequestLocale(locale)
-  const { creationDate, lastUpdateDate /* lastLoginDate */ } =
-    await getUserSession()
+  const { creationDate, lastUpdateDate, lastLoginDate } = await getUserSession()
 
   const t = await getTranslations({ locale, namespace: 'Dashboard.Account' })
 
@@ -42,15 +41,23 @@ const DashboardAccountPage = async ({ params: { locale } }: MetaDataProps) => {
               <Typography weight="semiBold" size="xs">
                 {t('registered_since')}
               </Typography>
-              <Typography size="xxs">{formatDate(creationDate)}</Typography>
+              <DateDisplay date={creationDate} />
             </div>
           )}
-          {lastUpdateDate && ( // TODO: remove condition when also available via Google signin
+          {lastUpdateDate && (
             <div className={styles.field}>
               <Typography weight="semiBold" size="xs">
                 {t('last_update')}
               </Typography>
-              <Typography size="xxs">{formatDate(lastUpdateDate)}</Typography>
+              <DateDisplay date={lastUpdateDate} />
+            </div>
+          )}
+          {lastLoginDate && (
+            <div className={styles.field}>
+              <Typography weight="semiBold" size="xs">
+                {t('last_login')}
+              </Typography>
+              <DateDisplay date={lastLoginDate} showTime />
             </div>
           )}
         </div>
