@@ -301,6 +301,9 @@
     "yes": "Yes",
     "no": "Cancel"
   },
+  "DateDisplay": {
+    "at": "{date}{time, select, null {} other { at {time}}}"
+  },
   "UseShowPassword": {
     "reveal_password": "Reveal password",
     "conceal_password": "Conceal password"

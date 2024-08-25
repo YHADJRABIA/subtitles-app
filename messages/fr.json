@@ -304,6 +304,9 @@
     "yes": "Oui",
     "no": "Annuler"
   },
+  "DateDisplay": {
+    "at": "{date}{time, select, null {} other { à {time}}}"
+  },
   "UseShowPassword": {
     "reveal_password": "Révéler mot de passe",
     "conceal_password": "Masquer mot de passe"
