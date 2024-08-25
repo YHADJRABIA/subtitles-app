@@ -10,6 +10,7 @@ export const handleDeleteUserById = async (id: string) => {
     })
   } catch (err) {
     console.error('Error deleting user:', getErrorMessage(err))
+    throw err
   }
 }
 
@@ -22,5 +23,6 @@ export const handleUpdateUserById = async (id: string) => {
     })
   } catch (err) {
     console.error('Error patching user:', getErrorMessage(err))
+    throw err
   }
 }
