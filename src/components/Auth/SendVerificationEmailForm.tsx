@@ -55,7 +55,7 @@ const SendVerificationEmailForm = () => {
       const res = await handleSendVerificationEmail(user)
       setInfoMessage(res.data.message, 'success')
     } catch (err) {
-      setInfoMessage(getErrorMessage(err), 'error')
+      setInfoMessage(await getErrorMessage(err), 'error')
     }
   }
 

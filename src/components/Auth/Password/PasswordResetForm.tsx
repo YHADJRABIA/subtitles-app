@@ -57,7 +57,7 @@ const PasswordResetForm = () => {
       const res = await axios.post('/api/users/password/reset', user)
       setInfoMessage(res.data.message, 'success')
     } catch (err) {
-      setInfoMessage(getErrorMessage(err), 'error')
+      setInfoMessage(await getErrorMessage(err), 'error')
     }
   }
 

@@ -3,22 +3,22 @@ import axios from 'axios'
 
 import { ZodError } from 'zod'
 
-export const getErrorMessage = (error: unknown): string => {
+export const getErrorMessage = (error: unknown): string | Promise<string> => {
   const [t_tooManyRequests, t_somethingWentWrong] = [
     getTranslation('General', 'too_many_requests'),
     getTranslation('General', 'something_went_wrong'),
   ]
 
-  let message: string
+  let message: string | Promise<string>
 
   if (axios.isAxiosError(error)) {
     if (error.response) {
       if (error.response.status === 429) {
-        return t_tooManyRequests as any // TODO fix type
+        return t_tooManyRequests
       }
       message = error.response.data?.message || t_somethingWentWrong
     } else {
-      message = error.message || (t_somethingWentWrong as any)
+      message = error.message || t_somethingWentWrong
     }
   } else if (error instanceof Error) {
     message = error.message
@@ -30,9 +30,9 @@ export const getErrorMessage = (error: unknown): string => {
     'error' in error &&
     'status' in error
   ) {
-    message = (error.error as string) || (t_somethingWentWrong as any)
+    message = (error.error as string) || t_somethingWentWrong
   } else {
-    message = t_somethingWentWrong as any
+    message = t_somethingWentWrong
   }
 
   return message

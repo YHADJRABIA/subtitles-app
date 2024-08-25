@@ -37,7 +37,7 @@ const VerifyEmail = () => {
       const res = await handleVerifyEmailValidationToken(user)
       setInfoMessage(res.data.message, 'success')
     } catch (err) {
-      setInfoMessage(getErrorMessage(err), 'error')
+      setInfoMessage(await getErrorMessage(err), 'error')
     }
   }
 

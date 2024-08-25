@@ -97,7 +97,7 @@ function AuthForm({ type }: PropTypes) {
           // Redirect if successful login
           router.push(DEFAULT_LOGIN_REDIRECT_ROUTE as string)
         } else {
-          setInfoMessage(getErrorMessage(res), 'error')
+          setInfoMessage(await getErrorMessage(res), 'error')
         }
       }
 
@@ -105,7 +105,7 @@ function AuthForm({ type }: PropTypes) {
         setInfoMessage((res as AxiosResponse)?.data.message, 'success')
       }
     } catch (err) {
-      setInfoMessage(getErrorMessage(err), 'error')
+      setInfoMessage(await getErrorMessage(err), 'error')
     }
   }
 

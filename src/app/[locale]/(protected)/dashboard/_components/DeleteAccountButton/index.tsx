@@ -56,7 +56,7 @@ const DeleteAccountButton = ({ className }: PropTypes) => {
         notify('success', res.data.message) // TODO: persist toast after redirection
       }
     } catch (err) {
-      notify('error', getErrorMessage(err) || t('deletion_failed'))
+      notify('error', (await getErrorMessage(err)) || t('deletion_failed'))
     } finally {
       setIsProcessing(false)
     }
