@@ -38,6 +38,7 @@ import { useTranslations } from 'next-intl'
 import { useSearchParams } from 'next/navigation'
 import { DEFAULT_LOGIN_REDIRECT_ROUTE } from '@/routes/routes'
 import { SignInResponse } from 'next-auth/react'
+import { AxiosResponse } from 'axios'
 
 interface PropTypes {
   type: 'login' | 'register'
@@ -89,7 +90,7 @@ function AuthForm({ type }: PropTypes) {
     try {
       const res = isRegisterForm
         ? await handleRegister(user)
-        : await handleCredentialsLogin(user)
+        : ((await handleCredentialsLogin(user)) as SignInResponse)
 
       if (isLoginForm) {
         if ((res as SignInResponse)?.ok) {
@@ -101,7 +102,7 @@ function AuthForm({ type }: PropTypes) {
       }
 
       if (isRegisterForm) {
-        setInfoMessage(getErrorMessage(res), 'success')
+        setInfoMessage((res as AxiosResponse)?.data.message, 'success')
       }
     } catch (err) {
       setInfoMessage(getErrorMessage(err), 'error')
