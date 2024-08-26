@@ -31,7 +31,7 @@ const PasswordResetForm = () => {
 
   const token = searchParams.get('token') ?? ''
 
-  const [passwordInputType, ToggleIcon] = useShowPassword({ size: 20 })
+  const [passwordInputType, ToggleIcon] = useShowPassword({ size: 18 })
   const { info, setInfoMessage } = useInfo()
 
   const isError = info.type === 'error'
@@ -78,7 +78,7 @@ const PasswordResetForm = () => {
           {t('PasswordReset.title')}
         </Typography>
         <TextInBox
-          icon={<InfoIcon style={{ fontSize: 18 }} />}
+          icon={InfoIcon}
           label={info.label}
           type={info.type}
           isShown={!!info.label}

@@ -10,11 +10,7 @@ interface PropTypes {
 const Loader = (props: PropTypes) => {
   const { size, className } = props
   return (
-    <ImSpinner2
-      {...props}
-      size={size ?? 16}
-      className={cn(styles.root, className)}
-    />
+    <ImSpinner2 {...props} size={size} className={cn(styles.root, className)} />
   )
 }
 
