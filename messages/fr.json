@@ -65,7 +65,7 @@
   "General": {
     "or": "Ou",
     "something_went_wrong": "Un erreur s'est produite",
-    "too_many_requests": "Trop de requêtes"
+    "too_many_requests": "Trop de requêtes. Veuillez patienter avant de réessayer."
   },
   "Index": {
     "HeroBanner": {
@@ -231,7 +231,7 @@
   },
   "User": {
     "user_not_found": "Utilisateur inconnu",
-    "user_deleted": "Utilisateur supprimé !",
+    "user_deleted": "Compte supprimé avec succès !",
     "unauthorised": "Non authorisé"
   },
   "Dashboard": {
@@ -255,7 +255,10 @@
       "last_login": "Dernière connexion : ",
       "registered_since": "Date de création : ",
       "last_update": "Dernière modification : ",
-      "delete_account": "Supprimer compte"
+      "delete_account": "Supprimer compte",
+      "account_deletion": "Suppression du compte",
+      "warning_deletion": "Ce compte sera définitivement supprimé, cette action est irréversible.",
+      "deletion_failed": "Échec de suppression du compte."
     }
   },
   "Zod": {
@@ -295,6 +298,14 @@
   },
   "Video": {
     "not_supported": "La balise vidéo n'est pas compatible avec ce navigateur."
+  },
+  "ConfirmationModal": {
+    "are_you_sure": "Voulez-vous procéder ?",
+    "yes": "Oui",
+    "no": "Annuler"
+  },
+  "DateDisplay": {
+    "at": "{date}{time, select, null {} other { à {time}}}"
   },
   "UseShowPassword": {
     "reveal_password": "Révéler mot de passe",

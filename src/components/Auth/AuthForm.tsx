@@ -38,6 +38,7 @@ import { useTranslations } from 'next-intl'
 import { useSearchParams } from 'next/navigation'
 import { DEFAULT_LOGIN_REDIRECT_ROUTE } from '@/routes/routes'
 import { SignInResponse } from 'next-auth/react'
+import { AxiosResponse } from 'axios'
 
 interface PropTypes {
   type: 'login' | 'register'
@@ -89,14 +90,22 @@ function AuthForm({ type }: PropTypes) {
     try {
       const res = isRegisterForm
         ? await handleRegister(user)
-        : await handleCredentialsLogin(user)
+        : ((await handleCredentialsLogin(user)) as SignInResponse)
 
-      setInfoMessage(getErrorMessage(res), isRegisterForm ? 'success' : 'error')
-      // Redirect if successful login
-      if (isLoginForm && (res as SignInResponse)?.ok)
-        router.push(DEFAULT_LOGIN_REDIRECT_ROUTE as string)
+      if (isLoginForm) {
+        if ((res as SignInResponse)?.ok) {
+          // Redirect if successful login
+          router.push(DEFAULT_LOGIN_REDIRECT_ROUTE as string)
+        } else {
+          setInfoMessage(await getErrorMessage(res), 'error')
+        }
+      }
+
+      if (isRegisterForm) {
+        setInfoMessage((res as AxiosResponse)?.data.message, 'success')
+      }
     } catch (err) {
-      setInfoMessage(getErrorMessage(err), 'error')
+      setInfoMessage(await getErrorMessage(err), 'error')
     }
   }
 
@@ -109,7 +118,12 @@ function AuthForm({ type }: PropTypes) {
       className={styles.root}
     >
       <div className={styles.wrapper}>
-        <Typography className={styles.title} tag="h1" weight="semiBold">
+        <Typography
+          className={styles.title}
+          align="center"
+          tag="h1"
+          weight="semiBold"
+        >
           {t(isRegisterForm ? 'Register.title' : 'Login.title')}
         </Typography>
         <TextInBox
@@ -132,12 +146,7 @@ function AuthForm({ type }: PropTypes) {
             isShown: fieldState.email.isTouched,
           }}
           testId={isRegisterForm ? 'register-email' : 'login-email'}
-          leftIcon={
-            <EmailIcon
-              style={{ fontSize: 18 }}
-              title={t('email')} // TODO: rework this
-            />
-          }
+          leftIcon={{ src: EmailIcon, title: t('email') }}
         />
 
         <Field
@@ -154,22 +163,16 @@ function AuthForm({ type }: PropTypes) {
             isShown: fieldState.password.isTouched,
             isInfo: isRegisterForm,
           }}
-          leftIcon={
-            <PasswordIcon
-              size={18}
-              title={t('password')} // TODO: rework this
-            />
-          }
-          rightIcon={<ToggleIcon />}
+          leftIcon={{ src: PasswordIcon, title: t('password') }}
+          rightIcon={{ src: ToggleIcon }}
         />
 
         {isLoginForm && (
           <Typography
-            isFullWidth
             className={styles.passwordRecovery}
             align="right"
             weight="semiBold"
-            size="xs"
+            size="xxs"
             link={{
               href: isValidEmail
                 ? `/password/recovery?email=${email}`
@@ -187,6 +190,8 @@ function AuthForm({ type }: PropTypes) {
           disabled={!isValid}
           isLoading={isSubmitting}
           type="submit"
+          weight="semiBold"
+          size="xs"
         >
           {t(isRegisterForm ? 'Register.cta' : 'Login.cta')}
         </Button>

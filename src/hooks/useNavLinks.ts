@@ -1,5 +1,7 @@
 import { handleLogout } from '@/actions/auth'
+import { getErrorMessage } from '@/utils/errors'
 import { useTranslations } from 'next-intl'
+import { useState } from 'react'
 
 import {
   GrHomeRounded as HomeIcon,
@@ -21,6 +23,22 @@ interface PropTypes {
  **/
 const useNavLinks = ({ isConnected }: PropTypes) => {
   const t = useTranslations('Navigation')
+
+  const [isLoggingOut, setIsLoggingOut] = useState(false)
+
+  // Prevent multiple clicks
+  const handleLogoutClick = async () => {
+    if (isLoggingOut) return
+
+    setIsLoggingOut(true)
+    try {
+      await handleLogout()
+    } catch (err) {
+      console.error(getErrorMessage(err))
+    } finally {
+      setIsLoggingOut(false)
+    }
+  }
   const navLinks = [
     {
       url: '/',
@@ -47,7 +65,7 @@ const useNavLinks = ({ isConnected }: PropTypes) => {
           {
             label: t('logout'),
             icon: LogoutIcon,
-            onClick: handleLogout,
+            onClick: handleLogoutClick,
           },
         ]
       : [

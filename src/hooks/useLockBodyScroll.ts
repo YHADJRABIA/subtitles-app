@@ -13,27 +13,28 @@ function useLockBodyScroll(initialLocked = false): ReturnType {
   useIsomorphicLayoutEffect(() => {
     if (!locked) return
 
+    const root = document.body
     // Save initial body style
-    const originalOverflow = document.body.style.overflow
-    const originalPaddingRight = document.body.style.paddingRight
+    const originalOverflow = root.style.overflow
+    const originalPaddingRight = root.style.paddingRight
 
     // Lock body scroll
-    document.body.style.overflow = 'hidden'
+    root.style.overflow = 'hidden'
 
     // Get the scrollBar width
-    const root = document.getElementById('__next') // TODO: Update, no longer valid with new NextJS versions
+
     const scrollBarWidth = root ? root.offsetWidth - root.scrollWidth : 0
 
     // Avoid width reflow
     if (scrollBarWidth) {
-      document.body.style.paddingRight = `${scrollBarWidth}px`
+      root.style.paddingRight = `${scrollBarWidth}px`
     }
 
     return () => {
-      document.body.style.overflow = originalOverflow
+      root.style.overflow = originalOverflow
 
       if (scrollBarWidth) {
-        document.body.style.paddingRight = originalPaddingRight
+        root.style.paddingRight = originalPaddingRight
       }
     }
   }, [locked])

@@ -12,9 +12,6 @@
 
 .title {
   margin: 5rem 0 4rem;
-  @include respond-to('small') {
-    width: 100%;
-  }
 }
 
 .wrapper {
@@ -36,4 +33,5 @@
   color: var(--secondary-blue-color);
   margin-top: 0.5rem;
   margin-bottom: 2rem;
+  margin-left: auto;
 }

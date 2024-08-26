@@ -1,13 +1,14 @@
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
-import React, { ReactNode, useState } from 'react'
+import React, { useState } from 'react'
 import { useTranslations } from 'next-intl'
+import { IconType } from 'react-icons/lib'
 
 /**
  * Toggles visibility of password's value
  * size prop represents icon's size
  */
 
-type UseShowPasswordReturnType = [string, () => ReactNode]
+type UseShowPasswordReturnType = [string, IconType]
 interface PropTypes {
   size: number
 }

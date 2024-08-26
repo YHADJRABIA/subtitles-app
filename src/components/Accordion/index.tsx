@@ -52,6 +52,7 @@ const Accordion = ({
     items ? items.map(() => false) : [false]
   )
 
+  // TODO: internationalise or edit structure
   if (items && body) {
     throw new Error(
       "Accordion cannot have both 'items' and 'body' at the same time."

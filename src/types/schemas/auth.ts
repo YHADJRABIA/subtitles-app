@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl'
 import * as z from 'zod'
 
-export type ValidFieldNames = 'email' | 'password'
+export type ValidFieldNames = 'email' | 'password' | 'token'
 
 export type AuthFormData = {
   email: string

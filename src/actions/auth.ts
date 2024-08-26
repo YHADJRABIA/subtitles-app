@@ -9,10 +9,22 @@ import { getErrorMessage } from '@/utils/errors'
 import axios from 'axios'
 import { signIn, signOut } from 'next-auth/react'
 
-export const handleLogout = async () => await signOut({ callbackUrl: '/' })
+export const handleLogout = async () => {
+  try {
+    return await signOut({ callbackUrl: '/' })
+  } catch (err) {
+    console.error('Error Logging out user:', getErrorMessage(err))
+    throw err
+  }
+}
 
 export const handleGoogleLogin = async () => {
-  await signIn('google')
+  try {
+    return await signIn('google')
+  } catch (err) {
+    console.error('Error Logging in with Google:', getErrorMessage(err))
+    throw err
+  }
 }
 
 export const handleCredentialsLogin = async (user: AccountLoginSchema) => {

@@ -9,7 +9,7 @@ import Separator from '@/components/Separator'
 import NavLink from './NavLink'
 import useNavLinks from '@/hooks/useNavLinks'
 import useIsOnDesktop from '@/hooks/useIsOnDesktop'
-import { LinkButton } from '@/components/UI/Button'
+import { LinkButton } from '@/components/UI/Button/LinkButton'
 import { SUPPORT_LINK } from '@/utils/hardCode'
 import { useTranslations } from 'next-intl'
 import { SiBuymeacoffee as SupportIcon } from 'react-icons/si'
@@ -64,10 +64,7 @@ const Nav = ({ className, isConnected }: PropTypes) => {
         />
         {/* TODO: Reuse later  <AuthSection showAccount={isConnected} className={styles.authSection} /> */}
         <div className={styles.bottomSection}>
-          <LanguageMenu
-            isInverted={!isOnDesktop}
-            className={styles.languageMenu}
-          />
+          <LanguageMenu isInverted={!isOnDesktop} />
 
           <LinkButton
             size="xs"

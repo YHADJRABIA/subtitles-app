@@ -6,7 +6,7 @@ import { connectDB } from '@/lib/mongodb'
 import { UserModel } from '@/models/user.model'
 import { UserAPIType } from '@/types/user'
 import { isDevelopment } from '@/utils/general'
-import { getUserByEmail, updateNameById } from '@/utils/db/user'
+import { getUserByEmail, updateNameById, updateUserById } from '@/utils/db/user'
 import { getErrorMessage, getZodErrors } from '@/utils/errors'
 import { AccountLoginValidator } from '@/types/schemas/auth'
 import { getTranslations } from 'next-intl/server'
@@ -56,7 +56,7 @@ export const authOptions: NextAuthOptions = {
       },
 
       // Runs on credential login (with email & password)
-      async authorize(credentials) {
+      async authorize(credentials /* req */) {
         const locale = getNextLocale()
 
         const [t_zod, t] = [
@@ -66,6 +66,10 @@ export const authOptions: NextAuthOptions = {
             namespace: 'Auth.Login',
           }),
         ]
+
+        /*         if (req.status === 429) {
+          throw new Error(t('incorrect_email_or_password')) // TODO: fix this
+        } */
 
         try {
           const validatedFields =
@@ -128,6 +132,7 @@ export const authOptions: NextAuthOptions = {
       if (!token.sub) return token // Logged out
 
       // Update token according to client session's data
+      // Triggered if update of useSession is called
       if (trigger === 'update') {
         // Update name in database
         if (token.name !== session?.name) {
@@ -188,6 +193,10 @@ export const authOptions: NextAuthOptions = {
           /*           return NextResponse.redirect(
             new URL(DEFAULT_LOGIN_REDIRECT_ROUTE, 'localhost:3000/')
           ) */
+
+          /*           if (user?.error.status === 429) {
+            throw new Error(t('too_many_api_calls'))
+          } */
         } catch (err) {
           console.error('Credentials SignIn failed:', getErrorMessage(err))
           throw err
@@ -201,7 +210,31 @@ export const authOptions: NextAuthOptions = {
           await connectDB()
 
           const existingUser = await getUserByEmail(email)
-          if (existingUser) return user
+
+          if (existingUser) {
+            // Update only empty fields and lastLogin
+            const updatedFields: Partial<UserAPIType> = {
+              lastLogin: String(new Date()),
+              ...(existingUser.name.length ? {} : { name }),
+              ...(existingUser.image.length ? {} : { image }),
+            }
+
+            const updatedUser = await updateUserById(
+              existingUser._id,
+              updatedFields
+            )
+
+            // Access following fields from session
+            Object.assign(user, {
+              id: existingUser._id,
+              lastLogin: existingUser.lastLogin, // Previous login
+              createdAt: updatedUser.createdAt,
+              updatedAt: updatedUser.updatedAt, // TODO: update accordingly
+              isVerifiedEmail: true,
+            })
+
+            return updatedUser
+          }
 
           const newUser = new UserModel({
             favoriteLocale: locale,
@@ -209,18 +242,27 @@ export const authOptions: NextAuthOptions = {
             email,
             image,
             emailVerified: new Date(), // Verify email automatically
+            createdAt: new Date(),
+            lastLogin: new Date(),
           })
           const res = await newUser.save()
+
+          Object.assign(user, {
+            id: newUser._id,
+            lastLogin: newUser.lastLogin,
+            createdAt: newUser.createdAt,
+            updatedAt: newUser.updatedAt,
+            isVerifiedEmail: true,
+          })
+
           if (res.status === 200 || res.status === 201) {
-            return user
+            return newUser
           }
         } catch (err) {
           console.error('Google SignIn failed:', getErrorMessage(err))
           throw err
         }
       }
-
-      // Todo: update lastLogin field on login
 
       return true
     },

@@ -1,21 +1,3 @@
-.root {
-  @include flexCenter(column, flex-start);
-  width: 100%;
-  height: 100%;
-
-  & > * {
-    width: 100%;
-  }
-}
-
-.title {
-  // TODO: refactor to all layout elements
-  margin-bottom: 4rem;
-  @include respond-to('medium') {
-    margin-bottom: 2rem;
-  }
-}
-
 .container {
   @include flexCenter(column, flex-start, flex-start);
   flex: 1;
@@ -30,10 +12,8 @@
 
 .fieldsContainer {
   width: 100%;
-  @include flexCenter(column, space-between);
-  & > *:not(:last-of-type) {
-    margin-bottom: 2rem;
-  }
+  @include flexCenter(column);
+  gap: 2rem;
   margin-bottom: 8rem;
 }
 

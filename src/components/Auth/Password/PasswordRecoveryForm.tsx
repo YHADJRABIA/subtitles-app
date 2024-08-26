@@ -54,9 +54,9 @@ const PasswordRecoveryForm = () => {
   const handleRecovery: SubmitHandler<PasswordRecoverySchema> = async user => {
     try {
       const res = await handleSendPasswordRecoveryEmail(user)
-      setInfoMessage(res?.data.message, 'success')
+      setInfoMessage(res.data.message, 'success')
     } catch (err) {
-      setInfoMessage(getErrorMessage(err), 'error')
+      setInfoMessage(await getErrorMessage(err), 'error')
     }
   }
 
@@ -81,7 +81,7 @@ const PasswordRecoveryForm = () => {
         <Field
           className={styles.field}
           autoFocus
-          register={register as any}
+          register={register}
           name="email"
           placeholder="email@domain.com"
           type="email"
@@ -91,12 +91,7 @@ const PasswordRecoveryForm = () => {
             isShown: fieldState.isTouched,
           }}
           testId="send-reset-password-email"
-          leftIcon={
-            <EmailIcon
-              style={{ fontSize: 18 }}
-              title={t('email')} // TODO: rework this
-            />
-          }
+          leftIcon={{ src: EmailIcon, title: t('email') }}
         />
 
         <Button
@@ -106,6 +101,8 @@ const PasswordRecoveryForm = () => {
           disabled={!isValid}
           isLoading={isSubmitting}
           type="submit"
+          weight="semiBold"
+          size="xs"
         >
           {t('PasswordRecovery.cta')}
         </Button>

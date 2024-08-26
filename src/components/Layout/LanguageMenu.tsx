@@ -33,7 +33,12 @@ const LanguageMenu = ({ className, isInverted = false }: PropTypes) => {
 
   return (
     <div ref={ref} className={cn(styles.root, className)}>
-      <Button onClick={onToggle} disabled={isPending} className={styles.button}>
+      <Button
+        onClick={onToggle}
+        disabled={isPending}
+        className={styles.button}
+        tag="span"
+      >
         <Image
           src={currentLanguage.icon}
           width={19}
