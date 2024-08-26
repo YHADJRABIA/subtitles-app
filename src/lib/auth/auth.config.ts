@@ -56,7 +56,7 @@ export const authOptions: NextAuthOptions = {
       },
 
       // Runs on credential login (with email & password)
-      async authorize(credentials) {
+      async authorize(credentials /* req */) {
         const locale = getNextLocale()
 
         const [t_zod, t] = [
@@ -66,6 +66,10 @@ export const authOptions: NextAuthOptions = {
             namespace: 'Auth.Login',
           }),
         ]
+
+        /*         if (req.status === 429) {
+          throw new Error(t('incorrect_email_or_password')) // TODO: fix this
+        } */
 
         try {
           const validatedFields =
@@ -189,6 +193,10 @@ export const authOptions: NextAuthOptions = {
           /*           return NextResponse.redirect(
             new URL(DEFAULT_LOGIN_REDIRECT_ROUTE, 'localhost:3000/')
           ) */
+
+          /*           if (user?.error.status === 429) {
+            throw new Error(t('too_many_api_calls'))
+          } */
         } catch (err) {
           console.error('Credentials SignIn failed:', getErrorMessage(err))
           throw err
