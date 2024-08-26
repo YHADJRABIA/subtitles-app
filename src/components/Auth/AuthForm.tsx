@@ -93,7 +93,10 @@ function AuthForm({ type }: PropTypes) {
         : ((await handleCredentialsLogin(user)) as SignInResponse)
 
       if (isLoginForm) {
-        if ((res as SignInResponse)?.ok) {
+        if (
+          (res as SignInResponse).ok &&
+          (res as SignInResponse).error === null
+        ) {
           // Redirect if successful login
           router.push(DEFAULT_LOGIN_REDIRECT_ROUTE as string)
         } else {

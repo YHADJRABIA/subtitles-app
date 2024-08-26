@@ -214,7 +214,7 @@ export const authOptions: NextAuthOptions = {
           if (existingUser) {
             // Update only empty fields and lastLogin
             const updatedFields: Partial<UserAPIType> = {
-              lastLogin: String(new Date()),
+              lastLogin: new Date(),
               ...(existingUser.name.length ? {} : { name }),
               ...(existingUser.image.length ? {} : { image }),
             }
