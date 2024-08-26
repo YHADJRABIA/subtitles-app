@@ -73,7 +73,7 @@ const PasswordRecoveryForm = () => {
         </Typography>
         <TextInBox
           className={styles.infoBox}
-          icon={<InfoIcon style={{ fontSize: 18 }} />}
+          icon={InfoIcon}
           label={info.label}
           type={info.type}
           isShown={!!info.label}

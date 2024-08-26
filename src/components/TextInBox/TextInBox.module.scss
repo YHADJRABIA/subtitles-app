@@ -1,5 +1,6 @@
 .root {
   @include flexCenter(row, flex-start);
+  gap: 1rem;
   flex-wrap: nowrap;
   border-radius: 0.5rem;
   padding: 0 1rem;
@@ -8,13 +9,11 @@
 }
 
 .icon {
-  margin-right: 1rem;
+  font-size: clamp(1.4rem, 3.5vw, 1.8rem);
   color: var(--primary-white-color);
 }
 
 .label {
-  font-size: 1.4rem;
-  font-weight: 500;
   color: var(--primary-white-color);
   @include truncated;
 }

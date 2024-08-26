@@ -127,7 +127,7 @@ function AuthForm({ type }: PropTypes) {
           {t(isRegisterForm ? 'Register.title' : 'Login.title')}
         </Typography>
         <TextInBox
-          icon={<InfoIcon style={{ fontSize: 18 }} />}
+          icon={InfoIcon}
           label={info.label}
           type={info.type}
           isShown={!!info.label}

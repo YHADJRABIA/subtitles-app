@@ -1,12 +1,13 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 import styles from './TextInBox.module.scss'
 import cn from 'classnames'
 import Typography from '../UI/Typography'
 import { Info } from '@/types/info'
+import { IconType } from 'react-icons/lib'
 
 interface PropTypes {
   label: string
-  icon: ReactNode
+  icon: IconType
   type?: Info
   className?: string
   isShown: boolean
@@ -14,7 +15,7 @@ interface PropTypes {
 
 const TextInBox = ({
   label,
-  icon,
+  icon: Icon,
   type = 'info',
   className,
   isShown,
@@ -31,8 +32,8 @@ const TextInBox = ({
     >
       {isShown && (
         <>
-          <div className={styles.icon}>{icon}</div>
-          <Typography className={styles.label} title={label}>
+          <Icon className={styles.icon} />
+          <Typography size="xs" className={styles.label} title={label}>
             {label}
           </Typography>
         </>
