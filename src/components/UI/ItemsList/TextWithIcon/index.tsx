@@ -24,7 +24,7 @@ const TextWithIcon = ({
       </span>
 
       <div className={styles.textContainer}>
-        <Typography tag="h3" size="m" weight="bold" className={styles.title}>
+        <Typography tag="h3" size="m" weight="bold">
           {title}
         </Typography>
 

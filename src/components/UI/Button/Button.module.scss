@@ -3,27 +3,38 @@
   border: none;
   outline: none;
   cursor: pointer;
-  font-weight: 600;
   letter-spacing: 0.1rem;
   transition:
     opacity 0.3s ease-in-out,
     border-color 0.3s ease-in-out,
     box-shadow 0.3s ease-in-out;
-  padding: 2rem 1.5rem;
+  padding: 1.5rem;
   border-radius: 0.8rem;
 
   @include respond-to('medium') {
-    padding: 2rem;
+    padding: 1.75rem;
   }
 
-  &:hover:enabled,
-  &:active:enabled {
-    opacity: 0.85;
-  }
-
-  &:disabled,
-  &[disabled] {
+  &.disabled {
+    @include preventUserSelect;
     cursor: not-allowed;
+  }
+}
+
+.clickable {
+  &.primary {
+    &:hover,
+    &:active {
+      opacity: 0.8;
+    }
+  }
+
+  &:not(.primary) {
+    box-shadow: 0 0.1rem 0.1rem rgba(0, 0, 0, 0.1);
+    &:hover,
+    &:active {
+      box-shadow: 0.2rem 0.4rem 0.6rem rgba(0, 0, 0, 0.2);
+    }
   }
 }
 
@@ -51,19 +62,6 @@
   }
 }
 
-.shadowEffect {
-  box-shadow: 0 0.1rem 0.1rem rgba(0, 0, 0, 0.1);
-  &:hover {
-    box-shadow: 0.2rem 0.4rem 0.6rem rgba(0, 0, 0, 0.2);
-  }
-}
-
-.hoverEffect {
-  &:hover {
-    opacity: 0.8;
-  }
-}
-
 .icon {
   margin-right: 1rem;
 }
@@ -72,4 +70,9 @@
   @include respond-to('medium') {
     align-items: normal;
   }
+}
+
+.rounded {
+  border-radius: 10rem;
+  padding: 1rem 1.5rem;
 }

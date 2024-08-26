@@ -57,7 +57,7 @@ const PasswordResetForm = () => {
       const res = await axios.post('/api/users/password/reset', user)
       setInfoMessage(res.data.message, 'success')
     } catch (err) {
-      setInfoMessage(getErrorMessage(err), 'error')
+      setInfoMessage(await getErrorMessage(err), 'error')
     }
   }
 
@@ -90,7 +90,7 @@ const PasswordResetForm = () => {
             passwordInputType === 'password' ? '••••••' : 'MyPa$$word_'
           }
           type={passwordInputType}
-          register={register as any}
+          register={register}
           name="password"
           subLabel={{
             text: errors?.password?.message,
@@ -99,13 +99,8 @@ const PasswordResetForm = () => {
           }}
           testId="reset-password-field"
           label={t('password')}
-          leftIcon={
-            <PasswordIcon
-              size={18}
-              title={t('password')} // TODO: rework this
-            />
-          }
-          rightIcon={<ToggleIcon />}
+          leftIcon={{ src: PasswordIcon, title: t('password') }}
+          rightIcon={{ src: ToggleIcon }}
         />
 
         <Button
@@ -115,6 +110,8 @@ const PasswordResetForm = () => {
           disabled={!isValid}
           isLoading={isSubmitting}
           type="submit"
+          weight="semiBold"
+          size="xs"
         >
           {t('PasswordReset.cta')}
         </Button>

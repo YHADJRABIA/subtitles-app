@@ -47,3 +47,8 @@
   width: 100%;
   @include flexCenter(row, space-between);
 }
+.languageMenu {
+  & > :first-child:hover {
+    border-color: var(--secondary-blue-color);
+  }
+}

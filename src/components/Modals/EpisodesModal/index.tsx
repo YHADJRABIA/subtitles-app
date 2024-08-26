@@ -3,18 +3,16 @@ import Typography from '@/components/UI/Typography'
 
 import styles from './EpisodesModal.module.scss'
 import { downloadFile } from '@/utils/download'
-import { SeriesEpisode } from '@/app/[locale]/(main)/series/[...slug]/_components/SeriesSubtitles' // TODO: relocate to types folder
 import { useTranslations } from 'next-intl'
+import { SeriesEpisode } from '@/types/series'
+import { Button } from '@/components/UI/Button'
 
-interface EpisodesModalProps {
-  isOpen: boolean
-  onClose: () => void
-  title?: string
+interface PropTypes {
   seasonNumber: number
   episodes: SeriesEpisode[]
 }
 
-const EpisodesModal = ({ seasonNumber, episodes }: EpisodesModalProps) => {
+const EpisodesModal = ({ seasonNumber, episodes }: PropTypes) => {
   const t = useTranslations('Series')
 
   const handleDownload = (subtitleUrl: string, episodeNumber: number) => {
@@ -30,13 +28,15 @@ const EpisodesModal = ({ seasonNumber, episodes }: EpisodesModalProps) => {
             {t('Subtitles.episode', { count: episode })}
           </Typography>
 
-          <Typography
+          <Button
             onClick={() => handleDownload(subtitleUrl, episode)}
+            variation="primary"
             size="xs"
-            className={styles.cta}
+            isFullWidth={false}
+            isRounded
           >
             {t('Subtitles.download')}
-          </Typography>
+          </Button>
         </li>
       ))}
     </ul>

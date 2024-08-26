@@ -7,33 +7,26 @@ import Typography from '@/components/UI/Typography'
 import Accordion from '@/components/Accordion'
 import { useModal } from '@/hooks/useModal'
 import EpisodesModal from '@/components/Modals/EpisodesModal'
-
-export type SeriesEpisode = { episode: number; subtitleUrl: string }
-
-export type SeriesSeason = { season: number; episodes: SeriesEpisode[] }
-
-export type SeriesSubtitles = SeriesSeason[]
+import {
+  SeriesEpisode,
+  SeriesSubtitles as SeriesSubtitlesType,
+} from '@/types/series'
 
 interface PropTypes {
   className?: string
   seriesName: string
-  subtitles: SeriesSubtitles
+  subtitles: SeriesSubtitlesType
 }
 
 const SeriesSubtitles = ({ className, subtitles, seriesName }: PropTypes) => {
   const t = useTranslations('Series')
-  const { openModal, closeModal } = useModal()
+  const { openModal } = useModal()
 
   const handleOpenModal = (seasonNumber: number, episodes: SeriesEpisode[]) => {
     openModal({
       title: `${t('Subtitles.season', { count: seasonNumber })} — ${seriesName}`,
       content: (
-        <EpisodesModal
-          isOpen={true}
-          onClose={closeModal}
-          seasonNumber={seasonNumber}
-          episodes={episodes}
-        />
+        <EpisodesModal seasonNumber={seasonNumber} episodes={episodes} />
       ),
     })
   }
@@ -85,7 +78,7 @@ const SeasonItem = memo(
     }
 
     return (
-      <li
+      <li // TODO: refactor with Button and add rounded prop?
         className={cn(styles.seasonItem, {
           [styles.isDisabled]: isUnavailable,
         })}

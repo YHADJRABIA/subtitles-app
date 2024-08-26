@@ -65,7 +65,7 @@
   "General": {
     "or": "Or",
     "something_went_wrong": "Something went wrong",
-    "too_many_requests": "Too many requests"
+    "too_many_requests": "Too many requests. Please wait before trying again."
   },
   "Index": {
     "HeroBanner": {
@@ -228,7 +228,7 @@
   },
   "User": {
     "user_not_found": "User not found",
-    "user_deleted": "User successfully deleted!",
+    "user_deleted": "Account successfully deleted!",
     "unauthorised": "Unauthorised"
   },
   "Dashboard": {
@@ -252,7 +252,10 @@
       "last_login": "Last login:",
       "registered_since": "Registred since:",
       "last_update": "Last update:",
-      "delete_account": "Delete account"
+      "delete_account": "Delete account",
+      "account_deletion": "Account deletion",
+      "warning_deletion": "This account will be permanently deleted, this action cannot be undone.",
+      "deletion_failed": "Failed to delete the account."
     }
   },
   "Zod": {
@@ -292,6 +295,14 @@
   },
   "Video": {
     "not_supported": "Video tag not supported by your browser."
+  },
+  "ConfirmationModal": {
+    "are_you_sure": "Do you want to proceed?",
+    "yes": "Yes",
+    "no": "Cancel"
+  },
+  "DateDisplay": {
+    "at": "{date}{time, select, null {} other { at {time}}}"
   },
   "UseShowPassword": {
     "reveal_password": "Reveal password",

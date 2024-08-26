@@ -1,4 +1,4 @@
-import { LinkButton } from '@/components/UI/Button'
+import { LinkButton } from '@/components/UI/Button/LinkButton'
 import React from 'react'
 import cn from 'classnames'
 import styles from './CtaSection.module.scss'

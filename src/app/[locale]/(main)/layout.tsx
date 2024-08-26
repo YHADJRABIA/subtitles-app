@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react'
 import Footer from '@/components/Layout/Footer'
 import { getUserSession } from '@/utils/session'
 import styles from './layout.module.scss'
-import ConcealableHeader from '@/components/Layout/Header/ConcealableHeader'
+import Header from '@/components/Layout/Header'
 
 interface PropTypes {
   children: ReactNode
@@ -13,7 +13,7 @@ const layout = async ({ children }: PropTypes) => {
 
   return (
     <>
-      <ConcealableHeader isConnected={!!user} />
+      <Header isConnected={!!user} isConcealable />
       <main className={styles.root}>{children}</main>
       <Footer />
     </>

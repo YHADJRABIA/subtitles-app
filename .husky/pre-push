@@ -1,0 +1,47 @@
+echo '🏗️👷 Styling, testing & building the project before pushing.'
+
+# Ensure npm run dev is not running
+if lsof -i :3000 &>/dev/null; then
+    echo '⚠️ Terminate localhost process (e.g., npm run dev) before pushing. ⚠️'
+    exit 1
+fi
+
+
+# TODO: Add testing script
+# npm test || { echo '❌ Tests failed. Fix the issues before pushing.'; exit 1; }
+
+# Check Prettier standards
+echo '🔍 Checking code format with Prettier...'
+npm run check-format || {
+    echo '❌ Styling errors — Prettier check failed. ❌'
+    echo 'Run npm run format, add changes, and try to push again.'
+    exit 1
+}
+
+# Check ESLint standards
+echo '🔍 Checking code quality with ESLint...'
+npm run check-lint || {
+    echo '❌ Linting errors — ESLint check failed. ❌'
+    echo 'Make the required changes listed above, add changes, and try to push again.'
+    exit 1
+}
+
+# Check TypeScript types
+echo '🔍 Checking type definitions with TypeScript...'
+npm run check-types || {
+    echo '❌ Typing errors — TypeScript check failed. ❌'
+    echo 'Make the above-required changes, add changes, and try to push again.'
+    exit 1
+}
+
+# If linting, formatting & typing pass, proceed with build
+echo '✅ Code is properly typed, linted & formatted ➜ proceeding with build. ✅'
+
+npm run build || {
+    echo '❌ Build failed. ❌'
+    echo 'View the errors above to see why.'
+    exit 1
+}
+
+# Everything passes — time to push
+echo '🏆🥳🎉 Successful build ➜ pushing changes. 🎉🥳🏆'

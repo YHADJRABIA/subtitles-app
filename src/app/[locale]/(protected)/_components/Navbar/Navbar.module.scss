@@ -7,15 +7,11 @@
     margin-left: 2rem;
     @include flexCenter(row, flex-start, center);
     height: inherit;
+    gap: 1.5rem;
 
     @include respond-to('medium') {
       margin-left: initial;
       justify-content: center;
-    }
-    li {
-      &:not(:last-of-type) {
-        margin-right: 1.5rem;
-      }
     }
   }
 }

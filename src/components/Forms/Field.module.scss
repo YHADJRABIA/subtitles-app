@@ -22,6 +22,7 @@
   }
 
   input {
+    font-size: clamp(1.2rem, 2.5vw, 1.4rem);
     padding: 1.3rem 3.2rem;
     width: 100%;
     transition: all 0.3s ease-in-out;
@@ -101,6 +102,7 @@
 .fieldIcon {
   position: absolute;
   transition: color 0.3s ease-in;
+  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
   top: 2.8rem;
   color: var(--secondary-gray-color);
 }

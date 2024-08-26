@@ -37,18 +37,19 @@
     }
   }
 }
+
+.button {
+  position: relative;
+  &:hover {
+    box-shadow: unset !important;
+    opacity: 0.9 !important;
+  }
+}
+
 .currentLang {
   margin: 0 0.8rem;
 }
 
 .toggler {
   transition: transform 0.2s ease;
-}
-
-.button {
-  position: relative;
-  box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
-  &:hover {
-    border-color: var(--secondary-blue-color);
-  }
 }

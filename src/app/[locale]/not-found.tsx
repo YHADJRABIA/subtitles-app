@@ -5,7 +5,7 @@ import { getUserSession } from '@/utils/session'
 import HeroBanner from '@/components/HeroBanner'
 import styles from './not-found.module.scss'
 import Typography from '@/components/UI/Typography'
-import { LinkButton } from '@/components/UI/Button'
+import { LinkButton } from '@/components/UI/Button/LinkButton'
 import { MdOutlineKeyboardBackspace as BackIcon } from 'react-icons/md'
 import { useTranslations } from 'next-intl'
 

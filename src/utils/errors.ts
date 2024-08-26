@@ -1,14 +1,24 @@
+import { getTranslation } from '@/lib/i18n/getTranslation'
 import axios from 'axios'
+
 import { ZodError } from 'zod'
 
-export const getErrorMessage = (error: unknown): string => {
-  let message: string
+export const getErrorMessage = (error: unknown): string | Promise<string> => {
+  const [t_tooManyRequests, t_somethingWentWrong] = [
+    getTranslation('General', 'too_many_requests'),
+    getTranslation('General', 'something_went_wrong'),
+  ]
+
+  let message: string | Promise<string>
 
   if (axios.isAxiosError(error)) {
     if (error.response) {
-      message = error.response.data?.message || 'Something went wrong'
+      if (error.response.status === 429) {
+        return t_tooManyRequests
+      }
+      message = error.response.data?.message || t_somethingWentWrong
     } else {
-      message = error.message || 'Something went wrong'
+      message = error.message || t_somethingWentWrong
     }
   } else if (error instanceof Error) {
     message = error.message
@@ -20,9 +30,9 @@ export const getErrorMessage = (error: unknown): string => {
     'error' in error &&
     'status' in error
   ) {
-    message = (error.error as string) || 'Something went wrong'
+    message = (error.error as string) || t_somethingWentWrong
   } else {
-    message = 'Something went wrong' // TODO: internationalise
+    message = t_somethingWentWrong
   }
 
   return message
