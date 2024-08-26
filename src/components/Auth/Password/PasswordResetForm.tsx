@@ -31,7 +31,7 @@ const PasswordResetForm = () => {
 
   const token = searchParams.get('token') ?? ''
 
-  const [passwordInputType, ToggleIcon] = useShowPassword({ size: 20 })
+  const [passwordInputType, ToggleIcon] = useShowPassword({ size: 18 })
   const { info, setInfoMessage } = useInfo()
 
   const isError = info.type === 'error'
