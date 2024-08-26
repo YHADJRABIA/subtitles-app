@@ -69,8 +69,7 @@ export const Button = ({
       aria-disabled={!isClickable}
       onClick={handleClick}
     >
-      {isLoading ? <Loader size={17} /> : children}{' '}
-      {/* TODO: fix minor layout shift due to loader */}
+      {isLoading ? <Loader className={styles.loader} /> : children}
     </Typography>
   ) : null
 }

@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './Subfield.module.scss'
 import { MdErrorOutline as ErrorIcon } from 'react-icons/md'
 import cn from 'classnames'
+import Typography from '../UI/Typography'
 
 interface PropTypes {
   label?: string
@@ -16,16 +17,16 @@ const Subfield = ({ label, hasIcon, isShown }: PropTypes) => {
         visible: isShown,
       })}
     >
-      {hasIcon && <ErrorIcon size={14} className={styles.errorIcon} />}
-      <small
+      {hasIcon && <ErrorIcon className={styles.errorIcon} />}
+      <Typography
+        tag="small"
+        size="xxs"
         className={styles.text}
-        style={{
-          color: hasIcon ? 'var(--primary-red-color)' : undefined,
-        }}
+        color={hasIcon ? 'var(--primary-red-color)' : undefined}
         title={label}
       >
         {label}
-      </small>
+      </Typography>
     </div>
   )
 }

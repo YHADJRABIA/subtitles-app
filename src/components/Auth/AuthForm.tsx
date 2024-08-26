@@ -49,7 +49,7 @@ function AuthForm({ type }: PropTypes) {
   const searchParams = useSearchParams()
   const queryParamEmail = searchParams.get('email') ?? ''
   const [isLoginForm, isRegisterForm] = [type === 'login', type === 'register']
-  const [passwordInputType, ToggleIcon] = useShowPassword({ size: 20 })
+  const [passwordInputType, ToggleIcon] = useShowPassword({ size: 18 })
 
   const [t, t_general, t_zod] = [
     useTranslations('Auth'),
@@ -127,7 +127,7 @@ function AuthForm({ type }: PropTypes) {
           {t(isRegisterForm ? 'Register.title' : 'Login.title')}
         </Typography>
         <TextInBox
-          icon={<InfoIcon style={{ fontSize: 18 }} />}
+          icon={InfoIcon}
           label={info.label}
           type={info.type}
           isShown={!!info.label}
