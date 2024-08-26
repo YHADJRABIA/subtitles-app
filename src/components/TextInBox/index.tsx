@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import styles from './TextInBox.module.scss'
 import cn from 'classnames'
 import Typography from '../UI/Typography'
@@ -20,12 +20,25 @@ const TextInBox = ({
   className,
   isShown,
 }: PropTypes) => {
+  const contentRef = useRef<HTMLDivElement | null>(null)
+  const [maxHeight, setMaxHeight] = useState(0)
+
+  useEffect(() => {
+    if (isShown && contentRef.current) {
+      setMaxHeight(contentRef.current.scrollHeight)
+    } else {
+      setMaxHeight(0)
+    }
+  }, [isShown, label])
+
   return (
     <div
+      ref={contentRef}
+      style={{ maxHeight: `${maxHeight}px` }}
       className={cn(
         styles[type],
-        'hidden',
         styles.root,
+        'hidden',
         { visible: isShown },
         className
       )}
