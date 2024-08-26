@@ -8,4 +8,5 @@ Fully internationalised fullstack Next.js application (React/Node.js) with Mongo
 - entirely translated api responses and paths;
 - form validation with zod;
 - api spam-protection middleware system using upstash & redis;
+- entirely responsive UX-UI.
 ...
