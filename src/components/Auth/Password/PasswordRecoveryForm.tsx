@@ -108,7 +108,7 @@ const PasswordRecoveryForm = () => {
         </Button>
       </div>
 
-      <Typography>
+      <Typography align="center">
         {t.rich('PasswordRecovery.fallback', {
           login: text => <Link href={'/login'}>{text}</Link>,
           register: text => <Link href={'/register'}>{text}</Link>,

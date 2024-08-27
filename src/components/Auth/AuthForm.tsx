@@ -206,7 +206,7 @@ function AuthForm({ type }: PropTypes) {
           label={t('continue_with_google')}
         />
       </div>
-      <Typography>
+      <Typography align="center">
         {t.rich(isRegisterForm ? 'Register.fallback' : 'Login.fallback', {
           link: text => (
             <Link href={isRegisterForm ? '/login' : '/register'}>{text}</Link>

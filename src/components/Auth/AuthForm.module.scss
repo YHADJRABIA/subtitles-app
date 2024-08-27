@@ -1,8 +1,11 @@
 .root {
-  justify-content: space-between;
-
+  justify-content: flex-start;
   .separator {
     margin: 2rem 0;
+  }
+
+  & > :last-child {
+    width: 100%;
   }
 }
 
@@ -15,7 +18,7 @@
 }
 
 .wrapper {
-  width: 90%;
+  width: 100%;
   margin-bottom: 4rem;
   @include flexCenter(column, space-evenly);
 
