@@ -107,7 +107,7 @@ const SendVerificationEmailForm = () => {
           {t('SendVerificationEmail.cta')}
         </Button>
       </div>
-      <Typography>
+      <Typography align="center">
         {t.rich('SendVerificationEmail.fallback', {
           login: text => (
             <Link href={isValid ? `/login?email=${email}` : '/login'}>

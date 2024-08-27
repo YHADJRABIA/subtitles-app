@@ -116,12 +116,9 @@ const PasswordResetForm = () => {
           {t('PasswordReset.cta')}
         </Button>
       </div>
-
-      {isError ? (
-        <Link href="/password/recovery">{t('PasswordReset.cta_error')}</Link>
-      ) : (
-        <Link href="/login">{t('PasswordReset.fallback')}</Link>
-      )}
+      <Link href={isError ? '/password/recovery' : '/login'}>
+        {t(isError ? 'PasswordReset.cta_error' : 'PasswordReset.fallback')}
+      </Link>
     </form>
   )
 }
