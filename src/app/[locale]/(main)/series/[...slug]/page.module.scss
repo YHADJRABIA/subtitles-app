@@ -23,19 +23,17 @@
 
 .leftContainer {
   @include flexCenter(column, space-between, flex-start);
-  @include respond-to('medium') {
-    max-width: min(50%, 70rem);
-  }
+  width: min(70rem, 100%);
 }
 
 .rightContainer {
   margin: 0 -2rem;
+  flex: 1;
   & > div {
     gap: 2rem;
   }
   @include respond-to('medium') {
     margin: unset;
-    flex: 1;
   }
 }
 .rightSubContainer {
