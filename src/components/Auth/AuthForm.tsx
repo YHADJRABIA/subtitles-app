@@ -90,13 +90,14 @@ function AuthForm({ type }: PropTypes) {
     try {
       const res = isRegisterForm
         ? await handleRegister(user)
-        : ((await handleCredentialsLogin(user)) as SignInResponse)
+        : await handleCredentialsLogin(user)
 
       if (isLoginForm) {
-        if (
-          (res as SignInResponse).ok &&
-          (res as SignInResponse).error === null
-        ) {
+        res
+        const isSuccessfulLogin =
+          (res as SignInResponse).ok && (res as SignInResponse).error === null
+
+        if (isSuccessfulLogin) {
           // Redirect if successful login
           router.push(DEFAULT_LOGIN_REDIRECT_ROUTE as string)
         } else {
@@ -145,7 +146,7 @@ function AuthForm({ type }: PropTypes) {
           name="email"
           label={t('email')}
           subLabel={{
-            text: errors?.email?.message as string,
+            text: errors?.email?.message,
             isShown: fieldState.email.isTouched,
           }}
           testId={isRegisterForm ? 'register-email' : 'login-email'}
@@ -162,7 +163,7 @@ function AuthForm({ type }: PropTypes) {
           testId={isRegisterForm ? 'register-password' : 'login-password'}
           label={t('password')}
           subLabel={{
-            text: errors?.password?.message as string,
+            text: errors?.password?.message,
             isShown: fieldState.password.isTouched,
             isInfo: isRegisterForm,
           }}
