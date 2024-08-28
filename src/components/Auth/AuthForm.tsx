@@ -143,6 +143,7 @@ function AuthForm({ type }: PropTypes) {
           <Typography
             className={styles.resendEmail}
             size="xxs"
+            weight="semiBold"
             link={{
               href: isValidEmail
                 ? `/send-verification-email?email=${email}`

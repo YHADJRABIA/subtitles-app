@@ -27,6 +27,7 @@ export const generateMetadata = async ({
   const t = await getTranslations({ locale, namespace: 'Metadata' })
 
   return {
+    metadataBase: new URL(websiteUrl),
     title: `${t('prefix')} ${t('NotFound.title')}`,
     description: t('NotFound.description'),
     openGraph: {

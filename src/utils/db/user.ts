@@ -34,6 +34,17 @@ export const updateNameById = async (id: string, name: string) => {
   }
 }
 
+export const verifyEmailByUserId = async (id: string) => {
+  try {
+    return await UserModel.updateOne({ _id: id }, { emailVerified: new Date() })
+  } catch (err) {
+    console.error(
+      "Error updating user's verifiedEmail by id:",
+      getErrorMessage(err)
+    )
+  }
+}
+
 const restrictedFields = [
   'createdAt',
   'email',
@@ -47,18 +58,18 @@ export const updateUserById = async (
   updateData: Partial<UserAPIType>
 ) => {
   try {
-    const filteredData = Object.fromEntries(
+    const allowedFields = Object.fromEntries(
       Object.entries(updateData).filter(
         ([key]) => !restrictedFields.includes(key)
       )
     )
 
-    if (!Object.keys(filteredData).length) {
-      console.error('No valid fields to update.')
+    if (!Object.keys(allowedFields).length) {
+      console.error('Error updating user by id: No valid fields to update.')
       return null
     }
 
-    return await UserModel.findByIdAndUpdate(id, filteredData, {
+    return await UserModel.findByIdAndUpdate(id, allowedFields, {
       new: true,
       runValidators: true,
     })
