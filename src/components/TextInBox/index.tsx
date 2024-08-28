@@ -13,6 +13,8 @@ interface PropTypes {
   isShown: boolean
 }
 
+const VERTICAL_PADDING = 15 // 1.5 rem
+
 const TextInBox = ({
   label,
   icon: Icon,
@@ -25,7 +27,7 @@ const TextInBox = ({
 
   useEffect(() => {
     if (isShown && contentRef.current) {
-      setMaxHeight(contentRef.current.scrollHeight)
+      setMaxHeight(contentRef.current.scrollHeight + VERTICAL_PADDING) // Vertical padding of root, to not cram container
     } else {
       setMaxHeight(0)
     }
