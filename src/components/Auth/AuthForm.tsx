@@ -66,7 +66,7 @@ function AuthForm({ type }: PropTypes) {
     getFieldState,
     handleSubmit,
     getValues,
-    formState: { errors, isValid, isSubmitting },
+    formState: { errors, isValid, isSubmitting, isSubmitSuccessful },
   } = useForm({
     resolver: zodResolver(
       isRegisterForm
@@ -113,6 +113,8 @@ function AuthForm({ type }: PropTypes) {
     }
   }
 
+  const showResendEmail = isRegisterForm && isSubmitSuccessful && isSuccessIcon
+
   // TODO: Add Google Recaptcha to prevent abuse + improve UX with resend validation email
   return (
     <form
@@ -135,7 +137,21 @@ function AuthForm({ type }: PropTypes) {
           label={info.label}
           type={info.type}
           isShown={!!info.label}
+          className={styles.formMessage}
         />
+        {showResendEmail && (
+          <Typography
+            className={styles.resendEmail}
+            size="xxs"
+            link={{
+              href: isValidEmail
+                ? `/send-verification-email?email=${email}`
+                : '/send-verification-email',
+            }}
+          >
+            {t('Register.resend_email')}
+          </Typography>
+        )}
 
         <Field
           className={styles.emailField}
@@ -164,7 +180,7 @@ function AuthForm({ type }: PropTypes) {
           label={t('password')}
           subLabel={{
             text: errors?.password?.message,
-            isShown: fieldState.password.isTouched,
+            isShown: true,
             isInfo: isRegisterForm,
           }}
           leftIcon={{ src: PasswordIcon, title: t('password') }}
