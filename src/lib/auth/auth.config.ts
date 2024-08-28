@@ -215,8 +215,9 @@ export const authOptions: NextAuthOptions = {
             // Update only empty fields and lastLogin
             const updatedFields: Partial<UserAPIType> = {
               lastLogin: new Date(),
-              ...(existingUser.name.length ? {} : { name }),
-              ...(existingUser.image.length ? {} : { image }),
+              ...(existingUser?.name?.length ? {} : { name }),
+              ...(existingUser?.image?.length ? {} : { image }),
+              emailVerified: new Date(),
             }
 
             const updatedUser = await updateUserById(
@@ -230,10 +231,9 @@ export const authOptions: NextAuthOptions = {
               lastLogin: existingUser.lastLogin, // Previous login
               createdAt: updatedUser.createdAt,
               updatedAt: updatedUser.updatedAt, // TODO: update accordingly
-              isVerifiedEmail: true,
             })
 
-            return updatedUser
+            return user
           }
 
           const newUser = new UserModel({

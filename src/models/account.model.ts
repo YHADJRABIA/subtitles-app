@@ -11,5 +11,7 @@ export const accountSchema = new Schema({
   providerAccountId: String,
 })
 
+accountSchema.index({ 'accounts.userId': 1 }, { unique: true, sparse: true })
+
 export const AccountModel =
   mongoose.models.Account || mongoose.model('Account', accountSchema)
