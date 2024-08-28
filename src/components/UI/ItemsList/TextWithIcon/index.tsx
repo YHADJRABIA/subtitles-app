@@ -19,8 +19,8 @@ const TextWithIcon = ({
 }: TextWithIconProps) => {
   return (
     <div className={cn(styles.root, className)}>
-      <span className={styles.icon}>
-        <Icon size={20} />
+      <span className={styles.iconContainer}>
+        <Icon className={styles.icon} />
       </span>
 
       <div className={styles.textContainer}>
