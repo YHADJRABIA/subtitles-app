@@ -66,7 +66,7 @@ function AuthForm({ type }: PropTypes) {
     getFieldState,
     handleSubmit,
     getValues,
-    formState: { errors, isValid, isSubmitting },
+    formState: { errors, isValid, isSubmitting, isSubmitSuccessful },
   } = useForm({
     resolver: zodResolver(
       isRegisterForm
@@ -90,13 +90,14 @@ function AuthForm({ type }: PropTypes) {
     try {
       const res = isRegisterForm
         ? await handleRegister(user)
-        : ((await handleCredentialsLogin(user)) as SignInResponse)
+        : await handleCredentialsLogin(user)
 
       if (isLoginForm) {
-        if (
-          (res as SignInResponse).ok &&
-          (res as SignInResponse).error === null
-        ) {
+        res
+        const isSuccessfulLogin =
+          (res as SignInResponse).ok && (res as SignInResponse).error === null
+
+        if (isSuccessfulLogin) {
           // Redirect if successful login
           router.push(DEFAULT_LOGIN_REDIRECT_ROUTE as string)
         } else {
@@ -111,6 +112,8 @@ function AuthForm({ type }: PropTypes) {
       setInfoMessage(await getErrorMessage(err), 'error')
     }
   }
+
+  const showResendEmail = isRegisterForm && isSubmitSuccessful && isSuccessIcon
 
   // TODO: Add Google Recaptcha to prevent abuse + improve UX with resend validation email
   return (
@@ -134,7 +137,21 @@ function AuthForm({ type }: PropTypes) {
           label={info.label}
           type={info.type}
           isShown={!!info.label}
+          className={styles.formMessage}
         />
+        {showResendEmail && (
+          <Typography
+            className={styles.resendEmail}
+            size="xxs"
+            link={{
+              href: isValidEmail
+                ? `/send-verification-email?email=${email}`
+                : '/send-verification-email',
+            }}
+          >
+            {t('Register.resend_email')}
+          </Typography>
+        )}
 
         <Field
           className={styles.emailField}
@@ -145,7 +162,7 @@ function AuthForm({ type }: PropTypes) {
           name="email"
           label={t('email')}
           subLabel={{
-            text: errors?.email?.message as string,
+            text: errors?.email?.message,
             isShown: fieldState.email.isTouched,
           }}
           testId={isRegisterForm ? 'register-email' : 'login-email'}
@@ -162,8 +179,8 @@ function AuthForm({ type }: PropTypes) {
           testId={isRegisterForm ? 'register-password' : 'login-password'}
           label={t('password')}
           subLabel={{
-            text: errors?.password?.message as string,
-            isShown: fieldState.password.isTouched,
+            text: errors?.password?.message,
+            isShown: true,
             isInfo: isRegisterForm,
           }}
           leftIcon={{ src: PasswordIcon, title: t('password') }}

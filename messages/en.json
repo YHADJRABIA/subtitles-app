@@ -1,5 +1,6 @@
 {
   "Metadata": {
+    "site_name": "РуSubs",
     "prefix": "РуSubs | ",
     "Homepage": {
       "title": "Homepage",
@@ -189,7 +190,8 @@
       "cta": "Create account",
       "fallback": "Already have an account? <link>Login here</link>",
       "email_already_taken": "Email already taken",
-      "account_created": "Account successfully created! Verification email sent"
+      "account_created": "Account successfully created! Verification email sent",
+      "resend_email": "Email not received?"
     },
     "VerifyEmail": {
       "loading": "Verifying your email",
