@@ -14,8 +14,10 @@
   background-color: var(--primary-white-color);
   @include flexCenter(column, space-evenly);
   flex-wrap: nowrap;
+  gap: 2rem;
 
   @include respond-to('large') {
+    gap: 1rem;
     flex: unset;
     width: 70rem;
     height: min-content;
