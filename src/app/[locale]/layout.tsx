@@ -32,7 +32,7 @@ export const generateMetadata = async ({
     openGraph: {
       title: t('site_name'),
       description: t('Homepage.description'),
-      url: websiteUrl,
+      url: websiteUrl, // Doesn't accept localhost:3000
       siteName: t('site_name'),
       images: [
         {
