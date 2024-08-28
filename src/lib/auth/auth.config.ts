@@ -195,9 +195,6 @@ export const authOptions: NextAuthOptions = {
         try {
           // Deny access if unverified email
           if (!isVerifiedEmail) throw new Error(t('unverified_email')) // TODO: Make status 400
-          /*           return NextResponse.redirect(
-            new URL(DEFAULT_LOGIN_REDIRECT_ROUTE, 'localhost:3000/')
-          ) */
 
           /*           if (user?.error.status === 429) {
             throw new Error(t('too_many_api_calls'))
@@ -239,7 +236,7 @@ export const authOptions: NextAuthOptions = {
               id: existingUser._id,
               lastLogin: existingUser.lastLogin, // Previous login
               createdAt: updatedUser.createdAt,
-              updatedAt: updatedUser.updatedAt, // TODO: update accordingly
+              updatedAt: updatedUser.updatedAt,
             })
 
             return user
