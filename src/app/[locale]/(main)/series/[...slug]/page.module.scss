@@ -23,7 +23,10 @@
 
 .leftContainer {
   @include flexCenter(column, space-between, flex-start);
-  width: min(70rem, 100%);
+  width: 100%;
+  @include respond-to('medium') {
+    width: 60rem;
+  }
 }
 
 .rightContainer {
