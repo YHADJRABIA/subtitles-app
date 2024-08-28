@@ -13,7 +13,7 @@ interface PropTypes {
   isShown: boolean
 }
 
-const VERTICAL_PADDING = 15 // 1.5 rem
+const VERTICAL_PADDING = 20 // 2 rem
 
 const TextInBox = ({
   label,
