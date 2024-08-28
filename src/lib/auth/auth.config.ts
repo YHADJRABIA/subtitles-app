@@ -6,7 +6,12 @@ import { connectDB } from '@/lib/mongodb'
 import { UserModel } from '@/models/user.model'
 import { UserAPIType } from '@/types/user'
 import { isDevelopment } from '@/utils/general'
-import { getUserByEmail, updateNameById, updateUserById } from '@/utils/db/user'
+import {
+  getUserByEmail,
+  updateNameById,
+  updateUserById,
+  verifyEmailByUserId,
+} from '@/utils/db/user'
 import { getErrorMessage, getZodErrors } from '@/utils/errors'
 import { AccountLoginValidator } from '@/types/schemas/auth'
 import { getTranslations } from 'next-intl/server'
@@ -212,12 +217,16 @@ export const authOptions: NextAuthOptions = {
           const existingUser = await getUserByEmail(email)
 
           if (existingUser) {
-            // Update only empty fields and lastLogin
+            // Verify user's existing account if user logs in with Google
+            if (!existingUser.emailVerified) {
+              await verifyEmailByUserId(existingUser._id)
+            }
+
+            // Update lastLogin & empty name & image
             const updatedFields: Partial<UserAPIType> = {
               lastLogin: new Date(),
               ...(existingUser?.name?.length ? {} : { name }),
               ...(existingUser?.image?.length ? {} : { image }),
-              emailVerified: new Date(),
             }
 
             const updatedUser = await updateUserById(
