@@ -4,7 +4,6 @@ import React, { useState } from 'react'
 import cn from 'classnames'
 import styles from './DeleteAccountButton.module.scss'
 import { Button } from '@/components/UI/Button'
-import { useSession } from 'next-auth/react'
 import { handleDeleteUserById } from '@/actions/user'
 import { useModal } from '@/hooks/useModal'
 import ConfirmationModal from '@/components/Modals/ConfirmationModal'
@@ -15,15 +14,12 @@ import { handleLogout } from '@/actions/auth'
 
 interface PropTypes {
   className?: string
+  userId: string
 }
 
-const DeleteAccountButton = ({ className }: PropTypes) => {
-  const { data: session, status } = useSession()
-
+const DeleteAccountButton = ({ className, userId }: PropTypes) => {
   const t = useTranslations('Dashboard.Account')
-  const [isProcessing, setIsProcessing] = useState(false)
-
-  const isLoading = status === 'loading' || isProcessing
+  const [isLoading, setIsLoading] = useState(false)
 
   const { openModal, closeModal } = useModal()
 
@@ -42,13 +38,12 @@ const DeleteAccountButton = ({ className }: PropTypes) => {
   }
 
   const handleDelete = async () => {
-    const userId = session?.user?.id
     if (!userId) {
       notify('error', t('deletion_failed'))
       return
     }
 
-    setIsProcessing(true)
+    setIsLoading(true)
     try {
       const res = await handleDeleteUserById(userId)
       if (res?.data.success) {
@@ -58,7 +53,7 @@ const DeleteAccountButton = ({ className }: PropTypes) => {
     } catch (err) {
       notify('error', (await getErrorMessage(err)) || t('deletion_failed'))
     } finally {
-      setIsProcessing(false)
+      setIsLoading(false)
     }
   }
 
