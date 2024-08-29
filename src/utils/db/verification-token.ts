@@ -35,3 +35,15 @@ export const deleteVerificationTokenById = async (id: string) => {
     )
   }
 }
+
+export const deleteVerificationTokenByEmail = async (email: string) => {
+  try {
+    const verificationToken = await VerificationTokenModel.deleteOne({ email })
+    return verificationToken
+  } catch (err) {
+    console.error(
+      'Error deleting verification token by email:',
+      getErrorMessage(err)
+    )
+  }
+}

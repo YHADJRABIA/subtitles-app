@@ -17,6 +17,7 @@ import { AccountLoginValidator } from '@/types/schemas/auth'
 import { getTranslations } from 'next-intl/server'
 import { getNextLocale } from '@/utils/cookies'
 import { JWT } from 'next-auth/jwt'
+import { deleteVerificationTokenByEmail } from '@/utils/db/verification-token'
 
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, NEXTAUTH_SECRET } = process.env
 
@@ -216,7 +217,10 @@ export const authOptions: NextAuthOptions = {
           if (existingUser) {
             // Verify user's existing account if user logs in with Google
             if (!existingUser.emailVerified) {
-              await verifyEmailByUserId(existingUser._id)
+              await Promise.all([
+                verifyEmailByUserId(existingUser._id),
+                deleteVerificationTokenByEmail(existingUser.email),
+              ])
             }
 
             // Update lastLogin & empty name & image
