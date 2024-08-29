@@ -24,7 +24,12 @@ export const generateMetadata = async ({
 
 const DashboardAccountPage = async ({ params: { locale } }: MetaDataProps) => {
   unstable_setRequestLocale(locale)
-  const { creationDate, lastUpdateDate, lastLoginDate } = await getUserSession()
+  const {
+    creationDate,
+    lastUpdateDate,
+    lastLoginDate,
+    id: userId,
+  } = await getUserSession()
 
   const t = await getTranslations({ locale, namespace: 'Dashboard.Account' })
 
@@ -61,7 +66,7 @@ const DashboardAccountPage = async ({ params: { locale } }: MetaDataProps) => {
             </div>
           )}
         </div>
-        <DeleteAccountButton className={styles.cta} />
+        <DeleteAccountButton userId={userId} className={styles.cta} />
       </div>
     </>
   )
