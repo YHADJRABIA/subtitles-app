@@ -37,7 +37,6 @@ import {
 import { useTranslations } from 'next-intl'
 import { useSearchParams } from 'next/navigation'
 import { DEFAULT_LOGIN_REDIRECT_ROUTE } from '@/routes/routes'
-import { SignInResponse } from 'next-auth/react'
 import { AxiosResponse } from 'axios'
 
 interface PropTypes {
@@ -93,15 +92,8 @@ function AuthForm({ type }: PropTypes) {
         : await handleCredentialsLogin(user)
 
       if (isLoginForm) {
-        const isSuccessfulLogin =
-          (res as SignInResponse).ok && (res as SignInResponse).error === null
-
-        if (isSuccessfulLogin) {
-          // Redirect if successful login
-          router.push(DEFAULT_LOGIN_REDIRECT_ROUTE as string)
-        } else {
-          setInfoMessage(await getErrorMessage(res), 'error')
-        }
+        // Redirect if successful login
+        router.push(DEFAULT_LOGIN_REDIRECT_ROUTE as string)
       }
 
       if (isRegisterForm) {
