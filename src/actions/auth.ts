@@ -8,6 +8,7 @@ import {
 import { getErrorMessage } from '@/utils/errors'
 import axios from 'axios'
 import { signIn, signOut } from 'next-auth/react'
+import { NextResponse } from 'next/server'
 
 export const handleLogout = async () => {
   try {
@@ -34,11 +35,11 @@ export const handleCredentialsLogin = async (user: AccountLoginSchema) => {
   try {
     const res = await signIn('credentials', { ...user, redirect: false })
 
-    if (res?.ok && !res.error) {
-      return {
-        message: res?.error,
-        success: true,
-      }
+    if (res?.ok && res.error !== null) {
+      return NextResponse.json(
+        { message: res.error, success: false },
+        { status: 400 }
+      )
     } else if (res?.error) {
       throw new Error(res.error)
     }
