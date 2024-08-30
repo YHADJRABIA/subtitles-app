@@ -195,7 +195,7 @@ export const authOptions: NextAuthOptions = {
       if (withCredentials) {
         try {
           // Deny access if unverified email
-          if (!isVerifiedEmail) throw new Error(t('unverified_email')) // TODO: Make status 400
+          if (!isVerifiedEmail) throw new Error(t('unverified_email'))
 
           /*           if (user?.error.status === 429) {
             throw new Error(t('too_many_api_calls'))
