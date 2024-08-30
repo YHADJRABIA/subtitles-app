@@ -93,7 +93,6 @@ function AuthForm({ type }: PropTypes) {
         : await handleCredentialsLogin(user)
 
       if (isLoginForm) {
-        res
         const isSuccessfulLogin =
           (res as SignInResponse).ok && (res as SignInResponse).error === null
 
