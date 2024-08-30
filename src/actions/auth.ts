@@ -43,7 +43,7 @@ export const handleCredentialsLogin = async (user: AccountLoginSchema) => {
       throw new Error(res.error)
     }
   } catch (err) {
-    console.error('Error signing in user:', getErrorMessage(err))
+    console.error('Error signing in user:', getErrorMessage(err)) // TODO: fix redirect to /api/auth/error after too many failed logins
     throw err
   }
 }
