@@ -35,11 +35,11 @@ export const handleCredentialsLogin = async (user: AccountLoginSchema) => {
   try {
     const res = await signIn('credentials', { ...user, redirect: false })
 
-    if (res?.ok && res.error !== null) {
-      return NextResponse.json(
-        { message: res.error, success: false },
-        { status: 400 }
-      )
+    if (res?.ok && !res.error) {
+      return {
+        message: '',
+        success: true,
+      }
     } else if (res?.error) {
       throw new Error(res.error)
     }
