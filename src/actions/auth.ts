@@ -8,7 +8,6 @@ import {
 import { getErrorMessage } from '@/utils/errors'
 import axios from 'axios'
 import { signIn, signOut } from 'next-auth/react'
-import { NextResponse } from 'next/server'
 
 export const handleLogout = async () => {
   try {
