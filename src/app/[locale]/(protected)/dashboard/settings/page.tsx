@@ -30,14 +30,8 @@ const DashboardSettingsPage = async ({ params: { locale } }: MetaDataProps) => {
   const t = await getTranslations({ locale, namespace: 'Dashboard.Settings' })
 
   return (
-    <div className={styles.root}>
-      <Typography
-        isFullWidth
-        tag="h1"
-        size="xxl"
-        weight="semiBold"
-        className={styles.title}
-      >
+    <>
+      <Typography isFullWidth tag="h1" size="xxl" weight="semiBold">
         {t('title')}
       </Typography>
 
@@ -72,7 +66,7 @@ const DashboardSettingsPage = async ({ params: { locale } }: MetaDataProps) => {
           {t('edit_email')}
         </Typography>
       </div> */}
-    </div>
+    </>
   )
 }
 

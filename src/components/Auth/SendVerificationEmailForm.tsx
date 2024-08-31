@@ -53,9 +53,9 @@ const SendVerificationEmailForm = () => {
   > = async user => {
     try {
       const res = await handleSendVerificationEmail(user)
-      setInfoMessage(res?.data.message, 'success')
+      setInfoMessage(res.data.message, 'success')
     } catch (err) {
-      setInfoMessage(getErrorMessage(err), 'error')
+      setInfoMessage(await getErrorMessage(err), 'error')
     }
   }
 
@@ -72,7 +72,7 @@ const SendVerificationEmailForm = () => {
         </Typography>
 
         <TextInBox
-          icon={<InfoIcon style={{ fontSize: 18 }} />}
+          icon={InfoIcon}
           label={info.label}
           type={info.type}
           isShown={!!info.label}
@@ -81,7 +81,7 @@ const SendVerificationEmailForm = () => {
         <Field
           className={styles.field}
           autoFocus
-          register={register as any}
+          register={register}
           placeholder="email@domain.com"
           type="email"
           name="email"
@@ -91,12 +91,7 @@ const SendVerificationEmailForm = () => {
             isShown: fieldState.isTouched,
           }}
           testId="verify-email"
-          leftIcon={
-            <EmailIcon
-              style={{ fontSize: 18 }}
-              title={t('email')} // TODO: rework this
-            />
-          }
+          leftIcon={{ src: EmailIcon, title: t('email') }}
         />
 
         <Button
@@ -106,11 +101,13 @@ const SendVerificationEmailForm = () => {
           disabled={!isValid}
           isLoading={isSubmitting}
           type="submit"
+          weight="semiBold"
+          size="xs"
         >
           {t('SendVerificationEmail.cta')}
         </Button>
       </div>
-      <Typography>
+      <Typography align="center">
         {t.rich('SendVerificationEmail.fallback', {
           login: text => (
             <Link href={isValid ? `/login?email=${email}` : '/login'}>

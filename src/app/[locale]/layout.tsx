@@ -7,6 +7,7 @@ import { getTranslations } from 'next-intl/server'
 import { Metadata } from 'next/types'
 import { Locale } from '@/types/locale'
 import { Analytics } from '@vercel/analytics/react'
+import { websiteUrl } from '@/utils/general'
 
 const inter = Inter({ subsets: ['latin', 'cyrillic'], variable: '--font-body' })
 const literate = Literata({
@@ -26,14 +27,29 @@ export const generateMetadata = async ({
   const t = await getTranslations({ locale, namespace: 'Metadata' })
 
   return {
+    metadataBase: new URL(websiteUrl),
     title: `${t('prefix')} ${t('NotFound.title')}`,
     description: t('NotFound.description'),
+    openGraph: {
+      title: t('site_name'),
+      description: t('Homepage.description'),
+      url: websiteUrl, // Doesn't accept localhost:3000
+      siteName: t('site_name'),
+      images: [
+        {
+          url: '/logo.svg',
+          width: 800,
+          height: 600,
+        },
+      ],
+      locale,
+      type: 'website',
+    },
   }
 }
 
-export interface LayoutProps {
+export interface LayoutProps extends MetaDataProps {
   children: ReactNode
-  params: { locale: string }
 }
 
 export default function LocaleLayout({

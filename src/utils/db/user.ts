@@ -1,5 +1,6 @@
 import { UserModel } from '@/models/user.model'
 import { getErrorMessage } from '../errors'
+import { UserAPIType } from '@/types/user'
 
 export const getUserByEmail = async (email: string) => {
   try {
@@ -30,5 +31,50 @@ export const updateNameById = async (id: string, name: string) => {
     return await UserModel.updateOne({ _id: id }, { name })
   } catch (err) {
     console.error("Error updating user's name by id:", getErrorMessage(err))
+  }
+}
+
+export const verifyEmailByUserId = async (id: string) => {
+  try {
+    return await UserModel.updateOne({ _id: id }, { emailVerified: new Date() })
+  } catch (err) {
+    console.error(
+      "Error updating user's verifiedEmail by id:",
+      getErrorMessage(err)
+    )
+  }
+}
+
+const restrictedFields = [
+  'createdAt',
+  'email',
+  'password',
+  'role',
+  'emailVerified',
+]
+
+export const updateUserById = async (
+  id: string,
+  updateData: Partial<UserAPIType>
+) => {
+  try {
+    const allowedFields = Object.fromEntries(
+      Object.entries(updateData).filter(
+        ([key]) => !restrictedFields.includes(key)
+      )
+    )
+
+    if (!Object.keys(allowedFields).length) {
+      console.error('Error updating user by id: No valid fields to update.')
+      return null
+    }
+
+    return await UserModel.findByIdAndUpdate(id, allowedFields, {
+      new: true,
+      runValidators: true,
+    })
+  } catch (err) {
+    console.error('Error updating user:', getErrorMessage(err))
+    return null
   }
 }

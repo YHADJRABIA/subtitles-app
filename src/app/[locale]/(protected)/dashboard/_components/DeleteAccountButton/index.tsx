@@ -1,39 +1,74 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 
 import cn from 'classnames'
 import styles from './DeleteAccountButton.module.scss'
-import Typography from '@/components/UI/Typography'
 import { Button } from '@/components/UI/Button'
-import { useSession } from 'next-auth/react'
 import { handleDeleteUserById } from '@/actions/user'
+import { useModal } from '@/hooks/useModal'
+import ConfirmationModal from '@/components/Modals/ConfirmationModal'
+import { useTranslations } from 'next-intl'
+import { notify } from '@/lib/toastify'
+import { getErrorMessage } from '@/utils/errors'
+import { handleLogout } from '@/actions/auth'
 
 interface PropTypes {
   className?: string
-  label: string
+  userId: string
 }
 
-const DeleteAccountButton = ({ className, label }: PropTypes) => {
-  const { data: session, status /* update */ } = useSession()
+const DeleteAccountButton = ({ className, userId }: PropTypes) => {
+  const t = useTranslations('Dashboard.Account')
+  const [isLoading, setIsLoading] = useState(false)
+
+  const { openModal, closeModal } = useModal()
+
+  const handleOpenModal = () => {
+    openModal({
+      title: t('account_deletion'),
+      content: (
+        <ConfirmationModal
+          message={t('warning_deletion')}
+          onConfirm={handleDelete}
+          onCancel={closeModal}
+          type="warning"
+        />
+      ),
+    })
+  }
 
   const handleDelete = async () => {
-    /*     console.log(session?.user.id) */
-    await handleDeleteUserById('123')
-    // Toast + logout + redirect
+    if (!userId) {
+      notify('error', t('deletion_failed'))
+      return
+    }
+
+    setIsLoading(true)
+    try {
+      const res = await handleDeleteUserById(userId)
+      if (res?.data.success) {
+        await handleLogout()
+        notify('success', res.data.message) // TODO: persist toast after redirection
+      }
+    } catch (err) {
+      notify('error', (await getErrorMessage(err)) || t('deletion_failed'))
+    } finally {
+      setIsLoading(false)
+    }
   }
+
   return (
     <Button
       className={cn(styles.root, className)}
       variation="primary"
       backgroundColor="var(--primary-red-color)"
-      disabled={status === 'loading'}
-      isLoading={status === 'loading'}
-      onClick={handleDelete}
+      disabled={isLoading}
+      isLoading={isLoading}
+      weight="semiBold"
+      size="xs"
+      onClick={handleOpenModal}
     >
-      {/*  TODO: Create CTA button without breaking HTML5 tag nesting guidelines */}
-      <Typography size="xs" weight="semiBold">
-        {label}
-      </Typography>
+      {t('delete_account')}
     </Button>
   )
 }

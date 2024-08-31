@@ -1,9 +1,8 @@
 import { connectDB } from '@/lib/mongodb'
-import { UserModel } from '@/models/user.model'
 import { NextRequest, NextResponse } from 'next/server'
 
 import { getErrorMessage, getZodErrors } from '@/utils/errors'
-import { getUserByEmail } from '@/utils/db/user'
+import { getUserByEmail, verifyEmailByUserId } from '@/utils/db/user'
 import { hasExpired } from '@/utils/date'
 import {
   deleteVerificationTokenById,
@@ -71,10 +70,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Validate associated user's email by setting current date
-    await UserModel.updateOne(
-      { _id: associatedUser.id },
-      { emailVerified: new Date() }
-    )
+    await verifyEmailByUserId(associatedUser.id)
 
     // Remove verification token
     await deleteVerificationTokenById(existingToken.id)

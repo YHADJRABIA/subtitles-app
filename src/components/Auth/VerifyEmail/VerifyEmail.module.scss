@@ -1,6 +1,5 @@
 .root {
   @include flexCenter(column);
-  padding: 0 2rem;
   min-height: 20rem;
   margin-bottom: auto;
   @include respond-to('medium') {
@@ -11,9 +10,7 @@
 .loadingSection {
   @include flexCenter(row);
   flex: 1;
-  & > :first-child {
-    margin-right: 1rem;
-  }
+  gap: 1rem;
 }
 
 .cta {

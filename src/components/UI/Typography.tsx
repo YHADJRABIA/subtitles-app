@@ -1,4 +1,9 @@
-import React, { CSSProperties, HTMLAttributes, ReactNode } from 'react'
+import React, {
+  CSSProperties,
+  HTMLAttributes,
+  MouseEventHandler,
+  ReactNode,
+} from 'react'
 import styles from './Typography.module.scss'
 import cn from 'classnames'
 import { Link } from '@/lib/i18n/navigation'
@@ -28,6 +33,9 @@ export interface TypographyPropTypes extends HTMLAttributes<HTMLElement> {
   link?: LinkType
   className?: string
   children: ReactNode
+  onClick?: MouseEventHandler<HTMLElement>
+  tag?: TagType
+  backgroundColor?: string
 }
 
 const tagMap = {
@@ -54,8 +62,10 @@ const Typography = ({
   children,
   isFullWidth,
   lineHeight = 'regular',
+  onClick,
+  backgroundColor,
   ...props
-}: TypographyPropTypes & { tag?: TagType }) => {
+}: TypographyPropTypes) => {
   const Tag = tagMap[tag]
 
   const PropStyles = {
@@ -63,6 +73,11 @@ const Typography = ({
     lineHeight: lineHeights[lineHeight] || lineHeight,
     textAlign: align,
     color,
+    backgroundColor,
+  }
+
+  const handleClick: MouseEventHandler<HTMLElement> = event => {
+    if (onClick) onClick(event)
   }
 
   return link?.href ? (
@@ -72,7 +87,7 @@ const Typography = ({
       style={PropStyles as CSSProperties}
       className={cn(
         styles.root,
-        { [styles.fullWidth]: isFullWidth, uppercase },
+        { isFullWidth, uppercase },
         size && styles[size],
         className
       )}
@@ -87,10 +102,11 @@ const Typography = ({
       style={PropStyles as CSSProperties}
       className={cn(
         styles.root,
-        { fullWidth: isFullWidth, uppercase },
+        { isFullWidth, uppercase },
         size && styles[size],
         className
       )}
+      onClick={onClick ? handleClick : undefined} // Allows component to remain server component if no onClick is passed
     >
       {children}
     </Tag>

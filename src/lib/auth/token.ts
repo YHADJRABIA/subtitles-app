@@ -10,11 +10,16 @@ import {
 } from '@/utils/db/verification-token'
 import { generateUUIDToken } from '@/utils/random'
 
-// TODO: Put expiration params in env variables and refactor in mail.ts also
+const {
+  EMAIL_VERIFICATION_TOKEN_LIFETIME_HOURS,
+  PASSWORD_RESET_TOKEN_LIFETIME_HOURS,
+} = process.env
 
 export const generateVerificationToken = async (email: string) => {
   // Generate random token
-  const { token, expirationDate } = generateUUIDToken(24) // Not using JWT because storing data in the token is irrelevant here. Token expires in 24 hours
+  const { token, expirationDate } = generateUUIDToken(
+    Number(EMAIL_VERIFICATION_TOKEN_LIFETIME_HOURS)
+  ) // Not using JWT because storing data in the token is irrelevant here. Token expires in 24 hours
 
   // Check if existing token already sent for this email to delete it
   const existingToken = await getVerificationTokenByEmail(email)
@@ -35,7 +40,9 @@ export const generateVerificationToken = async (email: string) => {
 
 export const generatePasswordResetToken = async (email: string) => {
   // Generate random token, valid for 2 hours
-  const { token, expirationDate } = generateUUIDToken(2)
+  const { token, expirationDate } = generateUUIDToken(
+    Number(PASSWORD_RESET_TOKEN_LIFETIME_HOURS)
+  )
 
   // Check if existing token already sent for this email to delete it
   const existingToken = await getPasswordResetTokenByEmail(email)

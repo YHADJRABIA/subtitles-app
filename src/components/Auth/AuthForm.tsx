@@ -37,7 +37,7 @@ import {
 import { useTranslations } from 'next-intl'
 import { useSearchParams } from 'next/navigation'
 import { DEFAULT_LOGIN_REDIRECT_ROUTE } from '@/routes/routes'
-import { SignInResponse } from 'next-auth/react'
+import { AxiosResponse } from 'axios'
 
 interface PropTypes {
   type: 'login' | 'register'
@@ -48,7 +48,7 @@ function AuthForm({ type }: PropTypes) {
   const searchParams = useSearchParams()
   const queryParamEmail = searchParams.get('email') ?? ''
   const [isLoginForm, isRegisterForm] = [type === 'login', type === 'register']
-  const [passwordInputType, ToggleIcon] = useShowPassword({ size: 20 })
+  const [passwordInputType, ToggleIcon] = useShowPassword({ size: 18 })
 
   const [t, t_general, t_zod] = [
     useTranslations('Auth'),
@@ -65,7 +65,7 @@ function AuthForm({ type }: PropTypes) {
     getFieldState,
     handleSubmit,
     getValues,
-    formState: { errors, isValid, isSubmitting },
+    formState: { errors, isValid, isSubmitting, isSubmitSuccessful },
   } = useForm({
     resolver: zodResolver(
       isRegisterForm
@@ -91,14 +91,20 @@ function AuthForm({ type }: PropTypes) {
         ? await handleRegister(user)
         : await handleCredentialsLogin(user)
 
-      setInfoMessage(getErrorMessage(res), isRegisterForm ? 'success' : 'error')
-      // Redirect if successful login
-      if (isLoginForm && (res as SignInResponse)?.ok)
+      if (isLoginForm) {
+        // Redirect if successful login
         router.push(DEFAULT_LOGIN_REDIRECT_ROUTE as string)
+      }
+
+      if (isRegisterForm) {
+        setInfoMessage((res as AxiosResponse)?.data.message, 'success')
+      }
     } catch (err) {
-      setInfoMessage(getErrorMessage(err), 'error')
+      setInfoMessage(await getErrorMessage(err), 'error')
     }
   }
+
+  const showResendEmail = isRegisterForm && isSubmitSuccessful && isSuccessIcon
 
   // TODO: Add Google Recaptcha to prevent abuse + improve UX with resend validation email
   return (
@@ -109,15 +115,35 @@ function AuthForm({ type }: PropTypes) {
       className={styles.root}
     >
       <div className={styles.wrapper}>
-        <Typography className={styles.title} tag="h1" weight="semiBold">
+        <Typography
+          className={styles.title}
+          align="center"
+          tag="h1"
+          weight="semiBold"
+        >
           {t(isRegisterForm ? 'Register.title' : 'Login.title')}
         </Typography>
         <TextInBox
-          icon={<InfoIcon style={{ fontSize: 18 }} />}
+          icon={InfoIcon}
           label={info.label}
           type={info.type}
           isShown={!!info.label}
+          className={styles.formMessage}
         />
+        {showResendEmail && (
+          <Typography
+            className={styles.resendEmail}
+            size="xxs"
+            weight="semiBold"
+            link={{
+              href: isValidEmail
+                ? `/send-verification-email?email=${email}`
+                : '/send-verification-email',
+            }}
+          >
+            {t('Register.resend_email')}
+          </Typography>
+        )}
 
         <Field
           className={styles.emailField}
@@ -128,16 +154,11 @@ function AuthForm({ type }: PropTypes) {
           name="email"
           label={t('email')}
           subLabel={{
-            text: errors?.email?.message as string,
+            text: errors?.email?.message,
             isShown: fieldState.email.isTouched,
           }}
           testId={isRegisterForm ? 'register-email' : 'login-email'}
-          leftIcon={
-            <EmailIcon
-              style={{ fontSize: 18 }}
-              title={t('email')} // TODO: rework this
-            />
-          }
+          leftIcon={{ src: EmailIcon, title: t('email') }}
         />
 
         <Field
@@ -150,26 +171,20 @@ function AuthForm({ type }: PropTypes) {
           testId={isRegisterForm ? 'register-password' : 'login-password'}
           label={t('password')}
           subLabel={{
-            text: errors?.password?.message as string,
-            isShown: fieldState.password.isTouched,
+            text: errors?.password?.message,
+            isShown: true,
             isInfo: isRegisterForm,
           }}
-          leftIcon={
-            <PasswordIcon
-              size={18}
-              title={t('password')} // TODO: rework this
-            />
-          }
-          rightIcon={<ToggleIcon />}
+          leftIcon={{ src: PasswordIcon, title: t('password') }}
+          rightIcon={{ src: ToggleIcon }}
         />
 
         {isLoginForm && (
           <Typography
-            isFullWidth
             className={styles.passwordRecovery}
             align="right"
             weight="semiBold"
-            size="xs"
+            size="xxs"
             link={{
               href: isValidEmail
                 ? `/password/recovery?email=${email}`
@@ -187,6 +202,8 @@ function AuthForm({ type }: PropTypes) {
           disabled={!isValid}
           isLoading={isSubmitting}
           type="submit"
+          weight="semiBold"
+          size="xs"
         >
           {t(isRegisterForm ? 'Register.cta' : 'Login.cta')}
         </Button>
@@ -198,7 +215,7 @@ function AuthForm({ type }: PropTypes) {
           label={t('continue_with_google')}
         />
       </div>
-      <Typography>
+      <Typography align="center">
         {t.rich(isRegisterForm ? 'Register.fallback' : 'Login.fallback', {
           link: text => (
             <Link href={isRegisterForm ? '/login' : '/register'}>{text}</Link>

@@ -1,16 +1,13 @@
 .root {
   width: 100%;
   @include flexCenter(column, flex-start, stretch);
+  gap: 1rem;
 
   background-color: var(--primary-gray-color);
   padding: var(--page-padding);
 
   @include respond-to('medium') {
     border-radius: 1rem;
-  }
-
-  & > :not(:last-of-type) {
-    margin-bottom: 1rem;
   }
 }
 
@@ -19,5 +16,5 @@
 }
 
 .label {
-  margin-right: 1rem;
+  color: var(--tertiary-black-color);
 }

@@ -1,9 +1,16 @@
 .root {
-  justify-content: space-between;
-
+  justify-content: flex-start;
   .separator {
     margin: 2rem 0;
   }
+
+  & > :last-child {
+    width: 100%;
+  }
+}
+
+.formMessage {
+  margin-bottom: 1rem;
 }
 
 .emailField {
@@ -11,14 +18,11 @@
 }
 
 .title {
-  margin: 5rem 0 4rem;
-  @include respond-to('small') {
-    width: 100%;
-  }
+  margin-bottom: 2rem;
 }
 
 .wrapper {
-  width: 90%;
+  width: 100%;
   margin-bottom: 4rem;
   @include flexCenter(column, space-evenly);
 
@@ -36,4 +40,9 @@
   color: var(--secondary-blue-color);
   margin-top: 0.5rem;
   margin-bottom: 2rem;
+  margin-left: auto;
+}
+.resendEmail {
+  color: var(--secondary-blue-color);
+  margin-right: auto;
 }

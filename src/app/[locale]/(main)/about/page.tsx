@@ -11,12 +11,11 @@ import {
   PiTipJarThin,
 } from 'react-icons/pi'
 import { Col, Row } from '@/components/UI/Grid'
+import { MetaDataProps } from '../../layout'
 
 export const generateMetadata = async ({
   params: { locale },
-}: {
-  params: { locale: string }
-}): Promise<Metadata> => {
+}: MetaDataProps): Promise<Metadata> => {
   const t = await getTranslations({ locale, namespace: 'Metadata' })
 
   return {
@@ -99,20 +98,17 @@ export default function AboutPage() {
         {t('title')}
       </Typography>
 
-      <section className={styles.highlights}>
-        <Row>
-          {highlights.map((item, idx) => (
-            <Col key={idx} width={[12, 6, 4]}>
-              <TextWithIcon
-                title={item.title}
-                description={item.description}
-                icon={item.icon}
-                className={styles.textWithIcon}
-              />
-            </Col>
-          ))}
-        </Row>
-      </section>
+      <Row className={styles.highlights} Tag="section">
+        {highlights.map((item, idx) => (
+          <Col key={idx} width={[12, 6, 4]}>
+            <TextWithIcon
+              title={item.title}
+              description={item.description}
+              icon={item.icon}
+            />
+          </Col>
+        ))}
+      </Row>
 
       <section>
         <Typography tag="h2" weight="bold" className={styles.title}>

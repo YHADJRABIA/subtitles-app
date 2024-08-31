@@ -24,21 +24,24 @@
   border-radius: 1rem;
   padding: 1rem 2rem 2rem;
   width: 100vw;
-  height: 75%;
+  height: auto;
+  max-height: 75dvh;
   position: relative;
   @include respond-to('medium') {
     min-width: 50rem;
-    width: min(60%, var(--page-max-width) / 1.5);
+    width: min(60dvh, var(--page-max-width) / 1.5);
   }
 }
 
+.header {
+  @include flexCenter(row, space-between, center);
+  gap: 1rem;
+}
+
 .closeIcon {
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
   background: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: clamp(1.6rem, 3vw, 1.8rem);
   color: var(--primary-black-color);
   cursor: pointer;
   transition: color 0.3s;

@@ -2,12 +2,8 @@
   @include ow;
 }
 
-.fullWidth {
-  width: inherit; // Todo: Find more appropriate name
-}
-
 .xxs {
-  font-size: clamp(1rem, 3vw, 1.2rem);
+  font-size: clamp(1rem, 2.25vw, 1.2rem);
 }
 
 .xs {
@@ -19,7 +15,7 @@
 }
 
 .m {
-  font-size: clamp(1.6rem, 3vw, 1.8rem);
+  font-size: clamp(1.6rem, 4.5vw, 1.8rem);
 }
 
 .l {

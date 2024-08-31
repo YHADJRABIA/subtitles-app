@@ -3,15 +3,14 @@ import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
 import styles from './page.module.scss'
 import Typography from '@/components/UI/Typography'
 import { getUserSession } from '@/utils/session'
-import { formatDate } from '@/utils/date'
 import DeleteAccountButton from '../_components/DeleteAccountButton'
 import { Metadata } from 'next/types'
+import { MetaDataProps } from '@/app/[locale]/layout'
+import DateDisplay from '@/components/DateDisplay'
 
 export const generateMetadata = async ({
   params: { locale },
-}: {
-  params: { locale: string }
-}): Promise<Metadata> => {
+}: MetaDataProps): Promise<Metadata> => {
   const t = await getTranslations({
     locale,
     namespace: 'Metadata.Protected.Account',
@@ -23,25 +22,20 @@ export const generateMetadata = async ({
   }
 }
 
-const DashboardAccountPage = async ({
-  params: { locale },
-}: {
-  params: { locale: string }
-}) => {
+const DashboardAccountPage = async ({ params: { locale } }: MetaDataProps) => {
   unstable_setRequestLocale(locale)
-  const { creationDate, lastUpdateDate } = await getUserSession()
+  const {
+    creationDate,
+    lastUpdateDate,
+    lastLoginDate,
+    id: userId,
+  } = await getUserSession()
 
   const t = await getTranslations({ locale, namespace: 'Dashboard.Account' })
 
   return (
-    <div className={styles.root}>
-      <Typography
-        isFullWidth
-        tag="h1"
-        size="xxl"
-        weight="semiBold"
-        className={styles.title}
-      >
+    <>
+      <Typography isFullWidth tag="h1" size="xxl" weight="semiBold">
         {t('title')}
       </Typography>
       <div className={styles.container}>
@@ -52,24 +46,29 @@ const DashboardAccountPage = async ({
               <Typography weight="semiBold" size="xs">
                 {t('registered_since')}
               </Typography>
-              <Typography size="xxs">{formatDate(creationDate)}</Typography>
+              <DateDisplay date={creationDate} />
             </div>
           )}
-          {lastUpdateDate && ( // TODO: remove condition when also available via Google signin
+          {lastUpdateDate && (
             <div className={styles.field}>
               <Typography weight="semiBold" size="xs">
                 {t('last_update')}
               </Typography>
-              <Typography size="xxs">{formatDate(lastUpdateDate)}</Typography>
+              <DateDisplay date={lastUpdateDate} />
+            </div>
+          )}
+          {lastLoginDate && (
+            <div className={styles.field}>
+              <Typography weight="semiBold" size="xs">
+                {t('last_login')}
+              </Typography>
+              <DateDisplay date={lastLoginDate} showTime />
             </div>
           )}
         </div>
-        <DeleteAccountButton
-          className={styles.cta}
-          label={t('delete_account')}
-        />
+        <DeleteAccountButton userId={userId} className={styles.cta} />
       </div>
-    </div>
+    </>
   )
 }
 

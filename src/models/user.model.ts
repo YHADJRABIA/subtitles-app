@@ -10,7 +10,6 @@ const userSchema = new Schema(
       type: String,
       required: [true, 'Please provide an email'],
       trim: true,
-      unique: true,
     },
 
     password: {
@@ -45,6 +44,9 @@ const userSchema = new Schema(
     timestamps: true,
   }
 )
+
+// Ensure indexes are created correctly
+userSchema.index({ email: 1 }, { unique: true })
 
 export const UserModel =
   mongoose.models.User || mongoose.model('User', userSchema)

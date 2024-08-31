@@ -5,14 +5,15 @@ export type UserType = {
   email: string
   id: string
   isVerifiedEmail: boolean
-  lastUpdateDate: Date
-  creationDate: Date
-  lastLoginDate?: Date
+  lastUpdateDate: string
+  creationDate: string
+  lastLoginDate?: string
   favoriteLocale: Locale
   isTwoFactorEnabled: boolean
 }
 
 export type UserAPIType = DefaultSession['user'] & {
+  id: string
   email: string
   emailVerified?: Date
   createdAt: Date

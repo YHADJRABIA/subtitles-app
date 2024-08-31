@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './SeriesOrigin.module.scss'
+import styles from './SeriesHighlights.module.scss'
 import cn from 'classnames'
 import {
   PiChatCircleDotsThin as LanguageIcon,
@@ -12,12 +12,12 @@ import {
 import Typography from '@/components/UI/Typography'
 import { IconType } from 'react-icons/lib'
 import { useTranslations } from 'next-intl'
-
-/* TODO: relocate to types folder */
-export type SeriesCountry = 'ru' | 'kz'
-export type SeriesLanguage = 'ru' | 'kz'
-export type SeriesGenre = 'comedy'
-export type SeriesNumberOfSeasons = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
+import {
+  SeriesCountry,
+  SeriesGenre,
+  SeriesLanguage,
+  SeriesNumberOfSeasons,
+} from '@/types/series'
 
 interface PropTypes {
   country: SeriesCountry
@@ -28,7 +28,7 @@ interface PropTypes {
   className?: string
 }
 
-const SeriesOrigin = ({
+const SeriesHighlights = ({
   country,
   language,
   releaseYear,
@@ -74,7 +74,7 @@ const SeriesOrigin = ({
   )
 }
 
-export default SeriesOrigin
+export default SeriesHighlights
 
 const Field = ({
   icon: Icon,
@@ -86,7 +86,7 @@ const Field = ({
   title: string
 }) => (
   <span className={styles.field}>
-    <Icon className={styles.icon} size={20} title={title} />
+    <Icon size={20} title={title} />
     <Typography size="xs" weight="semiBold">
       {value}
     </Typography>

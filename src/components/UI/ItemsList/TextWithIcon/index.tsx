@@ -19,12 +19,12 @@ const TextWithIcon = ({
 }: TextWithIconProps) => {
   return (
     <div className={cn(styles.root, className)}>
-      <span className={styles.icon}>
-        <Icon size={20} />
+      <span className={styles.iconContainer}>
+        <Icon className={styles.icon} />
       </span>
 
       <div className={styles.textContainer}>
-        <Typography tag="h3" size="m" weight="bold" className={styles.title}>
+        <Typography tag="h3" size="m" weight="bold">
           {title}
         </Typography>
 

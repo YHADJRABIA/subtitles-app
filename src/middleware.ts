@@ -11,6 +11,8 @@ import {
 import { DEFAULT_LOGIN_REDIRECT_ROUTE, LOGIN_ROUTE } from './routes/routes'
 import { getToken } from 'next-auth/jwt'
 import { Pathname } from './types/pathnames'
+import { Ratelimit } from '@upstash/ratelimit'
+import { kv } from '@vercel/kv'
 
 const intlMiddleware = createMiddleware({
   defaultLocale,
@@ -18,6 +20,34 @@ const intlMiddleware = createMiddleware({
   locales,
   pathnames,
 })
+
+// Initialise rate limiter for API routes
+const ratelimit = new Ratelimit({
+  redis: kv,
+  limiter: Ratelimit.slidingWindow(20, '25s'),
+})
+
+// Middleware for rate limiting API requests
+export async function apiRateLimitMiddleware(req: NextRequestWithAuth) {
+  const ip = req.ip ?? '127.0.0.1'
+  const { limit, reset, remaining } = await ratelimit.limit(ip)
+
+  if (remaining === 0) {
+    return NextResponse.json(
+      { message: 'Too many API calls', success: false },
+      {
+        status: 429,
+        headers: {
+          'X-RateLimit-Limit': limit.toString(),
+          'X-RateLimit-Remaining': remaining.toString(),
+          'X-RateLimit-Reset': reset.toString(),
+        },
+      }
+    )
+  }
+
+  return NextResponse.next()
+}
 
 // AuthMiddleware is skipped if user hits public routes
 const authMiddleware = withAuth(
@@ -41,16 +71,19 @@ const authMiddleware = withAuth(
 // Dispatches request to middlewares depending on conditions
 export default async function middleware(req: NextRequestWithAuth) {
   const { pathname } = req.nextUrl
+
+  // Handle API rate limiting
+  if (pathname.startsWith('/api')) {
+    return apiRateLimitMiddleware(req)
+  }
+
   const isProtectedRoute = isProtectedPath(pathname as Pathname)
-
-  // TODO: limit /api calls from same ip to prevent potential abuse
-
   // Needed outside of authMiddleware to access session (has to be the same as in authOptions at /auth.config.ts)
   const secret = process.env.NEXTAUTH_SECRET
   const session = await getToken({ req, secret })
   const isConnected = !!session
 
-  // Prevent authenticated user from reaching login/register pages by redirecting away
+  // Redirect authenticated users away from login/register pages
   if (isConnected && isLoginOrRegisterPath(pathname as Pathname)) {
     return NextResponse.redirect(new URL(DEFAULT_LOGIN_REDIRECT_ROUTE, req.url))
   }
@@ -62,5 +95,5 @@ export default async function middleware(req: NextRequestWithAuth) {
 }
 
 export const config = {
-  matcher: ['/((?!api|_next|.*\\..*).*)'], // Middleware triggers whenever route matches this regex
+  matcher: ['/api/(.*)', '/((?!_next|.*\\..*).*)'],
 }

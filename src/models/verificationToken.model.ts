@@ -6,7 +6,6 @@ const verificationTokenSchema = new Schema({
     type: String,
     required: [true, 'Please provide an email'],
     trim: true,
-    unique: true,
   },
   token: {
     type: String,
