@@ -195,7 +195,14 @@ export const authOptions: NextAuthOptions = {
       if (withCredentials) {
         try {
           // Deny access if unverified email
-          if (!isVerifiedEmail) throw new Error(t('unverified_email'))
+          if (!isVerifiedEmail) {
+            throw new Error(t('unverified_email'))
+          } else {
+            // Update database's lastLogin with current time
+            await updateUserById(user.id, { lastLogin: new Date() })
+
+            return user // Holds previous lastLogin
+          }
 
           /*           if (user?.error.status === 429) {
             throw new Error(t('too_many_api_calls'))
