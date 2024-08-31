@@ -200,8 +200,6 @@ export const authOptions: NextAuthOptions = {
           } else {
             // Update database's lastLogin with current time
             await updateUserById(user.id, { lastLogin: new Date() })
-
-            return user // Holds previous lastLogin
           }
 
           /*           if (user?.error.status === 429) {
