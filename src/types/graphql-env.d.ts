@@ -2578,7 +2578,7 @@ export type introspection = {
         }
       }
     }
-    SiteLocale: { name: 'SiteLocale'; enumValues: 'en' }
+    SiteLocale: { name: 'SiteLocale'; enumValues: Locale }
     String: unknown
     StringMatchesFilter: {
       kind: 'INPUT_OBJECT'
@@ -4038,6 +4038,7 @@ export type introspection = {
 }
 
 import * as gqlTada from 'gql.tada'
+import { Locale } from './locale'
 
 declare module 'gql.tada' {
   interface setupSchema {
