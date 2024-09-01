@@ -12,6 +12,10 @@ import {
 } from 'react-icons/pi'
 import { Col, Row } from '@/components/UI/Grid'
 import { MetaDataProps } from '../../layout'
+import { executeQuery } from '@/lib/datocms/executeQuery'
+import { graphql } from '@/lib/datocms/graphql'
+import { draftMode } from 'next/headers'
+import { notFound } from 'next/navigation'
 
 export const generateMetadata = async ({
   params: { locale },
@@ -24,55 +28,46 @@ export const generateMetadata = async ({
   }
 }
 
-export default function AboutPage() {
-  const t = useTranslations('About')
+/**
+ * The GraphQL query that will be executed for this route to generate the page
+ * content and metadata.
+ *
+ * Thanks to gql.tada, the result will be fully typed!
+ */
+const getAboutPage = graphql(`
+  query AboutPageQuery($locale: SiteLocale) {
+    aboutPage {
+      title(locale: $locale, fallbackLocales: en)
+      faq(locale: $locale, fallbackLocales: en) {
+        title
+        content {
+          question
+          answer
+        }
+      }
+    }
+  }
+`)
 
-  // TODO: Fetch from CMS instead
-  const faq = [
-    {
-      title: t('FAQ.is_it_free'),
-      body: t('FAQ.entirely_free'),
-    },
-    {
-      title: t('FAQ.how_do_you_support_yourself'),
-      body: t('FAQ.from_donations'),
-    },
+export default async function AboutPage({ params: { locale } }: MetaDataProps) {
+  const t = await getTranslations({ locale, namespace: 'About' })
+  const { isEnabled: isDraftModeEnabled } = draftMode()
 
-    {
-      title: t('FAQ.what_motivates_you'),
-      body: t('FAQ.motivation_for_subtitles'),
-    },
+  const { aboutPage } = await executeQuery(getAboutPage, {
+    variables: { locale },
+    includeDrafts: isDraftModeEnabled,
+  })
 
-    {
-      title: t('FAQ.are_you_a_professional_translator'),
-      body: t('FAQ.part_time_translator'),
-    },
+  if (!aboutPage) {
+    notFound()
+  }
 
-    {
-      title: t('FAQ.where_do_you_find_series'),
-      body: t('FAQ.series_found'),
-    },
+  const { title, faq } = aboutPage
 
-    {
-      title: t('FAQ.are_subtitles_exclusive'),
-      body: t('FAQ.exclusive_subtitles'),
-    },
-
-    {
-      title: t('FAQ.how_to_read_subtitles'),
-      body: t('FAQ.use_software'),
-    },
-
-    {
-      title: t('FAQ.how_long_for_episode'),
-      body: t('FAQ.a_whole_day'),
-    },
-
-    {
-      title: t('FAQ.where_to_get_series'),
-      body: t('FAQ.from_free_websites'),
-    },
-  ]
+  const faqItems = faq?.content.map(({ question, answer }) => ({
+    title: question,
+    body: answer,
+  }))
 
   const highlights = [
     {
@@ -95,7 +90,7 @@ export default function AboutPage() {
   return (
     <div className={styles.root}>
       <Typography tag="h1" weight="bold" className={styles.title}>
-        {t('title')}
+        {title}
       </Typography>
 
       <Row className={styles.highlights} Tag="section">
@@ -112,10 +107,10 @@ export default function AboutPage() {
 
       <section>
         <Typography tag="h2" weight="bold" className={styles.title}>
-          {t('FAQ.title')}
+          {faq.title}
         </Typography>
         <Accordion
-          items={faq}
+          items={faqItems}
           backgroundColor="var(--primary-gray-color)"
           expandMultiple
           hasBackgroundEffect
