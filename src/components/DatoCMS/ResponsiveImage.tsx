@@ -2,7 +2,7 @@ import { type FragmentOf, graphql, readFragment } from '@/lib/datocms/graphql'
 import { type ImagePropTypes, SRCImage } from 'react-datocms'
 
 /**
- * Let's define the GraphQL fragment needed for the component to function.
+ * GraphQL fragment needed for the component to function.
  *
  * GraphQL fragment colocation keeps queries near the components using them,
  * improving maintainability and encapsulation. Fragment composition enables
@@ -13,7 +13,7 @@ import { type ImagePropTypes, SRCImage } from 'react-datocms'
  *
  * Learn more: https://gql-tada.0no.co/guides/fragment-colocation
  */
-export const ResponsiveImageFragment = graphql(/* GraphQL */ `
+export const ResponsiveImageFragment = graphql(`
   fragment ResponsiveImageFragment on ResponsiveImage {
     # always required
     src
@@ -21,14 +21,14 @@ export const ResponsiveImageFragment = graphql(/* GraphQL */ `
     width
     height
 
-    # not required, but strongly suggested!
+    # not required, but strongly suggested
     alt
     title
 
     # LQIP (base64-encoded)
     base64
 
-    # you can omit 'sizes' if you explicitly pass the 'sizes' prop to the image component
+    # can be omitted if 'sizes' prop is explicitely passed to the image component
     sizes
   }
 `)

@@ -16,7 +16,7 @@ import {
  *
  * Learn more: https://gql-tada.0no.co/guides/fragment-colocation
  */
-export const VideoPlayerFragment = graphql(/* GraphQL */ `
+export const VideoPlayerFragment = graphql(`
   fragment VideoPlayerFragment on VideoFileField {
     video {
       # required: this field identifies the video to be played
