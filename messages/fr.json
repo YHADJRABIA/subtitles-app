@@ -79,19 +79,6 @@
       "support_me": "Me soutenir"
     }
   },
-  "About": {
-    "Highlights": {
-      "discover_new_series": "Séries peu connues",
-      "not_mainstream": "Non disponibles sur les plateformes grand public.",
-
-      "entirely_free": "Entièrement gratuit",
-      "donate_if_you_like": "Les dons sont les bienvenus, mais seulement si vous le souhaitez.",
-
-      "learn_about_cultures": "À la découverte de nouvelles cultures",
-      "ex_ussr": "D'Europe de l'Est, d'Asie centrale & septentrionale, et du Caucase."
-    }
-  },
-
   "Series": {
     "title": "Séries",
     "featured": "À la une :",

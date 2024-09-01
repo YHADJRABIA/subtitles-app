@@ -1,6 +1,5 @@
 import Typography from '@/components/UI/Typography'
 import styles from './page.module.scss'
-import { useTranslations } from 'next-intl'
 import Accordion from '@/components/Accordion'
 import { getTranslations } from 'next-intl/server'
 import { Metadata } from 'next'
@@ -36,21 +35,41 @@ export const generateMetadata = async ({
  */
 const getAboutPage = graphql(`
   query AboutPageQuery($locale: SiteLocale) {
-    aboutPage {
-      title(locale: $locale, fallbackLocales: en)
-      faq(locale: $locale, fallbackLocales: en) {
+    aboutPage(locale: $locale, fallbackLocales: en) {
+      seo {
+        title
+        description
+      }
+
+      title
+
+      faq {
         title
         content {
           question
           answer
         }
       }
+
+      highlights {
+        title
+        block {
+          title
+          description
+          icon
+        }
+      }
     }
   }
 `)
 
+const iconMap = {
+  MonitorIcon: PiMonitorPlayThin,
+  TipJarIcon: PiTipJarThin,
+  TranslateIcon: PiTranslateThin,
+}
+
 export default async function AboutPage({ params: { locale } }: MetaDataProps) {
-  const t = await getTranslations({ locale, namespace: 'About' })
   const { isEnabled: isDraftModeEnabled } = draftMode()
 
   const { aboutPage } = await executeQuery(getAboutPage, {
@@ -62,30 +81,12 @@ export default async function AboutPage({ params: { locale } }: MetaDataProps) {
     notFound()
   }
 
-  const { title, faq } = aboutPage
+  const { title, faq, highlights } = aboutPage
 
   const faqItems = faq?.content.map(({ question, answer }) => ({
     title: question,
     body: answer,
   }))
-
-  const highlights = [
-    {
-      title: t('Highlights.discover_new_series'),
-      description: t('Highlights.not_mainstream'),
-      icon: PiMonitorPlayThin,
-    },
-    {
-      title: t('Highlights.entirely_free'),
-      description: t('Highlights.donate_if_you_like'),
-      icon: PiTipJarThin,
-    },
-    {
-      title: t('Highlights.learn_about_cultures'),
-      description: t('Highlights.ex_ussr'),
-      icon: PiTranslateThin,
-    },
-  ]
 
   return (
     <div className={styles.root}>
@@ -94,15 +95,18 @@ export default async function AboutPage({ params: { locale } }: MetaDataProps) {
       </Typography>
 
       <Row className={styles.highlights} Tag="section">
-        {highlights.map((item, idx) => (
-          <Col key={idx} width={[12, 6, 4]}>
-            <TextWithIcon
-              title={item.title}
-              description={item.description}
-              icon={item.icon}
-            />
-          </Col>
-        ))}
+        {highlights.block.map((item, idx) => {
+          const icon = iconMap[item.icon]
+          return (
+            <Col key={idx} width={[12, 6, 4]}>
+              <TextWithIcon
+                title={item.title}
+                description={item.description}
+                icon={icon}
+              />
+            </Col>
+          )
+        })}
       </Row>
 
       <section>

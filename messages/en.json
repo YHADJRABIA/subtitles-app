@@ -79,18 +79,6 @@
       "support_me": "Support me"
     }
   },
-  "About": {
-    "Highlights": {
-      "discover_new_series": "Lesser-known series",
-      "not_mainstream": "Not available on English-speaking platforms.",
-
-      "entirely_free": "Entirely free",
-      "donate_if_you_like": "Donations are welcome, but only if you choose to.",
-
-      "learn_about_cultures": "Explore new cultures",
-      "ex_ussr": "From Eastern Europe, Central & Northern Asia, and the Caucasus region."
-    }
-  },
   "Series": {
     "title": "Series",
     "featured": "Featured:",
