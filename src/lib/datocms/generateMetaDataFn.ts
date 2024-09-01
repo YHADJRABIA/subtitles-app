@@ -9,7 +9,7 @@ import {
 import { executeQuery } from './executeQuery'
 
 /**
- * Generates a function that fits the Next.js `generateMetadata()` format. This
+ * Generates a function that fits Next.js' `generateMetadata()` format. This
  * automates the creation of meta tags based on the `_seoMetaTags` present in a
  * DatoCMS GraphQL query.
  */
