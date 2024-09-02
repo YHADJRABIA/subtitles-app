@@ -11,6 +11,6 @@ Fully internationalised fullstack Next.js application (React/Node.js) with Mongo
 - api spam-protection middleware system using upstash & redis;
 - entirely responsive UX-UI.
   ...
-(In progress)
 
-**Linking non-auth part to DatoCMS**
+
+## **(In progress) Linking non-auth part to DatoCMS**
