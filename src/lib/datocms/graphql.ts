@@ -9,7 +9,7 @@
 
 import { initGraphQLTada } from 'gql.tada'
 
-import type { introspection } from '@/types/graphql-env'
+import type { introspection } from '@/types/gql/graphql-env'
 
 /**
  * The Content Delivery API exposes a number of custom GraphQL scalar types. For
