@@ -49,6 +49,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@0no-co/graphqlsp": "^1.12.13",
     "@next/eslint-plugin-next": "^14.2.7",
     "@svgr/webpack": "^8.1.0",
     "@types/bcryptjs": "^2.4.6",
