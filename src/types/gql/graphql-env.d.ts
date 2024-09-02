@@ -4037,8 +4037,7 @@ export type introspection = {
   }
 }
 
-import * as gqlTada from 'gql.tada'
-import { Locale } from './locale'
+import { Locale } from '../locale'
 
 declare module 'gql.tada' {
   interface setupSchema {
