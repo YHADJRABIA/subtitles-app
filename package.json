@@ -14,7 +14,7 @@
     "format": "prettier --write .",
     "test-all": "npm run check-format && npm run check-lint && npm run check-types && npm run build",
     "prepare": "husky",
-    "generate-schema": "dotenv -c -- bash -c 'gql.tada generate schema https://graphql.datocms.com --header \"X-Exclude-Invalid: true\" --header \"Authorization: $DATOCMS_PUBLISHED_CONTENT_CDA_TOKEN\"'"
+    "generate-schema": "dotenv -c -- bash -c \"gql.tada generate schema https://graphql.datocms.com --header 'X-Exclude-Invalid: true' --header 'Authorization: $DATOCMS_PUBLISHED_CONTENT_CDA_TOKEN'\""
   },
   "dependencies": {
     "@datocms/cda-client": "^0.2.2",
