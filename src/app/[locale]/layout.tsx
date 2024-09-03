@@ -16,7 +16,7 @@ const literate = Literata({
 })
 
 export interface MetaDataProps {
-  params: { locale: Locale; slug?: string }
+  params: { locale: Locale; slug: string }
 }
 
 // Hacky way to account for 404's metadata
