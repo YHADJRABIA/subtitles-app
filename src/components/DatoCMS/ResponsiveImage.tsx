@@ -1,40 +1,26 @@
 import { type FragmentOf, graphql, readFragment } from '@/lib/datocms/graphql'
 import { type ImagePropTypes, SRCImage } from 'react-datocms'
+import styles from './ResponsiveImage.module.scss'
+import cn from 'classnames'
 
-/**
- * GraphQL fragment needed for the component to function.
- *
- * GraphQL fragment colocation keeps queries near the components using them,
- * improving maintainability and encapsulation. Fragment composition enables
- * building complex queries from reusable parts, promoting code reuse and
- * efficiency. Together, these practices lead to more modular, maintainable, and
- * performant GraphQL implementations by allowing precise data fetching and
- * easier code management.
- *
- * Learn more: https://gql-tada.0no.co/guides/fragment-colocation
- */
 export const ResponsiveImageFragment = graphql(`
   fragment ResponsiveImageFragment on ResponsiveImage {
-    # always required
-    src
     srcSet
+    webpSrcSet
+    sizes
+    src
     width
     height
-
-    # not required, but strongly suggested
+    aspectRatio
     alt
     title
-
-    # LQIP (base64-encoded)
     base64
-
-    # can be omitted if 'sizes' prop is explicitely passed to the image component
-    sizes
   }
 `)
 
 type Props = Omit<ImagePropTypes, 'data'> & {
   data: FragmentOf<typeof ResponsiveImageFragment>
+  hasRoundedBorder?: boolean
 }
 
 /**
@@ -43,8 +29,20 @@ type Props = Omit<ImagePropTypes, 'data'> & {
  * GraphQL fragment for this component to function only once, then reuse it
  * wherever needed.
  */
-export default function ResponsiveImage({ data, ...other }: Props) {
+export default function ResponsiveImage({
+  data,
+  hasRoundedBorder = true,
+  ...other
+}: Props) {
   const unmaskedData = readFragment(ResponsiveImageFragment, data)
 
-  return <SRCImage data={unmaskedData} {...other} />
+  return (
+    <SRCImage
+      data={unmaskedData}
+      imgClassName={cn({
+        [styles.roundedBorder]: hasRoundedBorder,
+      })}
+      {...other}
+    />
+  )
 }
