@@ -3260,7 +3260,7 @@ type TextWithIconRecord implements RecordInterface {
 input TextWithLinkModelFilter {
   id: ItemIdFilter
   href: StringFilter
-  title: StringFilter
+  label: StringFilter
   OR: [TextWithLinkModelFilter]
   AND: [TextWithLinkModelFilter]
 }
@@ -3287,7 +3287,7 @@ type TextWithLinkRecord implements RecordInterface {
   _updatedAt: DateTime!
   href: String!
   id: ItemId!
-  title: String!
+  label: String!
 }
 
 input TrailerModelFilter {
