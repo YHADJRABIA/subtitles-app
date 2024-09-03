@@ -310,9 +310,9 @@ type EpisodeRecord implements RecordInterface {
   _status: ItemStatus!
   _unpublishingScheduledAt: DateTime
   _updatedAt: DateTime!
+  episodeNumber: IntType!
   id: ItemId!
-  number: IntType!
-  subtitles: FileField!
+  subtitleUrl: FileField!
 }
 
 """Block of type ❓ FAQ (faq)"""
@@ -2484,6 +2484,37 @@ input OrientationFilter {
   neq: UploadOrientation
 }
 
+input PersonModelFilter {
+  id: ItemIdFilter
+  name: StringFilter
+  OR: [PersonModelFilter]
+  AND: [PersonModelFilter]
+}
+
+"""Block of type 🧍 Person (person)"""
+type PersonRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """Generates SEO and Social card meta tags to be used in your frontend"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  id: ItemId!
+  name: String!
+}
+
 """Specifies how to filter by publication datetime"""
 input PublishedAtFilter {
   """
@@ -2722,6 +2753,31 @@ type ResponsiveImage {
   width: IntType!
 }
 
+"""Block of type 📽️ Season (season)"""
+type SeasonRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """Generates SEO and Social card meta tags to be used in your frontend"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  episodes: [EpisodeRecord!]!
+  id: ItemId!
+  seasonNumber: IntType!
+}
+
 type SeoField {
   description: String
   image: FileField
@@ -2735,6 +2791,62 @@ type SeoFieldMultiLocaleField {
   value: SeoField
 }
 
+"""Specifies how to filter SEO meta tags fields"""
+input SeoFilter {
+  """
+  Filter records with the specified field defined (i.e. with any value) or not
+  """
+  exists: BooleanType
+}
+
+"""Specify nested blocks fields conditions"""
+input SeriesModelActorsFieldBlocksConditions {
+  person: PersonModelFilter
+}
+
+"""Specify nested blocks types presence"""
+input SeriesModelActorsFieldBlocksPresence {
+  person: BooleanType
+}
+
+"""Specify how to filter this specific Modular Content field instance"""
+input SeriesModelActorsFieldFilter {
+  """
+  Filter records containing at least one block matching the specified conditions
+  """
+  any: SeriesModelActorsFieldBlocksConditions
+
+  """Filter records containing at least one block of any kind or not"""
+  exists: BooleanType
+
+  """Filter records containing at least one block of specified type or not"""
+  containsAny: SeriesModelActorsFieldBlocksPresence
+}
+
+"""Specify nested blocks fields conditions"""
+input SeriesModelDirectorsFieldBlocksConditions {
+  person: PersonModelFilter
+}
+
+"""Specify nested blocks types presence"""
+input SeriesModelDirectorsFieldBlocksPresence {
+  person: BooleanType
+}
+
+"""Specify how to filter this specific Modular Content field instance"""
+input SeriesModelDirectorsFieldFilter {
+  """
+  Filter records containing at least one block matching the specified conditions
+  """
+  any: SeriesModelDirectorsFieldBlocksConditions
+
+  """Filter records containing at least one block of any kind or not"""
+  exists: BooleanType
+
+  """Filter records containing at least one block of specified type or not"""
+  containsAny: SeriesModelDirectorsFieldBlocksPresence
+}
+
 input SeriesModelFilter {
   _createdAt: CreatedAtFilter
   id: ItemIdFilter
@@ -2745,20 +2857,20 @@ input SeriesModelFilter {
   _status: StatusFilter
   _updatedAt: UpdatedAtFilter
   _isValid: BooleanFilter
-  actors: StringFilter
+  actors: SeriesModelActorsFieldFilter
   countryOfOrigin: StringFilter
+  coverImage: FileFilter
   description: TextFilter
+  directors: SeriesModelDirectorsFieldFilter
   genre: StringFilter
-  image: FileFilter
   language: StringFilter
   name: StringFilter
   numberOfSeasons: IntegerFilter
   releaseYear: IntegerFilter
+  seo: SeoFilter
   slug: SlugFilter
   subtitles: SeriesModelSubtitlesFieldFilter
-  trailer: FileFilter
-  trailerSubtitles: FileFilter
-  trailerThumbnail: FileFilter
+  trailer: SeriesModelTrailerFieldFilter
   whereToWatch: SeriesModelWhereToWatchFieldFilter
   OR: [SeriesModelFilter]
   AND: [SeriesModelFilter]
@@ -2783,8 +2895,6 @@ enum SeriesModelOrderBy {
   _updatedAt_DESC
   _isValid_ASC
   _isValid_DESC
-  actors_ASC
-  actors_DESC
   countryOfOrigin_ASC
   countryOfOrigin_DESC
   genre_ASC
@@ -2824,13 +2934,37 @@ input SeriesModelSubtitlesFieldFilter {
 }
 
 """Specify nested blocks fields conditions"""
+input SeriesModelTrailerFieldBlocksConditions {
+  trailer: TrailerModelFilter
+}
+
+"""Specify nested blocks types presence"""
+input SeriesModelTrailerFieldBlocksPresence {
+  trailer: BooleanType
+}
+
+"""Specify how to filter this specific Modular Content field instance"""
+input SeriesModelTrailerFieldFilter {
+  """
+  Filter records containing at least one block matching the specified conditions
+  """
+  any: SeriesModelTrailerFieldBlocksConditions
+
+  """Filter records containing at least one block of any kind or not"""
+  exists: BooleanType
+
+  """Filter records containing at least one block of specified type or not"""
+  containsAny: SeriesModelTrailerFieldBlocksPresence
+}
+
+"""Specify nested blocks fields conditions"""
 input SeriesModelWhereToWatchFieldBlocksConditions {
-  whereToWatch: WhereToWatchModelFilter
+  textWithLink: TextWithLinkModelFilter
 }
 
 """Specify nested blocks types presence"""
 input SeriesModelWhereToWatchFieldBlocksPresence {
-  whereToWatch: BooleanType
+  textWithLink: BooleanType
 }
 
 """Specify how to filter this specific Modular Content field instance"""
@@ -2858,6 +2992,18 @@ type SeriesRecord implements RecordInterface {
     """
     fallbackLocales: [SiteLocale!]
   ): [StringNonNullMultiLocaleField!]
+  _allNameLocales(
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+  ): [StringNonNullMultiLocaleField!]
+  _allSeoLocales(
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+  ): [SeoFieldMultiLocaleField!]
   _createdAt: DateTime!
 
   """Editing URL"""
@@ -2876,8 +3022,9 @@ type SeriesRecord implements RecordInterface {
   _status: ItemStatus!
   _unpublishingScheduledAt: DateTime
   _updatedAt: DateTime!
-  actors: String!
+  actors: [PersonRecord!]!
   countryOfOrigin: String!
+  coverImage: AltTitleFileField!
   description(
     """Process content as markdown"""
     markdown: Boolean
@@ -2890,20 +3037,34 @@ type SeriesRecord implements RecordInterface {
     """
     fallbackLocales: [SiteLocale!]
   ): String!
-  directors: String!
+  directors: [PersonRecord!]!
   genre: String!
   id: ItemId!
-  image: AltTitleFileField!
   language: String!
-  name: String!
+  name(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+  ): String!
   numberOfSeasons: IntType!
   releaseYear: IntType!
+  seo(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+  ): SeoField
   slug: String!
   subtitles: SubtitleRecord!
-  trailer: VideoAltTitleFileField!
-  trailerSubtitles: FileField
-  trailerThumbnail: AltTitleFileField
-  whereToWatch: WhereToWatchRecord!
+  trailer: TrailerRecord!
+  whereToWatch: [TextWithLinkRecord!]!
 }
 
 type Site {
@@ -3009,7 +3170,6 @@ type StringNonNullMultiLocaleField {
 
 input SubtitleModelFilter {
   id: ItemIdFilter
-  season: IntegerFilter
   OR: [SubtitleModelFilter]
   AND: [SubtitleModelFilter]
 }
@@ -3034,9 +3194,8 @@ type SubtitleRecord implements RecordInterface {
   _status: ItemStatus!
   _unpublishingScheduledAt: DateTime
   _updatedAt: DateTime!
-  episodes: EpisodeRecord!
   id: ItemId!
-  season: IntType!
+  seasons: [SeasonRecord!]!
 }
 
 type Tag {
@@ -3096,6 +3255,74 @@ type TextWithIconRecord implements RecordInterface {
   icon: String!
   id: ItemId!
   title: String!
+}
+
+input TextWithLinkModelFilter {
+  id: ItemIdFilter
+  href: StringFilter
+  title: StringFilter
+  OR: [TextWithLinkModelFilter]
+  AND: [TextWithLinkModelFilter]
+}
+
+"""Block of type 🔗 Text with link (text_with_link)"""
+type TextWithLinkRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """Generates SEO and Social card meta tags to be used in your frontend"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  href: String!
+  id: ItemId!
+  title: String!
+}
+
+input TrailerModelFilter {
+  id: ItemIdFilter
+  subtitles: FileFilter
+  thumbnail: FileFilter
+  video: FileFilter
+  OR: [TrailerModelFilter]
+  AND: [TrailerModelFilter]
+}
+
+"""Block of type 🎬 Trailer (trailer)"""
+type TrailerRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """Generates SEO and Social card meta tags to be used in your frontend"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  id: ItemId!
+  subtitles: FileField
+  thumbnail: AltTitleFileField
+  video: VideoAltTitleFileField!
 }
 
 """Specifies how to filter by upload type"""
@@ -3711,39 +3938,6 @@ enum VideoMp4Res {
   low
   medium
   high
-}
-
-input WhereToWatchModelFilter {
-  id: ItemIdFilter
-  href: StringFilter
-  label: StringFilter
-  OR: [WhereToWatchModelFilter]
-  AND: [WhereToWatchModelFilter]
-}
-
-"""Block of type 📍 Where to watch (where_to_watch)"""
-type WhereToWatchRecord implements RecordInterface {
-  _createdAt: DateTime!
-
-  """Editing URL"""
-  _editingUrl: String
-  _firstPublishedAt: DateTime
-  _isValid: BooleanType!
-  _modelApiKey: String!
-  _publicationScheduledAt: DateTime
-  _publishedAt: DateTime
-
-  """Generates SEO and Social card meta tags to be used in your frontend"""
-  _seoMetaTags(
-    """The locale to use to fetch the field's content"""
-    locale: SiteLocale
-  ): [Tag!]!
-  _status: ItemStatus!
-  _unpublishingScheduledAt: DateTime
-  _updatedAt: DateTime!
-  href: String!
-  id: ItemId!
-  label: String!
 }
 
 type focalPoint {
