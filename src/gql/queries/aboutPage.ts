@@ -1,4 +1,4 @@
-import { TagFragment } from '@/lib/datocms/commonFragments'
+import { TagFragment } from '../fragments/commonFragments'
 import { graphql } from '@/lib/datocms/graphql'
 
 export const aboutPageQuery = graphql(

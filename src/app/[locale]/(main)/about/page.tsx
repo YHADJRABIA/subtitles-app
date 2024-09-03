@@ -13,7 +13,7 @@ import { executeQuery } from '@/lib/datocms/executeQuery'
 import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
 import { generateMetadataFn } from '@/lib/datocms/generateMetaDataFn'
-import { aboutPageQuery } from '@/queries/aboutPage'
+import { aboutPageQuery } from '@/gql/queries/aboutPage'
 
 export const generateMetadata = generateMetadataFn({
   query: aboutPageQuery,
