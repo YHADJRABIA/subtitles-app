@@ -48,6 +48,12 @@ export const seriesBySlugQuery = graphql(
           ...VideoPlayerFragment
         }
 
+        trailerThumbnail {
+          responsiveImage {
+            srcSet
+          }
+        }
+
         subtitles {
           seasonNumber
           episodes {

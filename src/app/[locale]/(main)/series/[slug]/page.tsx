@@ -63,6 +63,7 @@ export default async function SeriesPage({
     directors: directorNames,
     whereToWatch,
     trailer,
+    trailerThumbnail,
     subtitles,
   } = series
 
@@ -77,6 +78,7 @@ export default async function SeriesPage({
 
   const coverImageData = coverImage.responsiveImage
   const formattedName = `${name} (${translatedName})`
+  const thumbnail = trailerThumbnail?.responsiveImage?.srcSet
 
   return (
     <div className={styles.root}>
@@ -107,7 +109,7 @@ export default async function SeriesPage({
               body={description}
               className={styles.description}
             />
-            <SeriesTrailer videoData={trailer} />
+            <SeriesTrailer videoData={trailer} thumbnail={thumbnail} />
           </div>
 
           <StickyContainer className={styles.rightContainer}>
