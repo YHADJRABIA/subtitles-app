@@ -38,7 +38,7 @@ export default async function SeriesPage({
   params: { locale, slug },
 }: MetaDataProps) {
   const t = await getTranslations({ locale, namespace: 'Series' })
-  const { isEnabled: isDraftModeEnabled } = draftMode()
+  const { isEnabled: isDraftModeEnabled } = draftMode() // TODO: Add webhooks from DatoCMS + work on draftmode
 
   const { series } = await executeQuery(seriesBySlugQuery, {
     variables: { locale, slug },
