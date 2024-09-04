@@ -1,8 +1,5 @@
 .root {
   width: 100%;
   @include flexCenter(column, flex-start, flex-start);
-}
-
-.title {
-  margin-bottom: 1rem;
+  gap: 1rem;
 }
