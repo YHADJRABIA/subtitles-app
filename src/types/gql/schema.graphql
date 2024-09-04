@@ -2871,6 +2871,7 @@ input SeriesModelFilter {
   slug: SlugFilter
   subtitles: SeriesModelSubtitlesFieldFilter
   trailer: SeriesModelTrailerFieldFilter
+  translatedName: StringFilter
   whereToWatch: SeriesModelWhereToWatchFieldFilter
   OR: [SeriesModelFilter]
   AND: [SeriesModelFilter]
@@ -2907,6 +2908,8 @@ enum SeriesModelOrderBy {
   numberOfSeasons_DESC
   releaseYear_ASC
   releaseYear_DESC
+  translatedName_ASC
+  translatedName_DESC
 }
 
 """Specify nested blocks fields conditions"""
@@ -2992,18 +2995,18 @@ type SeriesRecord implements RecordInterface {
     """
     fallbackLocales: [SiteLocale!]
   ): [StringNonNullMultiLocaleField!]
-  _allNameLocales(
-    """
-    If you want to fallback to a default translation when a translation has not been found
-    """
-    fallbackLocales: [SiteLocale!]
-  ): [StringNonNullMultiLocaleField!]
   _allSeoLocales(
     """
     If you want to fallback to a default translation when a translation has not been found
     """
     fallbackLocales: [SiteLocale!]
   ): [SeoFieldMultiLocaleField!]
+  _allTranslatedNameLocales(
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+  ): [StringMultiLocaleField!]
   _createdAt: DateTime!
 
   """Editing URL"""
@@ -3041,15 +3044,7 @@ type SeriesRecord implements RecordInterface {
   genre: String!
   id: ItemId!
   language: String!
-  name(
-    """The locale to use to fetch the field's content"""
-    locale: SiteLocale
-
-    """
-    If you want to fallback to a default translation when a translation has not been found
-    """
-    fallbackLocales: [SiteLocale!]
-  ): String!
+  name: String!
   numberOfSeasons: IntType!
   releaseYear: IntType!
   seo(
@@ -3064,6 +3059,15 @@ type SeriesRecord implements RecordInterface {
   slug: String!
   subtitles: SubtitleRecord!
   trailer: TrailerRecord!
+  translatedName(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+  ): String
   whereToWatch: [TextWithLinkRecord!]!
 }
 
@@ -3161,6 +3165,11 @@ input StringMatchesFilter {
   pattern: String!
   caseSensitive: BooleanType = false
   regexp: BooleanType = true
+}
+
+type StringMultiLocaleField {
+  locale: SiteLocale
+  value: String
 }
 
 type StringNonNullMultiLocaleField {
