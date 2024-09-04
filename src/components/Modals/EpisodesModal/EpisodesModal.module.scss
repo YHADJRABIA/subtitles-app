@@ -4,6 +4,7 @@
   gap: 1rem;
   @include respond-to('medium') {
     flex-direction: row;
+    justify-content: space-between;
   }
 }
 
