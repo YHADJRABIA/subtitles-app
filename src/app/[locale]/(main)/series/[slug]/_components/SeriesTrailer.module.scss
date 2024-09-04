@@ -1,0 +1,5 @@
+.root {
+  width: 100%;
+  @include flexCenter(column, flex-start, flex-start);
+  gap: 1rem;
+}

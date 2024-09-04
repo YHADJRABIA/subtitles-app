@@ -18,13 +18,19 @@ const Modal = ({ isOpen, onClose, title, className, children }: PropTypes) => {
   return (
     <div className={cn(styles.root, className)} onClick={onClose}>
       <div className={styles.container} onClick={e => e.stopPropagation()}>
-        <CloseIcon size={20} className={styles.closeIcon} onClick={onClose} />
-
-        {title && (
-          <Typography tag="h2" weight="bold" size="xl" className={styles.title}>
-            {title}
-          </Typography>
-        )}
+        <div className={styles.header}>
+          {title && (
+            <Typography
+              tag="h2"
+              weight="bold"
+              size="xl"
+              className={styles.title}
+            >
+              {title}
+            </Typography>
+          )}
+          <CloseIcon className={styles.closeIcon} onClick={onClose} />
+        </div>
         {children}
       </div>
     </div>

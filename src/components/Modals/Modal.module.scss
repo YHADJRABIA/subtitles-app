@@ -33,13 +33,15 @@
   }
 }
 
+.header {
+  @include flexCenter(row, space-between, center);
+  gap: 1rem;
+}
+
 .closeIcon {
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
   background: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: clamp(1.6rem, 3vw, 1.8rem);
   color: var(--primary-black-color);
   cursor: pointer;
   transition: color 0.3s;

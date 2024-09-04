@@ -59,6 +59,9 @@ const Accordion = ({
     )
   }
 
+  // Filter out items with empty title or body
+  const validItems = items?.filter(item => item.title && item.body) || []
+
   const handleToggle = (index: number) => {
     setOpenStates(prevStates =>
       prevStates.map((isOpen, idx) =>
@@ -75,31 +78,32 @@ const Accordion = ({
 
   return (
     <ul className={cn(styles.root, className)}>
-      {items ? (
-        items.map((item, idx) => (
-          <AccordionItem
-            key={idx}
-            {...item}
-            isOpen={openStates[idx]}
-            titleTag={titleTag}
-            bodyTag={bodyTag}
-            backgroundColor={backgroundColor}
-            onToggle={() => handleToggle(idx)}
-            hasBackgroundEffect={hasBackgroundEffect}
-          />
-        ))
-      ) : (
-        <AccordionItem
-          title={title}
-          body={body}
-          isOpen={openStates[0]}
-          titleTag={titleTag}
-          backgroundColor={backgroundColor}
-          onToggle={() => handleToggle(0)}
-          hasBackgroundEffect={hasBackgroundEffect}
-          isSingleItem
-        />
-      )}
+      {validItems.length
+        ? validItems.map((item, idx) => (
+            <AccordionItem
+              key={idx}
+              {...item}
+              isOpen={openStates[idx]}
+              titleTag={titleTag}
+              bodyTag={bodyTag}
+              backgroundColor={backgroundColor}
+              onToggle={() => handleToggle(idx)}
+              hasBackgroundEffect={hasBackgroundEffect}
+            />
+          ))
+        : title &&
+          body && (
+            <AccordionItem
+              title={title}
+              body={body}
+              isOpen={openStates[0]}
+              titleTag={titleTag}
+              backgroundColor={backgroundColor}
+              onToggle={() => handleToggle(0)}
+              hasBackgroundEffect={hasBackgroundEffect}
+              isSingleItem
+            />
+          )}
     </ul>
   )
 }
