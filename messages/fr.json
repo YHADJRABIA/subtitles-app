@@ -6,10 +6,6 @@
       "title": "Page d'accueil",
       "description": "Accès à des sous-titres exclusifs et gratuits de séries russophones."
     },
-    "About": {
-      "title": "À propos",
-      "description": "En savoir plus sur РуSubs et trouver des réponses à d'éventuelles questions."
-    },
     "Series": {
       "title": "Séries",
       "description": "Toutes les séries disponibles."
@@ -79,51 +75,6 @@
       "support_me": "Me soutenir"
     }
   },
-  "About": {
-    "title": "À propos",
-    "Highlights": {
-      "discover_new_series": "Séries peu connues",
-      "not_mainstream": "Non disponibles sur les plateformes grand public.",
-
-      "entirely_free": "Entièrement gratuit",
-      "donate_if_you_like": "Les dons sont les bienvenus, mais seulement si vous le souhaitez.",
-
-      "learn_about_cultures": "À la découverte de nouvelles cultures",
-      "ex_ussr": "D'Europe de l'Est, d'Asie centrale & septentrionale, et du Caucase."
-    },
-
-    "FAQ": {
-      "title": "Questions fréquentes",
-
-      "is_it_free": "Ces sous-titres sont-ils gratuits ?",
-      "entirely_free": "Oui, tout est entièrement gratuit. Il est possible d'effectuer un don si souhaité.",
-
-      "how_do_you_support_yourself": "Si tout est gratuit, comment êtes-vous rémunéré pour vos traductions ?",
-      "from_donations": "Je ne le suis pas, sauf en cas d'éventuels dons. L'argent n'est pas la principale motivation de ce site web.",
-
-      "what_motivates_you": "Qu'est-ce qui motive la création de ce site web et la réalisation de ces sous-titres ?",
-      "motivation_for_subtitles": "L'objectif est de promouvoir des séries provenant de pays de l'ex-URSS ainsi que leurs cultures respectives peu connues du grand public (non russophone). Ces séries sont négligées par les grandes plateformes de diffusion comme Netflix, ce qui les rend souvent inconnues du grand public. Les audiences non russophones découvrant ces séries peuvent avoir du mal à les comprendre pour faute de sous-titres indisponibles.",
-
-      "are_you_a_professional_translator": "Êtes-vous un traducteur professionnel ?",
-      "part_time_translator": "Non, je suis développeur web parlant et comprenant plusieurs langues. La traduction n'est qu'un passe-temps pour moi.",
-
-      "where_do_you_find_series": "Où avez-vous trouvé les séries que vous traduisez ?",
-      "series_found": "Certaines ont été suggérées par des amis russes, d'autres étaient disponibles sur des plateformes de streaming kazakhes ou russes.",
-
-      "are_subtitles_exclusive": "Ces sous-titres sont-ils disponibles ailleurs sur internet ?",
-      "exclusive_subtitles": "Pas à ma connaissance ; je n'ai pas trouvé de sous-titres pour les séries que je suis en train de traduire.",
-
-      "how_to_read_subtitles": "Comment lire les sous-titres après les avoir téléchargés ?",
-      "use_software": "Cela dépend. Certaines séries sont disponibles gratuitement sur YouTube (en russe, sans sous-titres). Dans ce cas, il existe une extension web appelée Substital, permettant de charger mes sous-titres et de regarder l'épisode sous-titré directement sur YouTube. Pour celles non disponibles sur YouTube, il serait nécessaire de télécharger un fichier vidéo de l'épisode, de le renommer exactement comme le fichier de sous-titres, de placer les deux fichiers dans le même dossier, puis lire la vidéo.",
-
-      "how_long_for_episode": "Combien de temps faut-il pour sous-titrer un épisode entier ?",
-      "a_whole_day": "Généralement une journée de travail (ou plus) pour traduire un épisode de 25 minutes. Cette estimation est prolongée en fonction de certaines subtilités culturelles à prendre en compte, ou d'expressions et jeux de mots à adapter.",
-
-      "where_to_get_series": "Où puis-je me procurer les séries ?",
-      "from_free_websites": "Certaines sont disponibles gratuitement sur YouTube, d'autres sur le site officiel de diffusion (comme CTC.ru ou NTK.kz). S'il est impossible de les trouver, il est possible de me contacter pour de l'aide."
-    }
-  },
-
   "Series": {
     "title": "Séries",
     "featured": "À la une :",

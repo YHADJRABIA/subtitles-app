@@ -1,0 +1,55 @@
+.root {
+  margin: var(--page-padding) var(--page-padding) 2rem;
+
+  @include respond-to('medium') {
+    @include flexCenter(column, flex-start, center);
+  }
+}
+
+.wrapper {
+  max-width: var(--page-max-width);
+  @include flexCenter(column, flex-start, flex-start);
+  gap: 2rem;
+}
+
+.container {
+  @include flexCenter(column);
+  gap: var(--page-padding);
+
+  @include respond-to('medium') {
+    @include flexCenter(row, center, flex-start);
+  }
+}
+
+.leftContainer {
+  @include flexCenter(column, space-between, flex-start);
+  width: 100%;
+  @include respond-to('medium') {
+    width: 60rem;
+  }
+}
+
+.rightContainer {
+  margin: 0 -2rem;
+  flex: 1;
+  & > div {
+    gap: 2rem;
+  }
+  @include respond-to('medium') {
+    margin: unset;
+  }
+}
+.rightSubContainer {
+  width: 100%;
+  @include flexCenter(row, space-between, flex-start);
+  gap: 2rem;
+
+  @include respond-to('small') {
+    margin: 0 var(--page-padding);
+  }
+}
+
+.image,
+.description {
+  margin-bottom: 3rem;
+}

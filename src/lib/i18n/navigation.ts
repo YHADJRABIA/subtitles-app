@@ -20,9 +20,9 @@ export const pathnames = {
     en: '/series',
     fr: '/series',
   },
-  '/series/[...slug]': {
-    en: '/series/[...slug]',
-    fr: '/series/[...slug]',
+  '/series/[slug]': {
+    en: '/series/[slug]',
+    fr: '/series/[slug]',
   },
 
   /* Protected */

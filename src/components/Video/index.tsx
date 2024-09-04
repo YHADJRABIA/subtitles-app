@@ -6,6 +6,8 @@ import { useTranslations } from 'next-intl'
 import { getYouTubeEmbedUrl, isYouTubeUrl } from '@/utils/video'
 import { capitaliseFirstLetter } from '@/utils/string'
 
+// TODO: Deprecate this, and use Mux Video player instead
+
 interface PropTypes {
   className?: string
   showControls?: boolean

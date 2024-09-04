@@ -1,2 +1,4 @@
 node_modules
 **/.next/**
+src/types/gql/graphql-env.d.ts
+src/types/gql/schema.graphql

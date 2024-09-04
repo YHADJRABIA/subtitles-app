@@ -6,10 +6,6 @@
       "title": "Homepage",
       "description": "Browse free and exclusive subtitles for Russian-speaking series."
     },
-    "About": {
-      "title": "About",
-      "description": "Learn more about РуSubs, and find answers to what you might be wondering about."
-    },
     "Series": {
       "title": "Series",
       "description": "All available series."
@@ -77,49 +73,6 @@
     "Cta": {
       "browse_series": "Browse series",
       "support_me": "Support me"
-    }
-  },
-  "About": {
-    "title": "About",
-    "Highlights": {
-      "discover_new_series": "Lesser-known series",
-      "not_mainstream": "Not available on English-speaking platforms.",
-
-      "entirely_free": "Entirely free",
-      "donate_if_you_like": "Donations are welcome, but only if you choose to.",
-
-      "learn_about_cultures": "Explore new cultures",
-      "ex_ussr": "From Eastern Europe, Central & Northern Asia, and the Caucasus region."
-    },
-    "FAQ": {
-      "title": "Frequently asked questions",
-
-      "is_it_free": "Are the subtitles free?",
-      "entirely_free": "Yes, everything here is entirely free. You may donate only if you feel inclined to do so.",
-
-      "how_do_you_support_yourself": "If this is free, how do you get paid for your translations?",
-      "from_donations": "I don't, unless donations are made. Money is not this website's main motivation.",
-
-      "what_motivates_you": "What motivates the creation of this website and making subtitles?",
-      "motivation_for_subtitles": "The goal is to promote lesser-known series from ex-USSR countries and their respective cultures. Many Russian-speaking series are overlooked by major streaming platforms like Netflix, this often results in viewers missing out on good series. Non-Russian-speaking audiences knowing about such series may struggle to understand them for lack of available subtitles.",
-
-      "are_you_a_professional_translator": "Are you a professional translator?",
-      "part_time_translator": "No, I am a web developer who speaks and understands many languages. Translation is merely a hobby for me.",
-
-      "where_do_you_find_series": "Where did you come across the series you are translating?",
-      "series_found": "Some were suggested by Russian friends, others were featured on Kazakh or Russian streaming platforms.",
-
-      "are_subtitles_exclusive": "Are these subtitles also available somewhere else online?",
-      "exclusive_subtitles": "Not as far as I know. I was unable to find subtitles for the series I am currently translating.",
-
-      "how_to_read_subtitles": "How to read the subtitles after downloading them?",
-      "use_software": "It depends. Some series are available for free directly on YouTube (in Russian, without subtitles), in this case, one might simply download a web extension called Substital, load my subtitles and enjoy the episode directly on Youtube. For those not available on YouTube, one might need to download the video file then rename it to match the subtitle file's name, place both files in the same folder, then play the video.",
-
-      "how_long_for_episode": "How long does it take to subtitle an entire episode?",
-      "a_whole_day": "It usually takes a full working day (or longer) to translate a 25-minute episode. Accounting for cultural subtleties, expressions and puns takes more time and focus to adapt a translation.",
-
-      "where_to_get_series": "Where can I watch the series?",
-      "from_free_websites": "Some are freely available on YouTube, others on their official publisher's website (such as CTC.ru or NTK.kz). If you still can't find them, feel free to message me and I will help you out."
     }
   },
   "Series": {
