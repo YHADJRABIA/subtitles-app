@@ -4,36 +4,23 @@ import {
   type VideoPlayerProps,
 } from 'react-datocms'
 
-/**
- * Let's define the GraphQL fragment needed for the component to function.
- *
- * GraphQL fragment colocation keeps queries near the components using them,
- * improving maintainability and encapsulation. Fragment composition enables
- * building complex queries from reusable parts, promoting code reuse and
- * efficiency. Together, these practices lead to more modular, maintainable, and
- * performant GraphQL implementations by allowing precise data fetching and
- * easier code management.
- *
- * Learn more: https://gql-tada.0no.co/guides/fragment-colocation
- */
 export const VideoPlayerFragment = graphql(`
-  fragment VideoPlayerFragment on VideoFileField {
+  fragment VideoPlayerFragment on VideoAltTitleFileField {
     video {
-      # required: this field identifies the video to be played
-      muxPlaybackId
-
-      # all the other fields are not required but:
-
-      # if provided, title is displayed in the upper left corner of the video
+      alt
       title
-
-      # if provided, width and height are used to define the aspect ratio of the
-      # player, so to avoid layout jumps during the rendering.
       width
       height
-
-      # if provided, it shows a blurred placeholder for the video
+      mp4Url
+      streamingUrl
+      muxAssetId
+      muxPlaybackId
+      thumbhash
+      thumbnailUrl
+      duration
       blurUpThumb
+      framerate
+      blurhash
     }
   }
 `)
@@ -54,7 +41,7 @@ export default function VideoPlayer({ data, ...other }: Props) {
   return (
     <DatoVideoPlayer
       data={unmaskedData.video}
-      accentColor="var(--primary-gray-color)"
+      accentColor="var(--tertiary-black-color)"
       {...other}
     />
   )
