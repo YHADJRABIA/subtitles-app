@@ -2877,7 +2877,7 @@ input SeriesModelFilter {
   seo: SeoFilter
   slug: SlugFilter
   subtitles: SeriesModelSubtitlesFieldFilter
-  trailer: SeriesModelTrailerFieldFilter
+  trailer: FileFilter
   translatedName: StringFilter
   whereToWatch: SeriesModelWhereToWatchFieldFilter
   OR: [SeriesModelFilter]
@@ -2941,30 +2941,6 @@ input SeriesModelSubtitlesFieldFilter {
 
   """Filter records containing at least one block of specified type or not"""
   containsAny: SeriesModelSubtitlesFieldBlocksPresence
-}
-
-"""Specify nested blocks fields conditions"""
-input SeriesModelTrailerFieldBlocksConditions {
-  trailer: TrailerModelFilter
-}
-
-"""Specify nested blocks types presence"""
-input SeriesModelTrailerFieldBlocksPresence {
-  trailer: BooleanType
-}
-
-"""Specify how to filter this specific Modular Content field instance"""
-input SeriesModelTrailerFieldFilter {
-  """
-  Filter records containing at least one block matching the specified conditions
-  """
-  any: SeriesModelTrailerFieldBlocksConditions
-
-  """Filter records containing at least one block of any kind or not"""
-  exists: BooleanType
-
-  """Filter records containing at least one block of specified type or not"""
-  containsAny: SeriesModelTrailerFieldBlocksPresence
 }
 
 """Specify nested blocks fields conditions"""
@@ -3065,7 +3041,7 @@ type SeriesRecord implements RecordInterface {
   ): SeoField
   slug: String!
   subtitles: [SeasonRecord!]!
-  trailer: TrailerRecord!
+  trailer: VideoAltTitleFileField!
   translatedName(
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
@@ -3276,15 +3252,6 @@ type TextWithLinkRecord implements RecordInterface {
   label: String!
 }
 
-input TrailerModelFilter {
-  id: ItemIdFilter
-  subtitles: FileFilter
-  thumbnail: FileFilter
-  video: FileFilter
-  OR: [TrailerModelFilter]
-  AND: [TrailerModelFilter]
-}
-
 """Block of type 🎬 Trailer (trailer)"""
 type TrailerRecord implements RecordInterface {
   _createdAt: DateTime!
@@ -3306,9 +3273,6 @@ type TrailerRecord implements RecordInterface {
   _unpublishingScheduledAt: DateTime
   _updatedAt: DateTime!
   id: ItemId!
-  subtitles: FileField
-  thumbnail: AltTitleFileField
-  video: VideoAltTitleFileField!
 }
 
 """Specifies how to filter by upload type"""
