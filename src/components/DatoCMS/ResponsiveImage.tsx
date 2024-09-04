@@ -31,7 +31,7 @@ type Props = Omit<ImagePropTypes, 'data'> & {
  */
 export default function ResponsiveImage({
   data,
-  hasRoundedBorder = true,
+  hasRoundedBorder,
   ...other
 }: Props) {
   const unmaskedData = readFragment(ResponsiveImageFragment, data)
