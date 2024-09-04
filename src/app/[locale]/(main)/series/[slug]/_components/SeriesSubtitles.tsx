@@ -25,9 +25,7 @@ const SeriesSubtitles = ({ className, subtitles, seriesName }: PropTypes) => {
   const handleOpenModal = (seasonNumber: number, episodes: SeriesEpisode[]) => {
     openModal({
       title: `${t('Subtitles.season', { count: seasonNumber })} — ${seriesName}`,
-      content: (
-        <EpisodesModal seasonNumber={seasonNumber} episodes={episodes} />
-      ),
+      content: <EpisodesModal episodes={episodes} />,
     })
   }
 
@@ -39,12 +37,12 @@ const SeriesSubtitles = ({ className, subtitles, seriesName }: PropTypes) => {
         title={t('subtitles')}
         body={
           <ul className={styles.accordionBody}>
-            {subtitles.map(({ season, episodes }) => {
+            {subtitles.map(({ seasonNumber, episodes }) => {
               const hasEpisodes = episodes.length > 0
               return (
                 <SeasonItem
-                  key={season}
-                  seasonNumber={season}
+                  key={seasonNumber}
+                  seasonNumber={seasonNumber}
                   episodes={episodes}
                   isActive={hasEpisodes}
                   onOpen={handleOpenModal}
