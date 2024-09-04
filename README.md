@@ -10,7 +10,7 @@ Fully internationalised fullstack Next.js application (React/Node.js) with Mongo
 - form validation with zod;
 - api spam-protection middleware system using upstash & redis;
 - entirely responsive UX-UI;
-- fully typed graphQL queries using gql tada.
+- fully typed graphQL queries using gql.tada.
   ...
 
 ## **(In progress) Linking non-auth part to DatoCMS**
