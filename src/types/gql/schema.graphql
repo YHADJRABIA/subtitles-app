@@ -312,7 +312,7 @@ type EpisodeRecord implements RecordInterface {
   _updatedAt: DateTime!
   episodeNumber: IntType!
   id: ItemId!
-  subtitleUrl: FileField!
+  subtitle: FileField!
 }
 
 """Block of type ❓ FAQ (faq)"""
@@ -2753,6 +2753,13 @@ type ResponsiveImage {
   width: IntType!
 }
 
+input SeasonModelFilter {
+  id: ItemIdFilter
+  seasonNumber: IntegerFilter
+  OR: [SeasonModelFilter]
+  AND: [SeasonModelFilter]
+}
+
 """Block of type 📽️ Season (season)"""
 type SeasonRecord implements RecordInterface {
   _createdAt: DateTime!
@@ -2914,12 +2921,12 @@ enum SeriesModelOrderBy {
 
 """Specify nested blocks fields conditions"""
 input SeriesModelSubtitlesFieldBlocksConditions {
-  subtitle: SubtitleModelFilter
+  season: SeasonModelFilter
 }
 
 """Specify nested blocks types presence"""
 input SeriesModelSubtitlesFieldBlocksPresence {
-  subtitle: BooleanType
+  season: BooleanType
 }
 
 """Specify how to filter this specific Modular Content field instance"""
@@ -3057,7 +3064,7 @@ type SeriesRecord implements RecordInterface {
     fallbackLocales: [SiteLocale!]
   ): SeoField
   slug: String!
-  subtitles: SubtitleRecord!
+  subtitles: [SeasonRecord!]!
   trailer: TrailerRecord!
   translatedName(
     """The locale to use to fetch the field's content"""
@@ -3175,36 +3182,6 @@ type StringMultiLocaleField {
 type StringNonNullMultiLocaleField {
   locale: SiteLocale
   value: String!
-}
-
-input SubtitleModelFilter {
-  id: ItemIdFilter
-  OR: [SubtitleModelFilter]
-  AND: [SubtitleModelFilter]
-}
-
-"""Block of type 💬 Subtitle (subtitle)"""
-type SubtitleRecord implements RecordInterface {
-  _createdAt: DateTime!
-
-  """Editing URL"""
-  _editingUrl: String
-  _firstPublishedAt: DateTime
-  _isValid: BooleanType!
-  _modelApiKey: String!
-  _publicationScheduledAt: DateTime
-  _publishedAt: DateTime
-
-  """Generates SEO and Social card meta tags to be used in your frontend"""
-  _seoMetaTags(
-    """The locale to use to fetch the field's content"""
-    locale: SiteLocale
-  ): [Tag!]!
-  _status: ItemStatus!
-  _unpublishingScheduledAt: DateTime
-  _updatedAt: DateTime!
-  id: ItemId!
-  seasons: [SeasonRecord!]!
 }
 
 type Tag {
