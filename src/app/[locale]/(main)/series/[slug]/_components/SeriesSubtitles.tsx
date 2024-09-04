@@ -16,9 +16,15 @@ interface PropTypes {
   className?: string
   seriesName: string
   subtitles: SeriesSubtitlesType
+  shownAmountOfSeasons: number
 }
 
-const SeriesSubtitles = ({ className, subtitles, seriesName }: PropTypes) => {
+const SeriesSubtitles = ({
+  className,
+  subtitles,
+  seriesName,
+  shownAmountOfSeasons,
+}: PropTypes) => {
   const t = useTranslations('Series')
   const { openModal } = useModal()
 
@@ -29,7 +35,11 @@ const SeriesSubtitles = ({ className, subtitles, seriesName }: PropTypes) => {
     })
   }
 
-  if (!subtitles.length) return null
+  // Generate an array of seasons from 1 to numberOfSeasons
+  const seasonsArray = Array.from(
+    { length: shownAmountOfSeasons },
+    (_, i) => i + 1
+  )
 
   return (
     <section className={cn(styles.root, className)}>
@@ -37,8 +47,13 @@ const SeriesSubtitles = ({ className, subtitles, seriesName }: PropTypes) => {
         title={t('subtitles')}
         body={
           <ul className={styles.accordionBody}>
-            {subtitles.map(({ seasonNumber, episodes }) => {
+            {seasonsArray.map(seasonNumber => {
+              const seasonData = subtitles.find(
+                subtitle => subtitle.seasonNumber === seasonNumber
+              )
+              const episodes = seasonData?.episodes ?? []
               const hasEpisodes = episodes.length > 0
+
               return (
                 <SeasonItem
                   key={seasonNumber}
