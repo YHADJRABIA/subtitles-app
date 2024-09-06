@@ -12,5 +12,3 @@ Fully internationalised fullstack Next.js application (React/Node.js) with Mongo
 - entirely responsive UX-UI;
 - fully typed graphQL queries using gql.tada.
   ...
-
-## **(In progress) Linking non-auth part to DatoCMS**

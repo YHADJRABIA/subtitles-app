@@ -186,6 +186,12 @@
     "user_deleted": "Account successfully deleted!",
     "unauthorised": "Unauthorised"
   },
+  "Revalidation": {
+    "invalid_request": "Invalid request",
+    "successful_revalidation": "Succesfully revalidated",
+    "unauthorised": "Unauthorised",
+    "failed": "Revalidation failed"
+  },
   "Dashboard": {
     "overview": "Overview",
     "settings": "Settings",
