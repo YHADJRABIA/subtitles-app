@@ -9,7 +9,7 @@ const { NEXT_ISR_REVALIDATION_TOKEN: revalidationToken } = process.env
 // Called by CMS webhook when content is published/unpublished
 export async function POST(req: NextRequest) {
   // Check for secret to validate request
-  const token = req.nextUrl.searchParams.get('token')
+  const token = req.headers.get('authorization')
   const locale = getLocaleFromNextRequest(req)
   const t = await getTranslations({ locale, namespace: 'Revalidation' })
 
