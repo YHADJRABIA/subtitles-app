@@ -187,6 +187,12 @@
     "user_deleted": "Compte supprimé avec succès !",
     "unauthorised": "Non authorisé"
   },
+  "Revalidation": {
+    "invalid_body": "Corps de requête invalide",
+    "successful_revalidation": "Revalidé avec succès!",
+    "unauthorised": "Non autorisé",
+    "failed": "Echec de revalidation"
+  },
   "Dashboard": {
     "overview": "Aperçu",
     "settings": "Réglages",
