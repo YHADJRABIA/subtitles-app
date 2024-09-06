@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Revalidate the page
-    revalidatePath(`/series/${slug}`)
+    revalidatePath(`/series/${slug}`) // TODO: fetch "series" from body instead
     return NextResponse.json({
       message: t('successful_revalidation'),
       success: true,
