@@ -188,7 +188,7 @@
     "unauthorised": "Non authorisé"
   },
   "Revalidation": {
-    "invalid_body": "Corps de requête invalide",
+    "invalid_request": "Requête invalide",
     "successful_revalidation": "Revalidé avec succès!",
     "unauthorised": "Non autorisé",
     "failed": "Echec de revalidation"

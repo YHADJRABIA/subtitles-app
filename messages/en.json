@@ -187,8 +187,8 @@
     "unauthorised": "Unauthorised"
   },
   "Revalidation": {
-    "invalid_body": "Invalid body",
-    "successful_revalidation": "Revalidé avec succès!",
+    "invalid_request": "Invalid request",
+    "successful_revalidation": "Succesfully revalidated",
     "unauthorised": "Unauthorised",
     "failed": "Revalidation failed"
   },
