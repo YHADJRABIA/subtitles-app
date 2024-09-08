@@ -9,7 +9,7 @@ export const generateMetadata = async ({
 }: MetaDataProps): Promise<Metadata> => {
   const t = await getTranslations({
     locale,
-    namespace: 'Metadat.Auth.PasswordReset',
+    namespace: 'Metadata.Auth.PasswordReset',
   })
 
   return {
