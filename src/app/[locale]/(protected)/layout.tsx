@@ -21,6 +21,10 @@ export const generateMetadata = async ({
   return {
     title: { template: `${t('prefix')} %s`, default: t('Protected.title') },
     description: t('Protected.description'),
+    robots: {
+      index: false,
+      follow: false,
+    },
   }
 }
 
