@@ -28,7 +28,8 @@ export const generateMetadata = async ({
 
   return {
     metadataBase: new URL(websiteUrl),
-    title: `${t('prefix')} ${t('NotFound.title')}`,
+
+    title: { template: `${t('prefix')} %s`, default: t('NotFound.title') },
     description: t('NotFound.description'),
     openGraph: {
       title: t('site_name'),

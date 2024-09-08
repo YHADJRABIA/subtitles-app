@@ -16,11 +16,11 @@ export function generateStaticParams() {
 export const generateMetadata = async ({
   params: { locale },
 }: MetaDataProps): Promise<Metadata> => {
-  const t = await getTranslations({ locale, namespace: 'Metadata.Protected' })
+  const t = await getTranslations({ locale, namespace: 'Metadata' })
 
   return {
-    title: t('title'),
-    description: t('description'),
+    title: { template: `${t('prefix')} %s`, default: t('Protected.title') },
+    description: t('Protected.description'),
   }
 }
 
