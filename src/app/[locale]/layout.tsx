@@ -32,6 +32,7 @@ export const generateMetadata = async ({
       default: t('site_name'),
     },
     description: t('NotFound.description'),
+    keywords: t('keywords'),
     openGraph: {
       title: t('site_name'),
       description: t('Homepage.description'),
