@@ -21,7 +21,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
       alternates: {
         languages: {
-          fr: `${websiteUrl}/fr/${pathnames['/series'].fr}/${slug}`,
+          fr: `${websiteUrl}/fr${pathnames['/series'].fr}/${slug}`,
         },
       },
     }
@@ -46,7 +46,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.5,
       alternates: {
         languages: {
-          fr: `${websiteUrl}/fr/${pathnames['/about'].fr}`,
+          fr: `${websiteUrl}/fr${pathnames['/about'].fr}`,
         },
       },
     },
@@ -57,7 +57,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
       alternates: {
         languages: {
-          fr: `${websiteUrl}/fr/${pathnames['/series'].fr}`,
+          fr: `${websiteUrl}/fr${pathnames['/series'].fr}`,
         },
       },
     },
