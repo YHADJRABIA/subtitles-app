@@ -7,11 +7,14 @@ import { MetaDataProps } from '../../layout'
 export const generateMetadata = async ({
   params: { locale },
 }: MetaDataProps): Promise<Metadata> => {
-  const t = await getTranslations({ locale, namespace: 'Metadata' })
+  const t = await getTranslations({
+    locale,
+    namespace: 'Metadata.Auth.SendVerificationEmail',
+  })
 
   return {
-    title: `${t('prefix')} ${t('Auth.SendVerificationEmail.title')}`,
-    description: t('Auth.SendVerificationEmail.description'),
+    title: t('title'),
+    description: t('description'),
   }
 }
 

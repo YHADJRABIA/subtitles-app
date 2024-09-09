@@ -12,11 +12,11 @@ const MAIN_ASSET_PATH = '/assets/film-rolls.svg'
 export const generateMetadata = async ({
   params: { locale },
 }: MetaDataProps): Promise<Metadata> => {
-  const t = await getTranslations({ locale, namespace: 'Metadata' })
+  const t = await getTranslations({ locale, namespace: 'Metadata.Homepage' })
 
   return {
-    title: `${t('prefix')} ${t('Homepage.title')}`,
-    description: t('Homepage.description'),
+    title: t('title'),
+    description: t('description'),
   }
 }
 
