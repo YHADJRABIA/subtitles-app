@@ -10,6 +10,7 @@ export const aboutPageQuery = graphql(
         }
 
         title
+        updatedAt: _updatedAt
 
         faq {
           title

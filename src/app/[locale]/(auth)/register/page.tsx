@@ -10,11 +10,14 @@ export const generateMetadata = async ({
 }: {
   params: { locale: Locale }
 }): Promise<Metadata> => {
-  const t = await getTranslations({ locale, namespace: 'Metadata' })
+  const t = await getTranslations({
+    locale,
+    namespace: 'Metadata.Auth.Register',
+  })
 
   return {
-    title: `${t('prefix')} ${t('Auth.Register.title')}`,
-    description: t('Auth.Register.description'),
+    title: t('title'),
+    description: t('description'),
   }
 }
 

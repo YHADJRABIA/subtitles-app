@@ -7,11 +7,14 @@ import { MetaDataProps } from '@/app/[locale]/layout'
 export const generateMetadata = async ({
   params: { locale },
 }: MetaDataProps): Promise<Metadata> => {
-  const t = await getTranslations({ locale, namespace: 'Metadata' })
+  const t = await getTranslations({
+    locale,
+    namespace: 'Metadata.Auth.PasswordRecovery',
+  })
 
   return {
-    title: `${t('prefix')} ${t('Auth.PasswordRecovery.title')}`,
-    description: t('Auth.PasswordRecovery.description'),
+    title: t('title'),
+    description: t('description'),
   }
 }
 const PasswordRecoveryPage = () => {

@@ -5,10 +5,9 @@ export const REGISTER_ROUTE: Pathname = '/register'
 export const DEFAULT_LOGIN_REDIRECT_ROUTE: Pathname = '/dashboard'
 
 /** Routes accessible without requiring authentication. */
-export const publicRoutes = [
-  '/',
-  '/about',
-  '/series',
+export const publicAuthRoutes = [
+  REGISTER_ROUTE,
+  LOGIN_ROUTE,
   '/verify-email',
   '/send-verification-email',
   '/password/recovery',

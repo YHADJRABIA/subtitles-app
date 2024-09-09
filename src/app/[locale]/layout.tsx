@@ -19,8 +19,6 @@ export interface MetaDataProps {
   params: { locale: Locale; slug: string }
 }
 
-// Hacky way to account for 404's metadata
-// TODO: find a batter way to apply page's metadata, this should only conain the whole app's meta
 export const generateMetadata = async ({
   params: { locale },
 }: MetaDataProps): Promise<Metadata> => {
@@ -28,7 +26,11 @@ export const generateMetadata = async ({
 
   return {
     metadataBase: new URL(websiteUrl),
-    title: `${t('prefix')} ${t('NotFound.title')}`,
+
+    title: {
+      template: `${t('prefix')} %s`,
+      default: t('site_name'),
+    },
     description: t('NotFound.description'),
     openGraph: {
       title: t('site_name'),
