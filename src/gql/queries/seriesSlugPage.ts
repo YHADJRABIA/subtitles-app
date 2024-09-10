@@ -19,6 +19,8 @@ export const seriesBySlugQuery = graphql(
           ...TagFragment
         }
 
+        updatedAt: _updatedAt
+
         coverImage {
           responsiveImage(
             sizes: "(max-width: 600px) 100vw, 600px"
