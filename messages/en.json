@@ -77,6 +77,7 @@
     }
   },
   "Series": {
+    "last_update": "Last update:",
     "title": "Series",
     "featured": "Featured:",
     "all_series": "Series:",
