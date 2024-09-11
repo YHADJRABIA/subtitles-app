@@ -24,6 +24,7 @@ import { executeQuery } from '@/lib/datocms/executeQuery'
 import { notFound } from 'next/navigation'
 import ResponsiveImage from '@/components/DatoCMS/ResponsiveImage'
 import SeriesTrailer from './_components/SeriesTrailer'
+import DateDisplay from '@/components/DateDisplay'
 
 export const generateMetadata = generateMetadataFn({
   query: seriesBySlugQuery,
@@ -65,6 +66,7 @@ export default async function SeriesPage({
     trailer,
     trailerThumbnail,
     subtitles,
+    updatedAt,
   } = series
 
   // TODO: relocale/refactor
@@ -86,6 +88,11 @@ export default async function SeriesPage({
         <Typography tag="h1" weight="bold" size="xxxl">
           {formattedName}
         </Typography>
+        <div className={styles.lastUpdate}>
+          <Typography size="xs">{t('last_update')}</Typography>
+          <DateDisplay date={updatedAt} showTime />
+        </div>
+
         <div className={styles.container}>
           <div className={styles.leftContainer}>
             {coverImageData && (

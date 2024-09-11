@@ -12,6 +12,11 @@
   gap: 2rem;
 }
 
+.lastUpdate {
+  @include flexCenter(row, space-between, flex-end);
+  gap: 1rem;
+}
+
 .container {
   @include flexCenter(column);
   gap: var(--page-padding);
