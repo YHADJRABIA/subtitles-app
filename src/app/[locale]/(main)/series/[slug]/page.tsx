@@ -85,7 +85,7 @@ export default async function SeriesPage({
   return (
     <div className={styles.root}>
       <div className={styles.wrapper}>
-        <Typography tag="h1" weight="bold" size="xxxl">
+        <Typography tag="h1" weight="bold" size="xxxl" className={styles.title}>
           {formattedName}
         </Typography>
         <div className={styles.lastUpdate}>
