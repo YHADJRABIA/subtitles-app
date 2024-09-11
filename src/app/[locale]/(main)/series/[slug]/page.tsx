@@ -97,10 +97,11 @@ export default async function SeriesPage({
           <div className={styles.leftContainer}>
             {coverImageData && (
               <ResponsiveImage
-                data={coverImageData}
+                usePlaceholder
                 hasRoundedBorder
                 priority
                 pictureClassName={styles.image}
+                data={coverImageData}
               />
             )}
             <SeriesHighlights
@@ -133,7 +134,7 @@ export default async function SeriesPage({
                     shownAmountOfSeasons={numberOfSeasons}
                   />
                 </Col>
-                <Col width={[12, 6]}>
+                <Col width={[12, 12, 6]}>
                   <SeriesWhereTo type="watch" list={whereToWatch} />
                 </Col>
               </section>
