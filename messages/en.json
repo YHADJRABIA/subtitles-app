@@ -194,6 +194,10 @@
     "unauthorised": "Unauthorised",
     "failed": "Revalidation failed"
   },
+  "DraftMode": {
+    "invalid_token": "Invalid token",
+    "non_relative_url": "Url must be relative"
+  },
   "Dashboard": {
     "overview": "Overview",
     "settings": "Settings",
