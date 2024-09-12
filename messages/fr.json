@@ -195,7 +195,7 @@
     "unauthorised": "Non autorisé",
     "failed": "Echec de revalidation"
   },
-  "DraftMode": {
+  "CMS": {
     "invalid_token": "Jeton invalide",
     "non_relative_url": "L'url doit être relative"
   },

@@ -16,7 +16,7 @@ const { SECRET_API_TOKEN: secretToken } = process.env
 
 export async function GET(req: NextRequest) {
   const locale = getLocaleFromNextRequest(req)
-  const t = await getTranslations({ locale, namespace: 'DraftMode' })
+  const t = await getTranslations({ locale, namespace: 'CMS' })
 
   // Parse query string parameters
   const token = req.nextUrl.searchParams.get('token')

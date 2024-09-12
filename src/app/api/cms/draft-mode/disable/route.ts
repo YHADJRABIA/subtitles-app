@@ -14,7 +14,7 @@ export const dynamic = 'force-dynamic'
 
 export async function GET(req: NextRequest) {
   const locale = getLocaleFromNextRequest(req)
-  const t = await getTranslations({ locale, namespace: 'DraftMode' })
+  const t = await getTranslations({ locale, namespace: 'CMS' })
 
   const url = req.nextUrl.searchParams.get('url') || '/'
 
