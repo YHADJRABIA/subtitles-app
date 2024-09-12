@@ -43,6 +43,7 @@ export default function ResponsiveImage({
       imgClassName={cn({
         [styles.roundedBorder]: hasRoundedBorder,
       })}
+      usePlaceholder
       {...other}
     />
   )

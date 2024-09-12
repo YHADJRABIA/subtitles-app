@@ -97,7 +97,6 @@ export default async function SeriesPage({
           <div className={styles.leftContainer}>
             {coverImageData && (
               <ResponsiveImage
-                usePlaceholder
                 hasRoundedBorder
                 priority
                 pictureClassName={styles.image}
