@@ -3,6 +3,8 @@ import {
   VideoPlayer as DatoVideoPlayer,
   type VideoPlayerProps,
 } from 'react-datocms'
+import styles from './VideoPlayer.module.scss'
+import cn from 'classnames'
 
 export const VideoPlayerFragment = graphql(`
   fragment VideoPlayerFragment on VideoAltTitleFileField {
@@ -27,6 +29,7 @@ export const VideoPlayerFragment = graphql(`
 
 type Props = Omit<VideoPlayerProps, 'data'> & {
   data: FragmentOf<typeof VideoPlayerFragment>
+  className?: string
 }
 
 /**
@@ -35,14 +38,16 @@ type Props = Omit<VideoPlayerProps, 'data'> & {
  * GraphQL fragment for this component to function only once, then reuse it
  * wherever needed.
  */
-export default function VideoPlayer({ data, ...other }: Props) {
+export default function VideoPlayer({ data, className, ...other }: Props) {
   const unmaskedData = readFragment(VideoPlayerFragment, data)
 
   return (
-    <DatoVideoPlayer
-      data={unmaskedData.video}
-      accentColor="var(--tertiary-black-color)"
-      {...other}
-    />
+    <div className={cn(styles.root, className)}>
+      <DatoVideoPlayer
+        data={unmaskedData.video}
+        accentColor="var(--tertiary-black-color)"
+        {...other}
+      />
+    </div>
   )
 }

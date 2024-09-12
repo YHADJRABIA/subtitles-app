@@ -23,7 +23,11 @@ const SeriesTrailer = ({ videoData, thumbnail, className }: PropTypes) => {
       <Typography tag="h3" weight="semiBold" size="s">
         {t('trailer')}
       </Typography>
-      <VideoPlayer data={videoData} poster={thumbnail} />
+      <VideoPlayer
+        data={videoData}
+        poster={thumbnail}
+        className={styles.video}
+      />
     </section>
   )
 }
