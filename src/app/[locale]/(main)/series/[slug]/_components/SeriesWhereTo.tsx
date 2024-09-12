@@ -3,10 +3,7 @@ import cn from 'classnames'
 import styles from './SeriesWhereTo.module.scss'
 import { useTranslations } from 'next-intl'
 import Typography from '@/components/UI/Typography'
-import {
-  PiFilmStripThin as WatchIcon,
-  PiDownloadSimpleThin as DownloadIcon,
-} from 'react-icons/pi'
+import { PiMapPinThin as MapMarkerIcon } from 'react-icons/pi'
 
 interface PropTypes {
   className?: string
@@ -22,11 +19,9 @@ const SeriesWhereTo = ({ type, list, className }: PropTypes) => {
 
   const isWatchMode = type === 'watch'
 
-  const Icon = isWatchMode ? WatchIcon : DownloadIcon
-
   return (
     <section className={cn(styles.root, className)}>
-      <Icon className={styles.icon} size={20} />
+      <MapMarkerIcon className={styles.icon} size={20} />
       <div className={styles.column}>
         <Typography
           tag="h3"
