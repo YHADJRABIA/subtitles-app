@@ -103,8 +103,8 @@ async function installWebPreviewsPlugin(client: Client, baseUrl: string) {
   })
 } */
 
-export async function POST(request: NextRequest): Promise<NextResponse> {
-  const body = await request.json()
+export async function POST(req: NextRequest): Promise<NextResponse> {
+  const body = await req.json()
 
   const client = buildClient({ apiToken: body.datocmsApiToken })
   const baseUrl = body.frontendUrl as string
