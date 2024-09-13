@@ -24,9 +24,7 @@ type WebPreviewsResponse = {
 }
 
 /**
- * This route handler implements the Previews webhook required for the "Web
- * Previews" plugin:
- *
+ * Implements Previews webhook required for the "Web Previews" plugin:
  * https://www.datocms.com/marketplace/plugins/i/datocms-plugin-web-previews#the-previews-webhook
  */
 
@@ -62,19 +60,19 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
     if (url) {
       /**
-       * If status is not published, it means it has a current version different
+       * If status is not published, the current version is different
        * from the published one, so it's in draft version.
        */
       if (status !== 'published') {
         /**
          * Generates a URL that initially enters Next.js' draft mode, then
-         * redirects to the desired URL
+         * redirects to the desired URL.
          */
         response.previewLinks.push({
           label: t('draft_version'),
           url: new URL(
             /*
-             * Generate the URL in a way that it first passes through the
+             * Generates the URL in a way that it first passes through the
              * draft-mode-enabling endpoint.
              */
             `/api/cms/draft-mode/enable?url=${url}&token=${token}&locale=${locale}`,
@@ -86,7 +84,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       /** If status is not draft, it means it has a published version. */
       if (status !== 'draft') {
         /**
-         * Generate a URL that first exits from Next.js' draft mode, then
+         * Generates a URL that first exits from Next.js' draft mode, then
          * redirects to the desired URL.
          */
         response.previewLinks.push({
