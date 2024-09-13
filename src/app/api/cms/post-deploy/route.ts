@@ -37,6 +37,20 @@ async function installWebPreviewsPlugin(client: Client, baseUrl: string) {
             baseUrl
           ).toString(),
         },
+        {
+          name: 'Staging',
+          previewWebhook: new URL(
+            `/api/cms/preview-links?token=${secretToken}`,
+            baseUrl
+          ).toString(),
+        },
+        /*  {
+          name: 'Development',
+          previewWebhook: new URL(
+            `/api/cms/preview-links?token=${secretToken}`,
+            baseUrl
+          ).toString(),
+        }, */
       ],
       startOpen: true,
     },
