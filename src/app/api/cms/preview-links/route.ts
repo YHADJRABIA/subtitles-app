@@ -1,13 +1,13 @@
 import { recordToWebsiteRoute } from '@/lib/datocms/recordInfo'
 import { type NextRequest, NextResponse } from 'next/server'
 
-import { getLocaleFromNextRequest } from '@/utils/cookies'
 import { getTranslations } from 'next-intl/server'
 import {
   handleUnexpectedError,
   invalidRequestResponse,
   withCORS,
 } from '@/utils/datoCms/api'
+import { getLocaleFromSearchParam } from '@/utils/request'
 
 export function OPTIONS() {
   return new Response('OK', withCORS())
@@ -33,7 +33,7 @@ type WebPreviewsResponse = {
 const { SECRET_API_TOKEN: secretToken } = process.env
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
-  const locale = getLocaleFromNextRequest(req)
+  const locale = getLocaleFromSearchParam(req)
   const t = await getTranslations({ locale, namespace: 'CMS' })
   try {
     const token = req.nextUrl.searchParams.get('token')
@@ -71,13 +71,13 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
          * redirects to the desired URL
          */
         response.previewLinks.push({
-          label: 'Draft version',
+          label: t('draft_version'),
           url: new URL(
             /*
              * Generate the URL in a way that it first passes through the
              * draft-mode-enabling endpoint.
              */
-            `/api/cms/draft-mode/enable?url=${url}&token=${token}`,
+            `/api/cms/draft-mode/enable?url=${url}&token=${token}&locale=${locale}`,
             req.url
           ).toString(),
         })
@@ -90,16 +90,16 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
          * redirects to the desired URL.
          */
         response.previewLinks.push({
-          label: 'Published version',
+          label: t('published_version'),
           url: new URL(
-            `/api/cms/draft-mode/disable?url=${url}`,
+            `/api/cms/draft-mode/disable?url=${url}&locale=${locale}`,
             req.url
           ).toString(),
         })
       }
     }
 
-    // Respond in the format expected by the plugin
+    // Responds in format expected by the plugin
     return NextResponse.json(response, withCORS())
   } catch (err) {
     return handleUnexpectedError(err)
