@@ -72,6 +72,8 @@ const authMiddleware = withAuth(
 export default async function middleware(req: NextRequestWithAuth) {
   const { pathname } = req.nextUrl
 
+  // TODO: Handle DatoCMS preview mode route
+
   // Handle API rate limiting
   if (pathname.startsWith('/api')) {
     return apiRateLimitMiddleware(req)
