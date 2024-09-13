@@ -3,12 +3,16 @@ const path = require('path')
 
 const withNextIntl = createNextIntlPlugin()
 
+// TODO: complete default-src to better secure CORS policy
+/*
+    default-src 'self' data: https://www.datocms-assets.com https://stream.mux.com/ https://inferred.litix.io/;
+ */
+
 // Content Security Policy
 const cspHeader = `
-    default-src 'self';
-    script-src 'self' 'unsafe-eval' 'unsafe-inline';
+    script-src 'self' 'unsafe-eval' 'unsafe-inline' https://va.vercel-scripts.com/ https://www.gstatic.com/;
     style-src 'self' 'unsafe-inline';
-    img-src 'self' blob: data:;
+    img-src 'self' blob: data: https://www.datocms-assets.com  https://image.mux.com/;
     font-src 'self';
     object-src 'none';
     base-uri 'self';
