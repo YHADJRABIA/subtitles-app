@@ -1,6 +1,7 @@
 import { Locale } from '@/types/locale'
 import FrFlagIcon from '../../../public/flags/fr.svg?url'
 import UkFlagIcon from '../../../public/flags/uk.svg?url'
+import { locales } from '@/lib/i18n/navigation'
 
 interface Language {
   id: Locale
@@ -19,3 +20,6 @@ export const defaultLanguage = languages[0]
 export const getLanguageByLocaleValue = (locale: Locale) => {
   return languages.find(lang => lang.value === locale) as Language
 }
+
+export const isRecognisedLocale = (locale: string) =>
+  locales.includes(locale as Locale)
