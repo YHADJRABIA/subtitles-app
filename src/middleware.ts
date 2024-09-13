@@ -72,7 +72,13 @@ const authMiddleware = withAuth(
 export default async function middleware(req: NextRequestWithAuth) {
   const { pathname } = req.nextUrl
 
-  // TODO: Handle DatoCMS preview mode route
+  // Allow draft mode routes to bypass middleware checks
+  if (
+    pathname.startsWith('/api/cms/draft-mode/') ||
+    pathname.startsWith('/api/cms/preview-links/')
+  ) {
+    return NextResponse.next() // Bypass all middleware checks
+  }
 
   // Handle API rate limiting
   if (pathname.startsWith('/api')) {
