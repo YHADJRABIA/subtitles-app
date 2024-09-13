@@ -73,10 +73,7 @@ export default async function middleware(req: NextRequestWithAuth) {
   const { pathname } = req.nextUrl
 
   // Allow draft mode routes to bypass middleware checks
-  if (
-    pathname.startsWith('/api/cms/draft-mode/') ||
-    pathname.startsWith('/api/cms/preview-links/')
-  ) {
+  if (pathname.startsWith('/api/cms/')) {
     return NextResponse.next() // Bypass all middleware checks
   }
 
