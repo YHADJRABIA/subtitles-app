@@ -103,6 +103,8 @@ async function installWebPreviewsPlugin(client: Client, baseUrl: string) {
   })
 } */
 
+// TODO: fix CORS and this request, not working because of secret
+
 export async function POST(req: NextRequest): Promise<NextResponse> {
   const body = await req.json()
 
