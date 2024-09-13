@@ -1,19 +1,20 @@
-import { redirect } from '@/lib/i18n/navigation'
-import { getLocaleFromNextRequest } from '@/utils/cookies'
 import {
   handleUnexpectedError,
   invalidRequestResponse,
   makeDraftModeWorkWithinIframes,
 } from '@/utils/datoCms/api'
+import { getLocaleFromSearchParam } from '@/utils/request'
 import { isNonRelativeUrl } from '@/utils/string'
 import { getTranslations } from 'next-intl/server'
 import { draftMode } from 'next/headers'
+// eslint-disable-next-line no-restricted-imports
+import { redirect } from 'next/navigation' // Important to not use custom next-intl's redirect here, because api lies outside of the [...locale] folder
 
 import type { NextRequest } from 'next/server'
 export const dynamic = 'force-dynamic'
 
 export async function GET(req: NextRequest) {
-  const locale = getLocaleFromNextRequest(req)
+  const locale = getLocaleFromSearchParam(req)
   const t = await getTranslations({ locale, namespace: 'CMS' })
 
   const url = req.nextUrl.searchParams.get('url') || '/'
@@ -30,5 +31,5 @@ export async function GET(req: NextRequest) {
     return handleUnexpectedError(err)
   }
 
-  redirect(url)
+  redirect(`/${locale}/${url}`)
 }
