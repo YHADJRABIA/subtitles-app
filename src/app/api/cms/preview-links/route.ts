@@ -28,6 +28,7 @@ type WebPreviewsResponse = {
  * https://www.datocms.com/marketplace/plugins/i/datocms-plugin-web-previews#the-previews-webhook
  */
 
+// TODO: Add frontend indicator to highlight preview mode (or add /preview/) path prefix
 const { SECRET_API_TOKEN: secretToken } = process.env
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
@@ -43,7 +44,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     /**
      * The plugin sends the record and model for which the user wants a preview,
      * along with information about which locale is currently viewed in
-     * the interface
+     * the interface.
      */
     const { item, itemType, locale } = await req.json()
 
