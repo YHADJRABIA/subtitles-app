@@ -9,7 +9,16 @@
 .wrapper {
   max-width: var(--page-max-width);
   @include flexCenter(column, flex-start, flex-start);
-  gap: 2rem;
+}
+
+.title {
+  margin-bottom: 2.5rem;
+}
+
+.lastUpdate {
+  @include flexCenter(row, space-between, flex-end);
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .container {
@@ -17,13 +26,14 @@
   gap: var(--page-padding);
 
   @include respond-to('medium') {
-    @include flexCenter(row, center, flex-start);
+    @include flexCenter(row, flex-start, flex-start);
   }
 }
 
 .leftContainer {
   @include flexCenter(column, space-between, flex-start);
   width: 100%;
+  flex: 1;
   @include respond-to('medium') {
     width: 60rem;
   }
@@ -31,7 +41,7 @@
 
 .rightContainer {
   margin: 0 -2rem;
-  flex: 1;
+  flex: 0.8;
   & > div {
     gap: 2rem;
   }
@@ -51,5 +61,6 @@
 
 .image,
 .description {
+  width: 100%;
   margin-bottom: 3rem;
 }

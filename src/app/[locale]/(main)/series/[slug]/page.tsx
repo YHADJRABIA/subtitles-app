@@ -24,6 +24,7 @@ import { executeQuery } from '@/lib/datocms/executeQuery'
 import { notFound } from 'next/navigation'
 import ResponsiveImage from '@/components/DatoCMS/ResponsiveImage'
 import SeriesTrailer from './_components/SeriesTrailer'
+import DateDisplay from '@/components/DateDisplay'
 
 export const generateMetadata = generateMetadataFn({
   query: seriesBySlugQuery,
@@ -38,7 +39,7 @@ export default async function SeriesPage({
   params: { locale, slug },
 }: MetaDataProps) {
   const t = await getTranslations({ locale, namespace: 'Series' })
-  const { isEnabled: isDraftModeEnabled } = draftMode() // TODO: Add webhooks from DatoCMS + work on draftmode
+  const { isEnabled: isDraftModeEnabled } = draftMode() // TODO: work on draftmode
 
   const { series } = await executeQuery(seriesBySlugQuery, {
     variables: { locale, slug },
@@ -65,6 +66,7 @@ export default async function SeriesPage({
     trailer,
     trailerThumbnail,
     subtitles,
+    updatedAt,
   } = series
 
   // TODO: relocale/refactor
@@ -83,17 +85,22 @@ export default async function SeriesPage({
   return (
     <div className={styles.root}>
       <div className={styles.wrapper}>
-        <Typography tag="h1" weight="bold" size="xxxl">
+        <Typography tag="h1" weight="bold" size="xxxl" className={styles.title}>
           {formattedName}
         </Typography>
+        <div className={styles.lastUpdate}>
+          <Typography size="xs">{t('last_update')}</Typography>
+          <DateDisplay date={updatedAt} showTime />
+        </div>
+
         <div className={styles.container}>
           <div className={styles.leftContainer}>
             {coverImageData && (
               <ResponsiveImage
-                data={coverImageData}
                 hasRoundedBorder
                 priority
                 pictureClassName={styles.image}
+                data={coverImageData}
               />
             )}
             <SeriesHighlights
@@ -126,7 +133,7 @@ export default async function SeriesPage({
                     shownAmountOfSeasons={numberOfSeasons}
                   />
                 </Col>
-                <Col width={[12, 6]}>
+                <Col width={[12, 12, 6]}>
                   <SeriesWhereTo type="watch" list={whereToWatch} />
                 </Col>
               </section>
