@@ -17,7 +17,7 @@ const cspHeader = `
     object-src 'none';
     base-uri 'self';
     form-action 'self';
-    frame-ancestors 'self' https://plugins-cdn.datocms.com;
+    frame-ancestors 'self' localhost:* https://plugins-cdn.datocms.com;
     upgrade-insecure-requests;
 `
 
