@@ -196,7 +196,9 @@
   },
   "CMS": {
     "invalid_token": "Invalid token",
-    "non_relative_url": "Url must be relative"
+    "non_relative_url": "Url must be relative",
+    "draft_version": "Draft version",
+    "published_version": "Published version"
   },
   "Dashboard": {
     "overview": "Overview",

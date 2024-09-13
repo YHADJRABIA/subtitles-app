@@ -197,7 +197,9 @@
   },
   "CMS": {
     "invalid_token": "Jeton invalide",
-    "non_relative_url": "L'url doit être relative"
+    "non_relative_url": "L'url doit être relative",
+    "draft_version": "Version brouillon",
+    "published_version": "Version publiée"
   },
   "Dashboard": {
     "overview": "Aperçu",
