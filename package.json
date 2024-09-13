@@ -14,7 +14,7 @@
     "format": "prettier --write .",
     "test-all": "npm run check-format && npm run check-lint && npm run check-types && npm run build",
     "prepare": "husky",
-    "generate-schema": "dotenv -c -- bash -c \"gql.tada generate schema https://graphql.datocms.com --header 'X-Exclude-Invalid: true' --header 'Authorization: $DATOCMS_PUBLISHED_CONTENT_CDA_TOKEN'\""
+    "generate-schema": "source .env && dotenv -c -- bash -c \"gql.tada generate schema https://graphql.datocms.com --header 'X-Exclude-Invalid: true' --header 'Authorization: $DATOCMS_PUBLISHED_CONTENT_CDA_TOKEN'\""
   },
   "dependencies": {
     "@datocms/cda-client": "^0.2.2",
@@ -32,7 +32,7 @@
     "gql.tada": "^1.8.5",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.5.1",
-    "next": "^14.2.8",
+    "next": "^14.2.11",
     "next-auth": "^4.24.7",
     "next-intl": "^3.17.3",
     "nodemailer": "^6.9.14",
@@ -50,7 +50,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@next/eslint-plugin-next": "^14.2.8",
+    "@next/eslint-plugin-next": "^14.2.11",
     "@svgr/webpack": "^8.1.0",
     "@types/bcryptjs": "^2.4.6",
     "@types/jsonwebtoken": "^9.0.6",
@@ -64,7 +64,7 @@
     "@typescript-eslint/parser": "^7.7.0",
     "dotenv-cli": "^7.4.2",
     "eslint": "^8",
-    "eslint-config-next": "^14.2.8",
+    "eslint-config-next": "^14.2.11",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-unused-imports": "^3.1.0",

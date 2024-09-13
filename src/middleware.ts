@@ -72,6 +72,11 @@ const authMiddleware = withAuth(
 export default async function middleware(req: NextRequestWithAuth) {
   const { pathname } = req.nextUrl
 
+  // Allow draft mode routes to bypass middleware checks
+  if (pathname.startsWith('/api/cms/')) {
+    return NextResponse.next() // Bypass all middleware checks
+  }
+
   // Handle API rate limiting
   if (pathname.startsWith('/api')) {
     return apiRateLimitMiddleware(req)

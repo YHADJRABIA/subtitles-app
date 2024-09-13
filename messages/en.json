@@ -77,6 +77,7 @@
     }
   },
   "Series": {
+    "last_update": "Last update:",
     "title": "Series",
     "featured": "Featured:",
     "all_series": "Series:",
@@ -192,6 +193,12 @@
     "successful_revalidation": "Succesfully revalidated",
     "unauthorised": "Unauthorised",
     "failed": "Revalidation failed"
+  },
+  "CMS": {
+    "invalid_token": "Invalid token",
+    "non_relative_url": "Url must be relative",
+    "draft_version": "Draft version",
+    "published_version": "Published version"
   },
   "Dashboard": {
     "overview": "Overview",
