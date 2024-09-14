@@ -96,7 +96,9 @@ async function installWebPreviewsPlugin(client: Client, baseUrl: string) {
   })
 } */
 
-// TODO: fix CORS and this request, not working because of secret
+// Important: Do not forget to integrate DatoCMS to deployment server (Vercel in this case)
+// Do not forget to add app url with secret token as search param (or header) from
+// DatoCMS' interface: Configuration -> Plugins -> Web Previews. Otherwise This won't work
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
   const body = await req.json()
