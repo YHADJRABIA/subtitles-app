@@ -44,13 +44,6 @@ async function installWebPreviewsPlugin(client: Client, baseUrl: string) {
             baseUrl
           ).toString(),
         },
-        /*  {
-          name: 'Development',
-          previewWebhook: new URL(
-            `/api/cms/preview-links?token=${secretToken}`,
-            baseUrl
-          ).toString(),
-        }, */
       ],
       startOpen: true,
     },
@@ -102,6 +95,8 @@ async function installWebPreviewsPlugin(client: Client, baseUrl: string) {
     http_basic_password: null,
   })
 } */
+
+// TODO: fix CORS and this request, not working because of secret
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
   const body = await req.json()

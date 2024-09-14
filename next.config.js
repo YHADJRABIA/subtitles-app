@@ -17,7 +17,7 @@ const cspHeader = `
     object-src 'none';
     base-uri 'self';
     form-action 'self';
-    frame-ancestors 'self' https://pysubs.admin.datocms.com/ https://plugins-cdn.datocms.com;
+    frame-ancestors 'self' https://plugins-cdn.datocms.com;
     upgrade-insecure-requests;
 `
 
