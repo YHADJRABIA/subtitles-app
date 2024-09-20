@@ -60,7 +60,7 @@ const DashboardAccountPage = async ({ params: { locale } }: MetaDataProps) => {
           {lastLoginDate && (
             <div className={styles.field}>
               <Typography weight="semiBold" size="xs">
-                {t('last_login')}
+                {t('last_visit')}
               </Typography>
               <DateDisplay date={lastLoginDate} showTime />
             </div>

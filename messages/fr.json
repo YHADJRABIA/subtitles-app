@@ -219,7 +219,7 @@
     },
     "Account": {
       "title": "Compte",
-      "last_login": "Dernière connexion : ",
+      "last_visit": "Dernière visite : ",
       "registered_since": "Date de création : ",
       "last_update": "Dernière modification : ",
       "delete_account": "Supprimer compte",

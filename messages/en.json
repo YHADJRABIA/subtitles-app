@@ -218,7 +218,7 @@
     },
     "Account": {
       "title": "Account",
-      "last_login": "Last login:",
+      "last_visit": "Last visit:",
       "registered_since": "Registred since:",
       "last_update": "Last update:",
       "delete_account": "Delete account",
