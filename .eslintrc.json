@@ -125,6 +125,7 @@
         ]
       }
     },
+    // TODO: Exclude next-intl links & redirect outside of [app] folder
     {
       "files": ["@/lib/datocms/executeQuery.ts"],
       "rules": {
