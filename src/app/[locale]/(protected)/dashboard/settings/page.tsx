@@ -1,6 +1,5 @@
 import React from 'react'
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
-import styles from './page.module.scss'
 /* import { getUserSession } from '@/utils/session' */
 import Typography from '@/components/UI/Typography'
 /* import SwitchButton from '@/components/SwitchButton' */

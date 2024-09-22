@@ -32,10 +32,10 @@ const GoogleLogin = ({ label, disabled, onClick }: PropTypes) => {
       weight="semiBold"
       size="xs"
       testId="login-with-google"
-      onClick={handleClick}
       disabled={disabled || isLoading}
       isLoading={isLoading}
       title={label}
+      onClick={handleClick}
     >
       <FcGoogle title="Google" size={22} />
       {label}

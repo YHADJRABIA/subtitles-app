@@ -65,18 +65,18 @@ const ConfirmationModal = ({
             isLoading={isLoading}
             disabled={isLoading}
             backgroundColor={color}
-            onClick={handleConfirm}
             size="xs"
             isFullWidth={isOnMobile}
+            onClick={handleConfirm}
           >
             {t('yes')}
           </Button>
 
           <Button
             variation="secondary"
-            onClick={onCancel}
             size="xs"
             isFullWidth={isOnMobile}
+            onClick={onCancel}
           >
             {t('no')}
           </Button>

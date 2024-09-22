@@ -25,9 +25,9 @@ export const useShowPassword = ({
 
   const Icon = () => (
     <IconComponent
-      onClick={handleClick}
       title={isShown ? t('reveal_password') : t('conceal_password')}
       style={{ fontSize: size, cursor: 'pointer' }}
+      onClick={handleClick}
     />
   )
 

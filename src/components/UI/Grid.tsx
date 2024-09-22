@@ -31,6 +31,7 @@ export const Row = forwardRef<HTMLDivElement, RowProps>(function Row(
   return (
     <Tag
       {...props}
+      ref={ref}
       className={cn(
         className,
         styles.row,
@@ -38,7 +39,6 @@ export const Row = forwardRef<HTMLDivElement, RowProps>(function Row(
         getResponsiveCN('align', align),
         getResponsiveCN('justify', justify)
       )}
-      ref={ref}
     />
   )
 })
@@ -58,6 +58,7 @@ export const Col = forwardRef<HTMLDivElement, ColProps>(function Col(
   return (
     <Tag
       {...props}
+      ref={ref}
       className={cn(
         className,
         getResponsiveCN('col', width),
@@ -67,7 +68,6 @@ export const Col = forwardRef<HTMLDivElement, ColProps>(function Col(
           [styles.last]: last,
         }
       )}
-      ref={ref}
     />
   )
 })

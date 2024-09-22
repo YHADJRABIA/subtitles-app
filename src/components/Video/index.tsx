@@ -49,16 +49,17 @@ const Video = ({
 
   return isYouTubeVideo ? (
     <iframe
+      allowFullScreen
       width={width}
       height={height}
       src={youtubeUrl}
       className={cn(styles.root, className)}
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowFullScreen
       aria-label="YouTube video" // Todo: make dynamic
     />
   ) : (
     <video
+      playsInline // For iOS browsers compatibility
       width={width}
       height={height}
       controls={showControls}
@@ -69,16 +70,15 @@ const Video = ({
       className={cn(styles.root, className)}
       aria-label="Video" // Todo: make dynamic
       poster={thumbnailSrc}
-      playsInline // For iOS browsers compatibility
     >
       <source src={videoSrc} type="video/mp4" />
       {captionsSrc?.length && (
         <track
+          default
           src={captionsSrc}
           kind="subtitles"
           srcLang={capitaliseFirstLetter(srcLang)}
           label={captionsLabel}
-          default
         />
       )}
       {t('not_supported')}

@@ -18,6 +18,7 @@ const Avatar = ({ src, size, className }: PropTypes) => {
   const defaultSize = hasAvatar ? 75 : 65
   return (
     <Image
+      priority
       src={hasAvatar ? src : PLACEHOLDER}
       alt={t('avatar')}
       title={t('avatar')}
@@ -25,7 +26,6 @@ const Avatar = ({ src, size, className }: PropTypes) => {
       height={size ?? defaultSize}
       style={{ objectFit: 'cover' }}
       className={cn(styles.root, className)}
-      priority
     />
   )
 }
