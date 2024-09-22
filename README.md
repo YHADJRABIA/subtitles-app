@@ -1,4 +1,5 @@
 # РуSubs
+![architecture](/public/architecture.png)
 
 Fully internationalised fullstack Next.js application (React/Node.js) with MongoDB & DatoCMS:
 
