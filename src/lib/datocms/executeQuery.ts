@@ -1,6 +1,5 @@
 import {
   buildRequestInit,
-  // eslint-disable-next-line no-restricted-imports
   executeQuery as libExecuteQuery,
 } from '@datocms/cda-client'
 import type { TadaDocumentNode } from 'gql.tada'

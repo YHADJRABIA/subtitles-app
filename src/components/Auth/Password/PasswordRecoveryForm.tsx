@@ -62,10 +62,10 @@ const PasswordRecoveryForm = () => {
 
   return (
     <form
-      method="POST"
-      onSubmit={handleSubmit(handleRecovery)}
       noValidate
+      method="POST"
       className={styles.root}
+      onSubmit={handleSubmit(handleRecovery)}
     >
       <div className={styles.wrapper}>
         <Typography className={styles.title} tag="h1" weight="semiBold">
@@ -79,19 +79,19 @@ const PasswordRecoveryForm = () => {
           isShown={!!info.label}
         />
         <Field
-          className={styles.field}
           autoFocus
+          className={styles.field}
           register={register}
           name="email"
           placeholder="email@domain.com"
           type="email"
           label={t('email')}
+          testId="send-reset-password-email"
+          leftIcon={{ src: EmailIcon, title: t('email') }}
           subLabel={{
             text: errors?.email?.message,
             isShown: fieldState.isTouched,
           }}
-          testId="send-reset-password-email"
-          leftIcon={{ src: EmailIcon, title: t('email') }}
         />
 
         <Button

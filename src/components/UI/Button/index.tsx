@@ -52,6 +52,11 @@ export const Button = ({
     <Typography
       {...rest}
       tag={tag}
+      data-testid={testId}
+      tabIndex={isClickable ? 0 : -1} // Prevents focus if disabled
+      backgroundColor={backgroundColor}
+      role="button"
+      aria-disabled={!isClickable}
       className={cn(
         styles.root,
         isClickable ? styles.clickable : styles.disabled,
@@ -62,11 +67,6 @@ export const Button = ({
         },
         className
       )}
-      data-testid={testId}
-      tabIndex={isClickable ? 0 : -1} // Prevents focus if disabled
-      backgroundColor={backgroundColor}
-      role="button"
-      aria-disabled={!isClickable}
       onClick={handleClick}
     >
       {isLoading ? <Loader className={styles.loader} /> : children}

@@ -34,10 +34,10 @@ const LanguageMenu = ({ className, isInverted = false }: PropTypes) => {
   return (
     <div ref={ref} className={cn(styles.root, className)}>
       <Button
-        onClick={onToggle}
         disabled={isPending}
         className={styles.button}
         tag="span"
+        onClick={onToggle}
       >
         <Image
           src={currentLanguage.icon}
@@ -46,9 +46,9 @@ const LanguageMenu = ({ className, isInverted = false }: PropTypes) => {
           alt={currentLanguage.label}
         />
         <Typography
+          uppercase
           size="xs"
           tag="span"
-          uppercase
           className={styles.currentLang}
         >
           {currentLanguage.value}
@@ -71,8 +71,8 @@ const LanguageMenu = ({ className, isInverted = false }: PropTypes) => {
             <li
               key={el.id}
               lang={el.value}
-              onClick={() => onChangeLanguage(el.value)}
               title={el.label}
+              onClick={() => onChangeLanguage(el.value)}
             >
               <Image
                 src={el.icon}

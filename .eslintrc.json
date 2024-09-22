@@ -86,8 +86,8 @@
     "no-unneeded-ternary": "error",
     "no-var": "error",
     "require-await": "error",
-    /*  "react/jsx-sort-props": [ // TODO: Configure properly
-      true,
+    "react/jsx-sort-props": [
+      "warn",
       {
         "callbacksLast": true,
         "shorthandFirst": true,
@@ -98,37 +98,70 @@
         "reservedFirst": ["key"],
         "locale": "auto"
       }
-    ], */
-    // Consistently import navigation APIs from `@/navigation` instead of next/link or next/navigation.
-    "no-restricted-imports": [
-      // Next-Intl
-      "error",
-      {
-        "name": "next/link",
-        "message": "Please import from '@/lib/i18n/navigation' instead."
-      },
-      {
-        "name": "next/navigation",
-        "importNames": [
-          "redirect",
-          "permanentRedirect",
-          "useRouter",
-          "usePathname"
-        ],
-        "message": "Please import from '@/lib/i18n/navigation' instead."
-      },
-
-      // DatoCMS
-      {
-        "name": "@datocms/cda-client",
-        "importNames": ["executeQuery"],
-        "message": "Please import from '@/lib/datocms/executeQuery' instead."
-      },
-      {
-        "name": "gql.tada",
-        "importNames": ["graphql"],
-        "message": "Please import from '@/lib/datocms/graphql' instead."
-      }
     ]
-  }
+  },
+  "overrides": [
+    {
+      // Next-Intl: Consistently import navigation APIs from `@/navigation` instead of next/link or next/navigation.
+      "files": ["@/app/[locale]/**/*.tsx"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "name": "next/link",
+            "message": "Please import from '@/lib/i18n/navigation' instead."
+          },
+          {
+            "name": "next/navigation",
+            "importNames": [
+              "redirect",
+              "permanentRedirect",
+              "useRouter",
+              "usePathname"
+            ],
+            "message": "Please import from '@/lib/i18n/navigation' instead."
+          }
+        ]
+      }
+    },
+    {
+      // Prevents use of Next-Intl hooks by api routes to prevent errors
+      "files": ["**/app/api/**/route.ts"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "name": "@/lib/i18n/navigation",
+            "importNames": [
+              "Link",
+              "redirect",
+              "getPathname",
+              "useRouter",
+              "usePathname"
+            ],
+            "message": "Please import from 'next/link' or 'next/navigation' instead."
+          }
+        ]
+      }
+    },
+    {
+      // Enforces use of custom DatoCMS imports
+      "files": ["@/lib/datocms/executeQuery.ts"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "name": "@datocms/cda-client",
+            "importNames": ["executeQuery"],
+            "message": "Please import from '@/lib/datocms/executeQuery' instead."
+          },
+          {
+            "name": "gql.tada",
+            "importNames": ["graphql"],
+            "message": "Please import from '@/lib/datocms/graphql' instead."
+          }
+        ]
+      }
+    }
+  ]
 }

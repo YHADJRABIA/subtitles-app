@@ -109,10 +109,10 @@ function AuthForm({ type }: PropTypes) {
   // TODO: Add Google Recaptcha to prevent abuse + improve UX with resend validation email
   return (
     <form
-      method="POST"
-      onSubmit={handleSubmit(handleAuth as SubmitHandler<FieldValues>)}
       noValidate
+      method="POST"
       className={styles.root}
+      onSubmit={handleSubmit(handleAuth as SubmitHandler<FieldValues>)}
     >
       <div className={styles.wrapper}>
         <Typography
@@ -146,37 +146,37 @@ function AuthForm({ type }: PropTypes) {
         )}
 
         <Field
-          className={styles.emailField}
           autoFocus
+          className={styles.emailField}
           register={register}
           placeholder="email@domain.com"
           type="email"
           name="email"
           label={t('email')}
+          testId={isRegisterForm ? 'register-email' : 'login-email'}
+          leftIcon={{ src: EmailIcon, title: t('email') }}
           subLabel={{
             text: errors?.email?.message,
             isShown: fieldState.email.isTouched,
           }}
-          testId={isRegisterForm ? 'register-email' : 'login-email'}
-          leftIcon={{ src: EmailIcon, title: t('email') }}
         />
 
         <Field
-          placeholder={
-            passwordInputType === 'password' ? '••••••' : 'MyPa$$word_'
-          }
           type={passwordInputType}
           register={register}
           name="password"
           testId={isRegisterForm ? 'register-password' : 'login-password'}
           label={t('password')}
+          leftIcon={{ src: PasswordIcon, title: t('password') }}
+          rightIcon={{ src: ToggleIcon }}
+          placeholder={
+            passwordInputType === 'password' ? '••••••' : 'MyPa$$word_'
+          }
           subLabel={{
             text: errors?.password?.message,
             isShown: true,
             isInfo: isRegisterForm,
           }}
-          leftIcon={{ src: PasswordIcon, title: t('password') }}
-          rightIcon={{ src: ToggleIcon }}
         />
 
         {isLoginForm && (
@@ -211,8 +211,8 @@ function AuthForm({ type }: PropTypes) {
         <Separator label={t_general('or')} className={styles.separator} />
         <GoogleLogin
           disabled={isSubmitting}
-          onClick={handleGoogleLogin}
           label={t('continue_with_google')}
+          onClick={handleGoogleLogin}
         />
       </div>
       <Typography align="center">
