@@ -7,7 +7,7 @@ import { getLocaleFromSearchParam } from '@/utils/request'
 import { isNonRelativeUrl } from '@/utils/string'
 import { getTranslations } from 'next-intl/server'
 import { draftMode } from 'next/headers'
-import { redirect } from 'next/navigation' // Important to not use custom next-intl's redirect here, because api lies outside of the [...locale] folder
+import { redirect } from 'next/navigation'
 
 import type { NextRequest } from 'next/server'
 export const dynamic = 'force-dynamic'
