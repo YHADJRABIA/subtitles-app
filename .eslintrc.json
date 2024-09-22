@@ -102,12 +102,11 @@
   },
   "overrides": [
     {
+      // Next-Intl: Consistently import navigation APIs from `@/navigation` instead of next/link or next/navigation.
       "files": ["@/app/[locale]/**/*.tsx"],
       "rules": {
         "no-restricted-imports": [
           "error",
-
-          // Next-Intl: Consistently import navigation APIs from `@/navigation` instead of next/link or next/navigation.
           {
             "name": "next/link",
             "message": "Please import from '@/lib/i18n/navigation' instead."
@@ -125,13 +124,32 @@
         ]
       }
     },
-    // TODO: Exclude next-intl links & redirect outside of [app] folder
     {
+      // Prevents use of Next-Intl components by api routes and pages outside of [locale] folder, to prevent errors
+      "files": ["@/app/api/**/*.ts", "@/app/**/*.tsx"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "name": "@/lib/i18n/navigation",
+            "importNames": [
+              "Link",
+              "redirect",
+              "getPathname",
+              "useRouter",
+              "usePathname"
+            ],
+            "message": "Please import from 'next/link' or 'next/navigation' instead."
+          }
+        ]
+      }
+    },
+    {
+      // Enforces use of custom DatoCMS imports
       "files": ["@/lib/datocms/executeQuery.ts"],
       "rules": {
         "no-restricted-imports": [
           "error",
-          // DatoCMS
           {
             "name": "@datocms/cda-client",
             "importNames": ["executeQuery"],
