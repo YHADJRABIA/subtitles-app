@@ -85,9 +85,9 @@
     "no-extra-boolean-cast": "error",
     "no-unneeded-ternary": "error",
     "no-var": "error",
-    "require-await": "error"
-    /*  "react/jsx-sort-props": [ // TODO: Configure properly
-      true,
+    "require-await": "error",
+    "react/jsx-sort-props": [
+      "warn",
       {
         "callbacksLast": true,
         "shorthandFirst": true,
@@ -98,7 +98,7 @@
         "reservedFirst": ["key"],
         "locale": "auto"
       }
-    ], */
+    ]
   },
   "overrides": [
     {
