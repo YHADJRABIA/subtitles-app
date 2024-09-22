@@ -125,8 +125,8 @@
       }
     },
     {
-      // Prevents use of Next-Intl components by api routes and pages outside of [locale] folder, to prevent errors
-      "files": ["@/app/api/**/*.ts", "@/app/**/*.tsx"],
+      // Prevents use of Next-Intl hooks by api routes to prevent errors
+      "files": ["**/app/api/**/route.ts"],
       "rules": {
         "no-restricted-imports": [
           "error",
