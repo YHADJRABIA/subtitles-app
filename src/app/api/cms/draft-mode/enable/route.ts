@@ -7,7 +7,6 @@ import { draftMode } from 'next/headers'
 import type { NextRequest } from 'next/server'
 import { getTranslations } from 'next-intl/server'
 import { isNonRelativeUrl } from '@/utils/string'
-// eslint-disable-next-line no-restricted-imports
 import { redirect } from 'next/navigation' // Important to not use custom next-intl's redirect here, because api lies outside of the [...locale] folder
 import { getLocaleFromSearchParam } from '@/utils/request'
 
