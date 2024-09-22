@@ -85,7 +85,7 @@
     "no-extra-boolean-cast": "error",
     "no-unneeded-ternary": "error",
     "no-var": "error",
-    "require-await": "error",
+    "require-await": "error"
     /*  "react/jsx-sort-props": [ // TODO: Configure properly
       true,
       {
@@ -99,36 +99,50 @@
         "locale": "auto"
       }
     ], */
-    // Consistently import navigation APIs from `@/navigation` instead of next/link or next/navigation.
-    "no-restricted-imports": [
-      // Next-Intl
-      "error",
-      {
-        "name": "next/link",
-        "message": "Please import from '@/lib/i18n/navigation' instead."
-      },
-      {
-        "name": "next/navigation",
-        "importNames": [
-          "redirect",
-          "permanentRedirect",
-          "useRouter",
-          "usePathname"
-        ],
-        "message": "Please import from '@/lib/i18n/navigation' instead."
-      },
+  },
+  "overrides": [
+    {
+      "files": ["@/app/[locale]/**/*.tsx"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
 
-      // DatoCMS
-      {
-        "name": "@datocms/cda-client",
-        "importNames": ["executeQuery"],
-        "message": "Please import from '@/lib/datocms/executeQuery' instead."
-      },
-      {
-        "name": "gql.tada",
-        "importNames": ["graphql"],
-        "message": "Please import from '@/lib/datocms/graphql' instead."
+          // Next-Intl: Consistently import navigation APIs from `@/navigation` instead of next/link or next/navigation.
+          {
+            "name": "next/link",
+            "message": "Please import from '@/lib/i18n/navigation' instead."
+          },
+          {
+            "name": "next/navigation",
+            "importNames": [
+              "redirect",
+              "permanentRedirect",
+              "useRouter",
+              "usePathname"
+            ],
+            "message": "Please import from '@/lib/i18n/navigation' instead."
+          }
+        ]
       }
-    ]
-  }
+    },
+    {
+      "files": ["@/lib/datocms/executeQuery.ts"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          // DatoCMS
+          {
+            "name": "@datocms/cda-client",
+            "importNames": ["executeQuery"],
+            "message": "Please import from '@/lib/datocms/executeQuery' instead."
+          },
+          {
+            "name": "gql.tada",
+            "importNames": ["graphql"],
+            "message": "Please import from '@/lib/datocms/graphql' instead."
+          }
+        ]
+      }
+    }
+  ]
 }
