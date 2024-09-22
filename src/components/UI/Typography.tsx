@@ -85,14 +85,14 @@ const Typography = ({
       {...props}
       href={link.href}
       style={PropStyles as CSSProperties}
+      target={link.openInNewTab ? '_blank' : undefined}
+      rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
       className={cn(
         styles.root,
         { isFullWidth, uppercase },
         size && styles[size],
         className
       )}
-      target={link.openInNewTab ? '_blank' : undefined}
-      rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
     >
       {children}
     </Link>

@@ -25,11 +25,11 @@ const EpisodesModal = ({ episodes }: PropTypes) => {
             </Typography>
 
             <Button
-              onClick={() => downloadFile(url, filename)}
+              isRounded
               variation="primary"
               size="xs"
               isFullWidth={false}
-              isRounded
+              onClick={() => downloadFile(url, filename)}
             >
               {t('Subtitles.download')}
             </Button>

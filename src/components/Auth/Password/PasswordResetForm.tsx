@@ -68,10 +68,10 @@ const PasswordResetForm = () => {
 
   return (
     <form
-      method="POST"
-      onSubmit={handleSubmit(handleReset)}
       noValidate
+      method="POST"
       className={styles.root}
+      onSubmit={handleSubmit(handleReset)}
     >
       <div className={styles.wrapper}>
         <Typography tag="h1" weight="semiBold" className={styles.title}>
@@ -86,21 +86,21 @@ const PasswordResetForm = () => {
 
         <Field
           className={styles.field}
-          placeholder={
-            passwordInputType === 'password' ? '••••••' : 'MyPa$$word_'
-          }
           type={passwordInputType}
           register={register}
           name="password"
+          testId="reset-password-field"
+          label={t('password')}
+          leftIcon={{ src: PasswordIcon, title: t('password') }}
+          rightIcon={{ src: ToggleIcon }}
+          placeholder={
+            passwordInputType === 'password' ? '••••••' : 'MyPa$$word_'
+          }
           subLabel={{
             text: errors?.password?.message,
             isShown: fieldState.isTouched,
             isInfo: true,
           }}
-          testId="reset-password-field"
-          label={t('password')}
-          leftIcon={{ src: PasswordIcon, title: t('password') }}
-          rightIcon={{ src: ToggleIcon }}
         />
 
         <Button

@@ -29,9 +29,9 @@ const DeleteAccountButton = ({ className, userId }: PropTypes) => {
       content: (
         <ConfirmationModal
           message={t('warning_deletion')}
+          type="warning"
           onConfirm={handleDelete}
           onCancel={closeModal}
-          type="warning"
         />
       ),
     })

@@ -61,10 +61,10 @@ const SendVerificationEmailForm = () => {
 
   return (
     <form
-      method="POST"
-      onSubmit={handleSubmit(handleVerify)}
       noValidate
+      method="POST"
       className={styles.root}
+      onSubmit={handleSubmit(handleVerify)}
     >
       <div className={styles.wrapper}>
         <Typography tag="h1" weight="semiBold" className={styles.title}>
@@ -79,19 +79,19 @@ const SendVerificationEmailForm = () => {
         />
 
         <Field
-          className={styles.field}
           autoFocus
+          className={styles.field}
           register={register}
           placeholder="email@domain.com"
           type="email"
           name="email"
           label={t('email')}
+          testId="verify-email"
+          leftIcon={{ src: EmailIcon, title: t('email') }}
           subLabel={{
             text: errors?.email?.message,
             isShown: fieldState.isTouched,
           }}
-          testId="verify-email"
-          leftIcon={{ src: EmailIcon, title: t('email') }}
         />
 
         <Button

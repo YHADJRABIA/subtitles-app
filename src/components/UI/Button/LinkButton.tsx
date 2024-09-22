@@ -30,6 +30,11 @@ export const LinkButton = ({
     <Typography
       {...rest}
       link={{ ...link }}
+      data-testid={testId}
+      style={{ backgroundColor }}
+      role="button"
+      tabIndex={0}
+      aria-pressed={isPrimary ? 'true' : 'false'}
       className={cn(
         styles.root,
         styles.linkButton,
@@ -41,11 +46,6 @@ export const LinkButton = ({
         },
         className
       )}
-      data-testid={testId}
-      style={{ backgroundColor }}
-      role="button"
-      tabIndex={0}
-      aria-pressed={isPrimary ? 'true' : 'false'}
     >
       {Icon && (
         <span className={styles.icon}>

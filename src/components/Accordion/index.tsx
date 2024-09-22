@@ -87,21 +87,21 @@ const Accordion = ({
               titleTag={titleTag}
               bodyTag={bodyTag}
               backgroundColor={backgroundColor}
-              onToggle={() => handleToggle(idx)}
               hasBackgroundEffect={hasBackgroundEffect}
+              onToggle={() => handleToggle(idx)}
             />
           ))
         : title &&
           body && (
             <AccordionItem
+              isSingleItem
               title={title}
               body={body}
               isOpen={openStates[0]}
               titleTag={titleTag}
               backgroundColor={backgroundColor}
-              onToggle={() => handleToggle(0)}
               hasBackgroundEffect={hasBackgroundEffect}
-              isSingleItem
+              onToggle={() => handleToggle(0)}
             />
           )}
     </ul>

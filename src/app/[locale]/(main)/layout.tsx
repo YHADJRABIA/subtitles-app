@@ -13,7 +13,7 @@ const layout = async ({ children }: PropTypes) => {
 
   return (
     <>
-      <Header isConnected={!!user} isConcealable />
+      <Header isConcealable isConnected={!!user} />
       <main className={styles.root}>{children}</main>
       <Footer />
     </>
