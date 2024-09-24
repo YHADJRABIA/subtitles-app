@@ -7,8 +7,7 @@ if lsof -i :3000 &>/dev/null; then
 fi
 
 
-# TODO: Add testing script
-# npm test || { echo '❌ Tests failed. Fix the issues before pushing.'; exit 1; }
+npm run test || { echo '❌ Tests failed. Fix the issues before pushing.'; exit 1; }
 
 # Check Prettier standards
 echo '🔍 Checking code format with Prettier...'
