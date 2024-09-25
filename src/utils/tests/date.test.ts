@@ -29,19 +29,19 @@ describe('Date utility functions', () => {
     it('should format date in default locale and without time', () => {
       const isoDateString = '2022-12-31T10:00:00Z'
       const result = formatDate(isoDateString)
-      expect(result).toBe('31/12/2022') // Adjust based on the 'fr' locale format if needed
+      expect(result).toBe('31/12/2022')
     })
 
     it('should format date with time when showTime is true', () => {
       const isoDateString = '2022-12-31T10:00:00Z'
       const result = formatDate(isoDateString, { showTime: true })
-      expect(result).toEqual({ date: '31/12/2022', time: '10:00' }) // Adjust based on the 'fr' locale format if needed
+      expect(result).toEqual({ date: '31/12/2022', time: '10:00' })
     })
 
     it('should format date with a specified locale', () => {
       const isoDateString = '2022-12-31T10:00:00Z'
       const result = formatDate(isoDateString, { locale: 'en' })
-      expect(result).toBe('12/31/2022') // Adjust based on the 'en-US' locale format if needed
+      expect(result).toBe('12/31/2022') //
     })
 
     it('should format date with time in a specified locale', () => {
@@ -50,7 +50,7 @@ describe('Date utility functions', () => {
         locale: 'en',
         showTime: true,
       })
-      expect(result).toEqual({ date: '12/31/2022', time: '10:00 AM' }) // Adjust based on the 'en-US' locale format if needed
+      expect(result).toEqual({ date: '12/31/2022', time: '10:00 AM' })
     })
 
     it('should return "Invalid date" for an invalid ISO date string', () => {
