@@ -1,5 +1,16 @@
 import { formatDate, getCurrentYear, hasExpired } from '../date'
 
+// Set the environment timezone to 'UTC' to ensure consistent test results
+const originalTimeZone = process.env.TZ
+
+beforeAll(() => {
+  process.env.TZ = 'UTC'
+})
+
+afterAll(() => {
+  process.env.TZ = originalTimeZone
+})
+
 describe('Date utility functions', () => {
   describe('getCurrentYear', () => {
     it('should return the current year', () => {
@@ -41,7 +52,7 @@ describe('Date utility functions', () => {
     it('should format date with a specified locale', () => {
       const isoDateString = '2022-12-31T10:00:00Z'
       const result = formatDate(isoDateString, { locale: 'en' })
-      expect(result).toBe('12/31/2022') //
+      expect(result).toBe('12/31/2022')
     })
 
     it('should format date with time in a specified locale', () => {
