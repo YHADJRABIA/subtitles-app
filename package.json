@@ -13,6 +13,8 @@
     "check-lint": "eslint . --ext ts --ext tsx --ext js",
     "format": "prettier --write .",
     "test-all": "npm run check-format && npm run check-lint && npm run check-types && npm run build",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "prepare": "husky",
     "generate-schema": "source .env && dotenv -c -- bash -c \"gql.tada generate schema https://graphql.datocms.com --header 'X-Exclude-Invalid: true' --header 'Authorization: $DATOCMS_PUBLISHED_CONTENT_CDA_TOKEN'\""
   },
