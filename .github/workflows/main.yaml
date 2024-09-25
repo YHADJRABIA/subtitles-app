@@ -41,7 +41,7 @@ jobs:
 
       - name: Cache Node.js dependencies
         id: npm-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ./node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -77,7 +77,7 @@ jobs:
 
       - name: Cache Node.js dependencies
         id: npm-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ./node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -112,7 +112,7 @@ jobs:
 
       - name: Cache Node.js dependencies
         id: npm-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ./node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -145,7 +145,7 @@ jobs:
 
       - name: Cache Node.js dependencies
         id: npm-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ./node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
