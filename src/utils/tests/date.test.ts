@@ -35,7 +35,7 @@ describe('Date utility functions', () => {
     it('should format date with time when showTime is true', () => {
       const isoDateString = '2022-12-31T10:00:00Z'
       const result = formatDate(isoDateString, { showTime: true })
-      expect(result).toEqual({ date: '31/12/2022', time: '10:00' })
+      expect(result).toEqual({ date: '31/12/2022', time: '11:00' }) // CET time = UTC+1
     })
 
     it('should format date with a specified locale', () => {
@@ -50,7 +50,7 @@ describe('Date utility functions', () => {
         locale: 'en',
         showTime: true,
       })
-      expect(result).toEqual({ date: '12/31/2022', time: '10:00 AM' })
+      expect(result).toEqual({ date: '12/31/2022', time: '11:00 AM' })
     })
 
     it('should return "Invalid date" for an invalid ISO date string', () => {
