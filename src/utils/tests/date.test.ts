@@ -1,16 +1,5 @@
 import { formatDate, getCurrentYear, hasExpired } from '../date'
 
-// Set the environment timezone to 'UTC' to ensure consistent test results
-const originalTimeZone = process.env.TZ
-
-beforeAll(() => {
-  process.env.TZ = 'UTC'
-})
-
-afterAll(() => {
-  process.env.TZ = originalTimeZone
-})
-
 describe('Date utility functions', () => {
   describe('getCurrentYear', () => {
     it('should return the current year', () => {
