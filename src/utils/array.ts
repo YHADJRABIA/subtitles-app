@@ -5,5 +5,5 @@
  * @returns {string} String with each array element separated by ", ".
  */
 export const ArrayToString = (arr: string[]): string => {
-  return arr.join(', ')
+  return arr.filter(str => str.trim() !== '').join(', ')
 }
