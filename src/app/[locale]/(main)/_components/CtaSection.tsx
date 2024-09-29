@@ -3,7 +3,7 @@ import React from 'react'
 import cn from 'classnames'
 import styles from './CtaSection.module.scss'
 import { useTranslations } from 'next-intl'
-import { SUPPORT_LINK } from '@/utils/hardCode'
+import { SUPPORT_LINK } from '@/utils/constants'
 
 interface PropTypes {
   className?: string

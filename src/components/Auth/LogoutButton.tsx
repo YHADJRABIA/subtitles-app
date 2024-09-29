@@ -30,10 +30,10 @@ const LogoutButton = ({ className, label }: PropTypes) => {
       disabled={isLoading}
       isLoading={isLoading}
       variation="secondary"
-      onClick={onLogoutClick}
       tag="span"
       size="xs"
       weight="semiBold"
+      onClick={onLogoutClick}
     >
       {label}
     </Button>

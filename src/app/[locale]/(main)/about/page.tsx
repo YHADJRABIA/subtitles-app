@@ -77,10 +77,10 @@ export default async function AboutPage({ params: { locale } }: MetaDataProps) {
 
           {faqItems?.length && (
             <Accordion
-              items={faqItems}
-              backgroundColor="var(--primary-gray-color)"
               expandMultiple
               hasBackgroundEffect
+              items={faqItems}
+              backgroundColor="var(--primary-gray-color)"
             />
           )}
         </section>

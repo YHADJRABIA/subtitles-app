@@ -38,12 +38,12 @@ export default function ResponsiveImage({
 
   return (
     <SRCImage
+      usePlaceholder
       data={unmaskedData}
       imgStyle={{ maxWidth: '100%' }}
       imgClassName={cn({
         [styles.roundedBorder]: hasRoundedBorder,
       })}
-      usePlaceholder
       {...other}
     />
   )
