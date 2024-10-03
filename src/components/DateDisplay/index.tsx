@@ -19,7 +19,6 @@ const DateDisplay = ({ date, showTime = false }: PropTypes) => {
   return (
     <Typography size="xxs">
       {t('at', { date: dateValue, time: timeValue })}
-      {/* TODO: Fix responsiveness */}
     </Typography>
   )
 }
