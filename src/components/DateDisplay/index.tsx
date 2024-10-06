@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import Typography, { TextSize } from '@/components/UI/Typography'
-import { formatDate } from '@/utils/date'
+import { formatDate, isToday, isYesterday } from '@/utils/date'
 import { useTranslations } from 'next-intl'
 
 interface PropTypes {
@@ -13,9 +13,15 @@ const DateDisplay = ({ date, showTime = false, size = 'xxs' }: PropTypes) => {
   const t = useTranslations('DateDisplay')
   const formattedDate = formatDate(date, { showTime })
 
-  const isObject = typeof formattedDate === 'object'
-  const dateValue = isObject ? formattedDate.date : formattedDate
-  const timeValue = isObject ? formattedDate.time : null
+  // Simplified useMemo to get dateValue
+  const dateValue = useMemo(() => {
+    if (isToday(date)) return t('today')
+    if (isYesterday(date)) return t('yesterday')
+    return typeof formattedDate === 'object' ? formattedDate.date : undefined
+  }, [date, formattedDate, t])
+
+  const timeValue =
+    typeof formattedDate === 'object' && showTime ? formattedDate.time : null
 
   return (
     <Typography size={size} weight="semiLight">
