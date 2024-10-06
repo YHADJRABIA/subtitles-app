@@ -52,6 +52,7 @@ export const formatDate = (
   const timeFormatOptions: Intl.DateTimeFormatOptions = {
     hour: '2-digit',
     minute: '2-digit',
+    timeZone: 'UTC',
   }
 
   // Format date and time separately
