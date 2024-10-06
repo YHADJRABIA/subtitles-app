@@ -1,14 +1,15 @@
 import React from 'react'
-import Typography from '@/components/UI/Typography'
+import Typography, { TextSize } from '@/components/UI/Typography'
 import { formatDate } from '@/utils/date'
 import { useTranslations } from 'next-intl'
 
 interface PropTypes {
   date: string
   showTime?: boolean
+  size?: TextSize
 }
 
-const DateDisplay = ({ date, showTime = false }: PropTypes) => {
+const DateDisplay = ({ date, showTime = false, size = 'xxs' }: PropTypes) => {
   const t = useTranslations('DateDisplay')
   const formattedDate = formatDate(date, { showTime })
 
@@ -17,7 +18,7 @@ const DateDisplay = ({ date, showTime = false }: PropTypes) => {
   const timeValue = isObject ? formattedDate.time : null
 
   return (
-    <Typography size="xxs">
+    <Typography size={size} weight="semiLight">
       {t('at', { date: dateValue, time: timeValue })}
     </Typography>
   )
