@@ -12,9 +12,9 @@ export const isToday = (date: Date | string): boolean => {
 
 export const isYesterday = (date: Date | string): boolean => {
   const inputDate = new Date(date)
-  const today = new Date()
+  const yesterday = new Date() // Today
 
-  const yesterday = new Date(today.getDate() - 1)
+  yesterday.setDate(yesterday.getDate() - 1)
 
   return inputDate.toDateString() === yesterday.toDateString()
 }
