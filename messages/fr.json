@@ -272,6 +272,8 @@
     "no": "Annuler"
   },
   "DateDisplay": {
+    "today": "Aujourd'hui",
+    "yesterday": "Hier",
     "at": "{date}{time, select, null {} other { à {time}}}"
   },
   "UseShowPassword": {
