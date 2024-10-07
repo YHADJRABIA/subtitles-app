@@ -89,7 +89,7 @@ export default async function SeriesPage({
           {formattedName}
         </Typography>
         <div className={styles.lastUpdate}>
-          <Typography size="xxs" weight="semiBold">
+          <Typography size="xs" weight="semiBold">
             {t('last_update')}
           </Typography>
           <DateDisplay showTime date={updatedAt} />
