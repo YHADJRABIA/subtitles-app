@@ -3,6 +3,22 @@ import { Locale } from '@/types/locale'
 export const getCurrentYear = () => new Date().getFullYear()
 export const hasExpired = (date: Date) => new Date(date) < new Date()
 
+export const isToday = (date: Date | string): boolean => {
+  const inputDate = new Date(date)
+  const today = new Date()
+
+  return inputDate.toDateString() === today.toDateString()
+}
+
+export const isYesterday = (date: Date | string): boolean => {
+  const inputDate = new Date(date)
+  const yesterday = new Date() // Today
+
+  yesterday.setDate(yesterday.getDate() - 1)
+
+  return inputDate.toDateString() === yesterday.toDateString()
+}
+
 /**
  * Converts ISO date string to a localised version with optional time (DD/MM/YYYY - HH:mm) format
  * @param {string} isoDateString ISO date string to convert
@@ -36,6 +52,7 @@ export const formatDate = (
   const timeFormatOptions: Intl.DateTimeFormatOptions = {
     hour: '2-digit',
     minute: '2-digit',
+    timeZone: 'UTC',
   }
 
   // Format date and time separately

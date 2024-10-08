@@ -19,7 +19,7 @@ export type LinkType = {
 
 type TextWeight = keyof typeof fontWeights
 type LineHeight = keyof typeof lineHeights
-type TextSize = 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | 'xxxl'
+export type TextSize = 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | 'xxxl'
 export type TextAlign = 'left' | 'center' | 'right'
 
 export interface TypographyPropTypes extends HTMLAttributes<HTMLElement> {

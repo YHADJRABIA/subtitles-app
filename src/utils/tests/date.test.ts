@@ -1,4 +1,10 @@
-import { formatDate, getCurrentYear, hasExpired } from '../date'
+import {
+  formatDate,
+  getCurrentYear,
+  hasExpired,
+  isToday,
+  isYesterday,
+} from '../date'
 
 describe('Date utility functions', () => {
   describe('getCurrentYear', () => {
@@ -58,5 +64,43 @@ describe('Date utility functions', () => {
       const result = formatDate(invalidIsoDateString)
       expect(result).toBe('Invalid date')
     })
+  })
+})
+
+describe('Date Utility Functions', () => {
+  const today = new Date()
+  const yesterday = new Date()
+  yesterday.setDate(today.getDate() - 1)
+
+  it("should return true for today's date", () => {
+    expect(isToday(today)).toBe(true)
+    expect(isToday(today.toISOString())).toBe(true)
+  })
+
+  it("should return false for yesterday's date", () => {
+    expect(isToday(yesterday)).toBe(false)
+    expect(isToday(yesterday.toISOString())).toBe(false)
+  })
+
+  it('should return false for any date other than today', () => {
+    const anotherDate = new Date('2023-10-01')
+    expect(isToday(anotherDate)).toBe(false)
+    expect(isToday(anotherDate.toISOString())).toBe(false)
+  })
+
+  it("should return true for yesterday's date", () => {
+    expect(isYesterday(yesterday)).toBe(true)
+    expect(isYesterday(yesterday.toISOString())).toBe(true)
+  })
+
+  it("should return false for today's date", () => {
+    expect(isYesterday(today)).toBe(false)
+    expect(isYesterday(today.toISOString())).toBe(false)
+  })
+
+  it('should return false for any date other than yesterday', () => {
+    const anotherDate = new Date('2023-10-01')
+    expect(isYesterday(anotherDate)).toBe(false)
+    expect(isYesterday(anotherDate.toISOString())).toBe(false)
   })
 })
