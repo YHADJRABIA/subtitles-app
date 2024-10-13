@@ -48,6 +48,9 @@ export const generateMetadata = async ({
       locale,
       type: 'website',
     },
+    verification: {
+      google: 'M6aa3CbXmeU9R8s22ny5So7N0AQo9CmsNyQpZeytuKc',
+    },
   }
 }
 
