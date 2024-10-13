@@ -8,6 +8,7 @@ import { Metadata } from 'next/types'
 import { Locale } from '@/types/locale'
 import { Analytics } from '@vercel/analytics/react'
 import { websiteUrl } from '@/utils/general'
+import { GOOGLE_SEARCH_CONSOLE_VERIFICATION } from '@/utils/constants'
 
 const inter = Inter({ subsets: ['latin', 'cyrillic'], variable: '--font-body' })
 const literate = Literata({
@@ -49,7 +50,7 @@ export const generateMetadata = async ({
       type: 'website',
     },
     verification: {
-      google: 'M6aa3CbXmeU9R8s22ny5So7N0AQo9CmsNyQpZeytuKc',
+      google: GOOGLE_SEARCH_CONSOLE_VERIFICATION,
     },
   }
 }
