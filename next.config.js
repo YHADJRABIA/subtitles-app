@@ -40,6 +40,7 @@ const nextConfig = {
       },
     ],
   },
+  // TODO: Uncomment
   /*   headers() {
     return [
       {
