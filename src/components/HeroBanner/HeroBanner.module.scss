@@ -8,6 +8,7 @@
 
 .image {
   margin-bottom: 4rem;
+  max-width: var(--container-max-width) * 0.8;
   @include respond-to('medium') {
     max-width: var(--container-max-width);
   }
