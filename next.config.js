@@ -40,7 +40,8 @@ const nextConfig = {
       },
     ],
   },
-  headers() {
+  // TODO: Uncomment
+  /*   headers() {
     return [
       {
         source: '/(.*)',
@@ -52,7 +53,7 @@ const nextConfig = {
         ],
       },
     ]
-  },
+  }, */
   webpack(config) {
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find(rule =>
