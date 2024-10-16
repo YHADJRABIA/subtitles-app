@@ -16,5 +16,5 @@ export const getTranslation = async (
   const t = createTranslator({ locale, messages, namespace } as any) // TODO: better type
 
   // Return the translated key
-  return t(key as MessageKeys<any, any>)
+  return t(key as MessageKeys<string, any>)
 }
