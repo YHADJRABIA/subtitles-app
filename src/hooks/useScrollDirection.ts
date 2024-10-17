@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react'
 import { useEventListener } from './useEventListener'
 import { isClient } from '@/utils/general'
+import { useDebounce } from './useDebounce'
 
 export const useScrollDirection = () => {
   const [scrollDirection, setScrollDirection] = useState<'up' | 'down'>('up')
@@ -20,8 +21,10 @@ export const useScrollDirection = () => {
     lastScrollTop.current = scrollTop <= 0 ? 0 : scrollTop // Update last scroll position
   }
 
+  const debouncedHandleScroll = useDebounce(handleScroll)
+
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  if (isClient) useEventListener('scroll', handleScroll, document.body) // TODO: debounce this
+  if (isClient) useEventListener('scroll', debouncedHandleScroll, document.body) // TODO: debounce this
 
   return scrollDirection
 }
