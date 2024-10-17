@@ -24,7 +24,7 @@ export const useScrollDirection = () => {
   const debouncedHandleScroll = useDebounce(handleScroll)
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  if (isClient) useEventListener('scroll', debouncedHandleScroll, document.body) // TODO: debounce this
+  if (isClient) useEventListener('scroll', debouncedHandleScroll, document.body)
 
   return scrollDirection
 }
