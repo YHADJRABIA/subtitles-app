@@ -1,3 +1,5 @@
+import { IntlMessagesKey } from '@/types/global'
+import { Locale } from '@/types/locale'
 import { createTranslator } from 'next-intl'
 
 let messages = {}
@@ -13,8 +15,12 @@ export const getTranslation = async (
   }
 
   // Create translator with the loaded messages and namespace
-  const t = createTranslator({ locale, messages, namespace } as any) // TODO: better type
+  const t = createTranslator({ locale, messages, namespace } as {
+    locale: Locale
+    messages: IntlMessagesKey
+    namespace: IntlMessagesKey
+  })
 
   // Return the translated key
-  return t(key as any)
+  return t(key as IntlMessagesKey)
 }
