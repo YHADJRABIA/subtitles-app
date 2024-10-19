@@ -3,6 +3,9 @@ import { useEventListener } from './useEventListener'
 import { isClient } from '@/utils/general'
 import { useDebounce } from './useDebounce'
 
+/**
+ * Returns user's scroll direction. "up" or "down".
+ */
 export const useScrollDirection = () => {
   const [scrollDirection, setScrollDirection] = useState<'up' | 'down'>('up')
   const lastScrollTop = useRef(0) // UseRef to track last scroll position
