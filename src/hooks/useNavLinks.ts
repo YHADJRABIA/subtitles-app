@@ -34,7 +34,7 @@ const useNavLinks = ({ isConnected }: PropTypes) => {
     try {
       await handleLogout()
     } catch (err) {
-      console.error(getErrorMessage(err))
+      console.error('Error logging out:', getErrorMessage(err))
     } finally {
       setIsLoggingOut(false)
     }
