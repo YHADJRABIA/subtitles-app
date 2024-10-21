@@ -21,7 +21,7 @@ export const useScrollDirection = () => {
       setScrollDirection('up')
     }
 
-    lastScrollTop.current = scrollTop <= 0 ? 0 : scrollTop // Update last scroll position
+    lastScrollTop.current = scrollTop <= 0 ? 0 : scrollTop // Update lastest scroll position
   }
 
   const debouncedHandleScroll = useDebounce(handleScroll)
