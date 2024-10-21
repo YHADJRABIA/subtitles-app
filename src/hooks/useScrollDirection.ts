@@ -14,11 +14,9 @@ export const useScrollDirection = () => {
     const scrollTop = window.scrollY || document.body.scrollTop
 
     if (scrollTop > lastScrollTop.current) {
-      // Scrolling down
-      setScrollDirection('down')
+      setScrollDirection('down') // Scrolling down
     } else if (scrollTop < lastScrollTop.current) {
-      // Scrolling up
-      setScrollDirection('up')
+      setScrollDirection('up') // Scrolling up
     }
 
     lastScrollTop.current = scrollTop <= 0 ? 0 : scrollTop // Update lastest scroll position
