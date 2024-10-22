@@ -46,7 +46,9 @@ const SendVerificationEmailForm = () => {
   const fieldState = getFieldState('email')
   const email = getValues('email')
 
-  const InfoIcon = info.type === 'error' ? ErrorIcon : EmailSentIcon // TODO: update
+  const isError = info.type === 'error'
+
+  const InfoIcon = isError ? ErrorIcon : EmailSentIcon // TODO: update
 
   const handleVerify: SubmitHandler<
     SendEmailVerificationSchema
