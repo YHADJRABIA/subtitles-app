@@ -49,7 +49,9 @@ const PasswordRecoveryForm = () => {
 
   const fieldState = getFieldState('email')
 
-  const InfoIcon = info.type === 'error' ? ErrorIcon : EmailSentIcon // TODO: update
+  const isError = info.type === 'error'
+
+  const InfoIcon = isError ? ErrorIcon : EmailSentIcon // TODO: update
 
   const handleRecovery: SubmitHandler<PasswordRecoverySchema> = async user => {
     try {
