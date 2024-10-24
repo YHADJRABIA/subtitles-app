@@ -1,4 +1,3 @@
-import { PathnamesType } from '@/types/pathnames'
 import { defineRouting } from 'next-intl/routing'
 import { Locale, Locales } from '@/types/locale'
 import { createNavigation } from 'next-intl/navigation'
@@ -65,7 +64,7 @@ export const pathnames = {
     en: '/password/reset',
     fr: '/mot-de-passe/reinitialisation',
   },
-} satisfies PathnamesType
+}
 
 export const routing = defineRouting({
   locales: locales,
