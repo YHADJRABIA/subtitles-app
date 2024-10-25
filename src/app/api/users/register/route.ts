@@ -15,7 +15,7 @@ connectDB()
 
 export async function POST(req: NextRequest) {
   try {
-    const locale = getLocaleFromNextRequest(req)
+    const locale = getLocaleFromNextRequest(req) // TODO: Use await getLocale() feature after updating to Next.js 15
 
     const [t_zod, t] = [
       await getTranslations({ locale, namespace: 'Zod' }),
