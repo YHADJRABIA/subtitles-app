@@ -8,29 +8,31 @@ export type AuthFormData = {
   password: string
 }
 
-const emailSchema = (t: ReturnType<typeof useTranslations<'Zod'>>) =>
+const emailSchema = (t: ReturnType<typeof useTranslations<'Zod.email'>>) =>
   z
     .string()
     .min(1, {
-      message: t('email.missing'),
+      message: t('missing'),
     })
     .email({
-      message: t('email.invalid'),
+      message: t('invalid'),
     })
     .max(255, {
-      message: t('email.too_long'),
+      message: t('too_long'),
     })
     .trim()
     .toLowerCase()
 
-const passwordSchema = (t: ReturnType<typeof useTranslations<'Zod'>>) =>
+const passwordSchema = (
+  t: ReturnType<typeof useTranslations<'Zod.password'>>
+) =>
   z
     .string()
-    .min(6, { message: t('password.too_short') })
-    .max(255, { message: t('password.too_long') })
+    .min(6, { message: t('too_short') })
+    .max(255, { message: t('too_long') })
 
-const tokenSchema = (t: ReturnType<typeof useTranslations<'Zod'>>) =>
-  z.string().min(1, { message: t('token.missing') })
+const tokenSchema = (t: ReturnType<typeof useTranslations<'Zod.token'>>) =>
+  z.string().min(1, { message: t('missing') })
 
 export const AccountRegistrationValidator = (
   t: ReturnType<typeof useTranslations<'Zod'>>
@@ -45,11 +47,11 @@ export type AccountRegistrationSchema = z.infer<
 >
 
 export const AccountLoginValidator = (
-  t: ReturnType<typeof useTranslations<'Zod'>>
+  t: ReturnType<typeof useTranslations<'Zod.password'>>
 ) =>
   z.object({
     email: emailSchema(t),
-    password: z.string().min(1, { message: t('password.missing') }),
+    password: z.string().min(1, { message: t('missing') }),
   })
 
 export type AccountLoginSchema = z.infer<
