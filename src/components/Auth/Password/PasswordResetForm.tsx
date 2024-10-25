@@ -36,7 +36,7 @@ const PasswordResetForm = () => {
 
   const isError = info.type === 'error'
 
-  const InfoIcon = isError ? ErrorIcon : SuccessIcon // TODO: update
+  const InfoIcon = isError ? ErrorIcon : SuccessIcon
 
   const {
     register,

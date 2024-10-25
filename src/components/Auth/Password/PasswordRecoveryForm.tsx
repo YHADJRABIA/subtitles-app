@@ -51,7 +51,7 @@ const PasswordRecoveryForm = () => {
 
   const isError = info.type === 'error'
 
-  const InfoIcon = isError ? ErrorIcon : EmailSentIcon // TODO: update
+  const InfoIcon = isError ? ErrorIcon : EmailSentIcon
 
   const handleRecovery: SubmitHandler<PasswordRecoverySchema> = async user => {
     try {
