@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
     ]
 
     const rawBody = await req.json()
-    const body = PasswordRecoveryValidator(t_zod).safeParse(rawBody)
+    const body = PasswordRecoveryValidator(t_zod as any).safeParse(rawBody) // TODO: Remove any after next-intl fixes typing bug
 
     // Form validation
     if (!body.success) {

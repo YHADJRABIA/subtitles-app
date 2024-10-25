@@ -20,7 +20,9 @@ export async function DELETE(req: NextRequest) {
     ]
 
     // Validate request params
-    const searchParams = UserDeleteValidator(t_zod).safeParse(rawSearchParams)
+    const searchParams = UserDeleteValidator(t_zod as any).safeParse(
+      rawSearchParams
+    )
     if (!searchParams.success) {
       const zodErrors = getZodErrors(searchParams.error)
       return NextResponse.json(
