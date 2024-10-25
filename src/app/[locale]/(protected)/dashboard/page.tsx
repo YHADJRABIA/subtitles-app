@@ -1,5 +1,5 @@
 import React from 'react'
-import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import LogoutButton from '@/components/Auth/LogoutButton'
 import styles from './page.module.scss'
 import { getUserSession } from '@/utils/session'
@@ -25,7 +25,7 @@ export const generateMetadata = async ({
 }
 
 const DashboardPage = async ({ params: { locale } }: MetaDataProps) => {
-  unstable_setRequestLocale(locale)
+  setRequestLocale(locale)
   const { email, name, image } = await getUserSession()
 
   const t = await getTranslations({ locale, namespace: 'Dashboard' })
