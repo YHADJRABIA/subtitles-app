@@ -1,6 +1,7 @@
-import { Locale, Locales } from '@/types/locale'
 import { PathnamesType } from '@/types/pathnames'
-import { createLocalizedPathnamesNavigation } from 'next-intl/navigation'
+import { defineRouting } from 'next-intl/routing'
+import { Locale, Locales } from '@/types/locale'
+import { createNavigation } from 'next-intl/navigation'
 
 export const defaultLocale: Locale = 'en'
 export const locales = ['en', 'fr'] satisfies Locales
@@ -66,9 +67,16 @@ export const pathnames = {
   },
 } satisfies PathnamesType
 
-export const { Link, redirect, usePathname, useRouter, getPathname } =
-  createLocalizedPathnamesNavigation({
-    locales,
-    localePrefix,
-    pathnames: pathnames as typeof pathnames & Record<string, string>, // For Link component, to allow hrefs that aren't part of pathnames
-  })
+export const routing = defineRouting({
+  locales: locales,
+  defaultLocale: defaultLocale,
+  localePrefix: {
+    mode: localePrefix,
+  },
+  pathnames: pathnames as typeof pathnames & Record<string, string>,
+})
+
+// Lightweight wrappers around Next.js' navigation APIs
+// that will consider the routing configuration
+export const { Link, redirect, usePathname, useRouter } =
+  createNavigation(routing)

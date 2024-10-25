@@ -6,7 +6,7 @@ import React, {
 } from 'react'
 import styles from './Typography.module.scss'
 import cn from 'classnames'
-import { Link } from '@/lib/i18n/navigation'
+import { Link } from '@/i18n/routing'
 import { UrlObject } from 'url'
 import { fontWeights, lineHeights } from '@/utils/font'
 

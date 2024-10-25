@@ -3,7 +3,7 @@ import { useParams } from 'next/navigation'
 import { useLocale } from 'next-intl'
 import { getLanguageByLocaleValue } from '@/utils/internationalisation/language'
 import { Locale } from '@/types/locale'
-import { useRouter, usePathname } from '@/lib/i18n/navigation'
+import { useRouter, usePathname } from '@/i18n/routing'
 import { useGetQueryParams } from './useGetQueryParams'
 
 /**

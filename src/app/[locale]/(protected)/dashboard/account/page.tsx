@@ -1,5 +1,5 @@
 import React from 'react'
-import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import styles from './page.module.scss'
 import Typography from '@/components/UI/Typography'
 import { getUserSession } from '@/utils/session'
@@ -23,7 +23,7 @@ export const generateMetadata = async ({
 }
 
 const DashboardAccountPage = async ({ params: { locale } }: MetaDataProps) => {
-  unstable_setRequestLocale(locale)
+  setRequestLocale(locale)
   const {
     creationDate,
     lastUpdateDate,

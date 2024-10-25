@@ -78,8 +78,9 @@ export const authOptions: NextAuthOptions = {
         } */
 
         try {
-          const validatedFields =
-            AccountLoginValidator(t_zod).safeParse(credentials)
+          const validatedFields = AccountLoginValidator(t_zod as any).safeParse(
+            credentials
+          )
 
           // Form validation
           if (!validatedFields.success) {

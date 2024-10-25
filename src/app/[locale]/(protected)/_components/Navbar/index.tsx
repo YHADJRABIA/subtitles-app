@@ -8,7 +8,7 @@ import {
 } from 'react-icons/lu'
 import { useTranslations } from 'next-intl'
 import NavLink from './NavLink'
-import { usePathname } from '@/lib/i18n/navigation'
+import { usePathname } from '@/i18n/routing'
 
 const Navbar = () => {
   const currentPath = usePathname()

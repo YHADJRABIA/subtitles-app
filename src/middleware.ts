@@ -2,12 +2,7 @@ import createMiddleware from 'next-intl/middleware'
 import withAuth, { NextRequestWithAuth } from 'next-auth/middleware'
 import { NextFetchEvent, NextResponse } from 'next/server'
 import { isLoginOrRegisterPath, isProtectedPath } from './utils/paths'
-import {
-  defaultLocale,
-  localePrefix,
-  locales,
-  pathnames,
-} from './lib/i18n/navigation'
+import { defaultLocale, localePrefix, locales, pathnames } from '@/i18n/routing'
 import { DEFAULT_LOGIN_REDIRECT_ROUTE, LOGIN_ROUTE } from './routes/routes'
 import { getToken } from 'next-auth/jwt'
 import { Pathname } from './types/pathnames'

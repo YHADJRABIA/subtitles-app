@@ -5,7 +5,7 @@ import styles from './PasswordResetForm.module.scss'
 import React, { useEffect } from 'react'
 import Field from '@/components/Forms/Field'
 import { Button } from '@/components/UI/Button'
-import { Link } from '@/lib/i18n/navigation'
+import { Link } from '@/i18n/routing'
 import { MdLockOutline as PasswordIcon } from 'react-icons/md'
 
 import {
@@ -36,7 +36,7 @@ const PasswordResetForm = () => {
 
   const isError = info.type === 'error'
 
-  const InfoIcon = isError ? ErrorIcon : SuccessIcon // TODO: update
+  const InfoIcon = isError ? ErrorIcon : SuccessIcon
 
   const {
     register,

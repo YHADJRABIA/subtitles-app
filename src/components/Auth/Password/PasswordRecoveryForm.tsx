@@ -26,7 +26,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import useInfo from '@/hooks/useInfo'
 import { useTranslations } from 'next-intl'
 import { handleSendPasswordRecoveryEmail } from '@/actions/auth'
-import { Link } from '@/lib/i18n/navigation'
+import { Link } from '@/i18n/routing'
 
 const PasswordRecoveryForm = () => {
   const searchParams = useSearchParams()
@@ -49,7 +49,9 @@ const PasswordRecoveryForm = () => {
 
   const fieldState = getFieldState('email')
 
-  const InfoIcon = info.type === 'error' ? ErrorIcon : EmailSentIcon // TODO: update
+  const isError = info.type === 'error'
+
+  const InfoIcon = isError ? ErrorIcon : EmailSentIcon
 
   const handleRecovery: SubmitHandler<PasswordRecoverySchema> = async user => {
     try {

@@ -1,4 +1,4 @@
-import { Link } from '@/lib/i18n/navigation'
+import { Link } from '@/i18n/routing'
 import styles from './Logo.module.scss'
 import React from 'react'
 import Image from 'next/image'

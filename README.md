@@ -1,4 +1,4 @@
-# РуSubs
+# PySubs
 
 ![architecture](/public/architecture.png)
 

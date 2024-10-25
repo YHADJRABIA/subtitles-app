@@ -1,5 +1,5 @@
 import React from 'react'
-import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 /* import { getUserSession } from '@/utils/session' */
 import Typography from '@/components/UI/Typography'
 /* import SwitchButton from '@/components/SwitchButton' */
@@ -23,7 +23,7 @@ export const generateMetadata = async ({
 }
 
 const DashboardSettingsPage = async ({ params: { locale } }: MetaDataProps) => {
-  unstable_setRequestLocale(locale)
+  setRequestLocale(locale)
   /*   const { favoriteLocale, isTwoFactorEnabled } = await getUserSession() */
 
   const t = await getTranslations({ locale, namespace: 'Dashboard.Settings' })

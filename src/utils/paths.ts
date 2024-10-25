@@ -1,4 +1,4 @@
-import { locales, pathnames } from '@/lib/i18n/navigation'
+import { locales, pathnames } from '@/i18n/routing'
 import { protectedRoutes, loginRegisterRoutes } from '@/routes/routes'
 import { Pathname } from '@/types/pathnames'
 

@@ -9,8 +9,6 @@ import { LinkButton } from '@/components/UI/Button/LinkButton'
 import { MdOutlineKeyboardBackspace as BackIcon } from 'react-icons/md'
 import { useTranslations } from 'next-intl'
 
-// TODO: fix "Unable to find `next-intl` locale because the middleware didn't run on this request. See https://next-intl-docs.vercel.app/docs/routing/middleware#unable-to-find-locale. The `notFound()` function will be called as a result."
-
 const SVG_PATH = '/assets/ice-fishing.svg'
 
 const NotFoundPage = () => {

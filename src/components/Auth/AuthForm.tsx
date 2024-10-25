@@ -1,5 +1,5 @@
 'use client'
-import { Link, useRouter } from '@/lib/i18n/navigation'
+import { Link, useRouter } from '@/i18n/routing'
 import React from 'react'
 import {
   MdLockOutline as PasswordIcon,
@@ -93,7 +93,7 @@ function AuthForm({ type }: PropTypes) {
 
       if (isLoginForm) {
         // Redirect if successful login
-        router.push(DEFAULT_LOGIN_REDIRECT_ROUTE as string)
+        router.push(DEFAULT_LOGIN_REDIRECT_ROUTE)
       }
 
       if (isRegisterForm) {

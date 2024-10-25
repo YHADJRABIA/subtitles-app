@@ -1,4 +1,4 @@
-import { pathnames } from '@/lib/i18n/navigation'
+import { pathnames } from '@/i18n/routing'
 import { Pathnames } from 'next-intl/routing'
 import { Locales } from './locale'
 
