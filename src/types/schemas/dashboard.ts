@@ -1,8 +1,8 @@
 import { useTranslations } from 'next-intl'
 import * as z from 'zod'
 
-export const idSchema = (t: ReturnType<typeof useTranslations<'Zod.id'>>) =>
-  z.string().min(1, { message: t('missing') })
+export const idSchema = (t: ReturnType<typeof useTranslations<'Zod'>>) =>
+  z.string().min(1, { message: t('id.missing') })
 
 export const UserDeleteValidator = (
   t: ReturnType<typeof useTranslations<'Zod'>>
