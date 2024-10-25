@@ -103,7 +103,7 @@
   },
   "overrides": [
     {
-      // Next-Intl: Consistently import navigation APIs from `@/navigation` instead of next/link or next/navigation.
+      // Next-Intl: Consistently import navigation APIs from `@/i18n/routing` instead of next/link or next/navigation.
       "files": ["@/app/[locale]/**/*.tsx"],
       "rules": {
         "no-restricted-imports": [
@@ -132,7 +132,7 @@
         "no-restricted-imports": [
           "error",
           {
-            "name": "@/lib/i18n/navigation",
+            "name": "@/i18n/routing",
             "importNames": [
               "Link",
               "redirect",
