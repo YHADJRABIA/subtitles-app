@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import styles from './Nav.module.scss'
 import cn from 'classnames'
-import { usePathname } from '@/lib/i18n/navigation'
+import { usePathname } from '@/i18n/routing'
 import BurgerMenu from '../BurgerMenu'
 import LanguageMenu from '../../LanguageMenu'
 import Separator from '@/components/Separator'

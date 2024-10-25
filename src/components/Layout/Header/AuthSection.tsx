@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './AuthSection.module.scss'
-import { Link } from '@/lib/i18n/navigation'
+import { Link } from '@/i18n/routing'
 import { useTranslations } from 'next-intl'
 import Typography from '@/components/UI/Typography'
 import { RxAvatar } from 'react-icons/rx'

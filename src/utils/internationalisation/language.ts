@@ -1,7 +1,7 @@
 import { Locale } from '@/types/locale'
 import FrFlagIcon from '../../../public/flags/fr.svg?url'
 import UkFlagIcon from '../../../public/flags/uk.svg?url'
-import { locales } from '@/lib/i18n/navigation'
+import { locales } from '@/i18n/routing'
 
 interface Language {
   id: Locale

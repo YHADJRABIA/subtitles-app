@@ -25,7 +25,7 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
 import { handleSendVerificationEmail } from '@/actions/auth'
-import { Link } from '@/lib/i18n/navigation'
+import { Link } from '@/i18n/routing'
 
 const SendVerificationEmailForm = () => {
   const [t, t_zod] = [useTranslations('Auth'), useTranslations('Zod')]

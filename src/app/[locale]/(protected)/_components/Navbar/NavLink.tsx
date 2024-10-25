@@ -3,7 +3,7 @@ import styles from './NavLink.module.scss'
 import React from 'react'
 import Typography from '@/components/UI/Typography'
 import cn from 'classnames'
-import { Link } from '@/lib/i18n/navigation'
+import { Link } from '@/i18n/routing'
 
 interface PropTypes {
   link: NavLinkType

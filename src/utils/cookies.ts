@@ -1,4 +1,4 @@
-import { defaultLocale } from '@/lib/i18n/navigation'
+import { defaultLocale } from '@/i18n/routing'
 import { RequestCookies } from 'next/dist/compiled/@edge-runtime/cookies'
 import { ReadonlyRequestCookies } from 'next/dist/server/web/spec-extension/adapters/request-cookies'
 import { cookies } from 'next/headers'
