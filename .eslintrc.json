@@ -18,6 +18,7 @@
   "plugins": ["@typescript-eslint", "react", "react-hooks", "unused-imports"],
   "rules": {
     // React-specific rules
+    "react/jsx-no-literals": "error", // Avoid hardcoded labels
     "react/jsx-pascal-case": ["warn", { "allowAllCaps": true }],
     "react/prop-types": "warn",
     "react/react-in-jsx-scope": "off",
