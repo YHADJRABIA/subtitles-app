@@ -132,6 +132,9 @@
     "password": "Password",
     "continue_with_google": "Continue with Google",
     "log_out": "Log out",
+    "Error": {
+      "title": "Auth Error Page"
+    },
     "Login": {
       "title": "Login",
       "cta": "Login",

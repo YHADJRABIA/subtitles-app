@@ -133,6 +133,9 @@
     "password": "Mot de passe",
     "continue_with_google": "Se connecter avec Google",
     "log_out": "Se déconnecter",
+    "Error": {
+      "title": "Page d'erreur d'authentification"
+    },
     "Login": {
       "title": "Connexion",
       "cta": "Se connecter",
