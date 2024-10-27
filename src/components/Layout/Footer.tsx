@@ -13,7 +13,7 @@ const Footer = () => {
         size="xs"
         tag="small"
       >
-        &copy;{getCurrentYear()} – {t('name')}
+        {t('copyright', { currentYear: getCurrentYear() })}
       </Typography>
     </footer>
   )
