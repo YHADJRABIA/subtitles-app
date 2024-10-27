@@ -14,6 +14,7 @@ const Footer = () => {
         tag="small"
       >
         {t('copyright', { currentYear: getCurrentYear() })}
+        {/* TODO: use next-intl's date features */}
       </Typography>
     </footer>
   )
