@@ -9,108 +9,64 @@
   },
   "extends": [
     "eslint:recommended",
-    "next",
+    "next/core-web-vitals",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
     "plugin:@typescript-eslint/recommended",
     "prettier"
   ],
-  "plugins": [
-    "@typescript-eslint",
-    "react",
-    "react-hooks",
-    "unused-imports",
-    "@typescript-eslint"
-  ],
+  "plugins": ["@typescript-eslint", "react", "react-hooks", "unused-imports"],
   "rules": {
-    "react/jsx-pascal-case": [
-      "warn",
-      {
-        "allowAllCaps": true,
-        "ignore": []
-      }
-    ],
+    // React-specific rules
+    "react/jsx-pascal-case": ["warn", { "allowAllCaps": true }],
     "react/prop-types": "warn",
     "react/react-in-jsx-scope": "off",
     "react/no-direct-mutation-state": "warn",
     "react/style-prop-object": "warn",
     "react/require-render-return": "error",
     "react/no-deprecated": "warn",
+    "react/jsx-fragments": "warn",
+    "react/jsx-no-target-blank": "warn",
+    "react/jsx-sort-props": [
+      "warn",
+      { "callbacksLast": true, "shorthandFirst": true, "ignoreCase": true }
+    ],
+
+    // TypeScript-specific rules
     "@typescript-eslint/no-explicit-any": "warn",
     "@typescript-eslint/no-var-requires": "off",
     "@typescript-eslint/no-unused-vars": "warn",
     "@typescript-eslint/ban-types": "warn",
+
+    // Next.js rules
     "@next/next/no-img-element": "warn",
     "@next/next/no-html-link-for-pages": "warn",
-    "@next/next/no-head-import-in-document": "warn",
-    "@next/next/no-document-import-in-page": "off",
-    "@next/next/no-title-in-document-head": "off",
-    "jsx-a11y/alt-text": "off",
-    "react/jsx-fragments": "warn",
-    "react/jsx-no-target-blank": "warn",
-    "no-unused-vars": "off",
+
+    // Unused import management
     "unused-imports/no-unused-imports": "warn",
+
+    // Miscellaneous best practices
     "no-const-assign": "error",
     "no-compare-neg-zero": "error",
     "no-cond-assign": "error",
-    "no-useless-concat": "warn",
-    "no-useless-return": "error",
-    "prefer-rest-params": "warn",
     "prefer-const": "warn",
     "prefer-template": "error",
-    "default-case": "error",
-    "default-case-last": "error",
-    "no-fallthrough": "error",
-    "no-duplicate-case": "error",
     "no-duplicate-imports": ["error", { "includeExports": true }],
-    "no-dupe-keys": "error",
-    "no-dupe-else-if": "error",
-    "no-dupe-args": "error",
-    "no-self-assign": "warn",
-    "no-self-compare": "warn",
-    "no-sparse-arrays": "warn",
-    "no-undef": "error",
-    "no-unreachable": "error",
-    "no-unsafe-finally": "error",
-    "no-unreachable-loop": "error",
-    "no-unsafe-negation": "warn",
-    "no-unsafe-optional-chaining": "error",
-    "no-template-curly-in-string": "error",
-    "use-isnan": "error",
-    "valid-typeof": ["error", { "requireStringLiterals": true }],
-    "spaced-comment": ["warn", "always", { "exceptions": ["*"] }],
-    "dot-notation": "error",
     "eqeqeq": "warn",
     "no-console": ["warn", { "allow": ["warn", "error"] }],
-    "no-empty": "error",
-    "no-extra-boolean-cast": "error",
-    "no-unneeded-ternary": "error",
-    "no-var": "error",
     "require-await": "error",
-    "react/jsx-sort-props": [
-      "warn",
-      {
-        "callbacksLast": true,
-        "shorthandFirst": true,
-        "shorthandLast": false,
-        "multiline": "last",
-        "ignoreCase": true,
-        "noSortAlphabetically": true,
-        "reservedFirst": ["key"],
-        "locale": "auto"
-      }
-    ]
+    "spaced-comment": ["warn", "always", { "exceptions": ["*"] }]
   },
   "overrides": [
     {
-      // Next-Intl: Consistently import navigation APIs from `@/i18n/routing` instead of next/link or next/navigation.
-      "files": ["@/app/[locale]/**/*.tsx"],
+      // Enforce custom navigation imports for Next-Intl
+      "files": ["**/app/[locale]/**/*.tsx"],
       "rules": {
         "no-restricted-imports": [
           "error",
           {
             "name": "next/link",
-            "message": "Please import from '@/i18n/routing' instead."
+            "message": "Use '@/i18n/routing' for navigation."
           },
           {
             "name": "next/navigation",
@@ -120,13 +76,13 @@
               "useRouter",
               "usePathname"
             ],
-            "message": "Please import from '@/i18n/routing' instead."
+            "message": "Use '@/i18n/routing' for navigation."
           }
         ]
       }
     },
     {
-      // Prevents use of Next-Intl hooks by api routes to prevent errors
+      // Prevent Next-Intl hooks in API routes to avoid errors
       "files": ["**/app/api/**/route.ts"],
       "rules": {
         "no-restricted-imports": [
@@ -140,13 +96,13 @@
               "useRouter",
               "usePathname"
             ],
-            "message": "Please import from 'next/link' or 'next/navigation' instead."
+            "message": "Use 'next/link' or 'next/navigation' for API routes."
           }
         ]
       }
     },
     {
-      // Enforces use of custom DatoCMS imports
+      // Custom imports for DatoCMS
       "files": ["@/lib/datocms/executeQuery.ts"],
       "rules": {
         "no-restricted-imports": [
@@ -154,12 +110,12 @@
           {
             "name": "@datocms/cda-client",
             "importNames": ["executeQuery"],
-            "message": "Please import from '@/lib/datocms/executeQuery' instead."
+            "message": "Use '@/lib/datocms/executeQuery' for custom queries."
           },
           {
             "name": "gql.tada",
             "importNames": ["graphql"],
-            "message": "Please import from '@/lib/datocms/graphql' instead."
+            "message": "Use '@/lib/datocms/graphql' for custom gql imports."
           }
         ]
       }
