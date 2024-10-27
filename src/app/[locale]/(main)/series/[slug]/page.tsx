@@ -85,7 +85,7 @@ export default async function SeriesPage({
   return (
     <div className={styles.root}>
       <div className={styles.wrapper}>
-        <Typography tag="h1" weight="bold" size="xxxl" className={styles.title}>
+        <Typography className={styles.title} size="xxxl" tag="h1" weight="bold">
           {formattedName}
         </Typography>
         <div className={styles.lastUpdate}>
@@ -101,24 +101,24 @@ export default async function SeriesPage({
               <ResponsiveImage
                 hasRoundedBorder
                 priority
-                pictureClassName={styles.image}
                 data={coverImageData}
+                pictureClassName={styles.image}
               />
             )}
             <SeriesHighlights
               country={country as SeriesCountry}
-              language={language as SeriesLanguage}
               genre={genre as SeriesGenre}
+              language={language as SeriesLanguage}
               numberOfSeasons={numberOfSeasons as SeriesNumberOfSeasons}
               releaseYear={releaseYear}
             />
             <Separator color="var(--primary-gray-border)" />
             <SeriesDescription
-              title={t('description')}
               body={description}
               className={styles.description}
+              title={t('description')}
             />
-            <SeriesTrailer videoData={trailer} thumbnail={thumbnail} />
+            <SeriesTrailer thumbnail={thumbnail} videoData={trailer} />
           </div>
 
           <StickyContainer className={styles.rightContainer}>
@@ -131,12 +131,12 @@ export default async function SeriesPage({
                 <Col width={12}>
                   <SeriesSubtitles
                     seriesName={name}
-                    subtitles={subtitles}
                     shownAmountOfSeasons={numberOfSeasons}
+                    subtitles={subtitles}
                   />
                 </Col>
                 <Col width={[12, 12, 6]}>
-                  <SeriesWhereTo type="watch" list={whereToWatch} />
+                  <SeriesWhereTo list={whereToWatch} type="watch" />
                 </Col>
               </section>
             </Row>

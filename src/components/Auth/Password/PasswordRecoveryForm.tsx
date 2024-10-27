@@ -65,8 +65,8 @@ const PasswordRecoveryForm = () => {
   return (
     <form
       noValidate
-      method="POST"
       className={styles.root}
+      method="POST"
       onSubmit={handleSubmit(handleRecovery)}
     >
       <div className={styles.wrapper}>
@@ -76,35 +76,35 @@ const PasswordRecoveryForm = () => {
         <TextInBox
           className={styles.infoBox}
           icon={InfoIcon}
+          isShown={!!info.label}
           label={info.label}
           type={info.type}
-          isShown={!!info.label}
         />
         <Field
           autoFocus
           className={styles.field}
-          register={register}
+          label={t('email')}
+          leftIcon={{ src: EmailIcon, title: t('email') }}
           name="email"
           placeholder="email@domain.com"
-          type="email"
-          label={t('email')}
-          testId="send-reset-password-email"
-          leftIcon={{ src: EmailIcon, title: t('email') }}
+          register={register}
           subLabel={{
             text: errors?.email?.message,
             isShown: fieldState.isTouched,
           }}
+          testId="send-reset-password-email"
+          type="email"
         />
 
         <Button
           className={styles.cta}
-          variation="primary"
-          testId="submit-send-reset-password-form"
           disabled={!isValid}
           isLoading={isSubmitting}
-          type="submit"
-          weight="semiBold"
           size="xs"
+          testId="submit-send-reset-password-form"
+          type="submit"
+          variation="primary"
+          weight="semiBold"
         >
           {t('PasswordRecovery.cta')}
         </Button>

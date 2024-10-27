@@ -18,10 +18,10 @@ const NavLink = ({ link, isActive, className }: PropTypes) => {
   return (
     <li>
       <Link
-        href={link.url ?? '/dashboard'}
         className={cn(styles.root, className, { [styles.active]: isActive })}
+        href={link.url ?? '/dashboard'}
       >
-        <Icon size={16} className={styles.icon} />
+        <Icon className={styles.icon} size={16} />
         <Typography size="xxs" weight={isActive ? 'semiBold' : undefined}>
           {link.label}
         </Typography>

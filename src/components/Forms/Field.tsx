@@ -59,9 +59,9 @@ function Field<T, K extends ValidFieldNames & string>({
         )}
         <input
           {...rest}
+          data-testid={testId}
           placeholder={placeholder}
           type={type}
-          data-testid={testId}
           {...register(name, { valueAsNumber })} // TODO Debounce value
         />
         <label htmlFor={name}>{label}</label>
@@ -73,7 +73,7 @@ function Field<T, K extends ValidFieldNames & string>({
       </div>
 
       {subLabel && (
-        <Subfield label={text} isShown={isShownSubfield} hasIcon={!isInfo} />
+        <Subfield hasIcon={!isInfo} isShown={isShownSubfield} label={text} />
       )}
     </div>
   )

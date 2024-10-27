@@ -27,23 +27,23 @@ const SeriesPage = ({ params: { locale } }: MetaDataProps) => {
   return (
     <div className={styles.root}>
       <div className={styles.wrapper}>
-        <Typography tag="h1" weight="bold" className={styles.title}>
+        <Typography className={styles.title} tag="h1" weight="bold">
           {t('title')}
         </Typography>
         <div className={styles.container}>
           <section className={styles.featured}>
             <Typography
+              className={styles.featuredTitle}
+              size="xl"
               tag="h2"
               weight="semiBold"
-              size="xl"
-              className={styles.featuredTitle}
             >
               {t('featured')}
             </Typography>
 
             <InfoImage
-              src="/assets/patrul-cover.jpg"
               alt="Patrul"
+              src="/assets/patrul-cover.jpg"
               title="Патруль"
             />
           </section>

@@ -18,23 +18,23 @@ const AuthSection = ({ showAccount, className, userAvatar }: PropTypes) => {
   return (
     <>
       {showAccount ? (
-        <Link href="/dashboard" className={cn(styles.profileIcon, className)}>
+        <Link className={cn(styles.profileIcon, className)} href="/dashboard">
           {/* TODO: Update with user avatar + name */}
           {hasAvatar ? <RxAvatar size={26} /> : <RxAvatar size={26} />}
         </Link>
       ) : (
         <div className={cn(styles.authCta, className)}>
           <Typography
-            size="s"
-            link={{ href: '/login' }}
             className={styles.loginCta}
+            link={{ href: '/login' }}
+            size="s"
           >
             {t('login')}
           </Typography>
           <Typography
-            size="s"
-            link={{ href: '/register' }}
             className={styles.registerCta}
+            link={{ href: '/register' }}
+            size="s"
           >
             {t('register')}
           </Typography>

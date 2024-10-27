@@ -49,7 +49,7 @@ export default async function AboutPage({ params: { locale } }: MetaDataProps) {
 
   return (
     <div className={styles.root}>
-      <Typography tag="h1" weight="bold" className={styles.title}>
+      <Typography className={styles.title} tag="h1" weight="bold">
         {title}
       </Typography>
 
@@ -59,9 +59,9 @@ export default async function AboutPage({ params: { locale } }: MetaDataProps) {
           return (
             <Col key={idx} width={[12, 6, 4]}>
               <TextWithIcon
-                title={item.title}
                 description={item.description}
                 icon={icon}
+                title={item.title}
               />
             </Col>
           )
@@ -70,7 +70,7 @@ export default async function AboutPage({ params: { locale } }: MetaDataProps) {
 
       {faq && (
         <section>
-          <Typography tag="h2" weight="bold" className={styles.title}>
+          <Typography className={styles.title} tag="h2" weight="bold">
             {faq.title}
           </Typography>
 
@@ -78,8 +78,8 @@ export default async function AboutPage({ params: { locale } }: MetaDataProps) {
             <Accordion
               expandMultiple
               hasBackgroundEffect
-              items={faqItems}
               backgroundColor="var(--primary-gray-color)"
+              items={faqItems}
             />
           )}
         </section>

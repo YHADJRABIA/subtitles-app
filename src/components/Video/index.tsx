@@ -50,35 +50,35 @@ const Video = ({
   return isYouTubeVideo ? (
     <iframe
       allowFullScreen
-      width={width}
-      height={height}
-      src={youtubeUrl}
-      className={cn(styles.root, className)}
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       aria-label="YouTube video" // Todo: make dynamic
+      className={cn(styles.root, className)}
+      height={height}
+      src={youtubeUrl}
+      width={width}
     />
   ) : (
     <video
       playsInline // For iOS browsers compatibility
-      width={width}
-      height={height}
-      controls={showControls}
-      autoPlay={isAutoPlay}
-      muted={isMuted}
-      loop={isLooping}
-      preload={preload}
-      className={cn(styles.root, className)}
       aria-label="Video" // Todo: make dynamic
+      autoPlay={isAutoPlay}
+      className={cn(styles.root, className)}
+      controls={showControls}
+      height={height}
+      loop={isLooping}
+      muted={isMuted}
       poster={thumbnailSrc}
+      preload={preload}
+      width={width}
     >
       <source src={videoSrc} type="video/mp4" />
       {captionsSrc?.length && (
         <track
           default
-          src={captionsSrc}
           kind="subtitles"
-          srcLang={capitaliseFirstLetter(srcLang)}
           label={captionsLabel}
+          src={captionsSrc}
+          srcLang={capitaliseFirstLetter(srcLang)}
         />
       )}
       {t('not_supported')}

@@ -83,29 +83,29 @@ const Typography = ({
   return link?.href ? (
     <Link
       {...props}
-      href={link.href}
-      style={PropStyles as CSSProperties}
-      target={link.openInNewTab ? '_blank' : undefined}
-      rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
       className={cn(
         styles.root,
         { isFullWidth, uppercase },
         size && styles[size],
         className
       )}
+      href={link.href}
+      rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
+      style={PropStyles as CSSProperties}
+      target={link.openInNewTab ? '_blank' : undefined}
     >
       {children}
     </Link>
   ) : (
     <Tag
       {...props}
-      style={PropStyles as CSSProperties}
       className={cn(
         styles.root,
         { isFullWidth, uppercase },
         size && styles[size],
         className
       )}
+      style={PropStyles as CSSProperties}
       onClick={onClick ? handleClick : undefined} // Allows component to remain server component if no onClick is passed
     >
       {children}

@@ -55,7 +55,7 @@ const EditableField = ({
 
   return (
     <div className={cn(styles.root, className)}>
-      <Typography size="s" weight="semiBold" className={styles.label}>
+      <Typography className={styles.label} size="s" weight="semiBold">
         {label}
       </Typography>
       {/*       {isEditing ? (
@@ -87,7 +87,7 @@ const EditableField = ({
           </div>
         </div>
       ) : ( */}
-      <Typography size="s" className={styles.value}>
+      <Typography className={styles.value} size="s">
         {value}
       </Typography>
       {/*   )}

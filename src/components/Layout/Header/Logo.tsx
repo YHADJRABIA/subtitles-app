@@ -11,15 +11,15 @@ interface PropsType {
 
 const Logo = ({ className, size, isInvertedColor }: PropsType) => {
   return (
-    <Link href="/" className={className}>
+    <Link className={className} href="/">
       <Image
         priority
-        src="/logo.svg"
-        width={size ?? 65}
-        height={size ?? 65}
         alt="Logo"
-        style={isInvertedColor ? { filter: 'invert(100%)' } : undefined}
         className={styles.root}
+        height={size ?? 65}
+        src="/logo.svg"
+        style={isInvertedColor ? { filter: 'invert(100%)' } : undefined}
+        width={size ?? 65}
       />
     </Link>
   )

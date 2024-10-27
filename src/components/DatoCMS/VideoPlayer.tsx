@@ -44,8 +44,8 @@ export default function VideoPlayer({ data, className, ...other }: Props) {
   return (
     <div className={cn(styles.root, className)}>
       <DatoVideoPlayer
-        data={unmaskedData.video}
         accentColor="var(--tertiary-black-color)"
+        data={unmaskedData.video}
         {...other}
       />
     </div>

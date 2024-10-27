@@ -42,33 +42,33 @@ const SeriesHighlights = ({
       <div className={styles.row}>
         <Field
           icon={CountryIcon}
-          value={t(`Country.${country}`)}
           title={t('Country.title')}
+          value={t(`Country.${country}`)}
         />
         <Field
           icon={LanguageIcon}
-          value={t(`Language.${language}`)}
           title={t('Language.title')}
+          value={t(`Language.${language}`)}
         />
       </div>
 
       <div className={styles.row}>
         <Field
           icon={GenreIcon}
-          value={t(`Genre.${genre}`)}
           title={t('Genre.title')}
+          value={t(`Genre.${genre}`)}
         />
         <Field
           icon={YearIcon}
-          value={String(releaseYear)}
           title={t('release_year')}
+          value={String(releaseYear)}
         />
       </div>
 
       <Field
         icon={SeasonsIcon}
-        value={t('Seasons.number_of_seasons', { count: numberOfSeasons })}
         title={t('Seasons.title')}
+        value={t('Seasons.number_of_seasons', { count: numberOfSeasons })}
       />
     </section>
   )
