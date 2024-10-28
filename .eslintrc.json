@@ -60,8 +60,8 @@
 
     "no-restricted-imports": [
       "error",
+      // Enforce imporrt of custom Next-Intl navigation in app/[locale] folder
       {
-        // Enforce custom navigation imports for Next-Intl
         "paths": [
           {
             "name": "next/link",
@@ -84,7 +84,7 @@
   },
   "overrides": [
     {
-      // Prevent Next-Intl hooks in API routes and pages outside of /[locale] to avoid errors
+      // Prevent Next-Intl navigation imports in pages outside of /[locale] and api routes to avoid errors
       "files": ["**/app/api/**/route.ts", "**/app/page.tsx"],
       "rules": {
         "no-restricted-imports": [
@@ -103,9 +103,11 @@
         ]
       }
     },
+
+    // Custom imports for DatoCMS
     {
-      // Custom imports for DatoCMS
-      "files": ["@/lib/datocms/executeQuery.ts"],
+      // Prevent import of @datocms/cda-client's executeQuery outside of lib
+      "files": ["!@/lib/datocms/executeQuery.ts"],
       "rules": {
         "no-restricted-imports": [
           "error",
@@ -118,7 +120,7 @@
       }
     },
     {
-      // Prevent import of graphql from gql.tada
+      // Prevent import of gql.tada's graphql
       "files": ["**.ts"],
       "rules": {
         "no-restricted-imports": [
