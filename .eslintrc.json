@@ -67,7 +67,7 @@
           "error",
           {
             "name": "next/link",
-            "message": "Use '@/i18n/routing' for navigation."
+            "message": "Use '@/i18n/routing' for Link component."
           },
           {
             "name": "next/navigation",
