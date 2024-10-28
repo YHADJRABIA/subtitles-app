@@ -83,11 +83,11 @@ const Accordion = ({
             <AccordionItem
               key={idx}
               {...item}
+              backgroundColor={backgroundColor}
+              bodyTag={bodyTag}
+              hasBackgroundEffect={hasBackgroundEffect}
               isOpen={openStates[idx]}
               titleTag={titleTag}
-              bodyTag={bodyTag}
-              backgroundColor={backgroundColor}
-              hasBackgroundEffect={hasBackgroundEffect}
               onToggle={() => handleToggle(idx)}
             />
           ))
@@ -95,12 +95,12 @@ const Accordion = ({
           body && (
             <AccordionItem
               isSingleItem
-              title={title}
-              body={body}
-              isOpen={openStates[0]}
-              titleTag={titleTag}
               backgroundColor={backgroundColor}
+              body={body}
               hasBackgroundEffect={hasBackgroundEffect}
+              isOpen={openStates[0]}
+              title={title}
+              titleTag={titleTag}
               onToggle={() => handleToggle(0)}
             />
           )}
@@ -131,29 +131,29 @@ const AccordionItem = ({
 
   return (
     <li
-      style={{ backgroundColor }}
       className={cn(styles.item, {
         [styles.coloredBackground]: hasBackgroundEffect && isOpen,
         [styles.hoverEffect]: hasBackgroundEffect,
       })}
+      style={{ backgroundColor }}
     >
       <span className={styles.titleContainer} onClick={onToggle}>
         <Typography
-          tag={titleTag}
-          size="m"
-          weight="semiBold"
           className={styles.title}
+          size="m"
+          tag={titleTag}
+          weight="semiBold"
         >
           {title}
         </Typography>
         <CaretIcon
-          size={16}
           className={cn(styles.toggler, { verticalFlip: isOpen })}
+          size={16}
         />
       </span>
       <div
-        ref={contentHeight}
         className={styles.collapseable}
+        ref={contentHeight}
         style={{
           maxHeight: isOpen ? `${contentHeight.current?.scrollHeight}px` : '0',
         }}
@@ -162,10 +162,10 @@ const AccordionItem = ({
           body // Render body as-is for single title-body pair
         ) : (
           <Typography
-            tag={bodyTag}
-            size="s"
-            weight="semiLight"
             className={styles.description}
+            size="s"
+            tag={bodyTag}
+            weight="semiLight"
           >
             {body}
           </Typography>

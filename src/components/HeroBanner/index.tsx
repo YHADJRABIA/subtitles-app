@@ -29,21 +29,21 @@ const HeroBanner = ({
     <section className={cn(styles.root, className)}>
       {image && (
         <FilledImage
-          src={image}
           alt={imageAlt ?? ''}
-          className={styles.image}
           aspectRatio={imageAspectRatio}
+          className={styles.image}
+          src={image}
         />
       )}
 
       {/* TODO: Limit text length */}
       <div className={styles.textContainer}>
         <Typography
-          tag="h1"
-          lineHeight="narrow"
-          weight="bold"
           align={align}
           className={styles.title}
+          lineHeight="narrow"
+          tag="h1"
+          weight="bold"
         >
           {title}
         </Typography>

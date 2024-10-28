@@ -69,49 +69,49 @@ const PasswordResetForm = () => {
   return (
     <form
       noValidate
-      method="POST"
       className={styles.root}
+      method="POST"
       onSubmit={handleSubmit(handleReset)}
     >
       <div className={styles.wrapper}>
-        <Typography tag="h1" weight="semiBold" className={styles.title}>
+        <Typography className={styles.title} tag="h1" weight="semiBold">
           {t('PasswordReset.title')}
         </Typography>
         <TextInBox
           icon={InfoIcon}
+          isShown={!!info.label}
           label={info.label}
           type={info.type}
-          isShown={!!info.label}
         />
 
         <Field
           className={styles.field}
-          type={passwordInputType}
-          register={register}
-          name="password"
-          testId="reset-password-field"
           label={t('password')}
           leftIcon={{ src: PasswordIcon, title: t('password') }}
-          rightIcon={{ src: ToggleIcon }}
+          name="password"
           placeholder={
             passwordInputType === 'password' ? '••••••' : 'MyPa$$word_'
           }
+          register={register}
+          rightIcon={{ src: ToggleIcon }}
           subLabel={{
             text: errors?.password?.message,
             isShown: fieldState.isTouched,
             isInfo: true,
           }}
+          testId="reset-password-field"
+          type={passwordInputType}
         />
 
         <Button
           className={styles.cta}
-          variation="primary"
-          testId="submit-reset-password-form"
           disabled={!isValid}
           isLoading={isSubmitting}
-          type="submit"
-          weight="semiBold"
           size="xs"
+          testId="submit-reset-password-form"
+          type="submit"
+          variation="primary"
+          weight="semiBold"
         >
           {t('PasswordReset.cta')}
         </Button>

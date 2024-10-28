@@ -28,16 +28,16 @@ const GoogleLogin = ({ label, disabled, onClick }: PropTypes) => {
   return (
     <Button
       className={styles.root}
-      variation="secondary"
-      weight="semiBold"
-      size="xs"
-      testId="login-with-google"
       disabled={disabled || isLoading}
       isLoading={isLoading}
+      size="xs"
+      testId="login-with-google"
       title={label}
+      variation="secondary"
+      weight="semiBold"
       onClick={handleClick}
     >
-      <FcGoogle title="Google" size={22} />
+      <FcGoogle size={22} title="Google" />
       {label}
     </Button>
   )

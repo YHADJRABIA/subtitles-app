@@ -35,8 +35,6 @@ const TextInBox = ({
 
   return (
     <div
-      ref={contentRef}
-      style={{ maxHeight: `${maxHeight}px` }}
       className={cn(
         styles[type],
         styles.root,
@@ -44,11 +42,13 @@ const TextInBox = ({
         { visible: isShown },
         className
       )}
+      ref={contentRef}
+      style={{ maxHeight: `${maxHeight}px` }}
     >
       {isShown && (
         <>
           <Icon className={styles.icon} />
-          <Typography size="xs" className={styles.label} title={label}>
+          <Typography className={styles.label} size="xs" title={label}>
             {label}
           </Typography>
         </>

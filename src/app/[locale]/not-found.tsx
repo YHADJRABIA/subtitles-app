@@ -20,30 +20,30 @@ const NotFoundPage = () => {
       <Header isConnected={!!user} />
       <main className={styles.root}>
         <HeroBanner
-          image={SVG_PATH}
-          imageAlt="404"
-          title={t('page_not_found')}
-          description={t('verify_route')}
-          imageAspectRatio="1/1"
           ctaElements={
             <LinkButton
+              className={styles.cta}
+              icon={{ src: BackIcon, size: 22 }}
               link={{ href: '/' }}
               size="s"
               variation="primary"
               weight="semiBold"
-              className={styles.cta}
-              icon={{ src: BackIcon, size: 22 }}
             >
               {t('back_to_homepage')}
             </LinkButton>
           }
+          description={t('verify_route')}
+          image={SVG_PATH}
+          imageAlt="404"
+          imageAspectRatio="1/1"
+          title={t('page_not_found')}
         />
       </main>
       <Typography
-        size="s"
         className={styles.credits}
         color="var(--primary-blue-color)"
         link={{ href: 'https://storyset.com/', openInNewTab: true }}
+        size="s"
       >
         {t('storyset_credit')}
       </Typography>

@@ -35,7 +35,7 @@ const Navbar = () => {
       <ul>
         {links.map((link, id) => {
           const isActive = link?.url === currentPath
-          return <NavLink key={id} link={link} isActive={isActive} />
+          return <NavLink isActive={isActive} key={id} link={link} />
         })}
       </ul>
     </nav>

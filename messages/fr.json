@@ -133,6 +133,9 @@
     "password": "Mot de passe",
     "continue_with_google": "Se connecter avec Google",
     "log_out": "Se déconnecter",
+    "Error": {
+      "title": "Page d'erreur d'authentification"
+    },
     "Login": {
       "title": "Connexion",
       "cta": "Se connecter",
@@ -291,8 +294,8 @@
     "donate": "Faire un don"
   },
   "Footer": {
-    "name": "Yacine HADJ RABIA",
-    "development_year": "2024"
+    "development_year": "2024",
+    "copyright": "©{currentYear} – Yacine HADJ RABIA"
   },
 
   "UnderDevelopement": { "title": "En cours de développement" }

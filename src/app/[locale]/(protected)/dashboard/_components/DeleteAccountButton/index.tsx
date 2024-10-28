@@ -30,8 +30,8 @@ const DeleteAccountButton = ({ className, userId }: PropTypes) => {
         <ConfirmationModal
           message={t('warning_deletion')}
           type="warning"
-          onConfirm={handleDelete}
           onCancel={closeModal}
+          onConfirm={handleDelete}
         />
       ),
     })
@@ -59,13 +59,13 @@ const DeleteAccountButton = ({ className, userId }: PropTypes) => {
 
   return (
     <Button
-      className={cn(styles.root, className)}
-      variation="primary"
       backgroundColor="var(--primary-red-color)"
+      className={cn(styles.root, className)}
       disabled={isLoading}
       isLoading={isLoading}
-      weight="semiBold"
       size="xs"
+      variation="primary"
+      weight="semiBold"
       onClick={handleOpenModal}
     >
       {t('delete_account')}

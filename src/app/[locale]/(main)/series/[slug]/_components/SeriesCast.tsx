@@ -32,10 +32,10 @@ export default SeriesCast
 const Field = ({ label, value }: { label: string; value: string }) => {
   return (
     <span className={styles.field}>
-      <Typography weight="semiBold" size="xs">
+      <Typography size="xs" weight="semiBold">
         {label}
       </Typography>
-      <Typography size="xs" className={styles.label}>
+      <Typography className={styles.label} size="xs">
         {value}
       </Typography>
     </span>

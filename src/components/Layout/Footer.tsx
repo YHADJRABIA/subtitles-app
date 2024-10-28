@@ -9,11 +9,12 @@ const Footer = () => {
   return (
     <footer>
       <Typography
-        tag="small"
         link={{ href: PORTFOLIO_LINK, openInNewTab: true }}
         size="xs"
+        tag="small"
       >
-        &copy;{getCurrentYear()} – {t('name')}
+        {t('copyright', { currentYear: getCurrentYear() })}
+        {/* TODO: use next-intl's date features */}
       </Typography>
     </footer>
   )

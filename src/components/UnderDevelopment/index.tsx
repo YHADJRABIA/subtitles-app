@@ -9,7 +9,7 @@ const UnderDevelopment = () => {
   const t = useTranslations('UnderDevelopement')
   return (
     <div className={styles.root}>
-      <InDevelopmentIcon size={22} className={styles.icon} />
+      <InDevelopmentIcon className={styles.icon} size={22} />
       <Typography size="m" weight="semiBold">
         {t('title')}
       </Typography>

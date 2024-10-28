@@ -32,30 +32,30 @@ const LanguageMenu = ({ className, isInverted = false }: PropTypes) => {
   useOnClickOutside(ref, handleClose) // Closes language menu if user clicks outside of ref
 
   return (
-    <div ref={ref} className={cn(styles.root, className)}>
+    <div className={cn(styles.root, className)} ref={ref}>
       <Button
-        disabled={isPending}
         className={styles.button}
+        disabled={isPending}
         tag="span"
         onClick={onToggle}
       >
         <Image
+          alt={currentLanguage.label}
+          height={19}
           src={currentLanguage.icon}
           width={19}
-          height={19}
-          alt={currentLanguage.label}
         />
         <Typography
           uppercase
+          className={styles.currentLang}
           size="xs"
           tag="span"
-          className={styles.currentLang}
         >
           {currentLanguage.value}
         </Typography>
         <CaretIcon
-          size={15}
           className={cn(styles.toggler, { verticalFlip: isOpen })}
+          size={15}
         />
       </Button>
 
@@ -75,17 +75,17 @@ const LanguageMenu = ({ className, isInverted = false }: PropTypes) => {
               onClick={() => onChangeLanguage(el.value)}
             >
               <Image
-                src={el.icon}
-                width={18}
-                height={18}
                 alt={el.label}
                 className={styles.flag}
+                height={18}
+                src={el.icon}
+                width={18}
               />
               <Typography
-                tag="span"
-                size="xs"
-                weight={isSelected ? 'semiBold' : undefined}
                 className={styles.label}
+                size="xs"
+                tag="span"
+                weight={isSelected ? 'semiBold' : undefined}
               >
                 {el.label}
               </Typography>

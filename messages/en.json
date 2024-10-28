@@ -132,6 +132,9 @@
     "password": "Password",
     "continue_with_google": "Continue with Google",
     "log_out": "Log out",
+    "Error": {
+      "title": "Auth Error Page"
+    },
     "Login": {
       "title": "Login",
       "cta": "Login",
@@ -290,8 +293,8 @@
     "donate": "Donate"
   },
   "Footer": {
-    "name": "Yacine Hadj Rabia",
-    "development_year": "2024"
+    "development_year": "2024",
+    "copyright": "©{currentYear} – Yacine Hadj Rabia"
   },
 
   "UnderDevelopement": { "title": "Under development" }

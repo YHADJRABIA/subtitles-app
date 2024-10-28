@@ -26,15 +26,15 @@ const BurgerMenu = ({ toggled, setToggled, className }: PropTypes) => {
 
   return (
     <div
+      aria-controls="navigation"
+      aria-label="Menu"
       className={cn(styles.icon, { [styles.toggled]: toggled }, className)}
       data-testid="burger-menu"
-      aria-label="Menu"
       role="button"
-      aria-controls="navigation"
       onClick={toggleMenu}
     >
       {[1, 2, 3].map(i => (
-        <div key={i} className={cn(styles.line)}></div>
+        <div className={cn(styles.line)} key={i}></div>
       ))}
     </div>
   )

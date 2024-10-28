@@ -29,9 +29,9 @@ const LogoutButton = ({ className, label }: PropTypes) => {
       className={cn(styles.root, className)}
       disabled={isLoading}
       isLoading={isLoading}
-      variation="secondary"
-      tag="span"
       size="xs"
+      tag="span"
+      variation="secondary"
       weight="semiBold"
       onClick={onLogoutClick}
     >

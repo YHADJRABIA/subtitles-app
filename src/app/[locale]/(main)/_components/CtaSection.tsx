@@ -16,17 +16,17 @@ const CtaSection = ({ className }: PropTypes) => {
   return (
     <section className={cn(styles.root, className)}>
       <LinkButton
+        link={{ href: '/series/patrul' }} // Todo: change to /series when page is finished
         size="xs"
         variation="primary"
         weight="semiBold"
-        link={{ href: '/series/patrul' }} // Todo: change to /series when page is finished
       >
         {t('browse_series')}
       </LinkButton>
       <LinkButton
+        link={{ href: SUPPORT_LINK, openInNewTab: true }}
         size="xs"
         variation="secondary"
-        link={{ href: SUPPORT_LINK, openInNewTab: true }}
       >
         {t('support_me')}
       </LinkButton>
