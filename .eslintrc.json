@@ -113,7 +113,16 @@
             "name": "@datocms/cda-client",
             "importNames": ["executeQuery"],
             "message": "Use '@/lib/datocms/executeQuery' for custom queries."
-          },
+          }
+        ]
+      }
+    },
+    {
+      // Prevent import of graphql from gql.tada
+      "files": ["**.ts"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
           {
             "name": "gql.tada",
             "importNames": ["graphql"],
