@@ -56,15 +56,13 @@
     "eqeqeq": "warn",
     "no-console": ["warn", { "allow": ["warn", "error"] }],
     "require-await": "error",
-    "spaced-comment": ["warn", "always", { "exceptions": ["*"] }]
-  },
-  "overrides": [
-    {
-      // Enforce custom navigation imports for Next-Intl
-      "files": ["**/app/[locale]/**/*.tsx"],
-      "rules": {
-        "no-restricted-imports": [
-          "error",
+    "spaced-comment": ["warn", "always", { "exceptions": ["*"] }],
+
+    "no-restricted-imports": [
+      "error",
+      {
+        // Enforce custom navigation imports for Next-Intl
+        "paths": [
           {
             "name": "next/link",
             "message": "Use '@/i18n/routing' for Link component."
@@ -79,12 +77,15 @@
             ],
             "message": "Use '@/i18n/routing' for navigation."
           }
-        ]
+        ],
+        "patterns": ["@/app/[locale]/**/*.tsx"]
       }
-    },
+    ]
+  },
+  "overrides": [
     {
-      // Prevent Next-Intl hooks in API routes to avoid errors
-      "files": ["**/app/api/**/route.ts"],
+      // Prevent Next-Intl hooks in API routes and pages outside of /[locale] to avoid errors
+      "files": ["**/app/api/**/route.ts", "**/app/page.tsx"],
       "rules": {
         "no-restricted-imports": [
           "error",
