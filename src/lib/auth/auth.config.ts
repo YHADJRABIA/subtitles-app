@@ -1,4 +1,4 @@
-import { NextAuthOptions, Session } from 'next-auth'
+import { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GoogleProvider from 'next-auth/providers/google'
 import bycrptjs from 'bcryptjs'
@@ -16,17 +16,9 @@ import { getErrorMessage, getZodErrors } from '@/utils/errors'
 import { AccountLoginValidator } from '@/types/schemas/auth'
 import { getTranslations } from 'next-intl/server'
 import { getNextLocale } from '@/utils/cookies'
-import { JWT } from 'next-auth/jwt'
 import { deleteVerificationTokenByEmail } from '@/utils/db/verification-token'
 
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, NEXTAUTH_SECRET } = process.env
-
-interface PropTypes {
-  user: UserAPIType
-  session: Session
-  token: JWT
-  account: { provider: string }
-}
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -166,10 +158,7 @@ export const authOptions: NextAuthOptions = {
       }
     },
 
-    // TODO: remove lint ignore once next-auth fixes bug
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    async signIn({ user, account }: PropTypes) {
+    async signIn({ user, account }) {
       const locale = getNextLocale()
 
       const t = await getTranslations({
@@ -178,8 +167,8 @@ export const authOptions: NextAuthOptions = {
       })
 
       const [withGoogle, withCredentials] = [
-        account.provider === 'google',
-        account.provider === 'credentials',
+        account?.provider === 'google',
+        account?.provider === 'credentials',
       ]
 
       if (!user) return null
@@ -212,7 +201,7 @@ export const authOptions: NextAuthOptions = {
           const { name, email, image } = user
           await connectDB()
 
-          const existingUser = await getUserByEmail(email)
+          const existingUser = await getUserByEmail(email ?? '')
 
           if (existingUser) {
             // Verify user's existing account if user logs in with Google
