@@ -51,14 +51,8 @@ export const authOptions: NextAuthOptions = {
       name: 'credentials',
       credentials: {
         // For built-in NextAuth form. Useless here since own UI exists
-        email: {
-          label: 'Email',
-          type: 'email',
-        },
-        password: {
-          label: 'Password',
-          type: 'password',
-        },
+        email: { label: 'Email', type: 'email' },
+        password: { label: 'Password', type: 'password' },
       },
 
       // Runs on credential login (with email & password)
