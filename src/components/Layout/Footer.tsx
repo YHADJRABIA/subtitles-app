@@ -6,6 +6,7 @@ import { PORTFOLIO_LINK } from '@/utils/constants'
 const Footer = () => {
   const t = useTranslations('Footer')
   const now = useNow()
+  const currentYear = now.getFullYear()
 
   return (
     <footer>
@@ -14,7 +15,7 @@ const Footer = () => {
         size="xs"
         tag="small"
       >
-        {t('copyright', { currentYear: now.getFullYear() })}
+        {t('copyright', { currentYear })}
       </Typography>
     </footer>
   )
