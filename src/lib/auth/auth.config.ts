@@ -224,7 +224,7 @@ export const authOptions: NextAuthOptions = {
               updatedFields
             )
 
-            // Access following fields from session
+            // Data to be accessed via getUserSession
             Object.assign(user, {
               id: existingUser._id,
               lastLogin: existingUser.lastLogin, // Previous login
@@ -246,6 +246,7 @@ export const authOptions: NextAuthOptions = {
           })
           const res = await newUser.save()
 
+          // Data to be accessed via getUserSession
           Object.assign(user, {
             id: newUser._id,
             createdAt: newUser.createdAt,
