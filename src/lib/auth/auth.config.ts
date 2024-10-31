@@ -248,7 +248,6 @@ export const authOptions: NextAuthOptions = {
 
           Object.assign(user, {
             id: newUser._id,
-            lastLogin: newUser.lastLogin,
             createdAt: newUser.createdAt,
             updatedAt: newUser.updatedAt,
             isVerifiedEmail: true,
