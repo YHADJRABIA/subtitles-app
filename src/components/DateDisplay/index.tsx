@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import Typography, { TextSize } from '@/components/UI/Typography'
-import { formatDate, isToday, isYesterday } from '@/utils/date'
+import { isToday, isYesterday } from '@/utils/date'
 import { useFormatter, useTranslations } from 'next-intl'
 
 interface PropTypes {
@@ -10,32 +10,33 @@ interface PropTypes {
 }
 
 const DateDisplay = ({ date, showTime = false, size = 'xxs' }: PropTypes) => {
-  /*   const t = useTranslations('DateDisplay')
-  const formattedDate = formatDate(date, { showTime }) */
-
+  const t = useTranslations('DateDisplay')
   const format = useFormatter()
 
   const dateTime = new Date(date)
 
-  const timeAgo = format.relativeTime(dateTime)
-  const timeDate = format.dateTime(dateTime, {
-    hour: 'numeric',
-    minute: 'numeric',
-  })
+  const isDateToday = isToday(dateTime)
+  const isDateYesterday = isYesterday(dateTime)
 
-  // Simplified useMemo to get dateValue
-  /*   const dateValue = useMemo(() => {
-    if (isToday(date)) return t('today')
-    if (isYesterday(date)) return t('yesterday')
-    return typeof formattedDate === 'object' ? formattedDate.date : undefined
-  }, [date, formattedDate, t])
+  let displayValue: string
 
-  const timeValue =
-    typeof formattedDate === 'object' && showTime ? formattedDate.time : null */
+  if (isDateToday) {
+    displayValue = t('today')
+  } else if (isDateYesterday) {
+    displayValue = t('yesterday')
+  } else {
+    // Format the date with or without time based on the showTime prop
+    displayValue = format.dateTime(dateTime, {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      ...(showTime && { hour: 'numeric', minute: 'numeric' }),
+    })
+  }
 
   return (
     <Typography size={size} weight="semiLight">
-      {timeDate}
+      {displayValue}
     </Typography>
   )
 }
