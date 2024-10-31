@@ -21,13 +21,12 @@ export const generateMetadata = generateMetadataFn({
   pickSeoMetaTags: data => data.aboutPage?._seoMetaTags,
 })
 
-const iconMap = {
-  // TODO: relocate somewhere better
+const ICON_MAP = {
   MonitorIcon: PiMonitorPlayThin,
   TipJarIcon: PiTipJarThin,
   TranslateIcon: PiTranslateThin,
 }
-type IconKeys = keyof typeof iconMap
+type IconKeys = keyof typeof ICON_MAP
 
 export default async function AboutPage({ params: { locale } }: MetaDataProps) {
   const { isEnabled: isDraftModeEnabled } = draftMode()
@@ -50,19 +49,19 @@ export default async function AboutPage({ params: { locale } }: MetaDataProps) {
 
   return (
     <div className={styles.root}>
-      <Typography tag="h1" weight="bold" className={styles.title}>
+      <Typography className={styles.title} tag="h1" weight="bold">
         {title}
       </Typography>
 
       <Row className={styles.highlights} Tag="section">
         {highlights.block.map((item, idx) => {
-          const icon = iconMap[item.icon as IconKeys]
+          const icon = ICON_MAP[item.icon as IconKeys]
           return (
             <Col key={idx} width={[12, 6, 4]}>
               <TextWithIcon
-                title={item.title}
                 description={item.description}
                 icon={icon}
+                title={item.title}
               />
             </Col>
           )
@@ -71,7 +70,7 @@ export default async function AboutPage({ params: { locale } }: MetaDataProps) {
 
       {faq && (
         <section>
-          <Typography tag="h2" weight="bold" className={styles.title}>
+          <Typography className={styles.title} tag="h2" weight="bold">
             {faq.title}
           </Typography>
 
@@ -79,8 +78,8 @@ export default async function AboutPage({ params: { locale } }: MetaDataProps) {
             <Accordion
               expandMultiple
               hasBackgroundEffect
-              items={faqItems}
               backgroundColor="var(--primary-gray-color)"
+              items={faqItems}
             />
           )}
         </section>

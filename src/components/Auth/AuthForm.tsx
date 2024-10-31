@@ -1,5 +1,5 @@
 'use client'
-import { Link, useRouter } from '@/lib/i18n/navigation'
+import { Link, useRouter } from '@/i18n/routing'
 import React from 'react'
 import {
   MdLockOutline as PasswordIcon,
@@ -93,7 +93,7 @@ function AuthForm({ type }: PropTypes) {
 
       if (isLoginForm) {
         // Redirect if successful login
-        router.push(DEFAULT_LOGIN_REDIRECT_ROUTE as string)
+        router.push(DEFAULT_LOGIN_REDIRECT_ROUTE)
       }
 
       if (isRegisterForm) {
@@ -110,36 +110,36 @@ function AuthForm({ type }: PropTypes) {
   return (
     <form
       noValidate
-      method="POST"
       className={styles.root}
+      method="POST"
       onSubmit={handleSubmit(handleAuth as SubmitHandler<FieldValues>)}
     >
       <div className={styles.wrapper}>
         <Typography
-          className={styles.title}
           align="center"
+          className={styles.title}
           tag="h1"
           weight="semiBold"
         >
           {t(isRegisterForm ? 'Register.title' : 'Login.title')}
         </Typography>
         <TextInBox
+          className={styles.formMessage}
           icon={InfoIcon}
+          isShown={!!info.label}
           label={info.label}
           type={info.type}
-          isShown={!!info.label}
-          className={styles.formMessage}
         />
         {showResendEmail && (
           <Typography
             className={styles.resendEmail}
-            size="xxs"
-            weight="semiBold"
             link={{
               href: isValidEmail
                 ? `/send-verification-email?email=${email}`
                 : '/send-verification-email',
             }}
+            size="xxs"
+            weight="semiBold"
           >
             {t('Register.resend_email')}
           </Typography>
@@ -148,48 +148,48 @@ function AuthForm({ type }: PropTypes) {
         <Field
           autoFocus
           className={styles.emailField}
-          register={register}
-          placeholder="email@domain.com"
-          type="email"
-          name="email"
           label={t('email')}
-          testId={isRegisterForm ? 'register-email' : 'login-email'}
           leftIcon={{ src: EmailIcon, title: t('email') }}
+          name="email"
+          placeholder="email@domain.com"
+          register={register}
           subLabel={{
             text: errors?.email?.message,
             isShown: fieldState.email.isTouched,
           }}
+          testId={isRegisterForm ? 'register-email' : 'login-email'}
+          type="email"
         />
 
         <Field
-          type={passwordInputType}
-          register={register}
-          name="password"
-          testId={isRegisterForm ? 'register-password' : 'login-password'}
           label={t('password')}
           leftIcon={{ src: PasswordIcon, title: t('password') }}
-          rightIcon={{ src: ToggleIcon }}
+          name="password"
           placeholder={
             passwordInputType === 'password' ? '••••••' : 'MyPa$$word_'
           }
+          register={register}
+          rightIcon={{ src: ToggleIcon }}
           subLabel={{
             text: errors?.password?.message,
             isShown: true,
             isInfo: isRegisterForm,
           }}
+          testId={isRegisterForm ? 'register-password' : 'login-password'}
+          type={passwordInputType}
         />
 
         {isLoginForm && (
           <Typography
-            className={styles.passwordRecovery}
             align="right"
-            weight="semiBold"
-            size="xxs"
+            className={styles.passwordRecovery}
             link={{
               href: isValidEmail
                 ? `/password/recovery?email=${email}`
                 : '/password/recovery',
             }}
+            size="xxs"
+            weight="semiBold"
           >
             {t('Login.recover_password')}
           </Typography>
@@ -197,18 +197,18 @@ function AuthForm({ type }: PropTypes) {
 
         <Button
           className={styles.cta}
-          variation="primary"
-          testId={isRegisterForm ? 'submit-register-form' : 'submit-login-form'}
           disabled={!isValid}
           isLoading={isSubmitting}
-          type="submit"
-          weight="semiBold"
           size="xs"
+          testId={isRegisterForm ? 'submit-register-form' : 'submit-login-form'}
+          type="submit"
+          variation="primary"
+          weight="semiBold"
         >
           {t(isRegisterForm ? 'Register.cta' : 'Login.cta')}
         </Button>
 
-        <Separator label={t_general('or')} className={styles.separator} />
+        <Separator className={styles.separator} label={t_general('or')} />
         <GoogleLogin
           disabled={isSubmitting}
           label={t('continue_with_google')}

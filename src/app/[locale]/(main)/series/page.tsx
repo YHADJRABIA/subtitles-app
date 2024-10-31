@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl'
 import { getTranslations } from 'next-intl/server'
 import { Metadata } from 'next'
 import InfoImage from '@/components/InfoImage'
-import { redirect } from '@/lib/i18n/navigation'
+import { redirect } from '@/i18n/routing'
 import { MetaDataProps } from '../../layout'
 
 export const generateMetadata = async ({
@@ -18,8 +18,8 @@ export const generateMetadata = async ({
   }
 }
 
-export default function SeriesPage() {
-  redirect('/series/patrul') // TODO: Remove when this page is finished
+const SeriesPage = ({ params: { locale } }: MetaDataProps) => {
+  redirect({ href: '/series/patrul', locale }) // TODO: Remove when this page is finished
 
   const t = useTranslations('Series')
   /* TODO: Add breadcrumbs */
@@ -27,23 +27,23 @@ export default function SeriesPage() {
   return (
     <div className={styles.root}>
       <div className={styles.wrapper}>
-        <Typography tag="h1" weight="bold" className={styles.title}>
+        <Typography className={styles.title} tag="h1" weight="bold">
           {t('title')}
         </Typography>
         <div className={styles.container}>
           <section className={styles.featured}>
             <Typography
+              className={styles.featuredTitle}
+              size="xl"
               tag="h2"
               weight="semiBold"
-              size="xl"
-              className={styles.featuredTitle}
             >
               {t('featured')}
             </Typography>
 
             <InfoImage
-              src="/assets/patrul-cover.jpg"
               alt="Patrul"
+              src="/assets/patrul-cover.jpg"
               title="Патруль"
             />
           </section>
@@ -84,3 +84,5 @@ export default function SeriesPage() {
             />
           </Col>
         </Row> */
+
+export default SeriesPage

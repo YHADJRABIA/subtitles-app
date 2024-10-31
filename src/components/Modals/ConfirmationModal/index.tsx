@@ -44,7 +44,7 @@ const ConfirmationModal = ({
 
   return (
     <div className={styles.root}>
-      <Typography size="s" color={color}>
+      <Typography color={color} size="s">
         {message}
       </Typography>
 
@@ -52,30 +52,30 @@ const ConfirmationModal = ({
         <span className={styles.textContainer}>
           <Icon className={styles.icon} color={color} />
           <Typography
+            className={styles.confirmation}
             size="s"
             weight="semiBold"
-            className={styles.confirmation}
           >
             {t('are_you_sure')}
           </Typography>
         </span>
         <div className={styles.cta}>
           <Button
-            variation="primary"
-            isLoading={isLoading}
-            disabled={isLoading}
             backgroundColor={color}
-            size="xs"
+            disabled={isLoading}
             isFullWidth={isOnMobile}
+            isLoading={isLoading}
+            size="xs"
+            variation="primary"
             onClick={handleConfirm}
           >
             {t('yes')}
           </Button>
 
           <Button
-            variation="secondary"
-            size="xs"
             isFullWidth={isOnMobile}
+            size="xs"
+            variation="secondary"
             onClick={onCancel}
           >
             {t('no')}

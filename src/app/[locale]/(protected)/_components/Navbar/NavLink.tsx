@@ -3,7 +3,7 @@ import styles from './NavLink.module.scss'
 import React from 'react'
 import Typography from '@/components/UI/Typography'
 import cn from 'classnames'
-import { Link } from '@/lib/i18n/navigation'
+import { Link } from '@/i18n/routing'
 
 interface PropTypes {
   link: NavLinkType
@@ -18,10 +18,10 @@ const NavLink = ({ link, isActive, className }: PropTypes) => {
   return (
     <li>
       <Link
-        href={link.url ?? '/dashboard'}
         className={cn(styles.root, className, { [styles.active]: isActive })}
+        href={link.url ?? '/dashboard'}
       >
-        <Icon size={16} className={styles.icon} />
+        <Icon className={styles.icon} size={16} />
         <Typography size="xxs" weight={isActive ? 'semiBold' : undefined}>
           {link.label}
         </Typography>

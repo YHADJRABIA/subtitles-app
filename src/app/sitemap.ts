@@ -1,7 +1,7 @@
 import { aboutPageQuery } from '@/gql/queries/aboutPage'
 import { allSeriesQuery } from '@/gql/queries/allSeriesPage'
 import { executeQuery } from '@/lib/datocms/executeQuery'
-import { pathnames } from '@/lib/i18n/navigation'
+import { pathnames } from '@/i18n/routing'
 import { websiteUrl } from '@/utils/general'
 import { MetadataRoute } from 'next'
 

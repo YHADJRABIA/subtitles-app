@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import styles from './Nav.module.scss'
 import cn from 'classnames'
-import { usePathname } from '@/lib/i18n/navigation'
+import { usePathname } from '@/i18n/routing'
 import BurgerMenu from '../BurgerMenu'
 import LanguageMenu from '../../LanguageMenu'
 import Separator from '@/components/Separator'
@@ -39,9 +39,9 @@ const Nav = ({ className, isConnected }: PropTypes) => {
   return (
     <nav aria-label="Main menu" className={cn(styles.root, className)}>
       <BurgerMenu
-        toggled={toggled}
-        setToggled={setToggled}
         className={styles.burgerMenu}
+        setToggled={setToggled}
+        toggled={toggled}
       />
 
       <div className={cn(styles.menu, { [styles.toggled]: toggled })}>
@@ -50,31 +50,31 @@ const Nav = ({ className, isConnected }: PropTypes) => {
             const isActive = link?.url === currentPath
             return (
               <NavLink
+                isActive={isActive}
                 key={id}
                 link={link}
-                isActive={isActive}
                 onClick={isActive ? handleCloseNav : undefined} // Close nav menu if already on target route
               />
             )
           })}
         </ul>
         <Separator
-          color="var(--secondary-gray-color)"
           className={styles.separator}
+          color="var(--secondary-gray-color)"
         />
         {/* TODO: Reuse later  <AuthSection showAccount={isConnected} className={styles.authSection} /> */}
         <div className={styles.bottomSection}>
           <LanguageMenu isInverted={!isOnDesktop} />
 
           <LinkButton
-            size="xs"
-            weight="semiBold"
-            isFullWidth={false}
             icon={{ src: SupportIcon }}
+            isFullWidth={false}
             link={{
               href: SUPPORT_LINK,
               openInNewTab: true,
             }}
+            size="xs"
+            weight="semiBold"
           >
             {t('donate')}
           </LinkButton>

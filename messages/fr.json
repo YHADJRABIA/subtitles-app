@@ -1,8 +1,8 @@
 {
   "Metadata": {
-    "site_name": "РуSubs",
-    "prefix": "РуSubs |",
-    "keywords": "Sous-titres de séries russes, Kazakhstan, séries Kazakhes, Patrul sous-titres Kazakhstan, Patrul sous-titres",
+    "site_name": "PySubs",
+    "prefix": "PySubs |",
+    "keywords": "Sous-titres de séries russes, Kazakhstan, séries Kazakhes, Patrul sous-titres Kazakhstan, Patrul sous-titres, Patrul sous-titres anglais, soutitres séries Kazakhes",
     "Homepage": {
       "title": "Page d'accueil",
       "description": "Accès à des sous-titres exclusifs et gratuits de séries russophones."
@@ -133,6 +133,9 @@
     "password": "Mot de passe",
     "continue_with_google": "Se connecter avec Google",
     "log_out": "Se déconnecter",
+    "Error": {
+      "title": "Page d'erreur d'authentification"
+    },
     "Login": {
       "title": "Connexion",
       "cta": "Se connecter",
@@ -291,8 +294,8 @@
     "donate": "Faire un don"
   },
   "Footer": {
-    "name": "Yacine HADJ RABIA",
-    "development_year": "2024"
+    "development_year": "2024",
+    "copyright": "©{currentYear} – Yacine HADJ RABIA"
   },
 
   "UnderDevelopement": { "title": "En cours de développement" }

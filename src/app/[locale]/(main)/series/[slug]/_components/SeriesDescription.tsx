@@ -11,7 +11,7 @@ interface PropTypes {
 const SeriesDescription = ({ className, title, body }: PropTypes) => {
   return (
     <span className={className}>
-      <Typography tag="h2" weight="semiBold" size="s" className={styles.title}>
+      <Typography className={styles.title} size="s" tag="h2" weight="semiBold">
         {title}
       </Typography>
       <Typography size="xs">{body}</Typography>

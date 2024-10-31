@@ -5,7 +5,7 @@ import styles from './PasswordResetForm.module.scss'
 import React, { useEffect } from 'react'
 import Field from '@/components/Forms/Field'
 import { Button } from '@/components/UI/Button'
-import { Link } from '@/lib/i18n/navigation'
+import { Link } from '@/i18n/routing'
 import { MdLockOutline as PasswordIcon } from 'react-icons/md'
 
 import {
@@ -36,7 +36,7 @@ const PasswordResetForm = () => {
 
   const isError = info.type === 'error'
 
-  const InfoIcon = isError ? ErrorIcon : SuccessIcon // TODO: update
+  const InfoIcon = isError ? ErrorIcon : SuccessIcon
 
   const {
     register,
@@ -69,49 +69,49 @@ const PasswordResetForm = () => {
   return (
     <form
       noValidate
-      method="POST"
       className={styles.root}
+      method="POST"
       onSubmit={handleSubmit(handleReset)}
     >
       <div className={styles.wrapper}>
-        <Typography tag="h1" weight="semiBold" className={styles.title}>
+        <Typography className={styles.title} tag="h1" weight="semiBold">
           {t('PasswordReset.title')}
         </Typography>
         <TextInBox
           icon={InfoIcon}
+          isShown={!!info.label}
           label={info.label}
           type={info.type}
-          isShown={!!info.label}
         />
 
         <Field
           className={styles.field}
-          type={passwordInputType}
-          register={register}
-          name="password"
-          testId="reset-password-field"
           label={t('password')}
           leftIcon={{ src: PasswordIcon, title: t('password') }}
-          rightIcon={{ src: ToggleIcon }}
+          name="password"
           placeholder={
             passwordInputType === 'password' ? '••••••' : 'MyPa$$word_'
           }
+          register={register}
+          rightIcon={{ src: ToggleIcon }}
           subLabel={{
             text: errors?.password?.message,
             isShown: fieldState.isTouched,
             isInfo: true,
           }}
+          testId="reset-password-field"
+          type={passwordInputType}
         />
 
         <Button
           className={styles.cta}
-          variation="primary"
-          testId="submit-reset-password-form"
           disabled={!isValid}
           isLoading={isSubmitting}
-          type="submit"
-          weight="semiBold"
           size="xs"
+          testId="submit-reset-password-form"
+          type="submit"
+          variation="primary"
+          weight="semiBold"
         >
           {t('PasswordReset.cta')}
         </Button>

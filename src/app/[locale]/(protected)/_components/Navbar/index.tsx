@@ -8,7 +8,7 @@ import {
 } from 'react-icons/lu'
 import { useTranslations } from 'next-intl'
 import NavLink from './NavLink'
-import { usePathname } from '@/lib/i18n/navigation'
+import { usePathname } from '@/i18n/routing'
 
 const Navbar = () => {
   const currentPath = usePathname()
@@ -35,7 +35,7 @@ const Navbar = () => {
       <ul>
         {links.map((link, id) => {
           const isActive = link?.url === currentPath
-          return <NavLink key={id} link={link} isActive={isActive} />
+          return <NavLink isActive={isActive} key={id} link={link} />
         })}
       </ul>
     </nav>

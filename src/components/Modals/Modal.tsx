@@ -21,10 +21,10 @@ const Modal = ({ isOpen, onClose, title, className, children }: PropTypes) => {
         <div className={styles.header}>
           {title && (
             <Typography
+              className={styles.title}
+              size="xl"
               tag="h2"
               weight="bold"
-              size="xl"
-              className={styles.title}
             >
               {title}
             </Typography>

@@ -1,4 +1,4 @@
-import { locales } from '@/lib/i18n/navigation'
+import { locales } from '@/i18n/routing'
 
 /**
  * Strips locale prefix from a given localised pathname.

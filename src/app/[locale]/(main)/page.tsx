@@ -26,13 +26,13 @@ export default function HomePage() {
   return (
     <div className={styles.root}>
       <HeroBanner
-        imageAspectRatio="1/1"
-        image={MAIN_ASSET_PATH}
         className={styles.heroBanner}
-        imageAlt={t('HeroBanner.image_alt')}
-        title={t('HeroBanner.heading')}
-        description={t('HeroBanner.description')}
         ctaElements={<CtaSection />}
+        description={t('HeroBanner.description')}
+        image={MAIN_ASSET_PATH}
+        imageAlt={t('HeroBanner.image_alt')}
+        imageAspectRatio="1/1"
+        title={t('HeroBanner.heading')}
       />
     </div>
   )

@@ -24,12 +24,12 @@ const InfoImage = ({
 }: PropTypes) => {
   return (
     <div className={cn(styles.root, className)}>
-      <FilledImage src={src} alt={alt} />
+      <FilledImage alt={alt} src={src} />
       <span className={styles.overlay}>
         <Typography
           align={titleAlign ?? 'left'}
-          size="s"
           color="var(--primary-white-color)"
+          size="s"
         >
           {title}
         </Typography>

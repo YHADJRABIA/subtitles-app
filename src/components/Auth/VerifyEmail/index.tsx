@@ -19,7 +19,7 @@ import {
 } from '@/types/schemas/auth'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 import { handleVerifyEmailValidationToken } from '@/actions/auth'
-import { Link } from '@/lib/i18n/navigation'
+import { Link } from '@/i18n/routing'
 
 const VerifyEmail = () => {
   const [t, t_zod] = [

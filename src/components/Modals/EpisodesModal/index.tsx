@@ -19,16 +19,16 @@ const EpisodesModal = ({ episodes }: PropTypes) => {
       {episodes.map(({ episodeNumber, subtitle }) => {
         const { url, filename } = subtitle
         return (
-          <li key={episodeNumber} className={styles.item}>
-            <Typography size="xs" weight="semiBold" className={styles.label}>
+          <li className={styles.item} key={episodeNumber}>
+            <Typography className={styles.label} size="xs" weight="semiBold">
               {t('Subtitles.episode', { count: episodeNumber })}
             </Typography>
 
             <Button
               isRounded
-              variation="primary"
-              size="xs"
               isFullWidth={false}
+              size="xs"
+              variation="primary"
               onClick={() => downloadFile(url, filename)}
             >
               {t('Subtitles.download')}

@@ -5,7 +5,7 @@ import Header from '@/components/Layout/Header'
 import Footer from '@/components/Layout/Footer'
 import Navbar from './_components/Navbar'
 import { Metadata } from 'next'
-import { locales } from '@/lib/i18n/navigation'
+import { locales } from '@/i18n/routing'
 import Loader from '@/components/UI/Loader'
 import { MetaDataProps } from '../layout'
 

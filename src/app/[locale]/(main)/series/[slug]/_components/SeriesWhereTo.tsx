@@ -24,15 +24,15 @@ const SeriesWhereTo = ({ type, list, className }: PropTypes) => {
       <MapMarkerIcon className={styles.icon} size={20} />
       <div className={styles.column}>
         <Typography
+          className={styles.title}
+          size="xs"
           tag="h3"
           weight="semiBold"
-          size="xs"
-          className={styles.title}
         >
           {t(isWatchMode ? 'where_to_watch' : 'where_to_download')}
         </Typography>
         {list.map((item, idx) => {
-          return <Item key={idx} label={item.label} href={item.href} />
+          return <Item href={item.href} key={idx} label={item.label} />
         })}
       </div>
     </section>
@@ -46,10 +46,10 @@ const Item = ({ label, href }: { label: string; href: string }) => {
   return (
     <span className={styles.item}>
       <Typography
+        className={styles.link}
+        color="var(--secondary-blue-color)"
         link={{ href: href, openInNewTab: true }}
         size="xs"
-        color="var(--secondary-blue-color)"
-        className={styles.link}
       >
         {label}
       </Typography>

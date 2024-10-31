@@ -9,8 +9,6 @@ import { LinkButton } from '@/components/UI/Button/LinkButton'
 import { MdOutlineKeyboardBackspace as BackIcon } from 'react-icons/md'
 import { useTranslations } from 'next-intl'
 
-// TODO: fix "Unable to find `next-intl` locale because the middleware didn't run on this request. See https://next-intl-docs.vercel.app/docs/routing/middleware#unable-to-find-locale. The `notFound()` function will be called as a result."
-
 const SVG_PATH = '/assets/ice-fishing.svg'
 
 const NotFoundPage = () => {
@@ -22,30 +20,30 @@ const NotFoundPage = () => {
       <Header isConnected={!!user} />
       <main className={styles.root}>
         <HeroBanner
-          image={SVG_PATH}
-          imageAlt="404"
-          title={t('page_not_found')}
-          description={t('verify_route')}
-          imageAspectRatio="1/1"
           ctaElements={
             <LinkButton
+              className={styles.cta}
+              icon={{ src: BackIcon, size: 22 }}
               link={{ href: '/' }}
               size="s"
               variation="primary"
               weight="semiBold"
-              className={styles.cta}
-              icon={{ src: BackIcon, size: 22 }}
             >
               {t('back_to_homepage')}
             </LinkButton>
           }
+          description={t('verify_route')}
+          image={SVG_PATH}
+          imageAlt="404"
+          imageAspectRatio="1/1"
+          title={t('page_not_found')}
         />
       </main>
       <Typography
-        size="s"
         className={styles.credits}
         color="var(--primary-blue-color)"
         link={{ href: 'https://storyset.com/', openInNewTab: true }}
+        size="s"
       >
         {t('storyset_credit')}
       </Typography>

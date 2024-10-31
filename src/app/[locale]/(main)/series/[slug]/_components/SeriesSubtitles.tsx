@@ -44,7 +44,6 @@ const SeriesSubtitles = ({
   return (
     <section className={cn(styles.root, className)}>
       <Accordion
-        title={t('subtitles')}
         body={
           <ul className={styles.accordionBody}>
             {seasonsArray.map(seasonNumber => {
@@ -56,16 +55,17 @@ const SeriesSubtitles = ({
 
               return (
                 <SeasonItem
-                  key={seasonNumber}
-                  seasonNumber={seasonNumber}
                   episodes={episodes}
                   isActive={hasEpisodes}
+                  key={seasonNumber}
+                  seasonNumber={seasonNumber}
                   onOpen={handleOpenModal}
                 />
               )
             })}
           </ul>
         }
+        title={t('subtitles')}
       />
     </section>
   )
@@ -98,11 +98,11 @@ const SeasonItem = memo(
         onClick={handleClick}
       >
         <Typography
-          tag="h4"
-          weight="semiBold"
-          size="xs"
           color="var(--primary-white-color)"
+          size="xs"
+          tag="h4"
           title={isUnavailable ? t('not_available_yet') : undefined}
+          weight="semiBold"
         >
           {t('season', { count: seasonNumber })}
         </Typography>

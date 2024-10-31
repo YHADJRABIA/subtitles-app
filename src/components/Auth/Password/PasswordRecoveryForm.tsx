@@ -26,7 +26,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import useInfo from '@/hooks/useInfo'
 import { useTranslations } from 'next-intl'
 import { handleSendPasswordRecoveryEmail } from '@/actions/auth'
-import { Link } from '@/lib/i18n/navigation'
+import { Link } from '@/i18n/routing'
 
 const PasswordRecoveryForm = () => {
   const searchParams = useSearchParams()
@@ -49,7 +49,9 @@ const PasswordRecoveryForm = () => {
 
   const fieldState = getFieldState('email')
 
-  const InfoIcon = info.type === 'error' ? ErrorIcon : EmailSentIcon // TODO: update
+  const isError = info.type === 'error'
+
+  const InfoIcon = isError ? ErrorIcon : EmailSentIcon
 
   const handleRecovery: SubmitHandler<PasswordRecoverySchema> = async user => {
     try {
@@ -63,8 +65,8 @@ const PasswordRecoveryForm = () => {
   return (
     <form
       noValidate
-      method="POST"
       className={styles.root}
+      method="POST"
       onSubmit={handleSubmit(handleRecovery)}
     >
       <div className={styles.wrapper}>
@@ -74,35 +76,35 @@ const PasswordRecoveryForm = () => {
         <TextInBox
           className={styles.infoBox}
           icon={InfoIcon}
+          isShown={!!info.label}
           label={info.label}
           type={info.type}
-          isShown={!!info.label}
         />
         <Field
           autoFocus
           className={styles.field}
-          register={register}
+          label={t('email')}
+          leftIcon={{ src: EmailIcon, title: t('email') }}
           name="email"
           placeholder="email@domain.com"
-          type="email"
-          label={t('email')}
-          testId="send-reset-password-email"
-          leftIcon={{ src: EmailIcon, title: t('email') }}
+          register={register}
           subLabel={{
             text: errors?.email?.message,
             isShown: fieldState.isTouched,
           }}
+          testId="send-reset-password-email"
+          type="email"
         />
 
         <Button
           className={styles.cta}
-          variation="primary"
-          testId="submit-send-reset-password-form"
           disabled={!isValid}
           isLoading={isSubmitting}
-          type="submit"
-          weight="semiBold"
           size="xs"
+          testId="submit-send-reset-password-form"
+          type="submit"
+          variation="primary"
+          weight="semiBold"
         >
           {t('PasswordRecovery.cta')}
         </Button>

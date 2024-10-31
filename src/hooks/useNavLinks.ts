@@ -19,7 +19,7 @@ interface PropTypes {
 }
 
 /**
- * Returns nav links to show based on authentication status
+ * Returns nav links based on authentication status
  **/
 const useNavLinks = ({ isConnected }: PropTypes) => {
   const t = useTranslations('Navigation')
@@ -34,7 +34,7 @@ const useNavLinks = ({ isConnected }: PropTypes) => {
     try {
       await handleLogout()
     } catch (err) {
-      console.error(getErrorMessage(err))
+      console.error('Error logging out:', getErrorMessage(err))
     } finally {
       setIsLoggingOut(false)
     }

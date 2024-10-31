@@ -24,12 +24,12 @@ const NavLink = ({ isActive, link, onClick }: PropTypes) => {
       className={cn(styles.root, { [styles.isActive]: isActive })}
       onClick={onClick}
     >
-      <Icon size={16} className={styles.icon} />
+      <Icon className={styles.icon} size={16} />
 
       <Typography
+        link={{ href: link?.url ?? null }}
         size="s"
         weight={isActive ? 'semiBold' : undefined}
-        link={{ href: link?.url ?? null }}
         onClick={link.onClick}
       >
         {link.label}

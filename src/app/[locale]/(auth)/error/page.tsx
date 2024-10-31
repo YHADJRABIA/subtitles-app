@@ -1,7 +1,9 @@
+import { useTranslations } from 'next-intl'
 import React from 'react'
 
 const AuthErrorPage = () => {
-  return <div>AuthErrorPage</div> // TODO finish up
+  const t = useTranslations('Auth.Error')
+  return <div>{t('title')}</div> // TODO finish up
 }
 
 export default AuthErrorPage

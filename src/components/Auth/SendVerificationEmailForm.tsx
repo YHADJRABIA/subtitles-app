@@ -25,7 +25,7 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
 import { handleSendVerificationEmail } from '@/actions/auth'
-import { Link } from '@/lib/i18n/navigation'
+import { Link } from '@/i18n/routing'
 
 const SendVerificationEmailForm = () => {
   const [t, t_zod] = [useTranslations('Auth'), useTranslations('Zod')]
@@ -46,7 +46,9 @@ const SendVerificationEmailForm = () => {
   const fieldState = getFieldState('email')
   const email = getValues('email')
 
-  const InfoIcon = info.type === 'error' ? ErrorIcon : EmailSentIcon // TODO: update
+  const isError = info.type === 'error'
+
+  const InfoIcon = isError ? ErrorIcon : EmailSentIcon
 
   const handleVerify: SubmitHandler<
     SendEmailVerificationSchema
@@ -62,47 +64,47 @@ const SendVerificationEmailForm = () => {
   return (
     <form
       noValidate
-      method="POST"
       className={styles.root}
+      method="POST"
       onSubmit={handleSubmit(handleVerify)}
     >
       <div className={styles.wrapper}>
-        <Typography tag="h1" weight="semiBold" className={styles.title}>
+        <Typography className={styles.title} tag="h1" weight="semiBold">
           {t('SendVerificationEmail.title')}
         </Typography>
 
         <TextInBox
           icon={InfoIcon}
+          isShown={!!info.label}
           label={info.label}
           type={info.type}
-          isShown={!!info.label}
         />
 
         <Field
           autoFocus
           className={styles.field}
-          register={register}
-          placeholder="email@domain.com"
-          type="email"
-          name="email"
           label={t('email')}
-          testId="verify-email"
           leftIcon={{ src: EmailIcon, title: t('email') }}
+          name="email"
+          placeholder="email@domain.com"
+          register={register}
           subLabel={{
             text: errors?.email?.message,
             isShown: fieldState.isTouched,
           }}
+          testId="verify-email"
+          type="email"
         />
 
         <Button
           className={styles.cta}
-          variation="primary"
-          testId="submit-email-verification-form"
           disabled={!isValid}
           isLoading={isSubmitting}
-          type="submit"
-          weight="semiBold"
           size="xs"
+          testId="submit-email-verification-form"
+          type="submit"
+          variation="primary"
+          weight="semiBold"
         >
           {t('SendVerificationEmail.cta')}
         </Button>

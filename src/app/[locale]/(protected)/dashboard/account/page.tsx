@@ -1,5 +1,5 @@
 import React from 'react'
-import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import styles from './page.module.scss'
 import Typography from '@/components/UI/Typography'
 import { getUserSession } from '@/utils/session'
@@ -23,7 +23,7 @@ export const generateMetadata = async ({
 }
 
 const DashboardAccountPage = async ({ params: { locale } }: MetaDataProps) => {
-  unstable_setRequestLocale(locale)
+  setRequestLocale(locale)
   const {
     creationDate,
     lastUpdateDate,
@@ -35,7 +35,7 @@ const DashboardAccountPage = async ({ params: { locale } }: MetaDataProps) => {
 
   return (
     <>
-      <Typography isFullWidth tag="h1" size="xxl" weight="semiBold">
+      <Typography isFullWidth size="xxl" tag="h1" weight="semiBold">
         {t('title')}
       </Typography>
       <div className={styles.container}>
@@ -43,7 +43,7 @@ const DashboardAccountPage = async ({ params: { locale } }: MetaDataProps) => {
           {/* TODO: refactor fieldsContainer common to all dashboard pages */}
           {creationDate && (
             <div className={styles.field}>
-              <Typography weight="semiBold" size="xs">
+              <Typography size="xs" weight="semiBold">
                 {t('registered_since')}
               </Typography>
               <DateDisplay date={creationDate} />
@@ -51,7 +51,7 @@ const DashboardAccountPage = async ({ params: { locale } }: MetaDataProps) => {
           )}
           {lastUpdateDate && (
             <div className={styles.field}>
-              <Typography weight="semiBold" size="xs">
+              <Typography size="xs" weight="semiBold">
                 {t('last_update')}
               </Typography>
               <DateDisplay date={lastUpdateDate} />
@@ -59,14 +59,14 @@ const DashboardAccountPage = async ({ params: { locale } }: MetaDataProps) => {
           )}
           {lastLoginDate && (
             <div className={styles.field}>
-              <Typography weight="semiBold" size="xs">
+              <Typography size="xs" weight="semiBold">
                 {t('last_visit')}
               </Typography>
               <DateDisplay showTime date={lastLoginDate} />
             </div>
           )}
         </div>
-        <DeleteAccountButton userId={userId} className={styles.cta} />
+        <DeleteAccountButton className={styles.cta} userId={userId} />
       </div>
     </>
   )
