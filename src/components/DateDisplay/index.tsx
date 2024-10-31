@@ -12,20 +12,27 @@ interface PropTypes {
 const DateDisplay = ({ date, showTime = false, size = 'xxs' }: PropTypes) => {
   const t = useTranslations('DateDisplay')
   const format = useFormatter()
-
   const dateTime = new Date(date)
+
+  const time = showTime
+    ? format.dateTime(dateTime, {
+        hour: 'numeric',
+        minute: 'numeric',
+      })
+    : null
 
   const isDateToday = isToday(dateTime)
   const isDateYesterday = isYesterday(dateTime)
 
   let displayValue: string
 
+  // Determine the display value based on date checks
   if (isDateToday) {
-    displayValue = t('today')
+    displayValue = t('at', { date: t('today'), time })
   } else if (isDateYesterday) {
-    displayValue = t('yesterday')
+    displayValue = t('at', { date: t('yesterday'), time })
   } else {
-    // Format the date with or without time based on the showTime prop
+    // Neither today nor yesterday
     displayValue = format.dateTime(dateTime, {
       year: 'numeric',
       month: 'long',
