@@ -12,6 +12,7 @@ interface PropTypes {
 const DateDisplay = ({ date, showTime = false, size = 'xxs' }: PropTypes) => {
   const t = useTranslations('DateDisplay')
   const format = useFormatter()
+
   const dateTime = new Date(date)
 
   const time = showTime
@@ -40,6 +41,8 @@ const DateDisplay = ({ date, showTime = false, size = 'xxs' }: PropTypes) => {
       ...(showTime && { hour: 'numeric', minute: 'numeric' }),
     })
   }
+
+  // TODO: Add relativeTime option prop
 
   return (
     <Typography size={size} weight="semiLight">
