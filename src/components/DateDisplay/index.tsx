@@ -3,12 +3,14 @@ import Typography, { TextSize } from '@/components/UI/Typography'
 import { isToday, isYesterday } from '@/utils/date'
 import { useFormatter, useTranslations } from 'next-intl'
 
-interface PropTypes {
+interface BaseProps {
   date: string
-  showTime?: boolean
   size?: TextSize
-  isRelativeDate?: boolean
 }
+
+type PropTypes =
+  | (BaseProps & { showTime?: true; isRelativeDate?: false })
+  | (BaseProps & { showTime?: false; isRelativeDate?: true })
 
 const DateDisplay = ({
   date,
