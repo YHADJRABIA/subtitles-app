@@ -31,17 +31,13 @@ const DateDisplay = ({ date, showTime = false, size = 'xxs' }: PropTypes) => {
   const isDateToday = isToday(dateTime)
   const isDateYesterday = isYesterday(dateTime)
 
-  let displayValue: string
+  const displayDate = isDateToday
+    ? t('today')
+    : isDateYesterday
+      ? t('yesterday')
+      : dateValue
 
-  // Determine the display value based on date checks
-  if (isDateToday) {
-    displayValue = t('at', { date: t('today'), time: timeValue })
-  } else if (isDateYesterday) {
-    displayValue = t('at', { date: t('yesterday'), time: timeValue })
-  } else {
-    // Neither today nor yesterday
-    displayValue = t('at', { date: dateValue, time: timeValue })
-  }
+  const displayValue = t('at', { date: displayDate, time: timeValue })
 
   // TODO: Add relativeTime option prop
 
