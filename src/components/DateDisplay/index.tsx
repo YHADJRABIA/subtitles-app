@@ -36,7 +36,7 @@ const DateDisplay = ({ date, showTime = false, size = 'xxs' }: PropTypes) => {
     // Neither today nor yesterday
     displayValue = format.dateTime(dateTime, {
       year: 'numeric',
-      month: 'long',
+      month: 'numeric',
       day: 'numeric',
       ...(showTime && { hour: 'numeric', minute: 'numeric' }),
     })
