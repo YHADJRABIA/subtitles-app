@@ -52,6 +52,7 @@ const DateDisplay = ({
 
     displayValue = t('at', { date: displayDate, time: timeValue })
   }
+  // TODO: show relative time if less than 1 day
 
   return (
     <Typography size={size} weight="semiLight">
