@@ -7,39 +7,49 @@ interface PropTypes {
   date: string
   showTime?: boolean
   size?: TextSize
+  isRelativeDate?: boolean
 }
 
-const DateDisplay = ({ date, showTime = false, size = 'xxs' }: PropTypes) => {
+const DateDisplay = ({
+  date,
+  showTime = false,
+  size = 'xxs',
+  isRelativeDate = false,
+}: PropTypes) => {
   const t = useTranslations('DateDisplay')
   const format = useFormatter()
 
   const dateTime = new Date(date)
 
-  const dateValue = format.dateTime(dateTime, {
-    year: 'numeric',
-    month: 'numeric',
-    day: 'numeric',
-  })
+  let displayValue
 
-  const timeValue = showTime
-    ? format.dateTime(dateTime, {
-        hour: 'numeric',
-        minute: 'numeric',
-      })
-    : null
+  if (isRelativeDate) {
+    displayValue = format.relativeTime(dateTime, new Date())
+  } else {
+    const dateValue = format.dateTime(dateTime, {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+    })
 
-  const isDateToday = isToday(dateTime)
-  const isDateYesterday = isYesterday(dateTime)
+    const timeValue = showTime
+      ? format.dateTime(dateTime, {
+          hour: 'numeric',
+          minute: 'numeric',
+        })
+      : null
 
-  const displayDate = isDateToday
-    ? t('today')
-    : isDateYesterday
-      ? t('yesterday')
-      : dateValue
+    const isDateToday = isToday(dateTime)
+    const isDateYesterday = isYesterday(dateTime)
 
-  const displayValue = t('at', { date: displayDate, time: timeValue })
+    const displayDate = isDateToday
+      ? t('today')
+      : isDateYesterday
+        ? t('yesterday')
+        : dateValue
 
-  // TODO: Add relativeTime option prop
+    displayValue = t('at', { date: displayDate, time: timeValue })
+  }
 
   return (
     <Typography size={size} weight="semiLight">
