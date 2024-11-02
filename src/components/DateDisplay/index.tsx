@@ -15,7 +15,13 @@ const DateDisplay = ({ date, showTime = false, size = 'xxs' }: PropTypes) => {
 
   const dateTime = new Date(date)
 
-  const time = showTime
+  const dateValue = format.dateTime(dateTime, {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+  })
+
+  const timeValue = showTime
     ? format.dateTime(dateTime, {
         hour: 'numeric',
         minute: 'numeric',
@@ -29,17 +35,12 @@ const DateDisplay = ({ date, showTime = false, size = 'xxs' }: PropTypes) => {
 
   // Determine the display value based on date checks
   if (isDateToday) {
-    displayValue = t('at', { date: t('today'), time })
+    displayValue = t('at', { date: t('today'), time: timeValue })
   } else if (isDateYesterday) {
-    displayValue = t('at', { date: t('yesterday'), time })
+    displayValue = t('at', { date: t('yesterday'), time: timeValue })
   } else {
     // Neither today nor yesterday
-    displayValue = format.dateTime(dateTime, {
-      year: 'numeric',
-      month: 'numeric',
-      day: 'numeric',
-      ...(showTime && { hour: 'numeric', minute: 'numeric' }),
-    })
+    displayValue = t('at', { date: dateValue, time: timeValue })
   }
 
   // TODO: Add relativeTime option prop
