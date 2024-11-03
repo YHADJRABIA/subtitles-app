@@ -1,7 +1,9 @@
 import React from 'react'
 import Typography, { TextSize } from '@/components/UI/Typography'
 import { isToday, isYesterday } from '@/utils/date'
-import { useFormatter, useTranslations } from 'next-intl'
+import { useFormatter, useNow, useTranslations } from 'next-intl'
+
+const RELATIVE_TIME_THRESHOLD = 24 * 60 * 60 * 1000 // 1 day in ms
 
 interface BaseProps {
   date: string
@@ -22,11 +24,15 @@ const DateDisplay = ({
   const format = useFormatter()
 
   const dateTime = new Date(date)
+  const now = useNow()
+
+  const timeDifference = now.getTime() - dateTime.getTime()
 
   let displayValue
 
-  if (isRelativeDate) {
-    displayValue = format.relativeTime(dateTime, new Date())
+  if (isRelativeDate || timeDifference < RELATIVE_TIME_THRESHOLD) {
+    // Show relative time if less than `RELATIVE_TIME_THRESHOLD` has passed or if isRelativeDate is true
+    displayValue = format.relativeTime(dateTime, now)
   } else {
     const dateValue = format.dateTime(dateTime, {
       year: 'numeric',
@@ -52,7 +58,6 @@ const DateDisplay = ({
 
     displayValue = t('at', { date: displayDate, time: timeValue })
   }
-  // TODO: show relative time if less than 1 day
 
   return (
     <Typography size={size} weight="semiLight">
