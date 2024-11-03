@@ -28,6 +28,14 @@ const DateDisplay = ({
 
   const timeDifference = now.getTime() - dateTime.getTime()
 
+  const fullDate = format.dateTime(dateTime, {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+  })
+
   let displayValue
 
   if (isRelativeDate || timeDifference < RELATIVE_TIME_THRESHOLD) {
@@ -60,7 +68,7 @@ const DateDisplay = ({
   }
 
   return (
-    <Typography size={size} weight="semiLight">
+    <Typography size={size} title={fullDate} weight="semiLight">
       {displayValue}
     </Typography>
   )
