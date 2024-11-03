@@ -25,7 +25,7 @@ const DateDisplay = ({
   const format = useFormatter()
   const dateTime = new Date(date)
   const now = useNow({
-    updateInterval: 1000 * 5, // Update `now` every 5 sec
+    updateInterval: 1000 * 5, // Update `now` every 5 seconds
   })
   const timeSince = now.getTime() - dateTime.getTime()
 
@@ -60,12 +60,23 @@ const DateDisplay = ({
     }
   }
 
-  const handleShowFullDate = () => setIsFullDateShown(prev => !prev)
+  // Toggles relativeDate to full date
+  const handleShowFullDate = () => {
+    if (isRelativeDate || timeSince < RELATIVE_TIME_THRESHOLD) {
+      setIsFullDateShown(prev => !prev)
+    }
+  }
 
   return (
     <Typography
       size={size}
-      title={isFullDateShown ? getDisplayValue() : fullDate} // Show alternate value as tooltip
+      style={{
+        cursor:
+          isRelativeDate || timeSince < RELATIVE_TIME_THRESHOLD
+            ? 'pointer'
+            : 'default',
+      }}
+      title={isFullDateShown ? fullDate : getDisplayValue()} // / Show alternate value as tooltip
       weight="semiLight"
       onClick={handleShowFullDate}
     >
