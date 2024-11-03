@@ -24,7 +24,9 @@ const DateDisplay = ({
   const t = useTranslations('DateDisplay')
   const format = useFormatter()
   const dateTime = new Date(date)
-  const now = useNow()
+  const now = useNow({
+    updateInterval: 1000 * 5, // Update `now` every 5 sec
+  })
   const timeSince = now.getTime() - dateTime.getTime()
 
   const [isFullDateShown, setIsFullDateShown] = useState(false)
