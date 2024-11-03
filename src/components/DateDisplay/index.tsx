@@ -58,11 +58,14 @@ const DateDisplay = ({
     }
   }
 
+  const handleShowFullDate = () => setIsFullDateShown(prev => !prev)
+
   return (
     <Typography
       size={size}
       title={isFullDateShown ? getDisplayValue() : fullDate} // Show alternate value as tooltip
       weight="semiLight"
+      onClick={handleShowFullDate}
     >
       {isFullDateShown ? fullDate : getDisplayValue()}
     </Typography>
