@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import Typography, { TextSize } from '@/components/UI/Typography'
 import { isToday, isYesterday } from '@/utils/date'
 import { useFormatter, useNow, useTranslations } from 'next-intl'
+import cn from 'classnames'
+import styles from './DateDisplay.module.scss'
 
 const RELATIVE_TIME_THRESHOLD = 24 * 60 * 60 * 1000 // 1 day in ms
 
@@ -24,9 +26,7 @@ const DateDisplay = ({
   const t = useTranslations('DateDisplay')
   const format = useFormatter()
   const dateTime = new Date(date)
-  const now = useNow({
-    updateInterval: 1000 * 5, // Update `now` every 5 seconds
-  })
+  const now = useNow({ updateInterval: 1000 * 5 }) // Update `now` every 5 seconds
   const timeSince = now.getTime() - dateTime.getTime()
 
   const [isFullDateShown, setIsFullDateShown] = useState(false)
@@ -39,9 +39,13 @@ const DateDisplay = ({
     minute: 'numeric',
   })
 
+  const relativeDate = format.relativeTime(dateTime, now)
+
+  const showRelativeDate = isRelativeDate || timeSince < RELATIVE_TIME_THRESHOLD
+
   const getDisplayValue = () => {
-    if (isRelativeDate || timeSince < RELATIVE_TIME_THRESHOLD) {
-      return format.relativeTime(dateTime, now)
+    if (showRelativeDate) {
+      return relativeDate
     } else {
       const dateValue = format.dateTime(dateTime, {
         year: 'numeric',
@@ -51,7 +55,7 @@ const DateDisplay = ({
       const timeValue = showTime
         ? format.dateTime(dateTime, { hour: 'numeric', minute: 'numeric' })
         : null
-      const displayDate = isToday(dateTime)
+      const displayDate = isToday(dateTime) // TODO: remove unreachable case
         ? t('today')
         : isYesterday(dateTime)
           ? t('yesterday')
@@ -60,23 +64,17 @@ const DateDisplay = ({
     }
   }
 
-  // Toggles relativeDate to full date
+  // Toggle relativeDate to full date
   const handleShowFullDate = () => {
-    if (isRelativeDate || timeSince < RELATIVE_TIME_THRESHOLD) {
-      setIsFullDateShown(prev => !prev)
-    }
+    if (!showRelativeDate) return
+    setIsFullDateShown(prev => !prev)
   }
 
   return (
     <Typography
+      className={cn(styles.root, { [styles.isCta]: showRelativeDate })}
       size={size}
-      style={{
-        cursor:
-          isRelativeDate || timeSince < RELATIVE_TIME_THRESHOLD
-            ? 'pointer'
-            : 'default',
-      }}
-      title={isFullDateShown ? fullDate : getDisplayValue()} // / Show alternate value as tooltip
+      title={!isFullDateShown && showRelativeDate ? fullDate : relativeDate} // / Show alternate value as tooltip
       weight="semiLight"
       onClick={handleShowFullDate}
     >
