@@ -137,7 +137,7 @@ export const authOptions: NextAuthOptions = {
       // User only defined after authorize (login)
       if (!user) return token // Logged out
       const isVerifiedEmail = !!user.emailVerified
-      const { createdAt, lastLogin, updatedAt } = user
+      const { createdAt, lastLogin, updatedAt } = user // TODO: Prevent updatedAt from updating at login, should only update if user info hasn't changed
 
       return { ...token, isVerifiedEmail, createdAt, lastLogin, updatedAt } // Passing down token to session
     },
@@ -229,7 +229,7 @@ export const authOptions: NextAuthOptions = {
               id: existingUser._id,
               lastLogin: existingUser.lastLogin, // Previous login
               createdAt: updatedUser.createdAt,
-              updatedAt: updatedUser.updatedAt, // TODO: Limit to credentials update, shouldn't update as user logs in
+              updatedAt: updatedUser.updatedAt, // TODO: Prevent updatedAt from updating at login, should only update if user info hasn't changed
             })
 
             return user
