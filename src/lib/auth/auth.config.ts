@@ -229,7 +229,7 @@ export const authOptions: NextAuthOptions = {
               id: existingUser._id,
               lastLogin: existingUser.lastLogin, // Previous login
               createdAt: updatedUser.createdAt,
-              updatedAt: updatedUser.updatedAt,
+              updatedAt: updatedUser.updatedAt, // TODO: Limit to credentials update, shouldn't update as user logs in
             })
 
             return user
