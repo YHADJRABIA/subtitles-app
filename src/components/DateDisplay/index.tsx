@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import Typography, { TextSize } from '@/components/UI/Typography'
-import { isToday, isYesterday } from '@/utils/date'
+import { isYesterday } from '@/utils/date'
 import { useFormatter, useNow, useTranslations } from 'next-intl'
 import cn from 'classnames'
 import styles from './DateDisplay.module.scss'
@@ -55,11 +55,7 @@ const DateDisplay = ({
       const timeValue = showTime
         ? format.dateTime(dateTime, { hour: 'numeric', minute: 'numeric' })
         : null
-      const displayDate = isToday(dateTime) // TODO: remove unreachable case
-        ? t('today')
-        : isYesterday(dateTime)
-          ? t('yesterday')
-          : dateValue
+      const displayDate = isYesterday(dateTime) ? t('yesterday') : dateValue
       return t('at', { date: displayDate, time: timeValue })
     }
   }
