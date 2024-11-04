@@ -1,4 +1,4 @@
-import { NextAuthOptions, Session } from 'next-auth'
+import { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GoogleProvider from 'next-auth/providers/google'
 import bycrptjs from 'bcryptjs'
@@ -16,17 +16,9 @@ import { getErrorMessage, getZodErrors } from '@/utils/errors'
 import { AccountLoginValidator } from '@/types/schemas/auth'
 import { getTranslations } from 'next-intl/server'
 import { getNextLocale } from '@/utils/cookies'
-import { JWT } from 'next-auth/jwt'
 import { deleteVerificationTokenByEmail } from '@/utils/db/verification-token'
 
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, NEXTAUTH_SECRET } = process.env
-
-interface PropTypes {
-  user: UserAPIType
-  session: Session
-  token: JWT
-  account: { provider: string }
-}
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -51,14 +43,8 @@ export const authOptions: NextAuthOptions = {
       name: 'credentials',
       credentials: {
         // For built-in NextAuth form. Useless here since own UI exists
-        email: {
-          label: 'Email',
-          type: 'email',
-        },
-        password: {
-          label: 'Password',
-          type: 'password',
-        },
+        email: { label: 'Email', type: 'email' },
+        password: { label: 'Password', type: 'password' },
       },
 
       // Runs on credential login (with email & password)
@@ -151,7 +137,7 @@ export const authOptions: NextAuthOptions = {
       // User only defined after authorize (login)
       if (!user) return token // Logged out
       const isVerifiedEmail = !!user.emailVerified
-      const { createdAt, lastLogin, updatedAt } = user
+      const { createdAt, lastLogin, updatedAt } = user // TODO: Prevent updatedAt from updating at login, should only update if user info hasn't changed
 
       return { ...token, isVerifiedEmail, createdAt, lastLogin, updatedAt } // Passing down token to session
     },
@@ -172,10 +158,7 @@ export const authOptions: NextAuthOptions = {
       }
     },
 
-    // TODO: remove lint ignore once next-auth fixes bug
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    async signIn({ user, account }: PropTypes) {
+    async signIn({ user, account }) {
       const locale = getNextLocale()
 
       const t = await getTranslations({
@@ -184,8 +167,8 @@ export const authOptions: NextAuthOptions = {
       })
 
       const [withGoogle, withCredentials] = [
-        account.provider === 'google',
-        account.provider === 'credentials',
+        account?.provider === 'google',
+        account?.provider === 'credentials',
       ]
 
       if (!user) return null
@@ -218,7 +201,7 @@ export const authOptions: NextAuthOptions = {
           const { name, email, image } = user
           await connectDB()
 
-          const existingUser = await getUserByEmail(email)
+          const existingUser = await getUserByEmail(email ?? '')
 
           if (existingUser) {
             // Verify user's existing account if user logs in with Google
@@ -241,12 +224,12 @@ export const authOptions: NextAuthOptions = {
               updatedFields
             )
 
-            // Access following fields from session
+            // Data to be accessed via getUserSession
             Object.assign(user, {
               id: existingUser._id,
               lastLogin: existingUser.lastLogin, // Previous login
               createdAt: updatedUser.createdAt,
-              updatedAt: updatedUser.updatedAt,
+              updatedAt: updatedUser.updatedAt, // TODO: Prevent updatedAt from updating at login, should only update if user info hasn't changed
             })
 
             return user
@@ -263,9 +246,9 @@ export const authOptions: NextAuthOptions = {
           })
           const res = await newUser.save()
 
+          // Data to be accessed via getUserSession
           Object.assign(user, {
             id: newUser._id,
-            lastLogin: newUser.lastLogin,
             createdAt: newUser.createdAt,
             updatedAt: newUser.updatedAt,
             isVerifiedEmail: true,

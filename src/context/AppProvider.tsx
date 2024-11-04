@@ -10,6 +10,7 @@ interface PropTypes {
 }
 
 const AppProvider = async ({ children }: PropTypes) => {
+  // Provide all messages to the client side
   const messages = await getMessages()
 
   return (
