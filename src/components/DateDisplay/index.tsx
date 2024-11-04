@@ -66,7 +66,8 @@ const DateDisplay = ({
     setIsFullDateShown(prev => !prev)
   }
 
-  const shouldShowFullDateTooltip = !isFullDateShown && showRelativeDate
+  const shouldShowFullDateTooltip =
+    (!isFullDateShown && showRelativeDate) || isYesterday(dateTime)
 
   return (
     <Typography
