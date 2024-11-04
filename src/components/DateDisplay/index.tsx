@@ -71,7 +71,7 @@ const DateDisplay = ({
 
   return (
     <Typography
-      className={cn(styles.root, { [styles.isCta]: showRelativeDate })}
+      className={cn({ [styles.isCta]: showRelativeDate })}
       size={size}
       title={shouldShowFullDateTooltip ? fullDate : relativeDate} // / Show alternate value as tooltip
       weight="semiLight"
