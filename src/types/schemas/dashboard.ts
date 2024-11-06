@@ -17,14 +17,11 @@ export const UserUpdateValidator = (
     id: idSchema(t),
     user: z
       .object({
-        name: z
-          .string()
-          .min(1, { message: t('name.missing') })
-          .optional(),
+        name: z.string().min(1, { message: t('name.missing') }),
         email: z
           .string()
           .email({ message: t('email.invalid') })
-          .optional(),
+          .toLowerCase(),
         // Add other fields as needed
       })
       .partial(),
