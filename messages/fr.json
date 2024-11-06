@@ -190,6 +190,7 @@
   "User": {
     "user_not_found": "Utilisateur inconnu",
     "user_deleted": "Compte supprimé avec succès !",
+    "user_updated": "Compte mis à jour avec succès !",
     "unauthorised": "Non authorisé"
   },
   "Revalidation": {
@@ -248,6 +249,9 @@
     },
     "token": {
       "missing": "Jeton requis"
+    },
+    "name": {
+      "missing": "Nom requis"
     }
   },
   "LanguageMenu": {},
