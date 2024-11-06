@@ -1,16 +1,19 @@
 import { connectDB } from '@/lib/mongodb'
 import { NextRequest, NextResponse } from 'next/server'
 import { getErrorMessage, getZodErrors } from '@/utils/errors'
-import { deleteUserById, getUserById } from '@/utils/db/user'
+import { deleteUserById, getUserById, updateNameById } from '@/utils/db/user'
 import { getLocaleFromNextRequest } from '@/utils/cookies'
 import { getTranslations } from 'next-intl/server'
-import { UserDeleteValidator } from '@/types/schemas/dashboard'
+import {
+  UserDeleteValidator,
+  UserUpdateValidator,
+} from '@/types/schemas/dashboard'
 import { getUserSession } from '@/utils/session'
 
 connectDB()
 
 export async function DELETE(req: NextRequest) {
-  const rawSearchParams = req.nextUrl.searchParams.get('id')
+  const rawSearchParams = req.nextUrl.searchParams.get('id') ?? ''
 
   try {
     const locale = getLocaleFromNextRequest(req)
@@ -23,6 +26,7 @@ export async function DELETE(req: NextRequest) {
     const searchParams = UserDeleteValidator(t_zod as any).safeParse(
       rawSearchParams
     )
+
     if (!searchParams.success) {
       const zodErrors = getZodErrors(searchParams.error)
       return NextResponse.json(
