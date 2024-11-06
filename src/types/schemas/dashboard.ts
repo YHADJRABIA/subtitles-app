@@ -9,3 +9,25 @@ export const UserDeleteValidator = (
 ) => idSchema(t)
 
 export type UserDeleteSchema = z.infer<ReturnType<typeof UserDeleteValidator>>
+
+export const UserUpdateValidator = (
+  t: ReturnType<typeof useTranslations<'Zod'>>
+) =>
+  z.object({
+    id: idSchema(t),
+    user: z
+      .object({
+        name: z
+          .string()
+          .min(1, { message: t('name.missing') })
+          .optional(),
+        email: z
+          .string()
+          .email({ message: t('email.invalid') })
+          .optional(),
+        // Add other fields as needed
+      })
+      .partial(),
+  })
+
+export type UserUpdateSchema = z.infer<ReturnType<typeof UserUpdateValidator>>
