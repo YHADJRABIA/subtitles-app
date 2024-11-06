@@ -248,6 +248,9 @@
     },
     "token": {
       "missing": "Missing token"
+    },
+    "name": {
+      "missing": "Missing name"
     }
   },
   "LanguageMenu": {},
