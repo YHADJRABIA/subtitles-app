@@ -189,6 +189,7 @@
   "User": {
     "user_not_found": "User not found",
     "user_deleted": "Account successfully deleted!",
+    "user_updated": "Account successfully updated!",
     "unauthorised": "Unauthorised"
   },
   "Revalidation": {
