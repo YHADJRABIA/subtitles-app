@@ -229,7 +229,8 @@
       "delete_account": "Supprimer compte",
       "account_deletion": "Suppression du compte",
       "warning_deletion": "Ce compte sera définitivement supprimé, cette action est irréversible.",
-      "deletion_failed": "Échec de suppression du compte."
+      "deletion_failed": "Échec de suppression du compte.",
+      "update_failed": "Échec de mise à jour d'informations utilisateur."
     }
   },
   "Zod": {
