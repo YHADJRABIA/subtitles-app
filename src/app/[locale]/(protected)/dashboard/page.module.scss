@@ -1,11 +1,4 @@
-.avatar {
-  @include flexCenter(column, center);
-  margin-bottom: 5rem;
-}
-
 .userInfo {
-  @include flexCenter(column);
-  gap: 1rem;
   margin-bottom: 6rem;
 }
 
