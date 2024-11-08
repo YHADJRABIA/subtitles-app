@@ -14,15 +14,17 @@ export const handleDeleteUserById = async (id: string) => {
   }
 }
 
-export const handleUpdateUserById = async (id: string) => {
+export const handleUpdateUserById = async (
+  id: string,
+  user: { name: string }
+) => {
   try {
-    return await axios.patch(`/api/user`, {
-      params: {
-        id,
-      },
+    return await axios.put(`/api/user`, {
+      id,
+      user,
     })
   } catch (err) {
-    console.error('Error patching user:', getErrorMessage(err))
+    console.error('Error updating user:', getErrorMessage(err))
     throw err
   }
 }
