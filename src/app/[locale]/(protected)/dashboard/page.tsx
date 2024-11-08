@@ -26,7 +26,7 @@ export const generateMetadata = async ({
 
 const DashboardPage = async ({ params: { locale } }: MetaDataProps) => {
   setRequestLocale(locale)
-  const { email, name, image } = await getUserSession()
+  const { id, email, name, image } = await getUserSession()
 
   const t = await getTranslations({ locale, namespace: 'Dashboard' })
 
@@ -47,7 +47,9 @@ const DashboardPage = async ({ params: { locale } }: MetaDataProps) => {
         <EditableField
           label={t('name')}
           value={name ?? ''}
-          /*           onValidate={() => {}} */
+          /*           onUpdate={() => {
+            console.log('test')
+          }} */
         />
         <EditableField
           label={t('email')}
