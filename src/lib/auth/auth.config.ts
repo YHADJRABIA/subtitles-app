@@ -126,10 +126,10 @@ export const authOptions: NextAuthOptions = {
 
       // Update token according to client session's data
       // Triggered if `update` of useSession is called
-      if (trigger === 'update') {
-        if (token.name !== session?.name) {
-          token.name = session.name
-        }
+      if (trigger === 'update' && session?.name) {
+        // Update session only if name is different (i.e. session.name isn't undefined)
+        token.name = session.name
+
         return { ...token, ...session }
       }
 
