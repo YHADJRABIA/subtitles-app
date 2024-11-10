@@ -15,14 +15,19 @@ export const UserUpdateValidator = (
 ) =>
   z.object({
     id: idSchema(t),
-    user: z.object({
-      name: z.string().min(1, { message: t('name.missing') }),
-      email: z
-        .string()
-        .email({ message: t('email.invalid') })
-        .toLowerCase(),
-      // Add other fields as needed
-    }), //.partial(),
+    user: z
+      .object({
+        name: z
+          .string()
+          .min(1, { message: t('name.missing') })
+          .trim(),
+        email: z
+          .string()
+          .email({ message: t('email.invalid') })
+          .toLowerCase(),
+        // Add other fields as needed
+      })
+      .partial(),
   })
 
 export type UserUpdateSchema = z.infer<ReturnType<typeof UserUpdateValidator>>
