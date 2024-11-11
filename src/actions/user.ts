@@ -1,3 +1,4 @@
+import { DashboardUser } from '@/types/user'
 import { getErrorMessage } from '@/utils/errors'
 import axios from 'axios'
 
@@ -14,12 +15,9 @@ export const handleDeleteUserById = async (id: string) => {
   }
 }
 
-export const handleUpdateUserById = async (
-  id: string,
-  user: { name: string }
-) => {
+export const handleUpdateUserById = async (id: string, user: DashboardUser) => {
   try {
-    return await axios.put(`/api/user`, {
+    return await axios.patch(`/api/user`, {
       id,
       user,
     })
