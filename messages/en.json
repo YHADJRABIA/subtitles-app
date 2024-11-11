@@ -190,7 +190,9 @@
     "user_not_found": "User not found",
     "user_deleted": "Account successfully deleted!",
     "user_updated": "Account successfully updated!",
-    "unauthorised": "Unauthorised"
+    "unauthorised": "Unauthorised",
+    "invalid_fields": "Invalid fields",
+    "failed_action": "Action failed"
   },
   "Revalidation": {
     "invalid_request": "Invalid request",
@@ -211,6 +213,7 @@
     "title": "Profile",
     "name": "Name",
     "email": "Email",
+    "confirmation_email": "A verification email will be sent to confirm this change.",
     "edit": "Edit",
     "log_out": "Log out",
     "Settings": {
