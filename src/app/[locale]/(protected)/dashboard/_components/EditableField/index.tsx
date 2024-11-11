@@ -1,5 +1,5 @@
 'use client'
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useState, useTransition } from 'react'
 import cn from 'classnames'
 import styles from './EditableField.module.scss'
 import Typography from '@/components/UI/Typography'
@@ -19,7 +19,7 @@ const EditableField = ({ className, label, value, onEdit }: PropTypes) => {
   const t = useTranslations('EditableField')
   const [isEditing, setIsEditing] = useState(false)
   const [inputValue, setInputValue] = useState(value)
-  const [isSaving, setIsSaving] = useState(false)
+  const [isPending, startTransition] = useTransition()
 
   const hasValue = !!value.length
   const handleEdit = () => {
@@ -30,17 +30,16 @@ const EditableField = ({ className, label, value, onEdit }: PropTypes) => {
     setInputValue(e.target.value)
   }
 
-  const handleSave = async () => {
+  const handleSave = () => {
     if (inputValue !== value) {
-      setIsSaving(true)
-      try {
-        await onEdit(inputValue) // Call the passed update function
-        setIsSaving(false)
-        setIsEditing(false)
-      } catch (err) {
-        console.error('Saving EditableField failed:', getErrorMessage(err))
-        setIsSaving(false)
-      }
+      startTransition(async () => {
+        try {
+          await onEdit(inputValue)
+          setIsEditing(false)
+        } catch (err) {
+          console.error('Saving EditableField failed:', getErrorMessage(err))
+        }
+      })
     } else {
       setIsEditing(false)
     }
@@ -83,8 +82,8 @@ const EditableField = ({ className, label, value, onEdit }: PropTypes) => {
           />
           <Button
             aria-label={t('save')}
-            disabled={isSaving}
-            isLoading={isSaving}
+            disabled={isPending}
+            isLoading={isPending}
             size="xs"
             variation="primary"
             onClick={handleSave}
