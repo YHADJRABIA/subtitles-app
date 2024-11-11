@@ -1,0 +1,45 @@
+.root {
+  @include flexCenter(column, space-around, flex-start);
+  width: 100%;
+}
+
+.heading {
+  @include flexCenter(row, space-between);
+  width: 100%;
+  margin-bottom: 0.8rem;
+}
+
+.inputContainer {
+  width: 100%;
+  @include flexCenter(column, space-between, stretch);
+  gap: 1.4rem;
+}
+
+.input {
+  padding: 1rem 0.5rem;
+  border-radius: 0.2rem;
+}
+
+.value {
+  @include truncated;
+}
+
+.offset {
+  margin-top: 0.5rem;
+}
+
+.cta {
+  cursor: pointer; // TODO: allow tap hover
+  transition: opacity 0.3s ease;
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+.hint {
+  opacity: 0.85;
+}
+
+.separator {
+  opacity: 0.1;
+}
