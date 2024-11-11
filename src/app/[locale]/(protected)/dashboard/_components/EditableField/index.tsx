@@ -4,12 +4,6 @@ import cn from 'classnames'
 import styles from './EditableField.module.scss'
 import Typography from '@/components/UI/Typography'
 import Separator from '@/components/Separator'
-import {
-  MdOutlineEdit as PenIcon,
-  MdAdd as AddIcon,
-  MdSave as SaveIcon,
-  MdCancel as CancelIcon,
-} from 'react-icons/md'
 import { Button } from '@/components/UI/Button'
 import { useTranslations } from 'next-intl'
 import { getErrorMessage } from '@/utils/errors'
@@ -28,8 +22,6 @@ const EditableField = ({ className, label, value, onEdit }: PropTypes) => {
   const [isSaving, setIsSaving] = useState(false)
 
   const hasValue = !!value.length
-  const CtaIcon = hasValue ? PenIcon : AddIcon
-
   const handleEdit = () => {
     setIsEditing(true)
   }
