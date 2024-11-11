@@ -59,25 +59,28 @@ const EditableField = ({ className, label, value, onEdit }: PropTypes) => {
     setIsEditing(false)
   }
 
+  const actionLabel = t(isEditing ? 'cancel' : hasValue ? 'edit' : 'add')
+
   return (
     <div className={cn(styles.root, className)}>
       <div className={styles.heading}>
-        <Typography className={styles.label} size="s" weight="semiBold">
+        <Typography size="s" weight="semiBold">
           {label}
         </Typography>
         <Typography
-          aria-label={t(isEditing ? 'cancel' : hasValue ? 'edit' : 'add')}
+          aria-label={actionLabel}
           className={styles.cta}
-          size="xxs"
-          title={t(isEditing ? 'cancel' : hasValue ? 'edit' : 'add')}
+          size="xs"
+          title={actionLabel}
+          weight="semiLight"
           onClick={isEditing ? handleCancel : handleEdit}
         >
-          {t(isEditing ? 'cancel' : hasValue ? 'edit' : 'add')}
+          {actionLabel}
         </Typography>
       </div>
 
-      {/*       {isEditing ? (
-        <div className={styles.editingContainer}>
+      {isEditing ? (
+        <div className={styles.inputContainer}>
           <input
             autoFocus
             aria-label={t('edit')}
@@ -86,25 +89,23 @@ const EditableField = ({ className, label, value, onEdit }: PropTypes) => {
             value={inputValue}
             onChange={handleInputChange}
           />
-          <div className={styles.ctaSection}>
-            <Button
-              aria-label={t('save')}
-              className={styles.saveButton}
-              disabled={isSaving}
-              isLoading={isSaving}
-              size="xxs"
-              onClick={handleSave}
-            >
-              {t('save')}
-            </Button>
-          </div>
+          <Button
+            aria-label={t('save')}
+            disabled={isSaving}
+            isLoading={isSaving}
+            size="xs"
+            variation="primary"
+            onClick={handleSave}
+          >
+            {t('save')}
+          </Button>
         </div>
       ) : (
         <Typography className={styles.value} size="s">
           {value}
         </Typography>
       )}
- */}
+
       <Separator className={styles.separator} />
     </div>
   )
