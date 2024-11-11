@@ -1,35 +1,33 @@
 .root {
   @include flexCenter(column, space-around, flex-start);
-  align-content: flex-start;
-  position: relative;
   width: 100%;
 }
 
-.editingContainer {
-  width: 100%;
+.heading {
   @include flexCenter(row, space-between);
-}
-
-.ctaSection {
-  gap: 1.5rem;
-  @include flexCenter(row, flex-start);
-}
-
-.separator {
-  opacity: 0.1;
-}
-
-.label {
+  width: 100%;
   margin-bottom: 0.8rem;
+}
+
+.inputContainer {
+  width: 100%;
+  @include flexCenter(column, space-between, stretch);
+  gap: 1.6rem;
+}
+
+.input {
+  padding: 1rem 0.5rem;
+  border-radius: 0.2rem;
 }
 
 .value {
   @include truncated;
 }
 
-.ctaIcon {
-  position: absolute;
-  right: 0;
-  bottom: 3rem;
+.cta {
   cursor: pointer;
+}
+
+.separator {
+  opacity: 0.1;
 }
