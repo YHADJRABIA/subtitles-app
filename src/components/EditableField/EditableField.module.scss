@@ -12,7 +12,7 @@
 .inputContainer {
   width: 100%;
   @include flexCenter(column, space-between, stretch);
-  gap: 1.4rem;
+  gap: 1.2rem;
 }
 
 .input {
