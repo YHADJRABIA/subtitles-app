@@ -254,7 +254,8 @@
       "missing": "Missing token"
     },
     "name": {
-      "missing": "Missing name"
+      "missing": "Missing name",
+      "too_long": "Name is too long. Max 40 characters"
     }
   },
   "LanguageMenu": {},
