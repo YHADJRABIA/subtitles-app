@@ -191,7 +191,7 @@
     "user_not_found": "Utilisateur inconnu",
     "user_deleted": "Compte supprimé avec succès !",
     "user_updated": "Compte mis à jour avec succès !",
-    "unauthorised": "Non authorisé",
+    "unauthorised": "Non autorisé",
     "invalid_fields": "Champs invalides",
     "failed_action": "L'action a échoué"
   },
@@ -255,7 +255,8 @@
       "missing": "Jeton requis"
     },
     "name": {
-      "missing": "Nom requis"
+      "missing": "Nom requis",
+      "too_long": "Nom trop long. Ne pas dépasser 40 caractères"
     }
   },
   "LanguageMenu": {},
