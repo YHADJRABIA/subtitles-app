@@ -6,21 +6,21 @@ import Typography from '../UI/Typography'
 
 interface PropTypes {
   label?: string
-  hasIcon?: boolean
+  isError?: boolean
   isShown: boolean
 }
 
-const Subfield = ({ label, hasIcon, isShown }: PropTypes) => {
+const Subfield = ({ label, isError, isShown }: PropTypes) => {
   return (
     <div
       className={cn(styles.root, 'hidden', {
         visible: isShown,
       })}
     >
-      {hasIcon && <ErrorIcon className={styles.errorIcon} />}
+      {isError && <ErrorIcon className={styles.errorIcon} />}
       <Typography
         className={styles.text}
-        color={hasIcon ? 'var(--primary-red-color)' : undefined}
+        color={isError ? 'var(--primary-red-color)' : undefined}
         size="xxs"
         tag="small"
         title={label}
