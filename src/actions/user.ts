@@ -1,4 +1,4 @@
-import { DashboardUser } from '@/types/user'
+import { UserAPIType } from '@/types/user'
 import { getErrorMessage } from '@/utils/errors'
 import axios from 'axios'
 
@@ -15,7 +15,10 @@ export const handleDeleteUserById = async (id: string) => {
   }
 }
 
-export const handleUpdateUserById = async (id: string, user: DashboardUser) => {
+export const handleUpdateUserById = async (
+  id: string,
+  user: Partial<UserAPIType>
+) => {
   try {
     return await axios.patch(`/api/user`, {
       id,
