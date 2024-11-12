@@ -12,7 +12,7 @@ interface PropTypes {
   label?: string
   value: string
   onEdit: (newValue: string) => Promise<void>
-  hintText?: string
+  topText?: string
   className?: string
   isLoading?: boolean
 }
@@ -22,7 +22,7 @@ const EditableField = ({
   label,
   value,
   onEdit,
-  hintText,
+  topText,
 }: PropTypes) => {
   const t = useTranslations('EditableField')
   const [isEditing, setIsEditing] = useState(false)
@@ -60,11 +60,11 @@ const EditableField = ({
 
   const actionLabel = t(isEditing ? 'cancel' : hasValue ? 'edit' : 'add')
 
-  const showHint = hintText?.length
+  const showTopText = topText?.length
 
   return (
     <div className={cn(styles.root, className)}>
-      <div className={cn(styles.heading, { [styles.offset]: showHint })}>
+      <div className={cn(styles.heading, { [styles.offset]: showTopText })}>
         <Typography size="s" weight="semiBold">
           {label}
         </Typography>
@@ -83,9 +83,9 @@ const EditableField = ({
       {isEditing ? (
         <div className={styles.inputContainer}>
           {/* TODO: Handle max-height fluid transition */}
-          {showHint && (
+          {showTopText && (
             <Typography className={styles.hint} size="xxs">
-              {hintText}
+              {topText}
             </Typography>
           )}
           <input
