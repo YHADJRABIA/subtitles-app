@@ -73,7 +73,7 @@ function Field<T, K extends ValidFieldNames & string>({
       </div>
 
       {subLabel && (
-        <Subfield hasIcon={!isInfo} isShown={isShownSubfield} label={text} />
+        <Subfield isError={!isInfo} isShown={isShownSubfield} label={text} />
       )}
     </div>
   )
