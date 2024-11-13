@@ -8,6 +8,7 @@ import { getToken } from 'next-auth/jwt'
 import { Pathname } from './types/pathnames'
 import { Ratelimit } from '@upstash/ratelimit'
 import { kv } from '@vercel/kv'
+import { isDevelopment } from './utils/general'
 
 const intlMiddleware = createMiddleware({
   defaultLocale,
@@ -74,6 +75,7 @@ export default async function middleware(req: NextRequestWithAuth) {
 
   // Handle API rate limiting
   if (pathname.startsWith('/api')) {
+    if (isDevelopment) return NextResponse.next() // Bypass in dev mode
     return apiRateLimitMiddleware(req)
   }
 
