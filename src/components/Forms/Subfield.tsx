@@ -8,14 +8,20 @@ interface PropTypes {
   label?: string
   isError?: boolean
   isShown: boolean
+  className?: string
 }
 
-const Subfield = ({ label, isError, isShown }: PropTypes) => {
+const Subfield = ({ label, isError, isShown, className }: PropTypes) => {
   return (
     <div
-      className={cn(styles.root, 'hidden', {
-        visible: isShown,
-      })}
+      className={cn(
+        styles.root,
+        'hidden',
+        {
+          visible: isShown,
+        },
+        className
+      )}
     >
       {isError && <ErrorIcon className={styles.errorIcon} />}
       <Typography
