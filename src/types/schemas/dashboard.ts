@@ -8,6 +8,8 @@ export const UserDeleteValidator = (
 
 export type UserDeleteSchema = z.infer<ReturnType<typeof UserDeleteValidator>>
 
+// TODO: refactor
+
 export const DashboardUserValidator = (
   t: ReturnType<typeof useTranslations<'Zod'>>
 ) =>
@@ -21,3 +23,17 @@ export const DashboardUserValidator = (
       })
       .partial(),
   })
+
+export type DashboardUserSchema = z.infer<
+  ReturnType<typeof DashboardUserValidator>
+>
+
+export const UserInfoValidator = (
+  t: ReturnType<typeof useTranslations<'Zod'>>
+) =>
+  z.object({
+    name: nameSchema(t),
+    email: emailSchema(t),
+  })
+
+export type UserInfoSchema = z.infer<ReturnType<typeof UserInfoValidator>>
