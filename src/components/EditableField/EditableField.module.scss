@@ -12,11 +12,12 @@
 .inputContainer {
   width: 100%;
   @include flexCenter(column, space-between, stretch);
-  gap: 1.2rem;
+  gap: 1rem;
 }
 
 .input {
   padding: 1rem 0.5rem;
+  border-width: 1px;
   border-radius: 0.2rem;
 }
 
@@ -29,7 +30,7 @@
 }
 
 .cta {
-  cursor: pointer; // TODO: allow tap hover
+  cursor: pointer; // TODO: allow tap highlight in mobile
   transition: opacity 0.3s ease;
   &:hover {
     opacity: 0.6;
