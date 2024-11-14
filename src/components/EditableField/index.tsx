@@ -1,5 +1,5 @@
 'use client'
-import React, { ChangeEvent, useState, useTransition } from 'react'
+import React, { FormEventHandler, useState, useTransition } from 'react'
 import cn from 'classnames'
 import styles from './EditableField.module.scss'
 import Typography from '@/components/UI/Typography'
@@ -7,24 +7,41 @@ import Separator from '@/components/Separator'
 import { Button } from '@/components/UI/Button'
 import { useTranslations } from 'next-intl'
 import { getErrorMessage } from '@/utils/errors'
+import Subfield from '../Forms/Subfield'
 
-interface PropTypes {
-  label?: string
-  value: string
+import { ValidFieldNames } from '@/types/schemas/general'
+import { FieldBasePropTypes } from '@/types/field'
+
+interface PropTypes<T, K extends ValidFieldNames>
+  extends FieldBasePropTypes<K> {
+  handleSubmit: (
+    callback: (data: T) => void
+  ) => FormEventHandler<HTMLFormElement>
   onEdit: (newValue: string) => Promise<void>
+  isSubmitting?: boolean
+  isValid?: boolean
   topText?: string
-  className?: string
-  isLoading?: boolean
+  value: string
 }
 
-const EditableField = ({
-  className,
-  label,
+const EditableField = <T, K extends ValidFieldNames & string>({
   value,
-  onEdit,
+  register,
   topText,
-}: PropTypes) => {
+  valueAsNumber,
+  label,
+  subLabel,
+  testId,
+  isSubmitting,
+  isValid,
+  name,
+  className,
+  onEdit,
+  handleSubmit,
+  ...rest
+}: PropTypes<T, K>) => {
   const t = useTranslations('EditableField')
+
   const [isEditing, setIsEditing] = useState(false)
   const [inputValue, setInputValue] = useState(value)
   const [isPending, startTransition] = useTransition()
@@ -32,10 +49,6 @@ const EditableField = ({
   const hasValue = !!value.length
   const handleEdit = () => {
     setIsEditing(true)
-  }
-
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value)
   }
 
   const handleSave = () => {
@@ -61,6 +74,9 @@ const EditableField = ({
   const actionLabel = t(isEditing ? 'cancel' : hasValue ? 'edit' : 'add')
 
   const showTopText = topText?.length
+  const { text, isShown = true, isInfo = false } = subLabel || {}
+
+  const isShownSubfield = isShown && !!text
 
   return (
     <div className={cn(styles.root, className)}>
@@ -81,32 +97,44 @@ const EditableField = ({
       </div>
 
       {isEditing ? (
-        <div className={styles.inputContainer}>
-          {/* TODO: Handle max-height fluid transition */}
-          {showTopText && (
-            <Typography className={styles.hint} size="xxs">
-              {topText}
-            </Typography>
-          )}
-          <input
-            autoFocus
-            aria-label={t('edit')}
-            className={styles.input}
-            type="text"
-            value={inputValue}
-            onChange={handleInputChange}
-          />
-          <Button
-            aria-label={t('save')}
-            disabled={isPending}
-            isLoading={isPending}
-            size="xs"
-            variation="primary"
-            onClick={handleSave}
-          >
-            {t('save')}
-          </Button>
-        </div>
+        <form noValidate method="PATCH" onSubmit={handleSubmit(handleSave)}>
+          <div className={styles.inputContainer}>
+            {/* TODO: Handle max-height fluid transition */}
+            {showTopText && (
+              <Typography className={styles.hint} size="xs">
+                {topText}
+              </Typography>
+            )}
+
+            <input
+              {...rest}
+              autoFocus
+              aria-label={t('edit')}
+              className={styles.input}
+              data-testid={testId}
+              type="text"
+              {...register(name, { valueAsNumber })}
+            />
+            {subLabel && (
+              <Subfield
+                className={styles.subField}
+                isError={!isInfo}
+                isShown={isShownSubfield}
+                label={text}
+              />
+            )}
+            <Button
+              aria-label={t('save')}
+              disabled={!isValid}
+              isLoading={isSubmitting}
+              size="xs"
+              type="submit"
+              variation="primary"
+            >
+              {t('save')}
+            </Button>
+          </div>
+        </form>
       ) : (
         <Typography className={styles.value} size="s">
           {value}
