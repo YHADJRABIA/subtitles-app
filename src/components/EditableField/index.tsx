@@ -97,43 +97,46 @@ const EditableField = <T, K extends ValidFieldNames & string>({
       </div>
 
       {isEditing ? (
-        <form noValidate method="PATCH" onSubmit={handleSubmit(handleSave)}>
-          <div className={styles.inputContainer}>
-            {/* TODO: Handle max-height fluid transition */}
-            {showTopText && (
-              <Typography className={styles.hint} size="xs">
-                {topText}
-              </Typography>
-            )}
+        <form
+          noValidate
+          className={styles.inputContainer}
+          method="PATCH"
+          onSubmit={handleSubmit(handleSave)}
+        >
+          {/* TODO: Handle max-height fluid transition */}
+          {showTopText && (
+            <Typography className={styles.hint} size="xs">
+              {topText}
+            </Typography>
+          )}
 
-            <input
-              {...rest}
-              autoFocus
-              aria-label={t('edit')}
-              className={styles.input}
-              data-testid={testId}
-              type="text"
-              {...register(name, { valueAsNumber })}
+          <input
+            {...rest}
+            autoFocus
+            aria-label={t('edit')}
+            className={styles.input}
+            data-testid={testId}
+            type="text"
+            {...register(name, { valueAsNumber })}
+          />
+          {subLabel && (
+            <Subfield
+              className={styles.subField}
+              isError={!isInfo}
+              isShown={isShownSubfield}
+              label={text}
             />
-            {subLabel && (
-              <Subfield
-                className={styles.subField}
-                isError={!isInfo}
-                isShown={isShownSubfield}
-                label={text}
-              />
-            )}
-            <Button
-              aria-label={t('save')}
-              disabled={!isValid}
-              isLoading={isSubmitting}
-              size="xs"
-              type="submit"
-              variation="primary"
-            >
-              {t('save')}
-            </Button>
-          </div>
+          )}
+          <Button
+            aria-label={t('save')}
+            disabled={!isValid}
+            isLoading={isSubmitting}
+            size="xs"
+            type="submit"
+            variation="primary"
+          >
+            {t('save')}
+          </Button>
         </form>
       ) : (
         <Typography className={styles.value} size="s">
