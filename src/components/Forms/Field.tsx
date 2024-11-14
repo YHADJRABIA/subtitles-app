@@ -1,34 +1,24 @@
-import React, { InputHTMLAttributes } from 'react'
+import React from 'react'
 
 import cn from 'classnames'
 import styles from './Field.module.scss'
 
 import Subfield from './Subfield'
-import { ValidFieldNames } from '@/types/schemas/auth'
+import { ValidFieldNames } from '@/types/schemas/general'
 import { IconType } from 'react-icons/lib'
+import { FieldBasePropTypes } from '@/types/field'
 
 interface IconProps {
   src: IconType
   title?: string
 }
-interface PropTypes<T, K extends ValidFieldNames>
-  extends InputHTMLAttributes<HTMLInputElement> {
-  register: (name: K, options: { valueAsNumber?: boolean }) => T
-  name: K
-  label: string
-  value?: string
-  subLabel?: {
-    text?: string
-    isShown: boolean
-    isInfo?: boolean
-  }
-  valueAsNumber?: boolean
+
+export type PropTypes<K extends ValidFieldNames> = FieldBasePropTypes<K> & {
   leftIcon?: IconProps
   rightIcon?: IconProps
-  testId?: string
 }
 
-function Field<T, K extends ValidFieldNames & string>({
+function Field<K extends ValidFieldNames & string>({
   register,
   valueAsNumber,
   label,
@@ -41,7 +31,7 @@ function Field<T, K extends ValidFieldNames & string>({
   rightIcon,
   className,
   ...rest
-}: PropTypes<T, K>) {
+}: PropTypes<K>) {
   const { text, isShown = true, isInfo = false } = subLabel || {}
 
   const isShownSubfield = isShown && !!text
