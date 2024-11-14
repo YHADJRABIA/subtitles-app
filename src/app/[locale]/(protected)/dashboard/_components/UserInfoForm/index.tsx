@@ -25,15 +25,14 @@ interface PropTypes {
 const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
   const [t, t_zod] = [useTranslations('Dashboard'), useTranslations('Zod')]
   const { data: clientSession, update } = useSession()
-
-  // Prioritize client-side session after update, fallback to server-side session
+  // Prioritise client-side session after update, fallback to server-side session
   const username = clientSession?.user?.name || name || ''
   const userEmail = clientSession?.user?.email || email || ''
 
   const {
     handleSubmit,
     register,
-    formState: { isValid, errors, isSubmitting },
+    formState: { errors, isSubmitting },
   } = useForm<UserInfoSchema>({
     resolver: zodResolver(UserInfoValidator(t_zod)),
     delayError: 400,
@@ -42,7 +41,6 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
   })
 
   const [isLoading, setIsLoading] = useState(false)
-
   // useCallback to memoize handleUpdate to prevent unnecessary re-renders in children components
   const handleUpdate = useCallback(
     async (updatedFields: Partial<UserAPIType>) => {
@@ -54,13 +52,11 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
       setIsLoading(true)
 
       try {
-        // Make the API call to update user info
         const res = await handleUpdateUserById(userId, updatedFields)
-
         if (res?.data.success) {
           // Notify success and update session
           notify('success', res.data.message)
-          await update(updatedFields) // Update session with the updated fields
+          await update(updatedFields)
         }
       } catch (err) {
         notify(
@@ -71,10 +67,8 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
         setIsLoading(false)
       }
     },
-    [userId, t, update] // Add dependencies for useCallback to make sure it's updated when necessary
+    [userId, t, update]
   )
-
-  const isDisabled = isSubmitting || !isValid
 
   return (
     <div className={cn(styles.root, className)}>
@@ -83,9 +77,8 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
       <div className={styles.userInfo}>
         <EditableField
           handleSubmit={handleSubmit}
-          isDisabled={isDisabled}
           isSubmitting={isSubmitting}
-          isValid={isValid}
+          isValid={!errors.name}
           label={t('name')}
           name="name"
           register={register}
@@ -96,13 +89,12 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
 
         <EditableField
           handleSubmit={handleSubmit}
-          isDisabled={isDisabled}
           isSubmitting={isSubmitting}
-          isValid={isValid}
+          isValid={!errors.email}
           label={t('email')}
           name="email"
           register={register}
-          subLabel={{ text: errors.email?.message, isShown: !!errors.email }}
+          subLabel={{ text: errors.email?.message, isShown: !!errors.email }} // TODO: combine props using errors.['name']
           topText={t('confirmation_email')}
           value={userEmail}
           onEdit={newEmail => handleUpdate({ email: newEmail })}
