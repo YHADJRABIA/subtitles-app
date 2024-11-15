@@ -18,7 +18,6 @@ interface PropTypes<T, K extends ValidFieldNames>
     callback: (data: T) => void
   ) => FormEventHandler<HTMLFormElement>
   onEdit: (newValue: string) => Promise<void>
-  isSubmitting?: boolean
   isValid?: boolean
   topText?: string
   value: string
@@ -32,7 +31,6 @@ const EditableField = <T, K extends ValidFieldNames & string>({
   label,
   subLabel,
   testId,
-  isSubmitting,
   isValid,
   name,
   className,
@@ -43,19 +41,19 @@ const EditableField = <T, K extends ValidFieldNames & string>({
   const t = useTranslations('EditableField')
 
   const [isEditing, setIsEditing] = useState(false)
-  const [inputValue, setInputValue] = useState(value)
+  const [initialValue, setInitialValue] = useState(value)
   const [isPending, startTransition] = useTransition()
 
   const hasValue = !!value.length
-  const handleEdit = () => {
-    setIsEditing(true)
-  }
+  const handleEdit = () => setIsEditing(true)
+
+  console.log('Value', value, 'InputValue', initialValue)
 
   const handleSave = () => {
-    if (inputValue !== value) {
+    if (initialValue !== value) {
       startTransition(async () => {
         try {
-          await onEdit(inputValue)
+          await onEdit(value)
           setIsEditing(false)
         } catch (err) {
           console.error('Saving EditableField failed:', getErrorMessage(err))
@@ -67,7 +65,7 @@ const EditableField = <T, K extends ValidFieldNames & string>({
   }
 
   const handleCancel = () => {
-    setInputValue(value) // Revert to the original value
+    setInitialValue(value) // Revert to the original value
     setIsEditing(false)
   }
 
@@ -130,7 +128,7 @@ const EditableField = <T, K extends ValidFieldNames & string>({
           <Button
             aria-label={t('save')}
             disabled={!isValid}
-            isLoading={isSubmitting}
+            isLoading={isPending}
             size="xs"
             type="submit"
             variation="primary"
