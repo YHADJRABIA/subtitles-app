@@ -72,7 +72,7 @@ const EditableField = <T, K extends ValidFieldNames & string>({
   const actionLabel = t(isEditing ? 'cancel' : hasValue ? 'edit' : 'add')
 
   const showTopText = topText?.length
-  const { text, isShown = true, isInfo = false } = subLabel || {}
+  const { text, isShown = true } = subLabel || {}
 
   const isShownSubfield = isShown && !!text
 
@@ -119,8 +119,8 @@ const EditableField = <T, K extends ValidFieldNames & string>({
           />
           {subLabel && (
             <Subfield
+              isError
               className={styles.subField}
-              isError={!isInfo}
               isShown={isShownSubfield}
               label={text}
             />
