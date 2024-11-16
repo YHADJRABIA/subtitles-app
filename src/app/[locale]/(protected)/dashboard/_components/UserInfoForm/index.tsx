@@ -1,5 +1,5 @@
 'use client'
-import React, { useCallback, useState } from 'react'
+import React, { useCallback } from 'react'
 import styles from './UserInfoForm.module.scss'
 import EditableAvatar from '../EditableAvatar'
 import { useTranslations } from 'next-intl'
@@ -32,15 +32,13 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
   const {
     handleSubmit,
     register,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<UserInfoSchema>({
     resolver: zodResolver(UserInfoValidator(t_zod)),
     delayError: 400,
     mode: 'onChange',
-    defaultValues: { name: username, email: userEmail },
   })
 
-  const [isLoading, setIsLoading] = useState(false)
   // useCallback to memoize handleUpdate to prevent unnecessary re-renders in children components
   const handleUpdate = useCallback(
     async (updatedFields: Partial<UserAPIType>) => {
@@ -48,8 +46,6 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
         notify('error', t('Account.update_failed'))
         return
       }
-
-      setIsLoading(true)
 
       try {
         const res = await handleUpdateUserById(userId, updatedFields)
@@ -63,8 +59,6 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
           'error',
           (await getErrorMessage(err)) || t('Account.update_failed')
         )
-      } finally {
-        setIsLoading(false)
       }
     },
     [userId, t, update]
@@ -77,24 +71,24 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
       <div className={styles.userInfo}>
         <EditableField
           handleSubmit={handleSubmit}
-          isSubmitting={isSubmitting}
           isValid={!errors.name}
           label={t('name')}
           name="name"
           register={register}
           subLabel={{ text: errors.name?.message, isShown: !!errors.name }}
+          testId="update-user-name"
           value={username}
           onEdit={newName => handleUpdate({ name: newName })}
         />
 
         <EditableField
           handleSubmit={handleSubmit}
-          isSubmitting={isSubmitting}
           isValid={!errors.email}
           label={t('email')}
           name="email"
           register={register}
           subLabel={{ text: errors.email?.message, isShown: !!errors.email }} // TODO: combine props using errors.['name']
+          testId="update-user-email"
           topText={t('confirmation_email')}
           value={userEmail}
           onEdit={newEmail => handleUpdate({ email: newEmail })}
