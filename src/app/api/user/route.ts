@@ -1,18 +1,23 @@
 import { connectDB } from '@/lib/mongodb'
 import { NextRequest, NextResponse } from 'next/server'
 import { getErrorMessage, getZodErrors } from '@/utils/errors'
-import { deleteUserById, getUserById, updateNameById } from '@/utils/db/user'
+import {
+  deleteUserById,
+  getUserById,
+  restrictedUserFields,
+  updateUserById,
+} from '@/utils/db/user'
 import { getLocaleFromNextRequest } from '@/utils/cookies'
 import { getTranslations } from 'next-intl/server'
 import {
   UserDeleteValidator,
-  UserUpdateValidator,
+  DashboardUserValidator,
 } from '@/types/schemas/dashboard'
 import { getUserSession } from '@/utils/session'
 
 connectDB()
 
-export async function PUT(req: NextRequest) {
+export async function PATCH(req: NextRequest) {
   try {
     const locale = getLocaleFromNextRequest(req)
 
@@ -23,7 +28,7 @@ export async function PUT(req: NextRequest) {
 
     const rawBody = await req.json()
 
-    const body = UserUpdateValidator(t_zod as any).safeParse(rawBody)
+    const body = DashboardUserValidator(t_zod as any).safeParse(rawBody)
 
     if (!body.success) {
       const zodErrors = getZodErrors(body.error)
@@ -35,7 +40,7 @@ export async function PUT(req: NextRequest) {
 
     const { id, user } = body.data
 
-    // Check if user exists
+    // Check if user exists in DB
     const existingUser = await getUserById(id)
     if (!existingUser) {
       return NextResponse.json(
@@ -52,17 +57,30 @@ export async function PUT(req: NextRequest) {
         { status: 401 }
       )
     }
+    // Prevent PATCH of restricted fields
+    const hasRestrictedFields = Object.keys(user).some(field =>
+      restrictedUserFields.includes(field)
+    )
 
-    // Ensure only authenticated users may update their own name
-    if (currentUser.id !== id) {
+    // TODO: handle email edit differently by sending verification email
+
+    // Users may edit own data only, sensitive data cannot be edited
+    if (currentUser.id !== id || hasRestrictedFields) {
       return NextResponse.json(
         { message: t('unauthorised'), success: false },
         { status: 403 }
       )
     }
 
-    // Update user's name
-    await updateNameById(id, user.name) // TODO: update to include more fields
+    // Update user with allowed fields
+    const updatedUser = await updateUserById(id, user)
+
+    if (!updatedUser) {
+      return NextResponse.json(
+        { message: t('failed_action'), success: false },
+        { status: 500 }
+      )
+    }
 
     return NextResponse.json({
       message: t('user_updated'),
@@ -98,7 +116,7 @@ export async function DELETE(req: NextRequest) {
 
     const id = searchParams.data
 
-    // Check if user exists
+    // Check if user exists in DB
     const existingUser = await getUserById(id)
     if (!existingUser) {
       return NextResponse.json(
@@ -118,7 +136,7 @@ export async function DELETE(req: NextRequest) {
       )
     }
 
-    // Ensure only the authenticated user can delete own account
+    // Users may delete own account only
     if (user.id !== id) {
       return NextResponse.json(
         { message: t('unauthorised'), success: false },
@@ -126,8 +144,14 @@ export async function DELETE(req: NextRequest) {
       )
     }
 
-    // Delete user
-    await deleteUserById(id)
+    const deletedUser = await deleteUserById(id)
+
+    if (!deletedUser) {
+      return NextResponse.json(
+        { message: t('failed_action'), success: false },
+        { status: 500 }
+      )
+    }
 
     return NextResponse.json({
       message: t('user_deleted'),
