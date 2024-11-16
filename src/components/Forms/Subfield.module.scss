@@ -1,15 +1,12 @@
 .root {
   @include flexCenter(row, flex-start);
   flex-wrap: nowrap;
-  position: absolute;
-  bottom: -20%;
   width: 100%;
   gap: 0.6rem;
 }
 
 .errorIcon {
   font-size: clamp(1.4rem, 3.5vw, 1.8rem);
-
   color: var(--primary-red-color);
 }
 

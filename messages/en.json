@@ -189,7 +189,10 @@
   "User": {
     "user_not_found": "User not found",
     "user_deleted": "Account successfully deleted!",
-    "unauthorised": "Unauthorised"
+    "user_updated": "Account successfully updated!",
+    "unauthorised": "Unauthorised",
+    "invalid_fields": "Invalid fields",
+    "failed_action": "Action failed"
   },
   "Revalidation": {
     "invalid_request": "Invalid request",
@@ -210,6 +213,7 @@
     "title": "Profile",
     "name": "Name",
     "email": "Email",
+    "confirmation_email": "A verification email will be sent to confirm this change.",
     "edit": "Edit",
     "log_out": "Log out",
     "Settings": {
@@ -227,7 +231,8 @@
       "delete_account": "Delete account",
       "account_deletion": "Account deletion",
       "warning_deletion": "This account will be permanently deleted, this action cannot be undone.",
-      "deletion_failed": "Failed to delete the account."
+      "deletion_failed": "Failed to delete the account.",
+      "update_failed": "Failed to update user info."
     }
   },
   "Zod": {
@@ -247,6 +252,10 @@
     },
     "token": {
       "missing": "Missing token"
+    },
+    "name": {
+      "missing": "Missing name",
+      "too_long": "Name is too long. Max 40 characters"
     }
   },
   "LanguageMenu": {},

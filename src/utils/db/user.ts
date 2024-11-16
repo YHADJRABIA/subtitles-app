@@ -45,7 +45,7 @@ export const verifyEmailByUserId = async (id: string) => {
   }
 }
 
-const restrictedFields = [
+export const restrictedUserFields = [
   'createdAt',
   'email',
   'password',
@@ -60,7 +60,7 @@ export const updateUserById = async (
   try {
     const allowedFields = Object.fromEntries(
       Object.entries(updateData).filter(
-        ([key]) => !restrictedFields.includes(key)
+        ([key]) => !restrictedUserFields.includes(key)
       )
     )
 

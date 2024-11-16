@@ -64,6 +64,7 @@ const DeleteAccountButton = ({ className, userId }: PropTypes) => {
       disabled={isLoading}
       isLoading={isLoading}
       size="xs"
+      testId="delete-user-account"
       variation="primary"
       weight="semiBold"
       onClick={handleOpenModal}

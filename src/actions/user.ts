@@ -1,3 +1,4 @@
+import { UserAPIType } from '@/types/user'
 import { getErrorMessage } from '@/utils/errors'
 import axios from 'axios'
 
@@ -14,15 +15,17 @@ export const handleDeleteUserById = async (id: string) => {
   }
 }
 
-export const handleUpdateUserById = async (id: string) => {
+export const handleUpdateUserById = async (
+  id: string,
+  user: Partial<UserAPIType>
+) => {
   try {
     return await axios.patch(`/api/user`, {
-      params: {
-        id,
-      },
+      id,
+      user,
     })
   } catch (err) {
-    console.error('Error patching user:', getErrorMessage(err))
+    console.error('Error updating user:', getErrorMessage(err))
     throw err
   }
 }

@@ -190,7 +190,10 @@
   "User": {
     "user_not_found": "Utilisateur inconnu",
     "user_deleted": "Compte supprimé avec succès !",
-    "unauthorised": "Non authorisé"
+    "user_updated": "Compte mis à jour avec succès !",
+    "unauthorised": "Non autorisé",
+    "invalid_fields": "Champs invalides",
+    "failed_action": "L'action a échoué"
   },
   "Revalidation": {
     "invalid_request": "Requête invalide",
@@ -211,6 +214,7 @@
     "title": "Profil",
     "name": "Nom",
     "email": "Email",
+    "confirmation_email": "Un email de vérification sera envoyé pour valider ce changement.",
     "edit": "Modifier",
     "log_out": "Se déconnecter",
     "Settings": {
@@ -228,7 +232,8 @@
       "delete_account": "Supprimer compte",
       "account_deletion": "Suppression du compte",
       "warning_deletion": "Ce compte sera définitivement supprimé, cette action est irréversible.",
-      "deletion_failed": "Échec de suppression du compte."
+      "deletion_failed": "Échec de suppression du compte.",
+      "update_failed": "Échec de mise à jour d'informations utilisateur."
     }
   },
   "Zod": {
@@ -248,11 +253,15 @@
     },
     "token": {
       "missing": "Jeton requis"
+    },
+    "name": {
+      "missing": "Nom requis",
+      "too_long": "Nom trop long. Ne pas dépasser 40 caractères"
     }
   },
   "LanguageMenu": {},
   "EditableField": {
-    "edit": "Edit",
+    "edit": "Modifier",
     "add": "Ajouter",
     "cancel": "Annuler",
     "save": "Enregistrer"

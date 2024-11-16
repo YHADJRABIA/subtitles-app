@@ -1,36 +1,11 @@
 import { useTranslations } from 'next-intl'
 import * as z from 'zod'
-
-export type ValidFieldNames = 'email' | 'password' | 'token'
+import { emailSchema, passwordSchema, tokenSchema } from './general'
 
 export type AuthFormData = {
   email: string
   password: string
 }
-
-const emailSchema = (t: ReturnType<typeof useTranslations<'Zod'>>) =>
-  z
-    .string()
-    .min(1, {
-      message: t('email.missing'),
-    })
-    .email({
-      message: t('email.invalid'),
-    })
-    .max(255, {
-      message: t('email.too_long'),
-    })
-    .trim()
-    .toLowerCase()
-
-const passwordSchema = (t: ReturnType<typeof useTranslations<'Zod'>>) =>
-  z
-    .string()
-    .min(6, { message: t('password.too_short') })
-    .max(255, { message: t('password.too_long') })
-
-const tokenSchema = (t: ReturnType<typeof useTranslations<'Zod'>>) =>
-  z.string().min(1, { message: t('token.missing') })
 
 export const AccountRegistrationValidator = (
   t: ReturnType<typeof useTranslations<'Zod'>>

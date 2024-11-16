@@ -1,0 +1,15 @@
+.root {
+  @include flexCenter(column, center);
+
+  gap: 5rem;
+}
+
+.avatar {
+  @include flexCenter(column, center);
+}
+
+.userInfo {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 1rem;
+}
