@@ -41,19 +41,17 @@ const EditableField = <T, K extends ValidFieldNames & string>({
   const t = useTranslations('EditableField')
 
   const [isEditing, setIsEditing] = useState(false)
-  const [initialValue, setInitialValue] = useState(value)
+  const [inputValue, setInputValue] = useState(value)
   const [isPending, startTransition] = useTransition()
 
   const hasValue = !!value.length
   const handleEdit = () => setIsEditing(true)
 
-  console.log('Value', value, 'InputValue', initialValue)
-
   const handleSave = () => {
-    if (initialValue !== value) {
+    if (inputValue !== value) {
       startTransition(async () => {
         try {
-          await onEdit(value)
+          await onEdit(inputValue)
           setIsEditing(false)
         } catch (err) {
           console.error('Saving EditableField failed:', getErrorMessage(err))
@@ -65,7 +63,7 @@ const EditableField = <T, K extends ValidFieldNames & string>({
   }
 
   const handleCancel = () => {
-    setInitialValue(value) // Revert to the original value
+    setInputValue(value) // Reset on cancel
     setIsEditing(false)
   }
 
@@ -114,8 +112,10 @@ const EditableField = <T, K extends ValidFieldNames & string>({
             aria-label={t('edit')}
             className={styles.input}
             data-testid={testId}
-            type="text"
             {...register(name, { valueAsNumber })}
+            type="text"
+            value={inputValue}
+            onChange={e => setInputValue(e.target.value)}
           />
           {subLabel && (
             <Subfield
@@ -138,7 +138,7 @@ const EditableField = <T, K extends ValidFieldNames & string>({
         </form>
       ) : (
         <Typography className={styles.value} size="s">
-          {value}
+          {inputValue}
         </Typography>
       )}
 
