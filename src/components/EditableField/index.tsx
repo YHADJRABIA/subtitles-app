@@ -112,7 +112,7 @@ const EditableField = <T, K extends ValidFieldNames & string>({
             aria-label={t('edit')}
             className={styles.input}
             data-testid={testId}
-            {...register(name, { valueAsNumber })}
+            {...register(name, { valueAsNumber })} // TODO: fix real-time validation
             type="text"
             value={inputValue}
             onChange={e => setInputValue(e.target.value)}
