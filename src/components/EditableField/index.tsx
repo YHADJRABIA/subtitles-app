@@ -44,7 +44,6 @@ const EditableField = <T, K extends ValidFieldNames & string>({
   const t = useTranslations('EditableField')
 
   const [isEditing, setIsEditing] = useState(false)
-  /*   const [inputValue, setInputValue] = useState(value) */
   const [isPending, startTransition] = useTransition()
 
   const hasValue = !!initialValue.length
