@@ -11,7 +11,6 @@ import Subfield from '../Forms/Subfield'
 
 import { ValidFieldNames } from '@/types/schemas/general'
 import { FieldBasePropTypes } from '@/types/field'
-import { UseFormGetValues } from 'react-hook-form'
 
 interface PropTypes<T, K extends ValidFieldNames>
   extends FieldBasePropTypes<K> {
@@ -22,7 +21,7 @@ interface PropTypes<T, K extends ValidFieldNames>
   isValid?: boolean
   topText?: string
   initialValue: string
-  getValues: UseFormGetValues<any> // TODO: fix any
+  value: string
 }
 
 const EditableField = <T, K extends ValidFieldNames & string>({
@@ -38,7 +37,7 @@ const EditableField = <T, K extends ValidFieldNames & string>({
   className,
   onEdit,
   handleSubmit,
-  getValues,
+  value,
   ...rest
 }: PropTypes<T, K>) => {
   const t = useTranslations('EditableField')
@@ -50,7 +49,6 @@ const EditableField = <T, K extends ValidFieldNames & string>({
   const handleEdit = () => setIsEditing(true)
 
   const handleSave = () => {
-    const value = getValues(name)
     if (initialValue !== value) {
       startTransition(async () => {
         try {
