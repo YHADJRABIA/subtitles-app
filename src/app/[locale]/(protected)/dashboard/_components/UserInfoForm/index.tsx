@@ -83,7 +83,7 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
           register={register}
           subLabel={{ text: errors.name?.message, isShown: !!errors.name }}
           testId="update-user-name"
-          value={getValues('name')}
+          value={getValues('name')!}
           onEdit={newName => handleUpdate({ name: newName })}
         />
 
@@ -97,7 +97,7 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
           subLabel={{ text: errors.email?.message, isShown: !!errors.email }}
           testId="update-user-email"
           topText={t('confirmation_email')}
-          value={getValues('email')}
+          value={getValues('email')!}
           onEdit={newEmail => handleUpdate({ email: newEmail })}
         />
       </div>
