@@ -32,7 +32,6 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
   const {
     handleSubmit,
     watch,
-    getValues,
     register,
     formState: { errors },
   } = useForm<UserInfoSchema>({
@@ -41,6 +40,8 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
     mode: 'onChange',
     defaultValues: { name: username, email: userEmail },
   })
+
+  const [nameValue, emailValue] = watch(['name', 'email']) // If not set, form inputs with more than 1 character will be delayed
 
   // useCallback to memoize handleUpdate to prevent unnecessary re-renders in children components
   const handleUpdate = useCallback(
@@ -67,7 +68,7 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
     [userId, t, update]
   )
 
-  watch() // If not set, form inputs that are more than 1 character will be delayed
+  watch()
 
   return (
     <div className={cn(styles.root, className)}>
@@ -83,7 +84,7 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
           register={register}
           subLabel={{ text: errors.name?.message, isShown: !!errors.name }}
           testId="update-user-name"
-          value={getValues('name')!}
+          value={nameValue!}
           onEdit={newName => handleUpdate({ name: newName })}
         />
 
@@ -97,7 +98,7 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
           subLabel={{ text: errors.email?.message, isShown: !!errors.email }}
           testId="update-user-email"
           topText={t('confirmation_email')}
-          value={getValues('email')!}
+          value={emailValue!}
           onEdit={newEmail => handleUpdate({ email: newEmail })}
         />
       </div>
