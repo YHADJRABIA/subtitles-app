@@ -77,7 +77,6 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
       <div className={styles.userInfo}>
         <EditableField
           handleSubmit={handleSubmit}
-          initialValue={username}
           isValid={!errors.name}
           label={t('name')}
           name="name"
@@ -90,7 +89,6 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
 
         <EditableField
           handleSubmit={handleSubmit}
-          initialValue={userEmail}
           isValid={!errors.email}
           label={t('email')}
           name="email"
