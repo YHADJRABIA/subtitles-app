@@ -20,12 +20,10 @@ interface PropTypes<T, K extends ValidFieldNames>
   onEdit: (newValue: string) => Promise<void>
   isValid?: boolean
   topText?: string
-  initialValue: string
   value: string
 }
 
 const EditableField = <T, K extends ValidFieldNames & string>({
-  initialValue,
   register,
   topText,
   valueAsNumber,
@@ -43,6 +41,7 @@ const EditableField = <T, K extends ValidFieldNames & string>({
   const t = useTranslations('EditableField')
 
   const [isEditing, setIsEditing] = useState(false)
+  const [initialValue, setInitialValue] = useState(value)
   const [isPending, startTransition] = useTransition()
 
   const hasValue = !!initialValue.length
@@ -53,9 +52,11 @@ const EditableField = <T, K extends ValidFieldNames & string>({
       startTransition(async () => {
         try {
           await onEdit(value)
-          setIsEditing(false)
         } catch (err) {
           console.error('Saving EditableField failed:', getErrorMessage(err))
+        } finally {
+          setIsEditing(false)
+          setInitialValue(value)
         }
       })
     } else {
