@@ -31,12 +31,14 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
 
   const {
     handleSubmit,
+    getValues,
     register,
     formState: { errors },
   } = useForm<UserInfoSchema>({
     resolver: zodResolver(UserInfoValidator(t_zod)),
     delayError: 400,
     mode: 'onChange',
+    defaultValues: { name: username, email: userEmail },
   })
 
   // useCallback to memoize handleUpdate to prevent unnecessary re-renders in children components
@@ -78,6 +80,7 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
           subLabel={{ text: errors.name?.message, isShown: !!errors.name }}
           testId="update-user-name"
           value={username}
+          getValues={getValues}
           onEdit={newName => handleUpdate({ name: newName })}
         />
 
@@ -91,6 +94,7 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
           testId="update-user-email"
           topText={t('confirmation_email')}
           value={userEmail}
+          getValues={getValues}
           onEdit={newEmail => handleUpdate({ email: newEmail })}
         />
       </div>
