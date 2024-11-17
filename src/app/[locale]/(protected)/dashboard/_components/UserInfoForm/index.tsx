@@ -79,7 +79,7 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
           register={register}
           subLabel={{ text: errors.name?.message, isShown: !!errors.name }}
           testId="update-user-name"
-          value={username}
+          initialValue={username}
           getValues={getValues}
           onEdit={newName => handleUpdate({ name: newName })}
         />
@@ -93,7 +93,7 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
           subLabel={{ text: errors.email?.message, isShown: !!errors.email }} // TODO: combine props using errors.['name']
           testId="update-user-email"
           topText={t('confirmation_email')}
-          value={userEmail}
+          initialValue={userEmail}
           getValues={getValues}
           onEdit={newEmail => handleUpdate({ email: newEmail })}
         />
