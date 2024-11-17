@@ -20,11 +20,11 @@ interface PropTypes<T, K extends ValidFieldNames>
   onEdit: (newValue: string) => Promise<void>
   isValid?: boolean
   topText?: string
-  value: string
+  initialValue: string
 }
 
 const EditableField = <T, K extends ValidFieldNames & string>({
-  value,
+  initialValue,
   register,
   topText,
   valueAsNumber,
@@ -36,22 +36,25 @@ const EditableField = <T, K extends ValidFieldNames & string>({
   className,
   onEdit,
   handleSubmit,
+  getValues,
   ...rest
 }: PropTypes<T, K>) => {
   const t = useTranslations('EditableField')
 
   const [isEditing, setIsEditing] = useState(false)
-  const [inputValue, setInputValue] = useState(value)
+  /*   const [inputValue, setInputValue] = useState(value) */
   const [isPending, startTransition] = useTransition()
 
-  const hasValue = !!value.length
+  const hasValue = !!initialValue.length
   const handleEdit = () => setIsEditing(true)
 
   const handleSave = () => {
-    if (inputValue !== value) {
+    const value = getValues(name)
+    /*     console.log('Called', 'value', value, 'input', inputValue, 'correct', test) */
+    if (initialValue !== value) {
       startTransition(async () => {
         try {
-          await onEdit(inputValue)
+          await onEdit(value)
           setIsEditing(false)
         } catch (err) {
           console.error('Saving EditableField failed:', getErrorMessage(err))
@@ -62,10 +65,7 @@ const EditableField = <T, K extends ValidFieldNames & string>({
     }
   }
 
-  const handleCancel = () => {
-    setInputValue(value) // Reset on cancel
-    setIsEditing(false)
-  }
+  const handleCancel = () => setIsEditing(false)
 
   const actionLabel = t(isEditing ? 'cancel' : hasValue ? 'edit' : 'add')
 
@@ -108,14 +108,12 @@ const EditableField = <T, K extends ValidFieldNames & string>({
 
           <input
             {...rest}
+            {...register(name, { valueAsNumber })}
             autoFocus
             aria-label={t('edit')}
             className={styles.input}
             data-testid={testId}
-            {...register(name, { valueAsNumber })} // TODO: fix real-time validation
             type="text"
-            value={inputValue}
-            onChange={e => setInputValue(e.target.value)}
           />
           {subLabel && (
             <Subfield
@@ -138,7 +136,7 @@ const EditableField = <T, K extends ValidFieldNames & string>({
         </form>
       ) : (
         <Typography className={styles.value} size="s">
-          {inputValue}
+          {initialValue}
         </Typography>
       )}
 
