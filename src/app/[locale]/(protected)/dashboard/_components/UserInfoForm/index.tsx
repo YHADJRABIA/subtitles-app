@@ -31,6 +31,7 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
 
   const {
     handleSubmit,
+    watch,
     getValues,
     register,
     formState: { errors },
@@ -66,13 +67,14 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
     [userId, t, update]
   )
 
+  watch() // If not set, form inputs that are more than 1 character will be delayed
+
   return (
     <div className={cn(styles.root, className)}>
       <EditableAvatar className={styles.avatar} src={image} />
 
       <div className={styles.userInfo}>
         <EditableField
-          getValues={getValues}
           handleSubmit={handleSubmit}
           initialValue={username}
           isValid={!errors.name}
@@ -81,20 +83,21 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
           register={register}
           subLabel={{ text: errors.name?.message, isShown: !!errors.name }}
           testId="update-user-name"
+          value={getValues('name')}
           onEdit={newName => handleUpdate({ name: newName })}
         />
 
         <EditableField
-          getValues={getValues}
           handleSubmit={handleSubmit}
           initialValue={userEmail}
           isValid={!errors.email}
           label={t('email')}
           name="email"
           register={register}
-          subLabel={{ text: errors.email?.message, isShown: !!errors.email }} // TODO: combine props using errors.['name']
+          subLabel={{ text: errors.email?.message, isShown: !!errors.email }}
           testId="update-user-email"
           topText={t('confirmation_email')}
+          value={getValues('email')}
           onEdit={newEmail => handleUpdate({ email: newEmail })}
         />
       </div>
