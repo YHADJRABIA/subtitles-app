@@ -72,20 +72,22 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
 
       <div className={styles.userInfo}>
         <EditableField
+          getValues={getValues}
           handleSubmit={handleSubmit}
+          initialValue={username}
           isValid={!errors.name}
           label={t('name')}
           name="name"
           register={register}
           subLabel={{ text: errors.name?.message, isShown: !!errors.name }}
           testId="update-user-name"
-          initialValue={username}
-          getValues={getValues}
           onEdit={newName => handleUpdate({ name: newName })}
         />
 
         <EditableField
+          getValues={getValues}
           handleSubmit={handleSubmit}
+          initialValue={userEmail}
           isValid={!errors.email}
           label={t('email')}
           name="email"
@@ -93,8 +95,6 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
           subLabel={{ text: errors.email?.message, isShown: !!errors.email }} // TODO: combine props using errors.['name']
           testId="update-user-email"
           topText={t('confirmation_email')}
-          initialValue={userEmail}
-          getValues={getValues}
           onEdit={newEmail => handleUpdate({ email: newEmail })}
         />
       </div>
