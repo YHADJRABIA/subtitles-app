@@ -48,20 +48,18 @@ const EditableField = <T, K extends ValidFieldNames & string>({
   const handleEdit = () => setIsEditing(true)
 
   const handleSave = () => {
-    if (initialValue !== value) {
-      startTransition(async () => {
-        try {
+    startTransition(async () => {
+      try {
+        if (initialValue !== value) {
           await onEdit(value)
-        } catch (err) {
-          console.error('Saving EditableField failed:', getErrorMessage(err))
-        } finally {
-          setIsEditing(false)
           setInitialValue(value)
         }
-      })
-    } else {
-      setIsEditing(false)
-    }
+      } catch (err) {
+        console.error('Saving EditableField failed:', getErrorMessage(err))
+      } finally {
+        setIsEditing(false)
+      }
+    })
   }
 
   const handleCancel = () => setIsEditing(false)
