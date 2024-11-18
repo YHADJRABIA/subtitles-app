@@ -105,12 +105,12 @@ const EditableField = <T, K extends ValidFieldNames & string>({
 
           <input
             {...rest}
-            {...register(name, { valueAsNumber })}
             autoFocus
             aria-label={t('edit')}
             className={styles.input}
             data-testid={testId}
             type="text"
+            {...register(name, { valueAsNumber })}
           />
           {subLabel && (
             <Subfield
