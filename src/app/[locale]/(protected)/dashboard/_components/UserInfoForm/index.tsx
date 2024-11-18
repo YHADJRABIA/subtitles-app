@@ -55,8 +55,8 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
         const res = await handleUpdateUserById(userId, updatedFields)
         if (res?.data.success) {
           // Notify success and update session
-          notify('success', res.data.message)
           await update(updatedFields)
+          notify('success', res.data.message)
         }
       } catch (err) {
         notify(
