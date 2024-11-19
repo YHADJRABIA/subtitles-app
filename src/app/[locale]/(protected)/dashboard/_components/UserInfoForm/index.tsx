@@ -43,7 +43,7 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
 
   const [nameValue, emailValue] = watch(['name', 'email']) // If not set, form inputs with more than 1 character will be delayed
 
-  // useCallback to memoize handleUpdate to prevent unnecessary re-renders in children components
+  // Memoize to prevent unnecessary re-renders in children components
   const handleUpdate = useCallback(
     async (updatedFields: Partial<UserAPIType>) => {
       if (!userId) {
