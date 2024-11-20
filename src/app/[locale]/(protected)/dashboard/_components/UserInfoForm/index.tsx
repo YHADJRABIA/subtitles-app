@@ -87,6 +87,8 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
           onEdit={newName => handleUpdate({ name: newName })}
         />
 
+        {/* TODO: Add 4-digit code modal to confirm email according to backend route */}
+
         <EditableField
           handleSubmit={handleSubmit}
           isValid={!errors.email}
