@@ -117,7 +117,7 @@ export const sendEmailUpdateEmail = async (
   code: string
 ) => {
   const outgoingEmail = {
-    title: 'Your email-update code',
+    title: `Your email-update code — ${code}`,
     content: `
     Hello,\r\n
     \r\n
