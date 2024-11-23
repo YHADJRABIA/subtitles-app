@@ -129,8 +129,9 @@ export const sendEmailUpdateEmail = async (
 
   switch (lang) {
     case 'fr':
-      outgoingEmail.title = "Votre code de mise à jour d'email"
-      outgoingEmail.content = `` /* TODO: complete */
+      outgoingEmail.title = `Votre code de mise à jour d'email — ${code}`
+      outgoingEmail.content = ``
+      /* TODO: complete */
       break
 
     default: // English
