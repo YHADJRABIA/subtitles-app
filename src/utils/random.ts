@@ -15,10 +15,7 @@ export const generateUUIDToken = (
   const token = uuidv4()
   const expirationDate = new Date().getTime() + 1000 * 3600 * validHours
 
-  return {
-    token,
-    expirationDate,
-  }
+  return { token, expirationDate }
 }
 
 /**
