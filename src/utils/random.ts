@@ -34,3 +34,9 @@ export const hashPassword = async (
 
   return hashedPassword
 }
+
+export const generateVerificationCode = (validHours: number = 1) => {
+  const code = Math.floor(1000 + Math.random() * 9000).toString() // Generate a 4-digit code (1000-9999)
+  const expirationDate = new Date().getTime() + 1000 * 3600 * validHours
+  return { code, expirationDate }
+}
