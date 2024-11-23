@@ -130,8 +130,13 @@ export const sendEmailUpdateEmail = async (
   switch (lang) {
     case 'fr':
       outgoingEmail.title = `Votre code de mise à jour d'email — ${code}`
-      outgoingEmail.content = ``
-      /* TODO: complete */
+      outgoingEmail.content = `
+      Bonjour,\r\n
+      \r\n
+      Une demande de mise à jour de l'email a été créée avec cette adresse.\r\n
+      Veuillez insérer le code suivant : <b>${code}</b> pour valider cette opération.
+      <b>Ce code n'est valable que pendant ${EMAIL_VERIFICATION_TOKEN_LIFETIME_HOURS} heures.</b>
+      `
       break
 
     default: // English
