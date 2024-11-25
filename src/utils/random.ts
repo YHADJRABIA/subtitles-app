@@ -35,7 +35,20 @@ export const hashPassword = async (
   return hashedPassword
 }
 
-export const generateDigitCode = (validHours: number = 1) => {
+/**
+ * Generates a 4-digit numeric code and an expiration timestamp.
+ * @param {number} [validHours=1] Number of hours until expiration. Defaults to 1 hour.
+ * @returns {{ code: string, expirationDate: number }} Generated code & its expiration date.
+ *
+ * @example
+ * const { code, expirationDate } = generateDigitCode(2)
+ * // `code` might be "1234"
+ * // `expirationDate` would be 2 hours from the current time
+ */
+
+export const generateDigitCode = (
+  validHours: number = 1
+): { code: string; expirationDate: number } => {
   const code = Math.floor(1000 + Math.random() * 9000).toString() // Generate a 4-digit code (1000-9999)
   const expirationDate = new Date().getTime() + 1000 * 3600 * validHours
   return { code, expirationDate }
