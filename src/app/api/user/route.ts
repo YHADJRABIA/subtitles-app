@@ -57,15 +57,21 @@ export async function PATCH(req: NextRequest) {
         { status: 401 }
       )
     }
+
+    // Users may edit own data only
+    if (currentUser.id !== id) {
+      return NextResponse.json(
+        { message: t('unauthorised'), success: false },
+        { status: 403 }
+      )
+    }
+
     // Prevent PATCH of restricted fields
     const hasRestrictedFields = Object.keys(user).some(field =>
       restrictedUserFields.includes(field)
     )
 
-    // TODO: handle email edit differently by sending verification email
-
-    // Users may edit own data only, sensitive data cannot be edited
-    if (currentUser.id !== id || hasRestrictedFields) {
+    if (hasRestrictedFields) {
       return NextResponse.json(
         { message: t('unauthorised'), success: false },
         { status: 403 }
