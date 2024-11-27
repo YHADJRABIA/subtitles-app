@@ -66,8 +66,10 @@ export async function PATCH(req: NextRequest) {
       )
     }
 
+    const userFields = Object.keys(user)
+
     // Prevent PATCH of restricted fields
-    const hasRestrictedFields = Object.keys(user).some(field =>
+    const hasRestrictedFields = userFields.some(field =>
       restrictedUserFields.includes(field)
     )
 
