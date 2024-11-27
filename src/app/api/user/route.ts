@@ -75,7 +75,7 @@ export async function PATCH(req: NextRequest) {
 
     const hasEmail = userFields.includes('email')
     if (hasEmail) {
-      // Generate & send code via e-mail
+      // Check if e-mail isn't already taken
     }
 
     // Sensitive data may not be edited
