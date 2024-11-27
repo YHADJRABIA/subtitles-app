@@ -73,6 +73,12 @@ export async function PATCH(req: NextRequest) {
       restrictedUserFields.includes(field)
     )
 
+    const hasEmail = userFields.includes('email')
+    if (hasEmail) {
+      // Generate & send code via e-mail
+    }
+
+    // Sensitive data may not be edited
     if (hasRestrictedFields) {
       return NextResponse.json(
         { message: t('unauthorised'), success: false },
