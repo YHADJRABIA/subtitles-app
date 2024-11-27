@@ -73,6 +73,7 @@ export async function PATCH(req: NextRequest) {
       restrictedUserFields.includes(field)
     )
 
+    // User attempts to update e-mail
     const hasEmail = userFields.includes('email')
     if (hasEmail) {
       // Check if e-mail isn't already taken
