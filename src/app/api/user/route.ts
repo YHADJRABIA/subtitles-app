@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getErrorMessage, getZodErrors } from '@/utils/errors'
 import {
   deleteUserById,
+  getUserByEmail,
   getUserById,
   restrictedUserFields,
   updateUserById,
@@ -14,6 +15,8 @@ import {
   DashboardUserValidator,
 } from '@/types/schemas/dashboard'
 import { getUserSession } from '@/utils/session'
+import { generateVerificationCode } from '@/lib/auth/code'
+import { sendEmailUpdateEmail } from '@/lib/mail'
 
 connectDB()
 
@@ -73,10 +76,14 @@ export async function PATCH(req: NextRequest) {
       restrictedUserFields.includes(field)
     )
 
-    // User attempts to update e-mail
     const hasEmail = userFields.includes('email')
+
+    const newEmail = user.email!
+
+    // User attempts to update e-mail
     if (hasEmail) {
       // Check if e-mail isn't already taken
+      const existingEmail = !!(await getUserByEmail(newEmail))
     }
 
     // Sensitive data may not be edited
