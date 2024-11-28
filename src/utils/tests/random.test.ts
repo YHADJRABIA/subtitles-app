@@ -56,10 +56,13 @@ describe('hashPassword', () => {
   const mockSalt = 'mockSalt123'
   const mockHashedPassword = 'mockHashedPassword123'
 
+  const mockGenSalt = bcryptjs.genSalt as jest.Mock
+  const mockHash = bcryptjs.hash as jest.Mock
+
   beforeEach(() => {
     jest.clearAllMocks()
-    ;(bcryptjs.genSalt as jest.Mock).mockResolvedValue(mockSalt)
-    ;(bcryptjs.hash as jest.Mock).mockResolvedValue(mockHashedPassword)
+    mockGenSalt.mockResolvedValue(mockSalt)
+    mockHash.mockResolvedValue(mockHashedPassword)
   })
 
   it('should hash the password with the default number of rounds', async () => {
