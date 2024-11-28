@@ -12,3 +12,14 @@ export const getVerificationCodeByEmail = async (email: string) => {
     )
   }
 }
+
+export const deleteVerificationCodeById = async (id: string) => {
+  try {
+    await VerificationCodeModel.deleteOne({ _id: id })
+  } catch (err) {
+    console.error(
+      'Error deleting verification code by id:',
+      getErrorMessage(err)
+    )
+  }
+}
