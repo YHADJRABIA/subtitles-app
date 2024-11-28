@@ -91,6 +91,9 @@ export async function PATCH(req: NextRequest) {
           { status: 400 }
         )
       }
+
+      // Send code to new e-mail address
+      const verificationCode = await generateVerificationCode(newEmail)
     }
 
     // Sensitive data may not be edited
