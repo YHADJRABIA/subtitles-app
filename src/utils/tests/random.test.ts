@@ -1,8 +1,11 @@
 import { v4 as uuidv4 } from 'uuid'
-import { generateUUIDToken } from '../random'
+import { generateUUIDToken, hashPassword } from '../random'
+
+import bcryptjs from 'bcryptjs'
 
 const mockUuid = 'mock-uuid-1234'
 jest.mock('uuid', () => ({ v4: jest.fn() }))
+jest.mock('bcryptjs')
 
 const mockedUUID = uuidv4 as jest.Mock
 
@@ -44,5 +47,50 @@ describe('generateUUIDToken', () => {
   it('should call uuidv4 exactly once', () => {
     generateUUIDToken()
     expect(uuidv4).toHaveBeenCalledTimes(1)
+  })
+})
+
+describe('hashPassword', () => {
+  const mockPassword = 'securePassword123'
+  const mockRounds = 12
+  const mockSalt = 'mockSalt123'
+  const mockHashedPassword = 'mockHashedPassword123'
+
+  beforeEach(() => {
+    jest.clearAllMocks()
+    ;(bcryptjs.genSalt as jest.Mock).mockResolvedValue(mockSalt)
+    ;(bcryptjs.hash as jest.Mock).mockResolvedValue(mockHashedPassword)
+  })
+
+  it('should hash the password with the default number of rounds', async () => {
+    const hashedPassword = await hashPassword(mockPassword)
+
+    expect(bcryptjs.genSalt).toHaveBeenCalledWith(10) // 10 rounds
+    expect(bcryptjs.hash).toHaveBeenCalledWith(mockPassword, mockSalt)
+    expect(hashedPassword).toBe(mockHashedPassword)
+  })
+
+  it('should hash the password with a custom number of rounds', async () => {
+    const hashedPassword = await hashPassword(mockPassword, mockRounds)
+
+    expect(bcryptjs.genSalt).toHaveBeenCalledWith(mockRounds)
+    expect(bcryptjs.hash).toHaveBeenCalledWith(mockPassword, mockSalt)
+    expect(hashedPassword).toBe(mockHashedPassword)
+  })
+
+  it('should throw an error if bcryptjs.genSalt fails', async () => {
+    ;(bcryptjs.genSalt as jest.Mock).mockRejectedValue(
+      new Error('Salt generation failed')
+    )
+
+    await expect(hashPassword(mockPassword)).rejects.toThrow(
+      'Salt generation failed'
+    )
+  })
+
+  it('should throw an error if bcryptjs.hash fails', async () => {
+    ;(bcryptjs.hash as jest.Mock).mockRejectedValue(new Error('Hashing failed'))
+
+    await expect(hashPassword(mockPassword)).rejects.toThrow('Hashing failed')
   })
 })
