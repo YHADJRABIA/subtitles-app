@@ -5,6 +5,7 @@ import bcryptjs from 'bcryptjs'
 
 jest.mock('uuid', () => ({ v4: jest.fn() }))
 jest.mock('bcryptjs')
+
 describe('generateUUIDToken', () => {
   const mockUuid = 'mock-uuid-1234'
   const mockedUUID = uuidv4 as jest.Mock
@@ -81,9 +82,7 @@ describe('hashPassword', () => {
   })
 
   it('should throw an error if bcryptjs.genSalt fails', async () => {
-    ;(bcryptjs.genSalt as jest.Mock).mockRejectedValue(
-      new Error('Salt generation failed')
-    )
+    mockGenSalt.mockRejectedValue(new Error('Salt generation failed'))
 
     await expect(hashPassword(mockPassword)).rejects.toThrow(
       'Salt generation failed'
@@ -91,7 +90,7 @@ describe('hashPassword', () => {
   })
 
   it('should throw an error if bcryptjs.hash fails', async () => {
-    ;(bcryptjs.hash as jest.Mock).mockRejectedValue(new Error('Hashing failed'))
+    mockHash.mockRejectedValue(new Error('Hashing failed'))
 
     await expect(hashPassword(mockPassword)).rejects.toThrow('Hashing failed')
   })
