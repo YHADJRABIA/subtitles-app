@@ -94,6 +94,9 @@ export async function PATCH(req: NextRequest) {
 
       // Send code to new e-mail address
       const verificationCode = await generateVerificationCode(newEmail)
+
+      // TODO: finish up in next PR
+      /*       await sendEmailUpdateEmail(locale, newEmail, verificationCode.code) */
     }
 
     // Sensitive data may not be edited
