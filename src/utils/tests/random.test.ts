@@ -3,13 +3,12 @@ import { generateUUIDToken, hashPassword } from '../random'
 
 import bcryptjs from 'bcryptjs'
 
-const mockUuid = 'mock-uuid-1234'
 jest.mock('uuid', () => ({ v4: jest.fn() }))
 jest.mock('bcryptjs')
-
-const mockedUUID = uuidv4 as jest.Mock
-
 describe('generateUUIDToken', () => {
+  const mockUuid = 'mock-uuid-1234'
+  const mockedUUID = uuidv4 as jest.Mock
+
   beforeEach(() => {
     jest.clearAllMocks()
     mockedUUID.mockReturnValue(mockUuid)
