@@ -84,6 +84,13 @@ export async function PATCH(req: NextRequest) {
     if (hasEmail) {
       // Check if e-mail isn't already taken
       const existingEmail = !!(await getUserByEmail(newEmail))
+
+      if (existingEmail) {
+        return NextResponse.json(
+          { message: t('email_already_taken'), success: false },
+          { status: 400 }
+        )
+      }
     }
 
     // Sensitive data may not be edited
