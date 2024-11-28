@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getErrorMessage, getZodErrors } from '@/utils/errors'
 import {
   deleteUserById,
+  getUserByEmail,
   getUserById,
   restrictedUserFields,
   updateUserById,
@@ -14,6 +15,8 @@ import {
   DashboardUserValidator,
 } from '@/types/schemas/dashboard'
 import { getUserSession } from '@/utils/session'
+import { generateVerificationCode } from '@/lib/auth/code'
+import { sendEmailUpdateEmail } from '@/lib/mail'
 
 connectDB()
 
@@ -57,15 +60,47 @@ export async function PATCH(req: NextRequest) {
         { status: 401 }
       )
     }
+
+    // Users may edit own data only
+    if (currentUser.id !== id) {
+      return NextResponse.json(
+        { message: t('unauthorised'), success: false },
+        { status: 403 }
+      )
+    }
+
+    const userFields = Object.keys(user)
+
     // Prevent PATCH of restricted fields
-    const hasRestrictedFields = Object.keys(user).some(field =>
+    const hasRestrictedFields = userFields.some(field =>
       restrictedUserFields.includes(field)
     )
 
-    // TODO: handle email edit differently by sending verification email
+    const hasEmail = userFields.includes('email')
 
-    // Users may edit own data only, sensitive data cannot be edited
-    if (currentUser.id !== id || hasRestrictedFields) {
+    const newEmail = user.email!
+
+    // User attempts to update e-mail
+    if (hasEmail) {
+      // Check if e-mail isn't already taken
+      const existingEmail = !!(await getUserByEmail(newEmail))
+
+      if (existingEmail) {
+        return NextResponse.json(
+          { message: t('email_already_taken'), success: false },
+          { status: 400 }
+        )
+      }
+
+      // Send code to new e-mail address
+      const verificationCode = await generateVerificationCode(newEmail)
+
+      // TODO: finish up in next PR
+      /*       await sendEmailUpdateEmail(locale, newEmail, verificationCode.code) */
+    }
+
+    // Sensitive data may not be edited
+    if (hasRestrictedFields) {
       return NextResponse.json(
         { message: t('unauthorised'), success: false },
         { status: 403 }

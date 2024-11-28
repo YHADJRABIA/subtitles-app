@@ -110,3 +110,44 @@ export const sendPasswordResetEmail = async (
     html: outgoingEmail.content.replace(/\r\n/g, '<br>'),
   })
 }
+
+export const sendEmailUpdateEmail = async (
+  lang: string,
+  email: string,
+  code: string
+) => {
+  const outgoingEmail = {
+    title: `Your email-update code — ${code}`,
+    content: `
+    Hello,\r\n
+    \r\n
+    An email update request has been created using this email.\r\n
+    You will need to input the following code: <b>${code}</b> to validate this operation.
+    <b>This code is only valid for ${EMAIL_VERIFICATION_TOKEN_LIFETIME_HOURS} hours.</b>
+    `,
+  }
+
+  switch (lang) {
+    case 'fr':
+      outgoingEmail.title = `Votre code de mise à jour d'email — ${code}`
+      outgoingEmail.content = `
+      Bonjour,\r\n
+      \r\n
+      Une demande de mise à jour de l'email a été créée avec cette adresse.\r\n
+      Veuillez insérer le code suivant : <b>${code}</b> pour valider cette opération.
+      <b>Ce code n'est valable que pendant ${EMAIL_VERIFICATION_TOKEN_LIFETIME_HOURS} heures.</b>
+      `
+      break
+
+    default: // English
+      break
+  }
+
+  await transporter.sendMail({
+    from: sender,
+    to: email,
+    subject: outgoingEmail.title,
+    text: outgoingEmail.content,
+    html: outgoingEmail.content.replace(/\r\n/g, '<br>'),
+  })
+}

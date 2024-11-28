@@ -192,6 +192,7 @@
     "user_deleted": "Compte supprimé avec succès !",
     "user_updated": "Compte mis à jour avec succès !",
     "unauthorised": "Non autorisé",
+    "email_already_taken": "Email déjà utilisé",
     "invalid_fields": "Champs invalides",
     "failed_action": "L'action a échoué"
   },

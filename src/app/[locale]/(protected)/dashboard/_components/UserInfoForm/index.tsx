@@ -31,15 +31,19 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
 
   const {
     handleSubmit,
+    watch,
     register,
     formState: { errors },
   } = useForm<UserInfoSchema>({
     resolver: zodResolver(UserInfoValidator(t_zod)),
     delayError: 400,
     mode: 'onChange',
+    defaultValues: { name: username, email: userEmail },
   })
 
-  // useCallback to memoize handleUpdate to prevent unnecessary re-renders in children components
+  const [nameValue, emailValue] = watch(['name', 'email']) // If not set, form inputs with more than 1 character will be delayed
+
+  // Memoize to prevent unnecessary re-renders in children components
   const handleUpdate = useCallback(
     async (updatedFields: Partial<UserAPIType>) => {
       if (!userId) {
@@ -51,8 +55,8 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
         const res = await handleUpdateUserById(userId, updatedFields)
         if (res?.data.success) {
           // Notify success and update session
-          notify('success', res.data.message)
           await update(updatedFields)
+          notify('success', res.data.message)
         }
       } catch (err) {
         notify(
@@ -63,6 +67,8 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
     },
     [userId, t, update]
   )
+
+  watch()
 
   return (
     <div className={cn(styles.root, className)}>
@@ -77,9 +83,11 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
           register={register}
           subLabel={{ text: errors.name?.message, isShown: !!errors.name }}
           testId="update-user-name"
-          value={username}
+          value={nameValue!}
           onEdit={newName => handleUpdate({ name: newName })}
         />
+
+        {/* TODO: Add 4-digit code modal to confirm email according to backend route */}
 
         <EditableField
           handleSubmit={handleSubmit}
@@ -87,10 +95,10 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
           label={t('email')}
           name="email"
           register={register}
-          subLabel={{ text: errors.email?.message, isShown: !!errors.email }} // TODO: combine props using errors.['name']
+          subLabel={{ text: errors.email?.message, isShown: !!errors.email }}
           testId="update-user-email"
           topText={t('confirmation_email')}
-          value={userEmail}
+          value={emailValue!}
           onEdit={newEmail => handleUpdate({ email: newEmail })}
         />
       </div>

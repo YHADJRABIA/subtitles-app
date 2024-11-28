@@ -191,6 +191,7 @@
     "user_deleted": "Account successfully deleted!",
     "user_updated": "Account successfully updated!",
     "unauthorised": "Unauthorised",
+    "email_already_taken": "Email already taken",
     "invalid_fields": "Invalid fields",
     "failed_action": "Action failed"
   },
