@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid'
-import { generateUUIDToken, hashPassword } from '../random'
+import { generateNDigitCode, generateUUIDToken, hashPassword } from '../random'
 
 import bcryptjs from 'bcryptjs'
 
@@ -93,5 +93,43 @@ describe('hashPassword', () => {
     mockHash.mockRejectedValue(new Error('Hashing failed'))
 
     await expect(hashPassword(mockPassword)).rejects.toThrow('Hashing failed')
+  })
+})
+
+describe('generateNDigitCode', () => {
+  it('should generate a 4-digit code with default expiration', () => {
+    const { code, expirationDate } = generateNDigitCode()
+
+    expect(code).toMatch(/^\d{4}$/) // Matches a 4-digit code
+    const expectedExpiration = new Date().getTime() + 1000 * 3600 * 1 // 1 hour
+    expect(expirationDate).toBeGreaterThanOrEqual(expectedExpiration - 5)
+    expect(expirationDate).toBeLessThanOrEqual(expectedExpiration + 5)
+  })
+
+  it('should generate a 6-digit code with custom expiration', () => {
+    const validHours = 3
+    const n = 6
+
+    const { code, expirationDate } = generateNDigitCode(validHours, n)
+
+    expect(code).toMatch(/^\d{6}$/) // Matches a 6-digit code
+    const expectedExpiration = new Date().getTime() + 1000 * 3600 * validHours
+    expect(expirationDate).toBeGreaterThanOrEqual(expectedExpiration - 5)
+    expect(expirationDate).toBeLessThanOrEqual(expectedExpiration + 5)
+  })
+
+  it('should generate a 5-digit code', () => {
+    const { code } = generateNDigitCode(1, 5)
+    expect(code).toMatch(/^\d{5}$/) // Matches a 5-digit code
+  })
+
+  it('should generate a 7-digit code', () => {
+    const { code } = generateNDigitCode(1, 7)
+    expect(code).toMatch(/^\d{7}$/) // Matches a 7-digit code
+  })
+
+  it('should generate a 8-digit code', () => {
+    const { code } = generateNDigitCode(1, 8)
+    expect(code).toMatch(/^\d{8}$/) // Matches a 8-digit code
   })
 })
