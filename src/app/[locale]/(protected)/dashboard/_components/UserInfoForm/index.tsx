@@ -52,9 +52,14 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
         return
       }
 
+      const isEmailUpdate = !!updatedFields.email
+
       try {
         const res = await handleUpdateUserById(userId, updatedFields)
 
+        if (isEmailUpdate) {
+          // Open modal
+        }
         if (res?.data.success) {
           // Notify success and update session
           await update(updatedFields)
