@@ -34,6 +34,7 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
     watch,
     register,
     formState: { errors },
+    setValue,
   } = useForm<UserInfoSchema>({
     resolver: zodResolver(UserInfoValidator(t_zod)),
     delayError: 400,
@@ -53,6 +54,7 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
 
       try {
         const res = await handleUpdateUserById(userId, updatedFields)
+
         if (res?.data.success) {
           // Notify success and update session
           await update(updatedFields)
@@ -81,6 +83,7 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
           label={t('name')}
           name="name"
           register={register}
+          setValue={setValue}
           subLabel={{ text: errors.name?.message, isShown: !!errors.name }}
           testId="update-user-name"
           value={nameValue!}
@@ -95,6 +98,7 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
           label={t('email')}
           name="email"
           register={register}
+          setValue={setValue}
           subLabel={{ text: errors.email?.message, isShown: !!errors.email }}
           testId="update-user-email"
           topText={t('confirmation_email')}
