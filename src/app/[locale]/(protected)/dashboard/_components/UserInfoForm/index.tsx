@@ -70,6 +70,7 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
           'error',
           (await getErrorMessage(err)) || t('Account.update_failed')
         )
+        throw err // Propagate error to EditableField to prevent field update if backend error
       }
     },
     [userId, t, update]
