@@ -78,7 +78,7 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
 
   watch()
 
-  const handleCancel = (field: keyof UserInfoSchema, defaultValue: string) => {
+  const handleRestore = (field: keyof UserInfoSchema, defaultValue: string) => {
     setValue(field, defaultValue)
   }
 
@@ -96,7 +96,7 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
           subLabel={{ text: errors.name?.message, isShown: !!errors.name }}
           testId="update-user-name"
           value={nameValue!}
-          onCancel={() => handleCancel('name', defaultName)}
+          onCancel={() => handleRestore('name', defaultName)}
           onEdit={newName => handleUpdate({ name: newName })}
         />
 
@@ -112,7 +112,7 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
           testId="update-user-email"
           topText={t('confirmation_email')}
           value={emailValue!}
-          onCancel={() => handleCancel('email', defaultEmail)}
+          onCancel={() => handleRestore('email', defaultEmail)}
           onEdit={newEmail => handleUpdate({ email: newEmail })}
         />
       </div>
