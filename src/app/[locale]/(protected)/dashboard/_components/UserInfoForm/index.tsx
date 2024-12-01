@@ -26,8 +26,8 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
   const [t, t_zod] = [useTranslations('Dashboard'), useTranslations('Zod')]
   const { data: clientSession, update } = useSession()
   // Prioritise client-side session after update, fallback to server-side session
-  const username = clientSession?.user?.name || name || ''
-  const userEmail = clientSession?.user?.email || email || ''
+  const defaultName = clientSession?.user?.name || name || ''
+  const defaultEmail = clientSession?.user?.email || email || ''
 
   const {
     handleSubmit,
@@ -39,7 +39,7 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
     resolver: zodResolver(UserInfoValidator(t_zod)),
     delayError: 400,
     mode: 'onChange',
-    defaultValues: { name: username, email: userEmail },
+    defaultValues: { name: defaultName, email: defaultEmail },
   })
 
   const [nameValue, emailValue] = watch(['name', 'email']) // If not set, form inputs with more than 1 character will be delayed
@@ -77,6 +77,10 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
 
   watch()
 
+  const handleCancel = (field: keyof UserInfoSchema, defaultValue: string) => {
+    setValue(field, defaultValue)
+  }
+
   return (
     <div className={cn(styles.root, className)}>
       <EditableAvatar className={styles.avatar} src={image} />
@@ -88,10 +92,10 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
           label={t('name')}
           name="name"
           register={register}
-          setValue={setValue}
           subLabel={{ text: errors.name?.message, isShown: !!errors.name }}
           testId="update-user-name"
           value={nameValue!}
+          onCancel={() => handleCancel('name', defaultName)}
           onEdit={newName => handleUpdate({ name: newName })}
         />
 
@@ -103,11 +107,11 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
           label={t('email')}
           name="email"
           register={register}
-          setValue={setValue}
           subLabel={{ text: errors.email?.message, isShown: !!errors.email }}
           testId="update-user-email"
           topText={t('confirmation_email')}
           value={emailValue!}
+          onCancel={() => handleCancel('email', defaultEmail)}
           onEdit={newEmail => handleUpdate({ email: newEmail })}
         />
       </div>
