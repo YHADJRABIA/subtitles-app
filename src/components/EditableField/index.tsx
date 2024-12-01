@@ -48,9 +48,7 @@ const EditableField = <T, K extends ValidFieldNames & string>({
 
   const hasValue = !!initialValue.length
 
-  const handleEdit = () => {
-    setIsEditing(true)
-  }
+  const handleEdit = () => setIsEditing(true)
 
   const handleSave = () => {
     startTransition(async () => {
