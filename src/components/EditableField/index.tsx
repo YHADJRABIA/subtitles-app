@@ -11,7 +11,6 @@ import Subfield from '../Forms/Subfield'
 
 import { ValidFieldNames } from '@/types/schemas/general'
 import { FieldBasePropTypes } from '@/types/field'
-import { FieldValues, UseFormSetValue } from 'react-hook-form'
 
 interface PropTypes<T, K extends ValidFieldNames>
   extends FieldBasePropTypes<K> {
@@ -19,7 +18,7 @@ interface PropTypes<T, K extends ValidFieldNames>
     callback: (data: T) => void
   ) => FormEventHandler<HTMLFormElement>
   onEdit: (newValue: string) => Promise<void>
-  setValue: UseFormSetValue<FieldValues>
+  onCancel: () => void
   isValid?: boolean
   topText?: string
   value: string
@@ -36,9 +35,9 @@ const EditableField = <T, K extends ValidFieldNames & string>({
   name,
   className,
   onEdit,
+  onCancel,
   handleSubmit,
   value,
-  setValue,
   ...rest
 }: PropTypes<T, K>) => {
   const t = useTranslations('EditableField')
@@ -49,11 +48,7 @@ const EditableField = <T, K extends ValidFieldNames & string>({
 
   const hasValue = !!initialValue.length
 
-  const restoreDefaultValue = () =>
-    setValue(name as keyof FieldValues, initialValue)
-
   const handleEdit = () => {
-    restoreDefaultValue()
     setIsEditing(true)
   }
 
@@ -66,6 +61,7 @@ const EditableField = <T, K extends ValidFieldNames & string>({
         }
       } catch (err) {
         console.error('Saving EditableField failed:', getErrorMessage(err))
+        onCancel()
       } finally {
         setIsEditing(false)
       }
@@ -74,7 +70,7 @@ const EditableField = <T, K extends ValidFieldNames & string>({
 
   const handleCancel = () => {
     setIsEditing(false)
-    restoreDefaultValue()
+    onCancel()
   }
 
   const actionLabel = t(isEditing ? 'cancel' : hasValue ? 'edit' : 'add')
