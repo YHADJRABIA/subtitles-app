@@ -20,6 +20,7 @@ import {
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 import { handleVerifyEmailValidationToken } from '@/actions/auth'
 import { Link } from '@/i18n/routing'
+import { getSuccessMessage } from '@/utils/api'
 
 const VerifyEmail = () => {
   const [t, t_zod] = [
@@ -35,7 +36,7 @@ const VerifyEmail = () => {
   const handleValidate: SubmitHandler<EmailVerificationSchema> = async user => {
     try {
       const res = await handleVerifyEmailValidationToken(user)
-      setInfoMessage(res.data.message, 'success')
+      setInfoMessage(getSuccessMessage(res), 'success')
     } catch (err) {
       setInfoMessage(await getErrorMessage(err), 'error')
     }
