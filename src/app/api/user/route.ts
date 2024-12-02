@@ -17,10 +17,13 @@ import {
 import { getUserSession } from '@/utils/session'
 import { generateVerificationCode } from '@/lib/auth/code'
 import { sendEmailUpdateEmail } from '@/lib/mail'
+import { APIResponse } from '@/types/api'
 
 connectDB()
 
-export async function PATCH(req: NextRequest) {
+export async function PATCH(
+  req: NextRequest
+): Promise<NextResponse<APIResponse>> {
   try {
     const locale = getLocaleFromNextRequest(req)
 
@@ -88,15 +91,24 @@ export async function PATCH(req: NextRequest) {
       if (existingEmail) {
         return NextResponse.json(
           { message: t('email_already_taken'), success: false },
-          { status: 400 }
+          { status: 409 }
         )
       }
 
       // Send code to new e-mail address
       const verificationCode = await generateVerificationCode(newEmail)
 
-      // TODO: finish up in next PR
-      /*       await sendEmailUpdateEmail(locale, newEmail, verificationCode.code) */
+      await sendEmailUpdateEmail(locale, newEmail, verificationCode.code)
+
+      return NextResponse.json(
+        {
+          message: t('verification_email_sent'),
+          success: true,
+          openModal: true,
+          // TODO: Add cooldown to retry
+        },
+        { status: 200 }
+      )
     }
 
     // Sensitive data may not be edited
