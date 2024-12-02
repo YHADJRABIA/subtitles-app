@@ -13,6 +13,9 @@ import { UserAPIType } from '@/types/user'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { UserInfoSchema, UserInfoValidator } from '@/types/schemas/dashboard'
+import { getSuccessMessage } from '@/utils/api'
+import { useModal } from '@/hooks/useModal'
+import OTPModal from '@/components/Modals/OTPModal'
 
 interface PropTypes {
   userId: string
@@ -28,6 +31,8 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
   // Prioritise client-side session after update, fallback to server-side session
   const defaultName = clientSession?.user?.name || name || ''
   const defaultEmail = clientSession?.user?.email || email || ''
+
+  const { openModal, closeModal } = useModal()
 
   const {
     handleSubmit,
@@ -57,13 +62,15 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
       try {
         const res = await handleUpdateUserById(userId, updatedFields)
 
-        if (isEmailUpdate) {
-          // Open modal
-        }
         if (res?.data.success) {
           // Notify success and update session
-          await update(updatedFields)
-          notify('success', res.data.message)
+          if (!isEmailUpdate) {
+            await update(updatedFields)
+            notify('success', getSuccessMessage(res))
+            return res // Propagate response to EditableField
+          }
+
+          // TODO: improve response data type
         }
       } catch (err) {
         notify(
