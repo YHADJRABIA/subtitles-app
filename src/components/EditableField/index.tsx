@@ -11,13 +11,14 @@ import Subfield from '../Forms/Subfield'
 
 import { ValidFieldNames } from '@/types/schemas/general'
 import { FieldBasePropTypes } from '@/types/field'
+import { AxiosResponse } from 'axios'
 
 interface PropTypes<T, K extends ValidFieldNames>
   extends FieldBasePropTypes<K> {
   handleSubmit: (
     callback: (data: T) => void
   ) => FormEventHandler<HTMLFormElement>
-  onEdit: (newValue: string) => Promise<void>
+  onEdit: (newValue: string) => Promise<AxiosResponse | void>
   onCancel: () => void
   isValid?: boolean
   topText?: string
@@ -58,6 +59,7 @@ const EditableField = <T, K extends ValidFieldNames & string>({
           setInitialValue(value)
         }
       } catch (err) {
+        /*         console.log(err.response.data.showModal) */
         console.error('Saving EditableField failed:', getErrorMessage(err))
         onCancel()
       } finally {
