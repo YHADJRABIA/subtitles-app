@@ -59,7 +59,6 @@ const EditableField = <T, K extends ValidFieldNames & string>({
           setInitialValue(value)
         }
       } catch (err) {
-        /*         console.log(err.response.data.showModal) */
         console.error('Saving EditableField failed:', getErrorMessage(err))
         onCancel()
       } finally {
