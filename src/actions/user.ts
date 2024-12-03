@@ -22,3 +22,12 @@ export const handleUpdateUserById = async (
     throw err
   }
 }
+
+export const handleVerifyEmail = async (email: string) => {
+  try {
+    return await axios.post('/api/user/verify-email', { email })
+  } catch (err) {
+    console.error('Error verifying user email:', getErrorMessage(err))
+    throw err
+  }
+}
