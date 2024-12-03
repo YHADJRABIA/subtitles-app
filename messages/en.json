@@ -190,6 +190,7 @@
     "user_not_found": "User not found",
     "user_deleted": "Account successfully deleted!",
     "user_updated": "Account successfully updated!",
+    "verification_email_sent": "Verification email sent!",
     "unauthorised": "Unauthorised",
     "email_already_taken": "Email already taken",
     "invalid_fields": "Invalid fields",
@@ -282,6 +283,15 @@
     "are_you_sure": "Do you want to proceed?",
     "yes": "Yes",
     "no": "Cancel"
+  },
+  "OTPModal": {
+    "otp_verification": "OTP Verification",
+    "otp_sent": "A one-time passcode is required to validate your operation.",
+    "input_otp": "Enter the code sent to {destination}",
+    "expires_in": "The code is only valid for {time} minutes",
+    "not_received": "Didn't receive code? Resend",
+    "verify": "Verify",
+    "cancel": "Cancel"
   },
   "DateDisplay": {
     "today": "Today",
