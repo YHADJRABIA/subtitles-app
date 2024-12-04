@@ -201,7 +201,7 @@ export const authOptions: NextAuthOptions = {
           const { name, email, image } = user
           await connectDB()
 
-          const existingUser = await getUserByEmail(email ?? '')
+          const existingUser = (await getUserByEmail(email ?? '')) as any // TODO: Fix api interface
 
           if (existingUser) {
             // Verify user's existing account if user logs in with Google
