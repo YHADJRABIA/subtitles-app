@@ -37,25 +37,25 @@ export const hashPassword = async (
 
 /**
  * Generates an n-digit numeric code and an expiration timestamp.
- * @param {number} [validHours=1] Number of hours until expiration. Defaults to 1 hour.
+ * @param {number} [validMinutes=15] Number of hours until expiration. Defaults to 15 minutes.
  * @param {number} [n=4] Number of digits in the code. Defaults to 4 digits.
  * @returns {{ code: string, expirationDate: number }} Generated code & its expiration date.
  *
  * @example
- * const { code, expirationDate } = generateNDigitCode(2, 6)
+ * const { code, expirationDate } = generateNDigitCode(45, 6)
  * // `code` might be "123456"
- * // `expirationDate` would be 2 hours from the current time
+ * // `expirationDate` would be 45 minutes from the current time
  */
 
 type DigitsNumber = 4 | 5 | 6 | 7 | 8 // Can only be between 4 and 8
 
 export const generateNDigitCode = (
-  validHours: number = 1,
+  validMinutes: number = 15,
   n: DigitsNumber = 4
 ): { code: string; expirationDate: number } => {
   const min = Math.pow(10, n - 1) // Min n-digit number
   const max = Math.pow(10, n) - 1 // Max  n-digit number
   const code = Math.floor(min + Math.random() * (max - min + 1)).toString() // Generate n-digit code
-  const expirationDate = new Date().getTime() + 1000 * 3600 * validHours // Calculate expiration timestamp
+  const expirationDate = new Date().getTime() + 1000 * 60 * validMinutes // Calculate expiration timestamp
   return { code, expirationDate }
 }
