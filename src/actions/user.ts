@@ -1,5 +1,6 @@
 import { UserAPIType } from '@/types/user'
 import { getErrorMessage } from '@/utils/errors'
+import { websiteUrl } from '@/utils/general'
 import axios from 'axios'
 
 export const handleDeleteUserById = async (id: string) => {
@@ -23,9 +24,10 @@ export const handleUpdateUserById = async (
   }
 }
 
+// Need to specify root url since this is called from API
 export const handleVerifyEmail = async (email: string) => {
   try {
-    return await axios.post('/api/user/verify-email', { email })
+    return await axios.post(`${websiteUrl}/api/user/verify-email`, { email })
   } catch (err) {
     console.error('Error verifying user email:', getErrorMessage(err))
     throw err
