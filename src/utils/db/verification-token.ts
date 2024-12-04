@@ -1,7 +1,10 @@
 import { VerificationTokenModel } from '@/models/verificationToken.model'
 import { getErrorMessage } from '../errors'
+import { VerificationResponse } from '@/types/api'
 
-export const getVerificationTokenByEmail = async (email: string) => {
+export const getVerificationTokenByEmail = async (
+  email: string
+): Promise<VerificationResponse> => {
   try {
     const verificationToken = await VerificationTokenModel.findOne({ email })
     return verificationToken
@@ -13,7 +16,9 @@ export const getVerificationTokenByEmail = async (email: string) => {
   }
 }
 
-export const getVerificationTokenByToken = async (token: string) => {
+export const getVerificationTokenByToken = async (
+  token: string
+): Promise<VerificationResponse> => {
   try {
     const verificationToken = await VerificationTokenModel.findOne({ token })
     return verificationToken
