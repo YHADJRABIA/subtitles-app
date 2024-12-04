@@ -191,6 +191,10 @@
     "user_not_found": "Utilisateur inconnu",
     "user_deleted": "Compte supprimé avec succès !",
     "user_updated": "Compte mis à jour avec succès !",
+    "verification_email_sent": "Email de vérification envoyé !",
+    "invalid_code": "Code invalide. Revérifier l'email",
+    "expired_code": "Code expiré. Revérifier l'email",
+    "email_mismatch": "Email non correspondant.",
     "unauthorised": "Non autorisé",
     "email_already_taken": "Email déjà utilisé",
     "invalid_fields": "Champs invalides",
@@ -216,6 +220,8 @@
     "name": "Nom",
     "email": "Email",
     "confirmation_email": "Un email de vérification sera envoyé pour valider ce changement.",
+    "email_update": "Mise à jour d'email",
+    "input_code": "Saisir le code envoyé à {recipient}",
     "edit": "Modifier",
     "log_out": "Se déconnecter",
     "Settings": {
@@ -255,6 +261,11 @@
     "token": {
       "missing": "Jeton requis"
     },
+    "code": {
+      "missing": "Code requis",
+      "too_short": "Le code doit contenir au moins 4 chiffres",
+      "too_long": "Code trop long. Ne pas dépasser 8 chiffres"
+    },
     "name": {
       "missing": "Nom requis",
       "too_long": "Nom trop long. Ne pas dépasser 40 caractères"
@@ -283,6 +294,14 @@
     "are_you_sure": "Voulez-vous procéder ?",
     "yes": "Oui",
     "no": "Annuler"
+  },
+  "OTPModal": {
+    "otp_verification": "Vérification OTP",
+    "otp_required": "Une vérification par code à usage unique est requise.",
+    "expires_in": "Le code est valable pour {expirationTime} minutes",
+    "not_received": "Code non reçu ?",
+    "verify": "Vérifier",
+    "resend": "Renvoyer le code"
   },
   "DateDisplay": {
     "today": "Aujourd'hui",
