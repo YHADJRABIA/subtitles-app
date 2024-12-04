@@ -3,7 +3,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getErrorMessage, getZodErrors } from '@/utils/errors'
 import {
   deleteUserById,
-  getUserByEmail,
   getUserById,
   restrictedUserFields,
   updateUserById,
@@ -15,9 +14,8 @@ import {
   DashboardUserValidator,
 } from '@/types/schemas/dashboard'
 import { getUserSession } from '@/utils/session'
-import { generateVerificationCode } from '@/lib/auth/code'
-import { sendEmailUpdateEmail } from '@/lib/mail'
 import { APIResponse } from '@/types/api'
+import { handleVerifyEmail } from '@/actions/user'
 
 connectDB()
 
@@ -86,29 +84,23 @@ export async function PATCH(
     // User attempts to update e-mail
     if (hasEmail) {
       // Check if e-mail isn't already taken
-      const existingEmail = !!(await getUserByEmail(newEmail))
+      try {
+        const res = await handleVerifyEmail(newEmail)
+        return NextResponse.json({ ...res.data }, { status: res.status })
+      } catch (err) {
+        console.error(
+          'Error verifying user email during update:',
+          getErrorMessage(err)
+        )
 
-      if (existingEmail) {
         return NextResponse.json(
-          { message: t('email_already_taken'), success: false },
-          { status: 409 }
+          {
+            message: await getErrorMessage(err),
+            success: false,
+          },
+          { status: 400 }
         )
       }
-
-      // Send code to new e-mail address
-      const verificationCode = await generateVerificationCode(newEmail)
-
-      await sendEmailUpdateEmail(locale, newEmail, verificationCode.code)
-
-      return NextResponse.json(
-        {
-          message: t('verification_email_sent'),
-          success: true,
-          openModal: true,
-          // TODO: Add cooldown to retry
-        },
-        { status: 200 }
-      )
     }
 
     // Sensitive data may not be edited
