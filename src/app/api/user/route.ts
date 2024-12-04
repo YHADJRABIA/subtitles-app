@@ -94,10 +94,7 @@ export async function PATCH(
         )
 
         return NextResponse.json(
-          {
-            message: await getErrorMessage(err),
-            success: false,
-          },
+          { message: await getErrorMessage(err), success: false },
           { status: 400 }
         )
       }
