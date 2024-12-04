@@ -6,7 +6,7 @@ import Image from 'next/image'
 interface PropsType {
   className?: string
   size?: number
-  isInvertedColor?: boolean // TODO: make colour dynamic
+  isInvertedColor?: boolean
 }
 
 const Logo = ({ className, size, isInvertedColor }: PropsType) => {

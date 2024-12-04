@@ -27,7 +27,7 @@ import {
 import TextInBox from '../TextInBox'
 import Typography from '../UI/Typography'
 import useInfo from '@/hooks/useInfo'
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
   AccountLoginValidator,
@@ -112,7 +112,7 @@ function AuthForm({ type }: PropTypes) {
       noValidate
       className={styles.root}
       method="POST"
-      onSubmit={handleSubmit(handleAuth as SubmitHandler<FieldValues>)}
+      onSubmit={handleSubmit(handleAuth)}
     >
       <div className={styles.wrapper}>
         <Typography
