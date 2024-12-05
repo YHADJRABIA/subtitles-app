@@ -1,10 +1,10 @@
 import {
   AccountLoginSchema,
   AccountRegistrationSchema,
-  EmailVerificationSchema,
+  EmailVerificationByTokenSchema,
   PasswordRecoverySchema,
-  SendEmailVerificationSchema,
 } from '@/types/schemas/auth'
+import { SendEmailVerificationSchema } from '@/types/schemas/general'
 import { getErrorMessage } from '@/utils/errors'
 import axios from 'axios'
 import { signIn, signOut } from 'next-auth/react'
@@ -69,7 +69,7 @@ export const handleSendVerificationEmail = async (
 }
 
 export const handleVerifyEmailValidationToken = async (
-  user: EmailVerificationSchema
+  user: EmailVerificationByTokenSchema
 ) => {
   try {
     return await axios.post('/api/users/verify-token', user)
