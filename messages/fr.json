@@ -221,7 +221,7 @@
     "email": "Email",
     "confirmation_email": "Un email de vérification sera envoyé pour valider ce changement.",
     "email_update": "Mise à jour d'email",
-    "input_code": "Saisir le code envoyé à {recipient}",
+    "input_code": "Saisir le code envoyé à <em>{recipient}</em>",
     "edit": "Modifier",
     "log_out": "Se déconnecter",
     "Settings": {
@@ -298,10 +298,11 @@
   "OTPModal": {
     "otp_verification": "Vérification OTP",
     "otp_required": "Une vérification par code à usage unique est requise.",
-    "expires_in": "Le code est valable pour {expirationTime} minutes",
-    "not_received": "Code non reçu ?",
+    "expires_in": "Ce code est valable pendant <em>{expirationTime} minutes</em>",
+    "not_received": "Code non reçu ? <cta>Renvoyer le code</cta>",
     "verify": "Vérifier",
-    "resend": "Renvoyer le code"
+    "input_code": "Saisir code",
+    "cancel": "Annuler"
   },
   "DateDisplay": {
     "today": "Aujourd'hui",
