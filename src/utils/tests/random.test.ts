@@ -101,19 +101,23 @@ describe('generateNDigitCode', () => {
     const { code, expirationDate } = generateNDigitCode()
 
     expect(code).toMatch(/^\d{4}$/) // Matches a 4-digit code
-    const expectedExpiration = new Date().getTime() + 1000 * 3600 * 1 // 1 hour
+
+    // Expected expiration is 15 minutes from now
+    const expectedExpiration = new Date().getTime() + 15 * 60000
     expect(expirationDate).toBeGreaterThanOrEqual(expectedExpiration - 5)
     expect(expirationDate).toBeLessThanOrEqual(expectedExpiration + 5)
   })
 
   it('should generate a 6-digit code with custom expiration', () => {
-    const validHours = 3
+    const validMinutes = 180 // 3 hours
     const n = 6
 
-    const { code, expirationDate } = generateNDigitCode(validHours, n)
+    const { code, expirationDate } = generateNDigitCode(validMinutes, n)
 
     expect(code).toMatch(/^\d{6}$/) // Matches a 6-digit code
-    const expectedExpiration = new Date().getTime() + 1000 * 3600 * validHours
+
+    // Expected expiration is 3 hours (180 minutes) from now
+    const expectedExpiration = new Date().getTime() + validMinutes * 60000
     expect(expirationDate).toBeGreaterThanOrEqual(expectedExpiration - 5)
     expect(expirationDate).toBeLessThanOrEqual(expectedExpiration + 5)
   })
@@ -128,8 +132,8 @@ describe('generateNDigitCode', () => {
     expect(code).toMatch(/^\d{7}$/) // Matches a 7-digit code
   })
 
-  it('should generate a 8-digit code', () => {
+  it('should generate an 8-digit code', () => {
     const { code } = generateNDigitCode(1, 8)
-    expect(code).toMatch(/^\d{8}$/) // Matches a 8-digit code
+    expect(code).toMatch(/^\d{8}$/) // Matches an 8-digit code
   })
 })
