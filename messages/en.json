@@ -220,7 +220,7 @@
     "email": "Email",
     "confirmation_email": "A verification email will be sent to confirm this change.",
     "email_update": "Update email address",
-    "input_code": "Enter the code sent to {recipient}",
+    "input_code": "Enter the code sent to <em>{recipient}</em>",
     "edit": "Edit",
     "log_out": "Log out",
     "Settings": {
@@ -297,10 +297,11 @@
   "OTPModal": {
     "otp_verification": "OTP Verification",
     "otp_required": "A one-time passcode is required to validate your operation.",
-    "expires_in": "The code is only valid for {expirationTime} minutes",
-    "not_received": "Didn't receive code?",
+    "expires_in": "The code is only valid for <em>{expirationTime} minutes</em>",
+    "not_received": "Didn't receive code? <cta>Resend code</cta>",
     "verify": "Verify",
-    "resend": "Resend code"
+    "input_code": "Input code",
+    "cancel": "Cancel"
   },
   "DateDisplay": {
     "today": "Today",
