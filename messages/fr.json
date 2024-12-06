@@ -192,7 +192,7 @@
     "user_deleted": "Compte supprimé avec succès !",
     "user_updated": "Compte mis à jour avec succès !",
     "verification_email_sent": "Email de vérification envoyé !",
-    "invalid_code": "Code invalide. Revérifier l'email",
+    "invalid_code": "Code invalide",
     "expired_code": "Code expiré. Revérifier l'email",
     "email_mismatch": "Email non correspondant.",
     "unauthorised": "Non autorisé",
@@ -301,8 +301,8 @@
     "expires_in": "Ce code est valable pendant <em>{expirationTime} minutes</em>",
     "not_received": "Code non reçu ? <cta>Renvoyer le code</cta>",
     "verify": "Vérifier",
-    "input_code": "Saisir code",
-    "cancel": "Annuler"
+    "cancel": "Annuler",
+    "ok": "D'accord"
   },
   "DateDisplay": {
     "today": "Aujourd'hui",
