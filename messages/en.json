@@ -195,7 +195,7 @@
     "email_already_taken": "Email already taken",
     "expired_code": "Code has expired. Reverify email",
     "email_mismatch": "Email mismatch",
-    "invalid_code": "Invalid code. Reverify email",
+    "invalid_code": "Invalid code",
     "invalid_fields": "Invalid fields",
     "failed_action": "Action failed"
   },
@@ -300,8 +300,8 @@
     "expires_in": "The code is only valid for <em>{expirationTime} minutes</em>",
     "not_received": "Didn't receive code? <cta>Resend code</cta>",
     "verify": "Verify",
-    "input_code": "Input code",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "ok": "Ok"
   },
   "DateDisplay": {
     "today": "Today",
