@@ -3,13 +3,13 @@ import {
   deleteVerificationCodeById,
   getVerificationCodeByEmail,
 } from '@/utils/db/verification-code'
-import { generateDigitCode } from '@/utils/random'
+import { generateNDigitCode } from '@/utils/random'
 
 const { EMAIL_VERIFICATION_CODE_LIFETIME_HOURS } = process.env
 
 export const generateVerificationCode = async (email: string) => {
   // Generate random code
-  const { code, expirationDate } = generateDigitCode(
+  const { code, expirationDate } = generateNDigitCode(
     Number(EMAIL_VERIFICATION_CODE_LIFETIME_HOURS)
   )
 

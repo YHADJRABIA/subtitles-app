@@ -11,6 +11,7 @@ import { useTranslations } from 'next-intl'
 import { notify } from '@/lib/toastify'
 import { getErrorMessage } from '@/utils/errors'
 import { handleLogout } from '@/actions/auth'
+import { getSuccessMessage } from '@/utils/api'
 
 interface PropTypes {
   className?: string
@@ -48,7 +49,7 @@ const DeleteAccountButton = ({ className, userId }: PropTypes) => {
       const res = await handleDeleteUserById(userId)
       if (res?.data.success) {
         await handleLogout()
-        notify('success', res.data.message) // TODO: persist toast after redirection
+        notify('success', getSuccessMessage(res)) // TODO: persist toast after redirection
       }
     } catch (err) {
       notify('error', (await getErrorMessage(err)) || t('deletion_failed'))

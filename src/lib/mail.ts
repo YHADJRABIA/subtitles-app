@@ -6,6 +6,7 @@ const {
   NODEMAILER_SENDER_EMAIL_PASSWORD: pass,
   NODEMAILER_SERVICE: service,
   EMAIL_VERIFICATION_TOKEN_LIFETIME_HOURS,
+  EMAIL_VERIFICATION_CODE_LIFETIME_MINUTES,
   PASSWORD_RESET_TOKEN_LIFETIME_HOURS,
 } = process.env
 
@@ -123,7 +124,7 @@ export const sendEmailUpdateEmail = async (
     \r\n
     An email update request has been created using this email.\r\n
     You will need to input the following code: <b>${code}</b> to validate this operation.
-    <b>This code is only valid for ${EMAIL_VERIFICATION_TOKEN_LIFETIME_HOURS} hours.</b>
+    <b>This code is only valid for ${EMAIL_VERIFICATION_CODE_LIFETIME_MINUTES} minutes.</b>
     `,
   }
 
@@ -135,7 +136,7 @@ export const sendEmailUpdateEmail = async (
       \r\n
       Une demande de mise à jour de l'email a été créée avec cette adresse.\r\n
       Veuillez insérer le code suivant : <b>${code}</b> pour valider cette opération.
-      <b>Ce code n'est valable que pendant ${EMAIL_VERIFICATION_TOKEN_LIFETIME_HOURS} heures.</b>
+      <b>Ce code n'est valable que pendant ${EMAIL_VERIFICATION_CODE_LIFETIME_MINUTES} minutes.</b>
       `
       break
 

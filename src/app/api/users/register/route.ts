@@ -10,10 +10,13 @@ import { hashPassword } from '@/utils/random'
 import { getLocaleFromNextRequest } from '@/utils/cookies'
 import { AccountRegistrationValidator } from '@/types/schemas/auth'
 import { getTranslations } from 'next-intl/server'
+import { APIResponse } from '@/types/api'
 
 connectDB()
 
-export async function POST(req: NextRequest) {
+export async function POST(
+  req: NextRequest
+): Promise<NextResponse<APIResponse>> {
   try {
     const locale = getLocaleFromNextRequest(req) // TODO: Use await getLocale() feature after updating to Next.js 15
 
@@ -46,7 +49,7 @@ export async function POST(req: NextRequest) {
     if (existingUser)
       return NextResponse.json(
         { message: t('email_already_taken'), success: false },
-        { status: 400 }
+        { status: 409 }
       )
 
     // Hash password for safety
