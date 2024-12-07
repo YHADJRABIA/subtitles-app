@@ -7,7 +7,7 @@ import { getUserByEmail } from '@/utils/db/user'
 import { getLocaleFromNextRequest } from '@/utils/cookies'
 import { sendVerificationEmail } from '@/lib/mail'
 import { generateVerificationToken } from '@/lib/auth/token'
-import { SendEmailVerificationValidator } from '@/types/schemas/auth'
+import { SendEmailVerificationValidator } from '@/types/schemas/general'
 import { getTranslations } from 'next-intl/server'
 
 connectDB()
