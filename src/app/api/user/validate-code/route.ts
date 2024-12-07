@@ -12,6 +12,7 @@ import {
 } from '@/utils/db/verification-code'
 import { hasExpired } from '@/utils/date'
 import { EmailVerificationByCodeValidator } from '@/types/schemas/dashboard'
+import { getUserSession } from '@/utils/session'
 
 connectDB()
 
@@ -38,7 +39,17 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    const { code, email } = body.data
+    const { code } = body.data
+
+    const currentUser = await getUserSession()
+
+    // Stop if user isn't authenticated
+    if (!currentUser) {
+      return NextResponse.json(
+        { message: t('unauthorised'), success: false },
+        { status: 401 }
+      )
+    }
 
     // Look for existing code
     const existingCode = await getVerificationCodeByCode(code)
@@ -63,8 +74,8 @@ export async function POST(req: NextRequest) {
     const newEmail = existingCode.email
     const linkedUser = await getUserById(existingCode.userId)
 
-    // Stop validation if provided email isn't linked to code
-    const isMatchingEmail = email === linkedUser?.email
+    // Stop validation if user's email isn't linked to code
+    const isMatchingEmail = currentUser.email === linkedUser?.email
     if (!linkedUser || !isMatchingEmail) {
       return NextResponse.json(
         { message: t('email_mismatch'), success: false },
