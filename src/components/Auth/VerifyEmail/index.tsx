@@ -14,8 +14,8 @@ import useInfo from '@/hooks/useInfo'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
-  EmailVerificationSchema,
-  EmailVerificationValidator,
+  EmailVerificationByTokenSchema,
+  EmailVerificationByTokenValidator,
 } from '@/types/schemas/auth'
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 import { handleVerifyEmailValidationToken } from '@/actions/auth'
@@ -33,7 +33,9 @@ const VerifyEmail = () => {
 
   const { info, setInfoMessage } = useInfo()
 
-  const handleValidate: SubmitHandler<EmailVerificationSchema> = async user => {
+  const handleValidate: SubmitHandler<
+    EmailVerificationByTokenSchema
+  > = async user => {
     try {
       const res = await handleVerifyEmailValidationToken(user)
       setInfoMessage(getSuccessMessage(res), 'success')
@@ -46,8 +48,8 @@ const VerifyEmail = () => {
     handleSubmit,
     setValue,
     formState: { isSubmitted },
-  } = useForm<EmailVerificationSchema>({
-    resolver: zodResolver(EmailVerificationValidator(t_zod)),
+  } = useForm<EmailVerificationByTokenSchema>({
+    resolver: zodResolver(EmailVerificationByTokenValidator(t_zod)),
     delayError: 400,
     mode: 'onChange',
   })
