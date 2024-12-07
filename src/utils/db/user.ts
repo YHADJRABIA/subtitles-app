@@ -1,8 +1,9 @@
 import { UserModel } from '@/models/user.model'
 import { getErrorMessage } from '../errors'
 import { UserAPIType } from '@/types/user'
+import { UserResponse } from '@/types/api'
 
-export const getUserByEmail = async (email: string) => {
+export const getUserByEmail = async (email: string): Promise<UserResponse> => {
   try {
     return await UserModel.findOne({ email })
   } catch (err) {
@@ -10,7 +11,7 @@ export const getUserByEmail = async (email: string) => {
   }
 }
 
-export const getUserById = async (id: string) => {
+export const getUserById = async (id: string): Promise<UserResponse> => {
   try {
     return await UserModel.findById(id)
   } catch (err) {
@@ -31,6 +32,14 @@ export const updateNameById = async (id: string, name: string) => {
     return await UserModel.updateOne({ _id: id }, { name })
   } catch (err) {
     console.error("Error updating user's name by id:", getErrorMessage(err))
+  }
+}
+
+export const updateEmailById = async (id: string, email: string) => {
+  try {
+    return await UserModel.updateOne({ _id: id }, { email })
+  } catch (err) {
+    console.error("Error updating user's email by id:", getErrorMessage(err))
   }
 }
 
