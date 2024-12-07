@@ -27,7 +27,7 @@ export const deleteUserById = async (id: string) => {
   }
 }
 
-export const updateNameById = async (id: string, name: string) => {
+export const updateNameByUserId = async (id: string, name: string) => {
   try {
     return await UserModel.updateOne({ _id: id }, { name })
   } catch (err) {
@@ -35,7 +35,7 @@ export const updateNameById = async (id: string, name: string) => {
   }
 }
 
-export const updateEmailById = async (id: string, email: string) => {
+export const updateEmailByUserId = async (id: string, email: string) => {
   try {
     return await UserModel.updateOne({ _id: id }, { email })
   } catch (err) {
