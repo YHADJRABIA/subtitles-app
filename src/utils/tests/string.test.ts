@@ -1,4 +1,8 @@
-import { capitaliseFirstLetter, isNonRelativeUrl } from '../string'
+import {
+  capitaliseFirstLetter,
+  isNonRelativeUrl,
+  shortenEmail,
+} from '../string'
 
 describe('capitaliseFirstLetter', () => {
   it('should capitalise the first letter of a string', () => {
@@ -72,5 +76,40 @@ describe('isNonRelativeUrl', () => {
   it('should return false for a URL starting with a space', () => {
     const url = ' https://example.com'
     expect(isNonRelativeUrl(url)).toBe(false)
+  })
+})
+
+describe('shortenEmail', () => {
+  test('should return the full email if within the character limit', () => {
+    expect(shortenEmail('user@domain.com', 20)).toBe('user@domain.com')
+  })
+
+  test('should shorten email with "..." when exceeding limit', () => {
+    expect(shortenEmail('exampleemail@domain.com', 10)).toBe('e...@domain.com')
+  })
+
+  test('should handle very small charLimit and keep a visible part', () => {
+    expect(shortenEmail('exampleemail@domain.com', 5)).toBe('e...@domain.com')
+    expect(shortenEmail('exampleemail@domain.com', 4)).toBe('e...d')
+  })
+
+  test('should shorten only the name part', () => {
+    expect(shortenEmail('longname@domain.com', 12)).toBe('lon...@domain.com')
+  })
+
+  test('should handle email without "@" gracefully', () => {
+    expect(shortenEmail('justastringwithoutat', 10)).toBe('justas...')
+  })
+
+  test('should handle edge cases with very small charLimit', () => {
+    expect(shortenEmail('example@domain.com', 3)).toBe('e...')
+  })
+
+  test('should return "..." for unreasonably small limits', () => {
+    expect(shortenEmail('example@domain.com', 1)).toBe('...')
+  })
+
+  test('should handle emails that are exactly at the limit', () => {
+    expect(shortenEmail('example@domain.com', 17)).toBe('example@domain.com')
   })
 })
