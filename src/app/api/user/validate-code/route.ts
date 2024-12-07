@@ -5,7 +5,11 @@ import { getErrorMessage, getZodErrors } from '@/utils/errors'
 
 import { getTranslations } from 'next-intl/server'
 import { getLocaleFromNextRequest } from '@/utils/cookies'
-import { getUserByEmail, getUserById, updateEmailById } from '@/utils/db/user'
+import {
+  getUserByEmail,
+  getUserById,
+  updateEmailByUserId,
+} from '@/utils/db/user'
 import {
   deleteVerificationCodeById,
   getVerificationCodeByCode,
@@ -93,7 +97,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Update targeted user's email
-    await updateEmailById(existingCode.userId, newEmail)
+    await updateEmailByUserId(existingCode.userId, newEmail)
 
     // Remove verification code
     await deleteVerificationCodeById(existingCode.id)
