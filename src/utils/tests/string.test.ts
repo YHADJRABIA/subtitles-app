@@ -80,36 +80,51 @@ describe('isNonRelativeUrl', () => {
 })
 
 describe('shortenEmail', () => {
-  test('should return the full email if within the character limit', () => {
-    expect(shortenEmail('user@domain.com', 20)).toBe('user@domain.com')
+  it('returns the email as is if the length is within the charLimit', () => {
+    expect(shortenEmail('user@example.com', 20)).toBe('user@example.com')
   })
 
-  test('should shorten email with "..." when exceeding limit', () => {
-    expect(shortenEmail('exampleemail@domain.com', 10)).toBe('e...@domain.com')
+  it('shortens the email with "..." when it exceeds the charLimit', () => {
+    expect(shortenEmail('user@example.com', 10)).toBe('u...@example.com')
   })
 
-  test('should handle very small charLimit and keep a visible part', () => {
-    expect(shortenEmail('exampleemail@domain.com', 5)).toBe('e...@domain.com')
-    expect(shortenEmail('exampleemail@domain.com', 4)).toBe('e...d')
+  it('handles cases where there is no "@" in the email', () => {
+    expect(shortenEmail('invalidemail', 10)).toBe('inval...')
   })
 
-  test('should shorten only the name part', () => {
-    expect(shortenEmail('longname@domain.com', 12)).toBe('lon...@domain.com')
+  it('handles cases where charLimit is too small to display the domain', () => {
+    expect(shortenEmail('user@example.com', 5)).toBe('u...')
   })
 
-  test('should handle email without "@" gracefully', () => {
-    expect(shortenEmail('justastringwithoutat', 10)).toBe('justas...')
+  it('handles cases where charLimit is exactly the length of the email', () => {
+    expect(shortenEmail('user@example.com', 15)).toBe('user@example.com')
   })
 
-  test('should handle edge cases with very small charLimit', () => {
-    expect(shortenEmail('example@domain.com', 3)).toBe('e...')
+  it('handles cases where charLimit is just enough for "..." but not the domain', () => {
+    expect(shortenEmail('user@example.com', 3)).toBe('...')
   })
 
-  test('should return "..." for unreasonably small limits', () => {
-    expect(shortenEmail('example@domain.com', 1)).toBe('...')
+  it('truncates properly when there is enough room for part of the name and the domain', () => {
+    expect(shortenEmail('longusername@example.com', 15)).toBe(
+      'longu...@example.com'
+    )
   })
 
-  test('should handle emails that are exactly at the limit', () => {
-    expect(shortenEmail('example@domain.com', 17)).toBe('example@domain.com')
+  it('handles cases where charLimit is too small for even minimal display', () => {
+    expect(shortenEmail('a@b.com', 4)).toBe('a...')
+  })
+
+  it('handles cases with very short emails', () => {
+    expect(shortenEmail('a@b.com', 6)).toBe('a@b.com')
+    expect(shortenEmail('a@b.com', 5)).toBe('a...')
+  })
+
+  it('handles edge case where charLimit is zero or negative', () => {
+    expect(shortenEmail('user@example.com', 0)).toBe('...')
+    expect(shortenEmail('user@example.com', -5)).toBe('...')
+  })
+
+  it('handles edge case with an empty string', () => {
+    expect(shortenEmail('', 10)).toBe('')
   })
 })
