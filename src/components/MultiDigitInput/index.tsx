@@ -10,6 +10,8 @@ interface MultiDigitInputProps {
   autoFocus?: boolean
   hasError?: boolean
   className?: string
+  ariaLabel?: string
+  testId?: string
 }
 
 const MultiDigitInput = ({
@@ -20,6 +22,8 @@ const MultiDigitInput = ({
   autoFocus = true,
   hasError = false,
   className,
+  ariaLabel,
+  testId,
 }: MultiDigitInputProps) => {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([])
 
@@ -57,7 +61,7 @@ const MultiDigitInput = ({
   }
 
   return (
-    <div className={cn(styles.root, className)}>
+    <div aria-label={ariaLabel} className={cn(styles.root, className)}>
       {Array.from({ length: n }).map((_, index) => (
         <input
           autoFocus={autoFocus && index === 0}
