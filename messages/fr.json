@@ -300,6 +300,7 @@
     "otp_required": "Une vérification par code à usage unique est requise.",
     "expires_in": "Ce code est valable pendant <em>{expirationTime} minutes</em>",
     "not_received": "Code non reçu ? <cta>Renvoyer le code</cta>",
+    "input_code": "Saisir code",
     "verify": "Vérifier",
     "cancel": "Annuler",
     "ok": "D'accord"
