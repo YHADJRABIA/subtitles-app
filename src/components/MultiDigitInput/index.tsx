@@ -61,7 +61,11 @@ const MultiDigitInput = ({
   }
 
   return (
-    <div aria-label={ariaLabel} className={cn(styles.root, className)}>
+    <div
+      aria-label={ariaLabel}
+      className={cn(styles.root, className)}
+      data-testid={testId}
+    >
       {Array.from({ length: n }).map((_, index) => (
         <input
           autoFocus={autoFocus && index === 0}
