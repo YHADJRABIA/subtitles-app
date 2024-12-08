@@ -131,10 +131,12 @@ const OTPModal = ({
             >
               <MultiDigitInput
                 autoFocus
+                ariaLabel={t('input_code')}
                 className={styles.input}
                 hasError={hasError}
                 isDisabled={isLoading}
                 n={digitsNumber}
+                testId="otp-modal-code"
                 value={code}
                 onChange={handleCodeChange}
               />
