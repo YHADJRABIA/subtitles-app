@@ -8,7 +8,6 @@ import { UserAPIType } from '@/types/user'
 import { isDevelopment } from '@/utils/general'
 import {
   getUserByEmail,
-  updateNameById,
   updateUserById,
   verifyEmailByUserId,
 } from '@/utils/db/user'
