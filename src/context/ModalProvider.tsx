@@ -28,7 +28,7 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
   const [isClosable, setIsClosable] = useState(true)
 
   const [className, setClassName] = useState<string | undefined>(undefined)
-  const [icon, setIcon] = useState<Icon | undefined>(undefined)
+  const [icon, setIcon] = useState<IconType | undefined>(undefined)
 
   const openModal = ({
     content,
