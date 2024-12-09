@@ -13,6 +13,9 @@ import { UserAPIType } from '@/types/user'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { UserInfoSchema, UserInfoValidator } from '@/types/schemas/dashboard'
+import { getSuccessMessage } from '@/utils/api'
+import { useModal } from '@/hooks/useModal'
+import OTPModal from '@/components/Modals/OTPModal'
 
 interface PropTypes {
   userId: string
@@ -26,19 +29,22 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
   const [t, t_zod] = [useTranslations('Dashboard'), useTranslations('Zod')]
   const { data: clientSession, update } = useSession()
   // Prioritise client-side session after update, fallback to server-side session
-  const username = clientSession?.user?.name || name || ''
-  const userEmail = clientSession?.user?.email || email || ''
+  const defaultName = clientSession?.user?.name || name || ''
+  const defaultEmail = clientSession?.user?.email || email || ''
+
+  const { openModal, closeModal } = useModal()
 
   const {
     handleSubmit,
     watch,
     register,
     formState: { errors },
+    setValue,
   } = useForm<UserInfoSchema>({
     resolver: zodResolver(UserInfoValidator(t_zod)),
     delayError: 400,
     mode: 'onChange',
-    defaultValues: { name: username, email: userEmail },
+    defaultValues: { name: defaultName, email: defaultEmail },
   })
 
   const [nameValue, emailValue] = watch(['name', 'email']) // If not set, form inputs with more than 1 character will be delayed
@@ -51,24 +57,37 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
         return
       }
 
+      const isEmailUpdate = !!updatedFields.email
+
       try {
         const res = await handleUpdateUserById(userId, updatedFields)
+
         if (res?.data.success) {
           // Notify success and update session
-          await update(updatedFields)
-          notify('success', res.data.message)
+          if (!isEmailUpdate) {
+            await update(updatedFields)
+            notify('success', getSuccessMessage(res))
+            return res // Propagate response to EditableField
+          }
+
+          // TODO: improve response data type
         }
       } catch (err) {
         notify(
           'error',
           (await getErrorMessage(err)) || t('Account.update_failed')
         )
+        throw err // Propagate error to EditableField to prevent field update if backend error
       }
     },
     [userId, t, update]
   )
 
   watch()
+
+  const handleReset = (field: keyof UserInfoSchema, defaultValue: string) => {
+    setValue(field, defaultValue)
+  }
 
   return (
     <div className={cn(styles.root, className)}>
@@ -84,6 +103,7 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
           subLabel={{ text: errors.name?.message, isShown: !!errors.name }}
           testId="update-user-name"
           value={nameValue!}
+          onCancel={() => handleReset('name', defaultName)}
           onEdit={newName => handleUpdate({ name: newName })}
         />
 
@@ -99,6 +119,7 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
           testId="update-user-email"
           topText={t('confirmation_email')}
           value={emailValue!}
+          onCancel={() => handleReset('email', defaultEmail)}
           onEdit={newEmail => handleUpdate({ email: newEmail })}
         />
       </div>

@@ -26,6 +26,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
 import { handleSendVerificationEmail } from '@/actions/auth'
 import { Link } from '@/i18n/routing'
+import { getSuccessMessage } from '@/utils/api'
 
 const SendVerificationEmailForm = () => {
   const [t, t_zod] = [useTranslations('Auth'), useTranslations('Zod')]
@@ -55,7 +56,7 @@ const SendVerificationEmailForm = () => {
   > = async user => {
     try {
       const res = await handleSendVerificationEmail(user)
-      setInfoMessage(res.data.message, 'success')
+      setInfoMessage(getSuccessMessage(res), 'success')
     } catch (err) {
       setInfoMessage(await getErrorMessage(err), 'error')
     }
