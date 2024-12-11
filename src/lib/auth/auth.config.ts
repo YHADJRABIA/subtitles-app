@@ -142,6 +142,7 @@ export const authOptions: NextAuthOptions = {
     },
 
     // Called after jwt
+    // This data is exposed to client after signIn
     session({ session, token }) {
       return {
         ...session,
@@ -149,7 +150,6 @@ export const authOptions: NextAuthOptions = {
           ...session.user,
           id: token.sub,
           name: token.name, // Updated name passed down from jwt after update-trigger
-          isVerifiedEmail: token.isVerifiedEmail,
           creationDate: token.createdAt,
           lastUpdateDate: token.updatedAt,
           lastLoginDate: token.lastLogin,
