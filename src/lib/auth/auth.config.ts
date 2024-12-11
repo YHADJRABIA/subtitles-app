@@ -59,7 +59,7 @@ export const authOptions: NextAuthOptions = {
         ]
 
         /*         if (req.status === 429) {
-          throw new Error(t('incorrect_email_or_password')) // TODO: fix this
+          throw new Error(t('too_many_api_calls')) // TODO: implement this
         } */
 
         try {
