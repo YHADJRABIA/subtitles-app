@@ -35,11 +35,7 @@ export type UserInfoSchema = z.infer<ReturnType<typeof UserInfoValidator>>
 
 export const SendEmailUpdateVerificationValidator = (
   t: ReturnType<typeof useTranslations<'Zod'>>
-) =>
-  z.object({
-    email: emailSchema(t),
-    userId: idSchema(t),
-  })
+) => z.object({ email: emailSchema(t) })
 
 export type SendEmailVerificationSchema = z.infer<
   ReturnType<typeof SendEmailUpdateVerificationValidator>
