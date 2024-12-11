@@ -1,0 +1,59 @@
+.root {
+  @include flexCenter(column, center, flex-start);
+  gap: 2rem;
+  margin: 0 auto;
+  transition: max-height 0.3s ease;
+
+  width: min(40rem, 100%);
+
+  & > * {
+    width: 100%;
+  }
+}
+
+.heading {
+  @include flexCenter(column, flex-start, flex-start);
+  gap: 1rem;
+}
+
+.expiration {
+  opacity: 0.8;
+  margin-bottom: 3rem;
+}
+
+.ctaSection {
+  @include flexCenter(column, center, center);
+  gap: 5rem;
+  width: 100%;
+}
+
+.cta {
+  @include flexCenter(row, center, center);
+  gap: 1.2rem;
+  width: 100%;
+}
+
+.inputContainer {
+  @include flexCenter(column, center, flex-start);
+  width: 100%;
+}
+.input {
+  width: 100%;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.error {
+  transition: opacity 0.5s ease;
+  width: 100%;
+  margin-bottom: 1.5rem;
+  @include ow;
+}
+.success {
+  @include flexCenter(column, center, center);
+  gap: 4rem;
+}
+
+.successHeading {
+  @include flexCenter(row, center, center);
+  gap: 2rem;
+}

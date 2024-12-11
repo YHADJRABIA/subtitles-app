@@ -38,3 +38,21 @@ export const nameSchema = (t: ReturnType<typeof useTranslations<'Zod'>>) =>
       message: t('name.too_long'),
     })
     .trim()
+
+export const codeSchema = (t: ReturnType<typeof useTranslations<'Zod'>>) =>
+  z
+    .string()
+    .min(4, { message: t('code.too_short') })
+    .max(8, { message: t('code.too_long') })
+    .trim()
+
+export const SendEmailVerificationValidator = (
+  t: ReturnType<typeof useTranslations<'Zod'>>
+) =>
+  z.object({
+    email: emailSchema(t),
+  })
+
+export type SendEmailVerificationSchema = z.infer<
+  ReturnType<typeof SendEmailVerificationValidator>
+>

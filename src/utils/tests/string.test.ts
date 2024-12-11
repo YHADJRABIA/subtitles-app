@@ -1,4 +1,8 @@
-import { capitaliseFirstLetter, isNonRelativeUrl } from '../string'
+import {
+  capitaliseFirstLetter,
+  isNonRelativeUrl,
+  shortenEmail,
+} from '../string'
 
 describe('capitaliseFirstLetter', () => {
   it('should capitalise the first letter of a string', () => {
@@ -72,5 +76,55 @@ describe('isNonRelativeUrl', () => {
   it('should return false for a URL starting with a space', () => {
     const url = ' https://example.com'
     expect(isNonRelativeUrl(url)).toBe(false)
+  })
+})
+
+describe('shortenEmail', () => {
+  it('returns the email as is if the length is within the charLimit', () => {
+    expect(shortenEmail('user@example.com', 20)).toBe('user@example.com')
+  })
+
+  it('shortens the email with "..." when it exceeds the charLimit', () => {
+    expect(shortenEmail('user@example.com', 10)).toBe('u...@example.com')
+  })
+
+  it('handles cases where there is no "@" in the email', () => {
+    expect(shortenEmail('invalidemail', 10)).toBe('inval...')
+  })
+
+  it('handles cases where charLimit is too small to display the domain', () => {
+    expect(shortenEmail('user@example.com', 5)).toBe('u...')
+  })
+
+  it('handles cases where charLimit is exactly the length of the email', () => {
+    expect(shortenEmail('user@example.com', 15)).toBe('user@example.com')
+  })
+
+  it('handles cases where charLimit is just enough for "..." but not the domain', () => {
+    expect(shortenEmail('user@example.com', 3)).toBe('...')
+  })
+
+  it('truncates properly when there is enough room for part of the name and the domain', () => {
+    expect(shortenEmail('longusername@example.com', 15)).toBe(
+      'longu...@example.com'
+    )
+  })
+
+  it('handles cases where charLimit is too small for even minimal display', () => {
+    expect(shortenEmail('a@b.com', 4)).toBe('a...')
+  })
+
+  it('handles cases with very short emails', () => {
+    expect(shortenEmail('a@b.com', 6)).toBe('a@b.com')
+    expect(shortenEmail('a@b.com', 5)).toBe('a...')
+  })
+
+  it('handles edge case where charLimit is zero or negative', () => {
+    expect(shortenEmail('user@example.com', 0)).toBe('...')
+    expect(shortenEmail('user@example.com', -5)).toBe('...')
+  })
+
+  it('handles edge case with an empty string', () => {
+    expect(shortenEmail('', 10)).toBe('')
   })
 })

@@ -15,9 +15,15 @@ label {
 input {
   font-family: inherit;
   cursor: pointer;
+  border: 1px solid var(--primary-gray-color);
+  outline: none;
+  transition: all 0.3s ease-in-out;
+  transition-property: box-shadow, border-color;
 
   &:focus {
     cursor: text;
+    border-color: var(--primary-blue-color);
+    box-shadow: 0 0 0.4rem var(--primary-blue-color);
   }
 }
 

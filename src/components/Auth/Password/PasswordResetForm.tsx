@@ -24,6 +24,7 @@ import {
   PasswordResetSchema,
   PasswordResetValidator,
 } from '@/types/schemas/auth'
+import { getSuccessMessage } from '@/utils/api'
 
 const PasswordResetForm = () => {
   const searchParams = useSearchParams()
@@ -55,7 +56,7 @@ const PasswordResetForm = () => {
   const handleReset: SubmitHandler<PasswordResetSchema> = async user => {
     try {
       const res = await axios.post('/api/users/password/reset', user)
-      setInfoMessage(res.data.message, 'success')
+      setInfoMessage(getSuccessMessage(res), 'success')
     } catch (err) {
       setInfoMessage(await getErrorMessage(err), 'error')
     }

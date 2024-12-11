@@ -2,6 +2,11 @@ import mongoose from 'mongoose'
 const { Schema } = mongoose
 
 const verificationCodeSchema = new Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
   email: {
     type: String,
     required: [true, 'Please provide an email'],

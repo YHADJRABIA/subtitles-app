@@ -1,0 +1,21 @@
+.root {
+  @include flexCenter(row, space-between);
+}
+
+.input {
+  border-radius: 0.5rem;
+  width: 4rem;
+  height: 4rem;
+  text-align: center;
+  border: 1px solid var(--secondary-gray-color);
+
+  &:disabled {
+    background-color: var(--disabled-gray-color);
+    cursor: not-allowed;
+  }
+
+  &.error {
+    border-color: var(--primary-red-color);
+    border-width: 0.2rem;
+  }
+}

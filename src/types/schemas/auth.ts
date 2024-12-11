@@ -31,26 +31,15 @@ export type AccountLoginSchema = z.infer<
   ReturnType<typeof AccountLoginValidator>
 >
 
-export const SendEmailVerificationValidator = (
-  t: ReturnType<typeof useTranslations<'Zod'>>
-) =>
-  z.object({
-    email: emailSchema(t),
-  })
-
-export type SendEmailVerificationSchema = z.infer<
-  ReturnType<typeof SendEmailVerificationValidator>
->
-
-export const EmailVerificationValidator = (
+export const EmailVerificationByTokenValidator = (
   t: ReturnType<typeof useTranslations<'Zod'>>
 ) =>
   z.object({
     token: tokenSchema(t),
   })
 
-export type EmailVerificationSchema = z.infer<
-  ReturnType<typeof EmailVerificationValidator>
+export type EmailVerificationByTokenSchema = z.infer<
+  ReturnType<typeof EmailVerificationByTokenValidator>
 >
 
 export const PasswordRecoveryValidator = (
