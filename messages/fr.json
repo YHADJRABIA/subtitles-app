@@ -301,6 +301,7 @@
     "expires_in": "Ce code est valable pendant <em>{expirationTime} minutes</em>",
     "not_received": "Code non reçu ? <cta>Renvoyer le code</cta>",
     "input_code": "Saisir code",
+    "resend": "Renvoyer",
     "verify": "Vérifier",
     "cancel": "Annuler",
     "ok": "D'accord"
