@@ -15,7 +15,7 @@ import {
 } from '@/types/schemas/dashboard'
 import { getUserSession } from '@/utils/session'
 import { APIResponse } from '@/types/api'
-import { handleVerifyEmail } from '@/actions/user'
+import { verifyEmailByCode } from '@/lib/auth/verifyEmail'
 
 connectDB()
 
@@ -84,20 +84,16 @@ export async function PATCH(
     // User attempts to update e-mail
     if (hasEmail) {
       // Check if e-mail isn't already taken
-      try {
-        const res = await handleVerifyEmail(newEmail)
-        return NextResponse.json({ ...res.data }, { status: res.status })
-      } catch (err) {
-        console.error(
-          'Error verifying user email during update:',
-          getErrorMessage(err)
-        )
 
-        return NextResponse.json(
-          { message: await getErrorMessage(err), success: false },
-          { status: 400 }
-        )
+      const { data, status, error } = await verifyEmailByCode(
+        newEmail,
+        currentUser.id,
+        locale
+      )
+      if (error) {
+        return NextResponse.json({ error, success: false }, { status })
       }
+      return NextResponse.json(data, { status })
     }
 
     // Sensitive data may not be edited
