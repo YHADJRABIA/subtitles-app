@@ -300,6 +300,7 @@
     "expires_in": "The code is only valid for <em>{expirationTime} minutes</em>",
     "not_received": "Didn't receive code? <cta>Resend code</cta>",
     "input_code": "Input code",
+    "resend": "Resend",
     "verify": "Verify",
     "cancel": "Cancel",
     "ok": "Ok"
