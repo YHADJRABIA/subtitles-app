@@ -1,6 +1,6 @@
 .root {
   @include flexCenter(column, center, flex-start);
-  gap: 2rem;
+  gap: 4rem;
   margin: 0 auto;
   transition: max-height 0.3s ease;
 
@@ -22,7 +22,7 @@
 }
 
 .ctaSection {
-  @include flexCenter(column, center, center);
+  @include flexCenter(column, center, flex-start);
   gap: 5rem;
   width: 100%;
 }
@@ -56,4 +56,13 @@
 .successHeading {
   @include flexCenter(row, center, center);
   gap: 2rem;
+}
+
+.resend {
+  cursor: pointer;
+  color: var(--primary-blue-color);
+  transition: color 0.3s ease;
+  &:hover {
+    color: var(--secondary-blue-color);
+  }
 }

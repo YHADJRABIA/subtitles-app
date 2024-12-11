@@ -4,7 +4,6 @@ import cn from 'classnames'
 import styles from './OTPModal.module.scss'
 import { useTranslations } from 'next-intl'
 import { Button } from '@/components/UI/Button'
-import useIsOnMobile from '@/hooks/useIsOnMobile'
 import { getErrorMessage } from '@/utils/errors'
 import { AxiosResponse } from 'axios'
 import { useForm } from 'react-hook-form'
@@ -30,7 +29,6 @@ const OTPModal = ({
   expirationTime,
   digitsNumber,
 }: PropTypes) => {
-  const isOnMobile = useIsOnMobile()
   const contentHeight = useRef<HTMLDivElement | null>(null)
   const [isLoading, setisLoading] = useState(false)
   const [successMessage, setSuccessMessage] = useState('')
@@ -118,9 +116,7 @@ const OTPModal = ({
         <>
           <div className={styles.heading}>
             <Typography weight="semiLight">{t('otp_required')}</Typography>
-            <Typography size="xs" weight="semiLight">
-              {message}
-            </Typography>
+            <Typography weight="semiLight">{message}</Typography>
           </div>
           <div className={styles.ctaSection}>
             <form
@@ -184,12 +180,14 @@ const OTPModal = ({
               </div>
             </form>
 
-            <Typography isFullWidth={isOnMobile} size="s" weight="semiLight">
+            <Typography weight="semiLight">
               {t.rich('not_received', {
                 cta: text => (
                   <Typography
-                    color="var(--primary-blue-color)"
+                    className={styles.resend}
                     tag="span"
+                    testId="otp-modal-resend-code"
+                    title={t('resend')}
                     onClick={handleResend}
                   >
                     {text}
