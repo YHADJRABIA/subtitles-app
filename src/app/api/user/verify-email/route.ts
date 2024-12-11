@@ -5,14 +5,16 @@ import { getErrorMessage, getZodErrors } from '@/utils/errors'
 
 import { getTranslations } from 'next-intl/server'
 import { getLocaleFromNextRequest } from '@/utils/cookies'
-import { SendEmailVerificationValidator } from '@/types/schemas/auth'
-import { getUserByEmail } from '@/utils/db/user'
-import { sendEmailUpdateEmail } from '@/lib/mail'
-import { generateVerificationCode } from '@/lib/auth/code'
+import { SendEmailUpdateVerificationValidator } from '@/types/schemas/dashboard'
+import { getUserSession } from '@/utils/session'
+import { verifyEmailByCode } from '@/lib/auth/verifyEmail'
+import { APIResponse } from '@/types/api'
 
 connectDB()
 
-export async function POST(req: NextRequest) {
+export async function POST(
+  req: NextRequest
+): Promise<NextResponse<APIResponse>> {
   try {
     const locale = getLocaleFromNextRequest(req)
 
@@ -22,7 +24,9 @@ export async function POST(req: NextRequest) {
     ]
 
     const rawBody = await req.json()
-    const body = SendEmailVerificationValidator(t_zod as any).safeParse(rawBody)
+    const body = SendEmailUpdateVerificationValidator(t_zod as any).safeParse(
+      rawBody
+    )
 
     // Form validation
     if (!body.success) {
@@ -35,29 +39,25 @@ export async function POST(req: NextRequest) {
 
     const { email } = body.data
 
-    const existingEmail = !!(await getUserByEmail(email))
+    const currentUser = await getUserSession()
 
-    if (existingEmail) {
+    // Stop if user isn't authenticated
+    if (!currentUser.id) {
       return NextResponse.json(
-        { message: t('email_already_taken'), success: false },
-        { status: 409 }
+        { message: t('unauthorised'), success: false },
+        { status: 401 }
       )
     }
 
-    // Send code to new e-mail address
-    const verificationCode = await generateVerificationCode(email)
-
-    await sendEmailUpdateEmail(locale, email, verificationCode.code)
-
-    return NextResponse.json(
-      {
-        message: t('verification_email_sent'),
-        success: true,
-        openModal: true,
-        // TODO: Add cooldown to retry
-      },
-      { status: 200 }
+    const { data, status, error } = await verifyEmailByCode(
+      email,
+      currentUser.id,
+      locale
     )
+    if (error) {
+      return NextResponse.json({ error, success: false }, { status })
+    }
+    return NextResponse.json(data, { status })
   } catch (error) {
     return NextResponse.json({ error: getErrorMessage(error) }, { status: 500 })
   }
