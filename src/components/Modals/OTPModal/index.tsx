@@ -163,7 +163,6 @@ const OTPModal = ({
                   size="xs"
                   type="submit"
                   variation="primary"
-                  onClick={handleVerify}
                 >
                   {t('verify')}
                 </Button>
