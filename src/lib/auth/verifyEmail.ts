@@ -29,7 +29,7 @@ export const verifyEmailByCode = async (
     await sendEmailUpdateEmail(locale, email, verificationCode.code)
 
     return {
-      openModal: true,
+      requiresUserAction: true,
       data: {
         message: t('verification_email_sent'),
         success: true,
