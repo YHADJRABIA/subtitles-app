@@ -1,8 +1,8 @@
-import { AxiosResponse } from 'axios'
+import { APIResponse } from '@/types/api'
 
 export const getSuccessMessage = (
-  response: AxiosResponse,
+  response: { data: APIResponse },
   defaultMessage?: string
 ): string => {
-  return response?.data?.message || defaultMessage
+  return (response?.data?.message || defaultMessage) ?? ''
 }
