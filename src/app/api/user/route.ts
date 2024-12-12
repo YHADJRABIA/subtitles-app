@@ -85,7 +85,7 @@ export async function PATCH(
     if (hasEmail) {
       // Check if e-mail isn't already taken
 
-      const { data, status, error } = await verifyEmailByCode(
+      const { data, openModal, status, error } = await verifyEmailByCode(
         newEmail,
         currentUser.id,
         locale
@@ -93,7 +93,7 @@ export async function PATCH(
       if (error) {
         return NextResponse.json({ error, success: false }, { status })
       }
-      return NextResponse.json(data, { status })
+      return NextResponse.json({ ...data, openModal }, { status })
     }
 
     // Sensitive data may not be edited
