@@ -221,7 +221,7 @@
     "email": "Email",
     "confirmation_email": "Un email de vérification sera envoyé pour valider ce changement.",
     "email_update": "Mise à jour d'email",
-    "input_code": "Saisir le code envoyé à <em>{recipient}</em>",
+    "input_code": "Pour valider cette opération, saisir le code envoyé à <em>{recipient}</em>",
     "edit": "Modifier",
     "log_out": "Se déconnecter",
     "Settings": {
