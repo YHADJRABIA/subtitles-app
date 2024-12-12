@@ -4,7 +4,7 @@ export type APIResponse = {
   message?: string
   error?: string | Promise<string>
   success?: boolean
-  openModal?: boolean
+  requiresUserAction?: boolean
 } | null
 
 export type VerificationResponse =
