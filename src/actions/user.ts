@@ -1,3 +1,4 @@
+import { APIResponse } from '@/types/api'
 import { UserAPIType } from '@/types/user'
 import { getErrorMessage } from '@/utils/errors'
 import axios from 'axios'
@@ -23,7 +24,9 @@ export const handleUpdateUserById = async (
   }
 }
 
-export const handleVerifyEmail = async (email: string) => {
+export const handleVerifyEmail = async (
+  email: string
+): Promise<{ data: APIResponse }> => {
   try {
     return await axios.post('/api/user/verify-email', { email })
   } catch (err) {
@@ -32,7 +35,9 @@ export const handleVerifyEmail = async (email: string) => {
   }
 }
 
-export const handleValidateCode = async (code: string) => {
+export const handleValidateCode = async (
+  code: string
+): Promise<{ data: APIResponse }> => {
   try {
     return await axios.post('/api/user/validate-code', { code })
   } catch (err) {
