@@ -5,18 +5,19 @@ import styles from './OTPModal.module.scss'
 import { useTranslations } from 'next-intl'
 import { Button } from '@/components/UI/Button'
 import { getErrorMessage } from '@/utils/errors'
-import { AxiosResponse } from 'axios'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { OTPCodeSchema, OTPCodeValidator } from '@/types/schemas/otpModal'
 import MultiDigitInput from '@/components/MultiDigitInput'
 import { BsCheckCircleFill as SuccessIcon } from 'react-icons/bs'
+import { APIResponse } from '@/types/api'
 
 interface PropTypes {
-  onSubmit: (code: string) => Promise<AxiosResponse>
-  onResend: () => Promise<AxiosResponse>
+  onSubmit: (code: string) => Promise<{ data: APIResponse }>
+  onSuccess: (value?: string) => Promise<{ data: APIResponse } | void>
+  onResend: () => Promise<{ data: APIResponse }>
   onCancel: () => void
-  message: ReactNode
+  message?: ReactNode
   expirationTime: number
   digitsNumber: number
 }
@@ -25,11 +26,13 @@ const OTPModal = ({
   onSubmit,
   onResend,
   onCancel,
+  onSuccess,
   message,
   expirationTime,
   digitsNumber,
 }: PropTypes) => {
-  const contentHeight = useRef<HTMLDivElement | null>(null)
+  const contentRef = useRef<HTMLDivElement | null>(null)
+  const [maxHeight, setMaxHeight] = useState(contentRef?.current?.scrollHeight)
   const [isLoading, setisLoading] = useState(false)
   const [successMessage, setSuccessMessage] = useState('')
   const [error, setError] = useState('')
@@ -51,6 +54,8 @@ const OTPModal = ({
   })
   const code = watch('code') // If not set, form inputs with more than 1 character will be delayed
 
+  // TODO: cancel after 3 unsuccessful tries
+
   useEffect(() => {
     // Initialize validation for empty code on mount
     setValue('code', code, { shouldValidate: true })
@@ -60,9 +65,8 @@ const OTPModal = ({
     setisLoading(true)
     try {
       const res = await onSubmit(code)
-      if (res?.data.sucess) {
-        setSuccessMessage(res.data.message)
-      }
+      setSuccessMessage(res.data?.message ?? '')
+      await onSuccess()
     } catch (err) {
       console.error('Error in OTPModal handleSubmit:', getErrorMessage(err))
       setError(await getErrorMessage(err))
@@ -88,35 +92,50 @@ const OTPModal = ({
     setValue('code', newCode, { shouldValidate: true })
   }
 
-  const handleResetCode = () => {
-    setValue('code', '')
-  }
+  const handleResetCode = () => setValue('code', '')
 
   const Success = () => (
     <div className={styles.success}>
       <div className={styles.successHeading}>
         <SuccessIcon color="var(--primary-green-color)" size={40} />
-        <Typography weight="semiBold"> {successMessage}</Typography>
+        <Typography weight="semiBold">{successMessage}</Typography>
       </div>
-      <Button size="s" variation="secondary" onClick={onCancel}>
+      <Button variation="secondary" onClick={onCancel}>
         {t('ok')}
       </Button>
     </div>
   )
 
+  useEffect(() => {
+    if (isValidated && contentRef.current) {
+      setMaxHeight(contentRef.current.scrollHeight)
+    }
+  }, [isValidated])
+
   return (
     <div
       className={styles.root}
-      ref={contentHeight}
-      style={{ maxHeight: `${contentHeight}px` }}
+      ref={contentRef}
+      style={{ maxHeight: `${maxHeight}px` }}
     >
       {isValidated ? (
         <Success />
       ) : (
         <>
           <div className={styles.heading}>
-            <Typography weight="semiLight">{t('otp_required')}</Typography>
-            <Typography weight="semiLight">{message}</Typography>
+            <Typography weight="semiLight">
+              {message ?? t('otp_required')}
+            </Typography>
+            <Typography
+              className={styles.expiration}
+              size="s"
+              weight="semiLight"
+            >
+              {t.rich('expires_in', {
+                em: text => <Typography tag="span">{text}</Typography>,
+                expirationTime,
+              })}
+            </Typography>
           </div>
           <div className={styles.ctaSection}>
             <form
@@ -143,16 +162,6 @@ const OTPModal = ({
                 weight="semiBold"
               >
                 {error}
-              </Typography>
-              <Typography
-                className={styles.expiration}
-                size="s"
-                weight="semiLight"
-              >
-                {t.rich('expires_in', {
-                  em: text => <Typography tag="span">{text}</Typography>,
-                  expirationTime,
-                })}
               </Typography>
 
               <div className={styles.cta}>
