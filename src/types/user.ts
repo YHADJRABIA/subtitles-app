@@ -1,6 +1,7 @@
 import { DefaultSession } from 'next-auth'
 import { Locale } from './locale'
 
+// Client data exposed to authenticated user
 export type UserType = {
   email: string
   id: string
