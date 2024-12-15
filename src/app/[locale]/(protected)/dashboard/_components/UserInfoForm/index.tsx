@@ -4,7 +4,11 @@ import styles from './UserInfoForm.module.scss'
 import EditableAvatar from '../EditableAvatar'
 import { useTranslations } from 'next-intl'
 import cn from 'classnames'
-import { handleUpdateUserById } from '@/actions/user'
+import {
+  handleUpdateUserById,
+  handleValidateCode,
+  handleVerifyEmail,
+} from '@/actions/user'
 import { notify } from '@/lib/toastify'
 import { getErrorMessage } from '@/utils/errors'
 import { useSession } from 'next-auth/react'
@@ -16,6 +20,10 @@ import { UserInfoSchema, UserInfoValidator } from '@/types/schemas/dashboard'
 import { getSuccessMessage } from '@/utils/api'
 import { useModal } from '@/hooks/useModal'
 import OTPModal from '@/components/Modals/OTPModal'
+import Typography from '@/components/UI/Typography'
+import { BsShieldLock as OTPIcon } from 'react-icons/bs'
+import { EMAIL_UPDATE_OTP } from '@/utils/constants'
+import { truncateEmail } from '@/utils/string'
 
 interface PropTypes {
   userId: string
@@ -24,6 +32,8 @@ interface PropTypes {
   image?: string | null
   className?: string
 }
+
+const MAX_NUMBER_OF_EMAIL_CHARACTERS = 30
 
 const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
   const [t, t_zod] = [useTranslations('Dashboard'), useTranslations('Zod')]
@@ -49,29 +59,52 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
 
   const [nameValue, emailValue] = watch(['name', 'email']) // If not set, form inputs with more than 1 character will be delayed
 
+  const handleOpenModal = () => {
+    openModal({
+      className: styles.modal,
+      isClosable: false,
+      title: t('email_update'),
+      icon: { src: OTPIcon },
+      content: (
+        <OTPModal
+          digitsNumber={EMAIL_UPDATE_OTP.n}
+          expirationTime={EMAIL_UPDATE_OTP.expirationInMinutes}
+          message={t.rich('input_code', {
+            em: text => (
+              <Typography
+                className={styles.recipient}
+                tag="span"
+                weight="semiBold"
+              >
+                {text}
+              </Typography>
+            ),
+            recipient: truncateEmail(
+              emailValue!,
+              MAX_NUMBER_OF_EMAIL_CHARACTERS
+            ),
+          })}
+          onCancel={closeModal}
+          onResend={() => handleVerifyEmail(emailValue!)}
+          onSubmit={code => handleValidateCode(code)}
+          onSuccess={() => handleUpdateSession({ email: emailValue })}
+        />
+      ),
+    })
+  }
+
   // Memoize to prevent unnecessary re-renders in children components
   const handleUpdate = useCallback(
     async (updatedFields: Partial<UserAPIType>) => {
       if (!userId) {
-        notify('error', t('Account.update_failed'))
-        return
+        return notify('error', t('Account.update_failed'))
       }
-
-      const isEmailUpdate = !!updatedFields.email
 
       try {
         const res = await handleUpdateUserById(userId, updatedFields)
+        notify('success', getSuccessMessage(res))
 
-        if (res?.data.success) {
-          // Notify success and update session
-          if (!isEmailUpdate) {
-            await update(updatedFields)
-            notify('success', getSuccessMessage(res))
-            return res // Propagate response to EditableField
-          }
-
-          // TODO: improve response data type
-        }
+        return res.data // Propagate response to EditableField
       } catch (err) {
         notify(
           'error',
@@ -80,13 +113,15 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
         throw err // Propagate error to EditableField to prevent field update if backend error
       }
     },
-    [userId, t, update]
+    [userId, t]
   )
-
-  watch()
 
   const handleReset = (field: keyof UserInfoSchema, defaultValue: string) => {
     setValue(field, defaultValue)
+  }
+
+  const handleUpdateSession = async (updatedFields: Partial<UserAPIType>) => {
+    await update(updatedFields)
   }
 
   return (
@@ -105,9 +140,8 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
           value={nameValue!}
           onCancel={() => handleReset('name', defaultName)}
           onEdit={newName => handleUpdate({ name: newName })}
+          onSuccess={newName => handleUpdateSession({ name: newName })}
         />
-
-        {/* TODO: Add 4-digit code modal to confirm email according to backend route */}
 
         <EditableField
           handleSubmit={handleSubmit}
@@ -121,6 +155,14 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
           value={emailValue!}
           onCancel={() => handleReset('email', defaultEmail)}
           onEdit={newEmail => handleUpdate({ email: newEmail })}
+          onSuccess={
+            handleOpenModal
+
+            /*             if (res.success) {
+              // Only update `initialValue` if modal validation succeeds
+              await handleUpdateSession({ email: emailValue })
+            } */
+          }
         />
       </div>
     </div>
