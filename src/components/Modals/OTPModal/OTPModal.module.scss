@@ -1,6 +1,6 @@
 .root {
   @include flexCenter(column, center, flex-start);
-  gap: 4rem;
+  gap: 1rem;
   margin: 0 auto;
   transition: max-height 0.3s ease;
 
@@ -13,7 +13,7 @@
 
 .heading {
   @include flexCenter(column, flex-start, flex-start);
-  gap: 1rem;
+  gap: 2rem;
 }
 
 .expiration {
@@ -43,7 +43,7 @@
   margin-bottom: 1.5rem;
 }
 .error {
-  transition: opacity 0.5s ease;
+  transition: all 0.5s ease;
   width: 100%;
   margin-bottom: 1.5rem;
   @include ow;
