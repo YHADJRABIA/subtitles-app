@@ -10,7 +10,7 @@ import {
 } from '@/utils/db/verification-token'
 import { getTranslations } from 'next-intl/server'
 import { getLocaleFromNextRequest } from '@/utils/cookies'
-import { EmailVerificationValidator } from '@/types/schemas/auth'
+import { EmailVerificationByTokenValidator } from '@/types/schemas/auth'
 
 connectDB()
 
@@ -20,14 +20,13 @@ export async function POST(req: NextRequest) {
 
     const [t_zod, t] = [
       await getTranslations({ locale, namespace: 'Zod' }),
-      await getTranslations({
-        locale,
-        namespace: 'Auth.VerifyEmail',
-      }),
+      await getTranslations({ locale, namespace: 'Auth.VerifyEmail' }),
     ]
 
     const rawBody = await req.json()
-    const body = EmailVerificationValidator(t_zod as any).safeParse(rawBody)
+    const body = EmailVerificationByTokenValidator(t_zod as any).safeParse(
+      rawBody
+    )
 
     // Form validation
     if (!body.success) {
@@ -75,10 +74,7 @@ export async function POST(req: NextRequest) {
     // Remove verification token
     await deleteVerificationTokenById(existingToken.id)
 
-    return NextResponse.json({
-      message: t('email_verified'),
-      success: true,
-    })
+    return NextResponse.json({ message: t('email_verified'), success: true })
   } catch (error) {
     return NextResponse.json({ error: getErrorMessage(error) }, { status: 500 })
   }

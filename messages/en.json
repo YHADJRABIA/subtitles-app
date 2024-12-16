@@ -190,8 +190,12 @@
     "user_not_found": "User not found",
     "user_deleted": "Account successfully deleted!",
     "user_updated": "Account successfully updated!",
+    "verification_email_sent": "Verification email sent!",
     "unauthorised": "Unauthorised",
     "email_already_taken": "Email already taken",
+    "expired_code": "Code has expired. Reverify email",
+    "email_mismatch": "Email mismatch",
+    "invalid_code": "Invalid code",
     "invalid_fields": "Invalid fields",
     "failed_action": "Action failed"
   },
@@ -215,6 +219,8 @@
     "name": "Name",
     "email": "Email",
     "confirmation_email": "A verification email will be sent to confirm this change.",
+    "email_update": "Update email address",
+    "input_code": "To validate this operation, enter the code sent to <em>{recipient}</em>",
     "edit": "Edit",
     "log_out": "Log out",
     "Settings": {
@@ -254,6 +260,11 @@
     "token": {
       "missing": "Missing token"
     },
+    "code": {
+      "missing": "Missing code",
+      "too_short": "Code must contain at least 4 digits",
+      "too_long": "Code is too long. Max 8 digits"
+    },
     "name": {
       "missing": "Missing name",
       "too_long": "Name is too long. Max 40 characters"
@@ -282,6 +293,17 @@
     "are_you_sure": "Do you want to proceed?",
     "yes": "Yes",
     "no": "Cancel"
+  },
+  "OTPModal": {
+    "otp_verification": "OTP Verification",
+    "otp_required": "A one-time passcode is required to validate your operation.",
+    "expires_in": "The code is only valid for <em>{expirationTime} minutes</em>",
+    "not_received": "Didn't receive code? <cta>Resend code</cta>",
+    "input_code": "Input code",
+    "resend": "Resend",
+    "verify": "Verify",
+    "cancel": "Cancel",
+    "ok": "Ok"
   },
   "DateDisplay": {
     "today": "Today",

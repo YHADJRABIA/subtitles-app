@@ -3,7 +3,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getErrorMessage, getZodErrors } from '@/utils/errors'
 import {
   deleteUserById,
-  getUserByEmail,
   getUserById,
   restrictedUserFields,
   updateUserById,
@@ -15,12 +14,14 @@ import {
   DashboardUserValidator,
 } from '@/types/schemas/dashboard'
 import { getUserSession } from '@/utils/session'
-import { generateVerificationCode } from '@/lib/auth/code'
-import { sendEmailUpdateEmail } from '@/lib/mail'
+import { APIResponse } from '@/types/api'
+import { verifyEmailByCode } from '@/lib/auth/verifyEmail'
 
 connectDB()
 
-export async function PATCH(req: NextRequest) {
+export async function PATCH(
+  req: NextRequest
+): Promise<NextResponse<APIResponse>> {
   try {
     const locale = getLocaleFromNextRequest(req)
 
@@ -83,20 +84,13 @@ export async function PATCH(req: NextRequest) {
     // User attempts to update e-mail
     if (hasEmail) {
       // Check if e-mail isn't already taken
-      const existingEmail = !!(await getUserByEmail(newEmail))
 
-      if (existingEmail) {
-        return NextResponse.json(
-          { message: t('email_already_taken'), success: false },
-          { status: 400 }
-        )
+      const { data, requiresUserAction, status, error } =
+        await verifyEmailByCode(newEmail, currentUser.id, locale)
+      if (error) {
+        return NextResponse.json({ error, success: false }, { status })
       }
-
-      // Send code to new e-mail address
-      const verificationCode = await generateVerificationCode(newEmail)
-
-      // TODO: finish up in next PR
-      /*       await sendEmailUpdateEmail(locale, newEmail, verificationCode.code) */
+      return NextResponse.json({ ...data, requiresUserAction }, { status })
     }
 
     // Sensitive data may not be edited

@@ -1,0 +1,28 @@
+.root {
+  @include flexCenter(row, space-between);
+  gap: 2rem;
+}
+
+.input {
+  border-radius: 0.5rem;
+  font-size: 1.8rem;
+  width: 5rem;
+  height: 5rem;
+  @include respond-to('medium') {
+    font-size: 1.6rem;
+    width: 6rem;
+    height: 6rem;
+  }
+  text-align: center;
+  border: 1px solid var(--secondary-gray-color);
+
+  &:disabled {
+    background-color: var(--disabled-gray-color);
+    cursor: not-allowed;
+  }
+
+  &.error {
+    border-color: var(--primary-red-color);
+    border-width: 0.2rem;
+  }
+}

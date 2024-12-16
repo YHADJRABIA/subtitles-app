@@ -27,6 +27,7 @@ import useInfo from '@/hooks/useInfo'
 import { useTranslations } from 'next-intl'
 import { handleSendPasswordRecoveryEmail } from '@/actions/auth'
 import { Link } from '@/i18n/routing'
+import { getSuccessMessage } from '@/utils/api'
 
 const PasswordRecoveryForm = () => {
   const searchParams = useSearchParams()
@@ -56,7 +57,7 @@ const PasswordRecoveryForm = () => {
   const handleRecovery: SubmitHandler<PasswordRecoverySchema> = async user => {
     try {
       const res = await handleSendPasswordRecoveryEmail(user)
-      setInfoMessage(res.data.message, 'success')
+      setInfoMessage(getSuccessMessage(res), 'success')
     } catch (err) {
       setInfoMessage(await getErrorMessage(err), 'error')
     }

@@ -8,7 +8,6 @@ import { UserAPIType } from '@/types/user'
 import { isDevelopment } from '@/utils/general'
 import {
   getUserByEmail,
-  updateNameById,
   updateUserById,
   verifyEmailByUserId,
 } from '@/utils/db/user'
@@ -60,7 +59,7 @@ export const authOptions: NextAuthOptions = {
         ]
 
         /*         if (req.status === 429) {
-          throw new Error(t('incorrect_email_or_password')) // TODO: fix this
+          throw new Error(t('too_many_api_calls')) // TODO: implement this
         } */
 
         try {
@@ -143,6 +142,7 @@ export const authOptions: NextAuthOptions = {
     },
 
     // Called after jwt
+    // This data is exposed to client after signIn
     session({ session, token }) {
       return {
         ...session,
@@ -150,7 +150,6 @@ export const authOptions: NextAuthOptions = {
           ...session.user,
           id: token.sub,
           name: token.name, // Updated name passed down from jwt after update-trigger
-          isVerifiedEmail: token.isVerifiedEmail,
           creationDate: token.createdAt,
           lastUpdateDate: token.updatedAt,
           lastLoginDate: token.lastLogin,
@@ -201,7 +200,7 @@ export const authOptions: NextAuthOptions = {
           const { name, email, image } = user
           await connectDB()
 
-          const existingUser = await getUserByEmail(email ?? '')
+          const existingUser = (await getUserByEmail(email ?? '')) as any // TODO: Fix api interface
 
           if (existingUser) {
             // Verify user's existing account if user logs in with Google

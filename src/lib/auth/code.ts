@@ -3,14 +3,17 @@ import {
   deleteVerificationCodeById,
   getVerificationCodeByEmail,
 } from '@/utils/db/verification-code'
-import { generateDigitCode } from '@/utils/random'
+import { generateNDigitCode } from '@/utils/random'
 
-const { EMAIL_VERIFICATION_CODE_LIFETIME_HOURS } = process.env
+const { EMAIL_VERIFICATION_CODE_LIFETIME_MINUTES } = process.env
 
-export const generateVerificationCode = async (email: string) => {
+export const generateVerificationCode = async (
+  email: string,
+  userId: string
+) => {
   // Generate random code
-  const { code, expirationDate } = generateDigitCode(
-    Number(EMAIL_VERIFICATION_CODE_LIFETIME_HOURS)
+  const { code, expirationDate } = generateNDigitCode(
+    Number(EMAIL_VERIFICATION_CODE_LIFETIME_MINUTES)
   )
 
   // Check if existing code already sent for this email to delete it
@@ -20,8 +23,9 @@ export const generateVerificationCode = async (email: string) => {
     await deleteVerificationCodeById(existingCode.id)
   }
 
-  // Create verification code
+  // Create verification code, userId links to user initiating the operation
   const verificationCode = await VerificationCodeModel.create({
+    userId,
     email,
     code,
     expires: new Date(expirationDate),

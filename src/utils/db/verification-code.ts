@@ -1,7 +1,10 @@
 import { VerificationCodeModel } from '@/models/verificationCode.model'
 import { getErrorMessage } from '../errors'
+import { VerificationResponse } from '@/types/api'
 
-export const getVerificationCodeByEmail = async (email: string) => {
+export const getVerificationCodeByEmail = async (
+  email: string
+): Promise<VerificationResponse> => {
   try {
     const verificationCode = await VerificationCodeModel.findOne({ email })
     return verificationCode
@@ -19,6 +22,20 @@ export const deleteVerificationCodeById = async (id: string) => {
   } catch (err) {
     console.error(
       'Error deleting verification code by id:',
+      getErrorMessage(err)
+    )
+  }
+}
+
+export const getVerificationCodeByCode = async (
+  code: string
+): Promise<VerificationResponse> => {
+  try {
+    const verificationCode = await VerificationCodeModel.findOne({ code })
+    return verificationCode
+  } catch (err) {
+    console.error(
+      'Error getting verification code by code:',
       getErrorMessage(err)
     )
   }

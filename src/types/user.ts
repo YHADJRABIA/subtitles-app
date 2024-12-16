@@ -1,10 +1,10 @@
 import { DefaultSession } from 'next-auth'
 import { Locale } from './locale'
 
+// Client data exposed to authenticated user
 export type UserType = {
   email: string
   id: string
-  isVerifiedEmail: boolean
   lastUpdateDate: string
   creationDate: string
   lastLoginDate?: string
@@ -16,6 +16,7 @@ export type UserAPIType = DefaultSession['user'] & {
   id: string
   email: string
   emailVerified?: Date
+  password?: string
   createdAt: Date
   updatedAt?: Date
   lastLogin?: Date

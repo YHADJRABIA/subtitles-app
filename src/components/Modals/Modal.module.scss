@@ -22,7 +22,7 @@
 
   background-color: var(--primary-white-color);
   border-radius: 1rem;
-  padding: 1rem 2rem 2rem;
+  padding: 1.5rem 2rem 2rem;
   width: 100vw;
   height: auto;
   max-height: 75dvh;
@@ -36,6 +36,15 @@
 .header {
   @include flexCenter(row, space-between, center);
   gap: 1rem;
+
+  &.centred {
+    justify-content: center;
+  }
+}
+
+.titleWrapper {
+  @include flexCenter(row, space-between, center);
+  gap: 1.5rem;
 }
 
 .closeIcon {
