@@ -34,9 +34,7 @@ export const nameSchema = (t: ReturnType<typeof useTranslations<'Zod'>>) =>
   z
     .string()
     .min(1, { message: t('name.missing') })
-    .max(40, {
-      message: t('name.too_long'),
-    })
+    .max(40, { message: t('name.too_long') })
     .trim()
 
 export const codeSchema = (t: ReturnType<typeof useTranslations<'Zod'>>) =>
@@ -48,10 +46,7 @@ export const codeSchema = (t: ReturnType<typeof useTranslations<'Zod'>>) =>
 
 export const SendEmailVerificationValidator = (
   t: ReturnType<typeof useTranslations<'Zod'>>
-) =>
-  z.object({
-    email: emailSchema(t),
-  })
+) => z.object({ email: emailSchema(t) })
 
 export type SendEmailVerificationSchema = z.infer<
   ReturnType<typeof SendEmailVerificationValidator>
