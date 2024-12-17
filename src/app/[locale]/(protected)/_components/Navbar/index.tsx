@@ -2,7 +2,7 @@
 import React from 'react'
 import styles from './Navbar.module.scss'
 import {
-  LuUserSquare2 as OverviewIcon,
+  LuSquareUserRound as OverviewIcon,
   LuSettings as SettingsIcon,
   LuInfo as InfoIcon,
 } from 'react-icons/lu'
