@@ -29,7 +29,7 @@ export async function POST(
     ]
 
     const rawBody = await req.json()
-    const body = AccountRegistrationValidator(t_zod as any).safeParse(rawBody)
+    const body = AccountRegistrationValidator(t_zod).safeParse(rawBody)
 
     // Form validation
     if (!body.success) {
