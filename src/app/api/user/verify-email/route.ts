@@ -24,9 +24,7 @@ export async function POST(
     ]
 
     const rawBody = await req.json()
-    const body = SendEmailUpdateVerificationValidator(t_zod as any).safeParse(
-      rawBody
-    )
+    const body = SendEmailUpdateVerificationValidator(t_zod).safeParse(rawBody)
 
     // Form validation
     if (!body.success) {
