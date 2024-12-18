@@ -32,7 +32,7 @@ export async function PATCH(
 
     const rawBody = await req.json()
 
-    const body = DashboardUserValidator(t_zod as any).safeParse(rawBody)
+    const body = DashboardUserValidator(t_zod).safeParse(rawBody)
 
     if (!body.success) {
       const zodErrors = getZodErrors(body.error)
@@ -131,9 +131,7 @@ export async function DELETE(req: NextRequest) {
     ]
 
     // Validate request params
-    const searchParams = UserDeleteValidator(t_zod as any).safeParse(
-      rawSearchParams
-    )
+    const searchParams = UserDeleteValidator(t_zod).safeParse(rawSearchParams)
 
     if (!searchParams.success) {
       const zodErrors = getZodErrors(searchParams.error)
