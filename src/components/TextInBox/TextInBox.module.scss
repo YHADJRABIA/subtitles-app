@@ -1,7 +1,6 @@
 .root {
   @include flexCenter(row, flex-start, center);
   gap: 1.5rem;
-  flex-wrap: nowrap;
   border-radius: 0.5rem;
   padding: 1.5rem;
   transition:
