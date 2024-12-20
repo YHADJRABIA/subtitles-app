@@ -110,7 +110,6 @@ const EditableField = <T, K extends ValidFieldNames & string>({
           method="PATCH"
           onSubmit={handleSubmit(handleSave)}
         >
-          {/* TODO: Handle max-height fluid transition */}
           {showTopText && (
             <Typography className={styles.hint} size="xs">
               {topText}

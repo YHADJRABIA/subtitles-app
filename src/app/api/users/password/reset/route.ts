@@ -57,10 +57,7 @@ export async function POST(req: NextRequest) {
     const tokenHasExpired = hasExpired(existingToken.expires)
     if (tokenHasExpired) {
       return NextResponse.json(
-        {
-          message: t('expired_token'),
-          success: false,
-        },
+        { message: t('expired_token'), success: false },
         { status: 400 }
       )
     }
