@@ -52,10 +52,7 @@ export const authOptions: NextAuthOptions = {
 
         const [t_zod, t] = [
           await getTranslations({ locale, namespace: 'Zod' }),
-          await getTranslations({
-            locale,
-            namespace: 'Auth.Login',
-          }),
+          await getTranslations({ locale, namespace: 'Auth.Login' }),
         ]
 
         /*         if (req.status === 429) {
@@ -159,10 +156,7 @@ export const authOptions: NextAuthOptions = {
     async signIn({ user, account }) {
       const locale = getNextLocale()
 
-      const t = await getTranslations({
-        locale,
-        namespace: 'Auth.Login',
-      })
+      const t = await getTranslations({ locale, namespace: 'Auth.Login' })
 
       const [withGoogle, withCredentials] = [
         account?.provider === 'google',
