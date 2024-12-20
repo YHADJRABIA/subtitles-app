@@ -131,6 +131,7 @@
   "Auth": {
     "email": "Email",
     "password": "Mot de passe",
+    "new_password": "Nouveau mot de passe",
     "continue_with_google": "Se connecter avec Google",
     "log_out": "Se déconnecter",
     "Error": {
