@@ -1,8 +1,10 @@
+import { APIResponse } from '@/types/api'
 import {
   AccountLoginSchema,
   AccountRegistrationSchema,
   EmailVerificationByTokenSchema,
   PasswordRecoverySchema,
+  PasswordResetSchema,
 } from '@/types/schemas/auth'
 import { SendEmailVerificationSchema } from '@/types/schemas/general'
 import { getErrorMessage } from '@/utils/errors'
@@ -27,7 +29,9 @@ export const handleGoogleLogin = async () => {
   }
 }
 
-export const handleCredentialsLogin = async (user: AccountLoginSchema) => {
+export const handleCredentialsLogin = async (
+  user: AccountLoginSchema
+): Promise<{ data: APIResponse } | null> => {
   // {redirect: false} to disable default redirection. Especially in case of invalid credentials, this might lead to Next-Auth's /api/auth/error page.
   // Instead, we want to process signIn response on same page for UX.
 
@@ -36,19 +40,24 @@ export const handleCredentialsLogin = async (user: AccountLoginSchema) => {
 
     if (res?.ok && !res.error) {
       return {
-        message: '',
-        success: true,
+        data: {
+          message: '',
+          success: true,
+        },
       }
     } else if (res?.error) {
       throw new Error(res.error)
     }
+    return null
   } catch (err) {
     console.error('Error signing in user:', getErrorMessage(err)) // TODO: fix redirect to /api/auth/error after too many failed logins
     throw err
   }
 }
 
-export const handleRegister = async (user: AccountRegistrationSchema) => {
+export const handleRegister = async (
+  user: AccountRegistrationSchema
+): Promise<{ data: APIResponse }> => {
   try {
     return await axios.post('/api/users/register', user)
   } catch (err) {
