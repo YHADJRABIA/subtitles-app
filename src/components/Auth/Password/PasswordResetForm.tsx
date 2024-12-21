@@ -87,8 +87,8 @@ const PasswordResetForm = () => {
 
         <Field
           className={styles.field}
-          label={t('password')}
-          leftIcon={{ src: PasswordIcon, title: t('password') }}
+          label={t('new_password')}
+          leftIcon={{ src: PasswordIcon, title: t('new_password') }}
           name="password"
           placeholder={
             passwordInputType === 'password' ? '••••••' : 'MyPa$$word_'
