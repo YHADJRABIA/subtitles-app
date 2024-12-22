@@ -101,3 +101,12 @@ export const handleSendPasswordRecoveryEmail = async (
     throw err
   }
 }
+
+export const handleResetPassword = async (user: PasswordResetSchema) => {
+  try {
+    return await axios.post('/api/users/password/reset', user)
+  } catch (err) {
+    console.error('Error resetting password:', getErrorMessage(err))
+    throw err
+  }
+}
