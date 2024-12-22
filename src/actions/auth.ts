@@ -1,3 +1,4 @@
+import { DEFAULT_LOGOUT_REDIRECT_ROUTE } from '@/routes/routes'
 import { APIResponse } from '@/types/api'
 import {
   AccountLoginSchema,
@@ -11,9 +12,10 @@ import { getErrorMessage } from '@/utils/errors'
 import axios from 'axios'
 import { signIn, signOut } from 'next-auth/react'
 
+// Logout & redirect
 export const handleLogout = async () => {
   try {
-    return await signOut({ callbackUrl: '/' })
+    return await signOut({ callbackUrl: DEFAULT_LOGOUT_REDIRECT_ROUTE })
   } catch (err) {
     console.error('Error Logging out user:', getErrorMessage(err))
     throw err
