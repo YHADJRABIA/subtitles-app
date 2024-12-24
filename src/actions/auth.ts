@@ -34,8 +34,9 @@ export const handleGoogleLogin = async () => {
 export const handleCredentialsLogin = async (
   user: AccountLoginSchema
 ): Promise<{ data: APIResponse } | null> => {
-  // {redirect: false} to disable default redirection. Especially in case of invalid credentials, this might lead to Next-Auth's /api/auth/error page.
-  // Instead, we want to process signIn response on same page for UX.
+  // In case of invalid credentials or other errors , NextAuth will redirect to /api/auth/error.
+  // {redirect: false} – Disables default redirection behaviour
+  // Prefered behaviour is processing signIn response on same page for UX purposes.
 
   try {
     const res = await signIn('credentials', { ...user, redirect: false })
