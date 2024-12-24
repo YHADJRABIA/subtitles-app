@@ -20,6 +20,8 @@ const userSchema = new Schema(
 
     lastLogin: Date,
 
+    lastUpdate: Date,
+
     favoriteLocale: {
       type: String,
       enum: ['en', 'fr'],
