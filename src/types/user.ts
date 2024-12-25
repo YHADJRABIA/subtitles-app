@@ -5,9 +5,9 @@ import { Locale } from './locale'
 export type UserType = {
   id: string
   email: string
-  lastUpdateDate: string
   creationDate: string
   lastLoginDate?: string
+  lastUpdateDate: string
   favoriteLocale: Locale
   isTwoFactorEnabled: boolean
 }
