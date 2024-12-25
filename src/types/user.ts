@@ -20,6 +20,7 @@ export type UserAPIType = DefaultSession['user'] & {
   createdAt: Date
   updatedAt?: Date
   lastLogin?: Date
+  lastUpdate?: Date
   favoriteLocale: Locale
   isTwoFactorEnabled: boolean
 }
