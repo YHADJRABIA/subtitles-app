@@ -111,10 +111,7 @@ export async function PATCH(
       )
     }
 
-    return NextResponse.json({
-      message: t('user_updated'),
-      success: true,
-    })
+    return NextResponse.json({ message: t('user_updated'), success: true })
   } catch (error) {
     return NextResponse.json({ error: getErrorMessage(error) }, { status: 500 })
   }
