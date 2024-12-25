@@ -180,10 +180,7 @@ export async function DELETE(req: NextRequest) {
       )
     }
 
-    return NextResponse.json({
-      message: t('user_deleted'),
-      success: true,
-    })
+    return NextResponse.json({ message: t('user_deleted'), success: true })
   } catch (error) {
     return NextResponse.json({ error: getErrorMessage(error) }, { status: 500 })
   }
