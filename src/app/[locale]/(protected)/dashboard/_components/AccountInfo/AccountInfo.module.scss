@@ -1,0 +1,11 @@
+.root {
+  width: 100%;
+  @include flexCenter(column);
+  gap: 2rem;
+  margin-bottom: 8rem;
+}
+
+.field {
+  @include flexCenter(row, space-between);
+  width: 100%;
+}
