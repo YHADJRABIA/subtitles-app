@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl'
 import { useSession } from 'next-auth/react'
 
 interface PropTypes {
-  creationDate?: string
+  creationDate: string
   lastUpdateDate?: string
   lastLoginDate?: string
 }
