@@ -5,17 +5,20 @@ import Typography from '@/components/UI/Typography'
 import DateDisplay from '@/components/DateDisplay'
 import { useTranslations } from 'next-intl'
 import { useSession } from 'next-auth/react'
+import cn from 'classnames'
 
 interface PropTypes {
   creationDate: string
   lastUpdateDate?: string
   lastLoginDate?: string
+  className?: string
 }
 
 const AccountInfo = ({
   creationDate,
   lastUpdateDate: serverLastUpdateDate,
   lastLoginDate,
+  className,
 }: PropTypes) => {
   const t = useTranslations('Dashboard.Account')
 
@@ -25,7 +28,7 @@ const AccountInfo = ({
     clientSession?.user?.lastUpdateDate || serverLastUpdateDate
 
   return (
-    <div className={styles.root}>
+    <div className={cn(styles.root, className)}>
       {creationDate && (
         <div className={styles.field}>
           <Typography size="xs" weight="semiBold">
