@@ -125,6 +125,7 @@ export const authOptions: NextAuthOptions = {
         // Update session only if name is different (i.e. session.xxx isn't undefined)
         if (session?.name) token.name = session.name
         if (session?.email) token.email = session.email
+        if (session?.lastUpdateDate) token.lastUpdate = session.lastUpdateDate
 
         return { ...token, ...session } // TODO: redundant to spread session?
       }
@@ -132,9 +133,9 @@ export const authOptions: NextAuthOptions = {
       // User only defined after authorize (login)
       if (!user) return token // Logged out
       const isVerifiedEmail = !!user.emailVerified
-      const { createdAt, lastLogin, updatedAt } = user // TODO: Prevent updatedAt from updating at login, should only update if user info hasn't changed
+      const { createdAt, lastLogin, lastUpdate } = user
 
-      return { ...token, isVerifiedEmail, createdAt, lastLogin, updatedAt } // Passing down token to session
+      return { ...token, isVerifiedEmail, createdAt, lastLogin, lastUpdate } // Passing down token to session
     },
 
     // Called after jwt
@@ -147,7 +148,7 @@ export const authOptions: NextAuthOptions = {
           id: token.sub,
           name: token.name, // Updated name passed down from jwt after update-trigger
           creationDate: token.createdAt,
-          lastUpdateDate: token.updatedAt,
+          lastUpdateDate: token.lastUpdate,
           lastLoginDate: token.lastLogin,
         },
       }
@@ -221,7 +222,7 @@ export const authOptions: NextAuthOptions = {
               id: existingUser._id,
               lastLogin: existingUser.lastLogin, // Previous login
               createdAt: updatedUser.createdAt,
-              updatedAt: updatedUser.updatedAt, // TODO: Prevent updatedAt from updating at login, should only update if user info hasn't changed
+              lastUpdate: updatedUser.lastUpdate,
             })
 
             return user
@@ -242,7 +243,7 @@ export const authOptions: NextAuthOptions = {
           Object.assign(user, {
             id: newUser._id,
             createdAt: newUser.createdAt,
-            updatedAt: newUser.updatedAt,
+            lastUpdate: newUser.lastUpdate,
             isVerifiedEmail: true,
           })
 
