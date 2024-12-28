@@ -8,6 +8,7 @@ import { UserAPIType } from '@/types/user'
 import { isDevelopment } from '@/utils/general'
 import {
   getUserByEmail,
+  getUserById,
   updateUserById,
   verifyEmailByUserId,
 } from '@/utils/db/user'
@@ -132,13 +133,18 @@ export const authOptions: NextAuthOptions = {
 
       // User only defined after authorize (login)
       if (!user) return token // Logged out
-      const isVerifiedEmail = !!user.emailVerified
-      const { createdAt, lastLogin, lastUpdate } = user
+      const { emailVerified, createdAt, lastLogin, lastUpdate } = user
 
       // Update lastLogin on login
       if (trigger === 'signIn') token.lastLogin = new Date()
 
-      return { ...token, isVerifiedEmail, createdAt, lastLogin, lastUpdate } // Passing down token to session
+      return {
+        ...token,
+        isVerifiedEmail: !!emailVerified,
+        createdAt,
+        lastLogin,
+        lastUpdate,
+      } // Passing down token to session
     },
 
     // Called after jwt
