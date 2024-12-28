@@ -135,6 +135,9 @@ export const authOptions: NextAuthOptions = {
       const isVerifiedEmail = !!user.emailVerified
       const { createdAt, lastLogin, lastUpdate } = user
 
+      // Update lastLogin on login
+      if (trigger === 'signIn') token.lastLogin = new Date()
+
       return { ...token, isVerifiedEmail, createdAt, lastLogin, lastUpdate } // Passing down token to session
     },
 
