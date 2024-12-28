@@ -17,7 +17,7 @@ interface PropTypes {
 const AccountInfo = ({
   creationDate,
   lastUpdateDate: serverLastUpdateDate,
-  lastLoginDate,
+  lastLoginDate: serverLastLoginDate,
   className,
 }: PropTypes) => {
   const t = useTranslations('Dashboard.Account')
@@ -26,6 +26,8 @@ const AccountInfo = ({
   // Prioritise client-side session after update to have real-time data, fallback to server-side session
   const lastUpdateDate =
     clientSession?.user?.lastUpdateDate || serverLastUpdateDate
+  const lastLoginDate =
+    clientSession?.user?.lastLoginDate || serverLastLoginDate
 
   return (
     <div className={cn(styles.root, className)}>
