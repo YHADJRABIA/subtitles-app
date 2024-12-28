@@ -37,6 +37,7 @@ const DashboardAccountPage = async ({ params: { locale } }: MetaDataProps) => {
       </Typography>
       <div className={styles.container}>
         <AccountInfo
+          className={styles.info}
           creationDate={creationDate}
           lastLoginDate={lastLoginDate}
           lastUpdateDate={lastUpdateDate}
