@@ -122,13 +122,18 @@ export const authOptions: NextAuthOptions = {
 
       // Update token according to client session's data
       // Triggered if `update` of useSession is called
-      if (trigger === 'update') {
-        // Update session only if name is different (i.e. session.xxx isn't undefined)
-        if (session?.name) token.name = session.name
-        if (session?.email) token.email = session.email
-        if (session?.lastUpdateDate) token.lastUpdate = session.lastUpdateDate
+      if (trigger === 'update' && session) {
+        // Update session only if data is different (i.e. session.xxx isn't undefined)
 
-        return { ...token, ...session } // TODO: redundant to spread session?
+        const updatedToken = {
+          ...token,
+          ...session,
+          name: session.name || token.name,
+          email: session.email || token.email,
+          lastUpdate: session.lastUpdateDate || token.lastUpdate,
+        }
+
+        return updatedToken
       }
 
       // User only defined after authorize (login)
