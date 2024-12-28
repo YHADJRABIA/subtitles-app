@@ -124,6 +124,17 @@ export const authOptions: NextAuthOptions = {
       // User only defined after authorize (login)
       if (!userId || !user) return token
 
+      // Logout user (if account deleted from another browser and user )
+      try {
+        const existingUser = await getUserById(userId)
+        if (!existingUser) {
+          console.error('User not found in database, logging out')
+          return { ...token, error: 'user-not-found' }
+        }
+      } catch (err) {
+        console.error('Error gettingUserById in JWT:', err)
+      }
+
       // Update token according to client session's data
       // Triggered if `update` of useSession is called
       if (trigger === 'update' && session) {
