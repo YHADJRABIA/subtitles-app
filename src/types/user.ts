@@ -10,6 +10,7 @@ export type UserType = {
   lastUpdateDate: string
   favoriteLocale: Locale
   isTwoFactorEnabled: boolean
+  error?: 'user-not-found'
 }
 
 export type UserAPIType = DefaultSession['user'] & {
