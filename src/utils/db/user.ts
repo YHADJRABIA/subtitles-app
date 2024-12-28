@@ -80,7 +80,7 @@ export const updateUserById = async (
 
     return await UserModel.findByIdAndUpdate(
       id,
-      { ...allowedFields, lastUpdate: new Date() }, // TODO: Delegate lastUpdate to middleware?
+      { ...allowedFields },
       {
         new: true,
         runValidators: true,
