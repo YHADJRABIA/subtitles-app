@@ -115,10 +115,14 @@ export const authOptions: NextAuthOptions = {
     },
 
     // Called after JWT is created (on login) or updated (client session is accessed)
-    jwt({ token, user, session, trigger }) {
+    async jwt({ token, user, session, trigger }) {
       // TODO: Check if access token is expired and prompt login if so
 
-      if (!token.sub) return token // Logged out
+      const userId = token.sub
+
+      // Logged out
+      // User only defined after authorize (login)
+      if (!userId || !user) return token
 
       // Update token according to client session's data
       // Triggered if `update` of useSession is called
@@ -136,8 +140,6 @@ export const authOptions: NextAuthOptions = {
         return updatedToken
       }
 
-      // User only defined after authorize (login)
-      if (!user) return token // Logged out
       const { emailVerified, createdAt, lastLogin, lastUpdate } = user
 
       // Update lastLogin on login
@@ -164,6 +166,7 @@ export const authOptions: NextAuthOptions = {
           creationDate: token.createdAt,
           lastUpdateDate: token.lastUpdate,
           lastLoginDate: token.lastLogin,
+          error: token.error,
         },
       }
     },
