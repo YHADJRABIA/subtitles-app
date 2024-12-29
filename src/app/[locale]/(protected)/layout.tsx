@@ -9,9 +9,7 @@ import { locales } from '@/i18n/routing'
 import Loader from '@/components/UI/Loader'
 import { MetaDataProps } from '../layout'
 
-export function generateStaticParams() {
-  return locales.map(locale => ({ locale }))
-}
+export const generateStaticParams = () => locales.map(locale => ({ locale }))
 
 export const generateMetadata = async ({
   params: { locale },
@@ -21,10 +19,7 @@ export const generateMetadata = async ({
   return {
     title: { template: `${t('prefix')} %s`, default: t('Protected.title') },
     description: t('Protected.description'),
-    robots: {
-      index: false,
-      follow: false,
-    },
+    robots: { index: false, follow: false },
   }
 }
 
