@@ -1,6 +1,6 @@
 'use client'
 import { Link, useRouter } from '@/i18n/routing'
-import React, { useState } from 'react'
+import React, { KeyboardEvent, useState } from 'react'
 import {
   MdLockOutline as PasswordIcon,
   MdAlternateEmail as EmailIcon,
@@ -78,6 +78,8 @@ function AuthForm({ type }: PropTypes) {
     mode: 'onChange',
   })
 
+  const isSubmittable = isValid && !isSubmitting
+
   const fieldState = {
     email: getFieldState('email'),
     password: getFieldState('password'),
@@ -105,12 +107,21 @@ function AuthForm({ type }: PropTypes) {
     }
   }
 
+  const handleSubmitOnEnterKey = (e: KeyboardEvent<HTMLFormElement>) => {
+    if (e.key === 'Enter' && isSubmittable) {
+      e.preventDefault()
+      handleSubmit(handleAuth)()
+    }
+  }
+
   // TODO: Add Google Recaptcha to prevent abuse + improve UX with resend validation email
   return (
     <form
       noValidate
       className={styles.root}
       method="POST"
+      role="form"
+      onKeyDown={handleSubmitOnEnterKey}
       onSubmit={handleSubmit(handleAuth)}
     >
       <div className={styles.wrapper}>
@@ -196,7 +207,7 @@ function AuthForm({ type }: PropTypes) {
 
         <Button
           className={styles.cta}
-          disabled={!isValid}
+          disabled={!isSubmittable}
           isLoading={isSubmitting}
           size="xs"
           testId={isRegisterForm ? 'submit-register-form' : 'submit-login-form'}
