@@ -118,11 +118,7 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user, session, trigger }) {
       // TODO: Check if access token is expired and prompt login if so
 
-      const userId = token.sub
-
-      // Logged out
-      // User only defined after authorize (login)
-      if (!userId || !user) return token
+      const userId = token.sub!
 
       // Logout user (if account deleted from another browser and user )
       try {
@@ -135,7 +131,7 @@ export const authOptions: NextAuthOptions = {
         console.error('Error gettingUserById in JWT:', err)
       }
 
-      // Update token according to client session's data
+      // Update token according to client's session data
       // Triggered if `update` of useSession is called
       if (trigger === 'update' && session) {
         // Update session only if data is different (i.e. session.xxx isn't undefined)
@@ -150,6 +146,9 @@ export const authOptions: NextAuthOptions = {
 
         return updatedToken
       }
+
+      // User only defined after authorize (login)
+      if (!user || !userId) return token // Logged out
 
       const { emailVerified, createdAt, lastLogin, lastUpdate } = user
 
