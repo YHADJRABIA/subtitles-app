@@ -102,7 +102,10 @@ export async function PATCH(
     }
 
     // Update user with allowed fields
-    const updatedUser = await updateUserById(id, user)
+    const updatedUser = await updateUserById(id, {
+      ...user,
+      lastUpdate: new Date(),
+    })
 
     if (!updatedUser) {
       return NextResponse.json(
