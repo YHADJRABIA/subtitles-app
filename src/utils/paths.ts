@@ -62,7 +62,7 @@ interface HrefParams {
 
 /**
  * Sanitises input href by returning searchParams or clean pathname.
- * @param {string | URL} href The URL or string representation of a URL to sanitise.
+ * @param {string | URL} href URL or string representation of a URL to sanitise.
  * @returns {HrefParams} Object containing search parameters (`searchParams`) and pathname (`pathname`).
  */
 
@@ -75,6 +75,8 @@ export const extractHrefParams = (href: string | URL): HrefParams => {
   }
 }
 
+// Returns true if the first slug of the path matches the first slug of the current path
+// Example: /test/example and /test will return true
 export const hasMatchingFirstSlug = (
   path: Pathname,
   currentPath: string
