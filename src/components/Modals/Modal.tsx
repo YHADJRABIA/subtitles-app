@@ -53,7 +53,7 @@ const Modal = ({
             <CloseIcon className={styles.closeIcon} onClick={onClose} />
           )}
         </div>
-        {children}
+        <div className={styles.scrollableContent}>{children}</div>
       </div>
     </div>
   )
