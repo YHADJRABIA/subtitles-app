@@ -13,6 +13,8 @@ import { LinkButton } from '@/components/UI/Button/LinkButton'
 import { SUPPORT_LINK } from '@/utils/constants'
 import { useTranslations } from 'next-intl'
 import { SiBuymeacoffee as SupportIcon } from 'react-icons/si'
+import { hasMatchingFirstSlug } from '@/utils/paths'
+import { Pathname } from '@/types/pathnames'
 
 interface PropTypes {
   isConnected: boolean
@@ -47,7 +49,10 @@ const Nav = ({ className, isConnected }: PropTypes) => {
       <div className={cn(styles.menu, { [styles.toggled]: toggled })}>
         <ul className={styles.links}>
           {navLinks.map((link, id) => {
-            const isActive = link?.url === currentPath
+            const isActive = hasMatchingFirstSlug(
+              link?.url as Pathname,
+              currentPath
+            )
             return (
               <NavLink
                 isActive={isActive}

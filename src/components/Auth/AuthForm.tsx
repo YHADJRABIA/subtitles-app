@@ -1,6 +1,6 @@
 'use client'
 import { Link, useRouter } from '@/i18n/routing'
-import React from 'react'
+import React, { KeyboardEvent, useState } from 'react'
 import {
   MdLockOutline as PasswordIcon,
   MdAlternateEmail as EmailIcon,
@@ -37,7 +37,7 @@ import {
 import { useTranslations } from 'next-intl'
 import { useSearchParams } from 'next/navigation'
 import { DEFAULT_LOGIN_REDIRECT_ROUTE } from '@/routes/routes'
-import { AxiosResponse } from 'axios'
+import { getSuccessMessage } from '@/utils/api'
 
 interface PropTypes {
   type: 'login' | 'register'
@@ -49,6 +49,7 @@ function AuthForm({ type }: PropTypes) {
   const queryParamEmail = searchParams.get('email') ?? ''
   const [isLoginForm, isRegisterForm] = [type === 'login', type === 'register']
   const [passwordInputType, ToggleIcon] = useShowPassword({ size: 18 })
+  const [showResendEmail, setShowResendEmail] = useState(false)
 
   const [t, t_general, t_zod] = [
     useTranslations('Auth'),
@@ -65,7 +66,7 @@ function AuthForm({ type }: PropTypes) {
     getFieldState,
     handleSubmit,
     getValues,
-    formState: { errors, isValid, isSubmitting, isSubmitSuccessful },
+    formState: { errors, isValid, isSubmitting },
   } = useForm({
     resolver: zodResolver(
       isRegisterForm
@@ -76,6 +77,8 @@ function AuthForm({ type }: PropTypes) {
     delayError: 400,
     mode: 'onChange',
   })
+
+  const isSubmittable = isValid && !isSubmitting
 
   const fieldState = {
     email: getFieldState('email'),
@@ -91,20 +94,25 @@ function AuthForm({ type }: PropTypes) {
         ? await handleRegister(user)
         : await handleCredentialsLogin(user)
 
-      if (isLoginForm) {
-        // Redirect if successful login
-        router.push(DEFAULT_LOGIN_REDIRECT_ROUTE)
+      // Redirect if successful login
+      if (isLoginForm) router.push(DEFAULT_LOGIN_REDIRECT_ROUTE)
+
+      if (isRegisterForm && res) {
+        setInfoMessage(getSuccessMessage(res), 'success')
       }
 
-      if (isRegisterForm) {
-        setInfoMessage((res as AxiosResponse)?.data.message, 'success')
-      }
+      if (res?.data!.requiresUserAction) setShowResendEmail(true)
     } catch (err) {
       setInfoMessage(await getErrorMessage(err), 'error')
     }
   }
 
-  const showResendEmail = isRegisterForm && isSubmitSuccessful && isSuccessIcon
+  const handleSubmitOnEnterKey = (e: KeyboardEvent<HTMLFormElement>) => {
+    if (e.key === 'Enter' && isSubmittable) {
+      e.preventDefault()
+      handleSubmit(handleAuth)()
+    }
+  }
 
   // TODO: Add Google Recaptcha to prevent abuse + improve UX with resend validation email
   return (
@@ -112,6 +120,8 @@ function AuthForm({ type }: PropTypes) {
       noValidate
       className={styles.root}
       method="POST"
+      role="form"
+      onKeyDown={handleSubmitOnEnterKey}
       onSubmit={handleSubmit(handleAuth)}
     >
       <div className={styles.wrapper}>
@@ -197,7 +207,7 @@ function AuthForm({ type }: PropTypes) {
 
         <Button
           className={styles.cta}
-          disabled={!isValid}
+          disabled={!isSubmittable}
           isLoading={isSubmitting}
           size="xs"
           testId={isRegisterForm ? 'submit-register-form' : 'submit-login-form'}

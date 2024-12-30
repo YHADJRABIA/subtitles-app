@@ -22,10 +22,7 @@ export async function POST(
 
     const [t_zod, t] = [
       await getTranslations({ locale, namespace: 'Zod' }),
-      await getTranslations({
-        locale,
-        namespace: 'Auth.Register',
-      }),
+      await getTranslations({ locale, namespace: 'Auth.Register' }),
     ]
 
     const rawBody = await req.json()
@@ -75,6 +72,7 @@ export async function POST(
         message: t('account_created'),
         success: true,
         savedUser: createdUser,
+        requiresUserAction: true,
       },
       { status: 201 }
     )

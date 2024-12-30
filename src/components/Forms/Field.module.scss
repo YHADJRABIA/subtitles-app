@@ -12,7 +12,7 @@
   width: 100%;
   padding-bottom: 0.8rem;
 
-  &:hover * {
+  &:hover > :not(.subField) {
     color: var(--primary-blue-color);
     border-color: var(--primary-blue-color);
   }
@@ -82,7 +82,10 @@
     &:not(:placeholder-shown) + label,
     &:focus + label,
     &:active + label {
-      background-color: var(--primary-white-color);
+      background-image: linear-gradient(
+        var(--primary-white-color),
+        var(--primary-gray-color)
+      );
       padding: 0 0.1rem;
       transform: translate(3rem, 0.75rem) scale(1);
     }

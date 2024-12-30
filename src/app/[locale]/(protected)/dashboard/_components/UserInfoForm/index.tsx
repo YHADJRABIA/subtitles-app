@@ -120,8 +120,9 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
     setValue(field, defaultValue)
   }
 
+  // Refactor into custom hook
   const handleUpdateSession = async (updatedFields: Partial<UserAPIType>) => {
-    await update(updatedFields)
+    await update({ ...updatedFields, lastUpdateDate: new Date() })
   }
 
   return (

@@ -14,7 +14,6 @@ import {
 } from 'react-icons/bs'
 import { useShowPassword } from '@/hooks/useShowPassword'
 import { getErrorMessage } from '@/utils/errors'
-import axios from 'axios'
 import { useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import useInfo from '@/hooks/useInfo'
@@ -25,6 +24,7 @@ import {
   PasswordResetValidator,
 } from '@/types/schemas/auth'
 import { getSuccessMessage } from '@/utils/api'
+import { handleResetPassword } from '@/actions/auth'
 
 const PasswordResetForm = () => {
   const searchParams = useSearchParams()
@@ -55,7 +55,7 @@ const PasswordResetForm = () => {
 
   const handleReset: SubmitHandler<PasswordResetSchema> = async user => {
     try {
-      const res = await axios.post('/api/users/password/reset', user)
+      const res = await handleResetPassword(user)
       setInfoMessage(getSuccessMessage(res), 'success')
     } catch (err) {
       setInfoMessage(await getErrorMessage(err), 'error')
@@ -87,8 +87,8 @@ const PasswordResetForm = () => {
 
         <Field
           className={styles.field}
-          label={t('password')}
-          leftIcon={{ src: PasswordIcon, title: t('password') }}
+          label={t('new_password')}
+          leftIcon={{ src: PasswordIcon, title: t('new_password') }}
           name="password"
           placeholder={
             passwordInputType === 'password' ? '••••••' : 'MyPa$$word_'

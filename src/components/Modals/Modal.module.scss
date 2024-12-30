@@ -11,7 +11,6 @@
 }
 
 .container {
-  overflow-y: auto;
   animation: slideIn 0.3s ease-out;
   @include respond-to('small') {
     margin-top: auto;
@@ -58,4 +57,10 @@
   &:hover {
     color: var(--primary-blue-color);
   }
+}
+
+.scrollableContent {
+  height: 100%;
+  overflow-y: auto;
+  flex-grow: 1;
 }

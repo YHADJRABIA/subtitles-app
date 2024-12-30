@@ -45,13 +45,8 @@ export async function POST(req: NextRequest) {
     // Email doesn't exist
     if (!existingUser)
       return NextResponse.json(
-        {
-          message: t('user_not_found'),
-          success: false,
-        },
-        {
-          status: 404,
-        }
+        { message: t('user_not_found'), success: false },
+        { status: 404 }
       )
 
     const passwordResetToken = await generatePasswordResetToken(email)

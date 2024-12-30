@@ -8,6 +8,7 @@ import { UserAPIType } from '@/types/user'
 import { isDevelopment } from '@/utils/general'
 import {
   getUserByEmail,
+  getUserById,
   updateUserById,
   verifyEmailByUserId,
 } from '@/utils/db/user'
@@ -52,10 +53,7 @@ export const authOptions: NextAuthOptions = {
 
         const [t_zod, t] = [
           await getTranslations({ locale, namespace: 'Zod' }),
-          await getTranslations({
-            locale,
-            namespace: 'Auth.Login',
-          }),
+          await getTranslations({ locale, namespace: 'Auth.Login' }),
         ]
 
         /*         if (req.status === 429) {
@@ -117,27 +115,53 @@ export const authOptions: NextAuthOptions = {
     },
 
     // Called after JWT is created (on login) or updated (client session is accessed)
-    jwt({ token, user, session, trigger }) {
+    async jwt({ token, user, session, trigger }) {
       // TODO: Check if access token is expired and prompt login if so
 
-      if (!token.sub) return token // Logged out
+      const userId = token.sub!
 
-      // Update token according to client session's data
+      // Logout user (if account deleted from another browser and user )
+      try {
+        const existingUser = await getUserById(userId)
+        if (!existingUser) {
+          console.error('User not found in database, logging out')
+          return { ...token, error: 'user-not-found' }
+        }
+      } catch (err) {
+        console.error('Error gettingUserById in JWT:', err)
+      }
+
+      // Update token according to client's session data
       // Triggered if `update` of useSession is called
-      if (trigger === 'update') {
-        // Update session only if name is different (i.e. session.xxx isn't undefined)
-        if (session?.name) token.name = session.name
-        if (session?.email) token.email = session.email
+      if (trigger === 'update' && session) {
+        // Update session only if data is different (i.e. session.xxx isn't undefined)
 
-        return { ...token, ...session } // TODO: redundant to spread session?
+        const updatedToken = {
+          ...token,
+          ...session,
+          name: session.name || token.name,
+          email: session.email || token.email,
+          lastUpdate: session.lastUpdateDate || token.lastUpdate,
+        }
+
+        return updatedToken
       }
 
       // User only defined after authorize (login)
-      if (!user) return token // Logged out
-      const isVerifiedEmail = !!user.emailVerified
-      const { createdAt, lastLogin, updatedAt } = user // TODO: Prevent updatedAt from updating at login, should only update if user info hasn't changed
+      if (!user || !userId) return token // Logged out
 
-      return { ...token, isVerifiedEmail, createdAt, lastLogin, updatedAt } // Passing down token to session
+      const { emailVerified, createdAt, lastLogin, lastUpdate } = user
+
+      // Update lastLogin on login
+      if (trigger === 'signIn') token.lastLogin = new Date()
+
+      return {
+        ...token,
+        isVerifiedEmail: !!emailVerified,
+        createdAt,
+        lastLogin,
+        lastUpdate,
+      } // Passing down token to session
     },
 
     // Called after jwt
@@ -150,8 +174,9 @@ export const authOptions: NextAuthOptions = {
           id: token.sub,
           name: token.name, // Updated name passed down from jwt after update-trigger
           creationDate: token.createdAt,
-          lastUpdateDate: token.updatedAt,
+          lastUpdateDate: token.lastUpdate,
           lastLoginDate: token.lastLogin,
+          error: token.error,
         },
       }
     },
@@ -159,10 +184,7 @@ export const authOptions: NextAuthOptions = {
     async signIn({ user, account }) {
       const locale = getNextLocale()
 
-      const t = await getTranslations({
-        locale,
-        namespace: 'Auth.Login',
-      })
+      const t = await getTranslations({ locale, namespace: 'Auth.Login' })
 
       const [withGoogle, withCredentials] = [
         account?.provider === 'google',
@@ -227,7 +249,7 @@ export const authOptions: NextAuthOptions = {
               id: existingUser._id,
               lastLogin: existingUser.lastLogin, // Previous login
               createdAt: updatedUser.createdAt,
-              updatedAt: updatedUser.updatedAt, // TODO: Prevent updatedAt from updating at login, should only update if user info hasn't changed
+              lastUpdate: updatedUser.lastUpdate,
             })
 
             return user
@@ -248,7 +270,7 @@ export const authOptions: NextAuthOptions = {
           Object.assign(user, {
             id: newUser._id,
             createdAt: newUser.createdAt,
-            updatedAt: newUser.updatedAt,
+            lastUpdate: newUser.lastUpdate,
             isVerifiedEmail: true,
           })
 

@@ -3,13 +3,14 @@ import { Locale } from './locale'
 
 // Client data exposed to authenticated user
 export type UserType = {
-  email: string
   id: string
-  lastUpdateDate: string
+  email: string
   creationDate: string
   lastLoginDate?: string
+  lastUpdateDate: string
   favoriteLocale: Locale
   isTwoFactorEnabled: boolean
+  error?: 'user-not-found'
 }
 
 export type UserAPIType = DefaultSession['user'] & {
@@ -20,6 +21,7 @@ export type UserAPIType = DefaultSession['user'] & {
   createdAt: Date
   updatedAt?: Date
   lastLogin?: Date
+  lastUpdate?: Date
   favoriteLocale: Locale
   isTwoFactorEnabled: boolean
 }

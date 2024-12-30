@@ -102,7 +102,10 @@ export async function PATCH(
     }
 
     // Update user with allowed fields
-    const updatedUser = await updateUserById(id, user)
+    const updatedUser = await updateUserById(id, {
+      ...user,
+      lastUpdate: new Date(),
+    })
 
     if (!updatedUser) {
       return NextResponse.json(
@@ -111,10 +114,7 @@ export async function PATCH(
       )
     }
 
-    return NextResponse.json({
-      message: t('user_updated'),
-      success: true,
-    })
+    return NextResponse.json({ message: t('user_updated'), success: true })
   } catch (error) {
     return NextResponse.json({ error: getErrorMessage(error) }, { status: 500 })
   }
@@ -180,10 +180,7 @@ export async function DELETE(req: NextRequest) {
       )
     }
 
-    return NextResponse.json({
-      message: t('user_deleted'),
-      success: true,
-    })
+    return NextResponse.json({ message: t('user_deleted'), success: true })
   } catch (error) {
     return NextResponse.json({ error: getErrorMessage(error) }, { status: 500 })
   }

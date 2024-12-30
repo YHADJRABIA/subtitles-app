@@ -78,10 +78,14 @@ export const updateUserById = async (
       return null
     }
 
-    return await UserModel.findByIdAndUpdate(id, allowedFields, {
-      new: true,
-      runValidators: true,
-    })
+    return await UserModel.findByIdAndUpdate(
+      id,
+      { ...allowedFields },
+      {
+        new: true,
+        runValidators: true,
+      }
+    )
   } catch (err) {
     console.error('Error updating user:', getErrorMessage(err))
     return null

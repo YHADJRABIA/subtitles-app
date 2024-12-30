@@ -60,16 +60,16 @@ function Field<K extends ValidFieldNames & string>({
             <RightIcon />
           </span>
         )}
-      </div>
 
-      {subLabel && (
-        <Subfield
-          className={styles.subField}
-          isError={!isInfo}
-          isShown={isShownSubfield}
-          label={text}
-        />
-      )}
+        {subLabel && (
+          <Subfield
+            className={styles.subField}
+            isError={!isInfo}
+            isShown={isShownSubfield}
+            label={text}
+          />
+        )}
+      </div>
     </div>
   )
 }

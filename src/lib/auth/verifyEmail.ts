@@ -16,10 +16,7 @@ export const verifyEmailByCode = async (
 
     if (existingEmail) {
       return {
-        data: {
-          message: t('email_already_taken'),
-          success: false,
-        },
+        data: { message: t('email_already_taken'), success: false },
         status: 409,
       }
     }
@@ -30,18 +27,11 @@ export const verifyEmailByCode = async (
 
     return {
       requiresUserAction: true,
-      data: {
-        message: t('verification_email_sent'),
-        success: true,
-      },
+      data: { message: t('verification_email_sent'), success: true },
       status: 200,
     }
   } catch (err) {
     console.error('Error in verifyEmailByCode:', getErrorMessage(err))
-    return {
-      data: null,
-      error: getErrorMessage(err),
-      status: 500,
-    }
+    return { data: null, error: getErrorMessage(err), status: 500 }
   }
 }
