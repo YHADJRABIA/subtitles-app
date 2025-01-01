@@ -120,7 +120,7 @@ export const authOptions: NextAuthOptions = {
 
       const userId = token.sub!
 
-      // Logout user (if account deleted from another browser and user )
+      // Logout user (if account deleted from another browser and user)
       try {
         await connectDB()
         const existingUser = await getUserById(userId)
