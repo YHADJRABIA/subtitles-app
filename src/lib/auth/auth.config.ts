@@ -122,13 +122,15 @@ export const authOptions: NextAuthOptions = {
 
       // Logout user (if account deleted from another browser and user )
       try {
+        await connectDB()
         const existingUser = await getUserById(userId)
         if (!existingUser) {
           console.error('User not found in database, logging out')
           return { ...token, error: 'user-not-found' }
         }
       } catch (err) {
-        console.error('Error gettingUserById in JWT:', err)
+        console.error('Error gettingUserById in JWT:', getErrorMessage(err))
+        return token
       }
 
       // Update token according to client's session data
