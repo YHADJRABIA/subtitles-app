@@ -16,7 +16,6 @@ const Footer = () => {
         tag="small"
       >
         {t('copyright', { currentYear })}
-        {/* TODO: Update as of 2025 to display as 2024-currentYear */}
       </Typography>
     </footer>
   )
