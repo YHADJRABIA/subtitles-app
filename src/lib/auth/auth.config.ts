@@ -130,7 +130,6 @@ export const authOptions: NextAuthOptions = {
         }
       } catch (err) {
         console.error('Error gettingUserById in JWT:', getErrorMessage(err))
-        return token
       }
 
       // Update token according to client's session data
