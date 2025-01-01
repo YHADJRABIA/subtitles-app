@@ -16,6 +16,7 @@ export const getUserById = async (id: string): Promise<UserResponse> => {
     return await UserModel.findById(id)
   } catch (err) {
     console.error('Error finding user by id:', getErrorMessage(err))
+    throw err
   }
 }
 
