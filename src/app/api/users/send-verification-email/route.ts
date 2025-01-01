@@ -7,7 +7,7 @@ import { getUserByEmail } from '@/utils/db/user'
 import { getLocaleFromNextRequest } from '@/utils/cookies'
 import { sendVerificationEmail } from '@/lib/mail'
 import { generateVerificationToken } from '@/lib/auth/token'
-import { SendEmailVerificationValidator } from '@/types/schemas/auth'
+import { SendEmailVerificationValidator } from '@/types/schemas/general'
 import { getTranslations } from 'next-intl/server'
 
 connectDB()
@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
     ]
 
     const rawBody = await req.json()
-    const body = SendEmailVerificationValidator(t_zod as any).safeParse(rawBody)
+    const body = SendEmailVerificationValidator(t_zod).safeParse(rawBody)
 
     // Form validation
     if (!body.success) {
@@ -41,15 +41,12 @@ export async function POST(req: NextRequest) {
     // Check if user already exists
     const existingUser = await getUserByEmail(email)
 
-    // For security reasons, reponses should be blurry as to not expose database
+    // TODO: For security reasons, reponses should be blurry as to not expose database
 
     // Email doesn't exist
     if (!existingUser)
       return NextResponse.json(
-        {
-          message: t('user_not_found'),
-          success: false,
-        },
+        { message: t('user_not_found'), success: false },
         { status: 404 }
       )
 
@@ -57,10 +54,7 @@ export async function POST(req: NextRequest) {
     const isAlreadyVerified = !!existingUser?.emailVerified
     if (isAlreadyVerified)
       return NextResponse.json(
-        {
-          message: t('email_already_verified'),
-          success: false,
-        },
+        { message: t('email_already_verified'), success: false },
         { status: 400 }
       )
 

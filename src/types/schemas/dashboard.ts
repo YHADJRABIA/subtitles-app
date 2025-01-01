@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl'
 import * as z from 'zod'
-import { emailSchema, idSchema, nameSchema } from './general'
+import { codeSchema, emailSchema, idSchema, nameSchema } from './general'
 
 export const UserDeleteValidator = (
   t: ReturnType<typeof useTranslations<'Zod'>>
@@ -32,3 +32,19 @@ export const UserInfoValidator = (
 ) => z.object(createUserSchema(t)).partial()
 
 export type UserInfoSchema = z.infer<ReturnType<typeof UserInfoValidator>>
+
+export const SendEmailUpdateVerificationValidator = (
+  t: ReturnType<typeof useTranslations<'Zod'>>
+) => z.object({ email: emailSchema(t) })
+
+export type SendEmailVerificationSchema = z.infer<
+  ReturnType<typeof SendEmailUpdateVerificationValidator>
+>
+
+export const EmailVerificationByCodeValidator = (
+  t: ReturnType<typeof useTranslations<'Zod'>>
+) => z.object({ code: codeSchema(t) })
+
+export type EmailVerificationByCodeSchema = z.infer<
+  ReturnType<typeof EmailVerificationByCodeValidator>
+>

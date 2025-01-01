@@ -6,7 +6,7 @@ import { getUserSession } from '@/utils/session'
 import DeleteAccountButton from '../_components/DeleteAccountButton'
 import { Metadata } from 'next/types'
 import { MetaDataProps } from '@/app/[locale]/layout'
-import DateDisplay from '@/components/DateDisplay'
+import AccountInfo from '../_components/AccountInfo'
 
 export const generateMetadata = async ({
   params: { locale },
@@ -16,10 +16,7 @@ export const generateMetadata = async ({
     namespace: 'Metadata.Protected.Account',
   })
 
-  return {
-    title: t('title'),
-    description: t('description'),
-  }
+  return { title: t('title'), description: t('description') }
 }
 
 const DashboardAccountPage = async ({ params: { locale } }: MetaDataProps) => {
@@ -39,33 +36,12 @@ const DashboardAccountPage = async ({ params: { locale } }: MetaDataProps) => {
         {t('title')}
       </Typography>
       <div className={styles.container}>
-        <div className={styles.fieldsContainer}>
-          {/* TODO: refactor fieldsContainer common to all dashboard pages */}
-          {creationDate && (
-            <div className={styles.field}>
-              <Typography size="xs" weight="semiBold">
-                {t('registered_since')}
-              </Typography>
-              <DateDisplay date={creationDate} />
-            </div>
-          )}
-          {lastUpdateDate && (
-            <div className={styles.field}>
-              <Typography size="xs" weight="semiBold">
-                {t('last_update')}
-              </Typography>
-              <DateDisplay date={lastUpdateDate} />
-            </div>
-          )}
-          {lastLoginDate && (
-            <div className={styles.field}>
-              <Typography size="xs" weight="semiBold">
-                {t('last_visit')}
-              </Typography>
-              <DateDisplay showTime date={lastLoginDate} />
-            </div>
-          )}
-        </div>
+        <AccountInfo
+          className={styles.info}
+          creationDate={creationDate}
+          lastLoginDate={lastLoginDate}
+          lastUpdateDate={lastUpdateDate}
+        />
         <DeleteAccountButton className={styles.cta} userId={userId} />
       </div>
     </>

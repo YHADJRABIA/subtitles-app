@@ -1,4 +1,8 @@
-import { capitaliseFirstLetter, isNonRelativeUrl } from '../string'
+import {
+  capitaliseFirstLetter,
+  isNonRelativeUrl,
+  truncateEmail,
+} from '../string'
 
 describe('capitaliseFirstLetter', () => {
   it('should capitalise the first letter of a string', () => {
@@ -72,5 +76,57 @@ describe('isNonRelativeUrl', () => {
   it('should return false for a URL starting with a space', () => {
     const url = ' https://example.com'
     expect(isNonRelativeUrl(url)).toBe(false)
+  })
+})
+
+describe('truncateEmail', () => {
+  it('should return the email as is if its length is less than or equal to maxLength', () => {
+    const email = 'user@example.com'
+    const maxLength = 20
+    expect(truncateEmail(email, maxLength)).toBe(email)
+  })
+
+  it('should return the email as is if the local part and domain fit within maxLength', () => {
+    const email = 'short@domain.com'
+    const maxLength = 20
+    expect(truncateEmail(email, maxLength)).toBe(email)
+  })
+
+  it('should truncate the local part and preserve the domain', () => {
+    const email = 'averylonglocalpart@domain.com'
+    const maxLength = 20
+    expect(truncateEmail(email, maxLength)).toBe('averylong...@domain.com')
+  })
+
+  it('should handle edge case where domain is very long and local part is very short', () => {
+    const email = 'a@averylongdomain.com' // Local part is just 1 character, but domain is long
+    const maxLength = 30 // Ensure maxLength is large enough to fit both the domain and local part
+    expect(truncateEmail(email, maxLength)).toBe('a@averylongdomain.com')
+  })
+
+  it('should return the email as is if the email has no domain part', () => {
+    const email = 'invalidemail'
+    const maxLength = 20
+    expect(truncateEmail(email, maxLength)).toBe(email)
+  })
+
+  it('should truncate the local part correctly when the email is valid but needs truncation', () => {
+    const email = 'verylonglocalpartwithnochange@domain.com'
+    const maxLength = 30
+    expect(truncateEmail(email, maxLength)).toBe(
+      'verylonglocalpartwi...@domain.com'
+    )
+  })
+
+  it('should handle edge case where domain is very long and local part is very short', () => {
+    const email = 'a@averylongdomain.com'
+    const maxLength = 20
+    expect(truncateEmail(email, maxLength)).toBe('a...@averylongdomain.com')
+  })
+
+  it('should return email as is when maxLength is large enough to fit both local part and domain', () => {
+    const email = 'user@domain.com'
+    const maxLength = 50
+    expect(truncateEmail(email, maxLength)).toBe(email)
   })
 })

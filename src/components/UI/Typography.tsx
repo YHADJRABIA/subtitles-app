@@ -36,6 +36,7 @@ export interface TypographyPropTypes extends HTMLAttributes<HTMLElement> {
   onClick?: MouseEventHandler<HTMLElement>
   tag?: TagType
   backgroundColor?: string
+  testId?: string
 }
 
 const tagMap = {
@@ -64,6 +65,7 @@ const Typography = ({
   lineHeight = 'regular',
   onClick,
   backgroundColor,
+  testId,
   ...props
 }: TypographyPropTypes) => {
   const Tag = tagMap[tag]
@@ -89,6 +91,7 @@ const Typography = ({
         size && styles[size],
         className
       )}
+      data-testid={testId}
       href={link.href}
       rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
       style={PropStyles as CSSProperties}
@@ -105,6 +108,7 @@ const Typography = ({
         size && styles[size],
         className
       )}
+      data-testid={testId}
       style={PropStyles as CSSProperties}
       onClick={onClick ? handleClick : undefined} // Allows component to remain server component if no onClick is passed
     >

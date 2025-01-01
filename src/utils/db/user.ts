@@ -1,8 +1,9 @@
 import { UserModel } from '@/models/user.model'
 import { getErrorMessage } from '../errors'
 import { UserAPIType } from '@/types/user'
+import { UserResponse } from '@/types/api'
 
-export const getUserByEmail = async (email: string) => {
+export const getUserByEmail = async (email: string): Promise<UserResponse> => {
   try {
     return await UserModel.findOne({ email })
   } catch (err) {
@@ -10,11 +11,12 @@ export const getUserByEmail = async (email: string) => {
   }
 }
 
-export const getUserById = async (id: string) => {
+export const getUserById = async (id: string): Promise<UserResponse> => {
   try {
     return await UserModel.findById(id)
   } catch (err) {
     console.error('Error finding user by id:', getErrorMessage(err))
+    throw err
   }
 }
 
@@ -26,11 +28,19 @@ export const deleteUserById = async (id: string) => {
   }
 }
 
-export const updateNameById = async (id: string, name: string) => {
+export const updateNameByUserId = async (id: string, name: string) => {
   try {
     return await UserModel.updateOne({ _id: id }, { name })
   } catch (err) {
     console.error("Error updating user's name by id:", getErrorMessage(err))
+  }
+}
+
+export const updateEmailByUserId = async (id: string, email: string) => {
+  try {
+    return await UserModel.updateOne({ _id: id }, { email })
+  } catch (err) {
+    console.error("Error updating user's email by id:", getErrorMessage(err))
   }
 }
 
@@ -69,10 +79,14 @@ export const updateUserById = async (
       return null
     }
 
-    return await UserModel.findByIdAndUpdate(id, allowedFields, {
-      new: true,
-      runValidators: true,
-    })
+    return await UserModel.findByIdAndUpdate(
+      id,
+      { ...allowedFields },
+      {
+        new: true,
+        runValidators: true,
+      }
+    )
   } catch (err) {
     console.error('Error updating user:', getErrorMessage(err))
     return null

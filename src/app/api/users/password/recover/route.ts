@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
     ]
 
     const rawBody = await req.json()
-    const body = PasswordRecoveryValidator(t_zod as any).safeParse(rawBody) // TODO: Remove any after next-intl fixes typing bug
+    const body = PasswordRecoveryValidator(t_zod).safeParse(rawBody)
 
     // Form validation
     if (!body.success) {
@@ -45,13 +45,8 @@ export async function POST(req: NextRequest) {
     // Email doesn't exist
     if (!existingUser)
       return NextResponse.json(
-        {
-          message: t('user_not_found'),
-          success: false,
-        },
-        {
-          status: 404,
-        }
+        { message: t('user_not_found'), success: false },
+        { status: 404 }
       )
 
     const passwordResetToken = await generatePasswordResetToken(email)

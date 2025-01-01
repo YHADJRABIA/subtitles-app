@@ -1,4 +1,4 @@
-import { IconType } from 'react-icons/lib'
+import { IconType } from '@/types/icon'
 import Typography, { LinkType, TypographyPropTypes } from '../Typography'
 import styles from './Button.module.scss'
 import cn from 'classnames'
@@ -8,7 +8,7 @@ interface LinkButtonPropTypes extends TypographyPropTypes {
   variation?: 'primary' | 'secondary' | 'regular'
   backgroundColor?: string
   isRounded?: boolean
-  icon?: { src: IconType; size?: number; color?: string }
+  icon?: IconType
   link: LinkType
 }
 

@@ -3,6 +3,7 @@ import { Pathname } from '@/types/pathnames'
 export const LOGIN_ROUTE: Pathname = '/login'
 export const REGISTER_ROUTE: Pathname = '/register'
 export const DEFAULT_LOGIN_REDIRECT_ROUTE: Pathname = '/dashboard'
+export const DEFAULT_LOGOUT_REDIRECT_ROUTE: Pathname = '/'
 
 /** Routes accessible without requiring authentication. */
 export const publicAuthRoutes = [

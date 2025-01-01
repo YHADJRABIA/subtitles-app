@@ -9,17 +9,8 @@
     padding: 2rem;
   }
 }
-
-.fieldsContainer {
-  width: 100%;
-  @include flexCenter(column);
-  gap: 2rem;
+.info {
   margin-bottom: 8rem;
-}
-
-.field {
-  @include flexCenter(row, space-between);
-  width: 100%;
 }
 
 .separator {

@@ -11,13 +11,16 @@ import Subfield from '../Forms/Subfield'
 
 import { ValidFieldNames } from '@/types/schemas/general'
 import { FieldBasePropTypes } from '@/types/field'
+import { APIResponse } from '@/types/api'
 
 interface PropTypes<T, K extends ValidFieldNames>
   extends FieldBasePropTypes<K> {
   handleSubmit: (
     callback: (data: T) => void
   ) => FormEventHandler<HTMLFormElement>
-  onEdit: (newValue: string) => Promise<void>
+  onEdit: (value: string) => Promise<APIResponse>
+  onCancel: () => void
+  onSuccess: (value?: string) => Promise<APIResponse | void> | void
   isValid?: boolean
   topText?: string
   value: string
@@ -34,6 +37,8 @@ const EditableField = <T, K extends ValidFieldNames & string>({
   name,
   className,
   onEdit,
+  onCancel,
+  onSuccess,
   handleSubmit,
   value,
   ...rest
@@ -45,24 +50,33 @@ const EditableField = <T, K extends ValidFieldNames & string>({
   const [isPending, startTransition] = useTransition()
 
   const hasValue = !!initialValue.length
+
   const handleEdit = () => setIsEditing(true)
 
   const handleSave = () => {
     startTransition(async () => {
       try {
         if (initialValue !== value) {
-          await onEdit(value)
-          setInitialValue(value)
+          const res = await onEdit(value)
+
+          // Do not update initialValue if user action is required
+          if (!res?.requiresUserAction) setInitialValue(value)
+
+          await onSuccess(value)
         }
       } catch (err) {
         console.error('Saving EditableField failed:', getErrorMessage(err))
+        onCancel()
       } finally {
         setIsEditing(false)
       }
     })
   }
 
-  const handleCancel = () => setIsEditing(false)
+  const handleCancel = () => {
+    setIsEditing(false)
+    onCancel()
+  }
 
   const actionLabel = t(isEditing ? 'cancel' : hasValue ? 'edit' : 'add')
 
@@ -96,7 +110,6 @@ const EditableField = <T, K extends ValidFieldNames & string>({
           method="PATCH"
           onSubmit={handleSubmit(handleSave)}
         >
-          {/* TODO: Handle max-height fluid transition */}
           {showTopText && (
             <Typography className={styles.hint} size="xs">
               {topText}

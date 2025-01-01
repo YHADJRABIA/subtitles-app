@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
     ]
 
     const rawBody = await req.json()
-    const body = PasswordResetValidator(t_zod as any).safeParse(rawBody)
+    const body = PasswordResetValidator(t_zod).safeParse(rawBody)
 
     // Form validation
     if (!body.success) {
@@ -57,10 +57,7 @@ export async function POST(req: NextRequest) {
     const tokenHasExpired = hasExpired(existingToken.expires)
     if (tokenHasExpired) {
       return NextResponse.json(
-        {
-          message: t('expired_token'),
-          success: false,
-        },
+        { message: t('expired_token'), success: false },
         { status: 400 }
       )
     }

@@ -12,7 +12,7 @@ import {
   GrUserExpert as RegisterIcon,
 } from 'react-icons/gr'
 
-import { LuSubtitles as SubtitlesIcon } from 'react-icons/lu'
+import { LuMessageSquareText as SubtitlesIcon } from 'react-icons/lu'
 
 interface PropTypes {
   isConnected: boolean

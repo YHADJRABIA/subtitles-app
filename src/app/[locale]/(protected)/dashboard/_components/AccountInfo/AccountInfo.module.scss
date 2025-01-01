@@ -1,0 +1,10 @@
+.root {
+  width: 100%;
+  @include flexCenter(column);
+  gap: 2rem;
+}
+
+.field {
+  @include flexCenter(row, space-between);
+  width: 100%;
+}

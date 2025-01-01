@@ -1,24 +1,27 @@
 import { DefaultSession } from 'next-auth'
 import { Locale } from './locale'
 
+// Client data exposed to authenticated user
 export type UserType = {
-  email: string
   id: string
-  isVerifiedEmail: boolean
-  lastUpdateDate: string
+  email: string
   creationDate: string
   lastLoginDate?: string
+  lastUpdateDate: string
   favoriteLocale: Locale
   isTwoFactorEnabled: boolean
+  error?: 'user-not-found'
 }
 
 export type UserAPIType = DefaultSession['user'] & {
   id: string
   email: string
   emailVerified?: Date
+  password?: string
   createdAt: Date
   updatedAt?: Date
   lastLogin?: Date
+  lastUpdate?: Date
   favoriteLocale: Locale
   isTwoFactorEnabled: boolean
 }

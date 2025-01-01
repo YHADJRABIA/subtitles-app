@@ -1,16 +1,14 @@
 .root {
   @include flexCenter(row, flex-start);
-  flex-wrap: nowrap;
   width: 100%;
   gap: 0.6rem;
 }
 
 .errorIcon {
-  font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+  font-size: clamp(1.4rem, 3.5vw, 1.6rem);
   color: var(--primary-red-color);
 }
 
 .text {
   @include truncated;
-  width: 100%;
 }
