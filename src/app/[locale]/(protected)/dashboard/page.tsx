@@ -16,10 +16,7 @@ export const generateMetadata = async ({
     namespace: 'Metadata.Protected.Dashboard',
   })
 
-  return {
-    title: t('title'),
-    description: t('description'),
-  }
+  return { title: t('title'), description: t('description') }
 }
 
 const DashboardPage = async ({ params: { locale } }: MetaDataProps) => {
