@@ -15,6 +15,7 @@ const AppProvider = async ({ children }: PropTypes) => {
   // Provide all messages to the client side
   const messages = await getMessages()
 
+  // Ensures that session is still available on client side after page refresh
   const session = await getServerSession(authOptions)
 
   return (
