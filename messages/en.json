@@ -326,8 +326,7 @@
     "donate": "Donate"
   },
   "Footer": {
-    "development_year": "2024",
-    "copyright": "©{currentYear} – Yacine Hadj Rabia"
+    "copyright": "© 2024 – {currentYear} Yacine Hadj Rabia"
   },
 
   "UnderDevelopement": { "title": "Under development" }
