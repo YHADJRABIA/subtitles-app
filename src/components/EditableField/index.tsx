@@ -150,7 +150,10 @@ const EditableField = <T, K extends ValidFieldNames & string>({
         </Typography>
       )}
 
-      <Separator className={styles.separator} />
+      <Separator
+        className={styles.separator}
+        color="var(--primary-black-color)"
+      />
     </div>
   )
 }
