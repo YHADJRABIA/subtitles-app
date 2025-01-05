@@ -17,13 +17,13 @@ const Separator = ({
   className,
 }: PropTypes & { className?: string }) => {
   return label ? (
-    <div className={cn(styles.labelSeparator, className)}>
+    <div className={cn(styles.root, styles.labelSeparator, className)}>
       <span>{label}</span>
     </div>
   ) : (
     <hr
-      className={cn(styles.separator, className)}
-      style={{ borderColor: color || 'var(--primary-black-color)' }}
+      className={cn(styles.root, className)}
+      style={{ borderColor: color || undefined }}
     />
   )
 }
