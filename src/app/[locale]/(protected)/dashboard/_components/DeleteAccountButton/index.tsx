@@ -12,6 +12,7 @@ import { notify } from '@/lib/toastify'
 import { getErrorMessage } from '@/utils/errors'
 import { handleLogout } from '@/actions/auth'
 import { getSuccessMessage } from '@/utils/api'
+import { BsTrash as TrashBinIcon } from 'react-icons/bs'
 
 interface PropTypes {
   className?: string
@@ -27,6 +28,7 @@ const DeleteAccountButton = ({ className, userId }: PropTypes) => {
   const handleOpenModal = () => {
     openModal({
       title: t('account_deletion'),
+      icon: { src: TrashBinIcon, size: 24 },
       content: (
         <ConfirmationModal
           message={t('warning_deletion')}
