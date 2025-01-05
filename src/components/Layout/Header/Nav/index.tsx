@@ -63,10 +63,7 @@ const Nav = ({ className, isConnected }: PropTypes) => {
             )
           })}
         </ul>
-        <Separator
-          className={styles.separator}
-          color="var(--secondary-gray-color)"
-        />
+        <Separator className={styles.separator} />
         {/* TODO: Reuse later  <AuthSection showAccount={isConnected} className={styles.authSection} /> */}
         <div className={styles.bottomSection}>
           <LanguageMenu isInverted={!isOnDesktop} />
