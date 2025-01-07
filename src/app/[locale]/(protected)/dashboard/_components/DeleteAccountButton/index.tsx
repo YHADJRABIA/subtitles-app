@@ -42,8 +42,7 @@ const DeleteAccountButton = ({ className, userId }: PropTypes) => {
 
   const handleDelete = async () => {
     if (!userId) {
-      notify('error', t('deletion_failed'))
-      return
+      return notify('error', t('deletion_failed'))
     }
 
     setIsLoading(true)
