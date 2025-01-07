@@ -88,7 +88,7 @@ export const authOptions: NextAuthOptions = {
           }
 
           // Passing down user to JWT
-          return existingUser // TODO: Limit what's passed down
+          return existingUser
         } catch (err) {
           console.error('Authorization failed:', getErrorMessage(err))
           throw err // Propagate error to frontend
