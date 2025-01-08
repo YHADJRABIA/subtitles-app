@@ -32,3 +32,22 @@ export const notify: PropTypes = (status, message, options = {}) => {
       break
   }
 }
+
+// TODO: Refactor to something more generic like a hook
+// key and values should be passed as param
+interface PropTypes {
+  type: 'success' | 'error'
+  message: string
+}
+
+export const storeNotification = (type: PropTypes['type'], message: string) => {
+  localStorage.setItem('notification', JSON.stringify({ type, message }))
+}
+
+export const getStoredNotification = (): PropTypes | null => {
+  const stored = localStorage.getItem('notification')
+  if (!stored) return null
+
+  localStorage.removeItem('notification')
+  return JSON.parse(stored)
+}
