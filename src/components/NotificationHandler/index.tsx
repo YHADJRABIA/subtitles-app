@@ -9,6 +9,9 @@ interface PropTypes {
   message: string
 }
 
+// Persists toast call after redirect
+// Toast data is read from localStorage
+
 export default function NotificationHandler() {
   const pathname = usePathname()
 
@@ -18,7 +21,9 @@ export default function NotificationHandler() {
 
     const notification: PropTypes = JSON.parse(stored)
 
-    notify(notification.type, notification.message, {
+    const { type, message } = notification
+
+    notify(type, message, {
       onOpen: () => {
         setTimeout(() => {
           localStorage.removeItem('notification')
