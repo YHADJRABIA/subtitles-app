@@ -8,7 +8,7 @@ import { handleDeleteUserById } from '@/actions/user'
 import { useModal } from '@/hooks/useModal'
 import ConfirmationModal from '@/components/Modals/ConfirmationModal'
 import { useTranslations } from 'next-intl'
-import { notify } from '@/lib/toastify'
+import { notify, storeNotification } from '@/lib/toastify'
 import { getErrorMessage } from '@/utils/errors'
 import { handleLogout } from '@/actions/auth'
 import { getSuccessMessage } from '@/utils/api'
@@ -48,7 +48,7 @@ const DeleteAccountButton = ({ className, userId }: PropTypes) => {
       const res = await handleDeleteUserById(userId)
       if (res?.data.success) {
         await handleLogout()
-        notify('success', getSuccessMessage(res)) // TODO: persist toast after redirection
+        storeNotification('success', getSuccessMessage(res))
       }
     } catch (err) {
       notify('error', (await getErrorMessage(err)) || t('deletion_failed'))
