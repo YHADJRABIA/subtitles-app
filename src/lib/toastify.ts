@@ -1,11 +1,9 @@
 import { toast, ToastOptions } from 'react-toastify'
 
+type ToastType = 'success' | 'info' | 'warning' | 'error'
+
 interface PropTypes {
-  (
-    status: 'success' | 'info' | 'warning' | 'error',
-    message: string,
-    options?: ToastOptions
-  ): void
+  (status: ToastType, message: string, options?: ToastOptions): void
 }
 
 export const notify: PropTypes = (status, message, options = {}) => {
@@ -35,16 +33,12 @@ export const notify: PropTypes = (status, message, options = {}) => {
 
 // TODO: Refactor to something more generic like a hook
 // key and values should be passed as param
-interface PropTypes {
-  type: 'success' | 'error'
-  message: string
-}
 
-export const storeNotification = (type: PropTypes['type'], message: string) => {
+export const storeNotification = (type: ToastType, message: string) => {
   localStorage.setItem('notification', JSON.stringify({ type, message }))
 }
 
-export const getStoredNotification = (): PropTypes | null => {
+export const getStoredNotification = (): Omit<PropTypes, 'options'> | null => {
   const stored = localStorage.getItem('notification')
   if (!stored) return null
 
