@@ -141,18 +141,21 @@ function AuthForm({ type }: PropTypes) {
           type={info.type}
         />
         {showResendEmail && (
-          <Typography
-            className={styles.resendEmail}
-            link={{
-              href: isValidEmail
-                ? `/send-verification-email?email=${email}`
-                : '/send-verification-email',
-            }}
-            size="xxs"
-            weight="semiBold"
-          >
-            {t('Register.resend_email')}
-          </Typography>
+          <>
+            <Typography
+              className={styles.resendEmail}
+              link={{
+                href: isValidEmail
+                  ? `/send-verification-email?email=${email}`
+                  : '/send-verification-email',
+              }}
+              size="xxs"
+              weight="semiBold"
+            >
+              {t('Register.resend_email')}
+            </Typography>
+            <Separator />
+          </>
         )}
 
         <Field

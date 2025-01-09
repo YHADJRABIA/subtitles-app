@@ -14,10 +14,7 @@ export const generateMetadata = async ({
 }: MetaDataProps): Promise<Metadata> => {
   const t = await getTranslations({ locale, namespace: 'Metadata.Homepage' })
 
-  return {
-    title: t('title'),
-    description: t('description'),
-  }
+  return { title: t('title'), description: t('description') }
 }
 
 export default function HomePage() {

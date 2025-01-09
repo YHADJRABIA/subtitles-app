@@ -15,6 +15,8 @@ interface PropTypes {
   children: ReactNode
 }
 
+const DEFAULT_ICON_SIZE = 28
+
 const Modal = ({
   isOpen,
   isClosable = true,
@@ -42,7 +44,9 @@ const Modal = ({
           )}
         >
           <div className={styles.titleWrapper}>
-            {Icon && <Icon color={icon.color} size={icon.size ?? 28} />}
+            {Icon && (
+              <Icon color={icon.color} size={icon.size ?? DEFAULT_ICON_SIZE} />
+            )}
             {title && (
               <Typography size="xl" tag="h2" weight="bold">
                 {title}
