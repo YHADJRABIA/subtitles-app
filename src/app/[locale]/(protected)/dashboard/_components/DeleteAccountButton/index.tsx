@@ -8,10 +8,11 @@ import { handleDeleteUserById } from '@/actions/user'
 import { useModal } from '@/hooks/useModal'
 import ConfirmationModal from '@/components/Modals/ConfirmationModal'
 import { useTranslations } from 'next-intl'
-import { notify } from '@/lib/toastify'
+import { notify, storeNotification } from '@/lib/toastify'
 import { getErrorMessage } from '@/utils/errors'
 import { handleLogout } from '@/actions/auth'
 import { getSuccessMessage } from '@/utils/api'
+import { BsTrash as TrashBinIcon } from 'react-icons/bs'
 
 interface PropTypes {
   className?: string
@@ -27,6 +28,7 @@ const DeleteAccountButton = ({ className, userId }: PropTypes) => {
   const handleOpenModal = () => {
     openModal({
       title: t('account_deletion'),
+      icon: { src: TrashBinIcon, size: 24 },
       content: (
         <ConfirmationModal
           message={t('warning_deletion')}
@@ -39,17 +41,14 @@ const DeleteAccountButton = ({ className, userId }: PropTypes) => {
   }
 
   const handleDelete = async () => {
-    if (!userId) {
-      notify('error', t('deletion_failed'))
-      return
-    }
+    if (!userId) return notify('error', t('deletion_failed'))
 
     setIsLoading(true)
     try {
       const res = await handleDeleteUserById(userId)
       if (res?.data.success) {
         await handleLogout()
-        notify('success', getSuccessMessage(res)) // TODO: persist toast after redirection
+        storeNotification('success', getSuccessMessage(res))
       }
     } catch (err) {
       notify('error', (await getErrorMessage(err)) || t('deletion_failed'))
