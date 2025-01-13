@@ -248,6 +248,8 @@ export const authOptions: NextAuthOptions = {
             // Data to be accessed via getUserSession
             Object.assign(user, {
               id: existingUser.id,
+              name: existingUser.name,
+              image: existingUser.image,
               lastLogin: existingUser.lastLogin, // Previous login
               createdAt: updatedUser.createdAt,
               lastUpdate: updatedUser.lastUpdate,
