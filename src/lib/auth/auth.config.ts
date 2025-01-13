@@ -269,7 +269,7 @@ export const authOptions: NextAuthOptions = {
 
           // Data to be accessed via getUserSession
           Object.assign(user, {
-            id: newUser._id,
+            id: newUser.id,
             createdAt: newUser.createdAt,
             lastUpdate: newUser.lastUpdate,
             isVerifiedEmail: true,
