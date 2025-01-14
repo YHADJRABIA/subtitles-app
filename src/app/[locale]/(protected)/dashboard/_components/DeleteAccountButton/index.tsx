@@ -48,7 +48,10 @@ const DeleteAccountButton = ({ className, userId }: PropTypes) => {
       const res = await handleDeleteUserById(userId)
       if (res?.data.success) {
         await handleLogout()
-        storeNotification('success', getSuccessMessage(res))
+        storeNotification({
+          type: 'success',
+          message: getSuccessMessage(res),
+        })
       }
     } catch (err) {
       notify('error', (await getErrorMessage(err)) || t('deletion_failed'))
