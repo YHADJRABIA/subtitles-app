@@ -1,12 +1,13 @@
 'use client'
 
+import { LocalStorageKey } from '@/types/localeStorage'
 import { isClient } from '@/utils/general'
 import { useState } from 'react'
 
 type ValueType<T> = T | null
 
 interface PropTypes<T> {
-  key: string
+  key: LocalStorageKey
   defaultValue?: ValueType<T>
 }
 
