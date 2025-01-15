@@ -1,13 +1,13 @@
 import React, { ReactNode } from 'react'
 import styles from './HeroBanner.module.scss'
-import Typography from '../UI/Typography'
+import Typography, { TextAlign } from '../UI/Typography'
 import cn from 'classnames'
 import FilledImage, { AspectRatio } from '../UI/FilledImage'
 
 interface PropTypes {
   title: string
   description: string
-  align?: 'left' | 'center' | 'right'
+  align?: TextAlign
   image?: string
   imageAlt?: string
   className?: string
