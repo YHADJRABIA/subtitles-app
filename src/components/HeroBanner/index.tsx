@@ -36,7 +36,6 @@ const HeroBanner = ({
         />
       )}
 
-      {/* TODO: Limit text length */}
       <div className={styles.textContainer}>
         <Typography
           align={align}
