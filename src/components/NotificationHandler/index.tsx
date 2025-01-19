@@ -2,10 +2,11 @@
 
 import { useEffect } from 'react'
 import { usePathname } from 'next/navigation'
-import { notify } from '@/lib/toastify'
+import { notify, ToastType } from '@/lib/toastify'
+import { useLocalStorage } from '@/hooks/useLocalStorage'
 
 interface PropTypes {
-  type: 'success' | 'error'
+  type: ToastType
   message: string
 }
 
@@ -15,22 +16,22 @@ interface PropTypes {
 export default function NotificationHandler() {
   const pathname = usePathname()
 
-  useEffect(() => {
-    const stored = localStorage.getItem('notification')
-    if (!stored) return
+  const [notification, setNotification] = useLocalStorage<PropTypes>({
+    key: 'notification',
+    defaultValue: null,
+  })
 
-    const notification: PropTypes = JSON.parse(stored)
+  useEffect(() => {
+    if (!notification) return
 
     const { type, message } = notification
 
     notify(type, message, {
       onOpen: () => {
-        setTimeout(() => {
-          localStorage.removeItem('notification')
-        }, 1000)
+        setNotification(null)
       },
     })
-  }, [pathname])
+  }, [notification, pathname, setNotification])
 
   return null
 }

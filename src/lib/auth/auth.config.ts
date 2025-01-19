@@ -222,13 +222,13 @@ export const authOptions: NextAuthOptions = {
           const { name, email, image } = user
           await connectDB()
 
-          const existingUser = (await getUserByEmail(email ?? '')) as any // TODO: Fix api interface
+          const existingUser = !!email && (await getUserByEmail(email))
 
           if (existingUser) {
             // Verify user's existing account if user logs in with Google
             if (!existingUser.emailVerified) {
               await Promise.all([
-                verifyEmailByUserId(existingUser._id),
+                verifyEmailByUserId(existingUser.id),
                 deleteVerificationTokenByEmail(existingUser.email),
               ])
             }
@@ -241,13 +241,15 @@ export const authOptions: NextAuthOptions = {
             }
 
             const updatedUser = await updateUserById(
-              existingUser._id,
+              existingUser.id,
               updatedFields
             )
 
             // Data to be accessed via getUserSession
             Object.assign(user, {
-              id: existingUser._id,
+              id: existingUser.id,
+              name: existingUser.name,
+              image: existingUser.image,
               lastLogin: existingUser.lastLogin, // Previous login
               createdAt: updatedUser.createdAt,
               lastUpdate: updatedUser.lastUpdate,
@@ -269,7 +271,7 @@ export const authOptions: NextAuthOptions = {
 
           // Data to be accessed via getUserSession
           Object.assign(user, {
-            id: newUser._id,
+            id: newUser.id,
             createdAt: newUser.createdAt,
             lastUpdate: newUser.lastUpdate,
             isVerifiedEmail: true,

@@ -14,7 +14,7 @@ export const isNonRelativeUrl = (url: string) => {
  * @param maxLength - Max allowed length for email address.
  * @returns Truncated email address.
  */
-export function truncateEmail(email: string, maxLength: number): string {
+export const truncateEmail = (email: string, maxLength: number): string => {
   if (email.length <= maxLength) return email
 
   const [localPart, domain] = email.split('@')
@@ -30,4 +30,9 @@ export function truncateEmail(email: string, maxLength: number): string {
   }
 
   return `${localPart.slice(0, maxLocalLength)}...@${domain}`
+}
+
+export const truncateString = (string: string, maxLength: number) => {
+  if (string.length <= maxLength) return string
+  return `${string.substring(0, maxLength - 1)}...`
 }

@@ -154,7 +154,7 @@ function AuthForm({ type }: PropTypes) {
             >
               {t('Register.resend_email')}
             </Typography>
-            <Separator />
+            <Separator className={styles.emailSeparator} />
           </>
         )}
 
