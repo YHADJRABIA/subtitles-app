@@ -2,6 +2,7 @@ import {
   capitaliseFirstLetter,
   isNonRelativeUrl,
   truncateEmail,
+  truncateString,
 } from '../string'
 
 describe('capitaliseFirstLetter', () => {
@@ -128,5 +129,37 @@ describe('truncateEmail', () => {
     const email = 'user@domain.com'
     const maxLength = 50
     expect(truncateEmail(email, maxLength)).toBe(email)
+  })
+})
+
+describe('truncateText', () => {
+  it('should return same text if length is less than maxLength', () => {
+    const text = 'Hello'
+    const maxLength = 10
+    expect(truncateString(text, maxLength)).toBe(text)
+  })
+
+  it('should return same text if length is equal to maxLength', () => {
+    const text = 'HelloWorld'
+    const maxLength = 10
+    expect(truncateString(text, maxLength)).toBe(text)
+  })
+
+  it('should truncate text and add ellipsis if length is greater than maxLength', () => {
+    const text = 'HelloWorld!'
+    const maxLength = 10
+    expect(truncateString(text, maxLength)).toBe('HelloWorl...')
+  })
+
+  it('should handle empty text', () => {
+    const text = ''
+    const maxLength = 10
+    expect(truncateString(text, maxLength)).toBe(text)
+  })
+
+  it('should handle maxLength of 0', () => {
+    const text = 'HelloWorld'
+    const maxLength = 0
+    expect(truncateString(text, maxLength)).toBe('...')
   })
 })
