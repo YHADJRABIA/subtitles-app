@@ -31,3 +31,8 @@ export const truncateEmail = (email: string, maxLength: number): string => {
 
   return `${localPart.slice(0, maxLocalLength)}...@${domain}`
 }
+
+export const truncateString = (string: string, maxLength: number) => {
+  if (string.length <= maxLength) return string
+  return `${string.substring(0, maxLength)}...`
+}
