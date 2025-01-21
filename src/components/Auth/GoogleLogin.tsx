@@ -20,7 +20,7 @@ const GoogleLogin = ({ label, disabled, onClick }: PropTypes) => {
     try {
       await onClick()
     } catch (err) {
-      console.error(getErrorMessage(err))
+      console.error('Error submitting Google Login:', getErrorMessage(err))
     } finally {
       setIsLoading(false)
     }
