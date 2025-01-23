@@ -19,7 +19,7 @@ const LogoutButton = ({ className, label }: PropTypes) => {
     try {
       await handleLogout()
     } catch (err) {
-      console.error(getErrorMessage(err))
+      console.error('Error using logout button:', getErrorMessage(err))
     } finally {
       setIsLoading(false)
     }
