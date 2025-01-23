@@ -76,17 +76,14 @@ export async function POST(req: NextRequest) {
 
     // Update associated user's password
     await UserModel.updateOne(
-      { _id: associatedUser.id },
+      { id: associatedUser.id },
       { password: hashedPassword }
     )
 
     // Remove password reset token
     await deletePasswordResetTokenById(existingToken.id)
 
-    return NextResponse.json({
-      message: t('password_updated'),
-      success: true,
-    })
+    return NextResponse.json({ message: t('password_updated'), success: true })
   } catch (error) {
     return NextResponse.json({ error: getErrorMessage(error) }, { status: 500 })
   }

@@ -30,7 +30,7 @@ export const deleteUserById = async (id: string) => {
 
 export const updateNameByUserId = async (id: string, name: string) => {
   try {
-    return await UserModel.updateOne({ _id: id }, { name })
+    return await UserModel.updateOne({ id }, { name })
   } catch (err) {
     console.error("Error updating user's name by id:", getErrorMessage(err))
   }
@@ -38,7 +38,7 @@ export const updateNameByUserId = async (id: string, name: string) => {
 
 export const updateEmailByUserId = async (id: string, email: string) => {
   try {
-    return await UserModel.updateOne({ _id: id }, { email })
+    return await UserModel.updateOne({ id }, { email })
   } catch (err) {
     console.error("Error updating user's email by id:", getErrorMessage(err))
   }
@@ -46,7 +46,7 @@ export const updateEmailByUserId = async (id: string, email: string) => {
 
 export const verifyEmailByUserId = async (id: string) => {
   try {
-    return await UserModel.updateOne({ _id: id }, { emailVerified: new Date() })
+    return await UserModel.updateOne({ id }, { emailVerified: new Date() })
   } catch (err) {
     console.error(
       "Error updating user's verifiedEmail by id:",

@@ -10,7 +10,7 @@
 }
 
 .formMessage {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .emailField {
@@ -45,4 +45,8 @@
 .resendEmail {
   color: var(--secondary-blue-color);
   margin-right: auto;
+}
+
+.emailSeparator {
+  opacity: 0.6;
 }

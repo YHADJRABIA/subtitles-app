@@ -18,7 +18,7 @@ export const getVerificationCodeByEmail = async (
 
 export const deleteVerificationCodeById = async (id: string) => {
   try {
-    await VerificationCodeModel.deleteOne({ _id: id })
+    await VerificationCodeModel.deleteOne({ id })
   } catch (err) {
     console.error(
       'Error deleting verification code by id:',

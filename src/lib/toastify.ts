@@ -1,6 +1,7 @@
+import { setLocalStorageItem } from '@/utils/localStorage'
 import { toast, ToastOptions } from 'react-toastify'
 
-type ToastType = 'success' | 'info' | 'warning' | 'error'
+export type ToastType = 'success' | 'info' | 'warning' | 'error'
 
 interface PropTypes {
   (status: ToastType, message: string, options?: ToastOptions): void
@@ -31,17 +32,11 @@ export const notify: PropTypes = (status, message, options = {}) => {
   }
 }
 
-// TODO: Refactor to something more generic like a hook
-// key and values should be passed as param
-
-export const storeNotification = (type: ToastType, message: string) => {
-  localStorage.setItem('notification', JSON.stringify({ type, message }))
+interface LocalStorageType {
+  type: ToastType
+  message: string
 }
 
-export const getStoredNotification = (): Omit<PropTypes, 'options'> | null => {
-  const stored = localStorage.getItem('notification')
-  if (!stored) return null
-
-  localStorage.removeItem('notification')
-  return JSON.parse(stored)
+export const storeNotification = (notificaiton: LocalStorageType) => {
+  setLocalStorageItem('notification', notificaiton)
 }

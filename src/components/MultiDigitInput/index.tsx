@@ -78,7 +78,7 @@ const MultiDigitInput = ({
             inputRefs.current[index] = el
           }}
           type="text"
-          value={value[index]} // Render  correct digit
+          value={value[index]} // Render correct digit
           onChange={e => handleInputChange(e.target.value, index)}
           onKeyDown={e => handleKeyDown(e, index)}
         />
