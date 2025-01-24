@@ -28,6 +28,7 @@ import { handleResetPassword } from '@/actions/auth'
 
 const PasswordResetForm = () => {
   const searchParams = useSearchParams()
+  const router = useRouter()
   const [t, t_zod] = [useTranslations('Auth'), useTranslations('Zod')]
 
   const token = searchParams.get('token') ?? ''
@@ -57,6 +58,7 @@ const PasswordResetForm = () => {
     try {
       const res = await handleResetPassword(user)
       setInfoMessage(getSuccessMessage(res), 'success')
+      router.push('/login')
     } catch (err) {
       setInfoMessage(await getErrorMessage(err), 'error')
     }
