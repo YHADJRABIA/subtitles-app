@@ -27,7 +27,7 @@ export const getPasswordResetTokenByEmail = async (email: string) => {
 
 export const deletePasswordResetTokenById = async (id: string) => {
   try {
-    await PasswordResetTokenModel.deleteOne({ id })
+    await PasswordResetTokenModel.deleteOne({ _id: id })
   } catch (err) {
     console.error(
       'Error deleting password reset token by id:',
