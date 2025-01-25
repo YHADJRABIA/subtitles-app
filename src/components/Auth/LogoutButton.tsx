@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useTransition } from 'react'
 import { Button } from '../UI/Button'
 import { handleLogout } from '@/actions/auth'
 import cn from 'classnames'
@@ -12,23 +12,23 @@ interface PropTypes {
 }
 
 const LogoutButton = ({ className, label }: PropTypes) => {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isPending, startTransition] = useTransition()
 
-  const onLogoutClick = async () => {
-    setIsLoading(true)
-    try {
-      await handleLogout()
-    } catch (err) {
-      console.error(getErrorMessage(err))
-    } finally {
-      setIsLoading(false)
-    }
+  const onLogoutClick = () => {
+    startTransition(async () => {
+      try {
+        await handleLogout()
+      } catch (err) {
+        console.error('Error using logout button:', getErrorMessage(err))
+      }
+    })
   }
+
   return (
     <Button
       className={cn(styles.root, className)}
-      disabled={isLoading}
-      isLoading={isLoading}
+      disabled={isPending}
+      isLoading={isPending}
       size="xs"
       tag="span"
       variation="secondary"

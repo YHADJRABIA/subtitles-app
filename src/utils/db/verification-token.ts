@@ -32,7 +32,7 @@ export const getVerificationTokenByToken = async (
 
 export const deleteVerificationTokenById = async (id: string) => {
   try {
-    await VerificationTokenModel.deleteOne({ id })
+    await VerificationTokenModel.deleteOne({ _id: id })
   } catch (err) {
     console.error(
       'Error deleting verification token by id:',

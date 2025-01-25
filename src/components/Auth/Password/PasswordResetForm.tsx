@@ -51,7 +51,7 @@ const PasswordResetForm = () => {
     mode: 'onChange',
   })
 
-  const fieldState = getFieldState('password')
+  const passwordField = getFieldState('password')
 
   const handleReset: SubmitHandler<PasswordResetSchema> = async user => {
     try {
@@ -97,7 +97,7 @@ const PasswordResetForm = () => {
           rightIcon={{ src: ToggleIcon }}
           subLabel={{
             text: errors?.password?.message,
-            isShown: fieldState.isTouched,
+            isShown: passwordField.isTouched,
             isInfo: true,
           }}
           testId="reset-password-field"

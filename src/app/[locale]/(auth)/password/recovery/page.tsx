@@ -12,10 +12,7 @@ export const generateMetadata = async ({
     namespace: 'Metadata.Auth.PasswordRecovery',
   })
 
-  return {
-    title: t('title'),
-    description: t('description'),
-  }
+  return { title: t('title'), description: t('description') }
 }
 const PasswordRecoveryPage = () => {
   return <PasswordRecoveryForm />

@@ -22,10 +22,7 @@ export async function POST(req: NextRequest) {
 
     const [t_zod, t] = [
       await getTranslations({ locale, namespace: 'Zod' }),
-      await getTranslations({
-        locale,
-        namespace: 'Auth.PasswordReset',
-      }),
+      await getTranslations({ locale, namespace: 'Auth.PasswordReset' }),
     ]
 
     const rawBody = await req.json()
@@ -76,7 +73,7 @@ export async function POST(req: NextRequest) {
 
     // Update associated user's password
     await UserModel.updateOne(
-      { id: associatedUser.id },
+      { _id: associatedUser.id },
       { password: hashedPassword }
     )
 
