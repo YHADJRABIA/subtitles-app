@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useTransition } from 'react'
 
 import cn from 'classnames'
 import styles from './DeleteAccountButton.module.scss'
@@ -21,7 +21,7 @@ interface PropTypes {
 
 const DeleteAccountButton = ({ className, userId }: PropTypes) => {
   const t = useTranslations('Dashboard.Account')
-  const [isLoading, setIsLoading] = useState(false)
+  const [isPending, startTransition] = useTransition()
 
   const { openModal, closeModal } = useModal()
 
@@ -40,32 +40,31 @@ const DeleteAccountButton = ({ className, userId }: PropTypes) => {
     })
   }
 
-  const handleDelete = async () => {
-    if (!userId) return notify('error', t('deletion_failed'))
+  const handleDelete = () => {
+    startTransition(async () => {
+      if (!userId) return notify('error', t('deletion_failed'))
 
-    setIsLoading(true)
-    try {
-      const res = await handleDeleteUserById(userId)
-      if (res?.data.success) {
-        await handleLogout()
-        storeNotification({
-          type: 'success',
-          message: getSuccessMessage(res),
-        })
+      try {
+        const res = await handleDeleteUserById(userId)
+        if (res?.data.success) {
+          await handleLogout()
+          storeNotification({
+            type: 'success',
+            message: getSuccessMessage(res),
+          })
+        }
+      } catch (err) {
+        notify('error', (await getErrorMessage(err)) || t('deletion_failed'))
       }
-    } catch (err) {
-      notify('error', (await getErrorMessage(err)) || t('deletion_failed'))
-    } finally {
-      setIsLoading(false)
-    }
+    })
   }
 
   return (
     <Button
       backgroundColor="var(--primary-red-color)"
       className={cn(styles.root, className)}
-      disabled={isLoading}
-      isLoading={isLoading}
+      disabled={isPending}
+      isLoading={isPending}
       size="xs"
       testId="delete-user-account"
       variation="primary"
