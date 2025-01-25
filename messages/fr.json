@@ -142,7 +142,7 @@
       "cta": "Se connecter",
       "fallback": "Pas de compte ? <link>S'inscrire</link>",
       "recover_password": "Mot de passe oublié ?",
-      "incorrect_email_or_password": "Email et/ou mot de passe erronés",
+      "incorrect_email_or_password": "Email et/ou mot de passe erroné(s)",
       "unverified_email": "L'email doit être vérifié"
     },
     "Register": {
