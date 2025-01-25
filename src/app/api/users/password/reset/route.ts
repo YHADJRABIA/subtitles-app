@@ -73,7 +73,7 @@ export async function POST(req: NextRequest) {
 
     // Update associated user's password
     await UserModel.updateOne(
-      { id: associatedUser.id },
+      { _id: associatedUser.id },
       { password: hashedPassword }
     )
 

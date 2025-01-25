@@ -5,7 +5,7 @@ import styles from './PasswordResetForm.module.scss'
 import React, { useEffect } from 'react'
 import Field from '@/components/Forms/Field'
 import { Button } from '@/components/UI/Button'
-import { Link, useRouter } from '@/i18n/routing'
+import { Link } from '@/i18n/routing'
 import { MdLockOutline as PasswordIcon } from 'react-icons/md'
 
 import {
@@ -28,7 +28,6 @@ import { handleResetPassword } from '@/actions/auth'
 
 const PasswordResetForm = () => {
   const searchParams = useSearchParams()
-  const router = useRouter()
   const [t, t_zod] = [useTranslations('Auth'), useTranslations('Zod')]
 
   const token = searchParams.get('token') ?? ''
@@ -58,7 +57,6 @@ const PasswordResetForm = () => {
     try {
       const res = await handleResetPassword(user)
       setInfoMessage(getSuccessMessage(res), 'success')
-      router.push('/login')
     } catch (err) {
       setInfoMessage(await getErrorMessage(err), 'error')
     }
