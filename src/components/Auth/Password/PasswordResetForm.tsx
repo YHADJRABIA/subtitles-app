@@ -44,7 +44,7 @@ const PasswordResetForm = () => {
     getFieldState,
     handleSubmit,
     setValue,
-    formState: { errors, isValid, isSubmitting },
+    formState: { errors, isValid, isSubmitting, isSubmitSuccessful },
   } = useForm<PasswordResetSchema>({
     resolver: zodResolver(PasswordResetValidator(t_zod)),
     delayError: 400,
@@ -104,22 +104,25 @@ const PasswordResetForm = () => {
           type={passwordInputType}
         />
 
-        <Button
-          className={styles.cta}
-          disabled={!isValid}
-          isLoading={isSubmitting}
-          size="xs"
-          testId="submit-reset-password-form"
-          type="submit"
-          variation="primary"
-          weight="semiBold"
-        >
-          {t('PasswordReset.cta')}
-        </Button>
+        {!isError ? (
+          <Button
+            disabled={!isSubmitSuccessful && !isValid}
+            isLoading={!isSubmitSuccessful && isSubmitting}
+            link={isSubmitSuccessful ? { href: '/login' } : undefined}
+            size="xs"
+            testId={
+              !isSubmitSuccessful ? 'submit-reset-password-form' : undefined
+            }
+            type="submit"
+            variation={!isSubmitSuccessful ? 'primary' : 'secondary'}
+            weight="semiBold"
+          >
+            {t(`PasswordReset.${isSubmitSuccessful ? 'fallback' : 'cta'}`)}
+          </Button>
+        ) : (
+          <Link href="/password/recovery">{t('PasswordReset.cta_error')}</Link>
+        )}
       </div>
-      <Link href={isError ? '/password/recovery' : '/login'}>
-        {t(isError ? 'PasswordReset.cta_error' : 'PasswordReset.fallback')}
-      </Link>
     </form>
   )
 }
