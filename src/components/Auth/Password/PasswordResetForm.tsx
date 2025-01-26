@@ -106,7 +106,6 @@ const PasswordResetForm = () => {
 
         {!isSubmitSuccessful ? (
           <Button
-            className={styles.cta}
             disabled={!isValid}
             isLoading={isSubmitting}
             size="xs"
@@ -119,7 +118,6 @@ const PasswordResetForm = () => {
           </Button>
         ) : (
           <Button
-            className={styles.cta}
             link={{ href: '/login' }}
             size="xs"
             type="submit"
