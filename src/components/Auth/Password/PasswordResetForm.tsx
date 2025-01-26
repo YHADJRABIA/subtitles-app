@@ -104,7 +104,7 @@ const PasswordResetForm = () => {
           type={passwordInputType}
         />
 
-        {!isError && (
+        {!isError ? (
           <Button
             disabled={!isSubmitSuccessful && !isValid}
             isLoading={!isSubmitSuccessful && isSubmitting}
@@ -119,11 +119,10 @@ const PasswordResetForm = () => {
           >
             {t(`PasswordReset.${isSubmitSuccessful ? 'fallback' : 'cta'}`)}
           </Button>
+        ) : (
+          <Link href="/password/recovery">{t('PasswordReset.cta_error')}</Link>
         )}
       </div>
-      {isError && (
-        <Link href="/password/recovery">{t('PasswordReset.cta_error')}</Link>
-      )}
     </form>
   )
 }
