@@ -29,7 +29,11 @@
   }
 }
 
+.link {
+  @include flexCenter(row);
+  gap: 1.5rem;
+}
+
 .icon {
-  margin-right: 1.5rem;
   @include hideOnLarge;
 }
