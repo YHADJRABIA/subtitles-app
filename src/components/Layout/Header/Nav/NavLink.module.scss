@@ -1,10 +1,6 @@
 .root {
   @include flexCenter(row);
 
-  &:not(:last-of-type) {
-    margin-bottom: 2rem;
-  }
-
   transition: color 0.3s ease;
 
   & > * {
@@ -18,13 +14,6 @@
   }
 
   @include respond-to('large') {
-    &:not(:first-of-type) {
-      margin-left: 2rem;
-    }
-
-    &:not(:last-of-type) {
-      margin-bottom: unset;
-    }
     cursor: pointer;
   }
 }
