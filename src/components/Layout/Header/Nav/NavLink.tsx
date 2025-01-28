@@ -2,23 +2,9 @@ import Typography from '@/components/UI/Typography'
 import React from 'react'
 import cn from 'classnames'
 import styles from './NavLink.module.scss'
-import { IconType } from 'react-icons/lib'
+import { NavLinkProps } from '@/types/nav-link'
 
-export type NavLinkType = {
-  icon: IconType
-  label: string
-  url?: string
-  onClick?: () => void
-}
-
-interface PropTypes {
-  link: NavLinkType
-  isActive: boolean
-  onClick?: () => void
-  className?: string
-}
-
-const NavLink = ({ isActive, link, onClick, className }: PropTypes) => {
+const NavLink = ({ isActive, link, onClick, className }: NavLinkProps) => {
   const Icon = link.icon
 
   const handleClick = () => {
