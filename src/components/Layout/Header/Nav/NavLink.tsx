@@ -12,12 +12,13 @@ export type NavLinkType = {
 }
 
 interface PropTypes {
-  isActive: boolean
   link: NavLinkType
+  isActive: boolean
   onClick?: () => void
+  className?: string
 }
 
-const NavLink = ({ isActive, link, onClick }: PropTypes) => {
+const NavLink = ({ isActive, link, onClick, className }: PropTypes) => {
   const Icon = link.icon
 
   const handleClick = () => {
@@ -26,7 +27,7 @@ const NavLink = ({ isActive, link, onClick }: PropTypes) => {
   }
   return (
     <li
-      className={cn(styles.root, { [styles.isActive]: isActive })}
+      className={cn(styles.root, className, { [styles.isActive]: isActive })}
       onClick={handleClick}
     >
       <Icon className={styles.icon} size={16} />
