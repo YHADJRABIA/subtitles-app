@@ -1,19 +1,11 @@
-import { NavLinkType } from '@/components/Layout/Header/Nav/NavLink'
 import styles from './NavLink.module.scss'
 import React from 'react'
 import Typography from '@/components/UI/Typography'
 import cn from 'classnames'
 import { Link } from '@/i18n/routing'
+import { NavLinkProps } from '@/types/nav-link'
 
-interface PropTypes {
-  link: NavLinkType
-  isActive: boolean
-  className?: string
-}
-
-// TODO: add type and unify with homepage's navlink
-
-const NavLink = ({ link, isActive, className }: PropTypes) => {
+const NavLink = ({ link, isActive, className }: NavLinkProps) => {
   const Icon = link.icon
   return (
     <li>

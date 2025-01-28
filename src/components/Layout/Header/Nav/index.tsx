@@ -48,7 +48,7 @@ const Nav = ({ className, isConnected }: PropTypes) => {
 
       <div className={cn(styles.menu, { [styles.toggled]: toggled })}>
         <ul className={styles.links}>
-          {navLinks.map((link, id) => {
+          {navLinks.map(link => {
             const isActive = hasMatchingFirstSlug(
               link?.url as Pathname,
               currentPath
@@ -56,7 +56,7 @@ const Nav = ({ className, isConnected }: PropTypes) => {
             return (
               <NavLink
                 isActive={isActive}
-                key={id}
+                key={link.label}
                 link={link}
                 onClick={isActive ? handleCloseNav : undefined} // Close nav menu if already on target route
               />
