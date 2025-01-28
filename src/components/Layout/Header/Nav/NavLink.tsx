@@ -19,10 +19,15 @@ interface PropTypes {
 
 const NavLink = ({ isActive, link, onClick }: PropTypes) => {
   const Icon = link.icon
+
+  const handleClick = () => {
+    link.onClick?.()
+    onClick?.()
+  }
   return (
     <li
       className={cn(styles.root, { [styles.isActive]: isActive })}
-      onClick={onClick}
+      onClick={handleClick}
     >
       <Icon className={styles.icon} size={16} />
 
@@ -30,7 +35,6 @@ const NavLink = ({ isActive, link, onClick }: PropTypes) => {
         link={{ href: link?.url ?? null }}
         size="s"
         weight={isActive ? 'semiBold' : undefined}
-        onClick={link.onClick}
       >
         {link.label}
       </Typography>
