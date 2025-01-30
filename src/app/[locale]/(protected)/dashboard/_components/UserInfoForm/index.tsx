@@ -186,7 +186,7 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
           value={emailValue!}
           onCancel={() => handleReset('email', defaultEmail)}
           onEdit={newEmail => handleUpdate({ email: newEmail })}
-          onSuccess={newEmail => handleOpenModal(newEmail)} // Pass the new email
+          onSuccess={newEmail => handleOpenModal(newEmail ?? '')} // Pass the new email
           /*             if (res.success) {
               // Only update `initialValue` if modal validation succeeds
               await handleUpdateSession({ email: emailValue })
