@@ -34,6 +34,11 @@ interface PropTypes {
   className?: string
 }
 
+interface OTPModalState {
+  isOpen: boolean
+  email?: string
+}
+
 const MAX_NUMBER_OF_EMAIL_CHARACTERS = 30
 
 const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
@@ -60,10 +65,10 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
 
   const [nameValue, emailValue] = watch(['name', 'email']) // If not set, form inputs with more than 1 character will be delayed
 
-  const [pendingEmail, setPendingEmail] = useLocalStorage<{
-    isOpen: boolean
-    email?: string
-  }>({ key: 'otp-modal', defaultValue: { isOpen: false } })
+  const [pendingEmail, setPendingEmail] = useLocalStorage<OTPModalState>({
+    key: 'otp-modal',
+    defaultValue: { isOpen: false },
+  })
 
   useEffect(() => {
     if (pendingEmail) {
@@ -74,6 +79,16 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
 
   const handleOpenModal = (pendingEmail: string) => {
     setPendingEmail({ isOpen: true, email: pendingEmail })
+
+    const handleCloseModal = () => {
+      setPendingEmail(null)
+      closeModal()
+    }
+
+    const handleSuccess = async () => {
+      await handleUpdateSession({ email: pendingEmail })
+      setPendingEmail(null)
+    }
 
     openModal({
       className: styles.modal,
@@ -99,16 +114,10 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
               MAX_NUMBER_OF_EMAIL_CHARACTERS
             ),
           })}
-          onCancel={() => {
-            setPendingEmail(null)
-            closeModal()
-          }}
+          onCancel={handleCloseModal}
           onResend={() => handleVerifyEmail(pendingEmail)}
           onSubmit={code => handleValidateCode(code)}
-          onSuccess={() => {
-            setPendingEmail(null)
-            handleUpdateSession({ email: pendingEmail })
-          }}
+          onSuccess={handleSuccess}
         />
       ),
     })
