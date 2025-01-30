@@ -1,5 +1,5 @@
 'use client'
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import styles from './UserInfoForm.module.scss'
 import EditableAvatar from '../EditableAvatar'
 import { useTranslations } from 'next-intl'
@@ -59,7 +59,14 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
 
   const [nameValue, emailValue] = watch(['name', 'email']) // If not set, form inputs with more than 1 character will be delayed
 
+  useEffect(() => {
+    if (localStorage.getItem('otpModalOpen')) {
+      handleOpenModal()
+    }
+  }, [])
+
   const handleOpenModal = () => {
+    localStorage.setItem('otpModalOpen', 'true') // Store modal state
     openModal({
       className: styles.modal,
       isClosable: false,
@@ -84,10 +91,16 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
               MAX_NUMBER_OF_EMAIL_CHARACTERS
             ),
           })}
-          onCancel={closeModal}
+          onCancel={() => {
+            localStorage.removeItem('otpModalOpen') // Remove flag on cancel
+            closeModal()
+          }}
           onResend={() => handleVerifyEmail(emailValue!)}
           onSubmit={code => handleValidateCode(code)}
-          onSuccess={() => handleUpdateSession({ email: emailValue })}
+          onSuccess={() => {
+            localStorage.removeItem('otpModalOpen') // Remove flag on success
+            handleUpdateSession({ email: emailValue })
+          }}
         />
       ),
     })
