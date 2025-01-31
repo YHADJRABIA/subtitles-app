@@ -1,5 +1,5 @@
 'use client'
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import styles from './UserInfoForm.module.scss'
 import EditableAvatar from '../EditableAvatar'
 import { useTranslations } from 'next-intl'
@@ -24,6 +24,7 @@ import Typography from '@/components/UI/Typography'
 import { BsShieldLock as OTPIcon } from 'react-icons/bs'
 import { EMAIL_UPDATE_OTP } from '@/utils/constants'
 import { truncateEmail } from '@/utils/string'
+import { useLocalStorage } from '@/hooks/useLocalStorage'
 
 interface PropTypes {
   userId: string
@@ -31,6 +32,11 @@ interface PropTypes {
   email: string
   image?: string | null
   className?: string
+}
+
+interface OTPModalState {
+  isOpen: boolean
+  email?: string
 }
 
 const MAX_NUMBER_OF_EMAIL_CHARACTERS = 30
@@ -59,7 +65,31 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
 
   const [nameValue, emailValue] = watch(['name', 'email']) // If not set, form inputs with more than 1 character will be delayed
 
-  const handleOpenModal = () => {
+  const [pendingEmail, setPendingEmail] = useLocalStorage<OTPModalState>({
+    key: 'otp-modal',
+    defaultValue: { isOpen: false },
+  })
+
+  useEffect(() => {
+    if (pendingEmail) {
+      const { isOpen, email } = pendingEmail
+      if (isOpen && email) handleOpenModal(email)
+    }
+  }, [])
+
+  const handleOpenModal = (pendingEmail: string) => {
+    setPendingEmail({ isOpen: true, email: pendingEmail })
+
+    const handleCloseModal = () => {
+      setPendingEmail(null)
+      closeModal()
+    }
+
+    const handleSuccess = async () => {
+      await handleUpdateSession({ email: pendingEmail })
+      setPendingEmail(null)
+    }
+
     openModal({
       className: styles.modal,
       isClosable: false,
@@ -80,14 +110,14 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
               </Typography>
             ),
             recipient: truncateEmail(
-              emailValue!,
+              pendingEmail,
               MAX_NUMBER_OF_EMAIL_CHARACTERS
             ),
           })}
-          onCancel={closeModal}
-          onResend={() => handleVerifyEmail(emailValue!)}
+          onCancel={handleCloseModal}
+          onResend={() => handleVerifyEmail(pendingEmail)}
           onSubmit={code => handleValidateCode(code)}
-          onSuccess={() => handleUpdateSession({ email: emailValue })}
+          onSuccess={handleSuccess}
         />
       ),
     })
@@ -156,14 +186,11 @@ const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
           value={emailValue!}
           onCancel={() => handleReset('email', defaultEmail)}
           onEdit={newEmail => handleUpdate({ email: newEmail })}
-          onSuccess={
-            handleOpenModal
-
-            /*             if (res.success) {
+          onSuccess={newEmail => handleOpenModal(newEmail ?? '')} // Pass the new email
+          /*             if (res.success) {
               // Only update `initialValue` if modal validation succeeds
               await handleUpdateSession({ email: emailValue })
             } */
-          }
         />
       </div>
     </div>
