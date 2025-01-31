@@ -21,11 +21,11 @@
 
   background-color: var(--primary-white-color);
   border-radius: 1rem;
-  padding: 1.5rem 2rem 2rem;
   width: 100vw;
   height: auto;
   max-height: 75dvh;
   position: relative;
+  padding: 2rem;
   @include respond-to('medium') {
     min-width: 50rem;
     width: min(60dvh, var(--page-max-width) / 1.5);
