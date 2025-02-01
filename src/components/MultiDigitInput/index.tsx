@@ -66,21 +66,21 @@ const MultiDigitInput = ({
       className={cn(styles.root, className)}
       data-testid={testId}
     >
-      {Array.from({ length: n }).map((_, index) => (
+      {Array.from({ length: n }).map((_, idx) => (
         <input
-          autoFocus={autoFocus && index === 0}
+          autoFocus={autoFocus && idx === 0}
           className={cn(styles.input, { [styles.error]: hasError })}
           disabled={isDisabled}
           inputMode="numeric"
-          key={index}
+          key={idx}
           maxLength={1}
           ref={el => {
-            inputRefs.current[index] = el
+            inputRefs.current[idx] = el
           }}
           type="text"
-          value={value[index]} // Render correct digit
-          onChange={e => handleInputChange(e.target.value, index)}
-          onKeyDown={e => handleKeyDown(e, index)}
+          value={value[idx]} // Render correct digit
+          onChange={e => handleInputChange(e.target.value, idx)}
+          onKeyDown={e => handleKeyDown(e, idx)}
         />
       ))}
     </div>
