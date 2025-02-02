@@ -17,6 +17,7 @@ import { OTPCodeSchema, OTPCodeValidator } from '@/types/schemas/otpModal'
 import MultiDigitInput from '@/components/MultiDigitInput'
 import { BsCheckCircleFill as SuccessIcon } from 'react-icons/bs'
 import { APIResponse } from '@/types/api'
+import { notify } from '@/lib/toastify'
 
 interface PropTypes {
   onSubmit: (code: string) => Promise<{ data: APIResponse }>
@@ -88,6 +89,7 @@ const OTPModal = ({
     startTransition(async () => {
       try {
         await onResend()
+        notify('success', t('code_resent'))
         handleResetCode()
         // TODO: restrict resend with timer
       } catch (err) {
