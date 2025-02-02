@@ -303,6 +303,7 @@
     "not_received": "Didn't receive code? <cta>Resend code</cta>",
     "input_code": "Input code",
     "resend": "Resend",
+    "code_resent": "Code resent! Check your email",
     "verify": "Verify",
     "cancel": "Cancel",
     "ok": "Ok"
