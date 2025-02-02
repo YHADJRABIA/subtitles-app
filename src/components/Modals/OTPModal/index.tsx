@@ -1,4 +1,10 @@
-import React, { ReactNode, useEffect, useRef, useState } from 'react'
+import React, {
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+  useTransition,
+} from 'react'
 import Typography from '@/components/UI/Typography'
 import cn from 'classnames'
 import styles from './OTPModal.module.scss'
@@ -35,7 +41,7 @@ const OTPModal = ({
 }: PropTypes) => {
   const contentRef = useRef<HTMLDivElement | null>(null)
   const [maxHeight, setMaxHeight] = useState(contentRef?.current?.scrollHeight)
-  const [isLoading, setisLoading] = useState(false)
+  const [isPending, startTransition] = useTransition()
   const [successMessage, setSuccessMessage] = useState('')
   const [error, setError] = useState('')
   const [t, t_zod] = [useTranslations('OTPModal'), useTranslations('Zod')]
@@ -63,33 +69,31 @@ const OTPModal = ({
     setValue('code', code, { shouldValidate: true })
   }, [code, setValue])
 
-  const handleVerify = async () => {
-    if (tooManyAttempts) return setError(t('too_many_attempts'))
+  const handleVerify = () => {
+    startTransition(async () => {
+      if (tooManyAttempts) return setError(t('too_many_attempts'))
 
-    setisLoading(true)
-    try {
-      const res = await onSubmit(code)
-      setSuccessMessage(res.data?.message ?? '')
-      await onSuccess()
-    } catch (err) {
-      console.error('Error in OTPModal handleSubmit:', getErrorMessage(err))
-      setError(await getErrorMessage(err))
-    } finally {
-      setisLoading(false)
-    }
+      try {
+        const res = await onSubmit(code)
+        setSuccessMessage(res.data?.message ?? '')
+        await onSuccess()
+      } catch (err) {
+        console.error('Error in OTPModal handleSubmit:', getErrorMessage(err))
+        setError(await getErrorMessage(err))
+      }
+    })
   }
 
-  const handleResend = async () => {
-    setisLoading(true)
-    try {
-      await onResend()
-      handleResetCode()
-      // TODO: restrict resend with timer
-    } catch (err) {
-      console.error('Error in OTPModal handleResend:', getErrorMessage(err))
-    } finally {
-      setisLoading(false)
-    }
+  const handleResend = () => {
+    startTransition(async () => {
+      try {
+        await onResend()
+        handleResetCode()
+        // TODO: restrict resend with timer
+      } catch (err) {
+        console.error('Error in OTPModal handleResend:', getErrorMessage(err))
+      }
+    })
   }
 
   const handleCodeChange = (newCode: string) => {
@@ -153,7 +157,7 @@ const OTPModal = ({
                 ariaLabel={t('input_code')}
                 className={styles.input}
                 hasError={hasError}
-                isDisabled={isLoading}
+                isDisabled={isPending}
                 n={digitsNumber}
                 testId="otp-modal-code"
                 value={code}
@@ -171,8 +175,8 @@ const OTPModal = ({
               <div className={styles.cta}>
                 <Button
                   isFullWidth
-                  disabled={isLoading || !!errors.code}
-                  isLoading={isLoading}
+                  disabled={isPending || !!errors.code}
+                  isLoading={isPending}
                   size="xs"
                   type="submit"
                   variation="primary"
@@ -182,7 +186,7 @@ const OTPModal = ({
 
                 <Button
                   isFullWidth
-                  disabled={isLoading}
+                  disabled={isPending}
                   size="xs"
                   variation="secondary"
                   onClick={onCancel}
