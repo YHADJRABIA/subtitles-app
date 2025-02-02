@@ -304,6 +304,7 @@
     "not_received": "Code non reçu ? <cta>Renvoyer le code</cta>",
     "input_code": "Saisir code",
     "resend": "Renvoyer",
+    "code_resent": "Code renvoyé ! Vérifier votre email",
     "verify": "Vérifier",
     "cancel": "Annuler",
     "ok": "D'accord"
