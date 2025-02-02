@@ -44,7 +44,7 @@ const OTPModal = ({
   const {
     handleSubmit,
     watch,
-    formState: { errors },
+    formState: { errors, submitCount },
     setValue,
   } = useForm<OTPCodeSchema>({
     resolver: zodResolver(OTPCodeValidator(t_zod)),
@@ -54,14 +54,14 @@ const OTPModal = ({
   })
   const code = watch('code') // If not set, form inputs with more than 1 character will be delayed
 
-  // TODO: cancel after 3 unsuccessful tries
-
   useEffect(() => {
     // Initialize validation for empty code on mount
     setValue('code', code, { shouldValidate: true })
   }, [code, setValue])
 
   const handleVerify = async () => {
+    if (submitCount >= 3) return setError(t('too_many_attempts'))
+
     setisLoading(true)
     try {
       const res = await onSubmit(code)
