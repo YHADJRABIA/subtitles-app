@@ -22,6 +22,8 @@ interface PropTypes {
   digitsNumber: number
 }
 
+const SUBMIT_LIMIT = 3
+
 const OTPModal = ({
   onSubmit,
   onResend,
@@ -60,7 +62,7 @@ const OTPModal = ({
   }, [code, setValue])
 
   const handleVerify = async () => {
-    if (submitCount >= 3) return setError(t('too_many_attempts'))
+    if (submitCount >= SUBMIT_LIMIT) return setError(t('too_many_attempts'))
 
     setisLoading(true)
     try {
