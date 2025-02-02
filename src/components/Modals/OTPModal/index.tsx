@@ -56,13 +56,15 @@ const OTPModal = ({
   })
   const code = watch('code') // If not set, form inputs with more than 1 character will be delayed
 
+  const tooManyAttempts = submitCount >= SUBMIT_LIMIT
+
   useEffect(() => {
     // Initialize validation for empty code on mount
     setValue('code', code, { shouldValidate: true })
   }, [code, setValue])
 
   const handleVerify = async () => {
-    if (submitCount >= SUBMIT_LIMIT) return setError(t('too_many_attempts'))
+    if (tooManyAttempts) return setError(t('too_many_attempts'))
 
     setisLoading(true)
     try {
