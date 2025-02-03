@@ -61,7 +61,7 @@ const OTPModal = ({
     mode: 'onChange',
     defaultValues: { code: '' },
   })
-  const code = watch('code') // If not set, form inputs with more than 1 character will be delayed
+  const code = watch('code') // Needed to prevent state delay
 
   const tooManyAttempts = submitCount >= SUBMIT_LIMIT // TODO add cooldown
 
