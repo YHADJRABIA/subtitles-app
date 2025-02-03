@@ -28,7 +28,7 @@
       },
       "SendVerificationEmail": {
         "title": "Envoyer email de vérification",
-        "description": "Envoi d'email en vérifier l'appartenance."
+        "description": "Envoi d'email pour en vérifier l'appartenance."
       },
       "PasswordRecovery": {
         "title": "Récupération de mot de passe",
