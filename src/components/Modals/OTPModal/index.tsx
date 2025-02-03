@@ -66,8 +66,7 @@ const OTPModal = ({
   const tooManyAttempts = submitCount >= SUBMIT_LIMIT // TODO add cooldown
 
   useEffect(() => {
-    // Initialize validation for empty code on mount
-    setValue('code', code, { shouldValidate: true })
+    setValue('code', code, { shouldValidate: true }) // Initialise validation for empty code on mount
   }, [code, setValue])
 
   const handleVerify = () => {
