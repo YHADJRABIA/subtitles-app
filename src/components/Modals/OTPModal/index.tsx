@@ -63,7 +63,7 @@ const OTPModal = ({
   })
   const code = watch('code') // If not set, form inputs with more than 1 character will be delayed
 
-  const tooManyAttempts = submitCount >= SUBMIT_LIMIT
+  const tooManyAttempts = submitCount >= SUBMIT_LIMIT // TODO add cooldown
 
   useEffect(() => {
     // Initialize validation for empty code on mount
