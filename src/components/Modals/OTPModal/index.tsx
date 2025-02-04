@@ -48,7 +48,7 @@ const OTPModal = ({
   const [t, t_zod] = [useTranslations('OTPModal'), useTranslations('Zod')]
 
   const hasError = !!error.length
-  const isValidated = !!successMessage.length
+  const isSuccess = !!successMessage.length
 
   const {
     handleSubmit,
@@ -116,10 +116,10 @@ const OTPModal = ({
   )
 
   useEffect(() => {
-    if (isValidated && contentRef.current) {
+    if (isSuccess && contentRef.current) {
       setMaxHeight(contentRef.current.scrollHeight)
     }
-  }, [isValidated])
+  }, [isSuccess])
 
   return (
     <div
@@ -127,7 +127,7 @@ const OTPModal = ({
       ref={contentRef}
       style={{ maxHeight: `${maxHeight}px` }}
     >
-      {isValidated ? (
+      {isSuccess ? (
         <Success />
       ) : (
         <>
