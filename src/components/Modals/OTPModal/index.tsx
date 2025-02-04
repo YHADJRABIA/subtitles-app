@@ -63,7 +63,7 @@ const OTPModal = ({
   })
   const code = watch('code') // Needed to prevent state delay
 
-  const tooManyAttempts = submitCount >= SUBMIT_LIMIT // TODO add cooldown
+  const hasExceededAttempts = submitCount >= SUBMIT_LIMIT // TODO add cooldown
 
   useEffect(() => {
     setValue('code', code, { shouldValidate: true }) // Initialise validation for empty code on mount
@@ -71,7 +71,7 @@ const OTPModal = ({
 
   const handleVerify = () => {
     startTransition(async () => {
-      if (tooManyAttempts) return setError(t('too_many_attempts'))
+      if (hasExceededAttempts) return setError(t('too_many_attempts'))
 
       try {
         const res = await onSubmit(code)
