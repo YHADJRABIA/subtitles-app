@@ -304,6 +304,7 @@
     "input_code": "Input code",
     "resend": "Resend",
     "code_resent": "Code resent! Check your email",
+    "wait_before_resend": "Wait {time} before resending",
     "verify": "Verify",
     "cancel": "Cancel",
     "ok": "Ok"
