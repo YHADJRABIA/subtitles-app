@@ -62,6 +62,7 @@ const OTPModal = ({
     defaultValues: { code: '' },
   })
   const code = watch('code') // Needed to prevent state delay
+  const isVerifyDisabled = isPending || !!errors.code
 
   const hasExceededAttempts = submitCount >= SUBMIT_LIMIT // TODO add cooldown
 
@@ -176,7 +177,7 @@ const OTPModal = ({
               <div className={styles.cta}>
                 <Button
                   isFullWidth
-                  disabled={isPending || !!errors.code}
+                  disabled={isVerifyDisabled}
                   isLoading={isPending}
                   size="xs"
                   type="submit"
