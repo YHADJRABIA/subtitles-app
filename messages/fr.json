@@ -305,7 +305,7 @@
     "input_code": "Saisir code",
     "resend": "Renvoyer",
     "code_resent": "Code renvoyé ! Vérifier votre email",
-    "wait_before_resend": "Attendre {time} avant renvoi",
+    "wait_before_resend": "Attendre {time} secondes avant renvoi",
     "verify": "Vérifier",
     "cancel": "Annuler",
     "ok": "D'accord"
