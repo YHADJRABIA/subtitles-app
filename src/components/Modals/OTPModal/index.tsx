@@ -49,7 +49,7 @@ const OTPModal = ({
   } | null>(null)
   const [t, t_zod] = [useTranslations('OTPModal'), useTranslations('Zod')]
 
-  const hasError = statusMessage?.type === 'error'
+  const isError = statusMessage?.type === 'error'
   const isSuccess = statusMessage?.type === 'success'
 
   const {
@@ -171,7 +171,7 @@ const OTPModal = ({
                 autoFocus
                 ariaLabel={t('input_code')}
                 className={styles.input}
-                hasError={hasError}
+                hasError={isError}
                 isDisabled={isPending}
                 n={digitsNumber}
                 testId="otp-modal-code"
@@ -179,7 +179,7 @@ const OTPModal = ({
                 onChange={handleCodeChange}
               />
               <Typography
-                className={cn(styles.error, 'hidden', { visible: hasError })}
+                className={cn(styles.error, 'hidden', { visible: isError })}
                 color="var(--primary-red-color)"
                 size="s"
                 weight="semiBold"
