@@ -43,12 +43,14 @@ const OTPModal = ({
   const contentRef = useRef<HTMLDivElement | null>(null)
   const [maxHeight, setMaxHeight] = useState(contentRef?.current?.scrollHeight)
   const [isPending, startTransition] = useTransition()
-  const [successMessage, setSuccessMessage] = useState('')
-  const [error, setError] = useState('')
+  const [statusMessage, setStatusMessage] = useState<{
+    type: 'success' | 'error'
+    message: string
+  } | null>(null)
   const [t, t_zod] = [useTranslations('OTPModal'), useTranslations('Zod')]
 
-  const hasError = !!error.length
-  const isSuccess = !!successMessage.length
+  const hasError = statusMessage?.type === 'error'
+  const isSuccess = statusMessage?.type === 'success'
 
   const {
     handleSubmit,
@@ -72,15 +74,26 @@ const OTPModal = ({
 
   const handleVerify = () => {
     startTransition(async () => {
-      if (hasExceededAttempts) return setError(t('too_many_attempts'))
+      if (hasExceededAttempts)
+        return setStatusMessage({
+          type: 'error',
+          message: t('too_many_attempts'),
+        })
 
       try {
         const res = await onSubmit(code)
-        setSuccessMessage(res.data?.message ?? '')
+        return setStatusMessage({
+          type: 'success',
+          message: res.data?.message ?? '',
+        })
+
         await onSuccess()
       } catch (err) {
         console.error('Error in OTPModal handleSubmit:', getErrorMessage(err))
-        setError(await getErrorMessage(err))
+        return setStatusMessage({
+          type: 'error',
+          message: await getErrorMessage(err),
+        })
       }
     })
   }
@@ -108,7 +121,7 @@ const OTPModal = ({
     <div className={styles.success}>
       <div className={styles.successHeading}>
         <SuccessIcon color="var(--primary-green-color)" size={40} />
-        <Typography weight="semiBold">{successMessage}</Typography>
+        <Typography weight="semiBold">{statusMessage?.message}</Typography>
       </div>
       <Button variation="secondary" onClick={onCancel}>
         {t('ok')}
@@ -171,7 +184,7 @@ const OTPModal = ({
                 size="s"
                 weight="semiBold"
               >
-                {error}
+                {statusMessage?.message}
               </Typography>
 
               <div className={styles.cta}>
