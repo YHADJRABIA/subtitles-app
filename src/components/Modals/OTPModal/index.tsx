@@ -64,9 +64,10 @@ const OTPModal = ({
     defaultValues: { code: '' },
   })
   const code = watch('code') // Needed to prevent state delay
-  const isVerifyDisabled = isPending || !!errors.code
 
   const hasExceededAttempts = submitCount >= SUBMIT_LIMIT // TODO add cooldown
+
+  const isVerifyDisabled = isPending || !!errors.code || hasExceededAttempts
 
   useEffect(() => {
     setValue('code', code, { shouldValidate: true }) // Initialise validation for empty code on mount
