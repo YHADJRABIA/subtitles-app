@@ -57,6 +57,8 @@ const MultiDigitInput = ({
       } else {
         e.preventDefault() // Prevent navigation if the current field is empty
       }
+    } else if (isNaN(Number(e.key))) {
+      e.preventDefault() // Prevent non-numeric input
     }
   }
 
