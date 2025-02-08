@@ -39,7 +39,7 @@ const MultiDigitInput = ({
 
     onChange(newValue) // Update parent value
 
-    // Move focus to next field if input is valid
+    // Move focus to next field if input is valid & not last field
     if (inputValue && idx < n - 1) {
       inputRefs.current[idx + 1]?.focus()
     }
