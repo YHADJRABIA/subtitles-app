@@ -27,6 +27,10 @@ const MultiDigitInput = ({
 }: MultiDigitInputProps) => {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([])
 
+  const focusInput = (idx: number) => {
+    inputRefs.current[idx]?.focus()
+  }
+
   // Update specific input field
   const handleInputChange = (inputValue: string, idx: number) => {
     // Allow only single-character inputs
@@ -41,19 +45,19 @@ const MultiDigitInput = ({
 
     // Move focus to next field if input is valid & not last field
     if (inputValue && idx < n - 1) {
-      inputRefs.current[idx + 1]?.focus()
+      focusInput(idx + 1)
     }
   }
 
   // Handle keyboard navigation
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>, idx: number) => {
     if (e.key === 'Backspace' && idx > 0 && !value[idx]) {
-      inputRefs.current[idx - 1]?.focus() // Move focus to previous field on backspace
+      focusInput(idx - 1) // Move focus to previous field on backspace
     } else if (e.key === 'ArrowLeft' && idx > 0) {
-      inputRefs.current[idx - 1]?.focus() // Move focus to previous field on left arrow
+      focusInput(idx - 1) // Move focus to previous field on left arrow
     } else if (e.key === 'ArrowRight' && idx < n - 1) {
       if (value[idx]) {
-        inputRefs.current[idx + 1]?.focus() // Move focus to next field if current field is filled
+        focusInput(idx + 1) // Move focus to next field if current field is filled
       } else {
         e.preventDefault() // Prevent navigation if the current field is empty
       }
