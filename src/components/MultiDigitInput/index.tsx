@@ -29,7 +29,7 @@ const MultiDigitInput = ({
 
   // Update specific input field
   const handleInputChange = (inputValue: string, idx: number) => {
-    // Allow only single-character numeric input
+    // Allow only single-character inputs
     if (inputValue.length > 1) return
 
     // Create a multi-digit array
