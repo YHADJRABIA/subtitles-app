@@ -49,8 +49,10 @@ const OTPModal = ({
   } | null>(null)
   const [t, t_zod] = [useTranslations('OTPModal'), useTranslations('Zod')]
 
-  const isError = statusMessage?.type === 'error'
-  const isSuccess = statusMessage?.type === 'success'
+  const [isError, isSuccess] = [
+    statusMessage?.type === 'error',
+    statusMessage?.type === 'success',
+  ]
 
   const {
     handleSubmit,
@@ -66,7 +68,6 @@ const OTPModal = ({
   const code = watch('code') // Needed to prevent state delay
 
   const hasExceededAttempts = submitCount >= SUBMIT_LIMIT // TODO add cooldown
-
   const isVerifyDisabled = isPending || !!errors.code || hasExceededAttempts
 
   useEffect(() => {
