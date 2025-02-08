@@ -43,8 +43,8 @@ const MultiDigitInput = ({
 
     onChange(newValue) // Update parent value
 
-    const isNotLastField = idx < n - 1
-    if (isNotLastField) focusInput(idx + 1) // Focus next field
+    const isLastField = idx === n - 1
+    if (!isLastField) focusInput(idx + 1) // Focus next field
   }
 
   // Handle keyboard navigation
