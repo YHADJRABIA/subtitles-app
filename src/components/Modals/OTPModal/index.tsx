@@ -84,7 +84,7 @@ const OTPModal = ({
 
       try {
         const res = await onSubmit(code)
-        return setStatusMessage({
+        setStatusMessage({
           type: 'success',
           message: res.data?.message ?? '',
         })
@@ -92,7 +92,7 @@ const OTPModal = ({
         await onSuccess()
       } catch (err) {
         console.error('Error in OTPModal handleSubmit:', getErrorMessage(err))
-        return setStatusMessage({
+        setStatusMessage({
           type: 'error',
           message: await getErrorMessage(err),
         })
