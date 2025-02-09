@@ -177,7 +177,6 @@ const OTPModal = ({
                 isDisabled={isPending}
                 n={digitsNumber}
                 testId="otp-modal-code"
-                value={code}
                 onChange={handleCodeChange}
               />
               <Typography
