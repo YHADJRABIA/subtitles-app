@@ -44,6 +44,7 @@ const MultiDigitInput = ({
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>, idx: number) => {
     const [isFirstField, isLastField] = [idx === 0, idx === n - 1]
     const isEmptyField = !digits[idx]
+
     if (e.key === 'Backspace' && isEmptyField && !isFirstField) {
       focusInput(idx - 1)
     } else if (e.key === 'ArrowLeft' && !isFirstField) {
