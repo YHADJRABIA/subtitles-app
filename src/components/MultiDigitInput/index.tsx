@@ -46,8 +46,15 @@ const MultiDigitInput = ({
     const [isFirstField, isLastField] = [idx === 0, idx === n - 1]
     const isEmptyField = !digits[idx]
 
-    if (e.key === 'Backspace' && isEmptyField && !isFirstField) {
-      focusInput(idx - 1)
+    if (e.key === 'Backspace') {
+      if (!isEmptyField) {
+        const array = [...digits]
+        array[idx] = ''
+        setDigits(array)
+        onChange(array.join(''))
+      } else if (!isFirstField) {
+        focusInput(idx - 1)
+      }
     } else if (e.key === 'ArrowLeft' && !isFirstField) {
       focusInput(idx - 1)
     } else if (e.key === 'ArrowRight' && !isLastField) {
