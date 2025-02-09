@@ -28,7 +28,7 @@ const MultiDigitInput = ({
 
   const focusInput = (idx: number) => inputRefs.current[idx]?.focus()
 
-  const updateDigits = (idx: number, value: string) => {
+  const updateDigitById = (idx: number, value: string) => {
     const array = [...digits]
     array[idx] = value
     setDigits(array)
@@ -39,7 +39,7 @@ const MultiDigitInput = ({
     // Allow only single-character inputs
     if (inputValue.length > 1) return
 
-    updateDigits(idx, inputValue)
+    updateDigitById(idx, inputValue)
 
     const isLastField = idx === n - 1
 
@@ -52,7 +52,7 @@ const MultiDigitInput = ({
 
     if (e.key === 'Backspace') {
       if (!isEmptyField) {
-        updateDigits(idx, '')
+        updateDigitById(idx, '')
       } else if (!isFirstField) {
         focusInput(idx - 1)
       }
