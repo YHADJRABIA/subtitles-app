@@ -122,7 +122,7 @@ const OTPModal = ({
   const Success = () => (
     <div className={styles.success}>
       <div className={styles.successHeading}>
-        <SuccessIcon color="var(--primary-green-color)" size={40} />
+        <SuccessIcon color="var(--primary-green-color)" size={35} />
         <Typography weight="semiBold">{statusMessage?.message}</Typography>
       </div>
       <Button variation="secondary" onClick={onCancel}>
