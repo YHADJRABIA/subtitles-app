@@ -38,6 +38,7 @@ const MultiDigitInput = ({
     onChange(array.join(''))
 
     const isLastField = idx === n - 1
+
     if (inputValue && !isLastField) focusInput(idx + 1) // Focus next field
   }
 
