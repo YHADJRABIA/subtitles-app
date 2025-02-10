@@ -1,10 +1,9 @@
-import React, { KeyboardEvent, useRef } from 'react'
+import React, { KeyboardEvent, useRef, useState } from 'react'
 import styles from './MultiDigitInput.module.scss'
 import cn from 'classnames'
 
 interface MultiDigitInputProps {
   n: number
-  value: string
   onChange: (value: string) => void
   isDisabled?: boolean
   autoFocus?: boolean
@@ -16,7 +15,6 @@ interface MultiDigitInputProps {
 
 const MultiDigitInput = ({
   n,
-  value,
   onChange,
   isDisabled = false,
   autoFocus = true,
@@ -25,38 +23,45 @@ const MultiDigitInput = ({
   ariaLabel,
   testId,
 }: MultiDigitInputProps) => {
+  const [digits, setDigits] = useState(Array(n).fill(null))
   const inputRefs = useRef<(HTMLInputElement | null)[]>([])
 
-  // Update specific input field
-  const handleInputChange = (inputValue: string, idx: number) => {
-    // Allow only single-character numeric input
-    if (inputValue.length > 1) return
+  const focusInput = (idx: number) => inputRefs.current[idx]?.focus()
 
-    // Create a multi-digit array
-    const otpArray = value.split('')
-    otpArray[idx] = inputValue // Update current index digit
-    const newValue = otpArray.join('') // Rebuild string
-
-    onChange(newValue) // Update parent value
-
-    // Move focus to next field if input is valid
-    if (inputValue && idx < n - 1) {
-      inputRefs.current[idx + 1]?.focus()
-    }
+  const updateDigitById = (idx: number, value: string) => {
+    const array = [...digits]
+    array[idx] = value
+    setDigits(array)
+    onChange(array.join(''))
   }
 
-  // Handle keyboard navigation
+  const handleInputChange = (inputValue: string, idx: number) => {
+    // Allow only single-character inputs
+    if (inputValue.length > 1) return
+
+    updateDigitById(idx, inputValue)
+
+    const isLastField = idx === n - 1
+
+    if (inputValue && !isLastField) focusInput(idx + 1) // Focus next field
+  }
+
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>, idx: number) => {
-    if (e.key === 'Backspace' && idx > 0 && !value[idx]) {
-      inputRefs.current[idx - 1]?.focus() // Move focus to previous field on backspace
-    } else if (e.key === 'ArrowLeft' && idx > 0) {
-      inputRefs.current[idx - 1]?.focus() // Move focus to previous field on left arrow
-    } else if (e.key === 'ArrowRight' && idx < n - 1) {
-      if (value[idx]) {
-        inputRefs.current[idx + 1]?.focus() // Move focus to next field if current field is filled
-      } else {
-        e.preventDefault() // Prevent navigation if the current field is empty
+    const [isFirstField, isLastField] = [idx === 0, idx === n - 1]
+    const isEmptyField = !digits[idx]
+
+    if (e.key === 'Backspace') {
+      if (!isEmptyField) {
+        updateDigitById(idx, '')
+      } else if (!isFirstField) {
+        focusInput(idx - 1)
       }
+    } else if (e.key === 'ArrowLeft' && !isFirstField) {
+      focusInput(idx - 1)
+    } else if (e.key === 'ArrowRight' && !isLastField) {
+      focusInput(idx + 1)
+    } else if (isNaN(Number(e.key))) {
+      e.preventDefault() // Prevent non-numeric input
     }
   }
 
@@ -66,21 +71,21 @@ const MultiDigitInput = ({
       className={cn(styles.root, className)}
       data-testid={testId}
     >
-      {Array.from({ length: n }).map((_, index) => (
+      {digits.map((digit, idx) => (
         <input
-          autoFocus={autoFocus && index === 0}
+          autoFocus={autoFocus && idx === 0}
           className={cn(styles.input, { [styles.error]: hasError })}
           disabled={isDisabled}
           inputMode="numeric"
-          key={index}
+          key={idx}
           maxLength={1}
           ref={el => {
-            inputRefs.current[index] = el
+            inputRefs.current[idx] = el
           }}
-          type="text"
-          value={value[index]} // Render correct digit
-          onChange={e => handleInputChange(e.target.value, index)}
-          onKeyDown={e => handleKeyDown(e, index)}
+          type="number"
+          value={digit}
+          onChange={e => handleInputChange(e.target.value, idx)}
+          onKeyDown={e => handleKeyDown(e, idx)}
         />
       ))}
     </div>

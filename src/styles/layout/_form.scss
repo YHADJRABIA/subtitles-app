@@ -25,6 +25,14 @@ input {
     border-color: var(--primary-blue-color);
     box-shadow: 0 0 0.4rem var(--primary-blue-color);
   }
+
+  &[type='number']::-webkit-inner-spin-button,
+  &[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+  }
 }
 
 textarea {
