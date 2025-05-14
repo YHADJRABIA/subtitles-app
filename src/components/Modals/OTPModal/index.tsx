@@ -1,4 +1,10 @@
-import React, { ReactNode, useEffect, useRef, useState } from 'react'
+import React, {
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+  useTransition,
+} from 'react'
 import Typography from '@/components/UI/Typography'
 import cn from 'classnames'
 import styles from './OTPModal.module.scss'
@@ -11,6 +17,7 @@ import { OTPCodeSchema, OTPCodeValidator } from '@/types/schemas/otpModal'
 import MultiDigitInput from '@/components/MultiDigitInput'
 import { BsCheckCircleFill as SuccessIcon } from 'react-icons/bs'
 import { APIResponse } from '@/types/api'
+import { notify } from '@/lib/toastify'
 
 interface PropTypes {
   onSubmit: (code: string) => Promise<{ data: APIResponse }>
@@ -21,6 +28,8 @@ interface PropTypes {
   expirationTime: number
   digitsNumber: number
 }
+
+const SUBMIT_LIMIT = 3
 
 const OTPModal = ({
   onSubmit,
@@ -33,18 +42,22 @@ const OTPModal = ({
 }: PropTypes) => {
   const contentRef = useRef<HTMLDivElement | null>(null)
   const [maxHeight, setMaxHeight] = useState(contentRef?.current?.scrollHeight)
-  const [isLoading, setisLoading] = useState(false)
-  const [successMessage, setSuccessMessage] = useState('')
-  const [error, setError] = useState('')
+  const [isPending, startTransition] = useTransition()
+  const [statusMessage, setStatusMessage] = useState<{
+    type: 'success' | 'error'
+    message: string
+  } | null>(null)
   const [t, t_zod] = [useTranslations('OTPModal'), useTranslations('Zod')]
 
-  const hasError = !!error.length
-  const isValidated = !!successMessage.length
+  const [isError, isSuccess] = [
+    statusMessage?.type === 'error',
+    statusMessage?.type === 'success',
+  ]
 
   const {
     handleSubmit,
     watch,
-    formState: { errors },
+    formState: { errors, submitCount },
     setValue,
   } = useForm<OTPCodeSchema>({
     resolver: zodResolver(OTPCodeValidator(t_zod)),
@@ -52,40 +65,52 @@ const OTPModal = ({
     mode: 'onChange',
     defaultValues: { code: '' },
   })
-  const code = watch('code') // If not set, form inputs with more than 1 character will be delayed
+  const code = watch('code') // Needed to prevent state delay
 
-  // TODO: cancel after 3 unsuccessful tries
+  const hasExceededAttempts = submitCount >= SUBMIT_LIMIT // TODO add cooldown
+  const isVerifyDisabled = isPending || !!errors.code || hasExceededAttempts
 
   useEffect(() => {
-    // Initialize validation for empty code on mount
-    setValue('code', code, { shouldValidate: true })
+    setValue('code', code, { shouldValidate: true }) // Initialise validation for empty code on mount
   }, [code, setValue])
 
-  const handleVerify = async () => {
-    setisLoading(true)
-    try {
-      const res = await onSubmit(code)
-      setSuccessMessage(res.data?.message ?? '')
-      await onSuccess()
-    } catch (err) {
-      console.error('Error in OTPModal handleSubmit:', getErrorMessage(err))
-      setError(await getErrorMessage(err))
-    } finally {
-      setisLoading(false)
-    }
+  const handleVerify = () => {
+    startTransition(async () => {
+      if (hasExceededAttempts)
+        return setStatusMessage({
+          type: 'error',
+          message: t('too_many_attempts'),
+        })
+
+      try {
+        const res = await onSubmit(code)
+        setStatusMessage({
+          type: 'success',
+          message: res.data?.message ?? '',
+        })
+
+        await onSuccess()
+      } catch (err) {
+        console.error('Error in OTPModal handleSubmit:', getErrorMessage(err))
+        setStatusMessage({
+          type: 'error',
+          message: await getErrorMessage(err),
+        })
+      }
+    })
   }
 
-  const handleResend = async () => {
-    setisLoading(true)
-    try {
-      await onResend()
-      handleResetCode()
-      // TODO: restrict resend with timer
-    } catch (err) {
-      console.error('Error in OTPModal handleResend:', getErrorMessage(err))
-    } finally {
-      setisLoading(false)
-    }
+  const handleResend = () => {
+    startTransition(async () => {
+      try {
+        await onResend()
+        notify('success', t('code_resent'))
+        handleResetCode()
+        // TODO: restrict resend with timer
+      } catch (err) {
+        console.error('Error in OTPModal handleResend:', getErrorMessage(err))
+      }
+    })
   }
 
   const handleCodeChange = (newCode: string) => {
@@ -97,8 +122,8 @@ const OTPModal = ({
   const Success = () => (
     <div className={styles.success}>
       <div className={styles.successHeading}>
-        <SuccessIcon color="var(--primary-green-color)" size={40} />
-        <Typography weight="semiBold">{successMessage}</Typography>
+        <SuccessIcon color="var(--primary-green-color)" size={35} />
+        <Typography weight="semiBold">{statusMessage?.message}</Typography>
       </div>
       <Button variation="secondary" onClick={onCancel}>
         {t('ok')}
@@ -107,10 +132,10 @@ const OTPModal = ({
   )
 
   useEffect(() => {
-    if (isValidated && contentRef.current) {
+    if (isSuccess && contentRef.current) {
       setMaxHeight(contentRef.current.scrollHeight)
     }
-  }, [isValidated])
+  }, [isSuccess])
 
   return (
     <div
@@ -118,7 +143,7 @@ const OTPModal = ({
       ref={contentRef}
       style={{ maxHeight: `${maxHeight}px` }}
     >
-      {isValidated ? (
+      {isSuccess ? (
         <Success />
       ) : (
         <>
@@ -148,27 +173,26 @@ const OTPModal = ({
                 autoFocus
                 ariaLabel={t('input_code')}
                 className={styles.input}
-                hasError={hasError}
-                isDisabled={isLoading}
+                hasError={isError}
+                isDisabled={isPending}
                 n={digitsNumber}
                 testId="otp-modal-code"
-                value={code}
                 onChange={handleCodeChange}
               />
               <Typography
-                className={cn(styles.error, 'hidden', { visible: hasError })}
+                className={cn(styles.error, 'hidden', { visible: isError })}
                 color="var(--primary-red-color)"
                 size="s"
                 weight="semiBold"
               >
-                {error}
+                {statusMessage?.message}
               </Typography>
 
               <div className={styles.cta}>
                 <Button
                   isFullWidth
-                  disabled={isLoading || !!errors.code}
-                  isLoading={isLoading}
+                  disabled={isVerifyDisabled}
+                  isLoading={isPending}
                   size="xs"
                   type="submit"
                   variation="primary"
@@ -178,7 +202,7 @@ const OTPModal = ({
 
                 <Button
                   isFullWidth
-                  disabled={isLoading}
+                  disabled={isPending}
                   size="xs"
                   variation="secondary"
                   onClick={onCancel}

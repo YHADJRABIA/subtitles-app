@@ -28,7 +28,7 @@
       },
       "SendVerificationEmail": {
         "title": "Envoyer email de vérification",
-        "description": "Envoi d'email en vérifier l'appartenance."
+        "description": "Envoi d'email pour en vérifier l'appartenance."
       },
       "PasswordRecovery": {
         "title": "Récupération de mot de passe",
@@ -300,9 +300,12 @@
     "otp_verification": "Vérification OTP",
     "otp_required": "Une vérification par code à usage unique est requise.",
     "expires_in": "Ce code est valable pendant <em>{expirationTime} minutes</em>",
+    "too_many_attempts": "Trop de tentatives. Réessayer plus tard.",
     "not_received": "Code non reçu ? <cta>Renvoyer le code</cta>",
     "input_code": "Saisir code",
     "resend": "Renvoyer",
+    "code_resent": "Code renvoyé ! Vérifier votre email",
+    "wait_before_resend": "Disponible dans {time} secondes",
     "verify": "Vérifier",
     "cancel": "Annuler",
     "ok": "D'accord"

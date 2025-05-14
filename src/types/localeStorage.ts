@@ -1,1 +1,1 @@
-export type LocalStorageKey = 'notification'
+export type LocalStorageKey = 'notification' | 'otp-modal'
