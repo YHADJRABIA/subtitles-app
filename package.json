@@ -33,7 +33,7 @@
     "dotenv": "^16.4.5",
     "gql.tada": "^1.8.5",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.9.5",
+    "mongoose": "^8.15.1",
     "next": "^14.2.29",
     "next-auth": "^4.24.10",
     "next-intl": "^3.26.2",
