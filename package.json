@@ -30,7 +30,7 @@
     "bcryptjs": "^2.4.3",
     "classnames": "^2.5.1",
     "datocms-structured-text-to-plain-text": "^4.0.1",
-    "dotenv": "^16.4.5",
+    "dotenv": "^16.5.0",
     "gql.tada": "^1.8.5",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.15.1",
