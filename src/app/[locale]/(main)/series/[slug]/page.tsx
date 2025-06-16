@@ -39,7 +39,7 @@ export default async function SeriesPage({
   params: { locale, slug },
 }: MetaDataProps) {
   const t = await getTranslations({ locale, namespace: 'Series' })
-  const { isEnabled: isDraftModeEnabled } = draftMode() // TODO: work on draftmode
+  const { isEnabled: isDraftModeEnabled } = await draftMode() // TODO: work on draftmode
 
   const { series } = await executeQuery(seriesBySlugQuery, {
     variables: { locale, slug },
