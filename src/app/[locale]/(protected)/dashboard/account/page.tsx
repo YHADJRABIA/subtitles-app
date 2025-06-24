@@ -8,9 +8,8 @@ import { Metadata } from 'next/types'
 import { MetaDataProps } from '@/app/[locale]/layout'
 import AccountInfo from '../_components/AccountInfo'
 
-export const generateMetadata = async ({
-  params: { locale },
-}: MetaDataProps): Promise<Metadata> => {
+export const generateMetadata = async (props: MetaDataProps): Promise<Metadata> => {
+  const params = await props.params;
   const t = await getTranslations({
     locale,
     namespace: 'Metadata.Protected.Account',
@@ -19,7 +18,13 @@ export const generateMetadata = async ({
   return { title: t('title'), description: t('description') }
 }
 
-const DashboardAccountPage = async ({ params: { locale } }: MetaDataProps) => {
+const DashboardAccountPage = async (props: MetaDataProps) => {
+  const params = await props.params;
+
+  const {
+    locale
+  } = params;
+
   setRequestLocale(locale)
   const {
     creationDate,
