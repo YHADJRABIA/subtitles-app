@@ -11,9 +11,13 @@ import { MetaDataProps } from '../layout'
 
 export const generateStaticParams = () => locales.map(locale => ({ locale }))
 
-export const generateMetadata = async ({
-  params: { locale },
-}: MetaDataProps): Promise<Metadata> => {
+export const generateMetadata = async (
+  props: MetaDataProps
+): Promise<Metadata> => {
+  const params = await props.params
+
+  const { locale } = params
+
   const t = await getTranslations({ locale, namespace: 'Metadata' })
 
   return {
