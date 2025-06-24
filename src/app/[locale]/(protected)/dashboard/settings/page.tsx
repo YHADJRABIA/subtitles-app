@@ -8,8 +8,10 @@ import { Metadata } from 'next/types'
 import UnderDevelopment from '@/components/UnderDevelopment'
 import { MetaDataProps } from '@/app/[locale]/layout'
 
-export const generateMetadata = async (props: MetaDataProps): Promise<Metadata> => {
-  const params = await props.params;
+export const generateMetadata = async ({
+  params,
+}: MetaDataProps): Promise<Metadata> => {
+  const { locale } = await params
   const t = await getTranslations({
     locale,
     namespace: 'Metadata.Protected.Settings',
@@ -21,12 +23,8 @@ export const generateMetadata = async (props: MetaDataProps): Promise<Metadata> 
   }
 }
 
-const DashboardSettingsPage = async (props: MetaDataProps) => {
-  const params = await props.params;
-
-  const {
-    locale
-  } = params;
+const DashboardSettingsPage = async ({ params }: MetaDataProps) => {
+  const { locale } = await params
 
   setRequestLocale(locale)
   /*   const { favoriteLocale, isTwoFactorEnabled } = await getUserSession() */
