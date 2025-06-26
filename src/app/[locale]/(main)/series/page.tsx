@@ -8,11 +8,10 @@ import InfoImage from '@/components/InfoImage'
 import { redirect } from '@/i18n/routing'
 import { MetaDataProps } from '../../layout'
 
-export const generateMetadata = async (
-  props: MetaDataProps
-): Promise<Metadata> => {
-  const params = await props.params
-  const { locale } = params
+export const generateMetadata = async ({
+  params,
+}: MetaDataProps): Promise<Metadata> => {
+  const { locale } = await params
 
   const t = await getTranslations({ locale, namespace: 'Metadata.Series' })
 
@@ -22,10 +21,8 @@ export const generateMetadata = async (
   }
 }
 
-const SeriesPage = (props: MetaDataProps) => {
-  const params = use(props.params)
-
-  const { locale } = params
+const SeriesPage = ({ params }: MetaDataProps) => {
+  const { locale } = use(params)
 
   redirect({ href: '/series/patrul', locale }) // TODO: Remove when this page is finished
 
