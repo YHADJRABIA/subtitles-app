@@ -9,9 +9,13 @@ import { MetaDataProps } from '../layout'
 const MAIN_ASSET_PATH = '/assets/film-rolls.svg'
 
 // TODO: Complete SEO fields
-export const generateMetadata = async ({
-  params: { locale },
-}: MetaDataProps): Promise<Metadata> => {
+export const generateMetadata = async (props: MetaDataProps): Promise<Metadata> => {
+  const params = await props.params;
+
+  const {
+    locale
+  } = params;
+
   const t = await getTranslations({ locale, namespace: 'Metadata.Homepage' })
 
   return { title: t('title'), description: t('description') }

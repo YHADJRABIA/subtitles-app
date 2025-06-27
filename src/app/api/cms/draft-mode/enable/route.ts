@@ -23,6 +23,7 @@ export async function GET(req: NextRequest) {
   const url = req.nextUrl.searchParams.get('url') || '/'
 
   try {
+    const draftModeStatus = await draftMode()
     // Ensure that the request is coming from a trusted source
     if (token !== secretToken) {
       return invalidRequestResponse(t('invalid_token'), 401)
@@ -33,7 +34,7 @@ export async function GET(req: NextRequest) {
       return invalidRequestResponse(t('non_relative_url'), 422)
     }
 
-    draftMode().enable()
+    draftModeStatus.enable()
 
     makeDraftModeWorkWithinIframes()
   } catch (err) {

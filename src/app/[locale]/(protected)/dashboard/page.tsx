@@ -9,8 +9,10 @@ import { MetaDataProps } from '../../layout'
 import UserInfoForm from './_components/UserInfoForm'
 
 export const generateMetadata = async ({
-  params: { locale },
+  params,
 }: MetaDataProps): Promise<Metadata> => {
+  const { locale } = await params
+
   const t = await getTranslations({
     locale,
     namespace: 'Metadata.Protected.Dashboard',
@@ -19,7 +21,9 @@ export const generateMetadata = async ({
   return { title: t('title'), description: t('description') }
 }
 
-const DashboardPage = async ({ params: { locale } }: MetaDataProps) => {
+const DashboardPage = async ({ params }: MetaDataProps) => {
+  const { locale } = await params
+
   setRequestLocale(locale)
   const { id, email, name, image } = await getUserSession()
 

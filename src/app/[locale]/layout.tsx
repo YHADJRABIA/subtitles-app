@@ -17,12 +17,16 @@ const literate = Literata({
 })
 
 export interface MetaDataProps {
-  params: { locale: Locale; slug: string }
+  params: Promise<{ locale: Locale; slug: string }>
 }
 
-export const generateMetadata = async ({
-  params: { locale },
-}: MetaDataProps): Promise<Metadata> => {
+export const generateMetadata = async (props: MetaDataProps): Promise<Metadata> => {
+  const params = await props.params;
+
+  const {
+    locale
+  } = params;
+
   const t = await getTranslations({ locale, namespace: 'Metadata' })
 
   return {
@@ -59,10 +63,17 @@ export interface LayoutProps extends MetaDataProps {
   children: ReactNode
 }
 
-export default function LocaleLayout({
-  children,
-  params: { locale },
-}: LayoutProps) {
+export default async function LocaleLayout(props: LayoutProps) {
+  const params = await props.params;
+
+  const {
+    locale
+  } = params;
+
+  const {
+    children
+  } = props;
+
   return (
     <html lang={locale}>
       <body className={`${inter.variable} ${literate.variable}`}>

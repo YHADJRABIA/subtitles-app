@@ -91,13 +91,13 @@ export function successfulResponse(data?: unknown, status = 200) {
  * CHIPS: https://developers.google.com/privacy-sandbox/3pcd/chips
  */
 
-export function makeDraftModeWorkWithinIframes() {
+export async function makeDraftModeWorkWithinIframes() {
   // Read the cookie just set by draftMode().enable() or draftMode().disable()...
-  const cookieStore = cookies()
+  const cookieStore = await cookies()
   const cookie = cookieStore.get('__prerender_bypass')!
 
   // and reapply it with `partitioned: true`
-  cookies().set({
+  cookieStore.set({
     name: '__prerender_bypass',
     value: cookie?.value,
     httpOnly: true,

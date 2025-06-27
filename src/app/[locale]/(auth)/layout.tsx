@@ -7,8 +7,10 @@ import { Metadata } from 'next'
 import { MetaDataProps } from '../layout'
 
 export const generateMetadata = async ({
-  params: { locale },
+  params,
 }: MetaDataProps): Promise<Metadata> => {
+  const { locale } = await params
+
   const t = await getTranslations({ locale, namespace: 'Metadata' })
 
   return {
