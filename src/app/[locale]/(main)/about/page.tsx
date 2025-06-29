@@ -28,12 +28,8 @@ const ICON_MAP = {
 }
 type IconKeys = keyof typeof ICON_MAP
 
-export default async function AboutPage(props: MetaDataProps) {
-  const params = await props.params;
-
-  const {
-    locale
-  } = params;
+export default async function AboutPage({ params }: MetaDataProps) {
+  const { locale } = await params
 
   const { isEnabled: isDraftModeEnabled } = await draftMode()
 
