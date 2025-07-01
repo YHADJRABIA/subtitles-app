@@ -20,12 +20,10 @@ export interface MetaDataProps {
   params: Promise<{ locale: Locale; slug: string }>
 }
 
-export const generateMetadata = async (props: MetaDataProps): Promise<Metadata> => {
-  const params = await props.params;
-
-  const {
-    locale
-  } = params;
+export const generateMetadata = async ({
+  params,
+}: MetaDataProps): Promise<Metadata> => {
+  const { locale } = await params
 
   const t = await getTranslations({ locale, namespace: 'Metadata' })
 
@@ -63,16 +61,8 @@ export interface LayoutProps extends MetaDataProps {
   children: ReactNode
 }
 
-export default async function LocaleLayout(props: LayoutProps) {
-  const params = await props.params;
-
-  const {
-    locale
-  } = params;
-
-  const {
-    children
-  } = props;
+export default async function LocaleLayout({ params, children }: LayoutProps) {
+  const { locale } = await params
 
   return (
     <html lang={locale}>
