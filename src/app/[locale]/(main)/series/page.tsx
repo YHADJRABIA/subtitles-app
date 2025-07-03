@@ -1,3 +1,4 @@
+import { use } from 'react'
 import Typography from '@/components/UI/Typography'
 import styles from './page.module.scss'
 import { useTranslations } from 'next-intl'
@@ -8,8 +9,10 @@ import { redirect } from '@/i18n/routing'
 import { MetaDataProps } from '../../layout'
 
 export const generateMetadata = async ({
-  params: { locale },
+  params,
 }: MetaDataProps): Promise<Metadata> => {
+  const { locale } = await params
+
   const t = await getTranslations({ locale, namespace: 'Metadata.Series' })
 
   return {
@@ -18,7 +21,9 @@ export const generateMetadata = async ({
   }
 }
 
-const SeriesPage = ({ params: { locale } }: MetaDataProps) => {
+const SeriesPage = ({ params }: MetaDataProps) => {
+  const { locale } = use(params)
+
   redirect({ href: '/series/patrul', locale }) // TODO: Remove when this page is finished
 
   const t = useTranslations('Series')

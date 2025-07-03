@@ -49,7 +49,7 @@ export const authOptions: NextAuthOptions = {
 
       // Runs on credential login (with email & password)
       async authorize(credentials /* req */) {
-        const locale = getNextLocale()
+        const locale = await getNextLocale()
 
         const [t_zod, t] = [
           await getTranslations({ locale, namespace: 'Zod' }),
@@ -183,7 +183,7 @@ export const authOptions: NextAuthOptions = {
     },
 
     async signIn({ user, account }) {
-      const locale = getNextLocale()
+      const locale = await getNextLocale()
 
       const t = await getTranslations({ locale, namespace: 'Auth.Login' })
 

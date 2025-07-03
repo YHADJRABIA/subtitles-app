@@ -6,8 +6,8 @@ interface PropTypes {
 
 const layout = ({ children }: PropTypes) => {
   return (
-    <html>
-      <body>{children}</body>
+    <html suppressHydrationWarning lang="en">
+      <body suppressHydrationWarning>{children}</body>
     </html>
   )
 }

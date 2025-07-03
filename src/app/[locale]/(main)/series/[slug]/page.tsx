@@ -35,11 +35,11 @@ export const generateMetadata = generateMetadataFn({
   pickSeoMetaTags: data => data.series?._seoMetaTags,
 })
 
-export default async function SeriesPage({
-  params: { locale, slug },
-}: MetaDataProps) {
+export default async function SeriesPage({ params }: MetaDataProps) {
+  const { locale, slug } = await params
+
   const t = await getTranslations({ locale, namespace: 'Series' })
-  const { isEnabled: isDraftModeEnabled } = draftMode() // TODO: work on draftmode
+  const { isEnabled: isDraftModeEnabled } = await draftMode() // TODO: work on draftmode
 
   const { series } = await executeQuery(seriesBySlugQuery, {
     variables: { locale, slug },

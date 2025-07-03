@@ -26,7 +26,7 @@ export const getLocaleFromNextCookies = (cookies: ReadonlyRequestCookies) => {
   return getLocaleFromNextCookie(cookies)
 }
 
-export const getNextLocale = () => {
-  const nextCookies = cookies()
+export const getNextLocale = async () => {
+  const nextCookies = await cookies()
   return getLocaleFromNextCookies(nextCookies)
 }
