@@ -14,10 +14,17 @@ import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
 import { generateMetadataFn } from '@/lib/datocms/generateMetaDataFn'
 import { aboutPageQuery } from '@/gql/queries/aboutPage'
+import { Locale } from '@/types/locale'
 
 export const generateMetadata = generateMetadataFn({
   query: aboutPageQuery,
-  buildQueryVariables: ({ params: { locale } }: MetaDataProps) => ({ locale }),
+  buildQueryVariables: ({
+    params: { locale },
+  }: {
+    params: { locale: Locale }
+  }) => ({
+    locale,
+  }),
   pickSeoMetaTags: data => data.aboutPage?._seoMetaTags,
 })
 
