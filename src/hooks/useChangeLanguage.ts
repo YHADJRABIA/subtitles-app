@@ -32,6 +32,8 @@ const useChangeLanguage = () => {
 
     const selectedLanguage = getLanguageByLocaleValue(locale)
 
+    const parsedQuery = Object.fromEntries(new URLSearchParams(queryParams))
+
     if (selectedLanguage) {
       startTransition(() => {
         setCurrentLanguage(selectedLanguage)
@@ -39,7 +41,7 @@ const useChangeLanguage = () => {
           // @ts-expect-error -- TypeScript will validate that only known `params`
           // are used in combination with a given `pathname`. Since the two will
           // always match for the current route, we can skip runtime checks.
-          { pathname: pathname + queryParams, params },
+          { pathname: pathname, params, query: parsedQuery },
           { locale }
         )
       })
