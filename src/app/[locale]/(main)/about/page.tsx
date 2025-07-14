@@ -22,9 +22,7 @@ export const generateMetadata = generateMetadataFn({
     params: { locale },
   }: {
     params: { locale: Locale }
-  }) => ({
-    locale,
-  }),
+  }) => ({ locale }),
   pickSeoMetaTags: data => data.aboutPage?._seoMetaTags,
 })
 
