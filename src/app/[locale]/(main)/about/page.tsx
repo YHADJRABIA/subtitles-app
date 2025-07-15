@@ -18,11 +18,14 @@ import { Locale } from '@/types/locale'
 
 export const generateMetadata = generateMetadataFn({
   query: aboutPageQuery,
-  buildQueryVariables: ({
-    params: { locale },
+  buildQueryVariables: async ({
+    params,
   }: {
-    params: { locale: Locale }
-  }) => ({ locale }),
+    params: Promise<{ locale: Locale }>
+  }) => {
+    const { locale } = await params
+    return { locale }
+  },
   pickSeoMetaTags: data => data.aboutPage?._seoMetaTags,
 })
 
