@@ -25,13 +25,18 @@ import { notFound } from 'next/navigation'
 import ResponsiveImage from '@/components/DatoCMS/ResponsiveImage'
 import SeriesTrailer from './_components/SeriesTrailer'
 import DateDisplay from '@/components/DateDisplay'
+import { Locale } from '@/types/locale'
 
 export const generateMetadata = generateMetadataFn({
   query: seriesBySlugQuery,
-  buildQueryVariables: ({ params: { locale, slug } }: MetaDataProps) => ({
-    locale,
-    slug,
-  }),
+  buildQueryVariables: async ({
+    params,
+  }: {
+    params: Promise<{ locale: Locale; slug: string }>
+  }) => {
+    const { locale, slug } = await params
+    return { locale, slug }
+  },
   pickSeoMetaTags: data => data.series?._seoMetaTags,
 })
 
