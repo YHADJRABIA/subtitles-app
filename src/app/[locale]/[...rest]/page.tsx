@@ -3,12 +3,10 @@ import { getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { MetaDataProps } from '../layout'
 
-export const generateMetadata = async (props: MetaDataProps): Promise<Metadata> => {
-  const params = await props.params;
-
-  const {
-    locale
-  } = params;
+export const generateMetadata = async ({
+  params,
+}: MetaDataProps): Promise<Metadata> => {
+  const { locale } = await params
 
   const t = await getTranslations({
     locale,
