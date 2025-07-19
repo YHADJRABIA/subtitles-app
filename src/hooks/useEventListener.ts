@@ -9,7 +9,7 @@ export const useEventListener = <T extends Event>(
   element?: RefObject<HTMLElement> | Window | Document | HTMLElement
 ) => {
   // Create a ref that stores the handler
-  const savedHandler = useRef<(event: T) => void>()
+  const savedHandler = useRef<(event: T) => void | null>(null)
 
   useEffect(() => {
     // Define the listening target
