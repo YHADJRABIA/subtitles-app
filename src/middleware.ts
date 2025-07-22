@@ -1,4 +1,5 @@
 import createMiddleware from 'next-intl/middleware'
+import { ipAddress } from '@vercel/functions'
 import withAuth, { NextRequestWithAuth } from 'next-auth/middleware'
 import { NextFetchEvent, NextResponse } from 'next/server'
 import { isLoginOrRegisterPath, isProtectedPath } from './utils/paths'
@@ -25,7 +26,8 @@ const ratelimit = new Ratelimit({
 
 // Middleware for rate limiting API requests
 export async function apiRateLimitMiddleware(req: NextRequestWithAuth) {
-  const ip = req.ip ?? '127.0.0.1'
+  const ip = ipAddress(req) ?? '127.0.0.1'
+
   const { limit, reset, remaining } = await ratelimit.limit(ip)
 
   if (remaining === 0) {

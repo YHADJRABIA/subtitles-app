@@ -5,11 +5,7 @@ interface PropTypes {
 }
 
 const layout = ({ children }: PropTypes) => {
-  return (
-    <html>
-      <body>{children}</body>
-    </html>
-  )
+  return <>{children}</>
 }
 
 export default layout

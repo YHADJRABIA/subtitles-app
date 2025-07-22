@@ -23,8 +23,9 @@ export async function GET(req: NextRequest) {
     if (isNonRelativeUrl(url)) {
       return invalidRequestResponse(t('non_relative_url'), 422)
     }
+    const draftModeStatus = await draftMode()
 
-    draftMode().disable()
+    draftModeStatus.disable()
     makeDraftModeWorkWithinIframes()
   } catch (err) {
     return handleUnexpectedError(err)

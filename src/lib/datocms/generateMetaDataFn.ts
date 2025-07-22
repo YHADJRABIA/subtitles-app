@@ -20,10 +20,11 @@ export function generateMetadataFn<PageProps, Result, Variables>(
     pageProps: PageProps,
     parent: ResolvingMetadata
   ): Promise<Metadata> {
-    const { isEnabled: isDraftModeEnabled } = draftMode()
+    const { isEnabled: isDraftModeEnabled } = await draftMode()
 
-    const variables =
-      options.buildQueryVariables?.(pageProps) || ({} as Variables)
+    const variables = options.buildQueryVariables
+      ? await Promise.resolve(options.buildQueryVariables(pageProps))
+      : ({} as Variables)
 
     const [parentMetadata, data] = await Promise.all([
       parent,
@@ -35,7 +36,6 @@ export function generateMetadataFn<PageProps, Result, Variables>(
 
     const tags = options.pickSeoMetaTags(data as Result)
 
-    // Combine metadata from parent routes with those of this route:
     return {
       ...(parentMetadata as Metadata),
       ...toNextMetadata(tags || []),
@@ -45,7 +45,7 @@ export function generateMetadataFn<PageProps, Result, Variables>(
 
 export type BuildQueryVariablesFn<PageProps, Variables> = (
   context: PageProps
-) => Variables
+) => Variables | Promise<Variables>
 
 export type GenerateMetadataFnOptions<PageProps, Result, Variables> = {
   /** The GraphQL query that will be used to generate metadata. */

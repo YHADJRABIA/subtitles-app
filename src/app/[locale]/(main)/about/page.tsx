@@ -14,10 +14,18 @@ import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
 import { generateMetadataFn } from '@/lib/datocms/generateMetaDataFn'
 import { aboutPageQuery } from '@/gql/queries/aboutPage'
+import { Locale } from '@/types/locale'
 
 export const generateMetadata = generateMetadataFn({
   query: aboutPageQuery,
-  buildQueryVariables: ({ params: { locale } }: MetaDataProps) => ({ locale }),
+  buildQueryVariables: async ({
+    params,
+  }: {
+    params: Promise<{ locale: Locale }>
+  }) => {
+    const { locale } = await params
+    return { locale }
+  },
   pickSeoMetaTags: data => data.aboutPage?._seoMetaTags,
 })
 
@@ -28,8 +36,10 @@ const ICON_MAP = {
 }
 type IconKeys = keyof typeof ICON_MAP
 
-export default async function AboutPage({ params: { locale } }: MetaDataProps) {
-  const { isEnabled: isDraftModeEnabled } = draftMode()
+export default async function AboutPage({ params }: MetaDataProps) {
+  const { locale } = await params
+
+  const { isEnabled: isDraftModeEnabled } = await draftMode()
 
   const { aboutPage } = await executeQuery(aboutPageQuery, {
     variables: { locale },
