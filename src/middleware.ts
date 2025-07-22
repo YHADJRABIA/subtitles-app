@@ -28,7 +28,6 @@ const ratelimit = new Ratelimit({
 export async function apiRateLimitMiddleware(req: NextRequestWithAuth) {
   const ip = ipAddress(req) ?? '127.0.0.1'
 
-  console.log('TEST IP', ip)
   const { limit, reset, remaining } = await ratelimit.limit(ip)
 
   if (remaining === 0) {
