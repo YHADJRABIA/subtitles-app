@@ -10,8 +10,10 @@ const MAIN_ASSET_PATH = '/assets/film-rolls.svg'
 
 // TODO: Complete SEO fields
 export const generateMetadata = async ({
-  params: { locale },
+  params,
 }: MetaDataProps): Promise<Metadata> => {
+  const { locale } = await params
+
   const t = await getTranslations({ locale, namespace: 'Metadata.Homepage' })
 
   return { title: t('title'), description: t('description') }

@@ -3,13 +3,13 @@ import AuthForm from '@/components/Auth/AuthForm'
 import React from 'react'
 import { Metadata } from 'next/types'
 import { getTranslations } from 'next-intl/server'
-import { Locale } from '@/types/locale'
+import { MetaDataProps } from '../../layout'
 
 export const generateMetadata = async ({
-  params: { locale },
-}: {
-  params: { locale: Locale }
-}): Promise<Metadata> => {
+  params,
+}: MetaDataProps): Promise<Metadata> => {
+  const { locale } = await params
+
   const t = await getTranslations({
     locale,
     namespace: 'Metadata.Auth.Register',

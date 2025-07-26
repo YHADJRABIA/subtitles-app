@@ -1,9 +1,4 @@
-import React, {
-  CSSProperties,
-  HTMLAttributes,
-  MouseEventHandler,
-  ReactNode,
-} from 'react'
+import React, { HTMLAttributes, MouseEventHandler, ReactNode } from 'react'
 import styles from './Typography.module.scss'
 import cn from 'classnames'
 import { Link } from '@/i18n/routing'
@@ -82,34 +77,30 @@ const Typography = ({
     if (onClick) onClick(event)
   }
 
+  const commonProps = {
+    className: cn(
+      styles.root,
+      { isFullWidth, uppercase },
+      size && styles[size],
+      className
+    ),
+    'data-testid': testId,
+    style: PropStyles,
+  }
+
   return link?.href ? (
     <Link
-      {...props}
-      className={cn(
-        styles.root,
-        { isFullWidth, uppercase },
-        size && styles[size],
-        className
-      )}
-      data-testid={testId}
       href={link.href}
       rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
-      style={PropStyles as CSSProperties}
       target={link.openInNewTab ? '_blank' : undefined}
+      {...commonProps}
     >
       {children}
     </Link>
   ) : (
     <Tag
       {...props}
-      className={cn(
-        styles.root,
-        { isFullWidth, uppercase },
-        size && styles[size],
-        className
-      )}
-      data-testid={testId}
-      style={PropStyles as CSSProperties}
+      {...commonProps}
       onClick={onClick ? handleClick : undefined} // Allows component to remain server component if no onClick is passed
     >
       {children}
