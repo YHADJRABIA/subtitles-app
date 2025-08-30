@@ -16,8 +16,10 @@ const literate = Literata({
   variable: '--font-heading',
 })
 
+export type ParamsType = { locale: Locale; slug: string }
+
 export interface MetaDataProps {
-  params: Promise<{ locale: Locale; slug: string }>
+  params: Promise<ParamsType>
 }
 
 export const generateMetadata = async ({
