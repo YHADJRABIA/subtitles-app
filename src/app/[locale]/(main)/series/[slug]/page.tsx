@@ -10,7 +10,7 @@ import SeriesWhereTo from './_components/SeriesWhereTo'
 import { Col, Row } from '@/components/UI/Grid'
 import StickyContainer from '@/components/StickyContainer'
 import SeriesSubtitles from './_components/SeriesSubtitles'
-import { MetaDataProps } from '@/app/[locale]/layout'
+import { MetaDataProps, ParamsType } from '@/app/[locale]/layout'
 import {
   SeriesCountry,
   SeriesGenre,
@@ -25,15 +25,10 @@ import { notFound } from 'next/navigation'
 import ResponsiveImage from '@/components/DatoCMS/ResponsiveImage'
 import SeriesTrailer from './_components/SeriesTrailer'
 import DateDisplay from '@/components/DateDisplay'
-import { Locale } from '@/types/locale'
 
 export const generateMetadata = generateMetadataFn({
   query: seriesBySlugQuery,
-  buildQueryVariables: async ({
-    params,
-  }: {
-    params: Promise<{ locale: Locale; slug: string }>
-  }) => {
+  buildQueryVariables: async ({ params }: { params: Promise<ParamsType> }) => {
     const { locale, slug } = await params
     return { locale, slug }
   },
