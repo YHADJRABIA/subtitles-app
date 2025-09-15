@@ -1,41 +1,47 @@
+'use client'
+
 import { useState, useEffect, useCallback } from 'react'
 
 interface PropTypes {
-  initialTime: number // seconds
+  seconds: number
+  onComplete?: () => void
 }
 
-const useTimer = (initialTime: PropTypes) => {
-  const [timeLeft, setTimeLeft] = useState(initialTime)
-  const [isRunning, setIsRunning] = useState(false)
+export const useTimer = ({ seconds, onComplete }: PropTypes) => {
+  const [timeLeft, setTimeLeft] = useState(0)
+  const [isActive, setIsActive] = useState(false)
+
+  const startTimer = useCallback(() => {
+    setTimeLeft(seconds)
+    setIsActive(true)
+  }, [seconds])
 
   useEffect(() => {
-    if (!isRunning) return
-    if (timeLeft <= 0) {
-      setIsRunning(false)
+    if (!isActive || timeLeft <= 0) {
+      if (timeLeft === 0 && isActive) {
+        setIsActive(false)
+        onComplete?.()
+      }
       return
     }
 
     const timer = setInterval(() => {
-      setTimeLeft(prevTime => Math.max(prevTime - 1, 0))
+      setTimeLeft(prev => {
+        if (prev <= 1) {
+          setIsActive(false)
+          onComplete?.()
+          return 0
+        }
+        return prev - 1
+      })
     }, 1000)
 
     return () => clearInterval(timer)
-  }, [isRunning, timeLeft])
+  }, [isActive, timeLeft, onComplete])
 
-  const start = useCallback(() => {
-    setIsRunning(true)
-  }, [])
-
-  const pause = useCallback(() => {
-    setIsRunning(false)
-  }, [])
-
-  const reset = useCallback(() => {
-    setIsRunning(false)
-    setTimeLeft(initialTime)
-  }, [initialTime])
-
-  return { timeLeft, isRunning, start, pause, reset }
+  return {
+    timeLeft,
+    isActive,
+    start: startTimer,
+  }
 }
-
-export default useTimer
