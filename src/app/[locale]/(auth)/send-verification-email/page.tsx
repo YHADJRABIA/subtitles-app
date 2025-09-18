@@ -14,10 +14,7 @@ export const generateMetadata = async ({
     namespace: 'Metadata.Auth.SendVerificationEmail',
   })
 
-  return {
-    title: t('title'),
-    description: t('description'),
-  }
+  return { title: t('title'), description: t('description') }
 }
 
 const SendVerificationEmailPage = () => {
