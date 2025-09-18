@@ -11,10 +11,7 @@ export const generateMetadata = async ({
 
   const t = await getTranslations({ locale, namespace: 'Metadata.Auth.Login' })
 
-  return {
-    title: t('title'),
-    description: t('description'),
-  }
+  return { title: t('title'), description: t('description') }
 }
 
 const LoginPage = () => {
