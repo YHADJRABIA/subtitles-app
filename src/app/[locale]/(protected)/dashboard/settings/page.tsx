@@ -17,10 +17,7 @@ export const generateMetadata = async ({
     namespace: 'Metadata.Protected.Settings',
   })
 
-  return {
-    title: t('title'),
-    description: t('description'),
-  }
+  return { title: t('title'), description: t('description') }
 }
 
 const DashboardSettingsPage = async ({ params }: MetaDataProps) => {
