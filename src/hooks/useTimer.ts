@@ -41,7 +41,7 @@ export const useTimer = ({ seconds, onComplete }: PropTypes) => {
 
   return {
     timeLeft,
-    isActive,
+    isActiveTimer: isActive,
     start: startTimer,
   }
 }
