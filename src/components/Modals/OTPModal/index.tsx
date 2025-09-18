@@ -1,10 +1,4 @@
-import React, {
-  ReactNode,
-  useEffect,
-  useRef,
-  useState,
-  useTransition,
-} from 'react'
+import { ReactNode, useEffect, useRef, useState, useTransition } from 'react'
 import Typography from '@/components/UI/Typography'
 import cn from 'classnames'
 import styles from './OTPModal.module.scss'
@@ -18,6 +12,7 @@ import MultiDigitInput from '@/components/MultiDigitInput'
 import { BsCheckCircleFill as SuccessIcon } from 'react-icons/bs'
 import { APIResponse } from '@/types/api'
 import { notify } from '@/lib/toastify'
+import { useTimer } from '@/hooks/useTimer'
 
 interface PropTypes {
   onSubmit: (code: string) => Promise<{ data: APIResponse }>
@@ -48,6 +43,12 @@ const OTPModal = ({
     message: string
   } | null>(null)
   const [t, t_zod] = [useTranslations('OTPModal'), useTranslations('Zod')]
+
+  const {
+    timeLeft,
+    isActiveTimer,
+    start: startResendTimer,
+  } = useTimer({ seconds: 30 })
 
   const [isError, isSuccess] = [
     statusMessage?.type === 'error',
@@ -101,12 +102,14 @@ const OTPModal = ({
   }
 
   const handleResend = () => {
+    if (isActiveTimer) return
+
     startTransition(async () => {
       try {
         await onResend()
         notify('success', t('code_resent'))
         handleResetCode()
-        // TODO: restrict resend with timer
+        startResendTimer()
       } catch (err) {
         console.error('Error in OTPModal handleResend:', getErrorMessage(err))
       }
@@ -222,7 +225,9 @@ const OTPModal = ({
                     title={t('resend')}
                     onClick={handleResend}
                   >
-                    {text}
+                    {isActiveTimer
+                      ? t('wait_before_resend', { time: timeLeft })
+                      : text}
                   </Typography>
                 ),
               })}
