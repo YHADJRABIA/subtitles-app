@@ -290,6 +290,9 @@
   "Video": {
     "not_supported": "Video tag not supported by your browser."
   },
+  "Modal": {
+    "close": "Close"
+  },
   "ConfirmationModal": {
     "are_you_sure": "Do you want to proceed?",
     "yes": "Yes",
