@@ -4,6 +4,7 @@ import styles from './Modal.module.scss'
 import Typography from '@/components/UI/Typography'
 import { RiCloseLargeFill as CloseIcon } from 'react-icons/ri'
 import { IconType } from '@/types/icon'
+import { useTranslations } from 'next-intl'
 
 interface PropTypes {
   isOpen: boolean
@@ -26,6 +27,7 @@ const Modal = ({
   className,
   children,
 }: PropTypes) => {
+  const t = useTranslations('Modal')
   if (!isOpen || !children) return null
   if (!isClosable) onClose = () => {}
 
@@ -52,7 +54,11 @@ const Modal = ({
             )}
           </div>
           {isClosable && (
-            <CloseIcon className={styles.closeIcon} onClick={onClose} />
+            <CloseIcon
+              className={styles.closeIcon}
+              title={t('close')}
+              onClick={onClose}
+            />
           )}
         </div>
         <div className={styles.scrollableContent}>{children}</div>
