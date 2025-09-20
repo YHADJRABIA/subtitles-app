@@ -37,9 +37,7 @@ const Modal = ({
         <div
           className={cn(
             styles.header,
-            {
-              [styles.centred]: !isClosable,
-            },
+            { [styles.centred]: !isClosable },
             className
           )}
         >
