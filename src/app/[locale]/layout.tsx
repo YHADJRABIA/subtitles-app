@@ -59,7 +59,8 @@ export const generateMetadata = async ({
   }
 }
 
-export interface LayoutProps extends MetaDataProps {
+export interface LayoutProps {
+  params: Promise<{ locale: string }>
   children: ReactNode
 }
 
