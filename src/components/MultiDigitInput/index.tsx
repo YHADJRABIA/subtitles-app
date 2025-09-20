@@ -23,7 +23,7 @@ const MultiDigitInput = ({
   ariaLabel,
   testId,
 }: MultiDigitInputProps) => {
-  const [digits, setDigits] = useState(Array(n).fill(null))
+  const [digits, setDigits] = useState(Array(n).fill(''))
   const inputRefs = useRef<(HTMLInputElement | null)[]>([])
 
   const focusInput = (idx: number) => inputRefs.current[idx]?.focus()
