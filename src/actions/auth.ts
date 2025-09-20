@@ -16,7 +16,7 @@ import { signIn, signOut } from 'next-auth/react'
 // Logout & redirect
 export const handleLogout = async () => {
   try {
-    if (isClient) localStorage.removeItem('otp-modal')
+    if (isClient) localStorage.removeItem('otp-modal') // Clear pending email update on logout
     return await signOut({ callbackUrl: DEFAULT_LOGOUT_REDIRECT_ROUTE })
   } catch (err) {
     console.error('Error Logging out user:', getErrorMessage(err))
