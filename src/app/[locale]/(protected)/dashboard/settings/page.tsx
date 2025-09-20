@@ -1,11 +1,11 @@
 import React from 'react'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
-/* import { getUserSession } from '@/utils/session' */
+import { getUserSession } from '@/utils/session'
 import Typography from '@/components/UI/Typography'
-/* import SwitchButton from '@/components/SwitchButton' */
+import SwitchButton from '@/components/SwitchButton'
+import styles from './page.module.scss'
 
 import { Metadata } from 'next/types'
-import UnderDevelopment from '@/components/UnderDevelopment'
 import { MetaDataProps } from '@/app/[locale]/layout'
 
 export const generateMetadata = async ({
@@ -17,17 +17,14 @@ export const generateMetadata = async ({
     namespace: 'Metadata.Protected.Settings',
   })
 
-  return {
-    title: t('title'),
-    description: t('description'),
-  }
+  return { title: t('title'), description: t('description') }
 }
 
 const DashboardSettingsPage = async ({ params }: MetaDataProps) => {
   const { locale } = await params
 
   setRequestLocale(locale)
-  /*   const { favoriteLocale, isTwoFactorEnabled } = await getUserSession() */
+  const { favoriteLocale, isTwoFactorEnabled } = await getUserSession()
 
   const t = await getTranslations({ locale, namespace: 'Dashboard.Settings' })
 
@@ -37,37 +34,20 @@ const DashboardSettingsPage = async ({ params }: MetaDataProps) => {
         {t('title')}
       </Typography>
 
-      <UnderDevelopment />
-
-      {/*   <div className={styles.section}> // TODO: finish development
-        <Typography weight="semiBold" size="xs">
+      <div className={styles.section}>
+        <Typography size="xs" weight="semiBold">
           {t('preferred_language')}
         </Typography>
         <div className={styles.element}>
-          <Typography weight="semiBold" size="xs">
+          <Typography size="xs" weight="semiBold">
             {t('two_factor_auth')}
           </Typography>
-          <SwitchButton
+          {/*           <SwitchButton
             isActive={isTwoFactorEnabled}
-            //  onToggle={() => console.log('TEST')} 
-          />
+            onToggle={() => console.log('TEST')}
+          /> */}
         </div>
-        <Typography
-          weight="semiBold"
-          size="xs"
-          color="var(--primary-blue-color)"
-        >
-          {t('edit_password')}
-        </Typography>
-
-        <Typography
-          weight="semiBold"
-          size="xs"
-          color="var(--primary-blue-color)"
-        >
-          {t('edit_email')}
-        </Typography>
-      </div> */}
+      </div>
     </>
   )
 }

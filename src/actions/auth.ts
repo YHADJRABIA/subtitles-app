@@ -9,12 +9,14 @@ import {
 } from '@/types/schemas/auth'
 import { SendEmailVerificationSchema } from '@/types/schemas/general'
 import { getErrorMessage } from '@/utils/errors'
+import { isClient } from '@/utils/general'
 import axios from 'axios'
 import { signIn, signOut } from 'next-auth/react'
 
 // Logout & redirect
 export const handleLogout = async () => {
   try {
+    if (isClient) localStorage.removeItem('otp-modal') // Clear pending email update on logout
     return await signOut({ callbackUrl: DEFAULT_LOGOUT_REDIRECT_ROUTE })
   } catch (err) {
     console.error('Error Logging out user:', getErrorMessage(err))

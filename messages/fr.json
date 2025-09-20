@@ -291,6 +291,9 @@
   "Video": {
     "not_supported": "La balise vidéo n'est pas compatible avec ce navigateur."
   },
+  "Modal": {
+    "close": "Fermer"
+  },
   "ConfirmationModal": {
     "are_you_sure": "Voulez-vous procéder ?",
     "yes": "Oui",
@@ -305,7 +308,7 @@
     "input_code": "Saisir code",
     "resend": "Renvoyer",
     "code_resent": "Code renvoyé ! Vérifier votre email",
-    "wait_before_resend": "Disponible dans {time} secondes",
+    "wait_before_resend": "Renvoyer dans {time} secondes.",
     "verify": "Vérifier",
     "cancel": "Annuler",
     "ok": "D'accord"

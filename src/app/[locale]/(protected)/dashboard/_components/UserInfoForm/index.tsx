@@ -44,6 +44,7 @@ const MAX_NUMBER_OF_EMAIL_CHARACTERS = 30
 const UserInfoForm = ({ userId, name, email, image, className }: PropTypes) => {
   const [t, t_zod] = [useTranslations('Dashboard'), useTranslations('Zod')]
   const { data: clientSession, update } = useSession()
+
   // Prioritise client-side session after update, fallback to server-side session
   const defaultName = clientSession?.user?.name || name || ''
   const defaultEmail = clientSession?.user?.email || email || ''

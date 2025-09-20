@@ -290,6 +290,9 @@
   "Video": {
     "not_supported": "Video tag not supported by your browser."
   },
+  "Modal": {
+    "close": "Close"
+  },
   "ConfirmationModal": {
     "are_you_sure": "Do you want to proceed?",
     "yes": "Yes",
@@ -304,7 +307,7 @@
     "input_code": "Input code",
     "resend": "Resend",
     "code_resent": "Code resent! Check your email",
-    "wait_before_resend": "Available in {time} seconds",
+    "wait_before_resend": "Resend in {time} seconds.",
     "verify": "Verify",
     "cancel": "Cancel",
     "ok": "Ok"

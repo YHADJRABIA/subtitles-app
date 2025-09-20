@@ -4,19 +4,17 @@ import { getTranslations } from 'next-intl/server'
 import Header from '@/components/Layout/Header'
 import Footer from '@/components/Layout/Footer'
 import Navbar from './_components/Navbar'
-import { Metadata } from 'next'
+import { Metadata } from 'next/types'
 import { locales } from '@/i18n/routing'
 import Loader from '@/components/UI/Loader'
 import { MetaDataProps } from '../layout'
 
 export const generateStaticParams = () => locales.map(locale => ({ locale }))
 
-export const generateMetadata = async (
-  props: MetaDataProps
-): Promise<Metadata> => {
-  const params = await props.params
-
-  const { locale } = params
+export const generateMetadata = async ({
+  params,
+}: MetaDataProps): Promise<Metadata> => {
+  const { locale } = await params
 
   const t = await getTranslations({ locale, namespace: 'Metadata' })
 
