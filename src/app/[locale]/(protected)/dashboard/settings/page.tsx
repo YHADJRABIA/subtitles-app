@@ -24,7 +24,7 @@ const DashboardSettingsPage = async ({ params }: MetaDataProps) => {
   const { locale } = await params
 
   setRequestLocale(locale)
-  const { favoriteLocale, isTwoFactorEnabled } = await getUserSession()
+  const { /* favoriteLocale,  */ isTwoFactorEnabled } = await getUserSession()
 
   const t = await getTranslations({ locale, namespace: 'Dashboard.Settings' })
 
