@@ -7,6 +7,7 @@ import styles from './page.module.scss'
 
 import { Metadata } from 'next/types'
 import { MetaDataProps } from '@/app/[locale]/layout'
+import { handleToggleTwoFactorAuth } from '@/actions/user'
 
 export const generateMetadata = async ({
   params,
@@ -42,10 +43,12 @@ const DashboardSettingsPage = async ({ params }: MetaDataProps) => {
           <Typography size="xs" weight="semiBold">
             {t('two_factor_auth')}
           </Typography>
-          {/*           <SwitchButton
+          <SwitchButton
             isActive={isTwoFactorEnabled}
-            onToggle={() => console.log('TEST')}
-          /> */}
+            onToggle={() => {
+              handleToggleTwoFactorAuth(!isTwoFactorEnabled)
+            }}
+          />
         </div>
       </div>
     </>
