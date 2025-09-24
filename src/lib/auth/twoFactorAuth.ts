@@ -13,7 +13,6 @@ export const toggleTwoFactorAuth = async (
     await updateTwoFactorAuthByUserId(userId, isTwoFactorEnabled)
 
     return {
-      requiresUserAction: true,
       data: { message: t('two_factor_updated'), success: true },
       status: 200,
     }
