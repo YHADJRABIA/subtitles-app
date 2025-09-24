@@ -62,10 +62,11 @@ export const updateTwoFactorAuthByUserId = async (
     return await UserModel.updateOne({ _id: id }, { isTwoFactorEnabled })
   } catch (err) {
     console.error(
-      "Error updating user's twoFactorAuth by id:", 
+      "Error updating user's twoFactorAuth by id:",
       getErrorMessage(err)
     )
   }
+}
 
 export const restrictedUserFields = [
   'createdAt',
