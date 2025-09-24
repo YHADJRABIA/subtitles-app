@@ -48,3 +48,9 @@ export const EmailVerificationByCodeValidator = (
 export type EmailVerificationByCodeSchema = z.infer<
   ReturnType<typeof EmailVerificationByCodeValidator>
 >
+
+export const TwoFactorAuthValidator = () => z.object({ isEnabled: z.boolean() })
+
+export type TwoFactorAuthSchema = z.infer<
+  ReturnType<typeof TwoFactorAuthValidator>
+>
