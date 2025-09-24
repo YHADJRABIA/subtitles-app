@@ -32,7 +32,7 @@ export async function POST(
       )
     }
 
-    const { isEnabled } = body.data
+    const { isTwoFactorEnabled } = body.data
 
     const currentUser = await getUserSession()
 
@@ -46,7 +46,7 @@ export async function POST(
     // Toggle two factor auth
     const { data, status, error } = await toggleTwoFactorAuth(
       currentUser.id,
-      isEnabled,
+      isTwoFactorEnabled,
       locale
     )
 
