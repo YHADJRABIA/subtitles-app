@@ -231,7 +231,7 @@
       "edit_email": "Modifier email",
       "edit_password": "Modifier mot de passe",
       "preferred_language": "Langue préférée : ",
-      "two_factor_auth": "Double authentification :"
+      "two_factor_auth": "Authentification à facteur double : "
     },
     "Account": {
       "title": "Compte",
