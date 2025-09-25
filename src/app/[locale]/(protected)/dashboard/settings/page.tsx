@@ -2,12 +2,12 @@ import React from 'react'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { getUserSession } from '@/utils/session'
 import Typography from '@/components/UI/Typography'
-import SwitchButton from '@/components/SwitchButton'
 import styles from './page.module.scss'
 
 import { Metadata } from 'next/types'
 import { MetaDataProps } from '@/app/[locale]/layout'
-import { handleToggleTwoFactorAuth } from '@/actions/user'
+
+import TwoFactorAuth from '../_components/TwoFactorAuth'
 
 export const generateMetadata = async ({
   params,
@@ -39,17 +39,7 @@ const DashboardSettingsPage = async ({ params }: MetaDataProps) => {
         <Typography size="xs" weight="semiBold">
           {t('preferred_language')}
         </Typography>
-        <div className={styles.element}>
-          <Typography size="xs" weight="semiBold">
-            {t('two_factor_auth')}
-          </Typography>
-          <SwitchButton
-            isActive={isTwoFactorEnabled}
-            onToggle={() => {
-              handleToggleTwoFactorAuth(!isTwoFactorEnabled)
-            }}
-          />
-        </div>
+        <TwoFactorAuth isOn={isTwoFactorEnabled} />
       </div>
     </>
   )
