@@ -1,0 +1,5 @@
+.root {
+  @include flexCenter(row, space-between);
+  width: 100%;
+  margin-bottom: 2rem;
+}
