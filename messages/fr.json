@@ -200,7 +200,7 @@
     "email_already_taken": "Email déjà utilisé",
     "invalid_fields": "Champs invalides",
     "failed_action": "L'action a échoué",
-    "two_factor_updated": "Authentification à deux facteurs mise à jour"
+    "two_factor_updated": "Authentification à deux facteurs mise à jour !"
   },
   "Revalidation": {
     "invalid_request": "Requête invalide",

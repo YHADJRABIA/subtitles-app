@@ -199,7 +199,7 @@
     "invalid_code": "Invalid code",
     "invalid_fields": "Invalid fields",
     "failed_action": "Action failed",
-    "two_factor_updated": "Two-factor authentication updated"
+    "two_factor_updated": "Two-factor authentication updated!"
   },
   "Revalidation": {
     "invalid_request": "Invalid request",
