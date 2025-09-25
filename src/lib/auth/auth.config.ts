@@ -143,6 +143,8 @@ export const authOptions: NextAuthOptions = {
           name: session.name || token.name,
           email: session.email || token.email,
           lastUpdate: session.lastUpdateDate || token.lastUpdate,
+          isTwoFactorEnabled:
+            session.isTwoFactorEnabled ?? token.isTwoFactorEnabled,
         }
 
         return updatedToken
@@ -151,7 +153,13 @@ export const authOptions: NextAuthOptions = {
       // User only defined after authorize (login)
       if (!user || !userId) return token // Logged out
 
-      const { emailVerified, createdAt, lastLogin, lastUpdate } = user
+      const {
+        emailVerified,
+        createdAt,
+        lastLogin,
+        lastUpdate,
+        isTwoFactorEnabled,
+      } = user
 
       // Update lastLogin on login
       if (trigger === 'signIn') token.lastLogin = new Date()
@@ -162,6 +170,7 @@ export const authOptions: NextAuthOptions = {
         createdAt,
         lastLogin,
         lastUpdate,
+        isTwoFactorEnabled,
       } // Passing down token to session
     },
 
@@ -177,6 +186,7 @@ export const authOptions: NextAuthOptions = {
           creationDate: token.createdAt,
           lastUpdateDate: token.lastUpdate,
           lastLoginDate: token.lastLogin,
+          isTwoFactorEnabled: token.isTwoFactorEnabled,
           error: token.error,
         },
       }
@@ -253,6 +263,7 @@ export const authOptions: NextAuthOptions = {
               lastLogin: existingUser.lastLogin, // Previous login
               createdAt: updatedUser.createdAt,
               lastUpdate: updatedUser.lastUpdate,
+              isTwoFactorEnabled: updatedUser.isTwoFactorEnabled,
             })
 
             return user
@@ -274,6 +285,7 @@ export const authOptions: NextAuthOptions = {
             id: newUser.id,
             createdAt: newUser.createdAt,
             lastUpdate: newUser.lastUpdate,
+            isTwoFactorEnabled: newUser.isTwoFactorEnabled,
             isVerifiedEmail: true,
           })
 
