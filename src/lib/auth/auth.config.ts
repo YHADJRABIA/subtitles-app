@@ -140,11 +140,7 @@ export const authOptions: NextAuthOptions = {
         const updatedToken = {
           ...token,
           ...session,
-          name: session.name || token.name,
-          email: session.email || token.email,
           lastUpdate: session.lastUpdateDate || token.lastUpdate,
-          isTwoFactorEnabled:
-            session.isTwoFactorEnabled ?? token.isTwoFactorEnabled,
         }
 
         return updatedToken
