@@ -287,6 +287,8 @@
     "edit": "Modifier photo"
   },
   "SwitchButton": {
+    "on": "Activé",
+    "off": "Désactivé",
     "toggle": "Basculer"
   },
   "Video": {

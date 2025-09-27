@@ -203,7 +203,7 @@
   },
   "Revalidation": {
     "invalid_request": "Invalid request",
-    "successful_revalidation": "Succesfully revalidated",
+    "successful_revalidation": "Successfully revalidated",
     "unauthorised": "Unauthorised",
     "failed": "Revalidation failed"
   },
@@ -286,6 +286,8 @@
     "edit": "Edit image"
   },
   "SwitchButton": {
+    "on": "On",
+    "off": "Off",
     "toggle": "Toggle"
   },
   "Video": {
