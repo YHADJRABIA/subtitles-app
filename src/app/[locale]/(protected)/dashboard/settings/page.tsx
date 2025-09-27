@@ -39,7 +39,7 @@ const DashboardSettingsPage = async ({ params }: MetaDataProps) => {
         <Typography size="xs" weight="semiBold">
           {t('preferred_language')}
         </Typography>
-        <TwoFactorAuth isOn={isTwoFactorEnabled} />
+        <TwoFactorAuth isActive={isTwoFactorEnabled} />
       </div>
     </>
   )
