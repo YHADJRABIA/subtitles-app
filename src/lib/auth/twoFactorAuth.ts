@@ -10,12 +10,13 @@ export const sendTwoFactorOTP = async (
   locale: string
 ) => {
   try {
+    const t = await getTranslations({ locale, namespace: 'User' })
     const verificationCode = await generateVerificationCode(email, userId)
 
     await sendTwoFactorOTPEmail(locale, email, verificationCode.code)
 
     return {
-      data: { message: 'OTP code sent to your email', success: true },
+      data: { message: t('otp_sent'), success: true },
       status: 200,
     }
   } catch (err) {
