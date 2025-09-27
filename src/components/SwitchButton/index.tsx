@@ -21,18 +21,14 @@ const SwitchButton = ({ onToggle, className, isActive }: PropTypes) => {
     })
   }
   return (
-    <div
+    <input
+      checked={isOn}
       className={cn(styles.root, className)}
+      disabled={isPending}
       title={t('toggle')}
-      onClick={handleToggle}
-    >
-      <input
-        checked={isOn}
-        className={styles.toggler}
-        disabled={isPending}
-        type="checkbox"
-      />
-    </div>
+      type="checkbox"
+      onChange={handleToggle}
+    />
   )
 }
 
