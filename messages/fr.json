@@ -143,7 +143,8 @@
       "fallback": "Pas de compte ? <link>S'inscrire</link>",
       "recover_password": "Mot de passe oublié ?",
       "incorrect_email_or_password": "Email et/ou mot de passe erroné(s)",
-      "unverified_email": "L'email doit être vérifié"
+      "failed_to_send_2fa_otp": "Échec d'envoi du code OTP. Réessayer plus tard.",
+      "unverified_email": "L'email doit être vérifié",
     },
     "Register": {
       "title": "Création de compte",

@@ -142,7 +142,8 @@
       "fallback": "No account yet? <link>Register here</link>",
       "recover_password": "Recover password",
       "incorrect_email_or_password": "Incorrect email and/or password",
-      "unverified_email": "Email verification required"
+      "failed_to_send_2fa_otp": "Failed to send 2FA OTP. Try again later.",
+      "unverified_email": "Email verification required",
     },
     "Register": {
       "title": "Create account",

@@ -16,6 +16,7 @@ import { getErrorMessage, getZodErrors } from '@/utils/errors'
 import { AccountLoginValidator } from '@/types/schemas/auth'
 import { getTranslations } from 'next-intl/server'
 import { getNextLocale } from '@/utils/cookies'
+import { sendTwoFactorOTP } from './twoFactorAuth'
 import { deleteVerificationTokenByEmail } from '@/utils/db/verification-token'
 
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, NEXTAUTH_SECRET } = process.env
@@ -87,10 +88,24 @@ export const authOptions: NextAuthOptions = {
             throw new Error(t('incorrect_email_or_password'))
           }
 
+          // If 2FA enabled — send OTP and block login
+          if (existingUser.isTwoFactorEnabled) {
+            try {
+              await sendTwoFactorOTP(existingUser.id, email, locale)
+              return null
+            } catch (err) {
+              // If unable to send OTP, throw error
+              console.error('Failed to send 2FA OTP: ', getErrorMessage(err))
+              throw new Error(t('failed_to_send_2fa_otp'))
+            }
+          }
+
           // Passing down user to JWT
           return existingUser
         } catch (err) {
-          console.error('Authorization failed:', getErrorMessage(err))
+          if (isDevelopment) {
+            console.error('Authorization failed: ', getErrorMessage(err))
+          }
           throw err // Propagate error to frontend
         }
       },
