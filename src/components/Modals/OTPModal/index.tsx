@@ -113,6 +113,7 @@ const OTPModal = ({
         startResendTimer()
       } catch (err) {
         console.error('Error in OTPModal handleResend:', getErrorMessage(err))
+        notify('error', await getErrorMessage(err))
       }
     })
   }
