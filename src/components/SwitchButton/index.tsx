@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl'
 
 interface PropTypes {
   isActive: boolean
-  onToggle: () => void
+  onToggle: (isOn: boolean) => void
   className?: string
 }
 const SwitchButton = ({ onToggle, className, isActive }: PropTypes) => {
@@ -17,7 +17,7 @@ const SwitchButton = ({ onToggle, className, isActive }: PropTypes) => {
   const handleToggle = () => {
     startTransition(() => {
       setIsOn(prev => !prev)
-      onToggle()
+      onToggle(!isOn)
     })
   }
   return (
