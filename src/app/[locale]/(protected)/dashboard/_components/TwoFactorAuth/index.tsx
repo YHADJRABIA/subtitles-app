@@ -15,13 +15,13 @@ const TwoFactorAuth = ({ isOn }: PropTypes) => {
   const t = useTranslations('Dashboard.Settings')
   const { update } = useSession()
 
-  const handleUpdateSession = async () => {
+  const handleUpdateSession = async (isOn: boolean) => {
     await update({ isTwoFactorEnabled: isOn })
   }
 
-  const handleToggle = () => {
-    handleToggleTwoFactorAuth(!isOn)
-    handleUpdateSession()
+  const handleToggle = (isOn: boolean) => {
+    handleToggleTwoFactorAuth(isOn)
+    handleUpdateSession(isOn)
   }
 
   return (
