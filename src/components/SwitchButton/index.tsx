@@ -25,7 +25,7 @@ const SwitchButton = ({ onToggle, className, isActive }: PropTypes) => {
       checked={isOn}
       className={cn(styles.root, className)}
       disabled={isPending}
-      title={t('toggle')}
+      title={isOn ? t('on') : t('off')}
       type="checkbox"
       onChange={handleToggle}
     />
