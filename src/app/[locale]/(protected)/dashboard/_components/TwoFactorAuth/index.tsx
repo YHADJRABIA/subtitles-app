@@ -8,10 +8,10 @@ import { handleToggleTwoFactorAuth } from '@/actions/user'
 import { useTranslations } from 'next-intl'
 
 interface PropTypes {
-  isOn: boolean
+  isActive: boolean
 }
 
-const TwoFactorAuth = ({ isOn }: PropTypes) => {
+const TwoFactorAuth = ({ isActive }: PropTypes) => {
   const t = useTranslations('Dashboard.Settings')
   const { update } = useSession()
 
@@ -29,7 +29,7 @@ const TwoFactorAuth = ({ isOn }: PropTypes) => {
       <Typography size="xs" weight="semiBold">
         {t('two_factor_auth')}
       </Typography>
-      <SwitchButton isActive={isOn} onToggle={handleToggle} />
+      <SwitchButton isActive={isActive} onToggle={handleToggle} />
     </div>
   )
 }
