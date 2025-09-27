@@ -8,6 +8,7 @@ import { handleToggleTwoFactorAuth } from '@/actions/user'
 import { notify } from '@/lib/toastify'
 import { useTranslations } from 'next-intl'
 import { getErrorMessage } from '@/utils/errors'
+import { getSuccessMessage } from '@/utils/api'
 
 interface PropTypes {
   isActive: boolean
@@ -27,7 +28,7 @@ const TwoFactorAuth = ({ isActive }: PropTypes) => {
       try {
         const res = await handleToggleTwoFactorAuth(isOn)
         await handleUpdateSession(isOn)
-        notify('success', res.data?.message ?? '')
+        notify('success', getSuccessMessage(res))
       } catch (err) {
         notify('error', await getErrorMessage(err))
         console.error('TwoFactorAuth toggle error: ', getErrorMessage(err))
