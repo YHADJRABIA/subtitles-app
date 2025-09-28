@@ -9,7 +9,7 @@ import { Locale } from '@/types/locale'
 import { Analytics } from '@vercel/analytics/react'
 import { websiteUrl } from '@/utils/general'
 import { GOOGLE_SEARCH_CONSOLE_VERIFICATION } from '@/utils/constants'
-import { locales } from '@/i18n/routing'
+import { locales, routing } from '@/i18n/routing'
 
 const inter = Inter({ subsets: ['latin', 'cyrillic'], variable: '--font-body' })
 const literate = Literata({
@@ -23,7 +23,8 @@ export interface MetaDataProps {
   params: Promise<ParamsType>
 }
 
-export const generateStaticParams = () => locales.map(locale => ({ locale }))
+export const generateStaticParams = () =>
+  routing.locales.map(locale => ({ locale }))
 
 export const generateMetadata = async ({
   params,
