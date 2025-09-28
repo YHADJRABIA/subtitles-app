@@ -1,19 +1,16 @@
 import React, { ReactNode } from 'react'
 import Footer from '@/components/Layout/Footer'
-import { getUserSession } from '@/utils/session'
 import styles from './layout.module.scss'
-import Header from '@/components/Layout/Header'
+import HeaderWithAuth from '@/components/Layout/Header/HeaderWithAuth'
 
 interface PropTypes {
   children: ReactNode
 }
 
-const layout = async ({ children }: PropTypes) => {
-  const user = await getUserSession()
-
+const layout = ({ children }: PropTypes) => {
   return (
     <>
-      <Header isConcealable isConnected={!!user} />
+      <HeaderWithAuth isConcealable />
       <main className={styles.root}>{children}</main>
       <Footer />
     </>
