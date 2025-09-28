@@ -8,7 +8,6 @@ import { Metadata } from 'next/types'
 import { MetaDataProps } from '@/app/[locale]/layout'
 
 import TwoFactorAuth from '../_components/TwoFactorAuth'
-
 export const generateMetadata = async ({
   params,
 }: MetaDataProps): Promise<Metadata> => {
@@ -25,7 +24,7 @@ const DashboardSettingsPage = async ({ params }: MetaDataProps) => {
   const { locale } = await params
 
   setRequestLocale(locale)
-  const { /* favoriteLocale,  */ isTwoFactorEnabled } = await getUserSession()
+  const { isTwoFactorEnabled } = await getUserSession()
 
   const t = await getTranslations({ locale, namespace: 'Dashboard.Settings' })
 
@@ -36,9 +35,6 @@ const DashboardSettingsPage = async ({ params }: MetaDataProps) => {
       </Typography>
 
       <div className={styles.section}>
-        <Typography size="xs" weight="semiBold">
-          {t('preferred_language')}
-        </Typography>
         <TwoFactorAuth isActive={isTwoFactorEnabled} />
       </div>
     </>
