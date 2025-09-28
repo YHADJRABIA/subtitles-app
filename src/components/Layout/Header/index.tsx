@@ -1,11 +1,10 @@
 'use client'
-import React, { Suspense } from 'react'
+import React from 'react'
 import styles from './Header.module.scss'
 import Nav from './Nav'
 import Logo from './Logo'
 import cn from 'classnames'
 import { useScrollDirection } from '@/hooks/useScrollDirection'
-import Loader from '@/components/UI/Loader'
 
 interface PropTypes {
   isConnected: boolean
@@ -30,9 +29,7 @@ const Header = ({
       }
     >
       <Logo isInvertedColor size={50} />
-      <Suspense fallback={<Loader size={20} />}>
-        <Nav className={styles.nav} isConnected={isConnected} />
-      </Suspense>
+      <Nav className={styles.nav} isConnected={isConnected} />
     </header>
   )
 }
