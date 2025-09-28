@@ -231,7 +231,8 @@
       "edit_email": "Edit email",
       "edit_password": "Edit password",
       "preferred_language": "Preferred language:",
-      "two_factor_auth": "Two-factor authentication:"
+      "two_factor_auth": "Two-factor authentication:",
+      "change_password": "Change password"
     },
     "Account": {
       "title": "Account",
