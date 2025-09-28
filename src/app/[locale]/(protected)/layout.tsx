@@ -1,4 +1,4 @@
-import React, { ReactNode, Suspense } from 'react'
+import React, { ReactNode } from 'react'
 import styles from './layout.module.scss'
 import { getTranslations } from 'next-intl/server'
 import Header from '@/components/Layout/Header'
@@ -6,7 +6,6 @@ import Footer from '@/components/Layout/Footer'
 import Navbar from './_components/Navbar'
 import { Metadata } from 'next/types'
 import { locales } from '@/i18n/routing'
-import Loader from '@/components/UI/Loader'
 import { MetaDataProps } from '../layout'
 
 export const generateStaticParams = () => locales.map(locale => ({ locale }))
@@ -31,9 +30,7 @@ interface PropTypes {
 const ProtectedLayout = ({ children }: PropTypes) => {
   return (
     <>
-      <Suspense fallback={<Loader size={20} />}>
-        <Header isConnected />
-      </Suspense>
+      <Header isConnected />
       <Navbar />
       <main className={styles.root}>
         {/*         <Sidebar className={styles.sidebar} /> */}
