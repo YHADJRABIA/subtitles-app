@@ -8,6 +8,7 @@ import { Metadata } from 'next/types'
 import { MetaDataProps } from '@/app/[locale]/layout'
 
 import TwoFactorAuth from '../_components/TwoFactorAuth'
+import PasswordResetButton from '../_components/PasswordResetButton'
 export const generateMetadata = async ({
   params,
 }: MetaDataProps): Promise<Metadata> => {
@@ -24,9 +25,12 @@ const DashboardSettingsPage = async ({ params }: MetaDataProps) => {
   const { locale } = await params
 
   setRequestLocale(locale)
-  const { isTwoFactorEnabled } = await getUserSession()
+  const { isTwoFactorEnabled, email, image } = await getUserSession()
 
   const t = await getTranslations({ locale, namespace: 'Dashboard.Settings' })
+
+  // TODO: Remove this hack. Should have provider info from session instead of wild-guessing via image
+  const showResetPassword = !!image
 
   return (
     <>
@@ -36,6 +40,7 @@ const DashboardSettingsPage = async ({ params }: MetaDataProps) => {
 
       <div className={styles.section}>
         <TwoFactorAuth isActive={isTwoFactorEnabled} />
+        {showResetPassword && <PasswordResetButton email={email} />}
       </div>
     </>
   )
