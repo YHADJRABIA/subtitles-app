@@ -38,7 +38,7 @@ const DashboardSettingsPage = async ({ params }: MetaDataProps) => {
         {t('title')}
       </Typography>
 
-      <div className={styles.section}>
+      <div className={styles.root}>
         <TwoFactorAuth isActive={isTwoFactorEnabled} />
         {showResetPassword && <PasswordResetButton email={email} />}
       </div>
