@@ -170,6 +170,7 @@ export const authOptions: NextAuthOptions = {
         lastLogin,
         lastUpdate,
         isTwoFactorEnabled,
+        password,
       } = user
 
       // Update lastLogin on login
@@ -182,6 +183,7 @@ export const authOptions: NextAuthOptions = {
         lastLogin,
         lastUpdate,
         isTwoFactorEnabled,
+        hasCredentialsProvider: !!password,
       } // Passing down token to session
     },
 
@@ -198,6 +200,7 @@ export const authOptions: NextAuthOptions = {
           lastUpdateDate: token.lastUpdate,
           lastLoginDate: token.lastLogin,
           isTwoFactorEnabled: token.isTwoFactorEnabled,
+          hasCredentialsProvider: token.hasCredentialsProvider,
           error: token.error,
         },
       }
@@ -275,6 +278,7 @@ export const authOptions: NextAuthOptions = {
               createdAt: updatedUser.createdAt,
               lastUpdate: updatedUser.lastUpdate,
               isTwoFactorEnabled: updatedUser.isTwoFactorEnabled,
+              hasCredentialsProvider: !!existingUser.password,
             })
 
             return user
@@ -297,6 +301,7 @@ export const authOptions: NextAuthOptions = {
             createdAt: newUser.createdAt,
             lastUpdate: newUser.lastUpdate,
             isTwoFactorEnabled: newUser.isTwoFactorEnabled,
+            hasCredentialsProvider: false, // New Google users don't have credentials provider
             isVerifiedEmail: true,
           })
 
