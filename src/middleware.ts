@@ -21,7 +21,7 @@ const intlMiddleware = createMiddleware({
 // Initialise rate limiter for API routes
 const ratelimit = new Ratelimit({
   redis: kv,
-  limiter: Ratelimit.slidingWindow(20, '25s'),
+  limiter: Ratelimit.slidingWindow(6, '25s'),
 })
 
 // Middleware for rate limiting API requests
@@ -58,9 +58,8 @@ const authMiddleware = withAuth(
       authorized: ({ token }) => token !== null, // User is considered authenticated if token isn't null
     },
     pages: {
-      // Replace Next-auth's built-in pages with own custom pagess
+      // Replace Next-auth's built-in pages with own custom pages
       signIn: LOGIN_ROUTE, // Unauthenticated user is redirected here when attempting to access protected routes
-      error: '/error',
     },
   }
 )
@@ -78,6 +77,7 @@ export default async function middleware(req: NextRequestWithAuth) {
   // Handle API rate limiting
   if (pathname.startsWith('/api')) {
     if (isDevelopment) return NextResponse.next() // Bypass in dev mode
+
     return apiRateLimitMiddleware(req)
   }
 
