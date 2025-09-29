@@ -25,12 +25,10 @@ const DashboardSettingsPage = async ({ params }: MetaDataProps) => {
   const { locale } = await params
 
   setRequestLocale(locale)
-  const { isTwoFactorEnabled, email, image } = await getUserSession()
+  const { isTwoFactorEnabled, email, hasCredentialsProvider } =
+    await getUserSession()
 
   const t = await getTranslations({ locale, namespace: 'Dashboard.Settings' })
-
-  // TODO: Remove this hack. Should have provider info from session instead of wild-guessing via image
-  const showResetPassword = !!image
 
   return (
     <>
@@ -40,7 +38,7 @@ const DashboardSettingsPage = async ({ params }: MetaDataProps) => {
 
       <div className={styles.root}>
         <TwoFactorAuth isActive={isTwoFactorEnabled} />
-        {showResetPassword && <PasswordResetButton email={email} />}
+        {hasCredentialsProvider && <PasswordResetButton email={email} />}
       </div>
     </>
   )
