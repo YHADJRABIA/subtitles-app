@@ -25,7 +25,7 @@ const DashboardSettingsPage = async ({ params }: MetaDataProps) => {
   const { locale } = await params
 
   setRequestLocale(locale)
-  const { isTwoFactorEnabled, email, hasCredentialsProvider } =
+  const { id, isTwoFactorEnabled, email, hasCredentialsProvider } =
     await getUserSession()
 
   const t = await getTranslations({ locale, namespace: 'Dashboard.Settings' })
@@ -37,7 +37,7 @@ const DashboardSettingsPage = async ({ params }: MetaDataProps) => {
       </Typography>
 
       <div className={styles.root}>
-        <TwoFactorAuth isActive={isTwoFactorEnabled} />
+        <TwoFactorAuth isActive={isTwoFactorEnabled} userId={id} />
         {hasCredentialsProvider && <PasswordResetButton email={email} />}
       </div>
     </>

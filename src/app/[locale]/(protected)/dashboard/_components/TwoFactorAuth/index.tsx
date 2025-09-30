@@ -4,17 +4,19 @@ import styles from './TwoFactorAuth.module.scss'
 import React, { useTransition } from 'react'
 import SwitchButton from '@/components/SwitchButton'
 import { useSession } from 'next-auth/react'
-import { handleToggleTwoFactorAuth } from '@/actions/user'
+import { handleUpdateUserById } from '@/actions/user'
 import { notify } from '@/lib/toastify'
 import { useTranslations } from 'next-intl'
 import { getErrorMessage } from '@/utils/errors'
 import { getSuccessMessage } from '@/utils/api'
+import { UserAPIType } from '@/types/user'
 
 interface PropTypes {
   isActive: boolean
+  userId: UserAPIType['id']
 }
 
-const TwoFactorAuth = ({ isActive }: PropTypes) => {
+const TwoFactorAuth = ({ isActive, userId }: PropTypes) => {
   const t = useTranslations('Dashboard.Settings')
   const { update } = useSession()
   const [isPending, startTransition] = useTransition()
@@ -26,7 +28,9 @@ const TwoFactorAuth = ({ isActive }: PropTypes) => {
   const handleToggle = (isOn: boolean) => {
     startTransition(async () => {
       try {
-        const res = await handleToggleTwoFactorAuth(isOn)
+        const res = await handleUpdateUserById(userId, {
+          isTwoFactorEnabled: isOn,
+        })
         await handleUpdateSession(isOn)
         notify('success', getSuccessMessage(res))
       } catch (err) {

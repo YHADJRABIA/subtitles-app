@@ -12,6 +12,7 @@ const createUserSchema = (t: ReturnType<typeof useTranslations<'Zod'>>) => {
   return {
     name: nameSchema(t),
     email: emailSchema(t),
+    isTwoFactorEnabled: z.boolean(),
   }
 }
 
