@@ -57,10 +57,6 @@ export const authOptions: NextAuthOptions = {
           await getTranslations({ locale, namespace: 'Auth.Login' }),
         ]
 
-        /*         if (req.status === 429) {
-          throw new Error(t('too_many_api_calls')) // TODO: implement this
-        } */
-
         try {
           const validatedFields =
             AccountLoginValidator(t_zod).safeParse(credentials)
@@ -230,10 +226,6 @@ export const authOptions: NextAuthOptions = {
             // Update database's lastLogin with current time
             await updateUserById(user.id, { lastLogin: new Date() })
           }
-
-          /*           if (user?.error.status === 429) {
-            throw new Error(t('too_many_api_calls'))
-          } */
         } catch (err) {
           console.error('Credentials SignIn failed:', getErrorMessage(err))
           throw err
