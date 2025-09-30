@@ -1,4 +1,3 @@
-import { updateTwoFactorAuthByUserId } from '@/utils/db/user'
 import { getErrorMessage } from '@/utils/errors'
 import { getTranslations } from 'next-intl/server'
 import { generateVerificationCode } from './code'
@@ -16,31 +15,11 @@ export const sendTwoFactorOTP = async (
     await sendTwoFactorOTPEmail(locale, email, verificationCode.code)
 
     return {
-      data: { message: t('otp_sent'), success: true },
+      data: { message: t('otp_sent'), success: true, requiresUserAction: true },
       status: 200,
     }
   } catch (err) {
     console.error('Error in sendTwoFactorOTP: ', getErrorMessage(err))
-    return { data: null, error: getErrorMessage(err), status: 500 }
-  }
-}
-
-export const toggleTwoFactorAuth = async (
-  userId: string,
-  isTwoFactorEnabled: boolean,
-  locale: string
-) => {
-  try {
-    const t = await getTranslations({ locale, namespace: 'User' })
-
-    await updateTwoFactorAuthByUserId(userId, isTwoFactorEnabled)
-
-    return {
-      data: { message: t('two_factor_updated'), success: true },
-      status: 200,
-    }
-  } catch (err) {
-    console.error('Error in toggleTwoFactorAuth: ', getErrorMessage(err))
     return { data: null, error: getErrorMessage(err), status: 500 }
   }
 }
