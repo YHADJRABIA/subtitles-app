@@ -77,7 +77,7 @@ export const handleSendVerificationEmail = async (
   try {
     return await axios.post('/api/users/send-verification-email', user)
   } catch (err) {
-    console.error('Error sending verificaiton email:', getErrorMessage(err))
+    console.error('Error sending verification email:', getErrorMessage(err))
     throw err
   }
 }
@@ -88,7 +88,7 @@ export const handleVerifyEmailValidationToken = async (
   try {
     return await axios.post('/api/users/verify-token', user)
   } catch (err) {
-    console.error('Error verifying validaiton token:', getErrorMessage(err))
+    console.error('Error verifying validation token:', getErrorMessage(err))
     throw err
   }
 }
