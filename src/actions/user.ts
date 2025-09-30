@@ -45,14 +45,3 @@ export const handleValidateCode = async (
     throw err
   }
 }
-
-export const handleToggleTwoFactorAuth = async (
-  isTwoFactorEnabled: boolean
-): Promise<{ data: APIResponse }> => {
-  try {
-    return await axios.post('/api/user/two-factor-auth', { isTwoFactorEnabled })
-  } catch (err) {
-    console.error('Error toggling two factor auth:', getErrorMessage(err))
-    throw err
-  }
-}
