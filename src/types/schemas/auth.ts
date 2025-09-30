@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl'
 import * as z from 'zod'
-import { emailSchema, passwordSchema, tokenSchema } from './general'
+import { codeSchema, emailSchema, passwordSchema, tokenSchema } from './general'
 
 export type AuthFormData = {
   email: string
@@ -60,4 +60,16 @@ export const PasswordResetValidator = (
 
 export type PasswordResetSchema = z.infer<
   ReturnType<typeof PasswordResetValidator>
+>
+
+export const TwoFactorVerificationValidator = (
+  t: ReturnType<typeof useTranslations<'Zod'>>
+) =>
+  z.object({
+    email: emailSchema(t),
+    code: codeSchema(t),
+  })
+
+export type TwoFactorVerificationSchema = z.infer<
+  ReturnType<typeof TwoFactorVerificationValidator>
 >
