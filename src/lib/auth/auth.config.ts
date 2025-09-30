@@ -47,6 +47,7 @@ export const authOptions: NextAuthOptions = {
         // For built-in NextAuth form. Useless here since own UI exists
         email: { label: 'Email', type: 'email' },
         password: { label: 'Password', type: 'password' },
+        skip2FA: { label: 'Skip 2FA', type: 'text' },
       },
 
       // Runs on credential login (with email & password)
@@ -85,8 +86,8 @@ export const authOptions: NextAuthOptions = {
             throw new Error(t('incorrect_email_or_password'))
           }
 
-          // If 2FA enabled — send OTP and block login
-          if (existingUser.isTwoFactorEnabled) {
+          // If 2FA enabled — send OTP and block login (unless skip2FA is set)
+          if (existingUser.isTwoFactorEnabled && !credentials?.skip2FA) {
             const hasSentOTP = await sendTwoFactorOTP(
               existingUser.id,
               email,

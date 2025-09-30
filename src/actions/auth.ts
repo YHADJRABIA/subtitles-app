@@ -6,6 +6,7 @@ import {
   EmailVerificationByTokenSchema,
   PasswordRecoverySchema,
   PasswordResetSchema,
+  TwoFactorVerificationSchema,
 } from '@/types/schemas/auth'
 import { SendEmailVerificationSchema } from '@/types/schemas/general'
 import { getErrorMessage } from '@/utils/errors'
@@ -35,7 +36,7 @@ export const handleGoogleLogin = async () => {
 }
 
 export const handleCredentialsLogin = async (
-  user: AccountLoginSchema
+  user: AccountLoginSchema & { skip2FA?: string }
 ): Promise<{ data: APIResponse } | null> => {
   // In case of invalid credentials or other errors , NextAuth will redirect to /api/auth/error.
   // {redirect: false} – Disables default redirection behaviour
@@ -121,6 +122,17 @@ export const handleResetPassword = async (user: PasswordResetSchema) => {
     return await axios.post('/api/users/password/reset', user)
   } catch (err) {
     console.error('Error resetting password:', getErrorMessage(err))
+    throw err
+  }
+}
+
+export const handleVerifyTwoFactorCode = async (
+  data: TwoFactorVerificationSchema
+) => {
+  try {
+    return await axios.post('/api/users/verify-2fa', data)
+  } catch (err) {
+    console.error('Error verifying 2FA code:', getErrorMessage(err))
     throw err
   }
 }

@@ -5,6 +5,7 @@ import { codeSchema, emailSchema, passwordSchema, tokenSchema } from './general'
 export type AuthFormData = {
   email: string
   password: string
+  skip2FA?: string
 }
 
 export const AccountRegistrationValidator = (
