@@ -9,6 +9,8 @@ export type APIResponse = {
 
 export type VerificationResponse =
   | { expires: Date; email: string; id: string; userId: string; code: string }
+  | { expires: Date; email: string; id: string; token: string }
+  | null
   | undefined
 
 export type UserResponse = UserAPIType | null | undefined
