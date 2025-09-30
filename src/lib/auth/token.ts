@@ -1,5 +1,6 @@
 import { PasswordResetTokenModel } from '@/models/passwordResetToken.model'
 import { VerificationTokenModel } from '@/models/verificationToken.model'
+import { TwoFactorTokenModel } from '@/models/twoFactorToken.model'
 import {
   deletePasswordResetTokenById,
   getPasswordResetTokenByEmail,
@@ -8,10 +9,15 @@ import {
   deleteVerificationTokenById,
   getVerificationTokenByEmail,
 } from '@/utils/db/verification-token'
-import { generateUUIDToken } from '@/utils/random'
+import {
+  deleteTwoFactorTokenById,
+  getTwoFactorTokenByEmail,
+} from '@/utils/db/two-factor-token'
+import { generateNDigitCode, generateUUIDToken } from '@/utils/random'
 
 const {
   EMAIL_VERIFICATION_TOKEN_LIFETIME_HOURS,
+  EMAIL_VERIFICATION_CODE_LIFETIME_MINUTES,
   PASSWORD_RESET_TOKEN_LIFETIME_HOURS,
 } = process.env
 
@@ -59,4 +65,25 @@ export const generatePasswordResetToken = async (email: string) => {
   })
 
   return passwordResetToken
+}
+
+export const generateTwoFactorToken = async (email: string) => {
+  const { code, expirationDate } = generateNDigitCode(
+    Number(EMAIL_VERIFICATION_CODE_LIFETIME_MINUTES),
+    4
+  )
+
+  const existingToken = await getTwoFactorTokenByEmail(email)
+
+  if (existingToken) {
+    await deleteTwoFactorTokenById(existingToken.id)
+  }
+
+  const twoFactorToken = await TwoFactorTokenModel.create({
+    email,
+    token: code,
+    expires: new Date(expirationDate),
+  })
+
+  return twoFactorToken
 }

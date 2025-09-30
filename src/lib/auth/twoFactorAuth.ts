@@ -1,7 +1,7 @@
 import { getErrorMessage } from '@/utils/errors'
 import { getTranslations } from 'next-intl/server'
-import { generateVerificationCode } from './code'
 import { sendTwoFactorOTPEmail } from '../mail'
+import { generateTwoFactorToken } from './token'
 
 export const sendTwoFactorOTP = async (
   userId: string,
@@ -10,9 +10,9 @@ export const sendTwoFactorOTP = async (
 ) => {
   try {
     const t = await getTranslations({ locale, namespace: 'User' })
-    const verificationCode = await generateVerificationCode(email, userId)
+    const twoFactorToken = await generateTwoFactorToken(email)
 
-    await sendTwoFactorOTPEmail(locale, email, verificationCode.code)
+    await sendTwoFactorOTPEmail(locale, email, twoFactorToken.token)
 
     return {
       data: { message: t('otp_sent'), success: true, requiresUserAction: true },
