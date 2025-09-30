@@ -185,7 +185,15 @@
       "password_updated": "Password successfully updated!"
     },
     "2FA": {
-      "code_sent": "Two-factor authentication code sent by email"
+      "title": "Two Factor Authentication",
+      "description": "A verification code has been sent to your email. Please input it below to complete your login.",
+      "code_sent": "Two-factor authentication code sent by email",
+      "invalid_code": "Invalid code",
+      "expired_code": "Code has expired. Try logging in again.",
+      "verified": "Successfully verified!",
+      "user_not_found": "User not found",
+      "confirm_button": "Confirm",
+      "code_label": "Verification Code"
     }
   },
   "User": {

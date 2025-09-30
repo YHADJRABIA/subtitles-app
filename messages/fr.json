@@ -186,7 +186,15 @@
       "password_updated": "Mot de passe mis à jour !"
     },
     "2FA": {
-      "code_sent": "Code de vérification envoyé par e-mail"
+      "title": "Authentification à Deux Facteurs",
+      "description": "Un code de vérification a été envoyé à votre email. Veuillez le saisir ci-dessous pour finaliser votre connexion.",
+      "code_sent": "Code de vérification envoyé par e-mail",
+      "invalid_code": "Code invalide",
+      "expired_code": "Le code a expiré. Réessayer en se reconnectant.",
+      "verified": "Vérification réussie !",
+      "user_not_found": "Utilisateur introuvable",
+      "confirm_button": "Confirmer",
+      "code_label": "Code de Vérification"
     }
   },
   "User": {
