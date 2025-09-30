@@ -38,7 +38,7 @@ export const handleCredentialsLogin = async (
 ): Promise<{ data: APIResponse } | null> => {
   // In case of invalid credentials or other errors , NextAuth will redirect to /api/auth/error.
   // {redirect: false} – Disables default redirection behaviour
-  // Prefered behaviour is processing signIn response on same page for UX purposes.
+  // Preferred behaviour is processing signIn response on same page for UX purposes.
 
   try {
     const res = await signIn('credentials', { ...user, redirect: false })
