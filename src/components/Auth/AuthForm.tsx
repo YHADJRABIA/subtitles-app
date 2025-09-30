@@ -94,6 +94,10 @@ function AuthForm({ type }: PropTypes) {
         ? await handleRegister(user)
         : await handleCredentialsLogin(user)
 
+      if (isLoginForm && res?.data?.requiresUserAction) {
+        return setInfoMessage(t('2FA.code_sent'), 'success')
+      }
+
       // Redirect if successful login
       if (isLoginForm) router.push(DEFAULT_LOGIN_REDIRECT_ROUTE)
 

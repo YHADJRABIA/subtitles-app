@@ -134,9 +134,6 @@
     "new_password": "Nouveau mot de passe",
     "continue_with_google": "Se connecter avec Google",
     "log_out": "Se déconnecter",
-    "Error": {
-      "title": "Page d'erreur d'authentification"
-    },
     "Login": {
       "title": "Connexion",
       "cta": "Se connecter",
@@ -144,7 +141,7 @@
       "recover_password": "Mot de passe oublié ?",
       "incorrect_email_or_password": "Email et/ou mot de passe erroné(s)",
       "failed_to_send_2fa_otp": "Échec d'envoi du code OTP. Réessayer plus tard.",
-      "unverified_email": "L'email doit être vérifié",
+      "unverified_email": "L'email doit être vérifié"
     },
     "Register": {
       "title": "Création de compte",
@@ -187,6 +184,9 @@
       "expired_token": "Jeton expiré. Renouveler récupération de mot de passe",
       "user_not_found": "Utilisateur inconnu",
       "password_updated": "Mot de passe mis à jour !"
+    },
+    "2FA": {
+      "code_sent": "Code de vérification envoyé par e-mail"
     }
   },
   "User": {
@@ -201,7 +201,7 @@
     "email_already_taken": "Email déjà utilisé",
     "invalid_fields": "Champs invalides",
     "failed_action": "L'action a échoué",
-    "otp_sent": "Code OTP envoyé à votre email",
+    "otp_sent": "Code OTP envoyé à votre email"
   },
   "Revalidation": {
     "invalid_request": "Requête invalide",

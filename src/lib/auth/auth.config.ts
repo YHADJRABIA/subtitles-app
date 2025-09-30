@@ -13,6 +13,7 @@ import {
   verifyEmailByUserId,
 } from '@/utils/db/user'
 import { getErrorMessage, getZodErrors } from '@/utils/errors'
+import { TWO_FACTOR_OTP_SENT } from '@/utils/constants'
 import { AccountLoginValidator } from '@/types/schemas/auth'
 import { getTranslations } from 'next-intl/server'
 import { getNextLocale } from '@/utils/cookies'
@@ -86,14 +87,15 @@ export const authOptions: NextAuthOptions = {
 
           // If 2FA enabled — send OTP and block login
           if (existingUser.isTwoFactorEnabled) {
-            try {
-              await sendTwoFactorOTP(existingUser.id, email, locale)
-              return null
-            } catch (err) {
-              // If unable to send OTP, throw error
-              console.error('Failed to send 2FA OTP: ', getErrorMessage(err))
+            const hasSentOTP = await sendTwoFactorOTP(
+              existingUser.id,
+              email,
+              locale
+            )
+            if (!hasSentOTP.data?.success) {
               throw new Error(t('failed_to_send_2fa_otp'))
             }
+            throw new Error(TWO_FACTOR_OTP_SENT)
           }
 
           // Passing down user to JWT

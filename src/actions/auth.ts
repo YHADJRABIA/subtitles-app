@@ -10,6 +10,7 @@ import {
 import { SendEmailVerificationSchema } from '@/types/schemas/general'
 import { getErrorMessage } from '@/utils/errors'
 import { isClient } from '@/utils/general'
+import { TWO_FACTOR_OTP_SENT } from '@/utils/constants'
 import axios from 'axios'
 import { signIn, signOut } from 'next-auth/react'
 
@@ -48,6 +49,14 @@ export const handleCredentialsLogin = async (
         data: {
           message: '',
           success: true,
+        },
+      }
+    } else if (res?.error === TWO_FACTOR_OTP_SENT) {
+      return {
+        data: {
+          message: '',
+          success: true,
+          requiresUserAction: true,
         },
       }
     } else if (res?.error) {
