@@ -21,7 +21,7 @@ const intlMiddleware = createMiddleware({
 // Initialise rate limiter for API routes
 const ratelimit = new Ratelimit({
   redis: kv,
-  limiter: Ratelimit.slidingWindow(6, '25s'),
+  limiter: Ratelimit.slidingWindow(25, '25s'),
 })
 
 // Middleware for rate limiting API requests
