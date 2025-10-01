@@ -2,6 +2,19 @@ import { TwoFactorTokenModel } from '@/models/twoFactorToken.model'
 import { getErrorMessage } from '../errors'
 import { VerificationResponse } from '@/types/api'
 
+export const getTwoFactorTokenByToken = async (
+  token: string
+): Promise<VerificationResponse> => {
+  try {
+    return await TwoFactorTokenModel.findOne({ token })
+  } catch (err) {
+    console.error(
+      'Error getting two-factor token by token:',
+      getErrorMessage(err)
+    )
+  }
+}
+
 export const getTwoFactorTokenByEmail = async (
   email: string
 ): Promise<VerificationResponse> => {
