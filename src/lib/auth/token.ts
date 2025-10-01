@@ -69,8 +69,7 @@ export const generatePasswordResetToken = async (email: string) => {
 
 export const generateTwoFactorToken = async (email: string) => {
   const { code, expirationDate } = generateNDigitCode(
-    Number(EMAIL_VERIFICATION_CODE_LIFETIME_MINUTES),
-    4
+    Number(EMAIL_VERIFICATION_CODE_LIFETIME_MINUTES)
   )
 
   const existingToken = await getTwoFactorTokenByEmail(email)
