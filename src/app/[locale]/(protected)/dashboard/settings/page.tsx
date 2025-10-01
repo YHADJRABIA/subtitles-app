@@ -2,12 +2,13 @@ import React from 'react'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { getUserSession } from '@/utils/session'
 import Typography from '@/components/UI/Typography'
-import SwitchButton from '@/components/SwitchButton'
 import styles from './page.module.scss'
 
 import { Metadata } from 'next/types'
 import { MetaDataProps } from '@/app/[locale]/layout'
 
+import TwoFactorAuth from '../_components/TwoFactorAuth'
+import PasswordResetButton from '../_components/PasswordResetButton'
 export const generateMetadata = async ({
   params,
 }: MetaDataProps): Promise<Metadata> => {
@@ -24,7 +25,8 @@ const DashboardSettingsPage = async ({ params }: MetaDataProps) => {
   const { locale } = await params
 
   setRequestLocale(locale)
-  const { favoriteLocale, isTwoFactorEnabled } = await getUserSession()
+  const { id, isTwoFactorEnabled, email, hasCredentialsProvider } =
+    await getUserSession()
 
   const t = await getTranslations({ locale, namespace: 'Dashboard.Settings' })
 
@@ -34,19 +36,9 @@ const DashboardSettingsPage = async ({ params }: MetaDataProps) => {
         {t('title')}
       </Typography>
 
-      <div className={styles.section}>
-        <Typography size="xs" weight="semiBold">
-          {t('preferred_language')}
-        </Typography>
-        <div className={styles.element}>
-          <Typography size="xs" weight="semiBold">
-            {t('two_factor_auth')}
-          </Typography>
-          {/*           <SwitchButton
-            isActive={isTwoFactorEnabled}
-            onToggle={() => console.log('TEST')}
-          /> */}
-        </div>
+      <div className={styles.root}>
+        <TwoFactorAuth isActive={isTwoFactorEnabled} userId={id} />
+        {hasCredentialsProvider && <PasswordResetButton email={email} />}
       </div>
     </>
   )

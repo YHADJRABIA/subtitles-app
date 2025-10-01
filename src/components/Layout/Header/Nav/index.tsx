@@ -6,15 +6,12 @@ import { usePathname } from '@/i18n/routing'
 import BurgerMenu from '../BurgerMenu'
 import LanguageMenu from '../../LanguageMenu'
 import Separator from '@/components/Separator'
-import NavLink from './NavLink'
-import useNavLinks from '@/hooks/useNavLinks'
 import useIsOnDesktop from '@/hooks/useIsOnDesktop'
+import NavLinks from './NavLinks'
 import { LinkButton } from '@/components/UI/Button/LinkButton'
 import { SUPPORT_LINK } from '@/utils/constants'
 import { useTranslations } from 'next-intl'
 import { SiBuymeacoffee as SupportIcon } from 'react-icons/si'
-import { hasMatchingFirstSlug } from '@/utils/paths'
-import { Pathname } from '@/types/pathnames'
 
 interface PropTypes {
   isConnected: boolean
@@ -26,7 +23,6 @@ const Nav = ({ className, isConnected }: PropTypes) => {
   const currentPath = usePathname()
   const isOnDesktop = useIsOnDesktop()
   const [toggled, setToggled] = useState(false)
-  const navLinks = useNavLinks({ isConnected })
 
   const handleCloseNav = () => {
     if (toggled === false) return
@@ -48,26 +44,15 @@ const Nav = ({ className, isConnected }: PropTypes) => {
 
       <div className={cn(styles.menu, { [styles.toggled]: toggled })}>
         <ul className={styles.links}>
-          {navLinks.map(link => {
-            const isActive = hasMatchingFirstSlug(
-              link?.url as Pathname,
-              currentPath
-            )
-            return (
-              <NavLink
-                isActive={isActive}
-                key={link.label}
-                link={link}
-                onClick={isActive ? handleCloseNav : undefined} // Close nav menu if already on target route
-              />
-            )
-          })}
+          <NavLinks
+            isConnected={isConnected}
+            onActiveLinkClick={handleCloseNav}
+          />
         </ul>
         <Separator className={styles.separator} />
         {/* TODO: Reuse later  <AuthSection showAccount={isConnected} className={styles.authSection} /> */}
         <div className={styles.bottomSection}>
           <LanguageMenu isInverted={!isOnDesktop} />
-
           <LinkButton
             icon={{ src: SupportIcon }}
             isFullWidth={false}

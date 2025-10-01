@@ -19,6 +19,7 @@ import Field from '@/components/Forms/Field'
 
 import { getErrorMessage } from '@/utils/errors'
 import GoogleLogin from '@/components/Auth/GoogleLogin'
+import TwoFactorForm from '@/components/Auth/TwoFactorForm'
 import {
   handleRegister,
   handleCredentialsLogin,
@@ -50,6 +51,7 @@ function AuthForm({ type }: PropTypes) {
   const [isLoginForm, isRegisterForm] = [type === 'login', type === 'register']
   const [passwordInputType, ToggleIcon] = useShowPassword({ size: 18 })
   const [showResendEmail, setShowResendEmail] = useState(false)
+  const [is2FA, setIs2FA] = useState(false)
 
   const [t, t_general, t_zod] = [
     useTranslations('Auth'),
@@ -86,6 +88,7 @@ function AuthForm({ type }: PropTypes) {
   }
 
   const email = getValues('email')
+  const password = getValues('password')
   const isValidEmail = !!email?.length && !fieldState.email.error
 
   const handleAuth: SubmitHandler<AuthFormData> = async user => {
@@ -93,6 +96,10 @@ function AuthForm({ type }: PropTypes) {
       const res = isRegisterForm
         ? await handleRegister(user)
         : await handleCredentialsLogin(user)
+
+      if (isLoginForm && res?.data?.requiresUserAction) {
+        return setIs2FA(true)
+      }
 
       // Redirect if successful login
       if (isLoginForm) router.push(DEFAULT_LOGIN_REDIRECT_ROUTE)
@@ -115,6 +122,8 @@ function AuthForm({ type }: PropTypes) {
   }
 
   // TODO: Add Google Recaptcha to prevent abuse + improve UX with resend validation email
+  if (is2FA) return <TwoFactorForm email={email} password={password} />
+
   return (
     <form
       noValidate

@@ -1,38 +1,37 @@
 'use client'
-import React, { useState, useTransition } from 'react'
+import React, { useState } from 'react'
 import styles from './SwitchButton.module.scss'
 import cn from 'classnames'
 import { useTranslations } from 'next-intl'
 
 interface PropTypes {
   isActive: boolean
-  onToggle: () => void
+  isDisabled: boolean
+  onToggle: (isOn: boolean) => void
   className?: string
 }
-const SwitchButton = ({ onToggle, className, isActive }: PropTypes) => {
+const SwitchButton = ({
+  onToggle,
+  className,
+  isActive,
+  isDisabled,
+}: PropTypes) => {
   const t = useTranslations('SwitchButton')
-  const [isPending, startTransition] = useTransition()
   const [isOn, setIsOn] = useState(isActive)
 
   const handleToggle = () => {
-    startTransition(() => {
-      setIsOn(prev => !prev)
-      onToggle()
-    })
+    setIsOn(prev => !prev)
+    onToggle(!isOn)
   }
   return (
-    <div
+    <input
+      checked={isOn}
       className={cn(styles.root, className)}
-      title={t('toggle')}
-      onClick={handleToggle}
-    >
-      <input
-        checked={isOn}
-        className={styles.toggler}
-        disabled={isPending}
-        type="checkbox"
-      />
-    </div>
+      disabled={isDisabled}
+      title={isOn ? t('on') : t('off')}
+      type="checkbox"
+      onChange={handleToggle}
+    />
   )
 }
 

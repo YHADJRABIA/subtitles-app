@@ -13,6 +13,7 @@ import { BsCheckCircleFill as SuccessIcon } from 'react-icons/bs'
 import { APIResponse } from '@/types/api'
 import { notify } from '@/lib/toastify'
 import { useTimer } from '@/hooks/useTimer'
+import { getSuccessMessage } from '@/utils/api'
 
 interface PropTypes {
   onSubmit: (code: string) => Promise<{ data: APIResponse }>
@@ -87,7 +88,7 @@ const OTPModal = ({
         const res = await onSubmit(code)
         setStatusMessage({
           type: 'success',
-          message: res.data?.message ?? '',
+          message: getSuccessMessage(res),
         })
 
         await onSuccess()
@@ -112,6 +113,7 @@ const OTPModal = ({
         startResendTimer()
       } catch (err) {
         console.error('Error in OTPModal handleResend:', getErrorMessage(err))
+        notify('error', await getErrorMessage(err))
       }
     })
   }

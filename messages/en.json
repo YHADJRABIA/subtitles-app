@@ -57,6 +57,9 @@
       "Account": {
         "title": "Account",
         "description": "Account's information."
+      },
+      "Error": {
+        "title": "Authentication Error"
       }
     }
   },
@@ -133,15 +136,13 @@
     "new_password": "New password",
     "continue_with_google": "Continue with Google",
     "log_out": "Log out",
-    "Error": {
-      "title": "Auth Error Page"
-    },
     "Login": {
       "title": "Login",
       "cta": "Login",
       "fallback": "No account yet? <link>Register here</link>",
       "recover_password": "Recover password",
       "incorrect_email_or_password": "Incorrect email and/or password",
+      "failed_to_send_2fa_otp": "Failed to send 2FA OTP. Try again later.",
       "unverified_email": "Email verification required"
     },
     "Register": {
@@ -185,6 +186,20 @@
       "expired_token": "Token has expired. Recover password again",
       "user_not_found": "User not found",
       "password_updated": "Password successfully updated!"
+    },
+    "2FA": {
+      "title": "Two Factor Authentication",
+      "description": "A verification code has been sent to your email. Please input it below to complete your login.",
+      "code_sent": "Two-factor authentication code sent by email",
+      "invalid_code": "Invalid code",
+      "expired_code": "Code has expired. Try logging in again.",
+      "verified": "Successfully verified!",
+      "user_not_found": "User not found",
+      "confirm_button": "Confirm",
+      "code_label": "Verification code"
+    },
+    "Error": {
+      "title": "Authentication Error"
     }
   },
   "User": {
@@ -198,11 +213,12 @@
     "email_mismatch": "Email mismatch",
     "invalid_code": "Invalid code",
     "invalid_fields": "Invalid fields",
-    "failed_action": "Action failed"
+    "failed_action": "Action failed",
+    "otp_sent": "OTP code sent to your email"
   },
   "Revalidation": {
     "invalid_request": "Invalid request",
-    "successful_revalidation": "Succesfully revalidated",
+    "successful_revalidation": "Successfully revalidated",
     "unauthorised": "Unauthorised",
     "failed": "Revalidation failed"
   },
@@ -229,7 +245,8 @@
       "edit_email": "Edit email",
       "edit_password": "Edit password",
       "preferred_language": "Preferred language:",
-      "two_factor_auth": "Two-factor authentication:"
+      "two_factor_auth": "Two-factor authentication:",
+      "change_password": "Change password"
     },
     "Account": {
       "title": "Account",
@@ -285,6 +302,8 @@
     "edit": "Edit image"
   },
   "SwitchButton": {
+    "on": "On",
+    "off": "Off",
     "toggle": "Toggle"
   },
   "Video": {

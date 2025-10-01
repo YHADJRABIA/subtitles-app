@@ -152,3 +152,48 @@ export const sendEmailUpdateEmail = async (
     html: outgoingEmail.content.replace(/\r\n/g, '<br>'),
   })
 }
+
+export const sendTwoFactorOTPEmail = async (
+  lang: string,
+  email: string,
+  code: string
+) => {
+  const outgoingEmail = {
+    title: `Your login code — ${code}`,
+    content: `
+    Hello,\r\n
+    \r\n
+    You have two-factor authentication enabled on your account.\r\n
+    Please use the following code to complete your login: <b>${code}</b>\r\n
+    <b>This code is only valid for ${EMAIL_VERIFICATION_CODE_LIFETIME_MINUTES} minutes.</b>\r\n
+    \r\n
+    If you did not request this login, please ignore this email and consider changing your password.
+    `,
+  }
+
+  switch (lang) {
+    case 'fr':
+      outgoingEmail.title = `Votre code de connexion — ${code}`
+      outgoingEmail.content = `
+      Bonjour,\r\n
+      \r\n
+      Vous avez activé l'authentification à deux facteurs sur votre compte.\r\n
+      Veuillez introduire le code suivant pour compléter votre connexion : <b>${code}</b>\r\n
+      <b>Ce code n'est valable que pendant ${EMAIL_VERIFICATION_CODE_LIFETIME_MINUTES} minutes.</b>\r\n
+      \r\n
+      Si vous n'avez pas demandé cette connexion, veuillez ignorer cet email et changer votre mot de passe.
+      `
+      break
+
+    default:
+      break
+  }
+
+  await transporter.sendMail({
+    from: sender,
+    to: email,
+    subject: outgoingEmail.title,
+    text: outgoingEmail.content,
+    html: outgoingEmail.content.replace(/\r\n/g, '<br>'),
+  })
+}

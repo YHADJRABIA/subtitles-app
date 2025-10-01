@@ -6,10 +6,12 @@ import {
   EmailVerificationByTokenSchema,
   PasswordRecoverySchema,
   PasswordResetSchema,
+  TwoFactorVerificationSchema,
 } from '@/types/schemas/auth'
 import { SendEmailVerificationSchema } from '@/types/schemas/general'
 import { getErrorMessage } from '@/utils/errors'
 import { isClient } from '@/utils/general'
+import { TWO_FACTOR_OTP_SENT } from '@/utils/constants'
 import axios from 'axios'
 import { signIn, signOut } from 'next-auth/react'
 
@@ -36,10 +38,6 @@ export const handleGoogleLogin = async () => {
 export const handleCredentialsLogin = async (
   user: AccountLoginSchema
 ): Promise<{ data: APIResponse } | null> => {
-  // In case of invalid credentials or other errors , NextAuth will redirect to /api/auth/error.
-  // {redirect: false} – Disables default redirection behaviour
-  // Prefered behaviour is processing signIn response on same page for UX purposes.
-
   try {
     const res = await signIn('credentials', { ...user, redirect: false })
 
@@ -51,11 +49,21 @@ export const handleCredentialsLogin = async (
         },
       }
     } else if (res?.error) {
+      // Handle 2FA requirement
+      if (res.error === TWO_FACTOR_OTP_SENT) {
+        return {
+          data: {
+            message: '2FA code sent to your email',
+            success: true,
+            requiresUserAction: true,
+          },
+        }
+      }
       throw new Error(res.error)
     }
     return null
   } catch (err) {
-    console.error('Error signing in user:', getErrorMessage(err)) // TODO: fix redirect to /api/auth/error after too many failed logins
+    console.error('Error signing in user:', getErrorMessage(err))
     throw err
   }
 }
@@ -77,7 +85,7 @@ export const handleSendVerificationEmail = async (
   try {
     return await axios.post('/api/users/send-verification-email', user)
   } catch (err) {
-    console.error('Error sending verificaiton email:', getErrorMessage(err))
+    console.error('Error sending verification email:', getErrorMessage(err))
     throw err
   }
 }
@@ -88,7 +96,7 @@ export const handleVerifyEmailValidationToken = async (
   try {
     return await axios.post('/api/users/verify-token', user)
   } catch (err) {
-    console.error('Error verifying validaiton token:', getErrorMessage(err))
+    console.error('Error verifying validation token:', getErrorMessage(err))
     throw err
   }
 }
@@ -112,6 +120,17 @@ export const handleResetPassword = async (user: PasswordResetSchema) => {
     return await axios.post('/api/users/password/reset', user)
   } catch (err) {
     console.error('Error resetting password:', getErrorMessage(err))
+    throw err
+  }
+}
+
+export const handleVerifyTwoFactorCode = async (
+  data: TwoFactorVerificationSchema
+) => {
+  try {
+    return await axios.post('/api/users/verify-2fa', data)
+  } catch (err) {
+    console.error('Error verifying 2FA code:', getErrorMessage(err))
     throw err
   }
 }
