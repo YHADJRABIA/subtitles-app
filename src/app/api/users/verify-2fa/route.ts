@@ -7,6 +7,7 @@ import {
   getTwoFactorTokenByEmailAndCode,
   deleteTwoFactorTokenById,
 } from '@/utils/db/two-factor-token'
+import { createTwoFactorConfirmation } from '@/utils/db/two-factor-confirmation'
 import { getTranslations } from 'next-intl/server'
 import { getLocaleFromNextRequest } from '@/utils/cookies'
 import { TwoFactorVerificationValidator } from '@/types/schemas/auth'
@@ -64,7 +65,11 @@ export async function POST(req: NextRequest) {
       )
     }
 
+    // Delete used token
     await deleteTwoFactorTokenById(existingToken.id)
+
+    // Create 2FA confirmation to allow login
+    await createTwoFactorConfirmation(associatedUser.id)
 
     return NextResponse.json({ message: t('verified'), success: true })
   } catch (error) {
