@@ -19,6 +19,7 @@ import Field from '@/components/Forms/Field'
 
 import { getErrorMessage } from '@/utils/errors'
 import GoogleLogin from '@/components/Auth/GoogleLogin'
+import TwoFactorForm from '@/components/Auth/TwoFactorForm'
 import {
   handleRegister,
   handleCredentialsLogin,
@@ -50,6 +51,7 @@ function AuthForm({ type }: PropTypes) {
   const [isLoginForm, isRegisterForm] = [type === 'login', type === 'register']
   const [passwordInputType, ToggleIcon] = useShowPassword({ size: 18 })
   const [showResendEmail, setShowResendEmail] = useState(false)
+  const [is2FA, setIs2FA] = useState(false)
 
   const [t, t_general, t_zod] = [
     useTranslations('Auth'),
@@ -95,7 +97,7 @@ function AuthForm({ type }: PropTypes) {
         : await handleCredentialsLogin(user)
 
       if (isLoginForm && res?.data?.requiresUserAction) {
-        return setInfoMessage(t('2FA.code_sent'), 'success')
+        return setIs2FA(true)
       }
 
       // Redirect if successful login
@@ -119,6 +121,8 @@ function AuthForm({ type }: PropTypes) {
   }
 
   // TODO: Add Google Recaptcha to prevent abuse + improve UX with resend validation email
+  if (is2FA) return <TwoFactorForm email={email} />
+
   return (
     <form
       noValidate
