@@ -58,6 +58,9 @@
         "title": "Account",
         "description": "Account's information."
       }
+      "Error": {
+        "title": "Authentication Error"
+      }
     }
   },
   "General": {
@@ -194,6 +197,9 @@
       "user_not_found": "User not found",
       "confirm_button": "Confirm",
       "code_label": "Verification code"
+    },
+    "Error": {
+      "title": "Authentication Error"
     }
   },
   "User": {

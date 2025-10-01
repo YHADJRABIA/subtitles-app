@@ -195,6 +195,9 @@
       "user_not_found": "Utilisateur introuvable",
       "confirm_button": "Confirmer",
       "code_label": "Code de vérification"
+    },
+    "Error": {
+      "title": "Erreur d'Authentification"
     }
   },
   "User": {
