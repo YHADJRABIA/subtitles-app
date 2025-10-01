@@ -57,7 +57,7 @@
       "Account": {
         "title": "Account",
         "description": "Account's information."
-      }
+      },
       "Error": {
         "title": "Authentication Error"
       }
