@@ -57,7 +57,7 @@ export async function POST(req: NextRequest) {
     const existingCode = await getVerificationCodeByCode(code)
 
     // Code doesn't match
-    if (!existingCode) {
+    if (!existingCode?.id || !existingCode.userId) {
       return NextResponse.json(
         { message: t('invalid_code'), success: false },
         { status: 400 }
