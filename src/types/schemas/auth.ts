@@ -26,6 +26,7 @@ export const AccountLoginValidator = (
   z.object({
     email: emailSchema(t),
     password: z.string().min(1, { message: t('password.missing') }),
+    code: codeSchema(t).or(z.undefined()),
   })
 
 export type AccountLoginSchema = z.infer<
