@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl'
 import * as z from 'zod'
 
-export type ValidFieldNames = 'email' | 'password' | 'token' | 'name'
+export type ValidFieldNames = 'email' | 'password' | 'token' | 'code' | 'name'
 
 export const emailSchema = (t: ReturnType<typeof useTranslations<'Zod'>>) =>
   z

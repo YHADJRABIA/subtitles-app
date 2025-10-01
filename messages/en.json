@@ -193,7 +193,7 @@
       "verified": "Successfully verified!",
       "user_not_found": "User not found",
       "confirm_button": "Confirm",
-      "code_label": "Verification Code"
+      "code_label": "Verification code"
     }
   },
   "User": {

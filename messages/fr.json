@@ -187,14 +187,14 @@
     },
     "2FA": {
       "title": "Authentification à Deux Facteurs",
-      "description": "Un code de vérification a été envoyé à votre email. Veuillez le saisir ci-dessous pour finaliser votre connexion.",
+      "description": "Veuillez saisir le code de vérification vous ayant été envoyé par email pour finaliser votre connexion.",
       "code_sent": "Code de vérification envoyé par e-mail",
       "invalid_code": "Code invalide",
       "expired_code": "Le code a expiré. Réessayer en se reconnectant.",
       "verified": "Vérification réussie !",
       "user_not_found": "Utilisateur introuvable",
       "confirm_button": "Confirmer",
-      "code_label": "Code de Vérification"
+      "code_label": "Code de vérification"
     }
   },
   "User": {
