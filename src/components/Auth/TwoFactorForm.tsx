@@ -6,7 +6,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
 
 import { TwoFactorVerificationValidator } from '@/types/schemas/auth'
-import { handleVerifyTwoFactorCode } from '@/actions/auth'
+import {
+  handleVerifyTwoFactorCode,
+  handleCredentialsLogin,
+} from '@/actions/auth'
 import { DEFAULT_LOGIN_REDIRECT_ROUTE } from '@/routes/routes'
 import { getErrorMessage } from '@/utils/errors'
 
@@ -23,9 +26,10 @@ import {
 
 interface PropTypes {
   email: string
+  password: string
 }
 
-function TwoFactorForm({ email }: PropTypes) {
+function TwoFactorForm({ email, password }: PropTypes) {
   const router = useRouter()
   const [t, t_zod] = [useTranslations('Auth'), useTranslations('Zod')]
 
@@ -57,7 +61,15 @@ function TwoFactorForm({ email }: PropTypes) {
       })
 
       if (res?.data?.success) {
-        router.push(DEFAULT_LOGIN_REDIRECT_ROUTE)
+        // Complete login
+        const loginRes = await handleCredentialsLogin({
+          email: data.email,
+          password: password,
+        })
+
+        if (loginRes?.data?.success) {
+          router.push(DEFAULT_LOGIN_REDIRECT_ROUTE)
+        }
       }
     } catch (err) {
       setInfoMessage(await getErrorMessage(err), 'error')

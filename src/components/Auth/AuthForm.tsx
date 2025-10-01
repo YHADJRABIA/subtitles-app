@@ -88,6 +88,7 @@ function AuthForm({ type }: PropTypes) {
   }
 
   const email = getValues('email')
+  const password = getValues('password')
   const isValidEmail = !!email?.length && !fieldState.email.error
 
   const handleAuth: SubmitHandler<AuthFormData> = async user => {
@@ -121,7 +122,7 @@ function AuthForm({ type }: PropTypes) {
   }
 
   // TODO: Add Google Recaptcha to prevent abuse + improve UX with resend validation email
-  if (is2FA) return <TwoFactorForm email={email} />
+  if (is2FA) return <TwoFactorForm email={email} password={password} />
 
   return (
     <form
