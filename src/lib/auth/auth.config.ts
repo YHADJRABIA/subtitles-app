@@ -19,6 +19,10 @@ import { getTranslations } from 'next-intl/server'
 import { getNextLocale } from '@/utils/cookies'
 import { sendTwoFactorOTP } from './twoFactorAuth'
 import { deleteVerificationTokenByEmail } from '@/utils/db/verification-token'
+import {
+  deleteTwoFactorConfirmationById,
+  getTwoFactorConfirmationByUserId,
+} from '@/utils/db/two-factor-confirmation'
 
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, NEXTAUTH_SECRET } = process.env
 
@@ -47,7 +51,6 @@ export const authOptions: NextAuthOptions = {
         // For built-in NextAuth form. Useless here since own UI exists
         email: { label: 'Email', type: 'email' },
         password: { label: 'Password', type: 'password' },
-        skip2FA: { label: 'Skip 2FA', type: 'text' },
       },
 
       // Runs on credential login (with email & password)
@@ -84,19 +87,6 @@ export const authOptions: NextAuthOptions = {
           )
           if (!passwordsMatch) {
             throw new Error(t('incorrect_email_or_password'))
-          }
-
-          // If 2FA enabled — send OTP and block login (unless skip2FA is set)
-          if (existingUser.isTwoFactorEnabled && !credentials?.skip2FA) {
-            const hasSentOTP = await sendTwoFactorOTP(
-              existingUser.id,
-              email,
-              locale
-            )
-            if (!hasSentOTP.data?.success) {
-              throw new Error(t('failed_to_send_2fa_otp'))
-            }
-            throw new Error(TWO_FACTOR_OTP_SENT)
           }
 
           // Passing down user to JWT
@@ -221,11 +211,30 @@ export const authOptions: NextAuthOptions = {
 
       // Credentials login
       if (withCredentials) {
+        const { id, email, isTwoFactorEnabled } = user
+
         try {
           // Deny access if unverified email
           if (!isVerifiedEmail) {
             throw new Error(t('unverified_email'))
           } else {
+            // If 2FA enabled — check if user provided valid code
+            if (isTwoFactorEnabled) {
+              const existingConfirmation =
+                await getTwoFactorConfirmationByUserId(id)
+
+              // User hasn't verified 2FA yet - send OTP and block login
+              if (!existingConfirmation) {
+                const hasSentOTP = await sendTwoFactorOTP(id, email!, locale)
+                if (!hasSentOTP.data?.success) {
+                  throw new Error(t('failed_to_send_2fa_otp'))
+                }
+                throw new Error(TWO_FACTOR_OTP_SENT)
+              }
+
+              // Valid 2FA confirmation, delete it then proceed with login
+              await deleteTwoFactorConfirmationById(existingConfirmation.id)
+            }
             // Update database's lastLogin with current time
             await updateUserById(user.id, { lastLogin: new Date() })
           }

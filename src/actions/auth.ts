@@ -36,12 +36,8 @@ export const handleGoogleLogin = async () => {
 }
 
 export const handleCredentialsLogin = async (
-  user: AccountLoginSchema & { skip2FA?: string }
+  user: AccountLoginSchema
 ): Promise<{ data: APIResponse } | null> => {
-  // In case of invalid credentials or other errors , NextAuth will redirect to /api/auth/error.
-  // {redirect: false} – Disables default redirection behaviour
-  // Preferred behaviour is processing signIn response on same page for UX purposes.
-
   try {
     const res = await signIn('credentials', { ...user, redirect: false })
 
@@ -52,20 +48,22 @@ export const handleCredentialsLogin = async (
           success: true,
         },
       }
-    } else if (res?.error === TWO_FACTOR_OTP_SENT) {
-      return {
-        data: {
-          message: '',
-          success: true,
-          requiresUserAction: true,
-        },
-      }
     } else if (res?.error) {
+      // Handle 2FA requirement
+      if (res.error === TWO_FACTOR_OTP_SENT) {
+        return {
+          data: {
+            message: '2FA code sent to your email',
+            success: true,
+            requiresUserAction: true,
+          },
+        }
+      }
       throw new Error(res.error)
     }
     return null
   } catch (err) {
-    console.error('Error signing in user:', getErrorMessage(err)) // TODO: fix redirect to /api/auth/error after too many failed logins
+    console.error('Error signing in user:', getErrorMessage(err))
     throw err
   }
 }
