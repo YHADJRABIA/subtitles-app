@@ -13,10 +13,7 @@ export const generateMetadata = async ({
     namespace: 'Metadata.NotFound',
   })
 
-  return {
-    title: t('title'),
-    description: t('description'),
-  }
+  return { title: t('title'), description: t('description') }
 }
 
 // Invoke 404 page for all non-matching paths inside of [locale] folder

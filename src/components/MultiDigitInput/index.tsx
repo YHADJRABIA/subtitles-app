@@ -23,7 +23,7 @@ const MultiDigitInput = ({
   ariaLabel,
   testId,
 }: MultiDigitInputProps) => {
-  const [digits, setDigits] = useState(Array(n).fill(null))
+  const [digits, setDigits] = useState(Array(n).fill(''))
   const inputRefs = useRef<(HTMLInputElement | null)[]>([])
 
   const focusInput = (idx: number) => inputRefs.current[idx]?.focus()
@@ -72,21 +72,23 @@ const MultiDigitInput = ({
       data-testid={testId}
     >
       {digits.map((digit, idx) => (
-        <input
-          autoFocus={autoFocus && idx === 0}
-          className={cn(styles.input, { [styles.error]: hasError })}
-          disabled={isDisabled}
-          inputMode="numeric"
-          key={idx}
-          maxLength={1}
-          ref={el => {
-            inputRefs.current[idx] = el
-          }}
-          type="number"
-          value={digit}
-          onChange={e => handleInputChange(e.target.value, idx)}
-          onKeyDown={e => handleKeyDown(e, idx)}
-        />
+        <div className={styles.inputContainer} key={idx}>
+          <input
+            autoFocus={autoFocus && idx === 0}
+            className={cn(styles.input, { [styles.error]: hasError })}
+            disabled={isDisabled}
+            inputMode="numeric"
+            maxLength={1}
+            ref={el => {
+              inputRefs.current[idx] = el
+            }}
+            type="number"
+            value={digit}
+            onChange={e => handleInputChange(e.target.value, idx)}
+            onKeyDown={e => handleKeyDown(e, idx)}
+          />
+          {!digit && <div className={styles.placeholder}>{'•'}</div>}
+        </div>
       ))}
     </div>
   )

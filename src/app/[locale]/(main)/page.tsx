@@ -1,6 +1,5 @@
 import HeroBanner from '@/components/HeroBanner'
 import styles from './page.module.scss'
-import { useTranslations } from 'next-intl'
 import CtaSection from './_components/CtaSection'
 import { getTranslations } from 'next-intl/server'
 import { Metadata } from 'next'
@@ -19,8 +18,9 @@ export const generateMetadata = async ({
   return { title: t('title'), description: t('description') }
 }
 
-export default function HomePage() {
-  const t = useTranslations('Index')
+export default async function HomePage({ params }: MetaDataProps) {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'Index' })
 
   return (
     <div className={styles.root}>

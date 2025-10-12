@@ -13,10 +13,16 @@ import {
   verifyEmailByUserId,
 } from '@/utils/db/user'
 import { getErrorMessage, getZodErrors } from '@/utils/errors'
+import { TWO_FACTOR_OTP_SENT } from '@/utils/constants'
 import { AccountLoginValidator } from '@/types/schemas/auth'
 import { getTranslations } from 'next-intl/server'
 import { getNextLocale } from '@/utils/cookies'
+import { sendTwoFactorOTP } from './twoFactorAuth'
 import { deleteVerificationTokenByEmail } from '@/utils/db/verification-token'
+import {
+  deleteTwoFactorConfirmationById,
+  getTwoFactorConfirmationByUserId,
+} from '@/utils/db/two-factor-confirmation'
 
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, NEXTAUTH_SECRET } = process.env
 
@@ -56,10 +62,6 @@ export const authOptions: NextAuthOptions = {
           await getTranslations({ locale, namespace: 'Auth.Login' }),
         ]
 
-        /*         if (req.status === 429) {
-          throw new Error(t('too_many_api_calls')) // TODO: implement this
-        } */
-
         try {
           const validatedFields =
             AccountLoginValidator(t_zod).safeParse(credentials)
@@ -90,7 +92,9 @@ export const authOptions: NextAuthOptions = {
           // Passing down user to JWT
           return existingUser
         } catch (err) {
-          console.error('Authorization failed:', getErrorMessage(err))
+          if (isDevelopment) {
+            console.error('Authorization failed: ', getErrorMessage(err))
+          }
           throw err // Propagate error to frontend
         }
       },
@@ -140,8 +144,6 @@ export const authOptions: NextAuthOptions = {
         const updatedToken = {
           ...token,
           ...session,
-          name: session.name || token.name,
-          email: session.email || token.email,
           lastUpdate: session.lastUpdateDate || token.lastUpdate,
         }
 
@@ -151,7 +153,14 @@ export const authOptions: NextAuthOptions = {
       // User only defined after authorize (login)
       if (!user || !userId) return token // Logged out
 
-      const { emailVerified, createdAt, lastLogin, lastUpdate } = user
+      const {
+        emailVerified,
+        createdAt,
+        lastLogin,
+        lastUpdate,
+        isTwoFactorEnabled,
+        password,
+      } = user
 
       // Update lastLogin on login
       if (trigger === 'signIn') token.lastLogin = new Date()
@@ -162,6 +171,8 @@ export const authOptions: NextAuthOptions = {
         createdAt,
         lastLogin,
         lastUpdate,
+        isTwoFactorEnabled,
+        hasCredentialsProvider: !!password,
       } // Passing down token to session
     },
 
@@ -177,6 +188,8 @@ export const authOptions: NextAuthOptions = {
           creationDate: token.createdAt,
           lastUpdateDate: token.lastUpdate,
           lastLoginDate: token.lastLogin,
+          isTwoFactorEnabled: token.isTwoFactorEnabled,
+          hasCredentialsProvider: token.hasCredentialsProvider,
           error: token.error,
         },
       }
@@ -198,18 +211,33 @@ export const authOptions: NextAuthOptions = {
 
       // Credentials login
       if (withCredentials) {
+        const { id, email, isTwoFactorEnabled } = user
+
         try {
           // Deny access if unverified email
           if (!isVerifiedEmail) {
             throw new Error(t('unverified_email'))
           } else {
+            // If 2FA enabled — check if user provided valid code
+            if (isTwoFactorEnabled) {
+              const existingConfirmation =
+                await getTwoFactorConfirmationByUserId(id)
+
+              // User hasn't verified 2FA yet - send OTP and block login
+              if (!existingConfirmation) {
+                const hasSentOTP = await sendTwoFactorOTP(id, email!, locale)
+                if (!hasSentOTP.data?.success) {
+                  throw new Error(t('failed_to_send_2fa_otp'))
+                }
+                throw new Error(TWO_FACTOR_OTP_SENT)
+              }
+
+              // Valid 2FA confirmation, delete it then proceed with login
+              await deleteTwoFactorConfirmationById(existingConfirmation.id)
+            }
             // Update database's lastLogin with current time
             await updateUserById(user.id, { lastLogin: new Date() })
           }
-
-          /*           if (user?.error.status === 429) {
-            throw new Error(t('too_many_api_calls'))
-          } */
         } catch (err) {
           console.error('Credentials SignIn failed:', getErrorMessage(err))
           throw err
@@ -253,6 +281,8 @@ export const authOptions: NextAuthOptions = {
               lastLogin: existingUser.lastLogin, // Previous login
               createdAt: updatedUser.createdAt,
               lastUpdate: updatedUser.lastUpdate,
+              isTwoFactorEnabled: updatedUser.isTwoFactorEnabled,
+              hasCredentialsProvider: !!existingUser.password,
             })
 
             return user
@@ -274,6 +304,8 @@ export const authOptions: NextAuthOptions = {
             id: newUser.id,
             createdAt: newUser.createdAt,
             lastUpdate: newUser.lastUpdate,
+            isTwoFactorEnabled: newUser.isTwoFactorEnabled,
+            hasCredentialsProvider: false, // New Google users don't have credentials provider
             isVerifiedEmail: true,
           })
 

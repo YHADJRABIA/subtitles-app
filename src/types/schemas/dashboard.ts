@@ -12,6 +12,7 @@ const createUserSchema = (t: ReturnType<typeof useTranslations<'Zod'>>) => {
   return {
     name: nameSchema(t),
     email: emailSchema(t),
+    isTwoFactorEnabled: z.boolean(),
   }
 }
 
@@ -47,4 +48,11 @@ export const EmailVerificationByCodeValidator = (
 
 export type EmailVerificationByCodeSchema = z.infer<
   ReturnType<typeof EmailVerificationByCodeValidator>
+>
+
+export const TwoFactorAuthValidator = () =>
+  z.object({ isTwoFactorEnabled: z.boolean() })
+
+export type TwoFactorAuthSchema = z.infer<
+  ReturnType<typeof TwoFactorAuthValidator>
 >

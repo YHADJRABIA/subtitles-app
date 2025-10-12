@@ -134,15 +134,13 @@
     "new_password": "Nouveau mot de passe",
     "continue_with_google": "Se connecter avec Google",
     "log_out": "Se déconnecter",
-    "Error": {
-      "title": "Page d'erreur d'authentification"
-    },
     "Login": {
       "title": "Connexion",
       "cta": "Se connecter",
       "fallback": "Pas de compte ? <link>S'inscrire</link>",
       "recover_password": "Mot de passe oublié ?",
       "incorrect_email_or_password": "Email et/ou mot de passe erroné(s)",
+      "failed_to_send_2fa_otp": "Échec d'envoi du code OTP. Réessayer plus tard.",
       "unverified_email": "L'email doit être vérifié"
     },
     "Register": {
@@ -186,6 +184,20 @@
       "expired_token": "Jeton expiré. Renouveler récupération de mot de passe",
       "user_not_found": "Utilisateur inconnu",
       "password_updated": "Mot de passe mis à jour !"
+    },
+    "2FA": {
+      "title": "Authentification à Deux Facteurs",
+      "description": "Veuillez saisir le code de vérification vous ayant été envoyé par email pour finaliser votre connexion.",
+      "code_sent": "Code de vérification envoyé par e-mail",
+      "invalid_code": "Code invalide",
+      "expired_code": "Le code a expiré. Réessayer en se reconnectant.",
+      "verified": "Vérification réussie !",
+      "user_not_found": "Utilisateur introuvable",
+      "confirm_button": "Confirmer",
+      "code_label": "Code de vérification"
+    },
+    "Error": {
+      "title": "Erreur d'Authentification"
     }
   },
   "User": {
@@ -199,7 +211,8 @@
     "unauthorised": "Non autorisé",
     "email_already_taken": "Email déjà utilisé",
     "invalid_fields": "Champs invalides",
-    "failed_action": "L'action a échoué"
+    "failed_action": "L'action a échoué",
+    "otp_sent": "Code OTP envoyé à votre email"
   },
   "Revalidation": {
     "invalid_request": "Requête invalide",
@@ -230,7 +243,8 @@
       "edit_email": "Modifier email",
       "edit_password": "Modifier mot de passe",
       "preferred_language": "Langue préférée : ",
-      "two_factor_auth": "Double authentification :"
+      "two_factor_auth": "Authentification à double facteur : ",
+      "change_password": "Modifier mot de passe"
     },
     "Account": {
       "title": "Compte",
@@ -286,10 +300,15 @@
     "edit": "Modifier photo"
   },
   "SwitchButton": {
+    "on": "Activé",
+    "off": "Désactivé",
     "toggle": "Basculer"
   },
   "Video": {
     "not_supported": "La balise vidéo n'est pas compatible avec ce navigateur."
+  },
+  "Modal": {
+    "close": "Fermer"
   },
   "ConfirmationModal": {
     "are_you_sure": "Voulez-vous procéder ?",
@@ -305,7 +324,7 @@
     "input_code": "Saisir code",
     "resend": "Renvoyer",
     "code_resent": "Code renvoyé ! Vérifier votre email",
-    "wait_before_resend": "Disponible dans {time} secondes",
+    "wait_before_resend": "Renvoyer dans {time} secondes.",
     "verify": "Vérifier",
     "cancel": "Annuler",
     "ok": "D'accord"
