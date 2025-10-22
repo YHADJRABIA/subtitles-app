@@ -1,4 +1,6 @@
 .root {
+  position: relative;
+
   ul {
     position: absolute;
     margin-top: 0.5rem;
@@ -6,11 +8,19 @@
     background-color: var(--primary-white-color);
     @include flexCenter(column, center, flex-start);
     border: 1px solid var(--secondary-white-color);
-    border-radius: 1rem;
+    border-radius: 0.8rem;
     box-shadow: 0 0.2rem 0.3rem rgba(0, 0, 0, 0.2);
+    min-width: 10rem;
+
+
 
     &.inverted {
-      margin-top: -12.5rem;
+      top: auto;
+      bottom: calc(100% + 0.8rem);
+      right: auto;
+      left: 0;
+
+
     }
   }
 
@@ -19,15 +29,17 @@
     @include flexCenter(row, flex-start);
     flex-wrap: nowrap;
     transition: opacity 0.3s ease;
-    padding: 1rem;
+    padding: 1rem 0.6rem;
     width: 100%;
 
     &:not(:last-child) {
       border-bottom: 1px solid var(--secondary-gray-color);
     }
+
     .label {
       text-transform: capitalize;
     }
+
     &:hover {
       opacity: 0.7;
     }
@@ -40,6 +52,7 @@
 
 .button {
   position: relative;
+
   &:hover {
     box-shadow: unset !important;
     opacity: 0.9 !important;
