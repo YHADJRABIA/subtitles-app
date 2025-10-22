@@ -1,11 +1,10 @@
-echo '🏗️👷 Styling, testing & building the project before pushing.'
+echo '🏗️👷 Testing & building the project before pushing.'
 
 # Ensure npm run dev is not running
 if lsof -i :3000 &>/dev/null; then
     echo '⚠️ Terminate localhost process (e.g., npm run dev) before pushing. ⚠️'
     exit 1
 fi
-
 
 npm run test || { echo '❌ Tests failed. Fix the issues before pushing.'; exit 1; }
 
@@ -17,21 +16,22 @@ npm run check-format || {
     exit 1
 }
 
+# NO LONGER NEEDED SINCE NEXT.JS handles these checks before build
 # Check ESLint standards
-echo '🔍 Checking code quality with ESLint...'
-npm run check-lint || {
-    echo '❌ Linting errors — ESLint check failed. ❌'
-    echo 'Make the required changes listed above, add changes, and try to push again.'
-    exit 1
-}
+# echo '🔍 Checking code quality with ESLint...'
+# npm run check-lint || {
+#     echo '❌ Linting errors — ESLint check failed. ❌'
+#     echo 'Make the required changes listed above, add changes, and try to push again.'
+#     exit 1
+# }
 
 # Check TypeScript types
-echo '🔍 Checking type definitions with TypeScript...'
-npm run check-types || {
-    echo '❌ Typing errors — TypeScript check failed. ❌'
-    echo 'Make the above-required changes, add changes, and try to push again.'
-    exit 1
-}
+# echo '🔍 Checking type definitions with TypeScript...'
+# npm run check-types || {
+#     echo '❌ Typing errors — TypeScript check failed. ❌'
+#     echo 'Make the above-required changes, add changes, and try to push again.'
+#     exit 1
+# }
 
 # If linting, formatting & typing pass, proceed with build
 echo '✅ Code is properly typed, linted & formatted ➜ proceeding with build. ✅'
