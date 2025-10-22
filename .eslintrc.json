@@ -15,6 +15,11 @@
     "plugin:@typescript-eslint/recommended",
     "prettier"
   ],
+  "ignorePatterns": [
+    "node_modules",
+    "**/.next/**",
+    "next-env.d.ts"
+  ],
   "plugins": ["@typescript-eslint", "react", "react-hooks", "unused-imports"],
   "rules": {
     // React-specific rules
