@@ -1,5 +1,4 @@
 import createMiddleware from 'next-intl/middleware'
-import { ipAddress } from '@vercel/functions'
 import withAuth, { NextRequestWithAuth } from 'next-auth/middleware'
 import { NextFetchEvent, NextResponse } from 'next/server'
 import { isLoginOrRegisterPath, isProtectedPath } from './utils/paths'
@@ -7,9 +6,8 @@ import { defaultLocale, localePrefix, locales, pathnames } from '@/i18n/routing'
 import { DEFAULT_LOGIN_REDIRECT_ROUTE, LOGIN_ROUTE } from './routes/routes'
 import { getToken } from 'next-auth/jwt'
 import { Pathname } from './types/pathnames'
-import { Ratelimit } from '@upstash/ratelimit'
-import { kv } from '@vercel/kv'
 import { isDevelopment } from './utils/general'
+import { checkRateLimit } from '@/lib/rate-limit'
 
 const intlMiddleware = createMiddleware({
   defaultLocale,
@@ -19,32 +17,11 @@ const intlMiddleware = createMiddleware({
 })
 
 // Initialise rate limiter for API routes
-const ratelimit = new Ratelimit({
-  redis: kv,
-  limiter: Ratelimit.slidingWindow(25, '25s'),
-})
 
 // Middleware for rate limiting API requests
 export async function apiRateLimitMiddleware(req: NextRequestWithAuth) {
-  const ip = ipAddress(req) ?? '127.0.0.1'
-
-  const { limit, reset, remaining } = await ratelimit.limit(ip)
-
-  if (remaining === 0) {
-    return NextResponse.json(
-      { message: 'Too many API calls', success: false },
-      {
-        status: 429,
-        headers: {
-          'X-RateLimit-Limit': limit.toString(),
-          'X-RateLimit-Remaining': remaining.toString(),
-          'X-RateLimit-Reset': reset.toString(),
-        },
-      }
-    )
-  }
-
-  return NextResponse.next()
+  const rateLimitResponse = await checkRateLimit(req)
+  return rateLimitResponse ?? NextResponse.next()
 }
 
 // AuthMiddleware is skipped if user hits public routes
