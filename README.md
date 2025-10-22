@@ -62,20 +62,20 @@ Alternatively, adapt `docker-compose.yml` to orchestrate services for local deve
 
 Create a `.env.local` file with the following keys:
 
-| Variable | Purpose |
-| --- | --- |
-| `MONGODB_URI` | MongoDB connection string used by `src/lib/mongodb.ts`. |
-| `NEXTAUTH_SECRET` | Shared secret for NextAuth sessions (also referenced in `src/middleware.ts`). |
-| `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` | OAuth credentials for Google sign-in. |
-| `SECRET_API_TOKEN` | Token gate for CMS webhooks and preview routes in `src/app/api/cms/*`. |
-| `NEXT_ISR_REVALIDATION_TOKEN` | Secret token required to trigger `src/app/api/series/revalidate/route.ts`. |
-| `DATOCMS_PUBLISHED_CONTENT_CDA_TOKEN` | DatoCMS published content token consumed by `src/lib/datocms/executeQuery.ts`. |
-| `DATOCMS_DRAFT_CONTENT_CDA_TOKEN` | Optional draft content token for preview builds. |
-| `NODEMAILER_SENDER_EMAIL` / `NODEMAILER_SENDER_EMAIL_PASSWORD` / `NODEMAILER_SERVICE` | Outbound email configuration in `src/lib/mail.ts`. |
-| `EMAIL_VERIFICATION_TOKEN_LIFETIME_HOURS` | Email verification token expiry window. |
-| `EMAIL_VERIFICATION_CODE_LIFETIME_MINUTES` | Verification code expiry window. |
-| `PASSWORD_RESET_TOKEN_LIFETIME_HOURS` | Password reset token expiry window. |
-| `GOOGLE_RECAPTCHA_SECRET` | Server-side validation secret for `src/utils/validators.ts`. |
+| Variable                                                                              | Purpose                                                                        |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| `MONGODB_URI`                                                                         | MongoDB connection string used by `src/lib/mongodb.ts`.                        |
+| `NEXTAUTH_SECRET`                                                                     | Shared secret for NextAuth sessions (also referenced in `src/middleware.ts`).  |
+| `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET`                                           | OAuth credentials for Google sign-in.                                          |
+| `SECRET_API_TOKEN`                                                                    | Token gate for CMS webhooks and preview routes in `src/app/api/cms/*`.         |
+| `NEXT_ISR_REVALIDATION_TOKEN`                                                         | Secret token required to trigger `src/app/api/series/revalidate/route.ts`.     |
+| `DATOCMS_PUBLISHED_CONTENT_CDA_TOKEN`                                                 | DatoCMS published content token consumed by `src/lib/datocms/executeQuery.ts`. |
+| `DATOCMS_DRAFT_CONTENT_CDA_TOKEN`                                                     | Optional draft content token for preview builds.                               |
+| `NODEMAILER_SENDER_EMAIL` / `NODEMAILER_SENDER_EMAIL_PASSWORD` / `NODEMAILER_SERVICE` | Outbound email configuration in `src/lib/mail.ts`.                             |
+| `EMAIL_VERIFICATION_TOKEN_LIFETIME_HOURS`                                             | Email verification token expiry window.                                        |
+| `EMAIL_VERIFICATION_CODE_LIFETIME_MINUTES`                                            | Verification code expiry window.                                               |
+| `PASSWORD_RESET_TOKEN_LIFETIME_HOURS`                                                 | Password reset token expiry window.                                            |
+| `GOOGLE_RECAPTCHA_SECRET`                                                             | Server-side validation secret for `src/utils/validators.ts`.                   |
 
 Optional values (such as staging URLs or analytics keys) can be added as needed.
 

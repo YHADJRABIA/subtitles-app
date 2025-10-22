@@ -12,15 +12,11 @@
     box-shadow: 0 0.2rem 0.3rem rgba(0, 0, 0, 0.2);
     min-width: 10rem;
 
-
-
     &.inverted {
       top: auto;
       bottom: calc(100% + 0.8rem);
       right: auto;
       left: 0;
-
-
     }
   }
 
