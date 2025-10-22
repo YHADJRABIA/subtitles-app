@@ -1,0 +1,14 @@
+node_modules
+.next
+.git
+.vscode
+.husky
+.swc
+npm-debug.log
+Dockerfile
+Dockerfile.dev
+docker-compose.yml
+*.log
+*.swp
+*.tmp
+coverage
