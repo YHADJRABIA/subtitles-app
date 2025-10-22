@@ -18,7 +18,7 @@ export async function checkRateLimit(
 
   if (remaining === 0) {
     return NextResponse.json(
-      { message: 'Too many API calls', success: false },
+      { message: 'Too many API calls', success: false, status: 429 },
       {
         status: 429,
         headers: {
