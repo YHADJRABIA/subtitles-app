@@ -358,5 +358,13 @@
     "copyright": "© 2024 – {currentYear} Yacine Hadj Rabia"
   },
 
-  "UnderDevelopement": { "title": "Under development" }
+  "UnderDevelopement": { "title": "Under development" },
+  "Breadcrumbs": {
+    "home": "Home",
+    "about": "About",
+    "series": "Series",
+    "dashboard": "Dashboard",
+    "settings": "Settings",
+    "account": "Account"
+  }
 }
