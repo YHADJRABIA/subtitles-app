@@ -283,6 +283,9 @@
       "too_short": "Code must contain at least 4 digits",
       "too_long": "Code is too long. Max 8 digits"
     },
+    "image": {
+      "invalid": "Invalid image"
+    },
     "name": {
       "missing": "Missing name",
       "too_long": "Name is too long. Max 40 characters"

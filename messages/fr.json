@@ -281,6 +281,9 @@
       "too_short": "Le code doit contenir au moins 4 chiffres",
       "too_long": "Code trop long. Ne pas dépasser 8 chiffres"
     },
+    "image": {
+      "invalid": "Image invalide"
+    },
     "name": {
       "missing": "Nom requis",
       "too_long": "Nom trop long. Ne pas dépasser 40 caractères"
