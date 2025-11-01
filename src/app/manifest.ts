@@ -1,5 +1,4 @@
 import { MetadataRoute } from 'next'
-import { websiteUrl } from '@/utils/general'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
@@ -39,6 +38,6 @@ export default function manifest(): MetadataRoute.Manifest {
         type: 'image/png',
       },
     ],
-    id: websiteUrl,
+    id: '/',
   }
 }
