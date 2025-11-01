@@ -13,7 +13,7 @@ const layout = ({ children }: PropTypes) => {
     <>
       <HeaderWithAuth isConcealable />
       <main className={styles.root}>
-        <Breadcrumbs />
+        <Breadcrumbs className={styles.breadCrumbs} />
         {children}
       </main>
       <Footer />
