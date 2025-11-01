@@ -1,0 +1,24 @@
+.root {
+  width: 100%;
+  max-width: var(--page-max-width);
+  padding: 0 var(--page-padding);
+}
+
+.list {
+  @include flexCenter(row, flex-start, center);
+  gap: 0.5rem;
+}
+
+.item {
+  @include flexCenter(row);
+  gap: 0.5rem;
+}
+
+.link {
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--primary-blue-color);
+    text-decoration: underline;
+  }
+}
