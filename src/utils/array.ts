@@ -7,3 +7,10 @@
 export const ArrayToString = (arr: string[]): string => {
   return arr.filter(str => str.trim() !== '').join(', ')
 }
+
+/**
+ * Extracts the defined values of a given key from an array of objects.
+ * Returns an empty array when the input is nullish or empty.
+ */
+export const pluck = <T, K extends keyof T>(i: T[] | null | undefined, k: K) =>
+  i?.flatMap(v => (v[k] != null ? [v[k]] : [])) ?? [];

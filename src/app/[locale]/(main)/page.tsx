@@ -7,7 +7,6 @@ import { MetaDataProps } from '../layout'
 
 const MAIN_ASSET_PATH = '/assets/film-rolls.svg'
 
-// TODO: Complete SEO fields
 export const generateMetadata = async ({
   params,
 }: MetaDataProps): Promise<Metadata> => {
