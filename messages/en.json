@@ -299,7 +299,8 @@
     "avatar": "Profile image"
   },
   "EditableAvatar": {
-    "edit": "Edit image"
+    "edit": "Edit image",
+    "delete": "Delete image"
   },
   "SwitchButton": {
     "on": "On",

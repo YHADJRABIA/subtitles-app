@@ -297,7 +297,8 @@
     "avatar": "Photo de profil"
   },
   "EditableAvatar": {
-    "edit": "Modifier photo"
+    "edit": "Modifier photo",
+    "delete": "Supprimer photo"
   },
   "SwitchButton": {
     "on": "Activé",
