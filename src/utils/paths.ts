@@ -89,3 +89,34 @@ export const hasMatchingFirstSlug = (
 
   return linkSlug === currentSlug
 }
+
+// TODO: refactor
+export const generateBreadcrumbs = (
+  pathname: string,
+  t: (key: any) => string
+): Array<{ label: string; href: string }> => {
+  if (pathname === '/') return []
+
+  const knownSegments = ['about', 'series', 'dashboard', 'settings', 'account'] as const
+  const breadcrumbs = [{ label: t('home'), href: '/' }]
+
+  let currentPath = ''
+  pathname
+    .split('/')
+    .filter(Boolean)
+    .forEach(segment => {
+      // Skip dynamic segments like [slug]
+      if (segment.startsWith('[') && segment.endsWith(']')) return
+
+      currentPath += `/${segment}`
+      const segmentLower = segment.toLowerCase()
+
+      const label = knownSegments.includes(segmentLower as any)
+        ? t(segmentLower)
+        : segment.charAt(0).toUpperCase() + segment.slice(1)
+
+      breadcrumbs.push({ label, href: currentPath })
+    })
+
+  return breadcrumbs
+}
