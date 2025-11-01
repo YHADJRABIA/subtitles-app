@@ -30,10 +30,15 @@
 }
 
 .cta {
-  cursor: pointer; // TODO: allow tap highlight in mobile
+  cursor: pointer;
   transition: opacity 0.3s ease;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.2);
+
   &:hover {
     opacity: 0.6;
+  }
+  &:active {
+    opacity: 0.4; // Quick visual feedback on touch
   }
 }
 
