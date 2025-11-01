@@ -37,8 +37,8 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  async headers() {
-    return [
+  headers() {
+    return Promise.resolve([
       {
         source: '/(.*)',
         headers: [
@@ -48,7 +48,7 @@ const nextConfig: NextConfig = {
           },
         ],
       },
-    ]
+    ])
   },
   webpack(config) {
     // Grab the existing rule that handles SVG imports
