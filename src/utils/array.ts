@@ -13,4 +13,4 @@ export const ArrayToString = (arr: string[]): string => {
  * Returns an empty array when the input is nullish or empty.
  */
 export const pluck = <T, K extends keyof T>(i: T[] | null | undefined, k: K) =>
-  i?.flatMap(v => (v[k] != null ? [v[k]] : [])) ?? [];
+  i?.flatMap(v => (v[k] !== null ? [v[k]] : [])) ?? []
