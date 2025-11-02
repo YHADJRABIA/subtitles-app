@@ -97,7 +97,13 @@ export const generateBreadcrumbs = (
 ): Array<{ label: string; href: string }> => {
   if (pathname === '/') return []
 
-  const knownSegments = ['about', 'series', 'dashboard', 'settings', 'account'] as const
+  const knownSegments = [
+    'about',
+    'series',
+    'dashboard',
+    'settings',
+    'account',
+  ] as const
   const breadcrumbs = [{ label: t('home'), href: '/' }]
 
   let currentPath = ''
