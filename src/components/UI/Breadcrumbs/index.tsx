@@ -1,47 +1,46 @@
-'use client'
-
 import React from 'react'
-import { usePathname } from '@/i18n/routing'
 import { Link } from '@/i18n/routing'
 import styles from './index.module.scss'
 import { IoChevronForward as ChevronIcon } from 'react-icons/io5'
-import { useTranslations } from 'next-intl'
-import { generateBreadcrumbs } from '@/utils/paths'
 import Typography from '../Typography'
 import cn from 'classnames'
 
-interface PropTypes {
-  className?: string
+export interface BreadcrumbItem {
+  label: string
+  href?: string
 }
 
-const Breadcrumbs = ({ className }: PropTypes) => {
-  const pathname = usePathname()
-  const t = useTranslations('Breadcrumbs')
+interface PropTypes {
+  className?: string
+  items: BreadcrumbItem[]
+}
 
-  const breadcrumbs = generateBreadcrumbs(pathname, t)
-
-  if (!breadcrumbs.length) return null
+const Breadcrumbs = ({ className, items }: PropTypes) => {
+  if (!items.length) return null
 
   return (
     <nav aria-label="Breadcrumb" className={cn(styles.root, className)}>
       <ol className={styles.list}>
-        {breadcrumbs.map((crumb, idx) => {
-          const isLast = idx === breadcrumbs.length - 1
+        {items.map((item, idx) => {
+          const isLast = idx === items.length - 1
+          const key = item.href ?? `${item.label}-${idx}`
 
           return (
-            <li key={crumb.href} className={styles.item}>
-              {!isLast ? (
-                <>
-                  <Link href={crumb.href} className={styles.link}>
-                    {crumb.label}
-                  </Link>
-                  <ChevronIcon aria-hidden="true" size={14} />
-                </>
+            <li key={key} className={styles.item}>
+              {item.href && !isLast ? (
+                <Link href={item.href} className={styles.link}>
+                  {item.label}
+                </Link>
               ) : (
-                <Typography tag="span" size='s' aria-current="page">
-                  {crumb.label}
+                <Typography
+                  tag="span"
+                  size="s"
+                  aria-current={isLast ? 'page' : undefined}
+                >
+                  {item.label}
                 </Typography>
               )}
+              {!isLast && <ChevronIcon aria-hidden="true" size={14} />}
             </li>
           )
         })}

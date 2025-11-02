@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react'
 import Footer from '@/components/Layout/Footer'
 import styles from './layout.module.scss'
 import HeaderWithAuth from '@/components/Layout/Header/HeaderWithAuth'
-import Breadcrumbs from '@/components/UI/Breadcrumbs'
+import BreadcrumbsContainer from '@/components/UI/Breadcrumbs/BreadcrumbsContainer'
 
 interface PropTypes {
   children: ReactNode
@@ -13,7 +13,7 @@ const layout = ({ children }: PropTypes) => {
     <>
       <HeaderWithAuth isConcealable />
       <main className={styles.root}>
-        <Breadcrumbs className={styles.breadCrumbs} />
+        <BreadcrumbsContainer className={styles.breadCrumbs} />
         {children}
       </main>
       <Footer />
