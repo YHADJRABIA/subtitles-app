@@ -2,10 +2,6 @@
 
 ![Application architecture diagram](/public/architecture.png)
 
-## Overview
-
-PySubs is a fully internationalised subtitles platform built with Next.js 15. It provides a multilingual browsing experience for TV series and film subtitles, a secure authentication workflow, and a rich dashboard for authenticated users. The project integrates tightly with DatoCMS for content management and MongoDB for persistent storage.
-
 ## Features
 
 - **Internationalised UX** with locale-aware routing, translated UI copy, and localized API responses.

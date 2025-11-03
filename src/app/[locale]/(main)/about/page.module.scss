@@ -1,7 +1,5 @@
 .root {
   @include flexCenter(column, flex-start, flex-start);
-  padding: var(--page-padding);
-  max-width: var(--page-max-width);
 }
 
 .title {

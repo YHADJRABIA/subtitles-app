@@ -25,6 +25,7 @@ import { notFound } from 'next/navigation'
 import ResponsiveImage from '@/components/DatoCMS/ResponsiveImage'
 import SeriesTrailer from './_components/SeriesTrailer'
 import DateDisplay from '@/components/DateDisplay'
+import { pluck } from '@/utils/array'
 
 export const generateMetadata = generateMetadataFn({
   query: seriesBySlugQuery,
@@ -69,13 +70,9 @@ export default async function SeriesPage({ params }: MetaDataProps) {
     updatedAt,
   } = series
 
-  // TODO: relocale/refactor
-  const extractNames = (people: { name: string }[]) =>
-    people.map(person => person.name)
-
   const [actors, directors] = [
-    extractNames(actorNames),
-    extractNames(directorNames),
+    pluck(actorNames, 'name'),
+    pluck(directorNames, 'name'),
   ]
 
   const coverImageData = coverImage.responsiveImage

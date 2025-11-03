@@ -1,5 +1,6 @@
 import { locales, pathnames } from '@/i18n/routing'
 import { protectedRoutes, loginRegisterRoutes } from '@/routes/routes'
+import { IntlMessagesKey } from '@/types/global'
 import { Pathname } from '@/types/pathnames'
 
 /**
@@ -88,4 +89,64 @@ export const hasMatchingFirstSlug = (
   const currentSlug = currentPath.split('/')[1]
 
   return linkSlug === currentSlug
+}
+
+// TODO: refactor
+export const generateBreadcrumbs = (
+  pathname: string,
+  t: (key: IntlMessagesKey) => string,
+  params?: Readonly<Record<string, string | string[] | undefined>>
+): Array<{ label: string; href: string }> => {
+  if (pathname === '/') return []
+
+  const KNOWN_SEGMENTS = new Set([
+    'about',
+    'series',
+    'dashboard',
+    'settings',
+    'account',
+  ])
+
+  const breadcrumbs: Array<{ label: string; href: string }> = [
+    { label: t('home' as IntlMessagesKey), href: '/' },
+  ]
+
+  const formatLabel = (segment: string): string => {
+    const lower = segment.toLowerCase()
+    if (KNOWN_SEGMENTS.has(lower)) return t(lower as IntlMessagesKey)
+
+    // Convert slug-like segments into title case
+    return lower
+      .split('-')
+      .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+      .join(' ')
+  }
+
+  const resolveParam = (key: string): string | null => {
+    const value = params?.[key]
+    if (!value) return null
+    return Array.isArray(value) ? value[0] : value
+  }
+
+  let currentPath = ''
+
+  for (const rawSegment of pathname.split('/').filter(Boolean)) {
+    let segment = rawSegment
+
+    // Handle dynamic route segments like [id]
+    if (segment.startsWith('[') && segment.endsWith(']')) {
+      const paramKey = segment.slice(1, -1)
+      const resolved = resolveParam(paramKey)
+      if (!resolved) continue
+      segment = decodeURIComponent(resolved)
+    }
+
+    currentPath += `/${segment}`
+    breadcrumbs.push({
+      label: formatLabel(segment),
+      href: currentPath,
+    })
+  }
+
+  return breadcrumbs
 }

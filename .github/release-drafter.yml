@@ -1,47 +1,62 @@
-name-template: 'v$NEXT_PATCH_VERSION'
-tag-template: 'v$NEXT_PATCH_VERSION'
-
+name-template: 'v$RESOLVED_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
 categories:
   - title: '🚀 Features'
     labels:
-      - feature
-      - enhancement
+      - 'feature'
+      - 'enhancement'
+    collapse-after: 5
   - title: '🐛 Bug Fixes'
     labels:
-      - bug
-      - fix
-      - bugfix
+      - 'fix'
+      - 'bugfix'
+      - 'bug'
+    collapse-after: 5
   - title: '🧰 Maintenance'
     labels:
-      - chore
-      - dependencies
-      - refactor
-
-change-template: '- $TITLE (#$NUMBER) by @$AUTHOR'
-no-changes-template: 'No changes since last release.'
-
+      - 'chore'
+      - 'dependencies'
+    collapse-after: 3
+  - title: '📚 Documentation'
+    labels:
+      - 'docs'
+      - 'documentation'
+    collapse-after: 3
+change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
+change-title-escapes: '\<*_&'
 version-resolver:
   major:
     labels:
-      - major
-      - breaking-change
+      - 'major'
+      - 'breaking'
   minor:
     labels:
-      - minor
-      - feature
+      - 'minor'
+      - 'feature'
   patch:
     labels:
-      - patch
-      - fix
-      - bug
-      - bugfix
+      - 'patch'
+      - 'fix'
+      - 'bugfix'
+      - 'chore'
   default: patch
-
+autolabeler:
+  - label: 'feature'
+    title:
+      - '/^feat($$.*$$)?:/i'
+  - label: 'fix'
+    title:
+      - '/^fix($$.*$$)?:/i'
+  - label: 'chore'
+    title:
+      - '/^chore($$.*$$)?:/i'
+  - label: 'docs'
+    title:
+      - '/^docs($$.*$$)?:/i'
+  - label: 'breaking'
+    title:
+      - '/^.*!:/i'
 template: |
-  ## Summary
+  ## Changes
 
   $CHANGES
-
-  ## Contributors
-
-  $CONTRIBUTORS

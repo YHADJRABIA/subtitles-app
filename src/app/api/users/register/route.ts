@@ -18,7 +18,7 @@ export async function POST(
   req: NextRequest
 ): Promise<NextResponse<APIResponse>> {
   try {
-    const locale = getLocaleFromNextRequest(req) // TODO: Use await getLocale() feature after updating to Next.js 15
+    const locale = getLocaleFromNextRequest(req)
 
     const [t_zod, t] = [
       await getTranslations({ locale, namespace: 'Zod' }),

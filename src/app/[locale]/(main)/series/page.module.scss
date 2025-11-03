@@ -1,11 +1,9 @@
 .root {
-  padding: var(--page-padding);
   width: 100%;
   @include flexCenter(column, flex-start, flex-start);
 }
 
 .wrapper {
-  /*   max-width: var(--page-max-width); */
   width: 100%;
 }
 
