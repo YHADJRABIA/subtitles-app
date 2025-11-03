@@ -2,7 +2,6 @@
 
 ![Application architecture diagram](/public/architecture.png)
 
-
 ## Features
 
 - **Internationalised UX** with locale-aware routing, translated UI copy, and localized API responses.
