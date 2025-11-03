@@ -1,14 +1,11 @@
 .root {
-  margin: var(--page-padding) var(--page-padding) 2rem;
-
   @include respond-to('medium') {
     @include flexCenter(column, flex-start, center);
   }
 }
 
 .wrapper {
-  max-width: var(--page-max-width);
-  @include flexCenter(column, flex-start, flex-start);
+  justify-items: flex-start;
 }
 
 .title {
