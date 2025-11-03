@@ -27,7 +27,6 @@ const SeriesPage = ({ params }: MetaDataProps) => {
   redirect({ href: '/series/patrul', locale }) // TODO: Remove when this page is finished
 
   const t = useTranslations('Series')
-  /* TODO: Add breadcrumbs */
 
   return (
     <div className={styles.root}>

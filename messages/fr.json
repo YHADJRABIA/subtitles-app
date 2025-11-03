@@ -281,6 +281,9 @@
       "too_short": "Le code doit contenir au moins 4 chiffres",
       "too_long": "Code trop long. Ne pas dépasser 8 chiffres"
     },
+    "image": {
+      "invalid": "Image invalide"
+    },
     "name": {
       "missing": "Nom requis",
       "too_long": "Nom trop long. Ne pas dépasser 40 caractères"
@@ -297,7 +300,8 @@
     "avatar": "Photo de profil"
   },
   "EditableAvatar": {
-    "edit": "Modifier photo"
+    "edit": "Modifier photo",
+    "delete": "Supprimer photo"
   },
   "SwitchButton": {
     "on": "Activé",
@@ -352,5 +356,13 @@
     "copyright": "© 2024 – {currentYear} Yacine HADJ RABIA"
   },
 
-  "UnderDevelopement": { "title": "En cours de développement" }
+  "UnderDevelopement": { "title": "En cours de développement" },
+  "Breadcrumbs": {
+    "home": "Accueil",
+    "about": "À propos",
+    "series": "Séries",
+    "dashboard": "Tableau de bord",
+    "settings": "Réglages",
+    "account": "Compte"
+  }
 }
