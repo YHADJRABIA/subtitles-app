@@ -1,5 +1,6 @@
 import { locales, pathnames } from '@/i18n/routing'
 import { protectedRoutes, loginRegisterRoutes } from '@/routes/routes'
+import { IntlMessagesKey } from '@/types/global'
 import { Pathname } from '@/types/pathnames'
 
 /**
@@ -93,36 +94,59 @@ export const hasMatchingFirstSlug = (
 // TODO: refactor
 export const generateBreadcrumbs = (
   pathname: string,
-  t: (key: any) => string
+  t: (key: IntlMessagesKey) => string,
+  params?: Readonly<Record<string, string | string[] | undefined>>
 ): Array<{ label: string; href: string }> => {
   if (pathname === '/') return []
 
-  const knownSegments = [
+  const KNOWN_SEGMENTS = new Set([
     'about',
     'series',
     'dashboard',
     'settings',
     'account',
-  ] as const
-  const breadcrumbs = [{ label: t('home'), href: '/' }]
+  ])
+
+  const breadcrumbs: Array<{ label: string; href: string }> = [
+    { label: t('home' as IntlMessagesKey), href: '/' },
+  ]
+
+  const formatLabel = (segment: string): string => {
+    const lower = segment.toLowerCase()
+    if (KNOWN_SEGMENTS.has(lower)) return t(lower as IntlMessagesKey)
+
+    // Convert slug-like segments into title case
+    return lower
+      .split('-')
+      .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+      .join(' ')
+  }
+
+  const resolveParam = (key: string): string | null => {
+    const value = params?.[key]
+    if (!value) return null
+    return Array.isArray(value) ? value[0] : value
+  }
 
   let currentPath = ''
-  pathname
-    .split('/')
-    .filter(Boolean)
-    .forEach(segment => {
-      // Skip dynamic segments like [slug]
-      if (segment.startsWith('[') && segment.endsWith(']')) return
 
-      currentPath += `/${segment}`
-      const segmentLower = segment.toLowerCase()
+  for (const rawSegment of pathname.split('/').filter(Boolean)) {
+    let segment = rawSegment
 
-      const label = knownSegments.includes(segmentLower as any)
-        ? t(segmentLower)
-        : segment.charAt(0).toUpperCase() + segment.slice(1)
+    // Handle dynamic route segments like [id]
+    if (segment.startsWith('[') && segment.endsWith(']')) {
+      const paramKey = segment.slice(1, -1)
+      const resolved = resolveParam(paramKey)
+      if (!resolved) continue
+      segment = decodeURIComponent(resolved)
+    }
 
-      breadcrumbs.push({ label, href: currentPath })
+    currentPath += `/${segment}`
+    breadcrumbs.push({
+      label: formatLabel(segment),
+      href: currentPath,
     })
+  }
 
   return breadcrumbs
 }
