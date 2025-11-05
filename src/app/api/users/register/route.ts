@@ -59,7 +59,7 @@ export async function POST(
     })
 
     const createdUser = await newUser.save()
-    isDevelopment && console.warn(createdUser)
+    if (isDevelopment) console.warn(createdUser)
 
     // Generate verification token
     const verificationToken = await generateVerificationToken(email)

@@ -14,6 +14,7 @@ export async function executeQuery<Result, Variables>(
   query: TadaDocumentNode<Result, Variables>,
   options?: ExecuteQueryOptions<Variables>
 ) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
   buildRequestInit
   const result = await libExecuteQuery(query, {
     variables: options?.variables,
