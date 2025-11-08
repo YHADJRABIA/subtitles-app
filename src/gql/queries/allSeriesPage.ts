@@ -8,6 +8,7 @@ export const allSeriesQuery = graphql(
         slug
         updatedAt: _updatedAt
         name
+        description
         countryOfOrigin
         language
         genre
