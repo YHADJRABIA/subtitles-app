@@ -22,6 +22,7 @@ const FilledImage = ({
       <Image
         {...props}
         fill
+        alt={props.alt}
         className={cn({ [styles.roundedBorder]: hasRoundedBorder })}
       />
     </div>

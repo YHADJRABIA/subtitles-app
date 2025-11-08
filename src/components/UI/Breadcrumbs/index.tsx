@@ -26,16 +26,16 @@ const Breadcrumbs = ({ className, items }: PropTypes) => {
           const key = item.href ?? `${item.label}-${idx}`
 
           return (
-            <li key={key} className={styles.item}>
+            <li className={styles.item} key={key}>
               {item.href && !isLast ? (
-                <Link href={item.href} className={styles.link}>
+                <Link className={styles.link} href={item.href}>
                   {item.label}
                 </Link>
               ) : (
                 <Typography
-                  tag="span"
-                  size="s"
                   aria-current={isLast ? 'page' : undefined}
+                  size="s"
+                  tag="span"
                 >
                   {item.label}
                 </Typography>

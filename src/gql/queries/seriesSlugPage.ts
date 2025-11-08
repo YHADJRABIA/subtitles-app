@@ -11,8 +11,8 @@ export const seriesBySlugQuery = graphql(
   `
     query SeriesBySlugQuery($locale: SiteLocale, $slug: String!) {
       series(
-        locale: $locale
         filter: { slug: { eq: $slug } }
+        locale: $locale
         fallbackLocales: en
       ) {
         _seoMetaTags {
