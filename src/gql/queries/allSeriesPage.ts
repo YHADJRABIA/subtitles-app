@@ -8,13 +8,14 @@ export const allSeriesQuery = graphql(
         slug
         updatedAt: _updatedAt
         name
+        translatedName
         description
         countryOfOrigin
         language
         genre
         releaseYear
         numberOfSeasons
-        coverImage {
+        posterImage {
           responsiveImage {
             ...ResponsiveImageFragment
           }
