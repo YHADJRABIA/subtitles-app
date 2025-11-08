@@ -41,10 +41,7 @@ const SeriesPage = async ({ params }: MetaDataProps) => {
         <Row className={styles.series}>
           {allSeries.map(({ slug, ...series }) => (
             <Col key={slug} width={[12, 6, 4]}>
-              <SeriesCard
-                {...series}
-                slug={slug}
-              />
+              <SeriesCard {...series} slug={slug} />
             </Col>
           ))}
         </Row>
