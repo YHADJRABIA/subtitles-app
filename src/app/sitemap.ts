@@ -50,7 +50,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         },
       },
     },
-    {
+    /*     {
       url: `${websiteUrl}${pathnames['/series'].en}`,
       lastModified: allSeries[0].updatedAt, // TODO: Update when there are more series
       changeFrequency: 'monthly',
@@ -60,7 +60,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           fr: `${websiteUrl}/fr${pathnames['/series'].fr}`,
         },
       },
-    },
+    }, */
   ]
 
   return [...staticRoutes, ...seriesRoutes] as MetadataRoute.Sitemap
