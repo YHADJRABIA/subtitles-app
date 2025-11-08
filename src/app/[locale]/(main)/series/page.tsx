@@ -29,6 +29,7 @@ const SeriesPage = async ({ params }: MetaDataProps) => {
   const { isEnabled: isDraftModeEnabled } = await draftMode()
 
   const { allSeries } = await executeQuery(allSeriesQuery, {
+    variables: { locale },
     includeDrafts: isDraftModeEnabled,
   })
 
