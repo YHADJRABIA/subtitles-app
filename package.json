@@ -16,7 +16,6 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "prepare": "husky",
-    "generate:favicon": "node scripts/generate-favicon.js",
     "generate-schema": "source .env && dotenv -c -- bash -c \"gql.tada generate schema https://graphql.datocms.com --header 'X-Exclude-Invalid: true' --header 'Authorization: $DATOCMS_PUBLISHED_CONTENT_CDA_TOKEN'\""
   },
   "dependencies": {
