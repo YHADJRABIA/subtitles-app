@@ -3,7 +3,7 @@ import Typography, { LinkType, TypographyPropTypes } from '../Typography'
 import styles from './Button.module.scss'
 import cn from 'classnames'
 
-interface LinkButtonPropTypes extends TypographyPropTypes {
+interface LinkButtonPropTypes {
   testId?: string
   variation?: 'primary' | 'secondary' | 'regular'
   backgroundColor?: string
@@ -23,7 +23,7 @@ export const LinkButton = ({
   children,
   icon,
   ...rest
-}: LinkButtonPropTypes) => {
+}: LinkButtonPropTypes & TypographyPropTypes) => {
   const isPrimary = variation === 'primary'
   const Icon = icon?.src
   return (
