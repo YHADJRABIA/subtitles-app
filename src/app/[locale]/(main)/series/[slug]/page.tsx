@@ -47,9 +47,7 @@ export default async function SeriesPage({ params }: MetaDataProps) {
     includeDrafts: isDraftModeEnabled,
   })
 
-  if (!series) {
-    notFound()
-  }
+  if (!series) notFound()
 
   const {
     name,
