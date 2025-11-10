@@ -21,7 +21,7 @@ import { ResponsiveImageType } from '@/types/fragment'
 interface PropTypes {
   href: string
   name: string
-  translatedName: string
+  translatedName?: string
   description: string
   image: ResponsiveImageType
   releaseYear: number
