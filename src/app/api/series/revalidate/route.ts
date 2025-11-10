@@ -36,6 +36,7 @@ export async function POST(req: NextRequest) {
 
     // Revalidate the page
     revalidatePath(`/series/${slug}`) // TODO: fetch "series" from body instead
+    revalidatePath(`/fr/series/${slug}`) // TODO: rework webhook to validate specific locale
     return NextResponse.json({
       message: t('successful_revalidation'),
       success: true,
