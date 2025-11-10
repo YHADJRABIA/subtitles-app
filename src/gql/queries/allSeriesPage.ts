@@ -4,7 +4,11 @@ import { ResponsiveImageFragment } from '@/components/DatoCMS/ResponsiveImage'
 export const allSeriesQuery = graphql(
   `
     query AllSeriesQuery($locale: SiteLocale) {
-      allSeries(locale: $locale, fallbackLocales: en) {
+      allSeries(
+        locale: $locale
+        fallbackLocales: en
+        orderBy: _firstPublishedAt_ASC
+      ) {
         slug
         updatedAt: _updatedAt
         name
