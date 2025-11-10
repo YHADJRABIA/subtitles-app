@@ -21,6 +21,7 @@ import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 import { handleVerifyEmailValidationToken } from '@/actions/auth'
 import { Link } from '@/i18n/routing'
 import { getSuccessMessage } from '@/utils/api'
+import { colors } from '@/utils/color'
 
 const VerifyEmail = () => {
   const [t, t_zod] = [
@@ -79,9 +80,7 @@ const VerifyEmail = () => {
             <Icon
               style={{
                 fontSize: 22,
-                color: isError
-                  ? 'var(--primary-red-color)'
-                  : 'var(--primary-green-color)',
+                color: isError ? colors.red.primary : colors.green.primary,
               }}
             />
             <Typography weight="semiBold">{info.label}</Typography>

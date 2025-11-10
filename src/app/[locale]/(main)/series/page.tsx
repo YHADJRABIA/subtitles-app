@@ -1,12 +1,15 @@
-import { use } from 'react'
 import Typography from '@/components/UI/Typography'
 import styles from './page.module.scss'
-import { useTranslations } from 'next-intl'
 import { getTranslations } from 'next-intl/server'
 import { Metadata } from 'next'
-import InfoImage from '@/components/InfoImage'
-import { redirect } from '@/i18n/routing'
 import { MetaDataProps } from '../../layout'
+import { executeQuery } from '@/lib/datocms/executeQuery'
+import { allSeriesQuery } from '@/gql/queries/allSeriesPage'
+import { Row, Col } from '@/components/UI/Grid'
+import SeriesCard from './_components/SeriesCard'
+import { draftMode } from 'next/headers'
+import { ResponsiveImageType } from '@/types/fragment'
+import { Series } from '@/types/series'
 
 export const generateMetadata = async ({
   params,
@@ -21,12 +24,18 @@ export const generateMetadata = async ({
   }
 }
 
-const SeriesPage = ({ params }: MetaDataProps) => {
-  const { locale } = use(params)
+const SeriesPage = async ({ params }: MetaDataProps) => {
+  const { locale } = await params
 
-  redirect({ href: '/series/patrul', locale }) // TODO: Remove when this page is finished
+  const t = await getTranslations({ locale, namespace: 'Series' })
+  const { isEnabled: isDraftModeEnabled } = await draftMode()
 
-  const t = useTranslations('Series')
+  const { allSeries } = (await executeQuery(allSeriesQuery, {
+    variables: { locale },
+    includeDrafts: isDraftModeEnabled,
+  })) as {
+    allSeries: Series[]
+  }
 
   return (
     <div className={styles.root}>
@@ -34,59 +43,20 @@ const SeriesPage = ({ params }: MetaDataProps) => {
         <Typography className={styles.title} tag="h1" weight="bold">
           {t('title')}
         </Typography>
-        <div className={styles.container}>
-          <section className={styles.featured}>
-            <Typography
-              className={styles.featuredTitle}
-              size="xl"
-              tag="h2"
-              weight="semiBold"
-            >
-              {t('featured')}
-            </Typography>
-
-            <InfoImage
-              alt="Patrul"
-              src="/assets/patrul-cover.jpg"
-              title="Патруль"
-            />
-          </section>
-
-          {/*  <section className={styles.series}>
-          <Typography
-            tag="h2"
-            weight="semiBold"
-            size="xl"
-            className={styles.seriesTitle}
-          >
-            {t('all_series')}
-          </Typography>
-
-          <div className={styles.serie}>
-            <Typography
-              tag="h3"
-              size="m"
-              link={{ href: '/series/patrul' }}
-            >
-              Патруль
-            </Typography>
-          </div>
-        </section> */}
-        </div>
+        <Row className={styles.series}>
+          {allSeries.map(({ slug, posterImage, ...series }) => (
+            <Col key={slug} width={[12, 6, 4]}>
+              <SeriesCard
+                {...series}
+                href={`/series/${slug}`}
+                image={posterImage.responsiveImage as ResponsiveImageType}
+              />
+            </Col>
+          ))}
+        </Row>
       </div>
     </div>
   )
 }
-
-/*  <Row>
-          <Col width={12}>
-            <Video
-              videoSrc="/assets/patrul-trailer.mp4"
-              className={styles.trailer}
-              captionsSrc="/assets/patrul-trailer.vtt"
-              captionsLabel="En"
-            />
-          </Col>
-        </Row> */
 
 export default SeriesPage

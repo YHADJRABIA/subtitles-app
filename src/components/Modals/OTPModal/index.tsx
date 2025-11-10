@@ -14,6 +14,7 @@ import { APIResponse } from '@/types/api'
 import { notify } from '@/lib/toastify'
 import { useTimer } from '@/hooks/useTimer'
 import { getSuccessMessage } from '@/utils/api'
+import { colors } from '@/utils/color'
 
 interface PropTypes {
   onSubmit: (code: string) => Promise<{ data: APIResponse }>
@@ -127,7 +128,7 @@ const OTPModal = ({
   const Success = () => (
     <div className={styles.success}>
       <div className={styles.successHeading}>
-        <SuccessIcon color="var(--primary-green-color)" size={35} />
+        <SuccessIcon color={colors.green.primary} size={35} />
         <Typography weight="semiBold">{statusMessage?.message}</Typography>
       </div>
       <Button variation="secondary" onClick={onCancel}>
@@ -186,7 +187,7 @@ const OTPModal = ({
               />
               <Typography
                 className={cn(styles.error, 'hidden', { visible: isError })}
-                color="var(--primary-red-color)"
+                color={colors.red.primary}
                 size="s"
                 weight="semiBold"
               >
