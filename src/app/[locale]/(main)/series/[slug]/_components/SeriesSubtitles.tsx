@@ -11,6 +11,7 @@ import {
   SeriesEpisode,
   SeriesSubtitles as SeriesSubtitlesType,
 } from '@/types/series'
+import { colors } from '@/utils/color'
 
 interface PropTypes {
   className?: string
@@ -98,7 +99,7 @@ const SeasonItem = memo(
         onClick={handleClick}
       >
         <Typography
-          color="var(--primary-white-color)"
+          color={colors.white.primary}
           size="xs"
           tag="h4"
           title={isUnavailable ? t('not_available_yet') : undefined}

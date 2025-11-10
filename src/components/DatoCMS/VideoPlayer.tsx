@@ -5,6 +5,7 @@ import {
 } from 'react-datocms'
 import styles from './VideoPlayer.module.scss'
 import cn from 'classnames'
+import { colors } from '@/utils/color'
 
 export const VideoPlayerFragment = graphql(`
   fragment VideoPlayerFragment on VideoAltTitleFileField {
@@ -44,7 +45,7 @@ export default function VideoPlayer({ data, className, ...other }: Props) {
   return (
     <div className={cn(styles.root, className)}>
       <DatoVideoPlayer
-        accentColor="var(--tertiary-black-color)"
+        accentColor={colors.black.tertiary}
         data={unmaskedData.video}
         {...other}
       />

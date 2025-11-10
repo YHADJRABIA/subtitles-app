@@ -3,6 +3,7 @@ import styles from './SeriesThumbnail.module.scss'
 import cn from 'classnames'
 import FilledImage from '@/components/UI/FilledImage'
 import Typography from '@/components/UI/Typography'
+import { colors } from '@/utils/color'
 
 // TODO: finish up
 interface PropTypes {
@@ -23,7 +24,7 @@ const SeriesThumbnail = ({
     <div className={cn(styles.root, className)}>
       <FilledImage alt={alt} src={src} />
       <span className={styles.overlay}>
-        <Typography color="var(--primary-white-color)" size="s">
+        <Typography color={colors.white.primary} size="s">
           {title}
         </Typography>
 

@@ -13,6 +13,7 @@ import { getErrorMessage } from '@/utils/errors'
 import { handleLogout } from '@/actions/auth'
 import { getSuccessMessage } from '@/utils/api'
 import { BsTrash as TrashBinIcon } from 'react-icons/bs'
+import { colors } from '@/utils/color'
 
 interface PropTypes {
   className?: string
@@ -62,7 +63,7 @@ const DeleteAccountButton = ({ className, userId }: PropTypes) => {
 
   return (
     <Button
-      backgroundColor="var(--primary-red-color)"
+      backgroundColor={colors.red.primary}
       className={cn(styles.root, className)}
       disabled={isLoading}
       isLoading={isLoading}
