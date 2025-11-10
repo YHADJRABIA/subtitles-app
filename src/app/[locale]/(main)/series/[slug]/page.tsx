@@ -114,7 +114,9 @@ export default async function SeriesPage({ params }: MetaDataProps) {
               className={styles.description}
               title={t('description')}
             />
-            <SeriesTrailer thumbnail={thumbnail} videoData={trailer} />
+            {trailer && (
+              <SeriesTrailer thumbnail={thumbnail} videoData={trailer} />
+            )}
           </div>
 
           <StickyContainer className={styles.rightContainer}>

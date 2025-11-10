@@ -3218,7 +3218,7 @@ type SeriesRecord implements RecordInterface {
   ): SeoField
   slug: String!
   subtitles: [SeasonRecord!]!
-  trailer: VideoAltTitleFileField!
+  trailer: VideoAltTitleFileField
   trailerThumbnail: FileField
   translatedName(
     """The locale to use to fetch the field's content"""
