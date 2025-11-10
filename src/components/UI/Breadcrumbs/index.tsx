@@ -36,7 +36,7 @@ const Breadcrumbs = ({ className, items }: PropTypes) => {
                   aria-current={isLast ? 'page' : undefined}
                   size="s"
                   tag="span"
-                  weight={isLast ? "semiBold" : undefined}
+                  weight={isLast ? 'semiBold' : undefined}
                 >
                   {item.label}
                 </Typography>
