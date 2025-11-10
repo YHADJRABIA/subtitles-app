@@ -3,14 +3,12 @@ import cn from 'classnames'
 import styles from './SeriesTrailer.module.scss'
 import Typography from '@/components/UI/Typography'
 import { useTranslations } from 'next-intl'
-import VideoPlayer, {
-  VideoPlayerFragment,
-} from '@/components/DatoCMS/VideoPlayer'
-import { FragmentOf } from 'gql.tada'
+import VideoPlayer from '@/components/DatoCMS/VideoPlayer'
+import { VideoPlayerType } from '@/types/fragment'
 
 interface PropTypes {
   className?: string
-  videoData?: FragmentOf<typeof VideoPlayerFragment>
+  videoData?: VideoPlayerType
   thumbnail?: string
 }
 

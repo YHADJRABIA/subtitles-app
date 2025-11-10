@@ -11,21 +11,19 @@ import type {
   SeriesGenre,
   SeriesNumberOfSeasons,
 } from '@/types/series'
-import ResponsiveImage, {
-  ResponsiveImageFragment,
-} from '@/components/DatoCMS/ResponsiveImage'
+import ResponsiveImage from '@/components/DatoCMS/ResponsiveImage'
 import Image from 'next/image'
 import { getFlagFromCountryCode } from '@/utils/flag'
 import { useTranslations } from 'next-intl'
 import { colors } from '@/utils/color'
-import { FragmentOf } from 'gql.tada'
+import { ResponsiveImageType } from '@/types/fragment'
 
 interface PropTypes {
   href: string
   name: string
   translatedName: string
   description: string
-  image: FragmentOf<typeof ResponsiveImageFragment>
+  image: ResponsiveImageType
   releaseYear: number
   numberOfSeasons: SeriesNumberOfSeasons
   genre: SeriesGenre

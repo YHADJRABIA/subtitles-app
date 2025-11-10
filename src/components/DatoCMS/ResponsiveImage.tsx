@@ -1,7 +1,8 @@
-import { type FragmentOf, graphql, readFragment } from '@/lib/datocms/graphql'
+import { graphql, readFragment } from '@/lib/datocms/graphql'
 import { type ImagePropTypes, SRCImage } from 'react-datocms'
 import styles from './ResponsiveImage.module.scss'
 import cn from 'classnames'
+import { ResponsiveImageType } from '@/types/fragment'
 
 export const ResponsiveImageFragment = graphql(`
   fragment ResponsiveImageFragment on ResponsiveImage {
@@ -19,7 +20,7 @@ export const ResponsiveImageFragment = graphql(`
 `)
 
 type Props = Omit<ImagePropTypes, 'data'> & {
-  data: FragmentOf<typeof ResponsiveImageFragment>
+  data: ResponsiveImageType
   hasRoundedBorder?: boolean
 }
 
