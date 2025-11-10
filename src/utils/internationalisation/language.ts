@@ -1,6 +1,6 @@
 import { Locale } from '@/types/locale'
-import FrFlagIcon from '../../../public/flags/fr.svg?url'
-import UkFlagIcon from '../../../public/flags/uk.svg?url'
+import FrFlagIcon from '../../../public/round-flags/fr.svg?url'
+import UkFlagIcon from '../../../public/round-flags/uk.svg?url'
 import { locales } from '@/i18n/routing'
 
 interface Language {

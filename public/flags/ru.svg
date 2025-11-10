@@ -1,13 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
 <svg
+  width="800px"
+  height="800px"
+  viewBox="0 0 36 36"
   xmlns="http://www.w3.org/2000/svg"
-  width="512"
-  height="512"
-  viewBox="0 0 512 512"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  aria-hidden="true"
+  role="img"
+  preserveAspectRatio="xMidYMid meet"
 >
-  <mask id="a"><circle cx="256" cy="256" r="256" fill="#fff" /></mask>
-  <g mask="url(#a)">
-    <path fill="#0052b4" d="M512 170v172l-256 32L0 342V170l256-32z" />
-    <path fill="#eee" d="M512 0v170H0V0Z" />
-    <path fill="#d80027" d="M512 342v170H0V342Z" />
-  </g>
+  <path fill="#CE2028" d="M36 27a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4v-4h36v4z"></path>
+  <path fill="#22408C" d="M0 13h36v10H0z"></path>
+  <path fill="#EEE" d="M32 5H4a4 4 0 0 0-4 4v4h36V9a4 4 0 0 0-4-4z"></path>
 </svg>

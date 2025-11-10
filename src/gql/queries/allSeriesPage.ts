@@ -3,17 +3,23 @@ import { ResponsiveImageFragment } from '@/components/DatoCMS/ResponsiveImage'
 
 export const allSeriesQuery = graphql(
   `
-    query AllSeriesQuery {
-      allSeries {
+    query AllSeriesQuery($locale: SiteLocale) {
+      allSeries(
+        locale: $locale
+        fallbackLocales: en
+        orderBy: _firstPublishedAt_ASC
+      ) {
         slug
         updatedAt: _updatedAt
         name
+        translatedName
+        description
         countryOfOrigin
         language
         genre
         releaseYear
         numberOfSeasons
-        coverImage {
+        posterImage {
           responsiveImage {
             ...ResponsiveImageFragment
           }

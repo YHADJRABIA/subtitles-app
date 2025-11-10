@@ -17,22 +17,28 @@ type LineHeight = keyof typeof lineHeights
 export type TextSize = 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | 'xxxl'
 export type TextAlign = 'left' | 'center' | 'right'
 
-export interface TypographyPropTypes extends HTMLAttributes<HTMLElement> {
-  weight?: TextWeight
-  align?: TextAlign
-  lineHeight?: LineHeight
-  size?: TextSize
-  color?: string
-  uppercase?: boolean
-  isFullWidth?: boolean
-  link?: LinkType
-  className?: string
-  children: ReactNode
-  onClick?: MouseEventHandler<HTMLElement>
-  tag?: TagType
-  backgroundColor?: string
-  testId?: string
-}
+// Make uppercase and capitalize mutually exclusive
+type TextTransformProps =
+  | { uppercase?: true; capitalize?: never }
+  | { uppercase?: never; capitalize?: true }
+  | { uppercase?: false; capitalize?: false }
+
+export type TypographyPropTypes = HTMLAttributes<HTMLElement> &
+  TextTransformProps & {
+    weight?: TextWeight
+    align?: TextAlign
+    lineHeight?: LineHeight
+    size?: TextSize
+    color?: string
+    isFullWidth?: boolean
+    link?: LinkType
+    className?: string
+    children: ReactNode
+    onClick?: MouseEventHandler<HTMLElement>
+    tag?: TagType
+    backgroundColor?: string
+    testId?: string
+  }
 
 const tagMap = {
   h1: 'h1',
@@ -51,6 +57,7 @@ const Typography = ({
   weight = 'normal',
   color,
   uppercase = false,
+  capitalize = false,
   align = 'left',
   size,
   link = { href: null, openInNewTab: false },
@@ -80,7 +87,7 @@ const Typography = ({
   const commonProps = {
     className: cn(
       styles.root,
-      { isFullWidth, uppercase },
+      { isFullWidth, uppercase, capitalize },
       size && styles[size],
       className
     ),
@@ -101,7 +108,7 @@ const Typography = ({
     <Tag
       {...props}
       {...commonProps}
-      onClick={onClick ? handleClick : undefined} // Allows component to remain server component if no onClick is passed
+      onClick={onClick ? handleClick : undefined}
     >
       {children}
     </Tag>

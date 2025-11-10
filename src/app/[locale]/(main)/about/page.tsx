@@ -15,6 +15,7 @@ import { notFound } from 'next/navigation'
 import { generateMetadataFn } from '@/lib/datocms/generateMetaDataFn'
 import { aboutPageQuery } from '@/gql/queries/aboutPage'
 import { Locale } from '@/types/locale'
+import { colors } from '@/utils/color'
 
 export const generateMetadata = generateMetadataFn({
   query: aboutPageQuery,
@@ -88,7 +89,7 @@ export default async function AboutPage({ params }: MetaDataProps) {
             <Accordion
               expandMultiple
               hasBackgroundEffect
-              backgroundColor="var(--primary-gray-color)"
+              backgroundColor={colors.gray.primary}
               items={faqItems}
             />
           )}

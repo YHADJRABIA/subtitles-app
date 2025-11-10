@@ -8,6 +8,7 @@ import Typography from '@/components/UI/Typography'
 import { LinkButton } from '@/components/UI/Button/LinkButton'
 import { MdOutlineKeyboardBackspace as BackIcon } from 'react-icons/md'
 import { useTranslations } from 'next-intl'
+import { colors } from '@/utils/color'
 
 const SVG_PATH = '/assets/ice-fishing.svg'
 
@@ -41,7 +42,7 @@ const NotFoundPage = () => {
       </main>
       <Typography
         className={styles.credits}
-        color="var(--primary-blue-color)"
+        color={colors.blue.primary}
         link={{ href: 'https://storyset.com/', openInNewTab: true }}
         size="s"
       >

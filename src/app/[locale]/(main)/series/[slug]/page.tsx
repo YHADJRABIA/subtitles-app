@@ -26,6 +26,7 @@ import ResponsiveImage from '@/components/DatoCMS/ResponsiveImage'
 import SeriesTrailer from './_components/SeriesTrailer'
 import DateDisplay from '@/components/DateDisplay'
 import { pluck } from '@/utils/array'
+import { colors } from '@/utils/color'
 
 export const generateMetadata = generateMetadataFn({
   query: seriesBySlugQuery,
@@ -47,9 +48,7 @@ export default async function SeriesPage({ params }: MetaDataProps) {
     includeDrafts: isDraftModeEnabled,
   })
 
-  if (!series) {
-    notFound()
-  }
+  if (!series) notFound()
 
   const {
     name,
@@ -109,13 +108,15 @@ export default async function SeriesPage({ params }: MetaDataProps) {
               numberOfSeasons={numberOfSeasons as SeriesNumberOfSeasons}
               releaseYear={releaseYear}
             />
-            <Separator color="var(--primary-gray-border)" />
+            <Separator color={colors.gray.border.primary} />
             <SeriesDescription
               body={description}
               className={styles.description}
               title={t('description')}
             />
-            <SeriesTrailer thumbnail={thumbnail} videoData={trailer} />
+            {trailer && (
+              <SeriesTrailer thumbnail={thumbnail} videoData={trailer} />
+            )}
           </div>
 
           <StickyContainer className={styles.rightContainer}>

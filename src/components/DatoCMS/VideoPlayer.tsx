@@ -1,10 +1,12 @@
-import { type FragmentOf, graphql, readFragment } from '@/lib/datocms/graphql'
+import { graphql, readFragment } from '@/lib/datocms/graphql'
 import {
   VideoPlayer as DatoVideoPlayer,
   type VideoPlayerProps,
 } from 'react-datocms'
 import styles from './VideoPlayer.module.scss'
 import cn from 'classnames'
+import { colors } from '@/utils/color'
+import { VideoPlayerType } from '@/types/fragment'
 
 export const VideoPlayerFragment = graphql(`
   fragment VideoPlayerFragment on VideoAltTitleFileField {
@@ -28,7 +30,7 @@ export const VideoPlayerFragment = graphql(`
 `)
 
 type Props = Omit<VideoPlayerProps, 'data'> & {
-  data: FragmentOf<typeof VideoPlayerFragment>
+  data: VideoPlayerType
   className?: string
 }
 
@@ -44,7 +46,7 @@ export default function VideoPlayer({ data, className, ...other }: Props) {
   return (
     <div className={cn(styles.root, className)}>
       <DatoVideoPlayer
-        accentColor="var(--tertiary-black-color)"
+        accentColor={colors.black.tertiary}
         data={unmaskedData.video}
         {...other}
       />

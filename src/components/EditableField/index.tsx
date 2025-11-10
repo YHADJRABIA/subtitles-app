@@ -12,6 +12,7 @@ import Subfield from '../Forms/Subfield'
 import { ValidFieldNames } from '@/types/schemas/general'
 import { FieldBasePropTypes } from '@/types/field'
 import { APIResponse } from '@/types/api'
+import { colors } from '@/utils/color'
 
 interface PropTypes<T, K extends ValidFieldNames>
   extends FieldBasePropTypes<K> {
@@ -150,10 +151,7 @@ const EditableField = <T, K extends ValidFieldNames & string>({
         </Typography>
       )}
 
-      <Separator
-        className={styles.separator}
-        color="var(--primary-black-color)"
-      />
+      <Separator className={styles.separator} color={colors.black.primary} />
     </div>
   )
 }

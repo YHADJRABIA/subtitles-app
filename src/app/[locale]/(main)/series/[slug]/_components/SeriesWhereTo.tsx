@@ -4,6 +4,7 @@ import styles from './SeriesWhereTo.module.scss'
 import { useTranslations } from 'next-intl'
 import Typography from '@/components/UI/Typography'
 import { PiMapPinThin as MapMarkerIcon } from 'react-icons/pi'
+import { colors } from '@/utils/color'
 
 interface PropTypes {
   className?: string
@@ -47,7 +48,7 @@ const Item = ({ label, href }: { label: string; href: string }) => {
     <span className={styles.item}>
       <Typography
         className={styles.link}
-        color="var(--secondary-blue-color)"
+        color={colors.blue.secondary}
         link={{ href: href, openInNewTab: true }}
         size="xs"
       >

@@ -51,7 +51,7 @@ const useNavLinks = ({ isConnected }: PropTypes) => {
       icon: AboutIcon,
     },
     {
-      url: '/series/patrul', // TODO: switch page to /series when page is finished
+      url: '/series',
       label: t('series'),
       icon: SubtitlesIcon,
     },

@@ -10,6 +10,7 @@ import {
 } from 'react-icons/pi'
 import useIsOnMobile from '@/hooks/useIsOnMobile'
 import { getErrorMessage } from '@/utils/errors'
+import { colors } from '@/utils/color'
 
 interface PropTypes {
   onConfirm: () => void | Promise<void>
@@ -29,7 +30,7 @@ const ConfirmationModal = ({
   const t = useTranslations('ConfirmationModal')
   const isInfo = type === 'info'
   const Icon = isInfo ? InfoIcon : WarningIcon
-  const color = isInfo ? undefined : 'var(--primary-red-color)'
+  const color = isInfo ? undefined : colors.red.primary
 
   const handleConfirm = async () => {
     setisLoading(true)
