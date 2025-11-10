@@ -8,6 +8,8 @@ import { allSeriesQuery } from '@/gql/queries/allSeriesPage'
 import { Row, Col } from '@/components/UI/Grid'
 import SeriesCard from './_components/SeriesCard'
 import { draftMode } from 'next/headers'
+import { ResponsiveImageType } from '@/types/fragment'
+import { Series } from '@/types/series'
 
 export const generateMetadata = async ({
   params,
@@ -28,10 +30,12 @@ const SeriesPage = async ({ params }: MetaDataProps) => {
   const t = await getTranslations({ locale, namespace: 'Series' })
   const { isEnabled: isDraftModeEnabled } = await draftMode()
 
-  const { allSeries } = await executeQuery(allSeriesQuery, {
+  const { allSeries } = (await executeQuery(allSeriesQuery, {
     variables: { locale },
     includeDrafts: isDraftModeEnabled,
-  })
+  })) as {
+    allSeries: Series[]
+  }
 
   return (
     <div className={styles.root}>
@@ -40,9 +44,13 @@ const SeriesPage = async ({ params }: MetaDataProps) => {
           {t('title')}
         </Typography>
         <Row className={styles.series}>
-          {allSeries.map(({ slug, ...series }) => (
+          {allSeries.map(({ slug, posterImage, ...series }) => (
             <Col key={slug} width={[12, 6, 4]}>
-              <SeriesCard {...series} slug={slug} />
+              <SeriesCard
+                {...series}
+                href={`/series/${slug}`}
+                image={posterImage.responsiveImage as ResponsiveImageType}
+              />
             </Col>
           ))}
         </Row>
