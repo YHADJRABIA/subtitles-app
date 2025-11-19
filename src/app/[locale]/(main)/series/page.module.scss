@@ -8,11 +8,11 @@
 }
 
 .title {
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
 }
 
 .series {
-  row-gap: 2rem;
+  row-gap: 4rem;
 
   @include respond-to('medium') {
     row-gap: 2.5rem;
