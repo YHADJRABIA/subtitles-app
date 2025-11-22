@@ -5,18 +5,27 @@
   position: sticky;
   top: 0;
   height: var(--header-height);
-  @include flexCenter(row);
+  @include flexCenter(row, space-between, center, nowrap);
   background-color: var(--primary-black-color);
   padding: 0.5rem 2.5rem;
+  --mobile-search-width: clamp(14rem, 60%, 26rem);
 }
 
 .authSection {
   margin-left: calc(1rem + 2%);
 }
 
-.nav {
+.container {
+  @include flexCenter(row, flex-end, center, nowrap);
+  gap: 1.5rem;
   margin-left: auto;
 }
+
+.searchar {
+  width: var(--mobile-search-width);
+  max-width: 100%;
+}
+
 .languageMenu {
   margin-left: calc(0.5rem + 2.5%);
 }

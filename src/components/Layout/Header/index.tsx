@@ -1,10 +1,13 @@
 'use client'
-import React from 'react'
+
+import React, { useState } from 'react'
 import styles from './Header.module.scss'
 import Nav from './Nav'
 import Logo from './Logo'
 import cn from 'classnames'
 import { useScrollDirection } from '@/hooks/useScrollDirection'
+import Searchbar from '@/components/Searchbar'
+import { useTranslations } from 'next-intl'
 
 interface PropTypes {
   isConnected: boolean
@@ -17,9 +20,12 @@ const Header = ({
   className,
   isConcealable = false,
 }: PropTypes) => {
+  const t = useTranslations('Series')
   const scrollDirection = useScrollDirection()
   const isDownScroll = scrollDirection === 'down'
   const translateY = () => (isDownScroll ? '-100%' : 0)
+
+  const [mobileQuery, setMobileQuery] = useState('')
 
   return (
     <header
@@ -29,7 +35,18 @@ const Header = ({
       }
     >
       <Logo isInvertedColor size={50} />
-      <Nav className={styles.nav} isConnected={isConnected} />
+
+      <div className={styles.container}>
+        <Searchbar
+          isFoldable
+          className={styles.searchbar}
+          placeholder={t('search_placeholder')}
+          value={mobileQuery}
+          onChange={setMobileQuery}
+        />
+
+        <Nav isConnected={isConnected} />
+      </div>
     </header>
   )
 }
