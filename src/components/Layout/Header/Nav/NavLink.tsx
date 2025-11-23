@@ -18,7 +18,7 @@ const NavLink = ({ isActive, link, onClick, className }: NavLinkProps) => {
     >
       <Typography
         className={styles.link}
-        link={{ href: link?.url ?? null }}
+        link={{ href: isActive ? null : link?.url ?? null }}
         size="s"
         weight={isActive ? 'semiBold' : undefined}
       >
