@@ -12,6 +12,7 @@ import { LinkButton } from '@/components/UI/Button/LinkButton'
 import { SUPPORT_LINK } from '@/utils/constants'
 import { useTranslations } from 'next-intl'
 import { SiBuymeacoffee as SupportIcon } from 'react-icons/si'
+import UserMenu from '../UserMenu'
 
 interface PropTypes {
   isConnected: boolean
@@ -50,8 +51,8 @@ const Nav = ({ className, isConnected }: PropTypes) => {
           />
         </ul>
         <Separator className={styles.separator} />
-        {/* TODO: Reuse later  <AuthSection showAccount={isConnected} className={styles.authSection} /> */}
         <div className={styles.bottomSection}>
+          <UserMenu isConnected={isConnected} />
           <LanguageMenu isInverted={!isOnDesktop} />
           <LinkButton
             icon={{ src: SupportIcon }}

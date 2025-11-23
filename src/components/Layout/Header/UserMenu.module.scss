@@ -1,0 +1,15 @@
+.root {
+  @include hideOnSmall;
+  &:hover,
+  &:focus-visible,
+  &:active {
+    .avatar {
+      color: var(--primary-yellow-color);
+    }
+  }
+}
+
+.avatar {
+  color: var(--primary-white-color);
+  transition: all 0.3s ease;
+}
