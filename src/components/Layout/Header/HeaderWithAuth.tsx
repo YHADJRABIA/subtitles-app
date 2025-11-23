@@ -10,7 +10,13 @@ interface PropTypes {
 const HeaderWithAuth = ({ isConcealable = false }: PropTypes) => {
   const { data: session } = useSession()
 
-  return <Header isConcealable={isConcealable} isConnected={!!session?.user} />
+  return (
+    <Header
+      isConcealable={isConcealable}
+      isConnected={!!session?.user}
+      userAvatar={session?.user?.image}
+    />
+  )
 }
 
 export default HeaderWithAuth

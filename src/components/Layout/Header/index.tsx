@@ -2,7 +2,7 @@
 
 import React from 'react'
 import styles from './Header.module.scss'
-import Nav from './Nav'
+import Nav, { NavProps } from './Nav'
 import Logo from './Logo'
 import cn from 'classnames'
 import { useScrollDirection } from '@/hooks/useScrollDirection'
@@ -12,14 +12,13 @@ import { Series } from '@/types/series'
 import SeriesSuggestion from '@/components/Searchbar/SeriesSuggestion'
 import { useSeriesSearch } from '@/hooks/useSeriesSearch'
 
-interface PropTypes {
-  isConnected: boolean
-  className?: string
+interface PropTypes extends NavProps {
   isConcealable?: boolean
 }
 
 const Header = ({
   isConnected,
+  userAvatar,
   className,
   isConcealable = false,
 }: PropTypes) => {
@@ -70,7 +69,7 @@ const Header = ({
           onSelect={clearSearch}
         />
 
-        <Nav isConnected={isConnected} />
+        <Nav isConnected={isConnected} userAvatar={userAvatar} />
       </div>
     </header>
   )
