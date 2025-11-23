@@ -29,6 +29,27 @@ const Header = ({
 
   const { query, setQuery, suggestions, isLoading, clearSearch } =
     useSeriesSearch()
+  const SeriesSearchbar = ({
+    isFoldable,
+    className,
+  }: {
+    isFoldable?: boolean
+    className: string
+  }) => (
+    <Searchbar
+      className={className}
+      isFoldable={isFoldable}
+      items={suggestions}
+      loading={isLoading}
+      placeholder={t('search_placeholder')}
+      renderItem={(series: Series, onSelect) => (
+        <SeriesSuggestion series={series} onSelect={onSelect} />
+      )}
+      value={query}
+      onChange={setQuery}
+      onSelect={clearSearch}
+    />
+  )
 
   return (
     <header
@@ -40,34 +61,11 @@ const Header = ({
       <Logo isInvertedColor size={50} />
 
       {/* Desktop */}
-      <Searchbar<Series>
-        className={styles.searchbarDesktop}
-        items={suggestions}
-        loading={isLoading}
-        placeholder={t('search_placeholder')}
-        renderItem={(series, onSelect) => (
-          <SeriesSuggestion series={series} onSelect={onSelect} />
-        )}
-        value={query}
-        onChange={setQuery}
-        onSelect={clearSearch}
-      />
+      <SeriesSearchbar className={styles.searchbarDesktop} />
 
       <div className={styles.container}>
         {/* Mobile */}
-        <Searchbar<Series>
-          isFoldable
-          className={styles.searchbarMobile}
-          items={suggestions}
-          loading={isLoading}
-          placeholder={t('search_placeholder')}
-          renderItem={(series, onSelect) => (
-            <SeriesSuggestion series={series} onSelect={onSelect} />
-          )}
-          value={query}
-          onChange={setQuery}
-          onSelect={clearSearch}
-        />
+        <SeriesSearchbar isFoldable className={styles.searchbarMobile} />
 
         <Nav isConnected={isConnected} userAvatar={userAvatar} />
       </div>
