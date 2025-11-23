@@ -2,16 +2,19 @@
   width: 100%;
   background-color: var(--primary-gray-color);
   box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.2);
+}
+
+.wrapper {
+  margin: 0 auto;
+  padding: 0 var(--page-padding);
+
+  @include respond-to('medium') {
+    max-width: var(--container-max-width);
+  }
 
   ul {
-    margin-left: 2rem;
     @include flexCenter(row, flex-start, center);
     height: inherit;
     gap: 1.5rem;
-
-    @include respond-to('medium') {
-      margin-left: initial;
-      justify-content: center;
-    }
   }
 }

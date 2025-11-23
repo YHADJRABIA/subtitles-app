@@ -32,12 +32,14 @@ const Navbar = () => {
   ]
   return (
     <nav className={styles.root}>
-      <ul>
-        {links.map(link => {
-          const isActive = link?.url === currentPath
-          return <NavLink isActive={isActive} key={link.label} link={link} />
-        })}
-      </ul>
+      <div className={styles.wrapper}>
+        <ul>
+          {links.map(link => {
+            const isActive = link?.url === currentPath
+            return <NavLink isActive={isActive} key={link.label} link={link} />
+          })}
+        </ul>
+      </div>
     </nav>
   )
 }
