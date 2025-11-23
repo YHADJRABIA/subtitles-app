@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import styles from './UserMenu.module.scss'
 import {
   MdDashboard as DashboardIcon,
@@ -28,19 +28,25 @@ const UserMenu = ({ avatarSrc, isConnected, onLogout }: PropTypes) => {
   const t = useTranslations('Navigation')
   const isOnDesktop = useIsOnDesktop()
   const [isLoggingOut, setIsLoggingOut] = useState(false)
+  const isLoggingOutRef = useRef(false)
 
   if (!isOnDesktop) return null
 
-  // Preventing double-clicks
+  // Prevent multiple logout calls
   const handleLogout = async () => {
-    if (isLoggingOut) return
+    if (isLoggingOutRef.current) return
+
+    isLoggingOutRef.current = true
     setIsLoggingOut(true)
+
     try {
       await onLogout()
     } finally {
+      isLoggingOutRef.current = false
       setIsLoggingOut(false)
     }
   }
+
   const userIcon = avatarSrc ? (
     <Avatar className={styles.avatar} size={32} src={avatarSrc} />
   ) : (
