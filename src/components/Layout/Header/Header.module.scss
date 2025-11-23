@@ -30,6 +30,7 @@
 
   @include respond-to('medium') {
     display: flex;
+    margin-left: 4rem;
   }
 }
 
