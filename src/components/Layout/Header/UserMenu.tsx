@@ -10,7 +10,7 @@ import {
 } from 'react-icons/md'
 import { PiUserCircleLight as UserIcon } from 'react-icons/pi'
 import { useTranslations } from 'next-intl'
-import { handleLogout } from '@/actions/auth'
+import Avatar from '@/components/Avatar/Avatar'
 import useIsOnDesktop from '@/hooks/useIsOnDesktop'
 import {
   Dropdown,
@@ -20,30 +20,35 @@ import {
 
 interface PropTypes {
   isConnected: boolean
+  avatarSrc?: string | null
+  onLogout: () => Promise<void> | void
 }
 
-const UserMenu = ({ isConnected }: PropTypes) => {
+const UserMenu = ({ avatarSrc, isConnected, onLogout }: PropTypes) => {
   const t = useTranslations('Navigation')
   const isOnDesktop = useIsOnDesktop()
   const [isLoggingOut, setIsLoggingOut] = useState(false)
 
   if (!isOnDesktop) return null
 
-  const handleLogoutClick = async () => {
+  // Preventing double-clicks
+  const handleLogout = async () => {
     if (isLoggingOut) return
     setIsLoggingOut(true)
     try {
-      await handleLogout()
+      await onLogout()
     } finally {
       setIsLoggingOut(false)
     }
   }
+  const userIcon = avatarSrc ? (
+    <Avatar className={styles.avatar} size={32} src={avatarSrc} />
+  ) : (
+    <UserIcon className={styles.avatar} size={32} />
+  )
 
   return (
-    <Dropdown
-      className={styles.root}
-      trigger={<UserIcon className={styles.avatar} size={32} />}
-    >
+    <Dropdown className={styles.root} trigger={userIcon}>
       {isConnected ? (
         <>
           <DropdownItem href="/dashboard" icon={<DashboardIcon />}>
@@ -53,7 +58,7 @@ const UserMenu = ({ isConnected }: PropTypes) => {
           <DropdownItem
             disabled={isLoggingOut}
             icon={<LogoutIcon />}
-            onClick={handleLogoutClick}
+            onClick={handleLogout}
           >
             {t('logout')}
           </DropdownItem>
