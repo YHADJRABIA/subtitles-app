@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 import styles from './Header.module.scss'
 import Nav from './Nav'
 import Logo from './Logo'
@@ -8,6 +8,9 @@ import cn from 'classnames'
 import { useScrollDirection } from '@/hooks/useScrollDirection'
 import Searchbar from '@/components/Searchbar'
 import { useTranslations } from 'next-intl'
+import { Series } from '@/types/series'
+import SeriesSuggestion from '@/components/Searchbar/SeriesSuggestion'
+import { useSeriesSearch } from '@/hooks/useSeriesSearch'
 
 interface PropTypes {
   isConnected: boolean
@@ -25,7 +28,8 @@ const Header = ({
   const isDownScroll = scrollDirection === 'down'
   const translateY = () => (isDownScroll ? '-100%' : 0)
 
-  const [mobileQuery, setMobileQuery] = useState('')
+  const { query, setQuery, suggestions, isLoading, clearSearch } =
+    useSeriesSearch()
 
   return (
     <header
@@ -36,13 +40,34 @@ const Header = ({
     >
       <Logo isInvertedColor size={50} />
 
+      {/* Desktop */}
+      <Searchbar<Series>
+        className={styles.searchbarDesktop}
+        items={suggestions}
+        loading={isLoading}
+        placeholder={t('search_placeholder')}
+        renderItem={(series, onSelect) => (
+          <SeriesSuggestion series={series} onSelect={onSelect} />
+        )}
+        value={query}
+        onChange={setQuery}
+        onSelect={clearSearch}
+      />
+
       <div className={styles.container}>
-        <Searchbar
+        {/* Mobile */}
+        <Searchbar<Series>
           isFoldable
-          className={styles.searchbar}
+          className={styles.searchbarMobile}
+          items={suggestions}
+          loading={isLoading}
           placeholder={t('search_placeholder')}
-          value={mobileQuery}
-          onChange={setMobileQuery}
+          renderItem={(series, onSelect) => (
+            <SeriesSuggestion series={series} onSelect={onSelect} />
+          )}
+          value={query}
+          onChange={setQuery}
+          onSelect={clearSearch}
         />
 
         <Nav isConnected={isConnected} />

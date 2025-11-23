@@ -18,6 +18,7 @@ interface PropTypes<T = string> {
   items?: T[]
   loading?: boolean
   onSelect?: (item: T) => void
+  renderItem?: (item: T, onSelect: () => void) => React.ReactNode
 
   isFoldable?: boolean
   className?: string
@@ -30,6 +31,7 @@ const Searchbar = <T,>({
   items,
   loading = false,
   onSelect,
+  renderItem,
   isFoldable = false,
   className,
 }: PropTypes<T>) => {
@@ -52,10 +54,13 @@ const Searchbar = <T,>({
   }
 
   const handleBlur = () => {
-    setFocused(false)
-    if (isFoldable && !value) {
-      setIsExpanded(false)
-    }
+    // Delay to allow click events on dropdown items to fire first
+    setTimeout(() => {
+      setFocused(false)
+      if (isFoldable && !value) {
+        setIsExpanded(false)
+      }
+    }, 200)
   }
 
   const handleSelect = (item: T) => {
@@ -73,14 +78,12 @@ const Searchbar = <T,>({
         [styles.collapsed]: !isExpanded,
       })}
     >
-      {isFoldable && (
-        <SearchIcon
-          className={styles.iconLeft}
-          size={24}
-          style={{ cursor: showPointer ? 'pointer' : 'default' }}
-          onClick={handleIconClick}
-        />
-      )}
+      <SearchIcon
+        className={styles.iconLeft}
+        size={24}
+        style={{ cursor: showPointer ? 'pointer' : 'default' }}
+        onClick={handleIconClick}
+      />
 
       <input
         className={styles.input}
@@ -111,6 +114,14 @@ const Searchbar = <T,>({
           {!loading &&
             items?.map((item, i) => {
               const key = typeof item === 'string' ? item : i
+
+              if (renderItem) {
+                return (
+                  <div key={key}>
+                    {renderItem(item, () => handleSelect(item))}
+                  </div>
+                )
+              }
 
               return (
                 <div className={styles.autocompleteItem} key={key}>
