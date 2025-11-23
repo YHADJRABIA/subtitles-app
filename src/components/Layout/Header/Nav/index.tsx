@@ -13,6 +13,8 @@ import { SUPPORT_LINK } from '@/utils/constants'
 import { useTranslations } from 'next-intl'
 import { SiBuymeacoffee as SupportIcon } from 'react-icons/si'
 import UserMenu from '../UserMenu'
+import { useSession } from 'next-auth/react'
+import { handleLogout } from '@/actions/auth'
 
 interface PropTypes {
   isConnected: boolean
@@ -24,6 +26,8 @@ const Nav = ({ className, isConnected }: PropTypes) => {
   const currentPath = usePathname()
   const isOnDesktop = useIsOnDesktop()
   const [toggled, setToggled] = useState(false)
+  const { data: session } = useSession()
+  const avatarSrc = session?.user?.image ?? null
 
   const handleCloseNav = () => {
     if (toggled === false) return
@@ -52,7 +56,11 @@ const Nav = ({ className, isConnected }: PropTypes) => {
         </ul>
         <Separator className={styles.separator} />
         <div className={styles.bottomSection}>
-          <UserMenu isConnected={isConnected} />
+          <UserMenu
+            avatarSrc={avatarSrc}
+            isConnected={isConnected}
+            onLogout={handleLogout}
+          />
           <LanguageMenu isInverted={!isOnDesktop} />
           <LinkButton
             icon={{ src: SupportIcon }}
