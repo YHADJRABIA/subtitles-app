@@ -30,7 +30,7 @@ interface PropTypes {
 const ProtectedLayout = ({ children }: PropTypes) => {
   return (
     <>
-      <HeaderWithAuth />
+      <HeaderWithAuth isOnDashboard />
       <Navbar />
       <main className={styles.root}>
         {/*         <Sidebar className={styles.sidebar} /> */}

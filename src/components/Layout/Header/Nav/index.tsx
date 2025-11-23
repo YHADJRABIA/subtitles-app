@@ -19,9 +19,15 @@ export interface NavProps {
   isConnected: boolean
   userAvatar?: string | null
   className?: string
+  showDashboardButton?: boolean
 }
 
-const Nav = ({ className, isConnected, userAvatar }: NavProps) => {
+const Nav = ({
+  className,
+  isConnected,
+  userAvatar,
+  showDashboardButton,
+}: NavProps) => {
   const t = useTranslations('Navigation')
   const currentPath = usePathname()
   const isOnDesktop = useIsOnDesktop()
@@ -57,6 +63,7 @@ const Nav = ({ className, isConnected, userAvatar }: NavProps) => {
           <UserMenu
             avatarSrc={userAvatar}
             isConnected={isConnected}
+            showDashboardButton={showDashboardButton}
             onLogout={handleLogout}
           />
           <LanguageMenu isInverted={!isOnDesktop} />

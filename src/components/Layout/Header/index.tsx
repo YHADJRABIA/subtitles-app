@@ -21,6 +21,7 @@ const Header = ({
   userAvatar,
   className,
   isConcealable = false,
+  showDashboardButton = false,
 }: PropTypes) => {
   const t = useTranslations('Series')
   const scrollDirection = useScrollDirection()
@@ -67,7 +68,11 @@ const Header = ({
         {/* Mobile */}
         <SeriesSearchbar isFoldable className={styles.searchbarMobile} />
 
-        <Nav isConnected={isConnected} userAvatar={userAvatar} />
+        <Nav
+          isConnected={isConnected}
+          showDashboardButton={showDashboardButton}
+          userAvatar={userAvatar}
+        />
       </div>
     </header>
   )

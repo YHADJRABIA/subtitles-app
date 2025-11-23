@@ -21,10 +21,16 @@ import {
 interface PropTypes {
   isConnected: boolean
   avatarSrc?: string | null
+  showDashboardButton?: boolean
   onLogout: () => Promise<void> | void
 }
 
-const UserMenu = ({ avatarSrc, isConnected, onLogout }: PropTypes) => {
+const UserMenu = ({
+  avatarSrc,
+  isConnected,
+  showDashboardButton,
+  onLogout,
+}: PropTypes) => {
   const t = useTranslations('Navigation')
   const isOnDesktop = useIsOnDesktop()
   const [isLoggingOut, setIsLoggingOut] = useState(false)
@@ -57,10 +63,14 @@ const UserMenu = ({ avatarSrc, isConnected, onLogout }: PropTypes) => {
     <Dropdown className={styles.root} trigger={userIcon}>
       {isConnected ? (
         <>
-          <DropdownItem href="/dashboard" icon={<DashboardIcon />}>
-            {t('dashboard')}
-          </DropdownItem>
-          <DropdownDivider />
+          {showDashboardButton && (
+            <>
+              <DropdownItem href="/dashboard" icon={<DashboardIcon />}>
+                {t('dashboard')}
+              </DropdownItem>
+              <DropdownDivider />
+            </>
+          )}
           <DropdownItem
             disabled={isLoggingOut}
             icon={<LogoutIcon />}
