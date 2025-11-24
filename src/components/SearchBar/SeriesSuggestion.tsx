@@ -1,5 +1,4 @@
 import { Series } from '@/types/series'
-import { Image as DatoCMSImage } from 'react-datocms'
 import styles from './SeriesSuggestion.module.scss'
 import Image from 'next/image'
 import { getFlagFromCountryCode } from '@/utils/flag'
@@ -7,6 +6,7 @@ import { useTranslations } from 'next-intl'
 import { memo } from 'react'
 import Typography from '../UI/Typography'
 import { Link } from '@/i18n/routing'
+import ResponsiveImage from '../DatoCMS/ResponsiveImage'
 
 interface PropTypes {
   series: Series
@@ -31,8 +31,8 @@ const SeriesSuggestion = ({ series, onSelect }: PropTypes) => {
       onMouseDown={e => e.preventDefault()}
     >
       <div className={styles.image}>
-        <DatoCMSImage
-          data={series.posterImage.responsiveImage as any}
+        <ResponsiveImage
+          data={series.posterImage.responsiveImage}
           objectFit="cover"
         />
       </div>
