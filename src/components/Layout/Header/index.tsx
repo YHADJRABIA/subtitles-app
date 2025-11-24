@@ -6,11 +6,7 @@ import Nav, { NavProps } from './Nav'
 import Logo from './Logo'
 import cn from 'classnames'
 import { useScrollDirection } from '@/hooks/useScrollDirection'
-import Searchbar from '@/components/Searchbar'
-import { useTranslations } from 'next-intl'
-import { Series } from '@/types/series'
-import SeriesSuggestion from '@/components/Searchbar/SeriesSuggestion'
-import { useSeriesSearch } from '@/hooks/useSeriesSearch'
+import SeriesSearchbar from '@/components/Searchbar/SeriesSearchbar'
 
 interface PropTypes extends NavProps {
   isConcealable?: boolean
@@ -23,34 +19,9 @@ const Header = ({
   isConcealable = false,
   showDashboardButton = false,
 }: PropTypes) => {
-  const t = useTranslations('Series')
   const scrollDirection = useScrollDirection()
   const isDownScroll = scrollDirection === 'down'
   const translateY = () => (isDownScroll ? '-100%' : 0)
-
-  const { query, setQuery, suggestions, isLoading, clearSearch } =
-    useSeriesSearch()
-  const SeriesSearchbar = ({
-    isFoldable,
-    className,
-  }: {
-    isFoldable?: boolean
-    className: string
-  }) => (
-    <Searchbar
-      className={className}
-      isFoldable={isFoldable}
-      items={suggestions}
-      loading={isLoading}
-      placeholder={t('search_placeholder')}
-      renderItem={(series: Series, onSelect) => (
-        <SeriesSuggestion series={series} onSelect={onSelect} />
-      )}
-      value={query}
-      onChange={setQuery}
-      onSelect={clearSearch}
-    />
-  )
 
   return (
     <header

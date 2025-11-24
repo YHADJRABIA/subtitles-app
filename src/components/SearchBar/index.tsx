@@ -1,6 +1,13 @@
 'use client'
 
-import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import {
+  ChangeEvent,
+  useRef,
+  useState,
+  useCallback,
+  memo,
+  ReactNode,
+} from 'react'
 import styles from './Searchbar.module.scss'
 import {
   PiMagnifyingGlassThin as SearchIcon,
@@ -8,9 +15,11 @@ import {
 } from 'react-icons/pi'
 import cn from 'classnames'
 import Loader from '@/components/UI/Loader'
+import { useTranslations } from 'next-intl'
+import Typography from '../UI/Typography'
 
 interface PropTypes<T = string> {
-  value: string
+  value?: string
   placeholder?: string
   onChange: (value: string) => void
 
@@ -18,7 +27,7 @@ interface PropTypes<T = string> {
   items?: T[]
   loading?: boolean
   onSelect?: (item: T) => void
-  renderItem?: (item: T, onSelect: () => void) => React.ReactNode
+  renderItem?: (item: T, onSelect: () => void) => ReactNode
 
   isFoldable?: boolean
   className?: string
@@ -26,7 +35,7 @@ interface PropTypes<T = string> {
 
 const Searchbar = <T,>({
   value,
-  placeholder = 'Search...',
+  placeholder,
   onChange,
   items,
   loading = false,
@@ -35,40 +44,90 @@ const Searchbar = <T,>({
   isFoldable = false,
   className,
 }: PropTypes<T>) => {
+  const t = useTranslations('Searchbar')
   const [focused, setFocused] = useState(false)
   const [isExpanded, setIsExpanded] = useState(!isFoldable)
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const showDropdown = focused && (loading || (items && items.length > 0))
+  const [internalValue, setInternalValue] = useState(value ?? '')
+  const isControlled = value !== undefined
+  const inputValue = isControlled ? (value as string) : internalValue
 
-  const handleInput = (e: ChangeEvent<HTMLInputElement>) =>
-    onChange(e.target.value)
+  const placeholderText = placeholder ?? t('placeholder')
 
-  const handleClear = () => onChange('')
+  const hasItems = !!items?.length
+  const hasInput = !!inputValue.length
+  const shouldShowEmpty = hasInput && !loading && !hasItems
 
-  const handleIconClick = () => {
+  const showDropdown = focused && (loading || hasItems || shouldShowEmpty)
+
+  const handleInput = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const newValue = e.target.value
+      onChange(newValue)
+    },
+    [onChange]
+  )
+
+  const handleClear = useCallback(() => {
+    if (!isControlled) {
+      setInternalValue('')
+    }
+
+    onChange('')
+    inputRef.current?.focus()
+  }, [isControlled, onChange])
+
+  const handleIconClick = useCallback(() => {
     if (isFoldable && !isExpanded) {
       setIsExpanded(true)
       setTimeout(() => inputRef.current?.focus(), 300)
     }
-  }
+  }, [isFoldable, isExpanded])
 
-  const handleBlur = () => {
-    // Delay to allow click events on dropdown items to fire first
-    setTimeout(() => {
-      setFocused(false)
-      if (isFoldable && !value) {
-        setIsExpanded(false)
+  const handleFocus = useCallback(() => setFocused(true), [])
+
+  const handleBlur = useCallback(() => {
+    setFocused(false)
+
+    if (isFoldable && !inputValue.length) setIsExpanded(false)
+  }, [isFoldable, inputValue])
+
+  const handleSelect = useCallback(
+    (item: T) => {
+      onSelect?.(item)
+      if (!renderItem) {
+        const stringValue = String(item)
+
+        if (!isControlled) setInternalValue(stringValue)
+
+        onChange(stringValue)
       }
-    }, 200)
-  }
-
-  const handleSelect = (item: T) => {
-    onSelect?.(item)
-    onChange(String(item))
-  }
+    },
+    [onSelect, renderItem, isControlled, onChange]
+  )
 
   const showPointer = isFoldable && !isExpanded
+
+  const renderSuggestion = (item: T, idx: number) => {
+    const handleItemSelect = () => handleSelect(item)
+
+    if (renderItem) {
+      return <div key={idx}>{renderItem(item, handleItemSelect)}</div>
+    }
+
+    const label = String(item)
+
+    return (
+      <div
+        className={styles.dropdownItem}
+        key={idx}
+        onMouseDown={handleItemSelect}
+      >
+        {label}
+      </div>
+    )
+  }
 
   return (
     <div
@@ -87,15 +146,15 @@ const Searchbar = <T,>({
 
       <input
         className={styles.input}
-        placeholder={placeholder}
+        placeholder={placeholderText}
         ref={inputRef}
-        value={value}
+        value={inputValue}
         onBlur={handleBlur}
         onChange={handleInput}
-        onFocus={() => setFocused(true)}
+        onFocus={handleFocus}
       />
 
-      {value && (
+      {inputValue && (
         <ClearIcon
           className={styles.clearButton}
           size={18}
@@ -104,43 +163,24 @@ const Searchbar = <T,>({
       )}
 
       {showDropdown && (
-        <div className={styles.autocomplete}>
-          {loading && (
-            <div className={styles.loader}>
-              <Loader size={16} />
+        <div className={styles.dropdown}>
+          {loading ? (
+            <div className={styles.container}>
+              <Loader size={20} />
             </div>
+          ) : hasItems ? (
+            items?.map(renderSuggestion)
+          ) : (
+            shouldShowEmpty && (
+              <Typography className={styles.container} size="xs">
+                {t('no_results')}
+              </Typography>
+            )
           )}
-
-          {!loading &&
-            items?.map((item, i) => {
-              const key = typeof item === 'string' ? item : i
-
-              if (renderItem) {
-                return (
-                  <div key={key}>
-                    {renderItem(item, () => handleSelect(item))}
-                  </div>
-                )
-              }
-
-              return (
-                <div className={styles.autocompleteItem} key={key}>
-                  <button
-                    type="button"
-                    onMouseDown={e => {
-                      e.preventDefault()
-                      handleSelect(item)
-                    }}
-                  >
-                    {String(item)}
-                  </button>
-                </div>
-              )
-            })}
         </div>
       )}
     </div>
   )
 }
 
-export default Searchbar
+export default memo(Searchbar) as typeof Searchbar

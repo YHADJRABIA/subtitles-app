@@ -6,12 +6,15 @@ import { ModalProvider } from './ModalProvider'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth/auth.config'
 import ToastProvider from './ToastProvider'
+import SeriesProvider from './SeriesProvider'
+import { Series } from '@/types/series'
 
 interface PropTypes {
   children: ReactNode
+  series: Series[]
 }
 
-const AppProvider = async ({ children }: PropTypes) => {
+const AppProvider = async ({ children, series }: PropTypes) => {
   // Provide all messages to the client side
   const messages = await getMessages()
 
@@ -22,7 +25,9 @@ const AppProvider = async ({ children }: PropTypes) => {
     <NextIntlClientProvider messages={messages}>
       <AuthProvider session={session}>
         <ToastProvider>
-          <ModalProvider>{children}</ModalProvider>
+          <ModalProvider>
+            <SeriesProvider series={series}>{children}</SeriesProvider>
+          </ModalProvider>
         </ToastProvider>
       </AuthProvider>
     </NextIntlClientProvider>

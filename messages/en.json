@@ -85,6 +85,21 @@
     "featured": "Featured:",
     "all_series": "Series:",
     "search_placeholder": "Search series...",
+    "no_results": "No results found",
+    "filter_search_placeholder": "Search...",
+    "filter_genre": "Genre",
+    "filter_country": "Country",
+    "filter_year": "Year",
+    "filter_all": "All",
+    "filter_sort_by": "Sort by",
+    "filter_sort_direction": "Direction",
+    "filter_clear": "Clear filters",
+    "genre_comedy": "Comedy",
+    "sort_name": "Name",
+    "sort_releaseYear": "Release Year",
+    "sort_numberOfSeasons": "Number of Seasons",
+    "sort_asc": "Ascending",
+    "sort_desc": "Descending",
     "Country": {
       "title": "Country",
       "ru": "Russia",
@@ -98,6 +113,7 @@
     },
 
     "release_year": "Release year",
+    "genre_and_year": "{genre} • {releaseYear}",
 
     "Genre": {
       "title": "Genre",
@@ -367,5 +383,9 @@
     "dashboard": "Dashboard",
     "settings": "Settings",
     "account": "Account"
+  },
+  "Searchbar": {
+    "no_results": "No results found",
+    "placeholder": "Search..."
   }
 }
