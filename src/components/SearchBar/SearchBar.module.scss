@@ -135,6 +135,10 @@
   }
 }
 
+.dropdownItemActive {
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
 .container {
   padding: 1rem;
   display: flex;

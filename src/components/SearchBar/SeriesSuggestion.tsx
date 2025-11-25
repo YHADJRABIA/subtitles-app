@@ -37,7 +37,9 @@ const SeriesSuggestion = ({ series, onSelect }: PropTypes) => {
         />
       </div>
       <div className={styles.content}>
-        <Typography tag="h4">{fullName}</Typography>
+        <Typography className={styles.title} tag="h4">
+          {fullName}
+        </Typography>
 
         <div className={styles.details}>
           {flagSrc && (

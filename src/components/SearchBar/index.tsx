@@ -17,6 +17,7 @@ import cn from 'classnames'
 import Loader from '@/components/UI/Loader'
 import { useTranslations } from 'next-intl'
 import Typography from '../UI/Typography'
+import { useKeyboardNavigation } from '@/hooks/useKeyboardNavigation'
 
 interface PropTypes<T = string> {
   value?: string
@@ -61,6 +62,31 @@ const Searchbar = <T,>({
 
   const showDropdown = focused && (loading || hasItems || shouldShowEmpty)
 
+  const handleSelect = useCallback(
+    (item: T) => {
+      onSelect?.(item)
+      if (!renderItem) {
+        const stringValue = String(item)
+
+        if (!isControlled) setInternalValue(stringValue)
+
+        onChange(stringValue)
+      }
+    },
+    [onSelect, renderItem, isControlled, onChange]
+  )
+
+  const { activeIndex, setActiveIndex, itemsRefs, handleKeyDown } =
+    useKeyboardNavigation({
+      items,
+      isOpen: showDropdown,
+      onSelect: handleSelect,
+      onClose: () => {
+        setFocused(false)
+        inputRef.current?.blur()
+      },
+    })
+
   const handleInput = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       const newValue = e.target.value
@@ -93,36 +119,43 @@ const Searchbar = <T,>({
     if (isFoldable && !inputValue.length) setIsExpanded(false)
   }, [isFoldable, inputValue])
 
-  const handleSelect = useCallback(
-    (item: T) => {
-      onSelect?.(item)
-      if (!renderItem) {
-        const stringValue = String(item)
-
-        if (!isControlled) setInternalValue(stringValue)
-
-        onChange(stringValue)
-      }
-    },
-    [onSelect, renderItem, isControlled, onChange]
-  )
-
   const showPointer = isFoldable && !isExpanded
 
   const renderSuggestion = (item: T, idx: number) => {
     const handleItemSelect = () => handleSelect(item)
+    const isActive = idx === activeIndex
 
     if (renderItem) {
-      return <div key={idx}>{renderItem(item, handleItemSelect)}</div>
+      return (
+        <div
+          className={cn(styles.dropdownItem, {
+            [styles.dropdownItemActive]: isActive,
+          })}
+          key={idx}
+          ref={el => {
+            itemsRefs.current[idx] = el
+          }}
+          onMouseDown={handleItemSelect}
+          onMouseEnter={() => setActiveIndex(idx)}
+        >
+          {renderItem(item, handleItemSelect)}
+        </div>
+      )
     }
 
     const label = String(item)
 
     return (
       <div
-        className={styles.dropdownItem}
+        className={cn(styles.dropdownItem, {
+          [styles.dropdownItemActive]: isActive,
+        })}
         key={idx}
+        ref={el => {
+          itemsRefs.current[idx] = el
+        }}
         onMouseDown={handleItemSelect}
+        onMouseEnter={() => setActiveIndex(idx)}
       >
         {label}
       </div>
@@ -152,6 +185,7 @@ const Searchbar = <T,>({
         onBlur={handleBlur}
         onChange={handleInput}
         onFocus={handleFocus}
+        onKeyDown={handleKeyDown}
       />
 
       {inputValue && (
