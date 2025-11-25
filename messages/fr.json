@@ -83,7 +83,7 @@
     "all_series": "Séries :",
     "search_placeholder": "Rechercher des séries...",
     "no_results": "Aucun résultat",
-    "no_results_description": "Réajuster les paramètres de filtrage.",
+    "adapt_filter": "Réajuster les paramètres de filtrage.",
     "reset_filters": "Réinitialiser",
     "genre_comedy": "Comédie",
     "sort_name": "Nom",
