@@ -198,12 +198,19 @@ const Searchbar = <T,>({
 
       {showDropdown && (
         <div className={styles.dropdown}>
-          {loading ? (
+          {hasItems ? (
+            <>
+              {items?.map(renderSuggestion)}
+              {loading && (
+                <div className={styles.container}>
+                  <Loader size={16} />
+                </div>
+              )}
+            </>
+          ) : loading ? (
             <div className={styles.container}>
               <Loader size={20} />
             </div>
-          ) : hasItems ? (
-            items?.map(renderSuggestion)
           ) : (
             shouldShowEmpty && (
               <Typography className={styles.container} size="xs">
