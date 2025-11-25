@@ -40,7 +40,7 @@
 
 .input {
   width: 100%;
-  padding: 0.9rem 3rem;
+  padding: 0.9rem 3.5rem;
   border-radius: 100rem;
   border: 1px solid var(--primary-gray-border);
   background-color: var(--primary-white-color);
@@ -69,7 +69,7 @@
   }
 }
 
-.clearButton {
+.clear {
   position: absolute;
   right: 0.8rem;
   top: 50%;

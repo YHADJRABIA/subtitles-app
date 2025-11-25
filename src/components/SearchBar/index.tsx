@@ -189,11 +189,7 @@ const Searchbar = <T,>({
       />
 
       {inputValue && (
-        <ClearIcon
-          className={styles.clearButton}
-          size={18}
-          onClick={handleClear}
-        />
+        <ClearIcon className={styles.clear} size={18} onClick={handleClear} />
       )}
 
       {showDropdown && (
