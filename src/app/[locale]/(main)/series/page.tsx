@@ -5,7 +5,7 @@ import { Metadata } from 'next'
 import { MetaDataProps } from '../../layout'
 import { executeQuery } from '@/lib/datocms/executeQuery'
 import { allSeriesQuery } from '@/gql/queries/allSeriesPage'
-import SeriesPageClient from './_components/SeriesPageClient'
+import SeriesContainer from './_components/SeriesContainer'
 import { draftMode } from 'next/headers'
 import { ResponsiveImageType } from '@/types/fragment'
 import { Series } from '@/types/series'
@@ -36,21 +36,21 @@ const SeriesPage = async ({ params }: MetaDataProps) => {
     allSeries: Series[]
   }
 
+  const series = allSeries.map(series => ({
+    ...series,
+    posterImage: {
+      responsiveImage: series.posterImage
+        .responsiveImage as ResponsiveImageType,
+    },
+  }))
+
   return (
     <div className={styles.root}>
       <div className={styles.wrapper}>
         <Typography className={styles.title} tag="h1" weight="bold">
           {t('title')}
         </Typography>
-        <SeriesPageClient
-          series={allSeries.map(series => ({
-            ...series,
-            posterImage: {
-              responsiveImage: series.posterImage
-                .responsiveImage as ResponsiveImageType,
-            },
-          }))}
-        />
+        <SeriesContainer series={series} />
       </div>
     </div>
   )
