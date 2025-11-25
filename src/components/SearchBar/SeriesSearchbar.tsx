@@ -1,13 +1,14 @@
 'use client'
 
+import { useEffect, useRef, useMemo, useState } from 'react'
 import Searchbar from '@/components/Searchbar'
 import { Series } from '@/types/series'
 import SeriesSuggestion from '@/components/Searchbar/SeriesSuggestion'
 import { useTranslations } from 'next-intl'
 import { useSeriesData } from '@/context/SeriesProvider'
-import { useSearch } from '@/hooks/series/useSearch'
+import { useSearch, getSearchSuggestions } from '@/hooks/series/useSearch'
 import { useSeriesFilters } from '@/hooks/series/useSeriesFilters'
-import { useTimeout } from '@/hooks/useTimeout'
+import { useDebounce } from '@/hooks/useDebounce'
 
 export interface PropTypes {
   className?: string
@@ -17,23 +18,41 @@ export interface PropTypes {
 const SeriesSearchbar = ({ className, isFoldable }: PropTypes) => {
   const t = useTranslations('Series')
   const allSeries = useSeriesData()
-  const { query, setQuery, suggestions, isLoading, clearSearch } =
-    useSearch(allSeries)
+  const { query, setQuery, clearSearch } = useSearch()
   const { setSearchQuery } = useSeriesFilters()
+  const [debouncedQuery, setDebouncedQuery] = useState(query)
+  const [isPending, setIsPending] = useState(false)
 
-  useTimeout({
-    callback: () => {
-      setSearchQuery(query)
-    },
-    deps: [query, setSearchQuery],
-  })
+  const updateDebounced = useDebounce(() => {
+    setDebouncedQuery(query)
+    setSearchQuery(query)
+    setIsPending(false)
+  }, 300)
+
+  const queryRef = useRef(query)
+  useEffect(() => {
+    queryRef.current = query
+    setIsPending(query !== debouncedQuery)
+    updateDebounced()
+  }, [query, debouncedQuery, updateDebounced])
+
+  useEffect(() => {
+    return () => {
+      void setSearchQuery(queryRef.current)
+    }
+  }, [setSearchQuery])
+
+  const suggestions = useMemo(
+    () => getSearchSuggestions(allSeries, debouncedQuery),
+    [allSeries, debouncedQuery]
+  )
 
   return (
     <Searchbar<Series>
       className={className}
       isFoldable={isFoldable}
       items={suggestions}
-      loading={isLoading}
+      loading={isPending}
       placeholder={t('search_placeholder')}
       renderItem={(series: Series, onSelect) => (
         <SeriesSuggestion series={series} onSelect={onSelect} />
