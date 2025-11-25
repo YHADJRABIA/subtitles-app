@@ -4,7 +4,10 @@ import Searchbar from '@/components/Searchbar'
 import { Series } from '@/types/series'
 import SeriesSuggestion from '@/components/Searchbar/SeriesSuggestion'
 import { useTranslations } from 'next-intl'
-import { useSeriesSearch } from '@/hooks/useSeriesSearch'
+import { useSeriesData } from '@/context/SeriesProvider'
+import { useSearch } from '@/hooks/series/useSearch'
+import { useSeriesFilters } from '@/hooks/series/useSeriesFilters'
+import { useTimeout } from '@/hooks/useTimeout'
 
 export interface PropTypes {
   className?: string
@@ -13,8 +16,17 @@ export interface PropTypes {
 
 const SeriesSearchbar = ({ className, isFoldable }: PropTypes) => {
   const t = useTranslations('Series')
+  const allSeries = useSeriesData()
   const { query, setQuery, suggestions, isLoading, clearSearch } =
-    useSeriesSearch()
+    useSearch(allSeries)
+  const { setSearchQuery } = useSeriesFilters()
+
+  useTimeout({
+    callback: () => {
+      setSearchQuery(query)
+    },
+    deps: [query, setSearchQuery],
+  })
 
   return (
     <Searchbar<Series>
