@@ -86,14 +86,6 @@
     "all_series": "Series:",
     "search_placeholder": "Search series...",
     "no_results": "No results found",
-    "filter_search_placeholder": "Search...",
-    "filter_genre": "Genre",
-    "filter_country": "Country",
-    "filter_year": "Year",
-    "filter_all": "All",
-    "filter_sort_by": "Sort by",
-    "filter_sort_direction": "Direction",
-    "filter_clear": "Clear filters",
     "genre_comedy": "Comedy",
     "sort_name": "Name",
     "sort_releaseYear": "Release Year",
@@ -140,6 +132,18 @@
     "trailer": "Trailer",
     "where_to_watch": "Where to watch",
     "where_to_download": "Where to download"
+  },
+  "Filters": {
+    "search_placeholder": "Search...",
+    "genre": "Genre",
+    "country": "Country",
+    "year": "Year",
+    "all": "All",
+    "sort_by": "Sort by",
+    "sort_direction": "Direction",
+    "clear": "Clear filters",
+    "toolbar_sort": "Sort",
+    "toolbar_filters": "Filters"
   },
   "NotFound": {
     "page_not_found": "Page not found",

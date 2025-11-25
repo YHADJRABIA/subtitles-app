@@ -1,5 +1,3 @@
-import Typography from '@/components/UI/Typography'
-import styles from './page.module.scss'
 import { getTranslations } from 'next-intl/server'
 import { Metadata } from 'next'
 import { MetaDataProps } from '../../layout'
@@ -44,16 +42,7 @@ const SeriesPage = async ({ params }: MetaDataProps) => {
     },
   }))
 
-  return (
-    <div className={styles.root}>
-      <div className={styles.wrapper}>
-        <Typography className={styles.title} tag="h1" weight="bold">
-          {t('title')}
-        </Typography>
-        <SeriesContainer series={series} />
-      </div>
-    </div>
-  )
+  return <SeriesContainer series={series} title={t('title')} />
 }
 
 export default SeriesPage

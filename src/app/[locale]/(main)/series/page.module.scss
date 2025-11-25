@@ -1,14 +1,14 @@
 .root {
   width: 100%;
-  @include flexCenter(column, flex-start, flex-start);
 }
 
-.wrapper {
-  width: 100%;
-}
-
-.title {
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
   margin-bottom: 2rem;
+  flex-wrap: wrap;
 }
 
 .series {

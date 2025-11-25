@@ -83,14 +83,6 @@
     "all_series": "Séries :",
     "search_placeholder": "Rechercher une série...",
     "no_results": "Aucun résultat",
-    "filter_search_placeholder": "Rechercher...",
-    "filter_genre": "Genre",
-    "filter_country": "Pays",
-    "filter_year": "Année",
-    "filter_all": "Tous",
-    "filter_sort_by": "Trier par",
-    "filter_sort_direction": "Direction",
-    "filter_clear": "Effacer les filtres",
     "genre_comedy": "Comédie",
     "sort_name": "Nom",
     "sort_releaseYear": "Année de sortie",
@@ -137,6 +129,19 @@
     "trailer": "Bande annonce",
     "where_to_watch": "Où regarder",
     "where_to_download": "Où télécharger"
+  },
+
+  "Filters": {
+    "search_placeholder": "Rechercher...",
+    "genre": "Genre",
+    "country": "Pays",
+    "year": "Année",
+    "all": "Tous",
+    "sort_by": "Trier par",
+    "sort_direction": "Direction",
+    "clear": "Réinitialiser les filtres",
+    "toolbar_sort": "Trier",
+    "toolbar_filters": "Filtres"
   },
 
   "NotFound": {
