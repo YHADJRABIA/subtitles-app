@@ -1,36 +1,25 @@
-import { useEffect, useMemo, useState, useTransition } from 'react'
+import { useDeferredValue, useMemo, useEffect } from 'react'
 import {
   useQuery,
   useSetQuery,
   useClearSearch,
+  useSetSuggestions,
 } from '@/store/useSeriesSearchStore'
 import { Series } from '@/types/series'
-import { useDebounce } from '@/hooks/useDebounce'
 
-const DEBOUNCE_MS = 300
 const MAX_RESULTS = 5
 
 export const useSearch = (allSeries: Series[]) => {
   const query = useQuery()
   const setQuery = useSetQuery()
   const clearSearch = useClearSearch()
+  const setSuggestions = useSetSuggestions()
 
-  const [debouncedQuery, setDebouncedQuery] = useState('')
-  const [isLoading, startTransition] = useTransition()
+  const deferredQuery = useDeferredValue(query)
 
-  const updateDebouncedQuery = useDebounce(() => {
-    const trimmed = query.trim()
-    startTransition(() => {
-      setDebouncedQuery(trimmed ? trimmed.toLowerCase() : '')
-    })
-  }, DEBOUNCE_MS)
-
-  useEffect(() => {
-    updateDebouncedQuery()
-  }, [query, updateDebouncedQuery])
-
-  const suggestions = useMemo(() => {
-    if (!debouncedQuery) return []
+  const filteredSuggestions = useMemo(() => {
+    const trimmed = deferredQuery.trim().toLowerCase()
+    if (!trimmed) return []
 
     return allSeries
       .filter(series => {
@@ -39,10 +28,22 @@ export const useSearch = (allSeries: Series[]) => {
           .join(' ')
           .toLowerCase()
 
-        return searchText.includes(debouncedQuery)
+        return searchText.includes(trimmed)
       })
       .slice(0, MAX_RESULTS)
-  }, [debouncedQuery, allSeries])
+  }, [deferredQuery, allSeries])
 
-  return { query, setQuery, suggestions, isLoading, clearSearch }
+  useEffect(() => {
+    setSuggestions(filteredSuggestions)
+  }, [filteredSuggestions, setSuggestions])
+
+  const isLoading = query !== deferredQuery
+
+  return {
+    query,
+    setQuery,
+    suggestions: filteredSuggestions,
+    isLoading,
+    clearSearch,
+  }
 }
