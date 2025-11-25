@@ -1,9 +1,10 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, type DependencyList } from 'react'
 import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect'
 
 export const useTimeout = (
   callback: () => void,
-  delay: number | null
+  delay: number | null,
+  deps: DependencyList = []
 ): void => {
   const savedCallback = useRef(callback)
 
@@ -18,5 +19,5 @@ export const useTimeout = (
     const id = setTimeout(() => savedCallback.current(), delay)
 
     return () => clearTimeout(id) // Clean up timeout on unmount or delay change
-  }, [delay])
+  }, [delay, deps])
 }
