@@ -130,7 +130,7 @@ export default async function LocaleLayout({ params, children }: LayoutProps) {
   }))
 
   return (
-    <html lang={locale}>
+    <html data-scroll-behavior="smooth" lang={locale}>
       <body className={`${inter.variable} ${literate.variable}`}>
         <AppProvider series={series}>{children}</AppProvider>
         <Analytics />

@@ -46,8 +46,8 @@ const SeriesSuggestion = ({ series, onSelect }: PropTypes) => {
             <Image
               alt={country}
               height={16}
-              objectFit="cover"
               src={flagSrc}
+              style={{ objectFit: 'cover' }}
               title={country}
               width={16}
             />
