@@ -5,7 +5,7 @@ import SeriesCard from './SeriesCard'
 import styles from '../page.module.scss'
 import { Series } from '@/types/series'
 import { useFilter } from '@/hooks/series/useFilter'
-import SeriesToolbar from './SeriesToolbar'
+import SeriesFilter from './SeriesFilter'
 import Typography from '@/components/UI/Typography'
 import { useSeriesFilters } from '@/hooks/series/useSeriesFilters'
 import NoResults from './NoResults'
@@ -40,7 +40,7 @@ const SeriesContainer = ({ series, title }: PropTypes) => {
         <Typography tag="h1" weight="bold">
           {title}
         </Typography>
-        <SeriesToolbar availableYears={availableYears} />
+        <SeriesFilter availableYears={availableYears} />
       </div>
 
       {!hasResults ? (
