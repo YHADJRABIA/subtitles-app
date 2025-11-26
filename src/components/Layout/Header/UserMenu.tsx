@@ -56,7 +56,7 @@ const UserMenu = ({
   const userIcon = avatarSrc ? (
     <Avatar className={styles.avatar} size={32} src={avatarSrc} />
   ) : (
-    <UserIcon className={styles.avatar} size={24} />
+    <UserIcon className={styles.avatar} size={22} />
   )
 
   return (
