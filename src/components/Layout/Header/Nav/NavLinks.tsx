@@ -3,8 +3,6 @@ import React from 'react'
 import NavLink from './NavLink'
 import useNavLinks from '@/hooks/useNavLinks'
 import { usePathname } from '@/i18n/routing'
-import { hasMatchingFirstSlug } from '@/utils/paths'
-import { Pathname } from '@/types/pathnames'
 
 interface PropTypes {
   isConnected: boolean
@@ -18,10 +16,8 @@ const NavLinks = ({ isConnected, onActiveLinkClick }: PropTypes) => {
   return (
     <>
       {navLinks.map(link => {
-        const isActive = hasMatchingFirstSlug(
-          link?.url as Pathname,
-          currentPath
-        )
+        const isActive = link?.url === currentPath
+
         return (
           <NavLink
             isActive={isActive}
