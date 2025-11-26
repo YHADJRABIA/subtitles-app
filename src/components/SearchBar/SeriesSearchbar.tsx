@@ -59,7 +59,6 @@ const SeriesSearchbar = ({ className, isFoldable }: PropTypes) => {
       )}
       value={query}
       onChange={setQuery}
-      onSelect={clearSearch}
     />
   )
 }
