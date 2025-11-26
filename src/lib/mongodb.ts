@@ -5,6 +5,7 @@ const URI = process.env.MONGODB_URI
 
 let isConnected = false
 let connectionPromise: Promise<typeof mongoose> | null = null
+let listenersAttached = false
 
 export const connectDB = async () => {
   if (isConnected) return true
@@ -12,15 +13,20 @@ export const connectDB = async () => {
   if (!connectionPromise) {
     connectionPromise = mongoose.connect(URI!)
 
-    mongoose.connection.on('disconnected', () => {
-      isConnected = false
-      console.warn('MongoDB disconnected')
-    })
+    // Only attach event listeners once
+    if (!listenersAttached) {
+      listenersAttached = true
 
-    mongoose.connection.on('error', err => {
-      isConnected = false
-      console.error('MongoDB connection error:', err)
-    })
+      mongoose.connection.on('disconnected', () => {
+        isConnected = false
+        console.warn('MongoDB disconnected')
+      })
+
+      mongoose.connection.on('error', err => {
+        isConnected = false
+        console.error('MongoDB connection error:', err)
+      })
+    }
   }
 
   try {
