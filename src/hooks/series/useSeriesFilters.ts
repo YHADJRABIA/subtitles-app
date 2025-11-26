@@ -33,7 +33,8 @@ const filterParsers = {
 export const useSeriesFilters = () => {
   const [filters, setFilters] = useQueryStates(filterParsers, {
     shallow: true,
-    history: 'push',
+    history: 'replace',
+    scroll: false,
   })
   const clearSearchStore = useClearSearch()
 
