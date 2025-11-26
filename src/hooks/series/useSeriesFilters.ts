@@ -12,10 +12,27 @@ import { useClearSearch } from '@/store/useSeriesSearchStore'
 export type SortOption = 'name' | 'releaseYear' | 'numberOfSeasons'
 export type SortDirection = 'asc' | 'desc'
 
-const SORT_OPTIONS: SortOption[] = ['name', 'releaseYear', 'numberOfSeasons']
+export const SORT_OPTIONS: SortOption[] = [
+  'name',
+  'releaseYear',
+  'numberOfSeasons',
+]
 const SORT_DIRECTIONS: SortDirection[] = ['asc', 'desc']
-const AVAILABLE_GENRES: Array<SeriesGenre | 'all'> = ['all', 'comedy']
-const AVAILABLE_COUNTRIES: Array<SeriesCountry | 'all'> = ['all', 'ru', 'kz']
+
+export const AVAILABLE_GENRES: Array<SeriesGenre | 'all'> = ['all', 'comedy']
+export const AVAILABLE_COUNTRIES: Array<SeriesCountry | 'all'> = [
+  'all',
+  'ru',
+  'kz',
+]
+
+export const UI_GENRES: SeriesGenre[] = AVAILABLE_GENRES.filter(
+  (genre): genre is SeriesGenre => genre !== 'all'
+)
+
+export const UI_COUNTRIES: SeriesCountry[] = AVAILABLE_COUNTRIES.filter(
+  (country): country is SeriesCountry => country !== 'all'
+)
 
 const filterParsers = {
   search: parseAsString.withDefault(''),
