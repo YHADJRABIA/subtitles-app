@@ -13,21 +13,21 @@ import {
 } from 'react-icons/pi'
 import type { IconType } from 'react-icons/lib'
 
-export type FilterOption<TValue extends string | number = string | number> = {
-  value: TValue
+export type FilterOption = {
+  value: string | number
   label: string
 }
 
-export type FilterSection<TValue extends string | number = string | number> = {
+export type FilterSection = {
   title: string
   icon: IconType
-  options: FilterOption<TValue>[]
-  selectedValue: TValue | 'all'
-  onSelect: (value: TValue | 'all') => void | Promise<unknown>
+  options: FilterOption[]
+  selectedValue: string | number | 'all'
+  onSelect: (value: string | number | 'all') => void | Promise<unknown>
 }
 
-export type FilterProps<TValue extends string | number = string | number> = {
-  sections: FilterSection<TValue>[]
+export type FilterProps = {
+  sections: FilterSection[]
   activeFiltersCount: number
   triggerLabel?: string
   clearLabel?: string
@@ -39,7 +39,7 @@ export type FilterProps<TValue extends string | number = string | number> = {
 }
 
 /* TODO: REFACTOR */
-function Filter<TValue extends string | number = string | number>({
+function Filter({
   sections,
   activeFiltersCount,
   triggerLabel = 'Filters',
@@ -49,7 +49,7 @@ function Filter<TValue extends string | number = string | number>({
   sortDirectionLabel,
   onClearFilters,
   onToggleSortDirection,
-}: FilterProps<TValue>) {
+}: FilterProps) {
   const hasActiveFilters = activeFiltersCount > 0
   const SortIcon: IconType | null =
     sortDirection === 'asc'

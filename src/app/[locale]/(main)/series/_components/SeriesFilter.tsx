@@ -63,7 +63,7 @@ const SeriesFilter = ({ availableYears }: SeriesFilterProps) => {
           label: t(`Series.genre_${genre}`),
         })),
         selectedValue: selectedGenre,
-        onSelect: (value: SeriesGenre | 'all') =>
+        onSelect: (value: string | number | 'all') =>
           setSelectedGenre(value as SeriesGenre | 'all'),
       },
       {
@@ -74,7 +74,7 @@ const SeriesFilter = ({ availableYears }: SeriesFilterProps) => {
           label: t(`Series.Country.${country}`),
         })),
         selectedValue: selectedCountry,
-        onSelect: (value: SeriesCountry | 'all') =>
+        onSelect: (value: string | number | 'all') =>
           setSelectedCountry(value as SeriesCountry | 'all'),
       },
       {
@@ -85,7 +85,7 @@ const SeriesFilter = ({ availableYears }: SeriesFilterProps) => {
           label: String(year),
         })),
         selectedValue: selectedYear,
-        onSelect: (value: number | 'all') =>
+        onSelect: (value: string | number | 'all') =>
           setSelectedYear(value as number | 'all'),
       },
       {
@@ -96,7 +96,8 @@ const SeriesFilter = ({ availableYears }: SeriesFilterProps) => {
           label: t(`Series.sort_${option}`),
         })),
         selectedValue: sortBy,
-        onSelect: (value: SortOption | 'all') => setSortBy(value as SortOption),
+        onSelect: (value: string | number | 'all') =>
+          setSortBy(value as SortOption),
       },
     ],
     [
