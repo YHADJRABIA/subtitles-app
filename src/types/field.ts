@@ -1,11 +1,10 @@
 import { InputHTMLAttributes } from 'react'
-import { ValidFieldNames } from './schemas/general'
-import { FieldValues, UseFormRegister } from 'react-hook-form'
+import { FieldValues, Path, UseFormRegister } from 'react-hook-form'
 
-export interface FieldBasePropTypes<K extends ValidFieldNames>
+export interface FieldBasePropTypes<T extends FieldValues>
   extends InputHTMLAttributes<HTMLInputElement> {
-  register: UseFormRegister<FieldValues | any> // TODO: Fix regression caused by React-hook-form update (should be UseFormRegister<FieldValues>)
-  name: K
+  register: UseFormRegister<T>
+  name: Path<T>
   label?: string
   subLabel?: {
     text?: string

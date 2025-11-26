@@ -4,21 +4,22 @@ import cn from 'classnames'
 import styles from './Field.module.scss'
 
 import Subfield from './Subfield'
-import { ValidFieldNames } from '@/types/schemas/general'
 import { IconType } from 'react-icons/lib'
 import { FieldBasePropTypes } from '@/types/field'
+import type { FieldValues } from 'react-hook-form'
 
 interface IconProps {
   src: IconType
   title?: string
 }
 
-export type PropTypes<K extends ValidFieldNames> = FieldBasePropTypes<K> & {
-  leftIcon?: IconProps
-  rightIcon?: IconProps
-}
+export type PropTypes<TFieldValues extends FieldValues> =
+  FieldBasePropTypes<TFieldValues> & {
+    leftIcon?: IconProps
+    rightIcon?: IconProps
+  }
 
-function Field<K extends ValidFieldNames & string>({
+function Field<TFieldValues extends FieldValues>({
   register,
   valueAsNumber,
   label,
@@ -31,7 +32,7 @@ function Field<K extends ValidFieldNames & string>({
   rightIcon,
   className,
   ...rest
-}: PropTypes<K>) {
+}: PropTypes<TFieldValues>) {
   const { text, isShown = true, isInfo = false } = subLabel || {}
 
   const isShownSubfield = isShown && !!text
