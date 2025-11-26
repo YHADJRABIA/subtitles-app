@@ -18,7 +18,7 @@ export interface PropTypes {
 const SeriesSearchbar = ({ className, isFoldable }: PropTypes) => {
   const t = useTranslations('Series')
   const allSeries = useSeriesData()
-  const { query, setQuery, clearSearch } = useSearch()
+  const { query, setQuery } = useSearch()
   const { setSearchQuery } = useSeriesFilters()
   const [debouncedQuery, setDebouncedQuery] = useState(query)
   const [isPending, setIsPending] = useState(false)
