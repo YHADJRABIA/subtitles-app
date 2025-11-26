@@ -2,13 +2,19 @@
   width: 100%;
 }
 
-.header {
+.stickyHeader {
+  position: sticky;
+  top: var(--sticky-top-offset, var(--header-height));
+  z-index: 9;
+  background-color: var(--primary-white-color);
+  padding: 1rem 0;
+  margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  margin-bottom: 2rem;
   flex-wrap: wrap;
+  transition: top 0.3s ease-in-out;
 }
 
 .series {

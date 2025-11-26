@@ -9,6 +9,8 @@ import SeriesToolbar from './SeriesToolbar'
 import Typography from '@/components/UI/Typography'
 import { useSeriesFilters } from '@/hooks/series/useSeriesFilters'
 import NoResults from './NoResults'
+import { useScrollDirection } from '@/hooks/useScrollDirection'
+import { CSSProperties } from 'react'
 
 interface PropTypes {
   series: Series[]
@@ -18,16 +20,26 @@ interface PropTypes {
 const SeriesContainer = ({ series, title }: PropTypes) => {
   const { filteredSeries, availableYears } = useFilter(series)
   const { clearFilters } = useSeriesFilters()
+  const scrollDirection = useScrollDirection()
+  const isHeaderHidden = scrollDirection === 'down'
 
   const hasResults = !!filteredSeries.length
 
   return (
     <div className={styles.root}>
-      <div className={styles.header}>
+      <div
+        className={styles.stickyHeader}
+        style={
+          {
+            '--sticky-top-offset': isHeaderHidden
+              ? '0'
+              : 'var(--header-height)',
+          } as CSSProperties
+        }
+      >
         <Typography tag="h1" weight="bold">
           {title}
         </Typography>
-
         <SeriesToolbar availableYears={availableYears} />
       </div>
 
