@@ -1,0 +1,43 @@
+.root {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  width: 100%;
+  padding: 0.5rem;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--primary-gray-border);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.image {
+  flex-shrink: 0;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 0.2rem;
+  overflow: hidden;
+  background-color: var(--primary-gray-border);
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 0.75rem;
+}
+
+.title {
+  @include truncated;
+}
+.details {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}

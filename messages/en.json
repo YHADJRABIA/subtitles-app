@@ -84,6 +84,16 @@
     "title": "Series",
     "featured": "Featured:",
     "all_series": "Series:",
+    "search_placeholder": "Search series...",
+    "no_results": "No results found",
+    "adapt_filter": "Readjust your filtering parameters.",
+    "reset_filters": "Reset filter",
+    "genre_comedy": "Comedy",
+    "sort_name": "Name",
+    "sort_releaseYear": "Release Year",
+    "sort_numberOfSeasons": "Number of Seasons",
+    "sort_asc": "Ascending",
+    "sort_desc": "Descending",
     "Country": {
       "title": "Country",
       "ru": "Russia",
@@ -97,6 +107,7 @@
     },
 
     "release_year": "Release year",
+    "genre_and_year": "{genre} • {releaseYear}",
 
     "Genre": {
       "title": "Genre",
@@ -123,6 +134,18 @@
     "trailer": "Trailer",
     "where_to_watch": "Where to watch",
     "where_to_download": "Where to download"
+  },
+  "Filters": {
+    "search_placeholder": "Search...",
+    "genre": "Genre",
+    "country": "Country",
+    "year": "Year",
+    "all": "All",
+    "sort_by": "Sort by",
+    "sort_direction": "Direction",
+    "clear": "Clear",
+    "toolbar_sort": "Sort",
+    "toolbar_filters": "Filters"
   },
   "NotFound": {
     "page_not_found": "Page not found",
@@ -366,5 +389,9 @@
     "dashboard": "Dashboard",
     "settings": "Settings",
     "account": "Account"
+  },
+  "Searchbar": {
+    "no_results": "No results found",
+    "placeholder": "Search..."
   }
 }

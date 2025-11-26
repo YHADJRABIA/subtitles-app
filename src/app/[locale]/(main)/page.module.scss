@@ -5,6 +5,12 @@
 
   @include respond-to('medium') {
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @include respond-to('huge') {
+    justify-content: flex-start;
   }
 }
 

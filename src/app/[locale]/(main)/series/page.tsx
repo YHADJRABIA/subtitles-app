@@ -1,12 +1,9 @@
-import Typography from '@/components/UI/Typography'
-import styles from './page.module.scss'
 import { getTranslations } from 'next-intl/server'
 import { Metadata } from 'next'
 import { MetaDataProps } from '../../layout'
 import { executeQuery } from '@/lib/datocms/executeQuery'
 import { allSeriesQuery } from '@/gql/queries/allSeriesPage'
-import { Row, Col } from '@/components/UI/Grid'
-import SeriesCard from './_components/SeriesCard'
+import SeriesContainer from './_components/SeriesContainer'
 import { draftMode } from 'next/headers'
 import { ResponsiveImageType } from '@/types/fragment'
 import { Series } from '@/types/series'
@@ -37,26 +34,15 @@ const SeriesPage = async ({ params }: MetaDataProps) => {
     allSeries: Series[]
   }
 
-  return (
-    <div className={styles.root}>
-      <div className={styles.wrapper}>
-        <Typography className={styles.title} tag="h1" weight="bold">
-          {t('title')}
-        </Typography>
-        <Row className={styles.series}>
-          {allSeries.map(({ slug, posterImage, ...series }) => (
-            <Col key={slug} width={[12, 6, 4]}>
-              <SeriesCard
-                {...series}
-                href={`/series/${slug}`}
-                image={posterImage.responsiveImage as ResponsiveImageType}
-              />
-            </Col>
-          ))}
-        </Row>
-      </div>
-    </div>
-  )
+  const series = allSeries.map(series => ({
+    ...series,
+    posterImage: {
+      responsiveImage: series.posterImage
+        .responsiveImage as ResponsiveImageType,
+    },
+  }))
+
+  return <SeriesContainer series={series} title={t('title')} />
 }
 
 export default SeriesPage

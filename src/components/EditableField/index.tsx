@@ -9,13 +9,13 @@ import { useTranslations } from 'next-intl'
 import { getErrorMessage } from '@/utils/errors'
 import Subfield from '../Forms/Subfield'
 
-import { ValidFieldNames } from '@/types/schemas/general'
 import { FieldBasePropTypes } from '@/types/field'
+import type { FieldValues } from 'react-hook-form'
 import { APIResponse } from '@/types/api'
 import { colors } from '@/utils/color'
 
-interface PropTypes<T, K extends ValidFieldNames>
-  extends FieldBasePropTypes<K> {
+interface PropTypes<T, TFieldValues extends FieldValues>
+  extends FieldBasePropTypes<TFieldValues> {
   handleSubmit: (
     callback: (data: T) => void
   ) => FormEventHandler<HTMLFormElement>
@@ -27,7 +27,7 @@ interface PropTypes<T, K extends ValidFieldNames>
   value: string
 }
 
-const EditableField = <T, K extends ValidFieldNames & string>({
+const EditableField = <T, K extends FieldValues>({
   register,
   topText,
   valueAsNumber,

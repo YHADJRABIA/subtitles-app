@@ -5,18 +5,55 @@
   position: sticky;
   top: 0;
   height: var(--header-height);
-  @include flexCenter(row);
+  @include flexCenter(row, flex-start, center, nowrap);
   background-color: var(--primary-black-color);
   padding: 0.5rem 2.5rem;
+  gap: 1.5rem;
+  --mobile-search-width: clamp(14rem, 60%, 26rem);
+  --desktop-search-width: 24rem;
 }
 
 .authSection {
   margin-left: calc(1rem + 2%);
 }
 
-.nav {
+.container {
+  @include flexCenter(row, flex-end, center, nowrap);
+  gap: 1.5rem;
   margin-left: auto;
 }
+
+.searchbarDesktop {
+  display: none;
+  flex: 0 1 var(--desktop-search-width);
+  max-width: var(--desktop-search-width);
+  min-width: 0; // Allow shrinking below max-width if needed
+
+  @include respond-to('medium') {
+    display: flex;
+    margin-left: clamp(1.5rem, 3vw, 4rem);
+  }
+
+  @include respond-to('huge') {
+    margin-left: max(
+      1.5rem,
+      calc(
+        max(var(--page-padding), (100vw - var(--page-max-width)) / 2) - 8.5rem
+      )
+    );
+  }
+}
+
+.searchbarMobile {
+  display: flex;
+  width: var(--mobile-search-width);
+  max-width: 100%;
+
+  @include respond-to('medium') {
+    display: none;
+  }
+}
+
 .languageMenu {
   margin-left: calc(0.5rem + 2.5%);
 }

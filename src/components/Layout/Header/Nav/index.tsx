@@ -12,13 +12,22 @@ import { LinkButton } from '@/components/UI/Button/LinkButton'
 import { SUPPORT_LINK } from '@/utils/constants'
 import { useTranslations } from 'next-intl'
 import { SiBuymeacoffee as SupportIcon } from 'react-icons/si'
+import UserMenu from '../UserMenu'
+import { handleLogout } from '@/actions/auth'
 
-interface PropTypes {
+export interface NavProps {
   isConnected: boolean
+  userAvatar?: string | null
   className?: string
+  showDashboardButton?: boolean
 }
 
-const Nav = ({ className, isConnected }: PropTypes) => {
+const Nav = ({
+  className,
+  isConnected,
+  userAvatar,
+  showDashboardButton,
+}: NavProps) => {
   const t = useTranslations('Navigation')
   const currentPath = usePathname()
   const isOnDesktop = useIsOnDesktop()
@@ -50,8 +59,13 @@ const Nav = ({ className, isConnected }: PropTypes) => {
           />
         </ul>
         <Separator className={styles.separator} />
-        {/* TODO: Reuse later  <AuthSection showAccount={isConnected} className={styles.authSection} /> */}
         <div className={styles.bottomSection}>
+          <UserMenu
+            avatarSrc={userAvatar}
+            isConnected={isConnected}
+            showDashboardButton={showDashboardButton}
+            onLogout={handleLogout}
+          />
           <LanguageMenu isInverted={!isOnDesktop} />
           <LinkButton
             icon={{ src: SupportIcon }}

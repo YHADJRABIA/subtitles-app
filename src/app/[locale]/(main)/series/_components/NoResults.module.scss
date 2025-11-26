@@ -1,0 +1,13 @@
+.root {
+  @include flexCenter(column, center, center);
+  gap: 0.5rem;
+  min-height: 30vh;
+}
+
+.content {
+  margin-bottom: 2rem;
+}
+
+.reset {
+  gap: 0.6rem;
+}
