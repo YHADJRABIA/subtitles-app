@@ -8,7 +8,7 @@ import {
   MdLogout as LogoutIcon,
   MdPersonAdd as RegisterIcon,
 } from 'react-icons/md'
-import { PiUserCircleLight as UserIcon } from 'react-icons/pi'
+import { PiUser as UserIcon } from 'react-icons/pi'
 import { useTranslations } from 'next-intl'
 import Avatar from '@/components/Avatar/Avatar'
 import useIsOnDesktop from '@/hooks/useIsOnDesktop'
@@ -56,7 +56,7 @@ const UserMenu = ({
   const userIcon = avatarSrc ? (
     <Avatar className={styles.avatar} size={32} src={avatarSrc} />
   ) : (
-    <UserIcon className={styles.avatar} size={32} />
+    <UserIcon className={styles.avatar} size={24} />
   )
 
   return (
