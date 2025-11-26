@@ -1,0 +1,88 @@
+.root {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-bottom: 0.8rem;
+  margin-bottom: -0.8rem;
+
+  &:hover .menu,
+  &:focus-within .menu {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+}
+
+.trigger {
+  @include flexCenter(row, center, center);
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+
+  &:focus-visible {
+    outline: 0.2rem solid var(--primary-yellow-color);
+    outline-offset: 0.2rem;
+    border-radius: 50%;
+  }
+}
+
+.menu {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  min-width: max-content;
+  padding: 0.4rem;
+  border-radius: 0.8rem;
+  background-color: var(--primary-white-color);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  border: 1px solid var(--secondary-white-color);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-0.4rem);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+  z-index: 1000;
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 0.6rem;
+  transition: all 0.15s ease;
+
+  &:hover,
+  &:focus-visible {
+    opacity: 0.8;
+    background-color: var(--secondary-white-color);
+    color: var(--primary-black-color);
+    outline: none;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}
+
+.itemIcon {
+  font-size: 1.8rem;
+}
+
+.divider {
+  height: 1px;
+  background-color: var(--secondary-white-color);
+  margin: 0.4rem 0.8rem;
+}

@@ -22,7 +22,7 @@
     @include initialProperties;
     box-sizing: border-box;
     @include flexCenter(row, flex-start);
-    gap: 4rem;
+    gap: 3rem;
   }
 
   &.toggled {

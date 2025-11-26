@@ -2,13 +2,14 @@ import { handleLogout } from '@/actions/auth'
 import { getErrorMessage } from '@/utils/errors'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
+import useIsOnDesktop from './useIsOnDesktop'
 
 import {
   GrHomeRounded as HomeIcon,
   GrCircleQuestion as AboutIcon,
   GrUserSettings as DashboardIcon,
   GrPowerShutdown as LogoutIcon,
-  GrKey as LoginIcon,
+  GrLogin as LoginIcon,
   GrUserExpert as RegisterIcon,
 } from 'react-icons/gr'
 
@@ -23,6 +24,8 @@ interface PropTypes {
  **/
 const useNavLinks = ({ isConnected }: PropTypes) => {
   const t = useTranslations('Navigation')
+
+  const isOnDesktop = useIsOnDesktop()
 
   const [isLoggingOut, setIsLoggingOut] = useState(false)
 
@@ -39,7 +42,8 @@ const useNavLinks = ({ isConnected }: PropTypes) => {
       setIsLoggingOut(false)
     }
   }
-  const navLinks = [
+
+  const baseLinks = [
     {
       url: '/',
       label: t('home'),
@@ -55,32 +59,37 @@ const useNavLinks = ({ isConnected }: PropTypes) => {
       label: t('series'),
       icon: SubtitlesIcon,
     },
-    ...(isConnected
-      ? [
-          {
-            url: '/dashboard',
-            label: t('dashboard'),
-            icon: DashboardIcon,
-          },
-          {
-            label: t('logout'),
-            icon: LogoutIcon,
-            onClick: handleLogoutClick,
-          },
-        ]
-      : [
-          {
-            url: '/register',
-            label: t('register'),
-            icon: RegisterIcon,
-          },
-          {
-            url: '/login',
-            label: t('login'),
-            icon: LoginIcon,
-          },
-        ]),
-  ].filter(Boolean)
+  ]
+
+  const authLinks = isConnected
+    ? [
+        {
+          url: '/dashboard',
+          label: t('dashboard'),
+          icon: DashboardIcon,
+        },
+        {
+          label: t('logout'),
+          icon: LogoutIcon,
+          onClick: handleLogoutClick,
+        },
+      ]
+    : [
+        {
+          url: '/register',
+          label: t('register'),
+          icon: RegisterIcon,
+        },
+        {
+          url: '/login',
+          label: t('login'),
+          icon: LoginIcon,
+        },
+      ]
+
+  const navLinks = (
+    isOnDesktop ? baseLinks : [...baseLinks, ...authLinks]
+  ).filter(Boolean)
 
   return navLinks
 }

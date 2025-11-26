@@ -3,6 +3,7 @@ import { getErrorMessage } from '@/utils/errors'
 import { getTranslations } from 'next-intl/server'
 import { revalidatePath } from 'next/cache'
 import { NextResponse, NextRequest } from 'next/server'
+import { locales, defaultLocale } from '@/i18n/routing'
 
 const { NEXT_ISR_REVALIDATION_TOKEN: revalidationToken } = process.env
 
@@ -34,9 +35,11 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    // Revalidate the page
-    revalidatePath(`/series/${slug}`) // TODO: fetch "series" from body instead
-    revalidatePath(`/fr/series/${slug}`) // TODO: rework webhook to validate specific locale
+    // Revalidate the page for all locales
+    locales.forEach(localeCode => {
+      const prefix = localeCode === defaultLocale ? '' : `/${localeCode}`
+      revalidatePath(`${prefix}/series/${slug}`)
+    })
     return NextResponse.json({
       message: t('successful_revalidation'),
       success: true,

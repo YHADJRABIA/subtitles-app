@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import styles from './layout.module.scss'
 import { getTranslations } from 'next-intl/server'
-import Header from '@/components/Layout/Header'
+import HeaderWithAuth from '@/components/Layout/Header/HeaderWithAuth'
 import Footer from '@/components/Layout/Footer'
 import Navbar from './_components/Navbar'
 import { Metadata } from 'next/types'
@@ -30,7 +30,7 @@ interface PropTypes {
 const ProtectedLayout = ({ children }: PropTypes) => {
   return (
     <>
-      <Header isConnected />
+      <HeaderWithAuth isOnDashboard />
       <Navbar />
       <main className={styles.root}>
         {/*         <Sidebar className={styles.sidebar} /> */}

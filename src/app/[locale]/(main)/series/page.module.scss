@@ -1,18 +1,24 @@
 .root {
   width: 100%;
-  @include flexCenter(column, flex-start, flex-start);
 }
 
-.wrapper {
-  width: 100%;
-}
-
-.title {
-  margin-bottom: 4rem;
+.stickyHeader {
+  position: sticky;
+  top: var(--sticky-top-offset, var(--header-height));
+  z-index: 9;
+  background-color: var(--primary-white-color);
+  padding: 1rem 0;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  transition: top 0.3s ease-in-out;
 }
 
 .series {
-  row-gap: 2rem;
+  row-gap: 4rem;
 
   @include respond-to('medium') {
     row-gap: 2.5rem;

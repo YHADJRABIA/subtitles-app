@@ -1,0 +1,145 @@
+.root {
+  width: 100%;
+  position: relative;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &.foldable {
+    &.collapsed {
+      width: 2.5rem;
+
+      .input {
+        width: 0;
+        padding: 0;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .iconLeft {
+        left: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: auto;
+      }
+    }
+
+    &.expanded {
+      .iconLeft {
+        left: 0.8rem;
+        transform: translateY(-50%) scale(0.85);
+        color: var(--primary-black-color);
+      }
+    }
+  }
+
+  &:not(.foldable) {
+    .iconLeft {
+      color: var(--primary-black-color);
+      transform: translateY(-50%) scale(0.85);
+    }
+  }
+}
+
+.input {
+  width: 100%;
+  padding: 0.9rem 3.5rem;
+  border-radius: 100rem;
+  border: 1px solid var(--primary-gray-border);
+  background-color: var(--primary-white-color);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:focus {
+    outline: none;
+    border-color: var(--primary-black-color);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+  }
+}
+
+.iconLeft {
+  position: absolute;
+  left: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  color: var(--primary-gray-color);
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  .foldable & {
+    pointer-events: auto;
+  }
+}
+
+.clear {
+  position: absolute;
+  right: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  right: 0;
+  border-radius: 0.8rem;
+  border: 1px solid var(--primary-gray-border);
+  background-color: var(--primary-white-color);
+  max-height: 30rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 10;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06),
+    0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  animation: slideDown 0.2s ease-out;
+
+  // Custom scrollbar
+  &::-webkit-scrollbar {
+    width: 0.6rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--primary-gray-border);
+    border-radius: 0.3rem;
+
+    &:hover {
+      background: var(--primary-gray-color);
+    }
+  }
+}
+
+.dropdownItem {
+  padding: 0.75rem 1rem;
+  transition: background-color 0.15s ease;
+  cursor: pointer;
+  border-bottom: 1px solid var(--primary-gray-border);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+
+  &:active {
+    background-color: rgba(0, 0, 0, 0.08);
+  }
+}
+
+.dropdownItemActive {
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+.container {
+  padding: 1rem;
+  display: flex;
+}

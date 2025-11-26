@@ -1,17 +1,21 @@
 import { ReactNode } from 'react'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import AuthProvider from './AuthProvider'
 import { ModalProvider } from './ModalProvider'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth/auth.config'
 import ToastProvider from './ToastProvider'
+import SeriesProvider from './SeriesProvider'
+import { Series } from '@/types/series'
 
 interface PropTypes {
   children: ReactNode
+  series: Series[]
 }
 
-const AppProvider = async ({ children }: PropTypes) => {
+const AppProvider = async ({ children, series }: PropTypes) => {
   // Provide all messages to the client side
   const messages = await getMessages()
 
@@ -20,11 +24,15 @@ const AppProvider = async ({ children }: PropTypes) => {
 
   return (
     <NextIntlClientProvider messages={messages}>
-      <AuthProvider session={session}>
-        <ToastProvider>
-          <ModalProvider>{children}</ModalProvider>
-        </ToastProvider>
-      </AuthProvider>
+      <NuqsAdapter>
+        <AuthProvider session={session}>
+          <ToastProvider>
+            <ModalProvider>
+              <SeriesProvider series={series}>{children}</SeriesProvider>
+            </ModalProvider>
+          </ToastProvider>
+        </AuthProvider>
+      </NuqsAdapter>
     </NextIntlClientProvider>
   )
 }

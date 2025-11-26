@@ -10,6 +10,10 @@ import { Analytics } from '@vercel/analytics/react'
 import { websiteUrl } from '@/utils/general'
 import { GOOGLE_SEARCH_CONSOLE_VERIFICATION } from '@/utils/constants'
 import { routing } from '@/i18n/routing'
+import { executeQuery } from '@/lib/datocms/executeQuery'
+import { allSeriesQuery } from '@/gql/queries/allSeriesPage'
+import { Series } from '@/types/series'
+import { ResponsiveImageType } from '@/types/fragment'
 
 const inter = Inter({ subsets: ['latin', 'cyrillic'], variable: '--font-body' })
 const literate = Literata({
@@ -108,10 +112,27 @@ interface LayoutProps {
 export default async function LocaleLayout({ params, children }: LayoutProps) {
   const { locale } = await params
 
+  const isValidLocale = routing.locales.includes(locale as Locale)
+
+  /* TODO: Consider api route when it gets bigger */
+  const { allSeries } = isValidLocale
+    ? ((await executeQuery(allSeriesQuery, {
+        variables: { locale: locale as Locale },
+      })) as { allSeries: Series[] })
+    : { allSeries: [] }
+
+  const series = allSeries.map(seriesItem => ({
+    ...seriesItem,
+    posterImage: {
+      responsiveImage: seriesItem.posterImage
+        .responsiveImage as ResponsiveImageType,
+    },
+  }))
+
   return (
-    <html lang={locale}>
+    <html data-scroll-behavior="smooth" lang={locale}>
       <body className={`${inter.variable} ${literate.variable}`}>
-        <AppProvider>{children}</AppProvider>
+        <AppProvider series={series}>{children}</AppProvider>
         <Analytics />
       </body>
     </html>
