@@ -38,6 +38,7 @@ export type FilterProps<TValue extends string | number = string | number> = {
   onToggleSortDirection?: () => void
 }
 
+/* TODO: REFACTOR */
 function Filter<TValue extends string | number = string | number>({
   sections,
   activeFiltersCount,
