@@ -3,26 +3,40 @@ import mongoose from 'mongoose'
 
 const URI = process.env.MONGODB_URI
 
-const isConnected = mongoose.connection.readyState === 1
+let isConnected = false
+let connectionPromise: Promise<typeof mongoose> | null = null
 
 export const connectDB = async () => {
   if (isConnected) return true
 
+  if (!connectionPromise) {
+    connectionPromise = mongoose.connect(URI!)
+
+    mongoose.connection.on('disconnected', () => {
+      isConnected = false
+      console.warn('MongoDB disconnected')
+    })
+
+    mongoose.connection.on('error', err => {
+      isConnected = false
+      console.error('MongoDB connection error:', err)
+    })
+  }
+
   try {
-    await mongoose.connect(URI!)
-    const connection = mongoose.connection
+    await connectionPromise
 
-    connection.on('connected', () => {
+    if (!isConnected) {
+      isConnected = true
       console.log('MongoDB connection successful ✓')
-    })
+    }
 
-    connection.on('error', err => {
-      console.error(
-        `MongoDB connection failed ✗. Ensure MongoDB is running. ${err}`
-      )
-      process.exit(1)
-    })
+    return true
   } catch (err) {
-    console.error(`Something went wrong ${err}`)
+    console.error(
+      'MongoDB connection failed ✗. Ensure MongoDB is running.',
+      err
+    )
+    throw err
   }
 }
