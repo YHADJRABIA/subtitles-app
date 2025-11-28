@@ -37,7 +37,7 @@ import {
 } from '@/types/schemas/auth'
 import { useTranslations } from 'next-intl'
 import { useSearchParams } from 'next/navigation'
-import { DEFAULT_LOGIN_REDIRECT_ROUTE } from '@/routes/routes'
+import { DEFAULT_LOGIN_REDIRECT_ROUTE, routes } from '@/routes/routes'
 import { getSuccessMessage } from '@/utils/api'
 
 interface PropTypes {
@@ -240,7 +240,11 @@ function AuthForm({ type }: PropTypes) {
       <Typography align="center">
         {t.rich(isRegisterForm ? 'Register.fallback' : 'Login.fallback', {
           link: text => (
-            <Link href={isRegisterForm ? '/login' : '/register'}>{text}</Link>
+            <Link
+              href={isRegisterForm ? routes['/login'] : routes['/register']}
+            >
+              {text}
+            </Link>
           ),
         })}
       </Typography>

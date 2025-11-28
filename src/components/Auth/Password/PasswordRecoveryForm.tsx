@@ -28,6 +28,7 @@ import { useTranslations } from 'next-intl'
 import { handleSendPasswordRecoveryEmail } from '@/actions/auth'
 import { Link } from '@/i18n/routing'
 import { getSuccessMessage } from '@/utils/api'
+import { routes } from '@/routes/routes'
 
 const PasswordRecoveryForm = () => {
   const searchParams = useSearchParams()
@@ -113,8 +114,8 @@ const PasswordRecoveryForm = () => {
 
       <Typography align="center">
         {t.rich('PasswordRecovery.fallback', {
-          login: text => <Link href={'/login'}>{text}</Link>,
-          register: text => <Link href={'/register'}>{text}</Link>,
+          login: text => <Link href={routes['/login']}>{text}</Link>,
+          register: text => <Link href={routes['/register']}>{text}</Link>,
         })}
       </Typography>
     </form>

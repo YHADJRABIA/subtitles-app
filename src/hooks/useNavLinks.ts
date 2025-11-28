@@ -3,6 +3,7 @@ import { getErrorMessage } from '@/utils/errors'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import useIsOnDesktop from './useIsOnDesktop'
+import { routes } from '@/routes/routes'
 
 import {
   GrHomeRounded as HomeIcon,
@@ -45,17 +46,17 @@ const useNavLinks = ({ isConnected }: PropTypes) => {
 
   const baseLinks = [
     {
-      url: '/',
+      url: routes['/'],
       label: t('home'),
       icon: HomeIcon,
     },
     {
-      url: '/about',
+      url: routes['/about'],
       label: t('about'),
       icon: AboutIcon,
     },
     {
-      url: '/series',
+      url: routes['/series'],
       label: t('series'),
       icon: SubtitlesIcon,
     },
@@ -64,7 +65,7 @@ const useNavLinks = ({ isConnected }: PropTypes) => {
   const authLinks = isConnected
     ? [
         {
-          url: '/dashboard',
+          url: routes['/dashboard'],
           label: t('dashboard'),
           icon: DashboardIcon,
         },
@@ -76,12 +77,12 @@ const useNavLinks = ({ isConnected }: PropTypes) => {
       ]
     : [
         {
-          url: '/register',
+          url: routes['/register'],
           label: t('register'),
           icon: RegisterIcon,
         },
         {
-          url: '/login',
+          url: routes['/login'],
           label: t('login'),
           icon: LoginIcon,
         },

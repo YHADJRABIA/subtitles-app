@@ -11,7 +11,7 @@ import {
   handleCredentialsLogin,
   handleResend2FACode,
 } from '@/actions/auth'
-import { DEFAULT_LOGIN_REDIRECT_ROUTE } from '@/routes/routes'
+import { DEFAULT_LOGIN_REDIRECT_ROUTE, routes } from '@/routes/routes'
 import { getErrorMessage } from '@/utils/errors'
 import { useTimer } from '@/hooks/useTimer'
 import { notify } from '@/lib/toastify'
@@ -186,7 +186,7 @@ function TwoFactorForm({ email, password }: PropTypes) {
               </Typography>
             </div>
 
-            <Link className={styles.backToLogin} href="/login">
+            <Link className={styles.backToLogin} href={routes['/login']}>
               <Typography size="xs">{t('2FA.back_to_login')}</Typography>
             </Link>
           </div>
