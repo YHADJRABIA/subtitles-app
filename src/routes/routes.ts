@@ -1,18 +1,7 @@
-import { pathnames } from '@/i18n/routing'
-import { Pathname } from '@/types/pathnames'
+import { routes, RoutePath } from '@/i18n/routing'
 
-/**
- * Type-safe routes object. Access routes via:
- * - routes['/login']
- * - routes['/dashboard/settings']
- */
-export const routes = Object.keys(pathnames).reduce(
-  (acc, key) => {
-    acc[key as Pathname] = key as Pathname
-    return acc
-  },
-  {} as Record<Pathname, Pathname>
-)
+// Re-export routes from routing.ts (single source of truth)
+export { routes, type RoutePath }
 
 // Redirect routes
 export const DEFAULT_LOGIN_REDIRECT_ROUTE = routes['/dashboard']
@@ -26,7 +15,7 @@ export const publicAuthRoutes = [
   routes['/send-verification-email'],
   routes['/password/recovery'],
   routes['/password/reset'],
-] satisfies Pathname[]
+] satisfies RoutePath[]
 
 /** Routes accessible only as unauthenticated user */
 export const loginRegisterRoutes = [
@@ -39,6 +28,6 @@ export const protectedRoutes = [
   routes['/dashboard'],
   routes['/dashboard/settings'],
   routes['/dashboard/account'],
-] satisfies Pathname[]
+] satisfies RoutePath[]
 
 export const apiAuthPrefix = '/api/auth' // Routes handled by Next-Auth
