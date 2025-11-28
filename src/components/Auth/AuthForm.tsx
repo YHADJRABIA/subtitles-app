@@ -121,7 +121,7 @@ function AuthForm({ type }: PropTypes) {
     }
   }
 
-  // TODO: Add Google Recaptcha to prevent abuse + improve UX with resend validation email
+  // TODO: Add Google Recaptcha to prevent abuse
   if (is2FA) return <TwoFactorForm email={email} password={password} />
 
   return (
