@@ -219,8 +219,8 @@
       "user_not_found": "Utilisateur introuvable",
       "confirm_button": "Confirmer",
       "code_label": "Code de vérification",
-      "not_received": "Code non reçu ? <cta>Renvoyer le code</cta>",
-      "resend": "Renvoyer",
+      "not_received_prefix": "Code non reçu ?",
+      "resend_cta": "Renvoyer le code",
       "code_resent": "Code renvoyé ! Vérifiez votre boîte mail",
       "wait_before_resend": "Renvoyer dans {time}s",
       "back_to_login": "Retour à la connexion"

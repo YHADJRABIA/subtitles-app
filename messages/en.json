@@ -220,8 +220,8 @@
       "user_not_found": "User not found",
       "confirm_button": "Confirm",
       "code_label": "Verification code",
-      "not_received": "Didn't receive code? <cta>Resend code</cta>",
-      "resend": "Resend",
+      "not_received_prefix": "Didn't receive code?",
+      "resend_cta": "Resend code",
       "code_resent": "Code resent! Check your email",
       "wait_before_resend": "Resend in {time}s",
       "back_to_login": "Back to login"
