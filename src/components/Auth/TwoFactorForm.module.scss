@@ -1,0 +1,83 @@
+.root {
+  justify-content: flex-start;
+
+  & > :last-child {
+    width: 100%;
+  }
+}
+
+.wrapper {
+  width: 100%;
+  margin-bottom: 4rem;
+  @include flexCenter(column, flex-start);
+  gap: 1.5rem;
+
+  @include respond-to('medium') {
+    width: var(--container-max-width);
+  }
+}
+
+.title {
+  text-align: center;
+  width: 100%;
+}
+
+.description {
+  text-align: center;
+  width: 100%;
+}
+
+.inputSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.codeError {
+  white-space: nowrap;
+}
+
+.actionsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.linksRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.resendText {
+  color: var(--secondary-gray-color);
+  font-size: 0.875rem;
+
+  .resendLink {
+    color: var(--primary-blue-color);
+    cursor: pointer;
+    text-decoration: underline;
+    margin-left: 0.25rem;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+.backToLogin {
+  color: var(--secondary-blue-color);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.cta {
+  width: 100%;
+}
