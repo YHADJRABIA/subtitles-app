@@ -1,6 +1,6 @@
 .root {
   @include flexCenter(row, flex-start);
-  gap: 0.5rem;
+  gap: 1rem;
   width: 100%;
   flex-wrap: nowrap;
 }
@@ -8,11 +8,10 @@
 .inputContainer {
   position: relative;
   @include flexCenter(row, center);
-  flex: 1;
-  min-width: 0;
-  max-width: 5rem;
+  flex: 0 0 auto;
+  width: 4rem;
   @include respond-to('medium') {
-    max-width: 7rem;
+    width: 5rem;
   }
 }
 
