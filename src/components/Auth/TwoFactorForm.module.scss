@@ -8,13 +8,22 @@
 
 .wrapper {
   width: 100%;
-  margin-bottom: 4rem;
+  flex: 1;
   @include flexCenter(column, flex-start);
-  gap: 1.5rem;
+  gap: 2rem;
 
   @include respond-to('medium') {
     width: var(--container-max-width);
+    flex: unset;
+    margin-bottom: 4rem;
   }
+}
+
+.verificationSection {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
 }
 
 .title {
@@ -28,22 +37,27 @@
 }
 
 .inputSection {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  @include flexCenter(column, flex-start, flext-start);
   gap: 0.5rem;
   width: 100%;
+  @include respond-to('medium') {
+    align-items: center;
+  }
 }
 
 .codeError {
   white-space: nowrap;
 }
 
-.actionsSection {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+.cta {
   width: 100%;
+  margin-top: auto;
+  margin-bottom: 2rem;
+
+  @include respond-to('medium') {
+    margin-top: 1rem;
+    margin-bottom: 0;
+  }
 }
 
 .linksRow {
@@ -54,17 +68,28 @@
 }
 
 .resendText {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
   color: var(--secondary-gray-color);
-  font-size: 0.875rem;
+}
 
-  .resendLink {
-    color: var(--primary-blue-color);
-    cursor: pointer;
-    text-decoration: underline;
-    margin-left: 0.25rem;
+.resendLink {
+  color: var(--primary-blue-color);
+  cursor: pointer;
+  text-decoration: underline;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &.disabled {
+    color: var(--secondary-gray-color);
+    cursor: default;
+    text-decoration: none;
 
     &:hover {
-      opacity: 0.8;
+      opacity: 1;
     }
   }
 }
@@ -76,8 +101,4 @@
   &:hover {
     text-decoration: underline;
   }
-}
-
-.cta {
-  width: 100%;
 }
