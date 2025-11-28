@@ -218,7 +218,12 @@
       "verified": "Vérification réussie !",
       "user_not_found": "Utilisateur introuvable",
       "confirm_button": "Confirmer",
-      "code_label": "Code de vérification"
+      "code_label": "Code de vérification",
+      "not_received": "Code non reçu ? <cta>Renvoyer le code</cta>",
+      "resend": "Renvoyer",
+      "code_resent": "Code renvoyé ! Vérifiez votre boîte mail",
+      "wait_before_resend": "Renvoyer dans {time}s",
+      "back_to_login": "Retour à la connexion"
     },
     "Error": {
       "title": "Erreur d'Authentification"
