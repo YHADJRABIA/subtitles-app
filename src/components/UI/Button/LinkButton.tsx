@@ -1,4 +1,5 @@
 import { IconType } from '@/types/icon'
+import { routes } from '@/routes/routes'
 import Typography, { LinkType, TypographyPropTypes } from '../Typography'
 import styles from './Button.module.scss'
 import cn from 'classnames'
@@ -18,7 +19,7 @@ export const LinkButton = ({
   isFullWidth = true,
   isRounded = false,
   className,
-  link = { href: '/', openInNewTab: false },
+  link = { href: routes['/'], openInNewTab: false },
   backgroundColor,
   children,
   icon,

@@ -4,6 +4,7 @@ import cn from 'classnames'
 import styles from './CtaSection.module.scss'
 import { useTranslations } from 'next-intl'
 import { SUPPORT_LINK } from '@/utils/constants'
+import { routes } from '@/routes/routes'
 
 interface PropTypes {
   className?: string
@@ -16,7 +17,7 @@ const CtaSection = ({ className }: PropTypes) => {
   return (
     <section className={cn(styles.root, className)}>
       <LinkButton
-        link={{ href: '/series' }}
+        link={{ href: routes['/series'] }}
         size="xs"
         variation="primary"
         weight="semiBold"

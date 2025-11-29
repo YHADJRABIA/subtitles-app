@@ -1,5 +1,9 @@
 import { locales, pathnames } from '@/i18n/routing'
-import { protectedRoutes, loginRegisterRoutes } from '@/routes/routes'
+import {
+  protectedRoutes,
+  loginRegisterRoutes,
+  routes as appRoutes,
+} from '@/routes/routes'
 import { IntlMessagesKey } from '@/types/global'
 import { Pathname } from '@/types/pathnames'
 
@@ -108,7 +112,7 @@ export const generateBreadcrumbs = (
   ])
 
   const breadcrumbs: Array<{ label: string; href: string }> = [
-    { label: t('home' as IntlMessagesKey), href: '/' },
+    { label: t('home' as IntlMessagesKey), href: appRoutes['/'] },
   ]
 
   const formatLabel = (segment: string): string => {

@@ -26,7 +26,17 @@ const MultiDigitInput = ({
   const [digits, setDigits] = useState(Array(n).fill(''))
   const inputRefs = useRef<(HTMLInputElement | null)[]>([])
 
-  const focusInput = (idx: number) => inputRefs.current[idx]?.focus()
+  const focusInput = (idx: number, cursorAtEnd = false) => {
+    const input = inputRefs.current[idx]
+    if (input) {
+      input.focus()
+      if (cursorAtEnd && input.value) {
+        // Move cursor to end of input
+        const len = input.value.length
+        input.setSelectionRange(len, len)
+      }
+    }
+  }
 
   const updateDigitById = (idx: number, value: string) => {
     const array = [...digits]
@@ -36,8 +46,17 @@ const MultiDigitInput = ({
   }
 
   const handleInputChange = (inputValue: string, idx: number) => {
-    // Allow only single-character inputs
-    if (inputValue.length > 1) return
+    // Handle case where user types over existing digit
+    if (inputValue.length > 1) {
+      // Take the last character (the new one typed)
+      const newDigit = inputValue.slice(-1)
+      if (!isNaN(Number(newDigit))) {
+        updateDigitById(idx, newDigit)
+        const isLastField = idx === n - 1
+        if (!isLastField) focusInput(idx + 1)
+      }
+      return
+    }
 
     updateDigitById(idx, inputValue)
 
@@ -57,8 +76,10 @@ const MultiDigitInput = ({
         focusInput(idx - 1)
       }
     } else if (e.key === 'ArrowLeft' && !isFirstField) {
-      focusInput(idx - 1)
+      e.preventDefault()
+      focusInput(idx - 1, true) // Cursor at end
     } else if (e.key === 'ArrowRight' && !isLastField) {
+      e.preventDefault()
       focusInput(idx + 1)
     } else if (isNaN(Number(e.key))) {
       e.preventDefault() // Prevent non-numeric input
@@ -78,11 +99,11 @@ const MultiDigitInput = ({
             className={cn(styles.input, { [styles.error]: hasError })}
             disabled={isDisabled}
             inputMode="numeric"
-            maxLength={1}
+            maxLength={2}
             ref={el => {
               inputRefs.current[idx] = el
             }}
-            type="number"
+            type="text"
             value={digit}
             onChange={e => handleInputChange(e.target.value, idx)}
             onKeyDown={e => handleKeyDown(e, idx)}

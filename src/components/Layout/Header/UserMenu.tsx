@@ -17,6 +17,7 @@ import {
   DropdownItem,
   DropdownDivider,
 } from '@/components/UI/Dropdown'
+import { routes } from '@/routes/routes'
 
 interface PropTypes {
   isConnected: boolean
@@ -65,7 +66,10 @@ const UserMenu = ({
         <>
           {showDashboardButton && (
             <>
-              <DropdownItem href="/dashboard" icon={<DashboardIcon />}>
+              <DropdownItem
+                href={routes['/dashboard']}
+                icon={<DashboardIcon />}
+              >
                 {t('dashboard')}
               </DropdownItem>
               <DropdownDivider />
@@ -81,10 +85,10 @@ const UserMenu = ({
         </>
       ) : (
         <>
-          <DropdownItem href="/login" icon={<LoginIcon />}>
+          <DropdownItem href={routes['/login']} icon={<LoginIcon />}>
             {t('login')}
           </DropdownItem>
-          <DropdownItem href="/register" icon={<RegisterIcon />}>
+          <DropdownItem href={routes['/register']} icon={<RegisterIcon />}>
             {t('register')}
           </DropdownItem>
         </>

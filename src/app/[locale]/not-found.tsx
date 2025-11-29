@@ -9,6 +9,7 @@ import { LinkButton } from '@/components/UI/Button/LinkButton'
 import { MdOutlineKeyboardBackspace as BackIcon } from 'react-icons/md'
 import { useTranslations } from 'next-intl'
 import { colors } from '@/utils/color'
+import { routes } from '@/routes/routes'
 
 const SVG_PATH = '/assets/ice-fishing.svg'
 
@@ -25,7 +26,7 @@ const NotFoundPage = () => {
             <LinkButton
               className={styles.cta}
               icon={{ src: BackIcon, size: 22 }}
-              link={{ href: '/' }}
+              link={{ href: routes['/'] }}
               size="s"
               variation="primary"
               weight="semiBold"
