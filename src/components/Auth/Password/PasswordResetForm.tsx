@@ -6,6 +6,7 @@ import React, { useEffect } from 'react'
 import Field from '@/components/Forms/Field'
 import { Button } from '@/components/UI/Button'
 import { Link } from '@/i18n/routing'
+import { routes } from '@/routes/routes'
 import { MdLockOutline as PasswordIcon } from 'react-icons/md'
 
 import {
@@ -108,7 +109,7 @@ const PasswordResetForm = () => {
           <Button
             disabled={!isSubmitSuccessful && !isValid}
             isLoading={!isSubmitSuccessful && isSubmitting}
-            link={isSubmitSuccessful ? { href: '/login' } : undefined}
+            link={isSubmitSuccessful ? { href: routes['/login'] } : undefined}
             size="xs"
             testId={
               !isSubmitSuccessful ? 'submit-reset-password-form' : undefined
@@ -120,7 +121,9 @@ const PasswordResetForm = () => {
             {t(`PasswordReset.${isSubmitSuccessful ? 'fallback' : 'cta'}`)}
           </Button>
         ) : (
-          <Link href="/password/recovery">{t('PasswordReset.cta_error')}</Link>
+          <Link href={routes['/password/recovery']}>
+            {t('PasswordReset.cta_error')}
+          </Link>
         )}
       </div>
     </form>

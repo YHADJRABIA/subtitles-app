@@ -67,6 +67,19 @@ export const pathnames = {
   },
 } satisfies PathnamesType
 
+/** Type representing valid route paths */
+export type RoutePath = keyof typeof pathnames
+
+/**
+ * Type-safe routes derived from pathnames.
+ * Usage: routes['/login'], routes['/dashboard/settings']
+ * TypeScript will error if path doesn't exist in pathnames.
+ */
+export const routes: { [K in RoutePath]: K } = Object.keys(pathnames).reduce(
+  (acc, key) => ({ ...acc, [key]: key }),
+  {} as { [K in RoutePath]: K }
+)
+
 export const routing = defineRouting({
   locales: locales,
   defaultLocale: defaultLocale,

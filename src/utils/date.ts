@@ -66,3 +66,16 @@ export const formatDate = (
 
   return showTime ? { date: formattedDate, time: formattedTime } : formattedDate
 }
+
+/**
+ * Computes the age in seconds of a token when only its expiry and lifetime are known.
+ * The creation time is derived as: createdAt = expires - lifetimeMinutes.
+ */
+export const getAgeInSecondsFromExpiry = (
+  expires: Date | string,
+  lifetimeMinutes: number
+): number => {
+  const expiresMs = new Date(expires).getTime()
+  const createdAtMs = expiresMs - lifetimeMinutes * 60 * 1000
+  return (Date.now() - createdAtMs) / 1000
+}

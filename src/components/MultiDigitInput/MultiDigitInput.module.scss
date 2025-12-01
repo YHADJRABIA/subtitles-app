@@ -1,6 +1,6 @@
 .root {
-  @include flexCenter(row, flex-start);
-  gap: 0.5rem;
+  @include flexCenter(row, center);
+  gap: 1rem;
   width: 100%;
   flex-wrap: nowrap;
 }
@@ -10,20 +10,18 @@
   @include flexCenter(row, center);
   flex: 1;
   min-width: 0;
-  max-width: 5rem;
+
   @include respond-to('medium') {
-    max-width: 7rem;
+    flex: 0 0 auto;
+    width: 5rem;
   }
 }
 
 .input {
   border-radius: 0.5rem;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   width: 100%;
   aspect-ratio: 1;
-  @include respond-to('medium') {
-    font-size: 1.6rem;
-  }
   text-align: center;
   border: 1px solid var(--secondary-gray-color);
   background-color: transparent;
@@ -52,12 +50,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   color: var(--secondary-gray-color);
   pointer-events: none;
   z-index: 1;
-
-  @include respond-to('medium') {
-    font-size: 1.6rem;
-  }
 }

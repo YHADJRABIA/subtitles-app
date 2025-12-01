@@ -134,3 +134,14 @@ export const handleVerifyTwoFactorCode = async (
     throw err
   }
 }
+
+export const handleResend2FACode = async (
+  email: string
+): Promise<{ data: APIResponse }> => {
+  try {
+    return await axios.post('/api/users/resend-2fa', { email })
+  } catch (err) {
+    console.error('Error resending 2FA code:', getErrorMessage(err))
+    throw err
+  }
+}

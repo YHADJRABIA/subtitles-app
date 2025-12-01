@@ -15,9 +15,14 @@ const useInfo = () => {
     setInfo({ label, type })
   }
 
+  const clearInfo = () => {
+    setInfo({ label: '' })
+  }
+
   return {
     info,
     setInfoMessage,
+    clearInfo,
   }
 }
 

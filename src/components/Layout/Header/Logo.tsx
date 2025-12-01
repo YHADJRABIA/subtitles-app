@@ -1,4 +1,5 @@
 import { Link } from '@/i18n/routing'
+import { routes } from '@/routes/routes'
 import styles from './Logo.module.scss'
 import React from 'react'
 import Image from 'next/image'
@@ -11,7 +12,7 @@ interface PropsType {
 
 const Logo = ({ className, size, isInvertedColor }: PropsType) => {
   return (
-    <Link className={className} href="/">
+    <Link className={className} href={routes['/']}>
       <Image
         priority
         alt="Logo"

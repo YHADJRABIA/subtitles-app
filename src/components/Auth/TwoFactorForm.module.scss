@@ -1,0 +1,104 @@
+.root {
+  justify-content: flex-start;
+
+  & > :last-child {
+    width: 100%;
+  }
+}
+
+.wrapper {
+  width: 100%;
+  flex: 1;
+  @include flexCenter(column, flex-start);
+  gap: 2rem;
+
+  @include respond-to('medium') {
+    width: var(--container-max-width);
+    flex: unset;
+    margin-bottom: 4rem;
+  }
+}
+
+.verificationSection {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+}
+
+.title {
+  text-align: center;
+  width: 100%;
+}
+
+.description {
+  text-align: center;
+  width: 100%;
+}
+
+.inputSection {
+  @include flexCenter(column, flex-start, flext-start);
+  gap: 0.5rem;
+  width: 100%;
+  @include respond-to('medium') {
+    align-items: center;
+  }
+}
+
+.codeError {
+  white-space: nowrap;
+}
+
+.cta {
+  width: 100%;
+  margin-top: auto;
+  margin-bottom: 2rem;
+
+  @include respond-to('medium') {
+    margin-top: 1rem;
+    margin-bottom: 0;
+  }
+}
+
+.linksRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.resendText {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--secondary-gray-color);
+}
+
+.resendLink {
+  color: var(--primary-blue-color);
+  cursor: pointer;
+  text-decoration: underline;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &.disabled {
+    color: var(--secondary-gray-color);
+    cursor: default;
+    text-decoration: none;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+.backToLogin {
+  color: var(--secondary-blue-color);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

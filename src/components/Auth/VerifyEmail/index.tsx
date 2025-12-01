@@ -20,6 +20,7 @@ import {
 import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 import { handleVerifyEmailValidationToken } from '@/actions/auth'
 import { Link } from '@/i18n/routing'
+import { routes } from '@/routes/routes'
 import { getSuccessMessage } from '@/utils/api'
 import { colors } from '@/utils/color'
 
@@ -91,10 +92,12 @@ const VerifyEmail = () => {
         <Typography className={styles.cta}>
           {isError ? (
             t.rich('resend_email', {
-              link: text => <Link href="/send-verification-email">{text}</Link>,
+              link: text => (
+                <Link href={routes['/send-verification-email']}>{text}</Link>
+              ),
             })
           ) : (
-            <Link href="/login">{t('fallback')}</Link>
+            <Link href={routes['/login']}>{t('fallback')}</Link>
           )}
         </Typography>
       )}
